@@ -237,7 +237,6 @@ namespace SpacePlanningZones
                     var outerOffset = boundary.Offset(corridorWidth).FirstOrDefault();
                     var coreWrap = new Profile(outerOffset, boundary);
                     var coreWrapWithinFloor = Profile.Intersection(new[] { coreWrap }, new[] { levelBoundary });
-                    // corridorProfiles.AddRange(coreWrapWithinFloor);
                 }
 
                 var extendedLines = new List<Line>();
@@ -282,8 +281,6 @@ namespace SpacePlanningZones
                             var linearZones = Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
                             foreach (var linearZone in linearZones)
                             {
-                                // spaceBoundaries.Add(SpaceBoundary.Make(linearZone, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
-                                // output.Model.AddElements(linearZone.Segments().Where(s => s.Length() > 2).Select(s => new ModelCurve(s, BuiltInMaterials.YAxis, new Transform(0, 0, 10))));
                                 var segmentsExtended = new List<Polyline>();
                                 foreach (var line in linearZone.Segments())
                                 {
@@ -303,33 +300,18 @@ namespace SpacePlanningZones
                                         var endLine = new Line(extended.End, line.End);
                                         segmentsExtended.Add(endLine.ToPolyline(1));
                                     }
-                                    // if (startDistance > maxExtension || endDistance > maxExtension) continue;
-                                    // var pl = new Line(extended.Start - extended.Direction() * 0.1, extended.End + extended.Direction() * 0.1).ToPolyline(1);
-                                    // segmentsExtended.Add(pl);
                                 }
-                                // output.Model.AddElements(segmentsExtended.Select(s => new ModelCurve(s, BuiltInMaterials.YAxis)));
-                                // output.Model.AddElements(segmentsExtended.Select(s => new ModelCurve(s, BuiltInMaterials.YAxis, lvl.Transform.Concatenated(new Transform(0, 0, lvl.Height)))));
-                                // var segmentsExtended = linearZone.Segments()
-                                // .Where(s => s.Length() > 2)
-                                // .Select(s => new Line(s.Start - s.Direction() * 0.1, s.End + s.Direction() * 0.1))
-                                // .Select(s => s.ExtendTo(linearZone))
-                                // .Select(s => new Line(s.Start - s.Direction() * 0.1, s.End + s.Direction() * 0.1).ToPolyline(1));
                                 Console.WriteLine(JsonConvert.SerializeObject(linearZone.Perimeter));
                                 Console.WriteLine(JsonConvert.SerializeObject(linearZone.Voids));
                                 Console.WriteLine(JsonConvert.SerializeObject(segmentsExtended));
                                 var splits = Profile.Split(new[] { linearZone }, segmentsExtended, Vector3.EPSILON);
-                                // output.Model.AddElements(segmentsExtended.Select(s => new ModelCurve(s, random.NextMaterial(), lvl.Transform.Concatenated(new Transform(0, 0, 0.3)))));
                                 spaceBoundaries.AddRange(splits.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
-                                // output.Model.AddElements(splits.Select(s => new Floor(s, 0.2, lvl.Transform, random.NextMaterial(false))));
                             }
                             spaceBoundaries.AddRange(endCapZones.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
-                            // output.Model.AddElements(endCapZones.Select(z => new Floor(z, 0.2, lvl.Transform, BuiltInMaterials.ZAxis)));
-                            // output.Model.AddElements(linearZones.Select(z => new Floor(z, 0.2, lvl.Transform, BuiltInMaterials.YAxis)));
                         }
                         else
                         {
                             spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
-                            // output.Model.AddElement(new Floor(remainingSpace, 0.2, lvl.Transform, random.NextMaterial(false)));
                         }
                     }
                     catch (Exception e)
@@ -338,7 +320,6 @@ namespace SpacePlanningZones
                         Console.WriteLine(e.Message);
                         Console.WriteLine(e.StackTrace);
                         spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
-                        // output.Model.AddElement(new Floor(remainingSpace, 0.2, lvl.Transform, BuiltInMaterials.XAxis));
                     }
                 }
                 var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
@@ -371,7 +352,6 @@ namespace SpacePlanningZones
                     var matchingSB = spaceBoundaries
                         .OrderBy(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid))
                         .FirstOrDefault(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 2.0);
-                    // var matchingSB = spaceBoundaries.FirstOrDefault(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 0.01);
                     var allMatchingSBs = spaceBoundaries
                         .OrderBy(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid))
                         .Where(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 2.0);
@@ -491,14 +471,11 @@ namespace SpacePlanningZones
                 if (!lengthByAngle.ContainsKey(angle))
                 {
                     lengthByAngle[angle] = (line.Length(), new[] { trueAngle });
-                    // matsByAngle[angle] = new Material(angle.ToString(), HlsToColor(angle, 0.5, 1));
-                    // model?.AddElement(new ModelCurve(line, matsByAngle[angle]));
                 }
                 else
                 {
                     var existingRecord = lengthByAngle[angle];
                     lengthByAngle[angle] = (existingRecord.length + line.Length(), existingRecord.angles.Union(new[] { trueAngle }));
-                    // model?.AddElement(new ModelCurve(line, matsByAngle[angle]));
                 }
             }
             var dominantAngle = lengthByAngle.ToArray().OrderByDescending(kvp => kvp.Value).First().Value.angles.Average();
