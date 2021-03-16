@@ -1,0 +1,61 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "e83225ea-a792-45d6-8426-e19ebe00a929",
+  "name": "Classroom Layout",
+  "description": "Generate an interior layout for classroom zones.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": false
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Create Walls": {
+        "type": "boolean",
+        "description": "Should partitions be added around meeting rooms?",
+        "default": true
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "overrides": {
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "Original Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null
+}

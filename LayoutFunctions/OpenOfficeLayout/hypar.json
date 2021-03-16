@@ -1,0 +1,60 @@
+{
+    "$schema": "https://hypar.io/Schemas/Function.json",
+    "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
+    "name": "Open Office Layout",
+    "description": "The OpenOfficeLayout function.",
+    "language": "C#",
+    "model_output": "Open Office Layout",
+    "model_dependencies": [{
+            "name": "Space Planning Zones"
+        },
+        {
+            "name": "Levels"
+        }
+    ],
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "Desk Type": {
+                "type": "string",
+                "enum": [
+                    "Simple Desk",
+                    "L-Shaped",
+                    "Double Desk",
+                    "Enclosed Pair"
+                ],
+                "default": "Simple Desk"
+            }
+        }
+    },
+    "outputs": [{
+        "unit_type": "none",
+        "name": "Total Desk Count",
+        "description": "The number of desks.",
+        "type": "number"
+    }],
+    "repository_url": "https://github.com/hypar-io/function",
+    "source_file_key": null,
+    "preview_image": null,
+    "overrides": {
+        "Furniture Locations": {
+            "context": "[*discriminator=Elements.PointTranslation]",
+            "identity": {
+                "Original Location": {
+                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            },
+            "schema": {
+                "Location": {
+                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            }
+        }
+    },
+    "element_types": [
+        "https://prod-api.hypar.io/schemas/SpaceBoundary",
+        "https://prod-api.hypar.io/schemas/LevelElements",
+        "https://prod-api.hypar.io/schemas/LevelVolume",
+        "https://prod-api.hypar.io/schemas/PointTranslation"
+    ]
+}

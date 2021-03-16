@@ -1,0 +1,51 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "2586d6e9-8586-42a0-9d49-b80d0d684925",
+  "name": "Lounge Layout",
+  "description": "Layout lounge spaces",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": false
+    }
+  ],
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "overrides": {
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "Original Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null
+}

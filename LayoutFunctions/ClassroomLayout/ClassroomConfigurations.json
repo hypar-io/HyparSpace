@@ -1,0 +1,690 @@
+{
+  "Classroom-A": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.6186350822567235,
+        "Y": 5.924135377775599,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.01132662408053875,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              0.61544155556845226,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.9620676888877995,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080567171,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              1.7895759484413531,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.9620676888877995,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080567171,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              2.9637103413142825,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.9620676888877995,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080567171,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              4.1378447341872118,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.9620676888877995,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080567171,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              5.3119791270601127,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.9620676888877995,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Turnstone+-+Shortcut+-+Stool+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.34202014332568126,
+              -0.939692620785904,
+              0.0,
+              0.7700033222456284,
+              0.939692620785904,
+              0.34202014332568126,
+              0.0,
+              5.2183617255395234,
+              0.0,
+              0.0,
+              1.0,
+              1.3535839116229909E-16
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751602766,
+          "Y": 5.924135377775599,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Coalesse+-+Montara650+-+Table+-+Cafe+Height+-+Square+-+Bar+Height+-+36D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.6427876096865508,
+              -0.76604444311896847,
+              0.0,
+              0.94263997447106362,
+              0.76604444311896847,
+              0.6427876096865508,
+              0.0,
+              4.7047372766811293,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751602766,
+          "Y": 5.924135377775599,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Sans+-+Accessories+-+Magnetic+Marker+Tray.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.021208742156119342,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              5.6599967869114209,
+              0.0,
+              0.0,
+              1.0,
+              0.0762
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751602766,
+          "Y": 5.924135377775599,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "Classroom-B": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.61863508225672,
+        "Y": 4.7216266161666738,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080563619,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              4.1094703654511875,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.3608133080833511,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080563619,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              2.9353359725782866,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.3608133080833511,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080563619,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              1.7612015797053573,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.3608133080833511,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080563619,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              0.587067186832428,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225953199055E-05,
+          "Y": 2.3608133080833511,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Sans+-+Accessories+-+Magnetic+Marker+Tray.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.02120874215611579,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              4.4574880253024958,
+              0.0,
+              0.0,
+              1.0,
+              0.0762
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751599214,
+          "Y": 4.7216266161666738,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Coalesse+-+Montara650+-+Table+-+Cafe+Height+-+Square+-+Bar+Height+-+36D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.6427876096865508,
+              -0.76604444311896847,
+              0.0,
+              0.94263997447106007,
+              0.76604444311896847,
+              0.6427876096865508,
+              0.0,
+              3.5022285150722041,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751599214,
+          "Y": 4.7216266161666738,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Turnstone+-+Shortcut+-+Stool+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.34202014332568126,
+              -0.939692620785904,
+              0.0,
+              0.77000332224562484,
+              0.939692620785904,
+              0.34202014332568126,
+              0.0,
+              4.0158529639305982,
+              0.0,
+              0.0,
+              1.0,
+              1.3535839116229909E-16
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751599214,
+          "Y": 4.7216266161666738,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "Classroom-C": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.6186350822567128,
+        "Y": 3.568480490437679,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Turnstone+-+Shortcut+-+Stool+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.34202014332568126,
+              -0.939692620785904,
+              0.0,
+              0.77000332224561774,
+              0.939692620785904,
+              0.34202014332568126,
+              0.0,
+              2.8627068382016034,
+              0.0,
+              0.0,
+              1.0,
+              1.3535839116229909E-16
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751592108,
+          "Y": 3.568480490437679,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Coalesse+-+Montara650+-+Table+-+Cafe+Height+-+Square+-+Bar+Height+-+36D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.6427876096865508,
+              -0.76604444311896847,
+              0.0,
+              0.942639974471053,
+              0.76604444311896847,
+              0.6427876096865508,
+              0.0,
+              2.3490823893432093,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751592108,
+          "Y": 3.568480490437679,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Sans+-+Accessories+-+Magnetic+Marker+Tray.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.021208742156108684,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              3.304341899573501,
+              0.0,
+              0.0,
+              1.0,
+              0.0762
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.028200295751592108,
+          "Y": 3.568480490437679,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080556513,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              0.60805545397636251,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225949646341E-05,
+          "Y": 1.7842402452188253,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080556513,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              1.7821898468492918,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225949646341E-05,
+          "Y": 1.7842402452188253,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+PolyVision+-+Flow+-+47W+x+95H+(1185+W+x+2420+H).glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.3845816694320076E-15,
+              -1.0,
+              0.0,
+              0.011326624080556513,
+              1.0,
+              5.3845816694320076E-15,
+              0.0,
+              2.9563242397221927,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.9906225949646341E-05,
+          "Y": 1.7842402452188253,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "Desk": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.5858024160042916,
+        "Y": 1.8295451436765973,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Turnstone+-+Shortcut+X+Base+-+Chair+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.4531337537902056E-15,
+              1.0,
+              0.0,
+              0.7590027853269099,
+              -1.0,
+              -3.4531337537902056E-15,
+              0.0,
+              1.3454200445981144,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": -0.0029972146730905536,
+          "Y": 0.91664374215682187,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+-+Akira+-+Table+-+Rectangle+Fixed+Top+-+L+Base+-+Standard+-+Glide+-+72L+x+30W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9984014443252822E-15,
+              -1.0,
+              0.0,
+              -0.0029972146730905536,
+              1.0,
+              1.9984014443252822E-15,
+              0.0,
+              0.0037423406370464818,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": -0.0029972146730905536,
+          "Y": 0.91664374215682187,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Turnstone+-+Shortcut+X+Base+-+Chair+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.4531337537902056E-15,
+              1.0,
+              0.0,
+              0.7590027853269099,
+              -1.0,
+              -3.4531337537902056E-15,
+              0.0,
+              0.49102314604166963,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": -0.0029972146730905536,
+          "Y": 0.91664374215682187,
+          "Z": 0.0
+        }
+      }
+    ]
+  }
+}

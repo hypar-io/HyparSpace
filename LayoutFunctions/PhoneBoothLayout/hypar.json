@@ -1,0 +1,68 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "6ddde416-c7e7-46cf-8fa0-8c5b1d268dd3",
+  "name": "Phone Booth Layout",
+  "description": "Lay out phone booths",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": false
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Create Walls": {
+        "type": "boolean",
+        "description": "Should partitions be added around meeting rooms?",
+        "default": true
+      },
+      "Minimum Size": {
+        "type": "number",
+        "$hyparUnitType": "length",
+        "minimum": 1.7,
+        "maximum": 3.5,
+        "default": 2.0
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "overrides": {
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "Original Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null
+}

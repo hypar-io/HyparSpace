@@ -1,0 +1,56 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "1f36c76c-d506-413b-83b3-9e484522f516",
+  "name": "Reception Layout",
+  "description": "Layout Reception spaces",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": false
+    },
+    {
+      "name": "Core",
+      "optional": true
+    }
+  ],
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "overrides": {
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "Original Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation",
+    "https://prod-api.hypar.io/schemas/ServiceCore"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null
+}
