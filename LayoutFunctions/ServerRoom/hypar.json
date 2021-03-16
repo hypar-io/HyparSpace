@@ -1,0 +1,52 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "dd0358e7-6238-43ad-b151-2da64e9c8cb2",
+  "name": "Server Room",
+  "description": "The ServerRoom function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "name": "Space Planning Zones"
+    },
+    {
+      "name": "Levels"
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Length": {
+        "type": "number",
+        "description": "The Length.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      },
+      "Width": {
+        "type": "number",
+        "description": "The Width.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null,
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume"
+  ]
+}
