@@ -1,0 +1,77 @@
+{
+    "$schema": "https://hypar.io/Schemas/Function.json",
+    "id": "dd0358e7-6238-43ad-b151-2da64e9c8cb2",
+    "name": "Data Hall",
+    "description": "Lay out a data hall in a space boundary.",
+    "language": "C#",
+    "model_dependencies": [{
+        "autohide": false,
+        "name": "Space Planning Zones",
+        "optional": false
+    }],
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "Cabinet Depth": {
+                "type": "string",
+                "enum": [
+                    "1000mm",
+                    "1200mm"
+                ],
+                "default": "1000mm"
+            },
+            "Cabinet Height": {
+                "type": "string",
+                "enum": [
+                    "42U (2013mm)",
+                    "45U (2146mm)",
+                    "48U (2280mm)"
+                ],
+                "default": "42U (2013mm)"
+            },
+            "KW / Rack": {
+                "type": "number",
+                "minimum": 5,
+                "maximum": 30,
+                "default": 10
+            },
+            "Hot Aisle Width": {
+                "type": "number",
+                "description": "The width of each hot aisle.",
+                "minimum": 0.0,
+                "maximum": 4,
+                "multipleOf": 0.01,
+                "default": 0.9144,
+                "$hyparUnitType": "length"
+            },
+            "Cold Aisle Width": {
+                "type": "number",
+                "description": "The width of each cold aisle.",
+                "minimum": 0.0,
+                "maximum": 4,
+                "multipleOf": 0.01,
+                "default": 1.2192,
+                "$hyparUnitType": "length"
+            }
+        }
+    },
+    "outputs": [{
+            "unit_type": "none",
+            "name": "Rack Count",
+            "description": "The number of server cabinets.",
+            "type": "number"
+        },
+        {
+            "type": "string",
+            "name": "Watts/sf",
+            "description": "Watts per square foot"
+        }
+    ],
+    "element_types": [
+        "https://prod-api.hypar.io/schemas/SpaceBoundary",
+        "https://prod-api.hypar.io/schemas/LevelElements"
+    ],
+    "repository_url": "https://github.com/hypar-io/function",
+    "source_file_key": null,
+    "preview_image": null
+}

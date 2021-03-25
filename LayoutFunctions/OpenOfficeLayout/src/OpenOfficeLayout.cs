@@ -21,10 +21,7 @@ namespace OpenOfficeLayout
         public static OpenOfficeLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenOfficeLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var levelsModel = inputModels["Levels"];
-
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
             var deskCount = 0;
 
             var configJson = File.ReadAllText("OpenOfficeConfigurations.json");
@@ -39,7 +36,6 @@ namespace OpenOfficeLayout
                 var corridors = lvl.Elements.OfType<Floor>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
-                var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
                 foreach (var ob in officeBoundaries)
                 {
                     var spaceBoundary = ob.Boundary;

@@ -6,12 +6,8 @@
     "language": "C#",
     "model_output": "Open Office Layout",
     "model_dependencies": [{
-            "name": "Space Planning Zones"
-        },
-        {
-            "name": "Levels"
-        }
-    ],
+        "name": "Space Planning Zones"
+    }],
     "input_schema": {
         "type": "object",
         "properties": {
