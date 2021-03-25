@@ -19,7 +19,8 @@ namespace Elements
             {"Meeting Room", new Material("Meeting Room", new Color(0.380,0.816,0.608,0.5))}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/251d637c-c570-43bd-ab33-f59f337506bb/Catalog-251d637c-c570-43bd-ab33-f59f337506bb.json
             {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5))},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
             {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5))},
-            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5))} //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5))}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5))}
         };
         private static Random random = new Random(4);
         public static SpaceBoundary Make(Profile profile, string name, Transform xform, double height, Vector3? parentCentroid = null)
@@ -34,8 +35,14 @@ namespace Elements
 
         public void SetProgram(string name)
         {
-            MaterialDict.TryGetValue(name ?? "unrecognized", out var material);
-            this.Material = material ?? MaterialDict["unrecognized"];
+            if (!MaterialDict.TryGetValue(name ?? "unrecognized", out var material))
+            {
+                var color = random.NextColor();
+                color.Alpha = 0.5;
+                MaterialDict[name] = new Material(name, color);
+                material = MaterialDict[name];
+            }
+            this.Material = material;
             this.Name = name;
         }
     }

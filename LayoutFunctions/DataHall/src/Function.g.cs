@@ -13,15 +13,15 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-namespace ServerRoom
+namespace DataHall
 {
     public class Function
     {
         // Cache the model store for use by subsequent
         // executions of this lambda.
-        private IModelStore<ServerRoomInputs> store;
+        private IModelStore<DataHallInputs> store;
 
-        public async Task<ServerRoomOutputs> Handler(ServerRoomInputs args, ILambdaContext context)
+        public async Task<DataHallOutputs> Handler(DataHallInputs args, ILambdaContext context)
         {
             // Preload dependencies (if they exist),
             // so that they are available during model deserialization.
@@ -61,10 +61,10 @@ namespace ServerRoom
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<ServerRoomInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<DataHallInputs>(RegionEndpoint.USWest1);
             }
 
-            var l = new InvocationWrapper<ServerRoomInputs,ServerRoomOutputs>(store, ServerRoom.Execute);
+            var l = new InvocationWrapper<DataHallInputs,DataHallOutputs>(store, DataHall.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

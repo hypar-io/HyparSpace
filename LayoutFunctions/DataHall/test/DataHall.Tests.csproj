@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ServerRoom.csproj" />
+    <ProjectReference Include="..\src\DataHall.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,8 +4,7 @@
     "name": "Space Planning Zones",
     "description": "Generate a circulation path and high-level zones for a schematic space plan.",
     "language": "C#",
-    "model_dependencies": [
-        {
+    "model_dependencies": [{
             "autohide": false,
             "name": "Levels",
             "optional": false
@@ -37,7 +36,8 @@
                     "Meeting Room",
                     "Phone Booth",
                     "Support",
-                    "Reception"
+                    "Reception",
+                    "Data Hall"
                 ],
                 "default": "unspecified"
             },
@@ -113,13 +113,14 @@
                     "$hyparAutocomplete": [
                         "Open Office",
                         "Private Office",
-                        "Classroom",
                         "Lounge",
+                        "Classroom",
                         "Pantry",
                         "Meeting Room",
                         "Phone Booth",
                         "Support",
-                        "Reception"
+                        "Reception",
+                        "Data Hall"
                     ]
                 },
                 "Split": {

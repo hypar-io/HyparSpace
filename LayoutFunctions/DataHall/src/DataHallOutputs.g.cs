@@ -12,36 +12,43 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace ServerRoom
+namespace DataHall
 {
-    public class ServerRoomOutputs: ResultsBase
+    public class DataHallOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// The number of server cabinets.
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
+		[JsonProperty("Rack Count")]
+		public double RackCount {get;}
+
+		/// <summary>
+		/// Watts per square foot
+		/// </summary>
+		[JsonProperty("Watts/sf")]
+		public string Wattssf {get;}
 
 
 
         /// <summary>
-        /// Construct a ServerRoomOutputs with default inputs.
+        /// Construct a DataHallOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public ServerRoomOutputs() : base()
+        public DataHallOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a ServerRoomOutputs specifying all inputs.
+        /// Construct a DataHallOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public ServerRoomOutputs(double volume): base()
+        public DataHallOutputs(double rackCount, string wattssf): base()
         {
-			this.Volume = volume;
+			this.RackCount = rackCount;
+			this.Wattssf = wattssf;
 
 		}
 
