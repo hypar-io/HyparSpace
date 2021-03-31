@@ -26,18 +26,15 @@ namespace SpacePlanningZones
             var levelsModel = inputModels["Levels"];
             var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
             inputModels.TryGetValue("Floors", out var floorsModel);
-            var coresModel = inputModels["Core"];
-            var cores = coresModel.AllElementsOfType<ServiceCore>();
+            var hasCore = inputModels.TryGetValue("Core", out var coresModel);
+            var cores = coresModel?.AllElementsOfType<ServiceCore>() ?? new List<ServiceCore>();
+
             var random = new Random(5);
             var levels = new List<LevelElements>();
             var levelMappings = new Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)>();
             if (levelVolumes.Count() == 0)
             {
                 throw new Exception("This function requires LevelVolumes, produced by functions like \"Simple Levels by Envelope\". Try using a different levels function.");
-            }
-            if (cores.Count() == 0)
-            {
-                throw new Exception("No ServiceCore elements were found in the model.");
             }
             foreach (var lvl in levelVolumes)
             {
@@ -156,7 +153,7 @@ namespace SpacePlanningZones
                     {
                         var crvB = allCenterLines[j].centerLine;
                         var doesIntersect = crvA.Intersects(crvB, out var intersection, true, true);
-                        Console.WriteLine($"DOES INTERSECT: " + doesIntersect.ToString());
+                        // Console.WriteLine($"DOES INTERSECT: " + doesIntersect.ToString());
 
                         var nearPtA = intersection.ClosestPointOn(crvA);
                         var nearPtB = intersection.ClosestPointOn(crvB);
@@ -301,9 +298,9 @@ namespace SpacePlanningZones
                                         segmentsExtended.Add(endLine.ToPolyline(1));
                                     }
                                 }
-                                Console.WriteLine(JsonConvert.SerializeObject(linearZone.Perimeter));
-                                Console.WriteLine(JsonConvert.SerializeObject(linearZone.Voids));
-                                Console.WriteLine(JsonConvert.SerializeObject(segmentsExtended));
+                                // Console.WriteLine(JsonConvert.SerializeObject(linearZone.Perimeter));
+                                // Console.WriteLine(JsonConvert.SerializeObject(linearZone.Voids));
+                                // Console.WriteLine(JsonConvert.SerializeObject(segmentsExtended));
                                 var splits = Profile.Split(new[] { linearZone }, segmentsExtended, Vector3.EPSILON);
                                 spaceBoundaries.AddRange(splits.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
                             }

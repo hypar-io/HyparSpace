@@ -12,7 +12,7 @@
         {
             "autohide": false,
             "name": "Core",
-            "optional": false
+            "optional": true
         },
         {
             "name": "Floors",
