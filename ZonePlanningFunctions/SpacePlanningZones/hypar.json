@@ -2,7 +2,7 @@
     "$schema": "https://hypar.io/Schemas/Function.json",
     "id": "09b8407f-6c93-4741-ad6c-31288213f4f7",
     "name": "Space Planning Zones",
-    "description": "TEST - Generate a circulation path and high-level zones for a schematic space plan.",
+    "description": "Generate a circulation path and high-level zones for a schematic space plan.",
     "language": "C#",
     "model_dependencies": [
         {
