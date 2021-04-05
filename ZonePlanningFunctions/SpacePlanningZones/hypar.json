@@ -2,9 +2,10 @@
     "$schema": "https://hypar.io/Schemas/Function.json",
     "id": "09b8407f-6c93-4741-ad6c-31288213f4f7",
     "name": "Space Planning Zones",
-    "description": "Generate a circulation path and high-level zones for a schematic space plan.",
+    "description": "TEST - Generate a circulation path and high-level zones for a schematic space plan.",
     "language": "C#",
-    "model_dependencies": [{
+    "model_dependencies": [
+        {
             "autohide": false,
             "name": "Levels",
             "optional": false
@@ -41,7 +42,45 @@
                 ],
                 "default": "unspecified"
             },
+            "Circulation Mode": {
+                "description": "How should circulation be calculated? \nAutomatic: a typical circulation network will be generated for you. \nManual: you draw the circulation paths yourself.",
+                "type": "string",
+                "enum": [
+                    "Automatic",
+                    "Manual"
+                ],
+                "default": "Automatic"
+            },
+            "Corridors": {
+                "$hyparShowIf": {
+                    "conditions": [
+                        {
+                            "property": "Circulation Mode",
+                            "value": "Manual"
+                        }
+                    ]
+                },
+                "type": "array",
+                "description": "Define the circulation network by drawing one or more corridor paths.",
+                "items": {
+                    "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+                    "$hyparAllowIntersection": true,
+                    "$hyparConstrainToGround": true,
+                    "default": {
+                        "width": 1.5,
+                        "flip": false
+                    }
+                }
+            },
             "Corridor Width": {
+                "$hyparShowIf": {
+                    "conditions": [
+                        {
+                            "property": "Circulation Mode",
+                            "value": "Automatic"
+                        }
+                    ]
+                },
                 "description": "How wide should circulation paths be?",
                 "type": "number",
                 "minimum": 0.3,
@@ -50,6 +89,14 @@
                 "$hyparUnitType": "length"
             },
             "Outer Band Depth": {
+                "$hyparShowIf": {
+                    "conditions": [
+                        {
+                            "property": "Circulation Mode",
+                            "value": "Automatic"
+                        }
+                    ]
+                },
                 "type": "number",
                 "description": "For the \"outer band\" of program running along the floor perimeter, how deep should the spaces be?",
                 "minimum": 1.0,
@@ -59,6 +106,14 @@
                 "$hyparUnitType": "length"
             },
             "Depth at Ends": {
+                "$hyparShowIf": {
+                    "conditions": [
+                        {
+                            "property": "Circulation Mode",
+                            "value": "Automatic"
+                        }
+                    ]
+                },
                 "type": "number",
                 "description": "If your floorplate is rectangular, or has roughly rectangular ends, how deep should the spaces be at these ends?",
                 "minimum": 1.0,
@@ -68,6 +123,14 @@
                 "$hyparUnitType": "length"
             },
             "Additional Corridor Locations": {
+                "$hyparShowIf": {
+                    "conditions": [
+                        {
+                            "property": "Circulation Mode",
+                            "value": "Automatic"
+                        }
+                    ]
+                },
                 "$hyparDisplayName": "Add Corridors",
                 "description": "Add new points to this list to insert additional corridor locations, to further subdivide the space. Corridors extend perpendicularly from the closest point on the boundary.",
                 "type": "array",
