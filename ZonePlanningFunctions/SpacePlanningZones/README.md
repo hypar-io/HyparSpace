@@ -2,7 +2,7 @@
 
 # Space Planning Zones
 
-TEST - Generate a circulation path and high-level zones for a schematic space plan.
+Generate a circulation path and high-level zones for a schematic space plan.
 
 |Input Name|Type|Description|
 |---|---|---|
