@@ -525,7 +525,7 @@ namespace SpacePlanningZones
                 }
                 spaceBoundaries.Remove(containingBoundary);
                 var perim = containingBoundary.Boundary.Perimeter;
-                pt.DistanceTo(perim, out var cp);
+                pt.DistanceTo(perim as Polyline, out var cp);
                 var line = new Line(pt, cp);
                 var extension = line.ExtendTo(containingBoundary.Boundary);
                 List<Profile> newSbs = new List<Profile>();
