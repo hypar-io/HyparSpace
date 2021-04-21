@@ -162,15 +162,16 @@ namespace SpacePlanningZones
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<ProgramAssignmentsOverride> @programAssignments)
+        public Overrides(IList<ProgramAssignmentsOverride> @programAssignments, IList<MergeZonesOverride> @mergeZones)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programAssignments});
+                validator.PreConstruct(new object[]{ @programAssignments, @mergeZones});
             }
         
             this.ProgramAssignments = @programAssignments;
+            this.MergeZones = @mergeZones;
         
             if(validator != null)
             {
@@ -180,6 +181,9 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("Program Assignments", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramAssignmentsOverride> ProgramAssignments { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Merge Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<MergeZonesOverride> MergeZones { get; set; }
     
     
     }
@@ -216,6 +220,38 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ProgramAssignmentsValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class MergeZonesOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public MergeZonesOverride(string @id, IList<MergeZonesIdentity> @identities)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<MergeZonesOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identities});
+            }
+        
+            this.Id = @id;
+            this.Identities = @identities;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identities", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<MergeZonesIdentity> Identities { get; set; }
     
     
     }
@@ -282,6 +318,34 @@ namespace SpacePlanningZones
         /// <summary>If you'd like to subdivide this zone into rooms, set the number of rooms.</summary>
         [Newtonsoft.Json.JsonProperty("Split", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Split { get; set; } = 1;
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class MergeZonesIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public MergeZonesIdentity(Vector3 @parentCentroid)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<MergeZonesIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @parentCentroid});
+            }
+        
+            this.ParentCentroid = @parentCentroid;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 ParentCentroid { get; set; }
     
     
     }

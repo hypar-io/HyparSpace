@@ -122,23 +122,62 @@ namespace SpacePlanningZones
                 foreach (SpaceBoundary b in spaceBoundaries)
                 {
                     levelMappings.Add(b.Id, (b, level));
-                    output.Model.AddElements(b.Boundary.ToModelCurves(b.Transform.Concatenated(new Transform(0, 0, 0.03))));
                 }
                 corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
             }
             List<SpaceBoundary> SubdividedBoundaries = new List<SpaceBoundary>();
-            if (input.Overrides != null && input.Overrides.ProgramAssignments.Count > 0)
+
+            // merge overrides
+            if (input.Overrides != null && input.Overrides.MergeZones != null && input.Overrides.MergeZones.Count > 0)
             {
                 var spaceBoundaries = levelMappings.Select(kvp => kvp.Value);
+                foreach (var mz in input.Overrides.MergeZones)
+                {
+                    var identitiesToMerge = mz.Identities;
+                    var matchingSbs = identitiesToMerge.Select(mzI => spaceBoundaries.FirstOrDefault(
+                        sb => ((Vector3)sb.boundary.AdditionalProperties["ParentCentroid"]).DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != (null, null)).ToList();
+                    foreach (var msb in matchingSbs)
+                    {
+                        levelMappings.Remove(msb.boundary.Id);
+                    }
+                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.level?.Id ?? Guid.Empty);
+                    foreach (var lvlGrp in sbsByLevel)
+                    {
+                        var level = lvlGrp.First().level;
+                        var profiles = lvlGrp.Select(sb => sb.boundary.Boundary);
+                        var baseobj = lvlGrp.FirstOrDefault(n => n.boundary.Name != null && n.boundary.Name != "unspecified");
+                        if (baseobj == default)
+                        {
+                            baseobj = lvlGrp.First();
+                        }
+                        var baseSB = baseobj.boundary;
+                        var union = Profile.UnionAll(profiles);
+                        foreach (var newProfile in union)
+                        {
+                            var rep = baseSB.Representation.SolidOperations.OfType<Extrude>().First();
+
+                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.AdditionalProperties["ParentCentroid"], (Vector3)baseSB.AdditionalProperties["ParentCentroid"]);
+                            newSB.SetProgram(baseSB.Name);
+                            levelMappings.Add(newSB.Id, (newSB, level));
+                        }
+                    }
+                }
+            }
+            // assignment overrides
+            if (input.Overrides != null && input.Overrides.ProgramAssignments != null && input.Overrides.ProgramAssignments.Count > 0)
+            {
+                var spaceBoundaries = levelMappings.Select(kvp => kvp.Value).ToList();
+                // overrides where it is its own parent
+                Console.WriteLine(JsonConvert.SerializeObject(input.Overrides.ProgramAssignments));
                 foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => o.Identity.IndividualCentroid.IsAlmostEqualTo(o.Identity.ParentCentroid)))
                 {
                     var centroid = overrideValue.Identity.ParentCentroid;
                     var matchingSB = spaceBoundaries
-                        .OrderBy(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid))
-                        .FirstOrDefault(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 2.0);
-                    var allMatchingSBs = spaceBoundaries
-                        .OrderBy(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid))
-                        .Where(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 2.0);
+                        .OrderBy(sb => ((Vector3)sb.boundary.AdditionalProperties["IndividualCentroid"]).DistanceTo(centroid))
+                        .FirstOrDefault(sb => ((Vector3)sb.boundary.AdditionalProperties["IndividualCentroid"]).DistanceTo(centroid) < 2.0);
+                    // var allMatchingSBs = spaceBoundaries
+                    //     .OrderBy(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid))
+                    //     .Where(sb => sb.boundary.Transform.OfPoint(sb.boundary.Boundary.Perimeter.Centroid()).DistanceTo(centroid) < 2.0);
                     if (matchingSB.boundary != null)
                     {
                         if (overrideValue.Value.Split <= 1)
@@ -154,7 +193,6 @@ namespace SpacePlanningZones
                             var alignmentXform = new Transform(boundaries[0].Start, guideVector, Vector3.ZAxis);
                             var grid = new Grid2d(boundaries, alignmentXform);
                             grid.U.DivideByCount(Math.Max(overrideValue.Value.Split, 1));
-                            output.Model.AddElements(grid.GetCellSeparators(GridDirection.V, false).Select(c => new ModelCurve(c as Line, new Material("Grey", new Color(0.3, 0.3, 0.3, 1)), matchingSB.boundary.Transform.Concatenated(new Transform(0, 0, 0.02)))));
                             foreach (var cell in grid.GetCells().SelectMany(c => c.GetTrimmedCellGeometry()))
                             {
                                 var rep = matchingSB.boundary.Representation.SolidOperations.OfType<Extrude>().First();
@@ -167,7 +205,7 @@ namespace SpacePlanningZones
                         }
                     }
                 }
-
+                // overrides where it's not its own parent
                 foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => !o.Identity.IndividualCentroid.IsAlmostEqualTo(o.Identity.ParentCentroid)))
                 {
                     var matchingCell = SubdividedBoundaries.FirstOrDefault(b => (b.AdditionalProperties["IndividualCentroid"] as Vector3?)?.DistanceTo(overrideValue.Identity.IndividualCentroid) < 0.01);
@@ -178,6 +216,7 @@ namespace SpacePlanningZones
                     }
                 }
             }
+
             foreach (var levelMapping in levelMappings)
             {
                 levelMapping.Value.level.Elements.Add(levelMapping.Value.boundary);
@@ -201,9 +240,11 @@ namespace SpacePlanningZones
                     existingTally.AreaTarget += area;
                     existingTally.DistinctAreaCount++;
                 }
+                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform.Concatenated(new Transform(0, 0, 0.03))));
             }
             output.Model.AddElements(areas.Select(kvp => kvp.Value).OrderByDescending(a => a.AchievedArea));
             output.Model.AddElements(levels);
+
             return output;
         }
 
@@ -474,7 +515,7 @@ namespace SpacePlanningZones
             var containingBoundary = spaceBoundaries.OfType<SpaceBoundary>().FirstOrDefault(b => b.Boundary.Contains(pt));
             if (containingBoundary != null)
             {
-                if (input.Overrides != null)
+                if (input.Overrides?.ProgramAssignments != null)
                 {
                     var spaceOverrides = input.Overrides.ProgramAssignments.FirstOrDefault(s => s.Identity.IndividualCentroid.IsAlmostEqualTo(containingBoundary.Boundary.Perimeter.Centroid()));
                     if (spaceOverrides != null)
@@ -484,7 +525,7 @@ namespace SpacePlanningZones
                 }
                 spaceBoundaries.Remove(containingBoundary);
                 var perim = containingBoundary.Boundary.Perimeter;
-                pt.DistanceTo(perim, out var cp);
+                pt.DistanceTo(perim as Polyline, out var cp);
                 var line = new Line(pt, cp);
                 var extension = line.ExtendTo(containingBoundary.Boundary);
                 List<Profile> newSbs = new List<Profile>();

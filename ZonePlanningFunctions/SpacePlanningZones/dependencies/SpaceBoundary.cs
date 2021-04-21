@@ -23,13 +23,13 @@ namespace Elements
             {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5))}
         };
         private static Random random = new Random(4);
-        public static SpaceBoundary Make(Profile profile, string name, Transform xform, double height, Vector3? parentCentroid = null)
+        public static SpaceBoundary Make(Profile profile, string name, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(name ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
-            sb.AdditionalProperties.Add("IndividualCentroid", xform.OfPoint(profile.Perimeter.Centroid()));
+            sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             return sb;
         }
 

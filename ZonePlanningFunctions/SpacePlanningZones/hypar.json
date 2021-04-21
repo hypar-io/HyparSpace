@@ -192,6 +192,18 @@
                     "default": 1
                 }
             }
+        },
+        "Merge Zones": {
+            "verbs": {
+                "edit": "Merge Zones",
+                "revert": "Reset Merged Zones"
+            },
+            "paradigm": "group",
+            "identity": {
+                "ParentCentroid": {
+                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            }
         }
     },
     "element_types": [
