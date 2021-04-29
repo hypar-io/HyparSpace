@@ -138,14 +138,15 @@ namespace PrivateOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public FurnitureLocationsOverride(FurnitureLocationsIdentity @identity, FurnitureLocationsValue @value)
+        public FurnitureLocationsOverride(string @id, FurnitureLocationsIdentity @identity, FurnitureLocationsValue @value)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<FurnitureLocationsOverride>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @identity, @value});
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
             }
         
+            this.Id = @id;
             this.Identity = @identity;
             this.Value = @value;
         
@@ -154,6 +155,9 @@ namespace PrivateOfficeLayout
                 validator.PostConstruct(this);
             }
         }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsIdentity Identity { get; set; }

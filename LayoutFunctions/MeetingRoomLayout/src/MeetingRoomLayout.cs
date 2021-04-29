@@ -91,8 +91,12 @@ namespace MeetingRoomLayout
                         else if (wallCandidate.type == "Glass")
                         {
                             var grid = new Grid1d(wallCandidate.line);
-                            grid.SplitAtOffsets(new[] { sideLightWidth, sideLightWidth + doorWidth });
-                            grid[2].DivideByApproximateLength(2);
+                            var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
+                            grid.SplitAtOffsets(offsets);
+                            if (grid.Cells.Count >= 3)
+                            {
+                                grid[2].DivideByApproximateLength(2);
+                            }
                             var separators = grid.GetCellSeparators(true);
                             var beam = new Beam(wallCandidate.line, Polygon.Rectangle(mullionSize, mullionSize), mullionMat, 0, 0, 0, isElementDefinition: true);
                             output.Model.AddElement(beam.CreateInstance(levelVolume.Transform, "Base Mullion"));

@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace DataHall
+namespace DataHallLayout
 {
-    public class DataHallOutputs: ResultsBase
+    public class DataHallLayoutOutputs: ResultsBase
     {
 		/// <summary>
 		/// The number of server cabinets.
@@ -31,21 +31,21 @@ namespace DataHall
 
 
         /// <summary>
-        /// Construct a DataHallOutputs with default inputs.
+        /// Construct a DataHallLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public DataHallOutputs() : base()
+        public DataHallLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a DataHallOutputs specifying all inputs.
+        /// Construct a DataHallLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DataHallOutputs(double rackCount, string wattssf): base()
+        public DataHallLayoutOutputs(double rackCount, string wattssf): base()
         {
 			this.RackCount = rackCount;
 			this.Wattssf = wattssf;

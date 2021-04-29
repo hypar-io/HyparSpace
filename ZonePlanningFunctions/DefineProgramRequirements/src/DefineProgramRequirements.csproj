@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\dependencies\DefineProgramRequirements.Dependencies.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="*-*" />
+    <PackageReference Include="Hypar.Functions" Version="0.8.7-alpha.15" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>

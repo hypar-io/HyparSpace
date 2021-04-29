@@ -1,6 +1,6 @@
 
 
-# Data Hall
+# Data Hall Layout
 
 Lay out a data hall in a space boundary.
 

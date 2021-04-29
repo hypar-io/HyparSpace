@@ -17,21 +17,21 @@ using System.Linq;
 using Line = Elements.Geometry.Line;
 using Polygon = Elements.Geometry.Polygon;
 
-namespace DataHall
+namespace DataHallLayout
 {
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public  class DataHallInputs : S3Args
+    public  class DataHallLayoutInputs : S3Args
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DataHallInputs(DataHallInputsCabinetDepth @cabinetDepth, DataHallInputsCabinetHeight @cabinetHeight, double @kWRack, double @hotAisleWidth, double @coldAisleWidth, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public DataHallLayoutInputs(DataHallLayoutInputsCabinetDepth @cabinetDepth, DataHallLayoutInputsCabinetHeight @cabinetHeight, double @kWRack, double @hotAisleWidth, double @coldAisleWidth, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<DataHallInputs>();
+            var validator = Validator.Instance.GetFirstValidatorForType<DataHallLayoutInputs>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @cabinetDepth, @cabinetHeight, @kWRack, @hotAisleWidth, @coldAisleWidth});
@@ -51,11 +51,11 @@ namespace DataHall
     
         [Newtonsoft.Json.JsonProperty("Cabinet Depth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DataHallInputsCabinetDepth CabinetDepth { get; set; } = DataHallInputsCabinetDepth._1000mm;
+        public DataHallLayoutInputsCabinetDepth CabinetDepth { get; set; } = DataHallLayoutInputsCabinetDepth._1000mm;
     
         [Newtonsoft.Json.JsonProperty("Cabinet Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DataHallInputsCabinetHeight CabinetHeight { get; set; } = DataHallInputsCabinetHeight._42U__2013mm_;
+        public DataHallLayoutInputsCabinetHeight CabinetHeight { get; set; } = DataHallLayoutInputsCabinetHeight._42U__2013mm_;
     
         [Newtonsoft.Json.JsonProperty("KW / Rack", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(5D, 30D)]
@@ -75,7 +75,7 @@ namespace DataHall
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum DataHallInputsCabinetDepth
+    public enum DataHallLayoutInputsCabinetDepth
     {
         [System.Runtime.Serialization.EnumMember(Value = @"1000mm")]
         _1000mm = 0,
@@ -86,7 +86,7 @@ namespace DataHall
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum DataHallInputsCabinetHeight
+    public enum DataHallLayoutInputsCabinetHeight
     {
         [System.Runtime.Serialization.EnumMember(Value = @"42U (2013mm)")]
         _42U__2013mm_ = 0,

@@ -4,17 +4,17 @@ using Elements.Spatial;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DataHall
+namespace DataHallLayout
 {
-    public static class DataHall
+    public static class DataHallLayout
     {
         /// <summary>
-        /// The DataHall function.
+        /// The DataHallLayout function.
         /// </summary>
         /// <param name="model">The input model.</param>
         /// <param name="input">The arguments to the execution.</param>
-        /// <returns>A DataHallOutputs instance containing computed results and the model with any new elements.</returns>
-        public static DataHallOutputs Execute(Dictionary<string, Model> inputModels, DataHallInputs input)
+        /// <returns>A DataHallLayoutOutputs instance containing computed results and the model with any new elements.</returns>
+        public static DataHallLayoutOutputs Execute(Dictionary<string, Model> inputModels, DataHallLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>();
@@ -23,30 +23,30 @@ namespace DataHall
             var dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A48U;
             switch (input.CabinetDepth)
             {
-                case DataHallInputsCabinetDepth._1000mm:
+                case DataHallLayoutInputsCabinetDepth._1000mm:
                     switch (input.CabinetHeight)
                     {
-                        case DataHallInputsCabinetHeight._42U__2013mm_:
+                        case DataHallLayoutInputsCabinetHeight._42U__2013mm_:
                             dataRack = DataRack.CabinetSiemonV800V81ADataCenterV81A42U;
                             break;
-                        case DataHallInputsCabinetHeight._45U__2146mm_:
+                        case DataHallLayoutInputsCabinetHeight._45U__2146mm_:
                             dataRack = DataRack.CabinetSiemonV800V81ADataCenterV81A45U;
                             break;
-                        case DataHallInputsCabinetHeight._48U__2280mm_:
+                        case DataHallLayoutInputsCabinetHeight._48U__2280mm_:
                             dataRack = DataRack.CabinetSiemonV800V81ADataCenterV81A48U;
                             break;
                     }
                     break;
-                case DataHallInputsCabinetDepth._1200mm:
+                case DataHallLayoutInputsCabinetDepth._1200mm:
                     switch (input.CabinetHeight)
                     {
-                        case DataHallInputsCabinetHeight._42U__2013mm_:
+                        case DataHallLayoutInputsCabinetHeight._42U__2013mm_:
                             dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A42U;
                             break;
-                        case DataHallInputsCabinetHeight._45U__2146mm_:
+                        case DataHallLayoutInputsCabinetHeight._45U__2146mm_:
                             dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A45U;
                             break;
-                        case DataHallInputsCabinetHeight._48U__2280mm_:
+                        case DataHallLayoutInputsCabinetHeight._48U__2280mm_:
                             dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A48U;
                             break;
                     }
@@ -104,7 +104,7 @@ namespace DataHall
             var rackCount = model.AllElementsOfType<ElementInstance>().Count();
             var areaInSf = totalArea * 10.7639;
             var density = input.KWRack * rackCount / areaInSf;
-            var output = new DataHallOutputs(rackCount, $"{density * 1000:0} watts/sf");
+            var output = new DataHallLayoutOutputs(rackCount, $"{density * 1000:0} watts/sf");
             output.Model = model;
             return output;
         }

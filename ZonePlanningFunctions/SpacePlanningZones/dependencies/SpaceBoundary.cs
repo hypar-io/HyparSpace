@@ -2,12 +2,35 @@ using System.Collections.Generic;
 using Elements.Geometry;
 using System;
 using Elements.Geometry.Solids;
+using System.Linq;
 
 namespace Elements
 {
     public partial class SpaceBoundary
     {
-        public static Dictionary<string, Material> MaterialDict { get; } = new Dictionary<string, Material> {
+        public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
+        {
+            Requirements = reqs.ToDictionary(v => v.ProgramName, v => v);
+            foreach (var kvp in Requirements)
+            {
+                var color = kvp.Value.Color;
+                color.Alpha = 0.5;
+                MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color);
+            }
+        }
+
+        /// <summary>
+        /// Static properties can persist across executions! need to reset to defaults w/ every execution.
+        /// </summary>
+        public static void Reset()
+        {
+            Requirements.Clear();
+            MaterialDict = new Dictionary<string, Material>(materialDefaults);
+        }
+
+        public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
+
+        private static Dictionary<string, Material> materialDefaults = new Dictionary<string, Material> {
             {"unspecified", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.8, 0.3))},
             {"unrecognized", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.2, 0.3))},
             {"Circulation", new Material("Circulation", new Color(0.996,0.965,0.863,0.5))}, //✅
@@ -22,28 +45,34 @@ namespace Elements
             {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5))}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
             {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5))}
         };
+        public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);
+
+        public string ProgramName { get; set; }
         private static Random random = new Random(4);
-        public static SpaceBoundary Make(Profile profile, string name, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
+        public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
-            MaterialDict.TryGetValue(name ?? "unspecified", out var material);
+            MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
+            var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            sb.ProgramName = displayName;
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             return sb;
         }
 
-        public void SetProgram(string name)
+        public void SetProgram(string displayName)
         {
-            if (!MaterialDict.TryGetValue(name ?? "unrecognized", out var material))
+            if (!MaterialDict.TryGetValue(displayName ?? "unrecognized", out var material))
             {
                 var color = random.NextColor();
                 color.Alpha = 0.5;
-                MaterialDict[name] = new Material(name, color);
-                material = MaterialDict[name];
+                MaterialDict[displayName] = new Material(displayName, color);
+                material = MaterialDict[displayName];
             }
             this.Material = material;
-            this.Name = name;
+            this.ProgramName = displayName;
+            this.Name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
         }
     }
 }

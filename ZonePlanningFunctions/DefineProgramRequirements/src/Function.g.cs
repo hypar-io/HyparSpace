@@ -13,15 +13,15 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-namespace MeetingRoomLayout
+namespace DefineProgramRequirements
 {
     public class Function
     {
         // Cache the model store for use by subsequent
         // executions of this lambda.
-        private IModelStore<MeetingRoomLayoutInputs> store;
+        private IModelStore<DefineProgramRequirementsInputs> store;
 
-        public async Task<MeetingRoomLayoutOutputs> Handler(MeetingRoomLayoutInputs args, ILambdaContext context)
+        public async Task<DefineProgramRequirementsOutputs> Handler(DefineProgramRequirementsInputs args, ILambdaContext context)
         {
             // Preload dependencies (if they exist),
             // so that they are available during model deserialization.
@@ -61,10 +61,10 @@ namespace MeetingRoomLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<MeetingRoomLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.USWest1);
             }
 
-            var l = new InvocationWrapper<MeetingRoomLayoutInputs,MeetingRoomLayoutOutputs>(store, MeetingRoomLayout.Execute);
+            var l = new InvocationWrapper<DefineProgramRequirementsInputs,DefineProgramRequirementsOutputs>(store, DefineProgramRequirements.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

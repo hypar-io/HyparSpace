@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\dependencies\DataHall.Dependencies.csproj" />
+    <ProjectReference Include="..\dependencies\DataHallLayout.Dependencies.csproj" />
   </ItemGroup>
 
   <ItemGroup>

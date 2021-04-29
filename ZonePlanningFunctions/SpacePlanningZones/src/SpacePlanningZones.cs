@@ -23,18 +23,29 @@ namespace SpacePlanningZones
             var corridorMat = SpaceBoundary.MaterialDict["Circulation"];
 
             var output = new SpacePlanningZonesOutputs();
+
             var levelsModel = inputModels["Levels"];
             var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
             inputModels.TryGetValue("Floors", out var floorsModel);
             var hasCore = inputModels.TryGetValue("Core", out var coresModel);
             var cores = coresModel?.AllElementsOfType<ServiceCore>() ?? new List<ServiceCore>();
 
+            var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
+            var programReqs = programReqsModel?.AllElementsOfType<ProgramRequirement>();
+
+            SpaceBoundary.Reset();
+            if (programReqs != null && programReqs.Count() > 0)
+            {
+                SpaceBoundary.SetRequirements(programReqs);
+            }
+
             var random = new Random(5);
             var levels = new List<LevelElements>();
             var levelMappings = new Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)>();
             if (levelVolumes.Count() == 0)
             {
-                throw new Exception("This function requires LevelVolumes, produced by functions like \"Simple Levels by Envelope\". Try using a different levels function.");
+                output.Warnings.Add("This function requires LevelVolumes, produced by functions like \"Simple Levels by Envelope\". Try a different levels function.");
+                return output;
             }
             foreach (var lvl in levelVolumes)
             {
@@ -123,7 +134,15 @@ namespace SpacePlanningZones
                 {
                     levelMappings.Add(b.Id, (b, level));
                 }
-                corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                try
+                {
+                    var cpUnion = Profile.UnionAll(corridorProfiles);
+                    cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                }
+                catch
+                {
+                    corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                }
             }
             List<SpaceBoundary> SubdividedBoundaries = new List<SpaceBoundary>();
 
@@ -185,7 +204,7 @@ namespace SpacePlanningZones
                             matchingSB.boundary.SetProgram(overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment);
                             Identity.AddOverrideIdentity(matchingSB.boundary, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                         }
-                        else
+                        else // Split input on overrides is now deprecated
                         {
                             levelMappings.Remove(matchingSB.boundary.Id);
                             var boundaries = new List<Polygon>(matchingSB.boundary.Boundary.Voids) { matchingSB.boundary.Boundary.Perimeter };
@@ -229,19 +248,35 @@ namespace SpacePlanningZones
                 {
                     continue;
                 }
-                if (!areas.ContainsKey(sb.Name))
+                if (!areas.ContainsKey(sb.ProgramName))
                 {
-                    areas[sb.Name] = new AreaTally(sb.Name, sb.Material.Color, area, area, 1, null, Guid.NewGuid(), sb.Name);
+                    var areaTarget = SpaceBoundary.Requirements.TryGetValue(sb.ProgramName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
+                    areas[sb.Name] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
                 }
                 else
                 {
                     var existingTally = areas[sb.Name];
                     existingTally.AchievedArea += area;
-                    existingTally.AreaTarget += area;
                     existingTally.DistinctAreaCount++;
                 }
                 output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform.Concatenated(new Transform(0, 0, 0.03))));
             }
+            // count corridors in area
+            var circulationKey = "Circulation";
+            var circReq = SpaceBoundary.Requirements.ToList().FirstOrDefault(k => k.Value.Name == "Circulation");
+            if (circReq.Key != null)
+            {
+                circulationKey = circReq.Value.ProgramName;
+            }
+
+            foreach (var corridorFloor in levels.SelectMany(lev => lev.Elements.OfType<Floor>()))
+            {
+                if (!areas.ContainsKey(circulationKey))
+                {
+                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
+                }
+            }
+
             output.Model.AddElements(areas.Select(kvp => kvp.Value).OrderByDescending(a => a.AchievedArea));
             output.Model.AddElements(levels);
 
