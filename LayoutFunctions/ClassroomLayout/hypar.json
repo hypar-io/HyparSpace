@@ -38,7 +38,7 @@
     "Furniture Locations": {
       "context": "[*discriminator=Elements.PointTranslation]",
       "identity": {
-        "Original Location": {
+        "OriginalLocation": {
           "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
         }
       },

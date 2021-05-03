@@ -13,15 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements.Components" Version="0.1.1"/>  </ItemGroup>
+    <PackageReference Include="Hypar.Elements.Components" Version="0.1.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.8.5-alpha.0" />
-    <PackageReference Include="Hypar.Functions" Version="0.8.7-alpha6" />
+    <PackageReference Include="Hypar.Elements" Version="0.8.5" />
+    <PackageReference Include="Hypar.Functions" Version="0.8.9" />
   </ItemGroup>
 
 </Project>

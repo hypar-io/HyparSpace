@@ -85,7 +85,8 @@ namespace ClassroomLayout
                                 {
                                     var cellRect = individualDesk.GetCellGeometry() as Polygon;
                                     var trimmedShape = individualDesk.GetTrimmedCellGeometry().FirstOrDefault() as Polygon;
-                                    if(trimmedShape == null) {
+                                    if (trimmedShape == null)
+                                    {
                                         continue;
                                     }
                                     if (trimmedShape.Area().ApproximatelyEquals(deskConfig.Width * deskConfig.Depth, 0.1))
@@ -165,6 +166,7 @@ namespace ClassroomLayout
             var pointTranslations = allElementInstances.Select(ei => ei.Transform.Origin).Distinct().Select(t => new PointTranslation(t, t, new Transform(), null, null, false, Guid.NewGuid(), null)).ToList();
             if (overrides != null)
             {
+                Console.WriteLine(JsonConvert.SerializeObject(overrides.FurnitureLocations));
                 foreach (var positionOverride in overrides.FurnitureLocations)
                 {
                     var thisOriginalLocation = positionOverride.Identity.OriginalLocation;
@@ -174,7 +176,11 @@ namespace ClassroomLayout
                     nearInstances.ToList().ForEach(ni => ni.Transform.Concatenate(new Transform(thisPt.X - ni.Transform.Origin.X, thisPt.Y - ni.Transform.Origin.Y, 0)));
                     // should only be one
                     var nearTranslations = pointTranslations.Where(pt => pt.OriginalLocation.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearTranslations.ToList().ForEach(nt => nt.Location = thisPt);
+                    nearTranslations.ToList().ForEach(nt =>
+                    {
+                        nt.OriginalLocation = thisOriginalLocation;
+                        nt.Location = thisPt;
+                    });
                 }
 
             }

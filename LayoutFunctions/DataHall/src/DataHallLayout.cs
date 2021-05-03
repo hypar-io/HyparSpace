@@ -17,9 +17,10 @@ namespace DataHallLayout
         public static DataHallLayoutOutputs Execute(Dictionary<string, Model> inputModels, DataHallLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>();
+            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>().Where(b => b.Name == "Data Hall");
 
             var model = new Model();
+            var warnings = new List<string>();
             var dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A48U;
             switch (input.CabinetDepth)
             {
@@ -61,7 +62,16 @@ namespace DataHallLayout
                 totalArea += profile.Area();
                 //inset from walls
                 var inset = profile.Perimeter.Offset(-1.2);
-                var longestEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                Line longestEdge = null;
+                try
+                {
+                    longestEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                }
+                catch
+                {
+                    warnings.Add("One space was too small for a data hall.");
+                    continue;
+                }
                 var alignment = new Transform(Vector3.Origin, longestEdge.Direction(), Vector3.ZAxis);
                 var grid = new Grid2d(inset, alignment);
                 grid.U.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
@@ -106,6 +116,7 @@ namespace DataHallLayout
             var density = input.KWRack * rackCount / areaInSf;
             var output = new DataHallLayoutOutputs(rackCount, $"{density * 1000:0} watts/sf");
             output.Model = model;
+            output.Warnings.AddRange(warnings);
             return output;
         }
     }

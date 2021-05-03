@@ -5,9 +5,11 @@
     "description": "The OpenOfficeLayout function.",
     "language": "C#",
     "model_output": "Open Office Layout",
-    "model_dependencies": [{
-        "name": "Space Planning Zones"
-    }],
+    "model_dependencies": [
+        {
+            "name": "Space Planning Zones"
+        }
+    ],
     "input_schema": {
         "type": "object",
         "properties": {
@@ -23,12 +25,14 @@
             }
         }
     },
-    "outputs": [{
-        "unit_type": "none",
-        "name": "Total Desk Count",
-        "description": "The number of desks.",
-        "type": "number"
-    }],
+    "outputs": [
+        {
+            "unit_type": "none",
+            "name": "Total Desk Count",
+            "description": "The number of desks.",
+            "type": "number"
+        }
+    ],
     "repository_url": "https://github.com/hypar-io/function",
     "source_file_key": null,
     "preview_image": null,
@@ -36,7 +40,7 @@
         "Furniture Locations": {
             "context": "[*discriminator=Elements.PointTranslation]",
             "identity": {
-                "Original Location": {
+                "OriginalLocation": {
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
                 }
             },

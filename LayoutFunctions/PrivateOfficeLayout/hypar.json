@@ -4,7 +4,8 @@
     "name": "Private Office Layout",
     "description": "Lay out private offices.",
     "language": "C#",
-    "model_dependencies": [{
+    "model_dependencies": [
+        {
             "autohide": false,
             "name": "Space Planning Zones",
             "optional": false
@@ -33,10 +34,12 @@
                         "maximum": 10,
                         "default": 5,
                         "$hyparShowIf": {
-                            "conditions": [{
-                                "property": "Automate Office Subdivisions",
-                                "value": true
-                            }]
+                            "conditions": [
+                                {
+                                    "property": "Automate Office Subdivisions",
+                                    "value": true
+                                }
+                            ]
                         }
                     }
                 }
@@ -48,17 +51,19 @@
             }
         }
     },
-    "outputs": [{
-        "unit_type": "volume",
-        "name": "Volume",
-        "description": "The volume.",
-        "type": "number"
-    }],
+    "outputs": [
+        {
+            "unit_type": "volume",
+            "name": "Volume",
+            "description": "The volume.",
+            "type": "number"
+        }
+    ],
     "overrides": {
         "Furniture Locations": {
             "context": "[*discriminator=Elements.PointTranslation]",
             "identity": {
-                "Original Location": {
+                "OriginalLocation": {
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
                 }
             },

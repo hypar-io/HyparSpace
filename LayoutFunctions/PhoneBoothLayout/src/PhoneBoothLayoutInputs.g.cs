@@ -147,7 +147,7 @@ namespace PhoneBoothLayout
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Original Location", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("OriginalLocation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 OriginalLocation { get; set; }
     
     
