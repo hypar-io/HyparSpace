@@ -4,17 +4,8 @@
     <ProjectReference Include="..\dependencies\OpenCollaborationLayout.Dependencies.csproj" />
   </ItemGroup>
 
-  <!-- <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Hypar.Elements.Components" Version="0.1.1" />
-  </ItemGroup> -->
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\elements\Elements.Components\src\Elements.Components.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="Hypar.Elements" Version="0.8.5" /> -->
+    <PackageReference Include="Hypar.Elements" Version="0.8.5" />
     <PackageReference Include="Hypar.Functions" Version="0.8.9" />
   </ItemGroup>
 
