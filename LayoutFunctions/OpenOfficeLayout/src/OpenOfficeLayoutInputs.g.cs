@@ -28,16 +28,17 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(OpenOfficeLayoutInputsDeskType @deskType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(OpenOfficeLayoutInputsDeskType @deskType, double @integratedCollaborationSpaceDensity, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @deskType, @overrides});
+                validator.PreConstruct(new object[]{ @deskType, @integratedCollaborationSpaceDensity, @overrides});
             }
         
             this.DeskType = @deskType;
+            this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -48,7 +49,12 @@ namespace OpenOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk;
+        public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk__29x70;
+    
+        /// <summary>Increase this number to add more distributed collaboration spaces throughout open office areas.</summary>
+        [Newtonsoft.Json.JsonProperty("Integrated Collaboration Space Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
+        public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
@@ -59,17 +65,26 @@ namespace OpenOfficeLayout
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     public enum OpenOfficeLayoutInputsDeskType
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk")]
-        Simple_Desk = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
+        Simple_Desk__24x48 = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
+        Simple_Desk__30x60 = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
+        Simple_Desk__29x70 = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
+        Simple_Desk__30x72 = 3,
     
         [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
-        LShaped = 1,
+        LShaped = 4,
     
         [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
-        Double_Desk = 2,
+        Double_Desk = 5,
     
         [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
-        Enclosed_Pair = 3,
+        Enclosed_Pair = 6,
     
     }
     
@@ -79,15 +94,16 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations)
+        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations, IList<SpaceSettingsOverride> @spaceSettings)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @furnitureLocations});
+                validator.PreConstruct(new object[]{ @furnitureLocations, @spaceSettings});
             }
         
             this.FurnitureLocations = @furnitureLocations;
+            this.SpaceSettings = @spaceSettings;
         
             if(validator != null)
             {
@@ -97,6 +113,9 @@ namespace OpenOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Space Settings", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpaceSettingsOverride> SpaceSettings { get; set; }
     
     
     }
@@ -133,6 +152,42 @@ namespace OpenOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsOverride(string @id, SpaceSettingsIdentity @identity, SpaceSettingsValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValue Value { get; set; }
     
     
     }
@@ -190,6 +245,89 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Location", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 Location { get; set; }
     
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsIdentity(Vector3 @parentCentroid)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @parentCentroid});
+            }
+        
+            this.ParentCentroid = @parentCentroid;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 ParentCentroid { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsValue(SpaceSettingsValueDeskType @deskType)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @deskType});
+            }
+        
+            this.DeskType = @deskType;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SpaceSettingsValueDeskType DeskType { get; set; } = SpaceSettingsValueDeskType.Simple_Desk__29x70;
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum SpaceSettingsValueDeskType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
+        Simple_Desk__24x48 = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
+        Simple_Desk__30x60 = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
+        Simple_Desk__29x70 = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
+        Simple_Desk__30x72 = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
+        LShaped = 4,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
+        Double_Desk = 5,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
+        Enclosed_Pair = 6,
     
     }
 }

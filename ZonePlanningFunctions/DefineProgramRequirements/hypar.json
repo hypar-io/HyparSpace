@@ -8,9 +8,6 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "Headcount": {
-        "type": "integer"
-      },
       "Program Requirements": {
         "$hyparCanPopOut": true,
         "type": "array",

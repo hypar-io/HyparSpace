@@ -1,0 +1,63 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "1a57db32-3ac1-4874-a23a-61f160c54604",
+  "name": "Open Collaboration Layout",
+  "description": "Lay out Open collaboration spaces.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Open Office Layout",
+      "optional": true
+    }
+  ],
+  "overrides": {
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "OriginalLocation": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "verbs": {
+        "edit": null,
+        "revert": null
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation",
+    "https://prod-api.hypar.io/schemas/ServiceCore"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null,
+  "thumbnail_id": null
+}

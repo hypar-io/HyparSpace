@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\dependencies\OpenCollaborationLayout.Dependencies.csproj" />
+  </ItemGroup>
+
+  <!-- <ItemGroup>
+    <PackageReference Include="Hypar.Elements.Components" Version="0.1.1" />
+  </ItemGroup> -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\elements\Elements.Components\src\Elements.Components.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\OpenCollaborationConfigurations.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <PackageReference Include="Hypar.Elements" Version="0.8.5" /> -->
+    <PackageReference Include="Hypar.Functions" Version="0.8.9" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>

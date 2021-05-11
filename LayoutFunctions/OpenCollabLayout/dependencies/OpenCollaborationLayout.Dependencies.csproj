@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <!-- <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.8.5" />
+  </ItemGroup> -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
+  </ItemGroup>
+
+</Project>
