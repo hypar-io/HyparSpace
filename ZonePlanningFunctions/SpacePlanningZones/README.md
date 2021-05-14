@@ -16,6 +16,8 @@ Manual: you draw the circulation paths yourself.|
 |Depth at Ends|number|If your floorplate is rectangular, or has roughly rectangular ends, how deep should the spaces be at these ends?|
 |Additional Corridor Locations|array|Add new points to this list to insert additional corridor locations, to further subdivide the space. Corridors extend perpendicularly from the closest point on the boundary.|
 |Manual Split Locations|array|Add new points to this list to insert additional program split locations, to further subdivide the space. This is similar to the corridor locations input above, but does not insert circulation between split spaces.|
+|Add Corridors|https://prod-api.hypar.io/schemas/PolygonSplitCollection|Insert additional corridors, to further subdivide the space.|
+|Split Zones|https://prod-api.hypar.io/schemas/PolygonSplitCollection|Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.|
 
 
 <br>
