@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 using System;
 using System.Collections.Generic;
 
-namespace DataHall.Tests
+namespace DataHallLayout.Tests
 {
     public class FunctionTests
     {

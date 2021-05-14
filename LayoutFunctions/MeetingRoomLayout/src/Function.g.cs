@@ -31,7 +31,7 @@ namespace MeetingRoomLayout
             var asmDir = Path.GetDirectoryName(asmLocation);
 
             // Explicitly load the dependencies project, it might have types
-            // that aren't used in the function but are necessary for correct 
+            // that aren't used in the function but are necessary for correct
             // deserialization.
             var asmName = Path.GetFileNameWithoutExtension(asmLocation);
             var depPath = Path.Combine(asmDir, $"{asmName}.Dependencies.dll");
@@ -41,12 +41,12 @@ namespace MeetingRoomLayout
                 Assembly.LoadFrom(depPath);
                 Console.WriteLine("Dependencies assembly loaded.");
             }
-            
+
             // Load all reference assemblies.
             Console.WriteLine($"Loading all referenced assemblies.");
             foreach (var asm in this.GetType().Assembly.GetReferencedAssemblies())
             {
-                try 
+                try
                 {
                     Assembly.Load(asm);
                 }

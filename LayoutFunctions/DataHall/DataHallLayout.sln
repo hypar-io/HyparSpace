@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHall", "src\DataHall.csproj", "{6E689081-EED9-4293-852C-FC3FAC0C1D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHallLayout", "src\DataHallLayout.csproj", "{6E689081-EED9-4293-852C-FC3FAC0C1D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHall.Dependencies", "dependencies\DataHall.Dependencies.csproj", "{DF989114-4F55-4D3F-922A-2FE0BAAB7519}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHallLayout.Dependencies", "dependencies\DataHallLayout.Dependencies.csproj", "{DF989114-4F55-4D3F-922A-2FE0BAAB7519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHall.Tests", "test\DataHall.Tests.csproj", "{5557E197-C7BC-4F0F-91FF-DE0AE6C6F550}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHallLayout.Tests", "test\DataHallLayout.Tests.csproj", "{5557E197-C7BC-4F0F-91FF-DE0AE6C6F550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

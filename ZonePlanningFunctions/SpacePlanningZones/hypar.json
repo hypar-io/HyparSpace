@@ -6,7 +6,7 @@
     "language": "C#",
     "model_dependencies": [
         {
-            "autohide": false,
+            "autohide": true,
             "name": "Levels",
             "optional": false
         },
@@ -17,6 +17,10 @@
         },
         {
             "name": "Floors",
+            "optional": true
+        },
+        {
+            "name": "Program Requirements",
             "optional": true
         }
     ],
@@ -40,6 +44,10 @@
                     "Reception",
                     "Data Hall"
                 ],
+                "$hyparAutocompleteQuery": {
+                    "dependency": "Program Requirements",
+                    "query": "[*discriminator=Elements.ProgramRequirement].Program Name"
+                },
                 "default": "unspecified"
             },
             "Circulation Mode": {
@@ -184,9 +192,14 @@
                         "Support",
                         "Reception",
                         "Data Hall"
-                    ]
+                    ],
+                    "$hyparAutocompleteQuery": {
+                        "dependency": "Program Requirements",
+                        "query": "[*discriminator=Elements.ProgramRequirement].Program Name"
+                    }
                 },
                 "Split": {
+                    "$hyparDeprecated": true,
                     "description": "If you'd like to subdivide this zone into rooms, set the number of rooms.",
                     "type": "integer",
                     "default": 1
@@ -208,10 +221,12 @@
     },
     "element_types": [
         "https://prod-api.hypar.io/schemas/LevelVolume",
+        "https://raw.githubusercontent.com/hypar-io/Schemas/master/LevelPerimeter.json",
         "https://prod-api.hypar.io/schemas/ServiceCore",
         "https://prod-api.hypar.io/schemas/SpaceBoundary",
         "https://prod-api.hypar.io/schemas/LevelElements",
-        "https://prod-api.hypar.io/schemas/AreaTally"
+        "https://prod-api.hypar.io/schemas/AreaTally",
+        "https://prod-api.hypar.io/schemas/ProgramRequirement"
     ],
     "repository_url": "https://github.com/hypar-io/function",
     "source_file_key": null,

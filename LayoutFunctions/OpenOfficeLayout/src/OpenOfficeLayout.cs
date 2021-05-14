@@ -117,7 +117,11 @@ namespace OpenOfficeLayout
                     nearInstances.ToList().ForEach(ni => ni.Transform.Concatenate(new Transform(thisPt.X - ni.Transform.Origin.X, thisPt.Y - ni.Transform.Origin.Y, 0)));
                     // should only be one
                     var nearTranslations = pointTranslations.Where(pt => pt.OriginalLocation.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearTranslations.ToList().ForEach(nt => nt.Location = thisPt);
+                    nearTranslations.ToList().ForEach(nt =>
+                    {
+                        nt.OriginalLocation = thisOriginalLocation;
+                        nt.Location = thisPt;
+                    });
                 }
 
             }
