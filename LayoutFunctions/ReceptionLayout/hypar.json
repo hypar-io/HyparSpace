@@ -3,6 +3,7 @@
   "id": "1f36c76c-d506-413b-83b3-9e484522f516",
   "name": "Reception Layout",
   "description": "Layout Reception spaces",
+  "model_output": "Reception Layout",
   "language": "C#",
   "model_dependencies": [
     {

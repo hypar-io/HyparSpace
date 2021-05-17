@@ -3,6 +3,7 @@
   "id": "2586d6e9-8586-42a0-9d49-b80d0d684925",
   "name": "Lounge Layout",
   "description": "Layout lounge spaces",
+  "model_output": "Lounge Layout",
   "language": "C#",
   "model_dependencies": [
     {
