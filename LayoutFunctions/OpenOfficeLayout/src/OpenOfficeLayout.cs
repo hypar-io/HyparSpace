@@ -206,6 +206,7 @@ namespace OpenOfficeLayout
 
             InstancePositionOverrides(input.Overrides, output.Model);
             var model = output.Model;
+            model.AddElement(new WorkpointCount(deskCount, Guid.NewGuid(), null));
             var outputWithData = new OpenOfficeLayoutOutputs(deskCount);
             outputWithData.Model = model;
 

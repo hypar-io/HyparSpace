@@ -2,7 +2,7 @@
 
 # Meeting Room Layout
 
-The MeetingRoomLayout function.
+Lay out meeting rooms.
 
 |Input Name|Type|Description|
 |---|---|---|
