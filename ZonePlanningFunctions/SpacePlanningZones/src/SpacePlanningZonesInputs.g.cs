@@ -69,6 +69,37 @@ namespace SpacePlanningZones
     
     }
     
+    /// <summary>A collection of points used to split a set of polygons </summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class PolygonSplitCollection 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public PolygonSplitCollection(IList<SplitLocations> @splitLocations)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<PolygonSplitCollection>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @splitLocations});
+            }
+        
+            this.SplitLocations = @splitLocations;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>The lines representing split locations. The start of each line should be treated as its anchor - the second is only an indication of its direction</summary>
+        [Newtonsoft.Json.JsonProperty("SplitLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SplitLocations> SplitLocations { get; set; }
+    
+    
+    }
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class SpacePlanningZonesInputs : S3Args
@@ -76,13 +107,13 @@ namespace SpacePlanningZones
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningZonesInputs(string @defaultProgramAssignment, SpacePlanningZonesInputsCirculationMode @circulationMode, IList<ThickenedPolyline> @corridors, double @corridorWidth, double @outerBandDepth, double @depthAtEnds, IList<Vector3> @additionalCorridorLocations, IList<Vector3> @manualSplitLocations, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningZonesInputs(string @defaultProgramAssignment, SpacePlanningZonesInputsCirculationMode @circulationMode, IList<ThickenedPolyline> @corridors, double @corridorWidth, double @outerBandDepth, double @depthAtEnds, IList<Vector3> @additionalCorridorLocations, IList<Vector3> @manualSplitLocations, PolygonSplitCollection @addCorridors, PolygonSplitCollection @splitZones, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningZonesInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @circulationMode, @corridors, @corridorWidth, @outerBandDepth, @depthAtEnds, @additionalCorridorLocations, @manualSplitLocations, @overrides});
+                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @circulationMode, @corridors, @corridorWidth, @outerBandDepth, @depthAtEnds, @additionalCorridorLocations, @manualSplitLocations, @addCorridors, @splitZones, @overrides});
             }
         
             this.DefaultProgramAssignment = @defaultProgramAssignment;
@@ -93,6 +124,8 @@ namespace SpacePlanningZones
             this.DepthAtEnds = @depthAtEnds;
             this.AdditionalCorridorLocations = @additionalCorridorLocations;
             this.ManualSplitLocations = @manualSplitLocations;
+            this.AddCorridors = @addCorridors;
+            this.SplitZones = @splitZones;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -139,8 +172,57 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Manual Split Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Vector3> ManualSplitLocations { get; set; }
     
+        /// <summary>Insert additional corridors, to further subdivide the space.</summary>
+        [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PolygonSplitCollection AddCorridors { get; set; }
+    
+        /// <summary>Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.</summary>
+        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PolygonSplitCollection SplitZones { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SplitLocations 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SplitLocations(Vector3 @position, Vector3 @direction)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SplitLocations>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @position, @direction});
+            }
+        
+            this.Position = @position;
+            this.Direction = @direction;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("position", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 Position { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("direction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 Direction { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
     
     
     }

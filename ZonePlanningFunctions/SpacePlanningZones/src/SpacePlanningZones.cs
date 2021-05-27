@@ -118,6 +118,43 @@ namespace SpacePlanningZones
                 var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
                 levels.Add(level);
 
+                // These are the new, correct methods using the split inputs: 
+
+                // Create snapping geometry for corridors
+                foreach (var sb in spaceBoundaries)
+                {
+                    var boundary = sb as SpaceBoundary;
+                    output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), "corridors"));
+                    if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
+                    {
+                        boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), "corridors")));
+                    }
+                }
+
+                //Manual Corridor Splits
+                foreach (var pt in input.AddCorridors.SplitLocations)
+                {
+                    SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
+                }
+                //Create snapping geometry for splits
+                foreach (var sb in spaceBoundaries)
+                {
+                    var boundary = sb as SpaceBoundary;
+                    output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), "splits"));
+                    if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
+                    {
+                        boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), "splits")));
+                    }
+                }
+
+                // Manual Split Locations
+                foreach (var pt in input.SplitZones.SplitLocations)
+                {
+                    SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
+                }
+
+                // These are the old style methods, just left in place for backwards compatibility. 
+                // Most of the time we expect these values to be empty.
                 // Manual Corridor Splits
                 foreach (var pt in input.AdditionalCorridorLocations)
                 {
@@ -547,7 +584,12 @@ namespace SpacePlanningZones
 
         private static void SplitZones(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<Element> spaceBoundaries, List<Profile> corridorProfiles, Vector3 pt, bool addCorridor = true)
         {
-            var containingBoundary = spaceBoundaries.OfType<SpaceBoundary>().FirstOrDefault(b => b.Boundary.Contains(pt));
+            // this is a hack — we're constructing a new SplitLocations w/ ZAxis as a sentinel meaning "null";
+            SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, new SplitLocations(pt, Vector3.ZAxis), addCorridor);
+        }
+        private static void SplitZones(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<Element> spaceBoundaries, List<Profile> corridorProfiles, SplitLocations pt, bool addCorridor = true)
+        {
+            var containingBoundary = spaceBoundaries.OfType<SpaceBoundary>().FirstOrDefault(b => b.Boundary.Contains(pt.Position));
             if (containingBoundary != null)
             {
                 if (input.Overrides?.ProgramAssignments != null)
@@ -560,8 +602,16 @@ namespace SpacePlanningZones
                 }
                 spaceBoundaries.Remove(containingBoundary);
                 var perim = containingBoundary.Boundary.Perimeter;
-                pt.DistanceTo(perim as Polyline, out var cp);
-                var line = new Line(pt, cp);
+                Line line;
+                if (pt.Direction == Vector3.ZAxis)
+                {
+                    pt.Position.DistanceTo(perim as Polyline, out var cp);
+                    line = new Line(pt.Position, cp);
+                }
+                else
+                {
+                    line = new Line(pt.Position, pt.Position + pt.Direction * 0.1);
+                }
                 var extension = line.ExtendTo(containingBoundary.Boundary);
                 List<Profile> newSbs = new List<Profile>();
                 if (addCorridor)
