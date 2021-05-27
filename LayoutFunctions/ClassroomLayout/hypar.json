@@ -3,6 +3,7 @@
   "id": "e83225ea-a792-45d6-8426-e19ebe00a929",
   "name": "Classroom Layout",
   "description": "Generate an interior layout for classroom zones.",
+  "model_output": "Classroom Layout",
   "language": "C#",
   "model_dependencies": [
     {

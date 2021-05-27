@@ -4,6 +4,7 @@
   "name": "Open Collaboration Layout",
   "description": "Lay out Open collaboration spaces.",
   "language": "C#",
+  "model_output": "Open Collaboration Layout",
   "model_dependencies": [
     {
       "autohide": false,

@@ -4,6 +4,7 @@
   "name": "Data Hall Layout",
   "description": "Lay out a data hall in a space boundary.",
   "language": "C#",
+  "model_output": "Data Hall Layout",
   "model_dependencies": [
     {
       "autohide": false,

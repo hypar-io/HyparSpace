@@ -2,7 +2,7 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "9a574d33-ae1e-4a68-a548-148d65fcf79e",
   "name": "Meeting Room Layout",
-  "description": "The MeetingRoomLayout function.",
+  "description": "Lay out meeting rooms.",
   "language": "C#",
   "model_output": "Meeting Room Layout",
   "model_dependencies": [

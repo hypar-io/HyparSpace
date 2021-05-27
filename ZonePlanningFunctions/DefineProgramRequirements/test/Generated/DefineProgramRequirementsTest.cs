@@ -35,189 +35,186 @@ namespace DefineProgramRequirements
     {
       ""Program Name"": ""Open Office"",
       ""Area per Space"": 11200,
-      ""Space Count"": 1,
-      ""Id"": ""02b64226-5ce5-4695-afe7-4179da1e9030"",
-      ""Hypar Space Type"": ""Open Office"",
       ""Color"": {
         ""Red"": 0.6784313725490196,
         ""Alpha"": 1,
         ""Blue"": 0.9019607843137255,
         ""Green"": 0.8470588235294118
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""90ba1244-6e9a-498e-8782-29ac70433dba"",
+      ""Hypar Space Type"": ""Open Office"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Private Office"",
       ""Area per Space"": 140,
-      ""Space Count"": 16,
-      ""Id"": ""4486fd2b-2878-4b7f-9613-ad25ca33defd"",
-      ""Hypar Space Type"": ""Private Office"",
       ""Color"": {
         ""Red"": 0.5019607843137255,
         ""Alpha"": 1,
         ""Blue"": 0.5019607843137255,
         ""Green"": 0
-      }
+      },
+      ""Space Count"": 16,
+      ""Id"": ""48f202f7-f1e7-485c-a6de-c50b65bf71c9"",
+      ""Hypar Space Type"": ""Private Office"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Phone Booth"",
       ""Area per Space"": 150,
-      ""Space Count"": 5,
-      ""Id"": ""1a7c509d-3752-4cae-8a63-ad0cab2c13de"",
-      ""Hypar Space Type"": ""Phone Booth"",
       ""Color"": {
         ""Red"": 0,
         ""Alpha"": 1,
         ""Blue"": 0,
         ""Green"": 0.5019607843137255
-      }
+      },
+      ""Space Count"": 5,
+      ""Id"": ""84beb75d-52be-49bd-8e4a-5ca60eb3cddc"",
+      ""Hypar Space Type"": ""Phone Booth"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Meeting Rm Lg"",
       ""Area per Space"": 600,
-      ""Space Count"": 1,
-      ""Id"": ""6feb473b-bd85-4dad-bb5c-763e7ed4eb5f"",
-      ""Hypar Space Type"": ""Meeting Room"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 0.796078431372549,
         ""Green"": 0.7529411764705882
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""fa0b6e5b-f46e-4cda-ace3-0eb00fbeeff7"",
+      ""Hypar Space Type"": ""Meeting Room"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Meeting Rm Md"",
       ""Area per Space"": 350,
-      ""Space Count"": 5,
-      ""Id"": ""69319675-3bf5-4d52-960d-bb334d3a5d6e"",
-      ""Hypar Space Type"": ""Meeting Room"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 0.796078431372549,
         ""Green"": 0.7529411764705882
-      }
+      },
+      ""Space Count"": 5,
+      ""Id"": ""5de71893-b16f-4fad-93a3-1463c536d0c1"",
+      ""Hypar Space Type"": ""Meeting Room"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Meeting Rm Sm"",
       ""Area per Space"": 250,
-      ""Space Count"": 2,
-      ""Id"": ""04a81ed3-e033-4d91-ba57-5b9013575d2a"",
-      ""Hypar Space Type"": ""Meeting Room"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 0.796078431372549,
         ""Green"": 0.7529411764705882
-      }
+      },
+      ""Space Count"": 2,
+      ""Id"": ""f5e6265f-a43d-44ec-9fa5-99e97db1a3ca"",
+      ""Hypar Space Type"": ""Meeting Room"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Circulation"",
       ""Area per Space"": 4600,
-      ""Space Count"": 1,
-      ""Id"": ""e8065cdf-2fb7-4183-a62d-0d87ad470acf"",
-      ""Hypar Space Type"": ""Circulation"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 1,
         ""Green"": 1
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""4cbb4985-ac73-47d8-9720-955043b94a3b"",
+      ""Hypar Space Type"": ""Circulation"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Open Collaboration Lg"",
       ""Area per Space"": 700,
-      ""Space Count"": 1,
-      ""Id"": ""25615e12-6988-4a44-b129-98253ba0926c"",
-      ""Hypar Space Type"": ""Meeting Room"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 0,
         ""Green"": 1
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""77b0a1cd-5bc0-4fe2-b14d-7fa96538e16f"",
+      ""Hypar Space Type"": ""Meeting Room"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Open Collaboration Sm"",
       ""Area per Space"": 300,
-      ""Space Count"": 2,
-      ""Id"": ""dd2e3a6b-9900-4ee1-89ed-6b91c811d70a"",
-      ""Hypar Space Type"": ""Lounge"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 0,
         ""Green"": 1
-      }
+      },
+      ""Space Count"": 2,
+      ""Id"": ""8294b593-7e06-41c7-8f4a-3c12b740c968"",
+      ""Hypar Space Type"": ""Lounge"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Service"",
       ""Area per Space"": 250,
-      ""Space Count"": 1,
-      ""Id"": ""db763ffc-9865-4906-94a7-4704874b82ff"",
-      ""Hypar Space Type"": ""Service"",
       ""Color"": {
         ""Red"": 0.5019607843137255,
         ""Alpha"": 1,
         ""Blue"": 0.5019607843137255,
         ""Green"": 0.5019607843137255
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""95a458ed-9ce7-4e43-83b6-0ac36a0dc02e"",
+      ""Hypar Space Type"": ""Service"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Common Area"",
       ""Area per Space"": 350,
-      ""Space Count"": 1,
-      ""Id"": ""3c83690f-7415-4a61-8d5c-0a7ab02f7ed7"",
-      ""Hypar Space Type"": ""Lounge"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 1,
         ""Green"": 1
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""215f10ae-82ef-4654-83ae-dd866d845d3a"",
+      ""Hypar Space Type"": ""Lounge"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Reception"",
       ""Area per Space"": 230,
-      ""Space Count"": 1,
-      ""Id"": ""3f9f8530-f337-4898-b3ac-6dcdabc5ff5a"",
-      ""Hypar Space Type"": ""Reception"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 1,
         ""Green"": 1
-      }
+      },
+      ""Space Count"": 1,
+      ""Id"": ""aa4c0df8-7466-485a-bd6d-7685dcfc37d2"",
+      ""Hypar Space Type"": ""Reception"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
       ""Program Name"": ""Kitchen"",
       ""Area per Space"": 625,
-      ""Space Count"": 1,
-      ""Id"": ""ea91a212-db17-403f-a076-a94fee48e14f"",
-      ""Hypar Space Type"": ""Pantry"",
       ""Color"": {
         ""Red"": 1,
         ""Alpha"": 1,
         ""Blue"": 1,
         ""Green"": 1
-      }
-    },
-    {
-      ""Program Name"": ""fatch match"",
-      ""Area per Space"": 0,
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0,
-        ""Green"": 0
       },
       ""Space Count"": 1,
-      ""Id"": ""12304c7b-2c8b-4d6a-8e6e-97c1a4c5cdd0"",
-      ""Hypar Space Type"": ""Lounge"",
-      ""Name"": null,
-      ""discriminator"": null
+      ""Id"": ""c59877f3-4101-4cb8-9860-b430bb230e5e"",
+      ""Hypar Space Type"": ""Pantry"",
+      ""discriminator"": ""Elements.ProgramRequirement""
     }
   ],
-  ""Color List"": [],
   ""model_input_keys"": {}
 }
             ";

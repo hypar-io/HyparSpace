@@ -3,6 +3,7 @@
     "id": "94dc146d-a523-412a-989f-dafdacd1ac68",
     "name": "Private Office Layout",
     "description": "Lay out private offices.",
+    "model_output": "Private Office Layout",
     "language": "C#",
     "model_dependencies": [
         {

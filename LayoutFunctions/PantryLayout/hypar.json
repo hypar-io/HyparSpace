@@ -4,6 +4,7 @@
   "name": "Pantry Layout",
   "description": "Layout Pantry spaces",
   "language": "C#",
+  "model_output": "Pantry Layout",
   "model_dependencies": [
     {
       "autohide": false,
