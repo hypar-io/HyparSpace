@@ -43,6 +43,7 @@ namespace Elements
             {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5))},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
             {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5))},
             {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5))}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Open Collaboration", new Material("Open Collaboration", new Color(209.0/255, 224.0/255, 178.0/255, 0.5))},
             {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5))}
         };
         public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);

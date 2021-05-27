@@ -21,60 +21,6 @@ namespace DefineProgramRequirements
 {
     #pragma warning disable // Disable all warnings
 
-    /// <summary>Fill out your program requirements. Use "Hypar Space Type" to dictate which function should be used to lay out your space.</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class ProgramRequirement : Element
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirement(string @programName, Color @color, double @areaPerSpace, int @spaceCount, string @hyparSpaceType, System.Guid @id, string @name)
-            : base(id, name)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirement>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @programName, @color, @areaPerSpace, @spaceCount, @hyparSpaceType, @id, @name});
-            }
-        
-            this.ProgramName = @programName;
-            this.Color = @color;
-            this.AreaPerSpace = @areaPerSpace;
-            this.SpaceCount = @spaceCount;
-            this.HyparSpaceType = @hyparSpaceType;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        /// <summary>What display name should be used for this program type?</summary>
-        [Newtonsoft.Json.JsonProperty("Program Name", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string ProgramName { get; set; }
-    
-        /// <summary>What color should be used to display this space type?</summary>
-        [Newtonsoft.Json.JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Color Color { get; set; }
-    
-        /// <summary>How much area should be allocated for this space?</summary>
-        [Newtonsoft.Json.JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double AreaPerSpace { get; set; }
-    
-        /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
-        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int SpaceCount { get; set; } = 1;
-    
-        /// <summary>What program type best matches this one?</summary>
-        [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string HyparSpaceType { get; set; } = "unspecified";
-    
-    
-    }
-    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class DefineProgramRequirementsInputs : S3Args

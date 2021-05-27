@@ -8,4 +8,10 @@
     <PackageReference Include="Hypar.Elements" Version="0.8.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
+  </ItemGroup>
+  <ItemGroup></ItemGroup>
+
 </Project>

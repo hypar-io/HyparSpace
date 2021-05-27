@@ -42,6 +42,7 @@
                     "Phone Booth",
                     "Support",
                     "Reception",
+                    "Open Collaboration",
                     "Data Hall"
                 ],
                 "$hyparAutocompleteQuery": {
@@ -191,6 +192,7 @@
                         "Phone Booth",
                         "Support",
                         "Reception",
+                        "Open Collaboration",
                         "Data Hall"
                     ],
                     "$hyparAutocompleteQuery": {

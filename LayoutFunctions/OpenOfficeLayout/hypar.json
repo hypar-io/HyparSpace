@@ -2,7 +2,7 @@
     "$schema": "https://hypar.io/Schemas/Function.json",
     "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
     "name": "Open Office Layout",
-    "description": "The OpenOfficeLayout function.",
+    "description": "Lay out desks with optional open collaboration areas distributed throughout.",
     "language": "C#",
     "model_output": "Open Office Layout",
     "model_dependencies": [
@@ -16,12 +16,22 @@
             "Desk Type": {
                 "type": "string",
                 "enum": [
-                    "Simple Desk",
+                    "Simple Desk - 24x48",
+                    "Simple Desk - 30x60",
+                    "Simple Desk - 29x70",
+                    "Simple Desk - 30x72",
                     "L-Shaped",
                     "Double Desk",
                     "Enclosed Pair"
                 ],
-                "default": "Simple Desk"
+                "default": "Simple Desk - 29x70"
+            },
+            "Integrated Collaboration Space Density": {
+                "type": "number",
+                "description": "Increase this number to add more distributed collaboration spaces throughout open office areas.",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 0.2
             }
         }
     },
@@ -47,6 +57,29 @@
             "schema": {
                 "Location": {
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            }
+        },
+        "Space Settings": {
+            "context": "[*discriminator=Elements.SpaceBoundary&Name=DeskArea]",
+            "identity": {
+                "ParentCentroid": {
+                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            },
+            "schema": {
+                "Desk Type": {
+                    "type": "string",
+                    "enum": [
+                        "Simple Desk - 24x48",
+                        "Simple Desk - 30x60",
+                        "Simple Desk - 29x70",
+                        "Simple Desk - 30x72",
+                        "L-Shaped",
+                        "Double Desk",
+                        "Enclosed Pair"
+                    ],
+                    "default": "Simple Desk - 29x70"
                 }
             }
         }

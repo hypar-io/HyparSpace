@@ -7,6 +7,8 @@ cd ../LoungeLayout
 hypar publish
 cd ../MeetingRoomLayout
 hypar publish
+cd ../OpenCollabLayout
+hypar publish
 cd ../OpenOfficeLayout
 hypar publish
 cd ../PantryLayout

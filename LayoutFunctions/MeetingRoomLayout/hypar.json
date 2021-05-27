@@ -4,6 +4,7 @@
   "name": "Meeting Room Layout",
   "description": "The MeetingRoomLayout function.",
   "language": "C#",
+  "model_output": "Meeting Room Layout",
   "model_dependencies": [
     {
       "name": "Space Planning Zones"

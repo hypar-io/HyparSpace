@@ -17,21 +17,21 @@ using System.Linq;
 using Line = Elements.Geometry.Line;
 using Polygon = Elements.Geometry.Polygon;
 
-namespace ReceptionLayout
+namespace OpenCollaborationLayout
 {
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public  class ReceptionLayoutInputs : S3Args
+    public  class OpenCollaborationLayoutInputs : S3Args
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public ReceptionLayoutInputs(Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenCollaborationLayoutInputs(Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<ReceptionLayoutInputs>();
+            var validator = Validator.Instance.GetFirstValidatorForType<OpenCollaborationLayoutInputs>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @overrides});
