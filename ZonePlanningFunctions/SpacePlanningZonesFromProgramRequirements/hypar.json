@@ -1,0 +1,116 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "221c8fd0-aca1-4165-aae6-3b332bc65025",
+  "name": "Space Planning Zones From Program Requirements",
+  "description": "The SpacePlanningZonesFromProgramRequirements function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": true,
+      "name": "Levels",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Core",
+      "optional": true
+    },
+    {
+      "name": "Floors",
+      "optional": true
+    },
+    {
+      "name": "Program Requirements",
+      "optional": false
+    }
+  ],
+  "model_output": "Space Planning Zones",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Default Program Assignment": {
+        "type": "string",
+        "description": "What would you like the default program for all zones to be? If specified, this program type will be used to fill all floor area not specified with specific blocks.",
+        "$hyparAutocomplete": [
+          "unspecified",
+          "Open Office",
+          "Private Office",
+          "Lounge",
+          "Classroom",
+          "Pantry",
+          "Meeting Room",
+          "Phone Booth",
+          "Support",
+          "Reception",
+          "Open Collaboration",
+          "Data Hall"
+        ],
+        "$hyparAutocompleteQuery": {
+          "dependency": "Program Requirements",
+          "query": "[*discriminator=Elements.ProgramRequirement].Program Name"
+        },
+        "default": "unspecified"
+      },
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "overrides": {
+    "Arrange Spaces": {
+      "verbs": {
+        "edit": "Arrange Spaces",
+        "revert": "Reset Spaces"
+      },
+      "context": "[*discriminator=Elements.SpaceBoundary&DefaultType!=true]",
+      "identity": {
+        "Identifier": {
+          "type": "string"
+        }
+      },
+      "schema": {
+        "Transform": {
+          "$ref": "https://prod-api.hypar.io/schemas/Transform"
+        }
+      }
+    },
+    "Mass Boundaries": {
+      "verbs": {
+        "edit": "Edit Space Boundaries",
+        "revert": "Reset Space Boundaries"
+      },
+      "context": "[*discriminator=Elements.SpaceBoundary]",
+      "identity": {
+        "Identifier": {
+          "type": "string"
+        },
+        "EditBoundaryTransform": {
+          "$ref": "https://prod-api.hypar.io/schemas/Transform"
+        }
+      },
+      "schema": {
+        "EditBoundary": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
+        }
+      }
+    }
+  },
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null,
+  "thumbnail_id": null,
+  "last_updated": "0001-01-01T00:00:00",
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/AreaTally",
+    "https://prod-api.hypar.io/schemas/ServiceCore"
+  ]
+}

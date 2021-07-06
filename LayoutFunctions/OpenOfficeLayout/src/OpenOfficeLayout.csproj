@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements.Components" Version="0.1.1" />
+    <PackageReference Include="Hypar.Elements.Components" Version="0.9.1" />
   </ItemGroup>
 
 
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.0-alpha.7" />
+    <PackageReference Include="Hypar.Elements" Version="0.9.1" />
     <PackageReference Include="Hypar.Functions" Version="0.8.9" />
   </ItemGroup>
 

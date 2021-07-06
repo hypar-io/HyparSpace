@@ -17,3 +17,5 @@ cd ../PhoneBoothLayout
 hypar publish
 cd ../PrivateOfficeLayout
 hypar publish
+cd ../ReceptionLayout
+hypar publish

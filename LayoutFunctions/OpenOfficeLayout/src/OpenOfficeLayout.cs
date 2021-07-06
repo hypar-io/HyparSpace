@@ -159,11 +159,13 @@ namespace OpenOfficeLayout
                             }
                         }
                     }
+                    // output.Model.AddElements(grid.ToModelCurves());
                     foreach (var cell in grid.GetCells())
                     {
                         try
                         {
-                            if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
+                            // TODO — fix cell.IsTrimmed 
+                            if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed() && cell.GetTrimmedCellGeometry().Count() > 0)
                             {
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {
@@ -192,7 +194,7 @@ namespace OpenOfficeLayout
                         }
                     }
 
-                    var collabSpaceCells = grid.GetCells().Where(c => c.Type?.Contains("Collab Space") == true).Select(c => new Profile(c.GetCellGeometry() as Polygon));
+                    var collabSpaceCells = grid.GetCells().Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true).Select(c => new Profile(c.GetCellGeometry() as Polygon));
                     var union = Profile.UnionAll(collabSpaceCells);
                     foreach (var profile in union)
                     {

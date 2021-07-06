@@ -21,9 +21,9 @@ namespace ReceptionLayout
         public static ReceptionLayoutOutputs Execute(Dictionary<string, Model> inputModels, ReceptionLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var levelsModel = inputModels["Levels"];
+            inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
             var output = new ReceptionLayoutOutputs();
             var configJson = File.ReadAllText("./ReceptionConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -38,7 +38,7 @@ namespace ReceptionLayout
                 var corridors = lvl.Elements.OfType<Floor>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Reception");
-                var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
+                // var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;

@@ -10,7 +10,8 @@
       "name": "Space Planning Zones"
     },
     {
-      "name": "Levels"
+      "name": "Levels",
+      "optional": true
     }
   ],
   "input_schema": {

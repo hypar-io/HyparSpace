@@ -14,7 +14,7 @@
     {
       "autohide": false,
       "name": "Levels",
-      "optional": false
+      "optional": true
     }
   ],
   "input_schema": {

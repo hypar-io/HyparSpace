@@ -1,0 +1,107 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "6d6f02dd-c50a-4ea4-a467-3e94c0bdb11c",
+  "name": "Custom Space Type",
+  "description": "Create custom space types.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": true
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Layouts": {
+        "type": "array",
+        "items": {
+          "$hyparDisplayName": "Layout",
+          "type": "object",
+          "required": [
+            "Space Type",
+            "Catalog"
+          ],
+          "properties": {
+            "Space Type": {
+              "type": "string",
+              "description": "The name for this space type."
+            },
+            "Catalog": {
+              "description": "The URL to the Furniture Catalog",
+              "type": "string"
+            },
+            "Boundary": {
+              "description": "The reference boundary around these furniture elements",
+              "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
+            },
+            "Walls": {
+              "type": "array",
+              "items": {
+                "$hyparDisplayName": "Wall",
+                "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+                "$hyparAllowIntersection": true,
+                "$hyparConstrainToGround": true,
+                "default": {
+                  "width": 0.15,
+                  "flip": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "overrides": {
+    "Transform": {
+      "context": "[*discriminator=Elements.ElementInstance]",
+      "identity": {
+        "Name": {
+          "type": "string"
+        },
+        "BaseDefinition": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Transform": {
+          "$ref": "https://prod-api.hypar.io/schemas/Transform",
+          "$hyparConstraints": {
+            "enablePosition": true,
+            "enableRotation": true,
+            "enableShear": false,
+            "positionZ": 0,
+            "rotationZ": 0
+          }
+        }
+      },
+      "verbs": {
+        "edit": null,
+        "revert": null
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null,
+  "thumbnail_id": null,
+  "last_updated": "0001-01-01T00:00:00"
+}

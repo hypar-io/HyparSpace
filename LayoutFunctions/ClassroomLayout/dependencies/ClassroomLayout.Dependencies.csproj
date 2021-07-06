@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.8.5" />
+    <ProjectReference Include="..\..\WallGeneration\WallGeneration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.9.1" />
   </ItemGroup>
 
 </Project>

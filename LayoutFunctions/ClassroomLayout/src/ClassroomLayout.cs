@@ -21,9 +21,9 @@ namespace ClassroomLayout
         public static ClassroomLayoutOutputs Execute(Dictionary<string, Model> inputModels, ClassroomLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var levelsModel = inputModels["Levels"];
+            inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -37,15 +37,13 @@ namespace ClassroomLayout
                 var corridors = lvl.Elements.OfType<Floor>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
-                var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
+                var levelVolume = levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
+
                     var spaceBoundary = room.Boundary;
-                    Line orientationGuideEdge = FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
-                    wallCandidateLines.Add((orientationGuideEdge, "Glass"));
-                    var exteriorWalls = FindEdgeAdjacentToSegments(wallCandidates, levelVolume.Profile.Segments(), out var solidWalls, 0.6);
-                    wallCandidateLines.AddRange(solidWalls.Select(s => (s, "Solid")));
+                    wallCandidateLines.AddRange(WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge));
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
                     var boundaryCurves = new List<Polygon>();
                     boundaryCurves.Add(spaceBoundary.Perimeter);
@@ -97,7 +95,7 @@ namespace ClassroomLayout
                                                 contentItem.Transform
                                                 .Concatenated(orientationTransform)
                                                 .Concatenated(new Transform(cellRect.Vertices[0]))
-                                                .Concatenated(levelVolume.Transform),
+                                                .Concatenated(room.Transform),
                                                 "Desk");
                                             output.Model.AddElement(instance);
                                         }
@@ -114,46 +112,14 @@ namespace ClassroomLayout
                     }
 
                 }
-                var mullionSize = 0.07;
-                var doorWidth = 0.9;
-                var doorHeight = 2.1;
-                var sideLightWidth = 0.4;
-                var totalStorefrontHeight = Math.Min(2.7, levelVolume.Height);
-                var mullion = new StandardWall(new Line(new Vector3(-mullionSize / 2, 0, 0), new Vector3(mullionSize / 2, 0, 0)), mullionSize, totalStorefrontHeight, mullionMat);
-                mullion.IsElementDefinition = true;
+                if (levelVolume == null)
+                {
+                    // if we didn't get a level volume, make a fake one.
+                    levelVolume = new LevelVolume(null, 3, 0, new Transform(), null, null, false, Guid.NewGuid(), null);
+                }
                 if (input.CreateWalls)
                 {
-                    foreach (var wallCandidate in wallCandidateLines)
-                    {
-                        if (wallCandidate.type == "Solid")
-                        {
-                            output.Model.AddElement(new StandardWall(wallCandidate.line, 0.2, levelVolume.Height, wallMat, levelVolume.Transform));
-                        }
-                        else if (wallCandidate.type == "Glass")
-                        {
-                            var grid = new Grid1d(wallCandidate.line);
-                            grid.SplitAtOffsets(new[] { sideLightWidth, sideLightWidth + doorWidth });
-                            grid[2].DivideByApproximateLength(2);
-                            var separators = grid.GetCellSeparators(true);
-                            var beam = new Beam(wallCandidate.line, Polygon.Rectangle(mullionSize, mullionSize), mullionMat, 0, 0, 0, isElementDefinition: true);
-                            output.Model.AddElement(beam.CreateInstance(levelVolume.Transform, "Base Mullion"));
-                            output.Model.AddElement(beam.CreateInstance(levelVolume.Transform.Concatenated(new Transform(0, 0, doorHeight)), "Base Mullion"));
-                            output.Model.AddElement(beam.CreateInstance(levelVolume.Transform.Concatenated(new Transform(0, 0, totalStorefrontHeight)), "Base Mullion"));
-                            foreach (var separator in separators)
-                            {
-                                // var line = new Line(separator, separator + new Vector3(0, 0, levelVolume.Height));
-                                // output.Model.AddElement(new ModelCurve(line, BuiltInMaterials.XAxis, levelVolume.Transform));
-                                var instance = mullion.CreateInstance(new Transform(separator, wallCandidate.line.Direction(), Vector3.ZAxis, 0).Concatenated(levelVolume.Transform), "Mullion");
-                                output.Model.AddElement(instance);
-                            }
-                            output.Model.AddElement(new StandardWall(wallCandidate.line, 0.05, totalStorefrontHeight, glassMat, levelVolume.Transform));
-                            var headerHeight = levelVolume.Height - totalStorefrontHeight;
-                            if (headerHeight > 0.01)
-                            {
-                                output.Model.AddElement(new StandardWall(wallCandidate.line, 0.2, headerHeight, wallMat, levelVolume.Transform.Concatenated(new Transform(0, 0, totalStorefrontHeight))));
-                            }
-                        }
-                    }
+                    WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
                 }
             }
             InstancePositionOverrides(input.Overrides, output.Model);
@@ -185,57 +151,6 @@ namespace ClassroomLayout
 
             }
             model.AddElements(pointTranslations);
-        }
-
-        private static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, out IEnumerable<Line> otherSegments, double maxDist = 0)
-        {
-            var minDist = double.MaxValue;
-            var minSeg = edgesToClassify.First();
-            var allEdges = edgesToClassify.ToList();
-            var selectedIndex = 0;
-            for (int i = 0; i < allEdges.Count; i++)
-            {
-                var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
-                foreach (var seg in corridorSegments)
-                {
-                    var dist = midpt.DistanceTo(seg);
-                    // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
-                    if (Math.Abs(dist - minDist) < 0.1)
-                    {
-                        minDist = dist;
-                        if (minSeg.Length() < edge.Length())
-                        {
-                            minSeg = edge;
-                            selectedIndex = i;
-                        }
-                    }
-                    else if (dist < minDist)
-                    {
-                        minDist = dist;
-                        minSeg = edge;
-                        selectedIndex = i;
-                    }
-                }
-            }
-            if (maxDist != 0)
-            {
-                if (minDist < maxDist)
-                {
-
-                    otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
-                    return minSeg;
-                }
-                else
-                {
-                    Console.WriteLine($"no matches: {minDist}");
-                    otherSegments = allEdges;
-                    return null;
-                }
-            }
-            otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
-            return minSeg;
         }
         private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {

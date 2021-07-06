@@ -26,7 +26,7 @@ namespace Elements
     public partial class LevelElements : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public LevelElements(IList<Element> @elements, System.Guid @id, string @name)
+        public LevelElements(IList<Element> @elements, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<LevelElements>();

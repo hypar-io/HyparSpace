@@ -18,13 +18,12 @@ namespace OpenOfficeLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Levels/model.json")) }, 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/model.json")) }, 
+            var modelDependencies = new Dictionary<string, Model> {
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
             };
 
             var result = OpenOfficeLayout.Execute(modelDependencies, input);
-            result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.gltf", false);
+            // result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.glb");
             File.WriteAllText("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.json", result.Model.ToJson());
         }
@@ -33,26 +32,11 @@ namespace OpenOfficeLayout
         {
             var inputText = @"
             {
+  ""Integrated Collaboration Space Density"": 0.2,
   ""model_input_keys"": {
-    ""Levels"": ""7a715f10-f397-4c6c-aa65-73c7eaf4939b_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Space Planning Zones"": ""1698599c-9d7f-4d11-962f-a372bc1a1eb2_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
+    ""Space Planning Zones"": ""260b02f8-9396-430b-93c5-cd08e8783878_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
   },
-  ""Desk Type"": ""Simple Desk"",
-  ""overrides"": {
-    ""Furniture Locations"": [
-      {
-        ""value"": {
-          ""Location"": {
-            ""X"": 22.30796159910952,
-            ""Y"": -1.6205042976973376,
-            ""Z"": 0.3000000000000011
-          }
-        },
-        ""identity"": {},
-        ""id"": ""9fc93595-b343-4e6c-8ca0-ad9a5d0590fa""
-      }
-    ]
-  }
+  ""Desk Type"": ""Simple Desk - 24x48""
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(inputText);

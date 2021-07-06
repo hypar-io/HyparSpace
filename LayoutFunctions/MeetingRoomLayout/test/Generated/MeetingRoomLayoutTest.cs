@@ -18,13 +18,12 @@ namespace MeetingRoomLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/model.json")) }, 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/model.json")) }, 
+            var modelDependencies = new Dictionary<string, Model> {
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/model.json")) },
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
             };
 
             var result = MeetingRoomLayout.Execute(modelDependencies, input);
-            result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.glb");
             File.WriteAllText("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.json", result.Model.ToJson());
         }
@@ -34,8 +33,8 @@ namespace MeetingRoomLayout
             var inputText = @"
             {
   ""model_input_keys"": {
-    ""Levels"": ""a0025b27-cb6f-4d0b-acb2-3b5f4269ff48_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Space Planning Zones"": ""b86366e8-1bac-45f7-8fd1-1977489f8de0_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
+    ""Levels"": ""fd07f65c-b8b0-4aeb-bfb6-77c6e5301060_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Space Planning Zones"": ""b727b082-ed31-4270-b485-027ecb767a6a_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
   },
   ""Create Walls"": true
 }

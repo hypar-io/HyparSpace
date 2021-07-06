@@ -336,7 +336,7 @@ namespace SpacePlanningZones
             var allLengths = perimeterSegments.Select(s => s.Length());
             var validLengths = allLengths.Where(l => l > TOO_SHORT)?.OrderBy(l => l);
             var shortLength = (validLengths?.FirstOrDefault() ?? 35 / 1.2) * 1.2;
-            var longLength = Math.Min(validLengths.SkipLast(1).Last(), 50);
+            var longLength = Math.Min(validLengths.Cast<double?>().SkipLast(1).LastOrDefault<double?>() ?? 50, 50);
             shortEdges = new List<Line>();
             shortEdgeIndices = new List<int>();
             for (int i = 0; i < perimeterSegments.Count(); i++)
