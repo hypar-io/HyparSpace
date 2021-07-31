@@ -11,6 +11,7 @@
       "Program Requirements": {
         "$hyparCanPopOut": true,
         "type": "array",
+        "$hyparGroupBy": "Program Group",
         "items": {
           "$ref": "https://prod-api.hypar.io/schemas/ProgramRequirement"
         }

@@ -23,7 +23,6 @@ namespace OpenOfficeLayout
             };
 
             var result = OpenOfficeLayout.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.glb");
             File.WriteAllText("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.json", result.Model.ToJson());
         }
@@ -34,9 +33,9 @@ namespace OpenOfficeLayout
             {
   ""Integrated Collaboration Space Density"": 0.2,
   ""model_input_keys"": {
-    ""Space Planning Zones"": ""260b02f8-9396-430b-93c5-cd08e8783878_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
+    ""Space Planning Zones"": ""aa2583fc-e5a3-4971-bcdf-466f50ac7f43_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
   },
-  ""Desk Type"": ""Simple Desk - 24x48""
+  ""Desk Type"": ""Simple Desk - 29x70""
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(inputText);

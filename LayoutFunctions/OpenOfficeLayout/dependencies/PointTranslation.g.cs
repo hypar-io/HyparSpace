@@ -26,7 +26,7 @@ namespace Elements
     public partial class PointTranslation : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public PointTranslation(Vector3 @location, Vector3 @originalLocation, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
+        public PointTranslation(Vector3 @location, Vector3 @originalLocation, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<PointTranslation>();

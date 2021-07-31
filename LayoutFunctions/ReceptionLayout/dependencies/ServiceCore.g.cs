@@ -26,7 +26,7 @@ namespace Elements
     public partial class ServiceCore : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ServiceCore(Profile @profile, double @elevation, double @height, Vector3 @centroid, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
+        public ServiceCore(Profile @profile, double @elevation, double @height, Vector3 @centroid, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ServiceCore>();

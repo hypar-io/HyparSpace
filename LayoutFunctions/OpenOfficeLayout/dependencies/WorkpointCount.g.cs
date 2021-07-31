@@ -26,7 +26,7 @@ namespace Elements
     public partial class WorkpointCount : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCount(int @count, System.Guid @id, string @name)
+        public WorkpointCount(int @count, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCount>();
