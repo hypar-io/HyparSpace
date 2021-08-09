@@ -53,78 +53,124 @@ namespace SpacePlanningZonesFromProgramRequirements
                 floorsOrLevels = floorsModel.AllElementsOfType<Floor>().Select(FloorOrLevel.FromFloor);
             }
 
-            // create primary space boundaries
-            for (int j = 0; j < programReqs.Count(); j++)
+            var groupedProgramReqs = programReqs.GroupBy(p => p.ProgramGroup);
+            foreach (var group in groupedProgramReqs)
             {
-                var req = programReqs[j];
-                if (req.ProgramName == input.DefaultProgramAssignment && hasFloors)
+                var coords = new List<Vector3>();
+                if (runningXPosition != 0)
                 {
-                    continue;
+                    runningXPosition += spacing;
                 }
-                var area = req.AreaPerSpace;
-                if (area == 0)
+                var reqsInGroup = group.ToList();
+                // create primary space boundaries
+                for (int j = 0; j < reqsInGroup.Count(); j++)
                 {
-                    continue;
-                }
-                var width = Math.Sqrt(area);
-                var length = Math.Sqrt(area);
-                if (fixedDepths.ContainsKey(req.HyparSpaceType))
-                {
-                    length = fixedDepths[req.HyparSpaceType];
-                    width = area / length;
-                }
-                var color = req.Color;
-                color.Alpha = 0.5;
-                var mat = new Material(req.ProgramName, color);
-                var runningYPosition = 0.0;
-                for (int i = 0; i < req.SpaceCount; i++)
-                {
-                    var profile = Polygon.Rectangle(width, length);
-                    var parentCentroid = profile.Centroid();
-                    var transform = new Transform(runningXPosition + width / 2, runningYPosition + length / 2, 0);
-                    var identifier = $"{req.ProgramName}: {i}";
-                    ArrangeSpacesOverride match = null;
-                    if (input.Overrides?.ArrangeSpaces != null)
+                    var req = reqsInGroup[j];
+                    if (req.ProgramName == input.DefaultProgramAssignment && hasFloors)
                     {
-                        match = input.Overrides.ArrangeSpaces.FirstOrDefault((ov) => ov.Identity.Identifier == identifier);
-                        transform = match?.Value?.Transform ?? transform;
-                        if (autoAlign && hasFloors)
+                        continue;
+                    }
+                    var area = req.AreaPerSpace;
+                    if (area == 0 && req.Width == null && req.Depth == null)
+                    {
+                        continue;
+                    }
+                    var width = 0.0;
+                    var depth = 0.0;
+                    output.Warnings.Add(req.Width.ToString());
+                    output.Warnings.Add(req.Depth.ToString());
+                    if (req.Width != null && req.Width != 0 && req.Depth != null && req.Depth != 0)
+                    {
+                        width = req.Width.Value;
+                        depth = req.Depth.Value;
+                    }
+                    else if (req.Width != null && req.Width != 0 && area != 0)
+                    {
+                        width = req.Width.Value;
+                        depth = area / width;
+                    }
+                    else if (req.Depth != null && req.Depth != 0 && area != 0)
+                    {
+                        depth = req.Depth.Value;
+                        width = area / depth;
+                    }
+                    else if (area != 0)
+                    {
+                        width = Math.Sqrt(area * defaultAspectRatio);
+                        depth = Math.Sqrt(area / defaultAspectRatio);
+                        if (fixedDepths.ContainsKey(req.HyparSpaceType))
                         {
-                            var closestEdgeTransform = FindTransformFromClosestEdge(floorEdges, transform);
-                            transform = closestEdgeTransform.Concatenated(transform);
+                            depth = fixedDepths[req.HyparSpaceType];
+                            width = area / depth;
                         }
                     }
-                    MassBoundariesOverride boundaryMatch = null;
-                    if (input.Overrides?.MassBoundaries != null)
+
+                    var color = req.Color;
+                    color.Alpha = 0.5;
+                    var mat = new Material(req.ProgramName, color);
+                    var runningYPosition = 0.0;
+                    for (int i = 0; i < req.SpaceCount; i++)
                     {
-                        boundaryMatch = input.Overrides.MassBoundaries.FirstOrDefault((ov) => ov.Identity.Identifier == identifier);
+                        var profile = Polygon.Rectangle(width, depth);
+                        var parentCentroid = profile.Centroid();
+                        var transform = new Transform(runningXPosition + width / 2, runningYPosition + depth / 2, 0);
+                        var identifier = $"{req.ProgramName}: {i}";
+                        ArrangeSpacesOverride match = null;
+                        if (input.Overrides?.ArrangeSpaces != null)
+                        {
+                            match = input.Overrides.ArrangeSpaces.FirstOrDefault((ov) => ov.Identity.Identifier == identifier);
+                            transform = match?.Value?.Transform ?? transform;
+                            if (autoAlign && hasFloors)
+                            {
+                                var closestEdgeTransform = FindTransformFromClosestEdge(floorEdges, transform);
+                                transform = closestEdgeTransform.Concatenated(transform);
+                            }
+                        }
+                        MassBoundariesOverride boundaryMatch = null;
+                        if (input.Overrides?.MassBoundaries != null)
+                        {
+                            boundaryMatch = input.Overrides.MassBoundaries.FirstOrDefault((ov) => ov.Identity.Identifier == identifier);
+                            if (boundaryMatch != null)
+                            {
+                                var previousTransform = boundaryMatch.Identity.EditBoundaryTransform ?? transform;
+                                var inverse = new Transform(previousTransform);
+                                inverse.Invert();
+                                var unTransformedBoundary = boundaryMatch.Value?.EditBoundary?.TransformedPolygon(inverse) ?? profile;
+                                profile = unTransformedBoundary.Project(xyPlane);
+                            }
+                        }
+                        // var rep = new Representation(new[] { new Extrude(profile, 3, Vector3.ZAxis, false) });
+                        // var sb = new SpaceBoundary(profile, null, transform, mat, rep, false, Guid.NewGuid(), req.HyparSpaceType);
+                        var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, 3, parentCentroid, parentCentroid);
+                        sb.AdditionalProperties["Identifier"] = identifier;
+                        sb.AdditionalProperties["Program Group"] = req.ProgramGroup;
+                        if (match != null)
+                        {
+                            Identity.AddOverrideIdentity(sb, "Arrange Spaces", match.Id, match.Identity);
+                        }
                         if (boundaryMatch != null)
                         {
-                            var previousTransform = boundaryMatch.Identity.EditBoundaryTransform ?? transform;
-                            var inverse = new Transform(previousTransform);
-                            inverse.Invert();
-                            var unTransformedBoundary = boundaryMatch.Value?.EditBoundary?.TransformedPolygon(inverse) ?? profile;
-                            profile = unTransformedBoundary.Project(xyPlane);
+                            Identity.AddOverrideIdentity(sb, "Mass Boundaries", boundaryMatch.Id, boundaryMatch.Identity);
                         }
+                        sb.AdditionalProperties["EditBoundary"] = profile.TransformedPolygon(transform);
+                        sb.AdditionalProperties["EditBoundaryTransform"] = transform;
+                        output.Model.AddElement(sb);
+                        if (match == null)
+                        {
+                            coords.AddRange(sb.Boundary.Perimeter.Vertices.Select(v => sb.Transform.OfPoint(v)));
+                        }
+                        runningYPosition += (depth + spacing);
                     }
-                    // var rep = new Representation(new[] { new Extrude(profile, 3, Vector3.ZAxis, false) });
-                    // var sb = new SpaceBoundary(profile, null, transform, mat, rep, false, Guid.NewGuid(), req.HyparSpaceType);
-                    var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, 3, parentCentroid, parentCentroid);
-                    sb.AdditionalProperties["Identifier"] = identifier;
-                    if (match != null)
-                    {
-                        Identity.AddOverrideIdentity(sb, "Arrange Spaces", match.Id, match.Identity);
-                    }
-                    if (boundaryMatch != null)
-                    {
-                        Identity.AddOverrideIdentity(sb, "Mass Boundaries", boundaryMatch.Id, boundaryMatch.Identity);
-                    }
-                    sb.AdditionalProperties["EditBoundary"] = profile.TransformedPolygon(transform);
-                    sb.AdditionalProperties["EditBoundaryTransform"] = transform;
-                    output.Model.AddElement(sb);
-                    runningYPosition += (length + spacing);
+                    runningXPosition += (width + spacing);
                 }
-                runningXPosition += (width + spacing);
+
+                // create group boundary
+                if (coords.Count > 0)
+                {
+                    var bbox = new BBox3(coords);
+                    var inflatedBox = new BBox3(bbox.Min + new Vector3(-1, -1), bbox.Max + new Vector3(1, 1));
+                    output.Model.AddElements(inflatedBox.ToModelCurves());
+                }
             }
 
             // create level elements

@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 using Elements.Spatial;
+using LayoutFunctionCommon;
 
 namespace OpenCollaborationLayout
 {
@@ -90,7 +91,7 @@ namespace OpenCollaborationLayout
 
                 }
             }
-            InstancePositionOverrides(input.Overrides, output.Model);
+            OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }
 

@@ -7,6 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 using Elements.Spatial;
+using LayoutFunctionCommon;
 
 namespace LoungeLayout
 {
@@ -68,35 +69,9 @@ namespace LoungeLayout
 
                 }
             }
-            InstancePositionOverrides(input.Overrides, output.Model);
+            OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
+
             return output;
-        }
-
-        private static void InstancePositionOverrides(Overrides overrides, Model model)
-        {
-            var allElementInstances = model.AllElementsOfType<ElementInstance>();
-            var pointTranslations = allElementInstances.Select(ei => ei.Transform.Origin).Distinct().Select(t => new PointTranslation(t, t, new Transform(), null, null, false, Guid.NewGuid(), null)).ToList();
-            if (overrides != null)
-            {
-                Console.WriteLine(JsonConvert.SerializeObject(overrides.FurnitureLocations));
-                foreach (var positionOverride in overrides.FurnitureLocations)
-                {
-                    var thisOriginalLocation = positionOverride.Identity.OriginalLocation;
-                    var thisPt = positionOverride.Value.Location;
-                    thisPt.Z = thisOriginalLocation.Z;
-                    var nearInstances = allElementInstances.Where(ei => ei.Transform.Origin.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearInstances.ToList().ForEach(ni => ni.Transform.Concatenate(new Transform(thisPt.X - ni.Transform.Origin.X, thisPt.Y - ni.Transform.Origin.Y, 0)));
-                    // should only be one
-                    var nearTranslations = pointTranslations.Where(pt => pt.OriginalLocation.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearTranslations.ToList().ForEach(nt =>
-                    {
-                        nt.OriginalLocation = thisOriginalLocation;
-                        nt.Location = thisPt;
-                    });
-                }
-
-            }
-            model.AddElements(pointTranslations);
         }
 
         private static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, out IEnumerable<Line> otherSegments, double maxDist = 0)

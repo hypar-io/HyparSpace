@@ -26,19 +26,22 @@ namespace Elements
     public partial class ProgramRequirement : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirement(string @programName, Color @color, double @areaPerSpace, int @spaceCount, string @hyparSpaceType, System.Guid @id = default, string @name = null)
+        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirement>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programName, @color, @areaPerSpace, @spaceCount, @hyparSpaceType, @id, @name});
+                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @areaPerSpace, @spaceCount, @width, @depth, @hyparSpaceType, @id, @name});
             }
         
+            this.ProgramGroup = @programGroup;
             this.ProgramName = @programName;
             this.Color = @color;
             this.AreaPerSpace = @areaPerSpace;
             this.SpaceCount = @spaceCount;
+            this.Width = @width;
+            this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
             
             if(validator != null)
@@ -46,6 +49,10 @@ namespace Elements
                 validator.PostConstruct(this);
             }
         }
+    
+        /// <summary>What group does this program belong to?</summary>
+        [Newtonsoft.Json.JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProgramGroup { get; set; }
     
         /// <summary>What display name should be used for this program type?</summary>
         [Newtonsoft.Json.JsonProperty("Program Name", Required = Newtonsoft.Json.Required.Always)]
@@ -63,6 +70,14 @@ namespace Elements
         /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
         [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int SpaceCount { get; set; } = 1;
+    
+        /// <summary>The width of this space (typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
+        [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Width { get; set; }
+    
+        /// <summary>The depth of this space (typically the shorter dimension — perpendicular to the side from which the space is accessed, like a corridor.)</summary>
+        [Newtonsoft.Json.JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Depth { get; set; }
     
         /// <summary>What program type best matches this one?</summary>
         [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]

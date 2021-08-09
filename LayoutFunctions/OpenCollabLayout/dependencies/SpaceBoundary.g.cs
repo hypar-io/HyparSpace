@@ -26,17 +26,18 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceBoundary>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @boundary, @cells, @transform, @material, @representation, @isElementDefinition, @id, @name});
+                validator.PreConstruct(new object[]{ @boundary, @cells, @area, @transform, @material, @representation, @isElementDefinition, @id, @name});
             }
         
             this.Boundary = @boundary;
             this.Cells = @cells;
+            this.Area = @area;
             
             if(validator != null)
             {
@@ -51,6 +52,10 @@ namespace Elements
         /// <summary>Component cells making up the boundary</summary>
         [Newtonsoft.Json.JsonProperty("Cells", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> Cells { get; set; }
+    
+        /// <summary>The area of the boundary</summary>
+        [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Area { get; set; }
     
     
     }

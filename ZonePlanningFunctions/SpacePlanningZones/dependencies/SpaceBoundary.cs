@@ -3,6 +3,7 @@ using Elements.Geometry;
 using System;
 using Elements.Geometry.Solids;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Elements
 {
@@ -48,14 +49,18 @@ namespace Elements
         };
         public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);
 
+        [JsonProperty("Program Type")]
         public string ProgramName { get; set; }
+
+
+
         private static Random random = new Random(4);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             sb.ProgramName = displayName;
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));

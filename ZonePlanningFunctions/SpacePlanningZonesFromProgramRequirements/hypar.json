@@ -50,7 +50,7 @@
           "query": "[*discriminator=Elements.ProgramRequirement].Program Name"
         },
         "default": "unspecified"
-      },
+      }
     }
   },
   "outputs": [

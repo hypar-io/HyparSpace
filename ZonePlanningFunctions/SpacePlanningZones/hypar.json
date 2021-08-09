@@ -231,9 +231,10 @@
         "Merge Zones": {
             "verbs": {
                 "edit": "Merge Zones",
-                "revert": "Reset Merged Zones"
+                "revert": "Un-Merge Zones"
             },
             "paradigm": "group",
+            "context": "[*discriminator=Elements.SpaceBoundary]",
             "identity": {
                 "ParentCentroid": {
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"

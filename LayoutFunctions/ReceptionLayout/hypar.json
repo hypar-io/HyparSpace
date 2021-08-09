@@ -48,7 +48,6 @@
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/PointTranslation",
     "https://prod-api.hypar.io/schemas/ServiceCore"
   ],
   "repository_url": "https://github.com/hypar-io/function",

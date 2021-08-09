@@ -17,7 +17,7 @@ namespace DefineProgramRequirements
         {
             var output = new DefineProgramRequirementsOutputs();
             output.Model.AddElements(input.ProgramRequirements);
-            if (input.ProgramRequirements.Select(p => p.ProgramName).Distinct().Count() != input.ProgramRequirements.Count)
+            if (input.ProgramRequirements.Select(p => p.ProgramName + p.ProgramGroup).Distinct().Count() != input.ProgramRequirements.Count)
             {
                 output.Errors.Add("No two programs can have the same Program Name. Please remove one of the duplicates.");
             }

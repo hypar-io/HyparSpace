@@ -214,6 +214,7 @@ namespace SpacePlanningZones
 
                             var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.AdditionalProperties["ParentCentroid"], (Vector3)baseSB.AdditionalProperties["ParentCentroid"]);
                             newSB.SetProgram(baseSB.Name);
+                            Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
                             levelMappings.Add(newSB.Id, (newSB, level));
                         }
                     }

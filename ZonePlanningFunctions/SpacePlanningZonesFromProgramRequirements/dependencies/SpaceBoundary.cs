@@ -48,6 +48,7 @@ namespace Elements
         };
         public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);
 
+        [JsonProperty("Program Type")]
         public string ProgramName { get; set; }
         private static Random random = new Random(4);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)

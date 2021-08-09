@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
+    <PackageReference Include="Hypar.Elements" Version="0.9.2-alpha.18" />
   </ItemGroup>
 
   <PropertyGroup>

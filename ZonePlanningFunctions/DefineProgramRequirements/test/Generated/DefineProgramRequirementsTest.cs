@@ -18,11 +18,11 @@ namespace DefineProgramRequirements
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model>
-            {
+            var modelDependencies = new Dictionary<string, Model> { 
             };
 
             var result = DefineProgramRequirements.Execute(modelDependencies, input);
+            result.Model.ToGlTF("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.glb");
             File.WriteAllText("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.json", result.Model.ToJson());
         }
@@ -33,124 +33,40 @@ namespace DefineProgramRequirements
             {
   ""Program Requirements"": [
     {
-      ""Program Name"": ""Open Office"",
-      ""Area per Space"": 1300,
-      ""Space Count"": 1,
-      ""Hypar Space Type"": ""Open Office"",
+      ""Program Name"": ""fazeez"",
+      ""Area per Space"": 0,
       ""Color"": {
-        ""Red"": 0.8196078431372549,
+        ""Red"": 1,
         ""Alpha"": 1,
-        ""Blue"": 1,
-        ""Green"": 0.8196078431372549
-      }
+        ""Blue"": 0,
+        ""Green"": 0
+      },
+      ""Space Count"": 2,
+      ""Id"": ""b1d9407b-bafb-405a-96e6-2b1c1cccb986"",
+      ""Program Group"": null,
+      ""Width"": 10,
+      ""Depth"": 10,
+      ""Hypar Space Type"": ""unspecified"",
+      ""Name"": null,
+      ""discriminator"": ""Elements.ProgramRequirement""
     },
     {
-      ""Program Name"": ""Private Office"",
-      ""Area per Space"": 30,
-      ""Space Count"": 6,
-      ""Hypar Space Type"": ""Private Office"",
+      ""Program Name"": ""mashoof"",
+      ""Area per Space"": 0,
       ""Color"": {
         ""Red"": 0,
         ""Alpha"": 1,
-        ""Blue"": 0.5450980392156862,
-        ""Green"": 0
-      }
-    },
-    {
-      ""Program Name"": ""Circulation"",
-      ""Area per Space"": 0,
+        ""Blue"": 1,
+        ""Green"": 0.3843137254901961
+      },
       ""Space Count"": 1,
-      ""Hypar Space Type"": ""Circulation"",
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0.803921568627451,
-        ""Green"": 0.9803921568627451
-      }
-    },
-    {
-      ""Program Name"": ""Meeting Room"",
-      ""Area per Space"": 30,
-      ""Space Count"": 6,
-      ""Hypar Space Type"": ""Meeting Room"",
-      ""Color"": {
-        ""Red"": 0.5647058823529412,
-        ""Alpha"": 1,
-        ""Blue"": 0.5647058823529412,
-        ""Green"": 0.9333333333333333
-      }
-    },
-    {
-      ""Program Name"": ""Lounge"",
-      ""Area per Space"": 140,
-      ""Space Count"": 1,
-      ""Hypar Space Type"": ""Lounge"",
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0.7568627450980392,
-        ""Green"": 0.7137254901960784
-      }
-    },
-    {
-      ""Program Name"": ""Classroom"",
-      ""Area per Space"": 100,
-      ""Space Count"": 1,
-      ""Hypar Space Type"": ""Classroom"",
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0,
-        ""Green"": 0.6470588235294118
-      }
-    },
-    {
-      ""Program Name"": ""Pantry"",
-      ""Area per Space"": 140,
-      ""Space Count"": 1,
-      ""Hypar Space Type"": ""Pantry"",
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0.3137254901960784,
-        ""Green"": 0.4980392156862745
-      }
-    },
-    {
-      ""Program Name"": ""Phone Booth"",
-      ""Area per Space"": 30,
-      ""Space Count"": 2,
-      ""Hypar Space Type"": ""Phone Booth"",
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0,
-        ""Green"": 0.8431372549019608
-      }
-    },
-    {
-      ""Program Name"": ""Reception"",
-      ""Area per Space"": 50,
-      ""Space Count"": 1,
-      ""Hypar Space Type"": ""Reception"",
-      ""Color"": {
-        ""Red"": 0.9568627450980393,
-        ""Alpha"": 1,
-        ""Blue"": 0.2627450980392157,
-        ""Green"": 0.2627450980392157
-      }
-    },
-    {
-      ""Program Name"": ""Open Collaboration"",
-      ""Area per Space"": 40,
-      ""Space Count"": 6,
-      ""Hypar Space Type"": ""Open Collaboration"",
-      ""Color"": {
-        ""Red"": 0.3803921568627451,
-        ""Alpha"": 1,
-        ""Blue"": 0.3568627450980392,
-        ""Green"": 0.7019607843137254
-      }
+      ""Id"": ""6a183472-e6be-4633-a320-5d6a9e148a44"",
+      ""Program Group"": null,
+      ""Width"": 10,
+      ""Depth"": 10,
+      ""Hypar Space Type"": ""unspecified"",
+      ""Name"": null,
+      ""discriminator"": ""Elements.ProgramRequirement""
     }
   ],
   ""model_input_keys"": {}
