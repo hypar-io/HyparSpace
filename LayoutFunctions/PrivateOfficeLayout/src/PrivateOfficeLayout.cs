@@ -83,7 +83,8 @@ namespace PrivateOfficeLayout
                                     }
                                     if (cell.Type != null && cell.Type.Contains("Office"))
                                     {
-                                        returnCells.Add(new SpaceBoundary(new Profile(cellBoundaries), null, room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name));
+                                        var profile = new Profile(cellBoundaries);
+                                        returnCells.Add(new SpaceBoundary(profile, null, profile.Area(), room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name));
                                     }
                                     else
                                     {
@@ -98,8 +99,11 @@ namespace PrivateOfficeLayout
                                 tempGrid.V.DivideByApproximateLength(input.OfficeSizing.OfficeSize, EvenDivisionMode.RoundDown);
                                 wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, levelVolume?.Profile));
                                 return tempGrid.GetCells().Select(c =>
-                                new SpaceBoundary(new Profile(c.GetTrimmedCellGeometry().OfType<Polygon>().ToList()), null, room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name
-                                ));
+                                {
+                                    var profile = new Profile(c.GetTrimmedCellGeometry().OfType<Polygon>().ToList());
+                                    return new SpaceBoundary(profile, null, profile.Area(), room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name);
+                                }
+                                );
                             }
                         }
                         catch (Exception e)

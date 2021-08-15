@@ -18,7 +18,7 @@ namespace LayoutFunctionCommon
             {
                 e.AdditionalProperties["OriginalLocation"] = e.Transform.Origin;
             }
-            if (overrides != null)
+            if (overrides != null && overrides.FurnitureLocations != null)
             {
                 foreach (var positionOverride in overrides.FurnitureLocations)
                 {

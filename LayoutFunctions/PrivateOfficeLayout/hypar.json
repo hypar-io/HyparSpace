@@ -1,5 +1,5 @@
 {
-    "$schema": "https://hypar.io/Schemas/Function.json",
+    "$schema": "https://hypar.io/Schemas/function_2.json",
     "id": "94dc146d-a523-412a-989f-dafdacd1ac68",
     "name": "Private Office Layout",
     "description": "Lay out private offices.",
@@ -34,6 +34,7 @@
                         "minimum": 3.7,
                         "maximum": 10,
                         "default": 5,
+                        "$hyparUnitType": "length",
                         "$hyparShowIf": {
                             "conditions": [
                                 {
