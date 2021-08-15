@@ -1,98 +1,133 @@
 {
-    "$schema": "https://hypar.io/Schemas/Function.json",
-    "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
-    "name": "Open Office Layout",
-    "description": "Lay out desks with optional open collaboration areas distributed throughout.",
-    "language": "C#",
-    "model_output": "Open Office Layout",
-    "model_dependencies": [
-        {
-            "name": "Space Planning Zones"
-        }
-    ],
-    "input_schema": {
-        "type": "object",
-        "properties": {
-            "Desk Type": {
-                "type": "string",
-                "enum": [
-                    "Simple Desk - 24x48",
-                    "Simple Desk - 30x60",
-                    "Simple Desk - 29x70",
-                    "Simple Desk - 30x72",
-                    "L-Shaped",
-                    "Double Desk",
-                    "Enclosed Pair"
-                ],
-                "default": "Simple Desk - 29x70"
-            },
-            "Integrated Collaboration Space Density": {
-                "type": "number",
-                "description": "Increase this number to add more distributed collaboration spaces throughout open office areas.",
-                "minimum": 0,
-                "maximum": 1,
-                "default": 0.2
-            }
-        }
-    },
-    "outputs": [
-        {
-            "unit_type": "none",
-            "name": "Total Desk Count",
-            "description": "The number of desks.",
-            "type": "number"
-        }
-    ],
-    "repository_url": "https://github.com/hypar-io/function",
-    "source_file_key": null,
-    "preview_image": null,
-    "overrides": {
-        "Furniture Locations": {
-            "context": "[*discriminator=Elements.PointTranslation]",
-            "identity": {
-                "OriginalLocation": {
-                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-                }
-            },
-            "schema": {
-                "Location": {
-                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-                }
-            }
-        },
-        "Space Settings": {
-            "context": "[*discriminator=Elements.SpaceBoundary&Name=DeskArea]",
-            "identity": {
-                "ParentCentroid": {
-                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-                }
-            },
-            "schema": {
-                "Desk Type": {
-                    "type": "string",
-                    "enum": [
-                        "Simple Desk - 24x48",
-                        "Simple Desk - 30x60",
-                        "Simple Desk - 29x70",
-                        "Simple Desk - 30x72",
-                        "L-Shaped",
-                        "Double Desk",
-                        "Enclosed Pair"
-                    ],
-                    "default": "Simple Desk - 29x70"
-                }
-            }
-        }
-    },
-    "element_types": [
-        "https://prod-api.hypar.io/schemas/SpaceBoundary",
-        "https://prod-api.hypar.io/schemas/LevelElements",
-        "https://prod-api.hypar.io/schemas/LevelVolume",
-        "https://prod-api.hypar.io/schemas/PointTranslation",
-        "https://prod-api.hypar.io/schemas/WorkpointCount"
-    ],
-    "default_camera": {
-        "projection": "orthographic",
-        "named_position": "top"
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
+  "name": "Open Office Layout",
+  "description": "Lay out desks with optional open collaboration areas distributed throughout.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
     }
+  ],
+  "model_output": "Open Office Layout",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Grid Rotation": {
+        "maximum": 360,
+        "default": 0,
+        "type": "number",
+        "$hyparUnitType": "plane_angle",
+        "$hyparOrder": 2,
+        "minimum": 0
+      },
+      "Integrated Collaboration Space Density": {
+        "description": "Increase this number to add more distributed collaboration spaces throughout open office areas.",
+        "maximum": 1,
+        "default": 0.2,
+        "type": "number",
+        "$hyparOrder": 1,
+        "minimum": 0
+      },
+      "Desk Type": {
+        "default": "Simple Desk - 29x70",
+        "type": "string",
+        "$hyparOrder": 0,
+        "enum": [
+          "Simple Desk - 24x48",
+          "Simple Desk - 30x60",
+          "Simple Desk - 29x70",
+          "Simple Desk - 30x72",
+          "L-Shaped",
+          "Double Desk",
+          "Enclosed Pair"
+        ]
+      }
+    }
+  },
+  "overrides": {
+    "Space Settings": {
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=DeskArea]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Grid Rotation": {
+          "maximum": 360,
+          "default": 0,
+          "type": "number",
+          "$hyparUnitType": "plane_angle",
+          "minimum": 0
+        },
+        "Integrated Collaboration Space Density": {
+          "description": "Increase this number to add more distributed collaboration spaces throughout open office areas.",
+          "maximum": 1,
+          "default": 0.2,
+          "type": "number",
+          "minimum": 0
+        },
+        "Desk Type": {
+          "type": "string",
+          "enum": [
+            "Simple Desk - 24x48",
+            "Simple Desk - 30x60",
+            "Simple Desk - 29x70",
+            "Simple Desk - 30x72",
+            "L-Shaped",
+            "Double Desk",
+            "Enclosed Pair"
+          ],
+          "default": "Simple Desk - 29x70"
+        }
+      },
+      "verbs": {
+        "edit": null,
+        "revert": null
+      }
+    },
+    "Furniture Locations": {
+      "context": "[*discriminator=Elements.PointTranslation]",
+      "identity": {
+        "OriginalLocation": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "verbs": {
+        "edit": null,
+        "revert": null
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "none",
+      "name": "Total Desk Count",
+      "description": "The number of desks.",
+      "type": "number"
+    }
+  ],
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/PointTranslation",
+    "https://prod-api.hypar.io/schemas/WorkpointCount"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "default_camera": {
+    "named_position": "top",
+    "projection": "orthographic"
+  },
+  "last_updated": "2021-08-12T18:10:46.74885"
 }

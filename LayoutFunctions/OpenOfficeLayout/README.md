@@ -8,6 +8,7 @@ Lay out desks with optional open collaboration areas distributed throughout.
 |---|---|---|
 |Desk Type|string||
 |Integrated Collaboration Space Density|number|Increase this number to add more distributed collaboration spaces throughout open office areas.|
+|Grid Rotation|number||
 
 
 <br>

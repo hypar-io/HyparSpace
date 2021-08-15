@@ -51,7 +51,6 @@ namespace OpenOfficeLayout
                 }
                 else
                 {
-
                     overridesByCentroid.Add(matchingBoundary.Id, spaceOverride);
                 }
             }
@@ -67,10 +66,34 @@ namespace OpenOfficeLayout
                     var overridableBoundary = new SpaceBoundary(ob.Boundary, ob.Cells, ob.Area, ob.Transform.Concatenated(new Transform(0, 0, -0.05)), ob.Material, new Representation(new[] { new Lamina(ob.Boundary.Perimeter, false) }), false, Guid.NewGuid(), "DeskArea");
                     overridableBoundary.AdditionalProperties.Add("ParentCentroid", (ob.AdditionalProperties["ParentCentroid"] as JObject).ToObject<Vector3>());
                     overridableBoundary.AdditionalProperties.Add("Desk Type", Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType));
+                    overridableBoundary.AdditionalProperties.Add("Integrated Collaboration Space Density", input.IntegratedCollaborationSpaceDensity);
+                    overridableBoundary.AdditionalProperties.Add("Grid Rotation", input.GridRotation);
                     output.Model.AddElement(overridableBoundary);
+
+                    var selectedConfig = defaultConfig;
+                    var rotation = input.GridRotation;
+                    var density = input.IntegratedCollaborationSpaceDensity;
+                    if (overridesByCentroid.ContainsKey(ob.Id))
+                    {
+                        var spaceOverride = overridesByCentroid[ob.Id];
+                        selectedConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType)];
+                        overridableBoundary.AdditionalProperties["Desk Type"] = Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType);
+                        overridableBoundary.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                        overridableBoundary.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
+                        rotation = spaceOverride.Value.GridRotation;
+                        density = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                    }
+
                     var spaceBoundary = ob.Boundary;
                     Line orientationGuideEdge = FindEdgeAdjacentToCorridor(spaceBoundary.Perimeter, corridorSegments);
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                    var dir = orientationGuideEdge.Direction();
+                    if (rotation != 0)
+                    {
+                        var gridRotation = new Transform();
+                        gridRotation.Rotate(Vector3.ZAxis, rotation);
+                        dir = gridRotation.OfVector(dir);
+                    }
+                    var orientationTransform = new Transform(Vector3.Origin, dir, Vector3.ZAxis);
                     var boundaryCurves = new List<Polygon>();
                     boundaryCurves.Add(spaceBoundary.Perimeter);
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
@@ -85,14 +108,6 @@ namespace OpenOfficeLayout
                         continue;
                     }
 
-                    var selectedConfig = defaultConfig;
-                    if (overridesByCentroid.ContainsKey(ob.Id))
-                    {
-                        var spaceOverride = overridesByCentroid[ob.Id];
-                        selectedConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType)];
-                        overridableBoundary.AdditionalProperties["Desk Type"] = Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType);
-                    }
-
                     var aisleWidth = 1.0;
                     grid.V.DivideByPattern(new[] { ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Aisle", aisleWidth) }, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
                     var mainVPattern = new[] { ("Aisle", aisleWidth), ("Forward", selectedConfig.Depth), ("Backward", selectedConfig.Depth) };
@@ -101,28 +116,28 @@ namespace OpenOfficeLayout
                     grid.U.DivideByPattern(pattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
                     var random = new Random();
 
-                    if (input.IntegratedCollaborationSpaceDensity > 0.0)
+                    if (density > 0.0)
                     {
                         var spaceEveryURows = 4;
                         var numDesksToConsume = 1;
 
-                        if (input.IntegratedCollaborationSpaceDensity >= 0.3)
+                        if (density >= 0.3)
                         {
                             spaceEveryURows = 3;
                         }
-                        if (input.IntegratedCollaborationSpaceDensity >= 0.5)
+                        if (density >= 0.5)
                         {
                             numDesksToConsume = 2;
                         }
-                        if (input.IntegratedCollaborationSpaceDensity >= 0.7)
+                        if (density >= 0.7)
                         {
                             spaceEveryURows = 2;
                         }
-                        if (input.IntegratedCollaborationSpaceDensity >= 0.8)
+                        if (density >= 0.8)
                         {
                             numDesksToConsume = 3;
                         }
-                        if (input.IntegratedCollaborationSpaceDensity >= 0.9)
+                        if (density >= 0.9)
                         {
                             numDesksToConsume = 4;
                         }
@@ -214,32 +229,6 @@ namespace OpenOfficeLayout
             outputWithData.Model = model;
 
             return outputWithData;
-        }
-
-        private static void InstancePositionOverrides(Overrides overrides, Model model)
-        {
-            var allElementInstances = model.AllElementsOfType<ElementInstance>();
-            var pointTranslations = allElementInstances.Select(ei => ei.Transform.Origin).Distinct().Select(t => new PointTranslation(t, t, new Transform(), null, null, false, Guid.NewGuid(), null)).ToList();
-            if (overrides != null && overrides.FurnitureLocations != null && overrides.FurnitureLocations.Count > 0)
-            {
-                foreach (var positionOverride in overrides.FurnitureLocations)
-                {
-                    var thisOriginalLocation = positionOverride.Identity.OriginalLocation;
-                    var thisPt = positionOverride.Value.Location;
-                    thisPt.Z = thisOriginalLocation.Z;
-                    var nearInstances = allElementInstances.Where(ei => ei.Transform.Origin.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearInstances.ToList().ForEach(ni => ni.Transform.Concatenate(new Transform(thisPt.X - ni.Transform.Origin.X, thisPt.Y - ni.Transform.Origin.Y, 0)));
-                    // should only be one
-                    var nearTranslations = pointTranslations.Where(pt => pt.OriginalLocation.DistanceTo(thisOriginalLocation) < 0.01);
-                    nearTranslations.ToList().ForEach(nt =>
-                    {
-                        nt.OriginalLocation = thisOriginalLocation;
-                        nt.Location = thisPt;
-                    });
-                }
-
-            }
-            model.AddElements(pointTranslations);
         }
 
         private static Line FindEdgeAdjacentToCorridor(Polygon perimeter, IEnumerable<Line> corridorSegments)

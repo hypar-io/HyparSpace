@@ -31,11 +31,32 @@ namespace OpenOfficeLayout
         {
             var inputText = @"
             {
+  ""Grid Rotation"": 30,
   ""Integrated Collaboration Space Density"": 0.2,
   ""model_input_keys"": {
-    ""Space Planning Zones"": ""aa2583fc-e5a3-4971-bcdf-466f50ac7f43_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
+    ""Space Planning Zones"": ""24994d9f-078f-440c-a409-547e304431e2_44085d84-0665-424c-8cf1-ef339b72c082_elements.zip""
   },
-  ""Desk Type"": ""Simple Desk - 29x70""
+  ""Desk Type"": ""Simple Desk - 29x70"",
+  ""overrides"": {
+    ""Space Settings"": [
+      {
+        ""value"": {
+          ""Grid Rotation"": 0,
+          ""Integrated Collaboration Space Density"": 0.2,
+          ""Desk Type"": ""Simple Desk - 29x70"",
+          ""Id"": ""8ffd2490-862b-42d9-8f79-c0b6c23591d5""
+        },
+        ""identity"": {
+          ""ParentCentroid"": {
+            ""X"": 36.590109999999996,
+            ""Y"": 1.1923000000000004,
+            ""Z"": 0
+          }
+        },
+        ""id"": ""3e687ab8-ff9f-4c35-a3de-1cb82b7a2999""
+      }
+    ]
+  }
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(inputText);

@@ -28,17 +28,18 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(OpenOfficeLayoutInputsDeskType @deskType, double @integratedCollaborationSpaceDensity, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(OpenOfficeLayoutInputsDeskType @deskType, double @integratedCollaborationSpaceDensity, double @gridRotation, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @deskType, @integratedCollaborationSpaceDensity, @overrides});
+                validator.PreConstruct(new object[]{ @deskType, @integratedCollaborationSpaceDensity, @gridRotation, @overrides});
             }
         
             this.DeskType = @deskType;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
+            this.GridRotation = @gridRotation;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -55,6 +56,10 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Integrated Collaboration Space Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
         public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
+    
+        [Newtonsoft.Json.JsonProperty("Grid Rotation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 360D)]
+        public double GridRotation { get; set; } = 0D;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
@@ -282,15 +287,17 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceSettingsValue(SpaceSettingsValueDeskType @deskType)
+        public SpaceSettingsValue(SpaceSettingsValueDeskType @deskType, double @integratedCollaborationSpaceDensity, double @gridRotation)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @deskType});
+                validator.PreConstruct(new object[]{ @deskType, @integratedCollaborationSpaceDensity, @gridRotation});
             }
         
             this.DeskType = @deskType;
+            this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
+            this.GridRotation = @gridRotation;
         
             if(validator != null)
             {
@@ -301,6 +308,15 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SpaceSettingsValueDeskType DeskType { get; set; } = SpaceSettingsValueDeskType.Simple_Desk__29x70;
+    
+        /// <summary>Increase this number to add more distributed collaboration spaces throughout open office areas.</summary>
+        [Newtonsoft.Json.JsonProperty("Integrated Collaboration Space Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
+        public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
+    
+        [Newtonsoft.Json.JsonProperty("Grid Rotation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 360D)]
+        public double GridRotation { get; set; } = 0D;
     
     
     }
