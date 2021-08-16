@@ -37,6 +37,11 @@
     "input_schema": {
         "type": "object",
         "properties": {
+            "Automatically Place Program": {
+                "type": "boolean",
+                "description": "If enabled, this function will attempt to place the program elements in your Program Requirements automatically. Disable to arrange spaces manually.",
+                "default": true
+            },
             "Default Program Assignment": {
                 "type": "string",
                 "description": "What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.",
@@ -268,6 +273,7 @@
         "https://prod-api.hypar.io/schemas/LevelElements",
         "https://prod-api.hypar.io/schemas/AreaTally",
         "https://prod-api.hypar.io/schemas/ProgramRequirement",
+        "https://prod-api.hypar.io/schemas/ProgramAdjacencyMatrix",
         "https://prod-api.hypar.io/schemas/PolygonReference"
     ],
     "repository_url": "https://github.com/hypar-io/function",

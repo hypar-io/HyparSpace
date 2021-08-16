@@ -10,5 +10,10 @@ namespace Elements
                 return this.SpaceCount - this.CountPlaced;
             }
         }
+
+        public string GetKey()
+        {
+            return $"{this.ProgramGroup} - ${this.ProgramName}";
+        }
     }
 }

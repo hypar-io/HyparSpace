@@ -180,8 +180,7 @@ namespace OpenOfficeLayout
                     {
                         try
                         {
-                            // TODO — fix cell.IsTrimmed 
-                            if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed() && cell.GetTrimmedCellGeometry().Count() > 0)
+                            if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
                             {
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {

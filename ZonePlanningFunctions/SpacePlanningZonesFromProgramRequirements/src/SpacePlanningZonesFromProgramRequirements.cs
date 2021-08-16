@@ -77,8 +77,6 @@ namespace SpacePlanningZonesFromProgramRequirements
                     }
                     var width = 0.0;
                     var depth = 0.0;
-                    output.Warnings.Add(req.Width.ToString());
-                    output.Warnings.Add(req.Depth.ToString());
                     if (req.Width != null && req.Width != 0 && req.Depth != null && req.Depth != 0)
                     {
                         width = req.Width.Value;
@@ -256,18 +254,18 @@ namespace SpacePlanningZonesFromProgramRequirements
             foreach (var sb in levels.SelectMany(lev => lev.Elements.OfType<SpaceBoundary>()))
             {
                 var area = sb.Boundary.Area();
-                if (sb.Name == null)
+                if (sb.ProgramName == null)
                 {
                     continue;
                 }
                 if (!areas.ContainsKey(sb.ProgramName))
                 {
                     var areaTarget = SpaceBoundary.Requirements.TryGetValue(sb.ProgramName, out var requirement) ? requirement.AreaPerSpace * requirement.SpaceCount : 0.0;
-                    areas[sb.Name] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
+                    areas[sb.ProgramName] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.ProgramName);
                 }
                 else
                 {
-                    var existingTally = areas[sb.Name];
+                    var existingTally = areas[sb.ProgramName];
                     existingTally.AchievedArea += area;
                     existingTally.DistinctAreaCount++;
                 }

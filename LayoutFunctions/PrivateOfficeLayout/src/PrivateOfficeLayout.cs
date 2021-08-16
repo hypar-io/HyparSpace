@@ -38,7 +38,11 @@ namespace PrivateOfficeLayout
                 var corridors = lvl.Elements.OfType<Floor>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Private Office");
-                var levelVolume = levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+
 
                 var wallCandidateLines = new List<(Line line, string type)>();
                 if (input.OfficeSizing.AutomateOfficeSubdivisions)
@@ -61,7 +65,6 @@ namespace PrivateOfficeLayout
                         boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(roomTransformProjected));
                         boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(roomTransformProjected)) ?? new List<Polygon>());
                         var tempGrid = new Grid2d(boundaryCurves, orientationTransform);
-                        output.Model.AddElements(tempGrid.ToModelCurves(levelVolume.Transform, BuiltInMaterials.YAxis));
                         try
                         {
                             var vLength = tempGrid.V.Domain.Length;
@@ -138,8 +141,6 @@ namespace PrivateOfficeLayout
                             // continue
                         }
                     }
-                    output.Model.AddElements(grid.ToModelCurves(levelVolume.Transform, BuiltInMaterials.XAxis));
-                    var random = new Random();
                     foreach (var cell in grid.GetCells())
                     {
                         var rect = cell.GetCellGeometry() as Polygon;

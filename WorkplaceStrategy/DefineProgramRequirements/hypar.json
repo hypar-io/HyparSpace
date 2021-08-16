@@ -1,0 +1,35 @@
+{
+  "$schema": "https://hypar.io/Schemas/function_2.json",
+  "id": "9448d3bc-c7a0-4cee-9757-4752b8ba9958",
+  "name": "Define Program Requirements",
+  "description": "Define a set of program requirements for Hypar Space.",
+  "language": "C#",
+  "model_output": "Program Requirements",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Program Requirements": {
+        "$hyparCanPopOut": true,
+        "type": "array",
+        "$hyparGroupBy": "Program Group",
+        "items": {
+          "$ref": "https://prod-api.hypar.io/schemas/ProgramRequirement"
+        }
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "source_file_key": null,
+  "preview_image": null,
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/ProgramRequirement"
+  ]
+}

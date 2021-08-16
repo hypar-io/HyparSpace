@@ -12,6 +12,7 @@ namespace Elements
 
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
 
+        public string ProgramGroup { get; set; }
         public Line AlignmentEdge { get; set; } = null;
         public double? Length { get; set; } = null;
         public double? Depth { get; set; } = null;
@@ -31,7 +32,7 @@ namespace Elements
         public ProgramRequirement FulfilledProgramRequirement = null;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
-            Requirements = reqs.ToDictionary(v => v.ProgramName, v => v);
+            Requirements = reqs.ToDictionary(v => v.GetKey(), v => v);
             foreach (var kvp in Requirements)
             {
                 var color = kvp.Value.Color;
@@ -39,6 +40,8 @@ namespace Elements
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color);
             }
         }
+
+
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.
@@ -122,6 +125,10 @@ namespace Elements
         private static Random random = new Random(4);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
         {
+            if (profile.Perimeter.IsClockWise())
+            {
+                profile = profile.Reversed();
+            }
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var hasReqMatch = Requirements.TryGetValue(displayName, out var fullReq);

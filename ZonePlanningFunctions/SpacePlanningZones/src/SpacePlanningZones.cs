@@ -47,6 +47,7 @@ namespace SpacePlanningZones
                 output.Warnings.Add("This function requires LevelVolumes, produced by functions like \"Simple Levels by Envelope\". Try a different levels function.");
                 return output;
             }
+
             foreach (var lvl in levelVolumes)
             {
                 if (floorsModel != null)
@@ -116,6 +117,7 @@ namespace SpacePlanningZones
 
                 // Construct Level 
                 var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
+                level.AdditionalProperties["LevelVolumeId"] = lvl.Id;
                 levels.Add(level);
 
                 // These are the new, correct methods using the split inputs: 
@@ -282,23 +284,25 @@ namespace SpacePlanningZones
             foreach (var sb in levels.SelectMany(lev => lev.Elements.OfType<SpaceBoundary>()))
             {
                 var area = sb.Boundary.Area();
-                if (sb.Name == null)
+                var programName = sb.ProgramName ?? sb.Name;
+                if (programName == null)
                 {
                     continue;
                 }
-                if (!areas.ContainsKey(sb.ProgramName))
+                if (!areas.ContainsKey(programName))
                 {
-                    var areaTarget = SpaceBoundary.Requirements.TryGetValue(sb.ProgramName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
-                    areas[sb.Name] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
+                    var areaTarget = SpaceBoundary.Requirements.TryGetValue(programName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
+                    areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
                 }
                 else
                 {
-                    var existingTally = areas[sb.Name];
+                    var existingTally = areas[programName];
                     existingTally.AchievedArea += area;
-                    existingTally.DistinctAreaCount++;
+                    existingTally.DistinctAreaCount += 1;
                 }
-                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform.Concatenated(new Transform(0, 0, 0.03))));
+                // output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform.Concatenated(new Transform(0, 0, 0.03))));
             }
+
             // count corridors in area
             var circulationKey = "Circulation";
             var circReq = SpaceBoundary.Requirements.ToList().FirstOrDefault(k => k.Value.Name == "Circulation");
@@ -312,6 +316,19 @@ namespace SpacePlanningZones
                 if (!areas.ContainsKey(circulationKey))
                 {
                     areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
+                }
+            }
+
+            if (hasProgramRequirements)
+            {
+                foreach (var req in SpaceBoundary.Requirements)
+                {
+                    var r = req.Value;
+                    var name = r.ProgramName;
+                    if (!areas.ContainsKey(name))
+                    {
+                        areas[name] = new AreaTally(name, r.Color, r.AreaPerSpace * r.SpaceCount, 0, 0, null, Guid.NewGuid());
+                    }
                 }
             }
 
@@ -423,20 +440,30 @@ namespace SpacePlanningZones
                             foreach (var line in linearZone.Segments())
                             {
                                 if (line.Length() < 2) continue;
-                                var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
-                                var extended = l.ExtendTo(linearZone);
-                                var endDistance = extended.End.DistanceTo(l.End);
-                                var startDistance = extended.Start.DistanceTo(l.Start);
-                                var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
-                                if (startDistance > 0.1 && startDistance < maxExtension)
+                                try
                                 {
-                                    var startLine = new Line(extended.Start, line.Start);
-                                    segmentsExtended.Add(startLine.ToPolyline(1));
+
+                                    var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
+                                    var extended = l.ExtendTo(linearZone);
+                                    var endDistance = extended.End.DistanceTo(l.End);
+                                    var startDistance = extended.Start.DistanceTo(l.Start);
+                                    var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
+                                    if (startDistance > 0.1 && startDistance < maxExtension)
+                                    {
+                                        var startLine = new Line(extended.Start, line.Start);
+                                        segmentsExtended.Add(startLine.ToPolyline(1));
+                                    }
+                                    if (endDistance > 0.1 && endDistance < maxExtension)
+                                    {
+                                        var endLine = new Line(extended.End, line.End);
+                                        segmentsExtended.Add(endLine.ToPolyline(1));
+                                    }
                                 }
-                                if (endDistance > 0.1 && endDistance < maxExtension)
+                                catch (Exception e)
                                 {
-                                    var endLine = new Line(extended.End, line.End);
-                                    segmentsExtended.Add(endLine.ToPolyline(1));
+                                    Console.WriteLine("Exception extending lines");
+                                    Console.WriteLine(e.Message);
+                                    // just ignore
                                 }
                             }
                             // Console.WriteLine(JsonConvert.SerializeObject(linearZone.Perimeter));

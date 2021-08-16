@@ -49,7 +49,11 @@ namespace OpenCollaborationLayout
                 var corridors = lvl.Elements.OfType<Floor>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Collaboration");
-                // var levelVolume = levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+                // var levelVolume = levelVolumes.FirstOrDefault(l =>
+                // (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                //     levelVolumeId as string == l.Id.ToString()) ||
+                // l.Name == lvl.Name);
+
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;

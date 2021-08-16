@@ -75,10 +75,7 @@
                     "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
                     "$hyparAllowIntersection": true,
                     "$hyparConstrainToGround": true,
-                    "default": {
-                        "width": 1.5,
-                        "flip": false
-                    }
+                    "default": null
                 }
             },
             "Corridor Width": {
