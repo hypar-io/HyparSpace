@@ -25,6 +25,7 @@ namespace Elements
         /// </summary>
         public static void Reset()
         {
+            random = new Random(11);
             Requirements.Clear();
             MaterialDict = new Dictionary<string, Material>(materialDefaults);
         }
@@ -54,7 +55,7 @@ namespace Elements
 
 
 
-        private static Random random = new Random(4);
+        private static Random random = new Random(11);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);

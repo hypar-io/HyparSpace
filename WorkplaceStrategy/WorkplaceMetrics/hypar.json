@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "505d62f3-c4fa-4874-a049-3516129384d2",
+  "id": "5915b2f2-09c9-4273-a151-0876b602e9e5",
   "name": "Workplace Metrics",
   "description": "The WorkplaceMetrics function.",
   "model_dependencies": [
@@ -29,7 +29,7 @@
           "Fixed Headcount",
           "Fixed Sharing Ratio"
         ],
-        "default": "Fixed Headcount"
+        "default": "Fixed Sharing Ratio"
       },
       "Total Headcount": {
         "description": "How many people will occupy this workspace?",
