@@ -101,8 +101,8 @@ namespace SpacePlanningZones
                 {
                     var centroid = overrideValue.Identity.ParentCentroid;
                     var matchingSB = spaceBoundaries
-                        .OrderBy(sb => ((Vector3)sb.boundary.AdditionalProperties["IndividualCentroid"]).DistanceTo(centroid))
-                        .FirstOrDefault(sb => ((Vector3)sb.boundary.AdditionalProperties["IndividualCentroid"]).DistanceTo(centroid) < 2.0);
+                        .OrderBy(sb => ((Vector3)sb.boundary.IndividualCentroid).DistanceTo(centroid))
+                        .FirstOrDefault(sb => ((Vector3)sb.boundary.IndividualCentroid).DistanceTo(centroid) < 2.0);
                     if (matchingSB.boundary != null)
                     {
                         if (overrideValue.Value.Split <= 1)
@@ -121,7 +121,7 @@ namespace SpacePlanningZones
                             foreach (var cell in grid.GetCells().SelectMany(c => c.GetTrimmedCellGeometry()))
                             {
                                 var rep = matchingSB.boundary.Representation.SolidOperations.OfType<Extrude>().First();
-                                var newCellSb = SpaceBoundary.Make(cell as Polygon, overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment, matchingSB.boundary.Transform, rep.Height, matchingSB.boundary.AdditionalProperties["ParentCentroid"] as Vector3?);
+                                var newCellSb = SpaceBoundary.Make(cell as Polygon, overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment, matchingSB.boundary.Transform, rep.Height, matchingSB.boundary.ParentCentroid as Vector3?);
                                 Identity.AddOverrideIdentity(newCellSb, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                                 newCellSb.AdditionalProperties["Split"] = overrideValue.Value.Split;
                                 SubdividedBoundaries.Add(newCellSb);
@@ -133,7 +133,7 @@ namespace SpacePlanningZones
                 // overrides where it's not its own parent
                 foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => !o.Identity.IndividualCentroid.IsAlmostEqualTo(o.Identity.ParentCentroid)))
                 {
-                    var matchingCell = SubdividedBoundaries.FirstOrDefault(b => (b.AdditionalProperties["IndividualCentroid"] as Vector3?)?.DistanceTo(overrideValue.Identity.IndividualCentroid) < 0.01);
+                    var matchingCell = SubdividedBoundaries.FirstOrDefault(b => (b.IndividualCentroid as Vector3?)?.DistanceTo(overrideValue.Identity.IndividualCentroid) < 0.01);
                     if (matchingCell != null)
                     {
                         Identity.AddOverrideIdentity(matchingCell, "Program Assignments", overrideValue.Id, overrideValue.Identity);
@@ -152,7 +152,7 @@ namespace SpacePlanningZones
                 {
                     var identitiesToMerge = mz.Identities;
                     var matchingSbs = identitiesToMerge.Select(mzI => spaceBoundaries.FirstOrDefault(
-                        sb => ((Vector3)sb.boundary.AdditionalProperties["ParentCentroid"]).DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != (null, null)).ToList();
+                        sb => ((Vector3)sb.boundary.ParentCentroid).DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != (null, null)).ToList();
                     foreach (var msb in matchingSbs)
                     {
                         levelMappings.Remove(msb.boundary.Id);
@@ -173,7 +173,7 @@ namespace SpacePlanningZones
                         {
                             var rep = baseSB.Representation.SolidOperations.OfType<Extrude>().First();
 
-                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.AdditionalProperties["ParentCentroid"], (Vector3)baseSB.AdditionalProperties["ParentCentroid"]);
+                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.ParentCentroid, (Vector3)baseSB.ParentCentroid);
                             newSB.SetProgram(baseSB.Name);
                             Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
                             levelMappings.Add(newSB.Id, (newSB, level));

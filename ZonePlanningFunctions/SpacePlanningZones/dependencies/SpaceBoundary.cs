@@ -9,9 +9,30 @@ namespace Elements
 {
     public partial class SpaceBoundary
     {
+
+        public List<Line> AdjacentCorridorEdges { get; set; } = null;
+
+        public string ProgramGroup { get; set; }
+        public Line AlignmentEdge { get; set; } = null;
+        public double? Length { get; set; } = null;
+        public double? Depth { get; set; } = null;
+
+        public double AvailableLength { get; set; } = 0;
+        public Transform ToAlignmentEdge = null;
+        public Transform FromAlignmentEdge = null;
+
+        public Vector3? IndividualCentroid { get; set; } = null;
+        public Vector3? ParentCentroid { get; set; } = null;
+
+        public bool AutoPlaced { get; set; } = false;
+
+        [Newtonsoft.Json.JsonIgnore]
+        public LevelElements Level { get; set; }
+
+        public ProgramRequirement FulfilledProgramRequirement = null;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
-            Requirements = reqs.ToDictionary(v => v.ProgramName, v => v);
+            Requirements = reqs.ToDictionary(v => v.GetKey(), v => v);
             foreach (var kvp in Requirements)
             {
                 var color = kvp.Value.Color;
@@ -19,6 +40,8 @@ namespace Elements
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color);
             }
         }
+
+
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.
@@ -28,6 +51,54 @@ namespace Elements
             random = new Random(11);
             Requirements.Clear();
             MaterialDict = new Dictionary<string, Material>(materialDefaults);
+        }
+
+        public List<ProgramRequirement> CollectedSpaces { get; set; } = new List<ProgramRequirement>();
+
+        public void Collect(ProgramRequirement req)
+        {
+            this.AvailableLength -= req.Width.Value;
+            req.CountPlaced++;
+            this.CollectedSpaces.Add(req);
+        }
+
+        public List<SpaceBoundary> ResolveCollected()
+        {
+            var newSpaces = new List<SpaceBoundary>();
+            if (this.CollectedSpaces.Count > 0)
+            {
+                var runningX = 0.0;
+                var bonus = 0.0;
+                if (this.AvailableLength < 3)
+                {
+                    bonus = this.AvailableLength / this.CollectedSpaces.Count;
+                }
+                foreach (var space in this.CollectedSpaces)
+                {
+                    var depth = space.Depth.Value;
+                    var width = space.Width.Value + bonus;
+                    if (Math.Abs(this.Depth.Value - depth) < 3)
+                    {
+                        depth = this.Depth.Value;
+                    }
+                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(width + runningX, depth)).TransformedPolygon(this.FromAlignmentEdge);
+                    var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(width + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
+                    var newSb = SpaceBoundary.Make(idealRect, space.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
+                    newSb.AlignmentEdge = edge;
+                    newSb.Level = Level;
+                    runningX += width;
+                    newSpaces.Add(newSb);
+                }
+                if (this.AvailableLength > 3)
+                {
+                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, this.Depth.Value)).TransformedPolygon(this.FromAlignmentEdge);
+                    var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
+                    var newSb = SpaceBoundary.Make(idealRect, this.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
+                    newSb.Level = Level;
+                    newSpaces.Add(newSb);
+                }
+            }
+            return newSpaces;
         }
 
         public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
@@ -52,27 +123,45 @@ namespace Elements
 
         [JsonProperty("Program Type")]
         public string ProgramName { get; set; }
-
-
-
         private static Random random = new Random(11);
-        public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
+        public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
         {
-            MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             if (profile.Perimeter.IsClockWise())
             {
-                profile = new Profile(profile.Perimeter, profile.Voids);
-                profile.OrientVoids();
+                profile = profile.Reversed();
             }
+            MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
-            var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
+            var hasReqMatch = Requirements.TryGetValue(displayName, out var fullReq);
+            var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            if (hasReqMatch)
+            {
+                fullReq.CountPlaced++;
+                sb.FulfilledProgramRequirement = fullReq;
+            }
             sb.ProgramName = displayName;
-            sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
-            sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
+            sb.ParentCentroid = parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
+            sb.IndividualCentroid = individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
+
+            if (corridorSegments != null)
+            {
+                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments(), corridorSegments, out var otherSegments);
+            }
             return sb;
         }
 
+        public void Remove()
+        {
+            if (this.Level?.Elements != null && this.Level.Elements.Contains(this))
+            {
+                this.Level.Elements.Remove(this);
+            }
+            if (this.FulfilledProgramRequirement != null)
+            {
+                this.FulfilledProgramRequirement.CountPlaced--;
+            }
+        }
         public void SetProgram(string displayName)
         {
             if (!MaterialDict.TryGetValue(displayName ?? "unrecognized", out var material))
@@ -84,7 +173,18 @@ namespace Elements
             }
             this.Material = material;
             this.ProgramName = displayName;
-            this.Name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
+            if (this.FulfilledProgramRequirement != null)
+            {
+                this.FulfilledProgramRequirement.CountPlaced--;
+            }
+            var hasReqMatch = Requirements.TryGetValue(displayName, out var fullReq);
+            this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            if (hasReqMatch)
+            {
+                fullReq.CountPlaced++;
+                this.FulfilledProgramRequirement = fullReq;
+            }
+
         }
     }
 }

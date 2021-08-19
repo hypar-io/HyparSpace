@@ -8,4 +8,8 @@
     <PackageReference Include="Hypar.Elements" Version="0.9.3-alpha.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+  </ItemGroup>
+
 </Project>
