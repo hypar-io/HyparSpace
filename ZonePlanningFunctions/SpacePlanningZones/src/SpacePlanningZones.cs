@@ -72,21 +72,21 @@ namespace SpacePlanningZones
             // For every level volume, create space boundaries with corridors and splits
             CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries);
 
-            // // process merge overrides
-            // ProcessMergeOverrides(input, allSpaceBoundaries);
+            // process merge overrides
+            ProcessMergeOverrides(input, allSpaceBoundaries);
 
-            // // process assignment overrides
-            // ProcessProgramAssignmentOverrides(input, allSpaceBoundaries);
+            // process assignment overrides
+            ProcessProgramAssignmentOverrides(input, allSpaceBoundaries);
 
             // exclude bad spaces and add boundaries to their levels.
             foreach (var sb in allSpaceBoundaries)
             {
                 // ignore skinny spaces
-                // var minDepth = 1.0;
-                // if ((sb.Depth ?? 10) < minDepth || (sb.Length ?? 10) < minDepth)
-                // {
-                //     continue;
-                // }
+                var minDepth = 1.0;
+                if ((sb.Depth ?? 10) < minDepth || (sb.Length ?? 10) < minDepth)
+                {
+                    continue;
+                }
                 // set levels
                 sb.Level.Elements.Add(sb);
                 // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
@@ -166,10 +166,9 @@ namespace SpacePlanningZones
                 {
                     var identitiesToMerge = mz.Identities;
                     var matchingSbs = identitiesToMerge.Select(mzI => allSpaceBoundaries.FirstOrDefault(
-                        sb => sb.ParentCentroid.Value.DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != null).ToList();
+                        sb => ((Vector3)sb.ParentCentroid).DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != null).ToList();
                     foreach (var msb in matchingSbs)
                     {
-                        msb.Remove();
                         allSpaceBoundaries.Remove(msb);
                     }
                     var sbsByLevel = matchingSbs.GroupBy(sb => sb.Level?.Id ?? Guid.Empty);
@@ -188,10 +187,10 @@ namespace SpacePlanningZones
                         {
                             var rep = baseSB.Representation.SolidOperations.OfType<Extrude>().First();
 
-                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, baseSB.ParentCentroid, baseSB.ParentCentroid);
+                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.ParentCentroid, (Vector3)baseSB.ParentCentroid);
                             newSB.SetProgram(baseSB.Name);
-                            newSB.Level = level;
                             Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
+                            newSB.Level = level;
                             allSpaceBoundaries.Add(newSB);
                         }
                     }
