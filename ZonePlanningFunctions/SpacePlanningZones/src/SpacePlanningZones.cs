@@ -73,11 +73,11 @@ namespace SpacePlanningZones
             // For every level volume, create space boundaries with corridors and splits
             CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, levelMappings);
 
-            // process merge overrides
-            ProcessMergeOverrides(input, levelMappings);
+            // // process merge overrides
+            // ProcessMergeOverrides(input, levelMappings);
 
-            // process assignment overrides
-            ProcessProgramAssignmentOverrides(input, levelMappings);
+            // // process assignment overrides
+            // ProcessProgramAssignmentOverrides(input, levelMappings);
 
             // actually add the boundaries to the level elements
             foreach (var levelMapping in levelMappings)
