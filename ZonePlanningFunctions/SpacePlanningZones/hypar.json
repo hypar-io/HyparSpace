@@ -251,5 +251,8 @@
     ],
     "repository_url": "https://github.com/hypar-io/function",
     "source_file_key": null,
-    "preview_image": null
+    "preview_image": null,
+    "default_camera": {
+        "named_position": "top"
+    }
 }

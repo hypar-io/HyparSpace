@@ -501,28 +501,38 @@ namespace SpacePlanningZones
 
         private static List<Element> SplitCornersAndGenerateSpaceBoundaries(List<Element> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null)
         {
+            // subtract corridors from level boundary
             var remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+            // for every space that's left
             foreach (var remainingSpace in remainingSpaces)
             {
                 try
                 {
+                    // if we're along the boundary of the level, try to look for linear zones to add corner splits
                     if (remainingSpace.Perimeter.Vertices.Any(v => v.DistanceTo(levelBoundary.Perimeter) < 0.1))
                     {
                         var linearZones = thickerOffsetProfiles == null ? new List<Profile> { remainingSpace } : Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
+                        var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
+
+                        // these zones are long, skinny, and at the edge of the floorplate, typically, and try to split them at their corners, so we don't
+                        // have linear zones wrapping a corner.
+
                         foreach (var linearZone in linearZones)
                         {
                             var segmentsExtended = new List<Polyline>();
                             foreach (var line in linearZone.Segments())
                             {
+                                // consider only longer lines
                                 if (line.Length() < 2) continue;
                                 try
                                 {
-
+                                    // extend a line
                                     var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
                                     var extended = l.ExtendTo(linearZone);
                                     var endDistance = extended.End.DistanceTo(l.End);
                                     var startDistance = extended.Start.DistanceTo(l.Start);
-                                    var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
+                                    // if it went a reasonable amount — more than 0.1 and less than maxExtension
+                                    // add it to our split candidates
                                     if (startDistance > 0.1 && startDistance < maxExtension)
                                     {
                                         var startLine = new Line(extended.Start, line.Start);
@@ -541,19 +551,20 @@ namespace SpacePlanningZones
                                     // just ignore
                                 }
                             }
-                            // Console.WriteLine(JsonConvert.SerializeObject(linearZone.Perimeter));
-                            // Console.WriteLine(JsonConvert.SerializeObject(linearZone.Voids));
-                            // Console.WriteLine(JsonConvert.SerializeObject(segmentsExtended));
+                            // split the linear zone with these segments, and add the results as spaces. 
                             var splits = Profile.Split(new[] { linearZone }, segmentsExtended, Vector3.EPSILON);
                             spaceBoundaries.AddRange(splits.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
                         }
+                        // if we had "thicker end zones" — these are only added with automatic circulation
+                        // at "squarish" ends of hthe floorplate — subtract these from the zones we just made and add the "end zones"
+                        // as spaces directly
                         if (thickerOffsetProfiles != null)
                         {
                             var endCapZones = Profile.Intersection(new[] { remainingSpace }, thickerOffsetProfiles);
                             spaceBoundaries.AddRange(endCapZones.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
                         }
                     }
-                    else
+                    else // otherwise just add each chunk cut by the circulation (non-exterior) as a boundary
                     {
                         spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
                     }

@@ -26,8 +26,8 @@ namespace SpacePlanningZones
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
-            result.Model.ToGlTF("../../../Generated/TestFromSmallProject61b504f4/results/TestFromSmallProject61b504f4.glb");
-            File.WriteAllText("../../../Generated/TestFromSmallProject61b504f4/results/TestFromSmallProject61b504f4.json", result.Model.ToJson());
+            result.Model.ToGlTF("../../../Generated/results/TestFromSmallProject61b504f4.glb");
+            File.WriteAllText("../../../Generated/results/TestFromSmallProject61b504f4.json", result.Model.ToJson());
         }
 
         public SpacePlanningZonesInputs GetInput()

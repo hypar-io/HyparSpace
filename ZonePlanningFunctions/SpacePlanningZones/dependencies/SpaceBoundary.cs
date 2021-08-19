@@ -59,6 +59,11 @@ namespace Elements
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
+            if (profile.Perimeter.IsClockWise())
+            {
+                profile = new Profile(profile.Perimeter, profile.Voids);
+                profile.OrientVoids();
+            }
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);

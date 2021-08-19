@@ -28,8 +28,8 @@ namespace SpacePlanningZones
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
-            result.Model.ToGlTF("../../../Generated/FederalPlaza_ed5dcf/results/FederalPlaza_ed5dcf.glb");
-            File.WriteAllText("../../../Generated/FederalPlaza_ed5dcf/results/FederalPlaza_ed5dcf.json", result.Model.ToJson());
+            result.Model.ToGlTF("../../../Generated/results/FederalPlaza_ed5dcf.glb");
+            File.WriteAllText("../../../Generated/results/FederalPlaza_ed5dcf.json", result.Model.ToJson());
         }
 
         public SpacePlanningZonesInputs GetInput()
