@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cd ../../../../../ML/image_generation/ && npm run ts-node generateImages.ts "/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/results" "/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/results/img" "0,0,-1.0"
