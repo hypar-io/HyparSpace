@@ -23,9 +23,6 @@ namespace SpacePlanningZones
             // Set up output object
             var output = new SpacePlanningZonesOutputs();
 
-            // Corridor Settings
-            var corridorWidth = input.CorridorWidth;
-
             // Get Levels
             var levelsModel = inputModels["Levels"];
             var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
@@ -68,25 +65,36 @@ namespace SpacePlanningZones
             // create a collection of LevelElements (which contain other elements)
             // to add to the model
             var levels = new List<LevelElements>();
-            var levelMappings = new Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)>();
+
+            // create a collection of all the final space boundaries we'll pass to the model
+            var allSpaceBoundaries = new List<SpaceBoundary>();
 
             // For every level volume, create space boundaries with corridors and splits
-            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, levelMappings);
+            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries);
 
             // // process merge overrides
-            // ProcessMergeOverrides(input, levelMappings);
+            // ProcessMergeOverrides(input, allSpaceBoundaries);
 
             // // process assignment overrides
-            // ProcessProgramAssignmentOverrides(input, levelMappings);
+            // ProcessProgramAssignmentOverrides(input, allSpaceBoundaries);
 
-            // actually add the boundaries to the level elements
-            foreach (var levelMapping in levelMappings)
+            // exclude bad spaces and add boundaries to their levels.
+            foreach (var sb in allSpaceBoundaries)
             {
-                levelMapping.Value.level.Elements.Add(levelMapping.Value.boundary);
+                // ignore skinny spaces
+                // var minDepth = 1.0;
+                // if ((sb.Depth ?? 10) < minDepth || (sb.Length ?? 10) < minDepth)
+                // {
+                //     continue;
+                // }
+                // set levels
+                sb.Level.Elements.Add(sb);
+                // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
+                sb.Level = null;
             }
 
             // calculate area tallies
-            var areas = CalculateAreas(hasProgramRequirements, levels);
+            var areas = CalculateAreas(hasProgramRequirements, levels, allSpaceBoundaries);
 
             output.Model.AddElements(areas.Select(kvp => kvp.Value).OrderByDescending(a => a.AchievedArea));
 
@@ -96,42 +104,43 @@ namespace SpacePlanningZones
             return output;
         }
 
-        private static void ProcessProgramAssignmentOverrides(SpacePlanningZonesInputs input, Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)> levelMappings)
+        private static void ProcessProgramAssignmentOverrides(SpacePlanningZonesInputs input, List<SpaceBoundary> allSpaceBoundaries)
         {
             if (input.Overrides != null && input.Overrides.ProgramAssignments != null && input.Overrides.ProgramAssignments.Count > 0)
             {
                 List<SpaceBoundary> SubdividedBoundaries = new List<SpaceBoundary>();
-                var spaceBoundaries = levelMappings.Select(kvp => kvp.Value).ToList();
                 // overrides where it is its own parent
                 foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => o.Identity.IndividualCentroid.IsAlmostEqualTo(o.Identity.ParentCentroid)))
                 {
                     var centroid = overrideValue.Identity.ParentCentroid;
-                    var matchingSB = spaceBoundaries
-                        .OrderBy(sb => ((Vector3)sb.boundary.IndividualCentroid).DistanceTo(centroid))
-                        .FirstOrDefault(sb => ((Vector3)sb.boundary.IndividualCentroid).DistanceTo(centroid) < 2.0);
-                    if (matchingSB.boundary != null)
+                    var matchingSB = allSpaceBoundaries
+                        .OrderBy(sb => sb.IndividualCentroid.Value.DistanceTo(centroid))
+                        .FirstOrDefault(sb => sb.IndividualCentroid.Value.DistanceTo(centroid) < 2.0);
+                    if (matchingSB != null)
                     {
                         if (overrideValue.Value.Split <= 1)
                         {
-                            matchingSB.boundary.SetProgram(overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment);
-                            Identity.AddOverrideIdentity(matchingSB.boundary, "Program Assignments", overrideValue.Id, overrideValue.Identity);
+                            matchingSB.SetProgram(overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment);
+                            Identity.AddOverrideIdentity(matchingSB, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                         }
                         else // Split input on overrides is now deprecated — we shouldn't typically hit this code.
                         {
-                            levelMappings.Remove(matchingSB.boundary.Id);
-                            var boundaries = new List<Polygon>(matchingSB.boundary.Boundary.Voids) { matchingSB.boundary.Boundary.Perimeter };
+                            var level = matchingSB.Level;
+                            matchingSB.Remove();
+                            var boundaries = new List<Polygon>(matchingSB.Boundary.Voids) { matchingSB.Boundary.Perimeter };
                             var guideVector = GetDominantAxis(boundaries.SelectMany(b => b.Segments()));
                             var alignmentXform = new Transform(boundaries[0].Start, guideVector, Vector3.ZAxis);
                             var grid = new Grid2d(boundaries, alignmentXform);
                             grid.U.DivideByCount(Math.Max(overrideValue.Value.Split, 1));
                             foreach (var cell in grid.GetCells().SelectMany(c => c.GetTrimmedCellGeometry()))
                             {
-                                var rep = matchingSB.boundary.Representation.SolidOperations.OfType<Extrude>().First();
-                                var newCellSb = SpaceBoundary.Make(cell as Polygon, overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment, matchingSB.boundary.Transform, rep.Height, matchingSB.boundary.ParentCentroid as Vector3?);
+                                var rep = matchingSB.Representation.SolidOperations.OfType<Extrude>().First();
+                                var newCellSb = SpaceBoundary.Make(cell as Polygon, overrideValue.Value.ProgramType ?? input.DefaultProgramAssignment, matchingSB.Transform, rep.Height, matchingSB.ParentCentroid);
                                 Identity.AddOverrideIdentity(newCellSb, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                                 newCellSb.AdditionalProperties["Split"] = overrideValue.Value.Split;
                                 SubdividedBoundaries.Add(newCellSb);
-                                levelMappings.Add(newCellSb.Id, (newCellSb, matchingSB.level));
+                                newCellSb.Level = level;
+
                             }
                         }
                     }
@@ -139,7 +148,7 @@ namespace SpacePlanningZones
                 // overrides where it's not its own parent
                 foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => !o.Identity.IndividualCentroid.IsAlmostEqualTo(o.Identity.ParentCentroid)))
                 {
-                    var matchingCell = SubdividedBoundaries.FirstOrDefault(b => (b.IndividualCentroid as Vector3?)?.DistanceTo(overrideValue.Identity.IndividualCentroid) < 0.01);
+                    var matchingCell = SubdividedBoundaries.FirstOrDefault(b => b.IndividualCentroid?.DistanceTo(overrideValue.Identity.IndividualCentroid) < 0.01);
                     if (matchingCell != null)
                     {
                         Identity.AddOverrideIdentity(matchingCell, "Program Assignments", overrideValue.Id, overrideValue.Identity);
@@ -149,50 +158,51 @@ namespace SpacePlanningZones
             }
         }
 
-        private static void ProcessMergeOverrides(SpacePlanningZonesInputs input, Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)> levelMappings)
+        private static void ProcessMergeOverrides(SpacePlanningZonesInputs input, List<SpaceBoundary> allSpaceBoundaries)
         {
             if (input.Overrides != null && input.Overrides.MergeZones != null && input.Overrides.MergeZones.Count > 0)
             {
-                var spaceBoundaries = levelMappings.Select(kvp => kvp.Value);
                 foreach (var mz in input.Overrides.MergeZones)
                 {
                     var identitiesToMerge = mz.Identities;
-                    var matchingSbs = identitiesToMerge.Select(mzI => spaceBoundaries.FirstOrDefault(
-                        sb => ((Vector3)sb.boundary.ParentCentroid).DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != (null, null)).ToList();
+                    var matchingSbs = identitiesToMerge.Select(mzI => allSpaceBoundaries.FirstOrDefault(
+                        sb => sb.ParentCentroid.Value.DistanceTo(mzI.ParentCentroid) < 1.0)).Where(s => s != null).ToList();
                     foreach (var msb in matchingSbs)
                     {
-                        levelMappings.Remove(msb.boundary.Id);
+                        msb.Remove();
+                        allSpaceBoundaries.Remove(msb);
                     }
-                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.level?.Id ?? Guid.Empty);
+                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.Level?.Id ?? Guid.Empty);
                     foreach (var lvlGrp in sbsByLevel)
                     {
-                        var level = lvlGrp.First().level;
-                        var profiles = lvlGrp.Select(sb => sb.boundary.Boundary);
-                        var baseobj = lvlGrp.FirstOrDefault(n => n.boundary.Name != null && n.boundary.Name != "unspecified");
+                        var level = lvlGrp.First().Level;
+                        var profiles = lvlGrp.Select(sb => sb.Boundary);
+                        var baseobj = lvlGrp.FirstOrDefault(n => n.Name != null && n.Name != "unspecified");
                         if (baseobj == default)
                         {
                             baseobj = lvlGrp.First();
                         }
-                        var baseSB = baseobj.boundary;
+                        var baseSB = baseobj;
                         var union = Profile.UnionAll(profiles);
                         foreach (var newProfile in union)
                         {
                             var rep = baseSB.Representation.SolidOperations.OfType<Extrude>().First();
 
-                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.ParentCentroid, (Vector3)baseSB.ParentCentroid);
+                            var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, baseSB.ParentCentroid, baseSB.ParentCentroid);
                             newSB.SetProgram(baseSB.Name);
+                            newSB.Level = level;
                             Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
-                            levelMappings.Add(newSB.Id, (newSB, level));
+                            allSpaceBoundaries.Add(newSB);
                         }
                     }
                 }
             }
         }
 
-        private static Dictionary<string, AreaTally> CalculateAreas(bool hasProgramRequirements, List<LevelElements> levels)
+        private static Dictionary<string, AreaTally> CalculateAreas(bool hasProgramRequirements, List<LevelElements> levels, List<SpaceBoundary> allSpaceBoundaries)
         {
             Dictionary<string, AreaTally> areas = new Dictionary<string, AreaTally>();
-            foreach (var sb in levels.SelectMany(lev => lev.Elements.OfType<SpaceBoundary>()))
+            foreach (var sb in allSpaceBoundaries)
             {
                 var area = sb.Boundary.Area();
                 var programName = sb.ProgramName ?? sb.Name;
@@ -251,7 +261,8 @@ namespace SpacePlanningZones
                                                         Model floorsModel,
                                                         IEnumerable<ServiceCore> cores,
                                                         List<LevelElements> levels,
-                                                        Dictionary<Guid, (SpaceBoundary boundary, LevelElements level)> levelMappings)
+                                                        IEnumerable<Element> walls,
+                                                        List<SpaceBoundary> allSpaceBoundaries)
         {
             var corridorWidth = input.CorridorWidth;
             var corridorMat = SpaceBoundary.MaterialDict["Circulation"];
@@ -270,7 +281,30 @@ namespace SpacePlanningZones
                     levelBoundary.OrientVoids();
                 }
 
-                var spaceBoundaries = new List<Element>();
+                // if we have any walls, try to create boundaries from any enclosed spaces, 
+                // and then continue to operate on the largest "leftover" region.
+                var wallsInBoundary = walls.Where(w =>
+                {
+                    var pt = GetPointFromWall(w);
+                    return pt.HasValue && levelBoundary.Contains(pt.Value);
+                }).ToList();
+                var interiorZones = new List<Profile>();
+                if (wallsInBoundary.Count() > 0)
+                {
+                    var newLevelBoundary = AttemptToSplitWallsAndYieldLargestZone(levelBoundary, wallsInBoundary, out var centerlines, out interiorZones, output.Model);
+                    levelBoundary = newLevelBoundary;
+                }
+
+                var spaceBoundaries = new List<SpaceBoundary>();
+
+                // take enclosed zones generated from the walls process, if any, and generate these as "unspecified" zones, regardless
+                // of the program default.
+                interiorZones.ForEach((z) =>
+                {
+                    var zone = SpaceBoundary.Make(z, "unspecified", lvl.Transform, lvl.Height);
+                    spaceBoundaries.Add(zone);
+                });
+
                 List<Profile> corridorProfiles = new List<Profile>();
 
                 List<Profile> thickerOffsetProfiles = null;
@@ -290,19 +324,11 @@ namespace SpacePlanningZones
 
                 // Construct LevelElements to contain space boundaries
                 var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
-                level.AdditionalProperties["LevelVolumeId"] = lvl.Id;
+                level.LevelVolumeId = lvl.Id;
                 levels.Add(level);
 
-                // Create snapping geometry for splits
-                foreach (var sb in spaceBoundaries)
-                {
-                    var boundary = sb as SpaceBoundary;
-                    output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), "corridors"));
-                    if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
-                    {
-                        boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), "corridors")));
-                    }
-                }
+                // Create snapping geometry for corridors
+                CreateSnappingGeometry(output, spaceBoundaries, "corridors");
 
                 // These are the new, correct methods using the split inputs: 
                 //Manual Corridor Splits
@@ -310,22 +336,19 @@ namespace SpacePlanningZones
                 {
                     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
                 }
+                // SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
+
                 //Create snapping geometry for splits
-                foreach (var sb in spaceBoundaries)
-                {
-                    var boundary = sb as SpaceBoundary;
-                    output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), "splits"));
-                    if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
-                    {
-                        boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), "splits")));
-                    }
-                }
+                CreateSnappingGeometry(output, spaceBoundaries, "splits");
+
 
                 // Manual Split Locations
                 foreach (var pt in input.SplitZones.SplitLocations)
                 {
                     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
                 }
+                // SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.SplitZones.SplitLocations, false, output.Model);
+
 
                 // These are the old style methods, just left in place for backwards compatibility. 
                 // Most of the time we expect these values to be empty.
@@ -343,8 +366,11 @@ namespace SpacePlanningZones
 
                 foreach (SpaceBoundary b in spaceBoundaries)
                 {
-                    levelMappings.Add(b.Id, (b, level));
+                    b.Level = level;
                 }
+
+                allSpaceBoundaries.AddRange(spaceBoundaries.OfType<SpaceBoundary>());
+                // create floors for corridors and add them to the associated level.
                 try
                 {
                     var cpUnion = Profile.UnionAll(corridorProfiles);
@@ -583,7 +609,7 @@ namespace SpacePlanningZones
             }
         }
 
-        private static List<Element> SplitCornersAndGenerateSpaceBoundaries(List<Element> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null)
+        private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null)
         {
             // subtract corridors from level boundary
             var remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
@@ -661,7 +687,6 @@ namespace SpacePlanningZones
                     spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
                 }
             }
-            return spaceBoundaries;
         }
 
         private static void ThickenAndExtendSingleLoaded(double corridorWidth, List<Profile> corridorProfiles, List<ServiceCore> coresInBoundary, List<Polygon> thickerOffsets, IEnumerable<Polygon> innerOffsetMinusThicker, (Polygon hull, Line centerLine)[] allCenterLines)
@@ -780,12 +805,12 @@ namespace SpacePlanningZones
             return singleLoadedZones;
         }
 
-        private static void SplitZonesDeprecated(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<Element> spaceBoundaries, List<Profile> corridorProfiles, Vector3 pt, bool addCorridor = true)
+        private static void SplitZonesDeprecated(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, Vector3 pt, bool addCorridor = true)
         {
             // this is a hack — we're constructing a new SplitLocations w/ ZAxis as a sentinel meaning "null";
             SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, new SplitLocations(pt, Vector3.ZAxis), addCorridor);
         }
-        private static void SplitZones(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<Element> spaceBoundaries, List<Profile> corridorProfiles, SplitLocations pt, bool addCorridor = true)
+        private static void SplitZones(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, SplitLocations pt, bool addCorridor = true)
         {
             var containingBoundary = spaceBoundaries.OfType<SpaceBoundary>().FirstOrDefault(b => b.Boundary.Contains(pt.Position));
             if (containingBoundary != null)
@@ -898,7 +923,6 @@ namespace SpacePlanningZones
                 spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
             }
         }
-
         private static Vector3 GetDominantAxis(IEnumerable<Line> allLines, Model model = null)
         {
             var refVec = new Vector3(1, 0, 0);
