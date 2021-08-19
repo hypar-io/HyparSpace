@@ -2,7 +2,6 @@ using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using Elements.Spatial;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +42,13 @@ namespace SpacePlanningZones
             // Get Cores
             var hasCore = inputModels.TryGetValue("Core", out var coresModel);
             var cores = coresModel?.AllElementsOfType<ServiceCore>() ?? new List<ServiceCore>();
+
+            // Get Walls
+            var hasWalls = inputModels.TryGetValue("Walls", out var wallsModel);
+            var walls = wallsModel?.Elements.Values.Where(e => new[] { typeof(Wall), typeof(WallByProfile), typeof(StandardWall) }.Contains(e.GetType())) ?? new List<Element>();
+            // Get Columns
+            var hasColumns = inputModels.TryGetValue("Columns", out var columnsModel);
+            var columns = columnsModel?.AllElementsOfType<Column>() ?? new List<Column>();
 
             // Get program requirements
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
@@ -351,6 +357,19 @@ namespace SpacePlanningZones
             }
         }
 
+        private static void CreateSnappingGeometry(SpacePlanningZonesOutputs output, List<SpaceBoundary> spaceBoundaries, string type)
+        {
+            foreach (var sb in spaceBoundaries)
+            {
+                var boundary = sb as SpaceBoundary;
+                output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), type));
+                if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
+                {
+                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), type)));
+                }
+            }
+        }
+
         private static List<Profile> ProcessManualCirculation(SpacePlanningZonesInputs input)
         {
             List<Profile> corridorProfiles;
@@ -410,6 +429,71 @@ namespace SpacePlanningZones
                         lvl.Height -= floorFaceOffset;
                     }
                 }
+            }
+        }
+
+        private static Profile AttemptToSplitWallsAndYieldLargestZone(Profile levelBoundary, List<Element> wallsInBoundary, out IEnumerable<Polyline> wallCenterlines, out List<Profile> otherProfiles, Model m = null)
+        {
+            var centerlines = wallsInBoundary.Select(w => GetCenterlineFromWall(w).Extend(0.1)).Where(w => w != null).Select(l => l.ToPolyline(1));
+            otherProfiles = new List<Profile>();
+            wallCenterlines = centerlines;
+            var xy = new Plane((0, 0), (0, 0, 1));
+            try
+            {
+                var graph = HalfEdgeGraph2d.Construct(new Polygon[] { }, centerlines);
+                var pgons = graph.Polygonize().Select(p => p.Project(xy));
+                var nonPrimaryPgons = pgons.Where(p => !p.IsClockWise() && p.Area() < levelBoundary.Area() * 0.5).Select(p => new Profile(p)).ToList();
+                var union = Profile.UnionAll(nonPrimaryPgons);
+                var splitResults = Profile.Difference(new[] { levelBoundary }, union);
+                // Console.WriteLine(pgons.Count());
+                // var rand = new Random();
+                // nonPrimaryPgons.ForEach(p => m?.AddElement(new GeometricElement(new Transform(0, 0, 2), rand.NextMaterial(), new Lamina(p)) { AdditionalProperties = new Dictionary<string, object> { { "Area", p.Area() } } }));
+                var resultsSorted = splitResults.OrderByDescending(p => Math.Abs(p.Area()));
+                var largestZone = resultsSorted.First();
+                // Console.WriteLine(largestZone.Area());
+                otherProfiles = nonPrimaryPgons;
+                return largestZone;
+            }
+            catch
+            {
+                Console.WriteLine("🚃");
+                return levelBoundary;
+            }
+        }
+
+        private static Line Extend(this Line l, double amt)
+        {
+            var dir = l.Direction().Unitized();
+            return new Line(l.Start - dir * amt, l.End + dir * amt);
+        }
+
+        private static Line GetCenterlineFromWall(Element w)
+        {
+            switch (w)
+            {
+                case StandardWall standardWall:
+                    return standardWall.CenterLine.TransformedLine(standardWall.Transform);
+                case WallByProfile wallByProfile:
+                    return wallByProfile.Centerline.TransformedLine(wallByProfile.Transform);
+                case Wall wall:
+                    //TODO: handle this case
+                    return null;
+                default:
+                    return null;
+            }
+        }
+        private static Vector3? GetPointFromWall(Element w)
+        {
+            switch (w)
+            {
+                case StandardWall standardWall:
+                    return standardWall.Transform.OfPoint(standardWall.CenterLine.PointAt(0.5));
+                case WallByProfile wallByProfile:
+                    return wallByProfile.Transform.OfPoint(wallByProfile.Centerline.PointAt(0.5));
+                case Wall wall:
+                    return wall.Transform.OfPoint(wall.Profile.Perimeter.Centroid());
+                default:
+                    return null;
             }
         }
 
@@ -741,6 +825,77 @@ namespace SpacePlanningZones
                     newSbs = Profile.Split(new[] { containingBoundary.Boundary }, new[] { extension.ToPolyline(1) }, Vector3.EPSILON);
                 }
                 spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height)));
+            }
+        }
+
+        private static void SplitZonesMultiple(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, IEnumerable<SplitLocations> pts, bool addCorridor = true, Model m = null)
+        {
+            var corridorSegments = corridorProfiles.SelectMany(c => c.Segments());
+            var allBoundaries = spaceBoundaries.OfType<SpaceBoundary>();
+            var boundariesByPoint = pts.Select((pt) =>
+            {
+                var bd = allBoundaries.FirstOrDefault(b => b.Boundary.Contains(pt.Position));
+                var id = bd?.Id ?? default(Guid);
+                return (pt, bd, id);
+            }).GroupBy((i) => i.id);
+            foreach (var grp in boundariesByPoint)
+            {
+                if (grp.First().id == default(Guid))
+                {
+                    continue;
+                }
+                var containingBoundary = grp.First().bd;
+
+                if (input.Overrides?.ProgramAssignments != null)
+                {
+                    var spaceOverrides = input.Overrides.ProgramAssignments.FirstOrDefault(s => s.Identity.IndividualCentroid.IsAlmostEqualTo(containingBoundary.Boundary.Perimeter.Centroid()));
+                    if (spaceOverrides != null)
+                    {
+                        containingBoundary.Name = spaceOverrides.Value.ProgramType;
+                    }
+                }
+
+                spaceBoundaries.Remove(containingBoundary);
+                containingBoundary.Remove();
+                var perim = containingBoundary.Boundary.Perimeter;
+                List<Line> extensions = new List<Line>();
+                foreach (var grpItem in grp)
+                {
+                    var pt = grpItem.pt;
+                    Line line;
+                    if (pt.Direction == Vector3.ZAxis)
+                    {
+                        pt.Position.DistanceTo(perim as Polyline, out var cp);
+                        line = new Line(pt.Position, cp);
+                    }
+                    else
+                    {
+                        line = new Line(pt.Position, pt.Position + pt.Direction * 0.1);
+                    }
+                    var extension = line.ExtendTo(containingBoundary.Boundary);
+                    extensions.Add(extension);
+                }
+                List<Profile> newSbs = new List<Profile>();
+                if (addCorridor)
+                {
+                    var corridorShapesIntersected = new List<Profile>();
+                    var csAsProfiles = new List<Profile>();
+                    extensions.ForEach((extension) =>
+                    {
+                        var corridorShape = extension.ToPolyline(1).Offset(corridorWidth / 2, EndType.Square);
+                        var csAsProfilesLocal = corridorShape.Select(s => new Profile(s));
+                        csAsProfiles.AddRange(csAsProfilesLocal);
+                        corridorShapesIntersected.AddRange(Profile.Intersection(new[] { containingBoundary.Boundary }, csAsProfilesLocal));
+                    });
+                    corridorProfiles.AddRange(corridorShapesIntersected);
+                    newSbs = Profile.Difference(new[] { containingBoundary.Boundary }, csAsProfiles);
+                }
+                else
+                {
+                    var extensionsAsPolylines = extensions.Select(e => e.ToPolyline(1));
+                    newSbs = Profile.Split(new[] { containingBoundary.Boundary }, extensionsAsPolylines, Vector3.EPSILON);
+                }
+                spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
             }
         }
 
