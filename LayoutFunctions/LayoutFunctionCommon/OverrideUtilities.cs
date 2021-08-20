@@ -23,7 +23,18 @@ namespace LayoutFunctionCommon
                 foreach (var positionOverride in overrides.FurnitureLocations)
                 {
                     var matchingElement = allElementInstances.OrderBy(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation)).First();
-                    matchingElement.Transform.Matrix = positionOverride.Value.Transform.Matrix;
+                    if (matchingElement == null)
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        matchingElement.Transform.Matrix = positionOverride.Value.Transform.Matrix;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("failed to apply an override.");
+                    }
                 }
             }
         }

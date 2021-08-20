@@ -20,16 +20,13 @@ namespace SpacePlanningZones
 
             var modelDependencies = new Dictionary<string, Model> {
                 {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) },
-                {"Columns", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Columns/model.json")) },
                 {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Program Requirements/model.json")) },
                 {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) },
-                {"Walls", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Walls/model.json")) },
                 {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesAutoPlace/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) },
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.gltf", false);
-            // result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
+            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
             File.WriteAllText("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.json", result.Model.ToJson());
         }
 
@@ -37,18 +34,92 @@ namespace SpacePlanningZones
         {
             var inputText = @"
             {
-  ""Default Program Assignment"": ""unspecified"",
-  ""Circulation Mode"": ""Manual"",
+  ""Manual Split Locations"": [],
+  ""overrides"": {
+    ""Merge Zones"": [
+      {
+        ""identities"": [
+          {
+            ""ParentCentroid"": {
+              ""X"": 29.52518,
+              ""Y"": 13.759065,
+              ""Z"": 0
+            }
+          },
+          {
+            ""ParentCentroid"": {
+              ""X"": 31.007859999999997,
+              ""Y"": 20.100323333333332,
+              ""Z"": 0
+            }
+          }
+        ],
+        ""id"": ""101c2cd4-f518-4bc9-b8ea-ee09fec6cae6""
+      }
+    ]
+  },
+  ""Additional Corridor Locations"": [],
+  ""Automatically Place Program"": true,
+  ""Default Program Assignment"": ""Open Office"",
+  ""Circulation Mode"": ""Automatic"",
   ""Add Corridors"": {
     ""SplitLocations"": [
       {
         ""position"": {
-          ""X"": 55.51666815769246,
-          ""Y"": -6.454369903958041,
+          ""X"": 21.46320620661802,
+          ""Y"": 15.709143393859746,
           ""Z"": 0
         },
         ""direction"": {
           ""X"": 0,
+          ""Y"": 1,
+          ""Z"": 0
+        }
+      },
+      {
+        ""position"": {
+          ""X"": 5.570626202704158,
+          ""Y"": 17.71011583479078,
+          ""Z"": 0
+        },
+        ""direction"": {
+          ""X"": 1,
+          ""Y"": 0,
+          ""Z"": 0
+        }
+      },
+      {
+        ""position"": {
+          ""X"": 4.371203013517423,
+          ""Y"": 22.744352951614296,
+          ""Z"": 0
+        },
+        ""direction"": {
+          ""X"": -1,
+          ""Y"": 0,
+          ""Z"": 0
+        }
+      },
+      {
+        ""position"": {
+          ""X"": 30.337950846839163,
+          ""Y"": 26.968614831379895,
+          ""Z"": 0
+        },
+        ""direction"": {
+          ""X"": 0,
+          ""Y"": -1,
+          ""Z"": 0
+        }
+      },
+      {
+        ""position"": {
+          ""X"": 30.875107285697876,
+          ""Y"": 41.748860073234,
+          ""Z"": 0
+        },
+        ""direction"": {
+          ""X"": 3.190818968446706E-15,
           ""Y"": -1,
           ""Z"": 0
         }
@@ -60,109 +131,13 @@ namespace SpacePlanningZones
     ""SplitLocations"": [
       {
         ""position"": {
-          ""X"": 9.167585400976535,
-          ""Y"": -10.165420908993438,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 0,
-          ""Y"": 0.9999999999999999,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 36.635021496254076,
-          ""Y"": -5.697384637492724,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 0,
-          ""Y"": -1,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 45.71758703175919,
-          ""Y"": -5.3311521562221715,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 9.050898621512315E-15,
-          ""Y"": -1,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 28.431413915797847,
-          ""Y"": -10.238667405247547,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 1,
-          ""Y"": 0,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 63.95596459902346,
-          ""Y"": -10.238667405247547,
+          ""X"": 33.94056069076703,
+          ""Y"": 17.62039745976522,
           ""Z"": 0
         },
         ""direction"": {
           ""X"": 0,
           ""Y"": 1,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 75.23592502215075,
-          ""Y"": -10.311913901501656,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 1,
-          ""Y"": 7.116543398389285E-16,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": -3.6505514434863144,
-          ""Y"": -10.385160397755765,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": -1,
-          ""Y"": 0,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 48.09638498926673,
-          ""Y"": -10.176625751761762,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 1,
-          ""Y"": 9.029911085929328E-15,
-          ""Z"": 0
-        }
-      },
-      {
-        ""position"": {
-          ""X"": 57.67626017198953,
-          ""Y"": -10.124803581292477,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": 0.9999999999999999,
-          ""Y"": 0,
           ""Z"": 0
         }
       }
@@ -171,1068 +146,48 @@ namespace SpacePlanningZones
   ""Corridors"": [
     {
       ""width"": 1.5,
-      ""leftWidth"": 1.5,
-      ""flip"": true,
-      ""polyline"": {
-        ""Vertices"": [
-          {
-            ""X"": 67.09656470090712,
-            ""Y"": -17.32169663249726,
-            ""Z"": 0
-          },
-          {
-            ""X"": 72.73430924702193,
-            ""Y"": -17.32169663249726,
-            ""Z"": 0
-          },
-          {
-            ""X"": 72.73430924702193,
-            ""Y"": -3.0572993628729037,
-            ""Z"": 0
-          },
-          {
-            ""X"": 0.44590924702194457,
-            ""Y"": -3.0572993628729037,
-            ""Z"": 0
-          },
-          {
-            ""X"": 0.4459092470219414,
-            ""Y"": -17.293519720280145,
-            ""Z"": 0
-          },
-          {
-            ""X"": 2.664480059268834,
-            ""Y"": -17.293519720280145,
-            ""Z"": 0
-          }
-        ],
-        ""discriminator"": ""Elements.Geometry.Polyline""
-      }
-    },
-    {
-      ""width"": 1,
-      ""leftWidth"": 1,
-      ""flip"": true,
-      ""polyline"": {
-        ""Vertices"": [
-          {
-            ""X"": 33.25656,
-            ""Y"": -10.17663,
-            ""Z"": 0
-          },
-          {
-            ""X"": 54.76667,
-            ""Y"": -10.17663,
-            ""Z"": 0
-          },
-          {
-            ""X"": 71.23431,
-            ""Y"": -10.1248,
-            ""Z"": 0
-          }
-        ],
-        ""discriminator"": ""Elements.Geometry.Polyline""
-      }
-    },
-    {
-      ""width"": 1,
       ""flip"": false,
       ""polyline"": {
         ""Vertices"": [
           {
-            ""X"": 41.401515367650404,
-            ""Y"": -4.5573,
+            ""X"": -10.455778532593294,
+            ""Y"": 33.26173194251658,
             ""Z"": 0
           },
           {
-            ""X"": 41.44639024141817,
-            ""Y"": -9.17663,
+            ""X"": -17.933014337764224,
+            ""Y"": 33.26173194251658,
+            ""Z"": 0
+          },
+          {
+            ""X"": -17.806636666666666,
+            ""Y"": 18.935760836919517,
+            ""Z"": 0
+          },
+          {
+            ""X"": -10.455778532593294,
+            ""Y"": 19.000607005092355,
+            ""Z"": 0
+          },
+          {
+            ""X"": -10.449406356201136,
+            ""Y"": 33.31511610387172,
             ""Z"": 0
           }
         ],
         ""discriminator"": ""Elements.Geometry.Polyline""
       },
-      ""rightWidth"": 1
-    },
-    {
-      ""width"": 1.5,
-      ""leftWidth"": 1.5,
-      ""flip"": true,
-      ""polyline"": {
-        ""Vertices"": [
-          {
-            ""X"": 33.72998040056579,
-            ""Y"": -14.47689663249724,
-            ""Z"": 0
-          },
-          {
-            ""X"": 33.72998040056579,
-            ""Y"": -3.0573,
-            ""Z"": 0
-          }
-        ],
-        ""discriminator"": ""Elements.Geometry.Polyline""
-      }
+      ""rightWidth"": 1.5
     }
   ],
   ""Corridor Width"": 1.5,
-  ""Outer Band Depth"": 6,
-  ""Manual Split Locations"": [],
+  ""Outer Band Depth"": 8.02,
   ""model_input_keys"": {
-    ""Levels"": ""c8507813-2b5b-42de-96d8-ae1471079c98_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Columns"": ""0bfa3402-64bc-4fc0-a75c-70aa070634e0_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip"",
-    ""Program Requirements"": ""c0559344-d1a9-4029-991e-2e2264c8a845_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
-    ""Floors"": ""0bfa3402-64bc-4fc0-a75c-70aa070634e0_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip"",
-    ""Walls"": ""0bfa3402-64bc-4fc0-a75c-70aa070634e0_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip"",
-    ""Core"": ""2cb8c2ed-ad26-4119-8832-ed84b4b04a60_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
-  },
-  ""overrides"": {
-    ""Program Assignments"": [
-      {
-        ""value"": {
-          ""Id"": ""7f5a26a3-e8a7-4368-aa2d-2a2f6820ac07"",
-          ""Program Type"": ""Open Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 31.875465,
-            ""Y"": -7.397985,
-            ""Z"": 0
-          },
-          ""AlignmentEdge"": null,
-          ""IndividualCentroid"": {
-            ""X"": 31.875465,
-            ""Y"": -7.397985,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""9604e053-1b65-4dc1-beac-f71940f2dfd3"",
-            ""discriminator"": ""Elements.Geometry.Profile"",
-            ""Name"": null
-          }
-        },
-        ""id"": ""135d9852-dff0-4c1a-b150-62b06c44ec3b""
-      },
-      {
-        ""value"": {
-          ""Id"": ""240dbd06-0308-416d-9d96-5bd871ceb560"",
-          ""Program Type"": ""Open Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 32.56137,
-            ""Y"": -13.353466666666668,
-            ""Z"": 0
-          },
-          ""AlignmentEdge"": null,
-          ""IndividualCentroid"": {
-            ""X"": 32.56137,
-            ""Y"": -13.353466666666668,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.93318,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.93318,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""34a283f7-e031-4dd1-b1e6-afd15d69fafc"",
-            ""discriminator"": ""Elements.Geometry.Profile"",
-            ""Name"": null
-          }
-        },
-        ""id"": ""3786c308-e29e-4b48-a803-7ca3e99b1f7b""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Id"": ""7e6f065a-c0be-4f93-8f8e-88a2abbaa51d"",
-          ""Program Type"": ""Private Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 51.638413333333325,
-            ""Y"": -13.414273333333332,
-            ""Z"": 0
-          },
-          ""AlignmentEdge"": null,
-          ""IndividualCentroid"": {
-            ""X"": 51.638413333333325,
-            ""Y"": -13.414273333333332,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 54.43098,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.76667,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.76667,
-                  ""Y"": -10.17663,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 45.71759,
-                  ""Y"": -10.17663,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 45.71759,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.43098,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""60dc3dc3-7455-45dd-be91-18522e89c5fc"",
-            ""discriminator"": ""Elements.Geometry.Profile"",
-            ""Name"": null
-          }
-        },
-        ""id"": ""985182a0-9999-4c76-8940-69477e7710da""
-      },
-      {
-        ""value"": {
-          ""Id"": ""e6940fd3-c7c4-43bd-b566-e2afcebf4d5b"",
-          ""Program Type"": ""Private Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 41.176305,
-            ""Y"": -12.893350000000002,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 41.176305,
-            ""Y"": -12.893350000000002,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 45.71759,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 36.63502,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 45.71759,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""5adfd5e8-4526-4a5d-bcca-7e3154aced94"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""f6de8724-364b-469f-943b-084b90fc88b9""
-      },
-      {
-        ""value"": {
-          ""Id"": ""39ce1435-f8c2-4c9d-a7e0-a02fc1bc657f"",
-          ""Program Type"": ""Private Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 58.42104333333333,
-            ""Y"": -13.45573,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 58.42104333333333,
-            ""Y"": -13.45573,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.8734,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.8734,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 56.43377,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 56.43377,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""b757fc97-373f-4259-91d1-43a28cadacbf"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""4680f2f1-4fa8-4396-ab2e-1a97834ec7bc""
-      },
-      {
-        ""value"": {
-          ""Id"": ""412853a6-22a3-4800-9546-724cf04f0436"",
-          ""Program Type"": ""Reception""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 67.595135,
-            ""Y"": -12.924515,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 67.595135,
-            ""Y"": -12.924515,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 71.23431,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 71.23431,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""f0c9ea8d-b335-4873-b0a4-c2eb73f8fe54"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""1cbc05b9-cf7e-4d97-b263-55fefda5163d""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Open Office"",
-          ""Id"": ""8c2c9f17-de13-43a0-9649-a60da37720eb""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 36.590109999999996,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 36.590109999999996,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 72.73431,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 72.73431,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""15c2fd4b-9674-45b3-aec5-03a9eb53b135"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""66c741f2-60ff-49b1-8b2a-450ebd37300a""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Open Office"",
-          ""Id"": ""a69caced-9c03-4053-97bc-f44589faabbc""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": -4.5746150000000005,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": -4.5746150000000005,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 0.44591,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""a9a3908b-64f3-4b25-ac94-e55ad9e7d06b"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""0673fc0d-fe5e-41fb-b482-0d19cc1fcf79""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Open Office"",
-          ""Id"": ""e63aae36-23e2-430d-9cc6-216d73f0dc8d""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 77.72649999999999,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 77.72649999999999,
-            ""Y"": 1.1923000000000004,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 82.71869,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 72.73431,
-                  ""Y"": 5.4419,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 72.73431,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 82.71869,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""a179024d-e744-4173-a091-5294f630c5b8"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""63b6fb17-4d23-4a60-a782-0f11a85c1309""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Open Office"",
-          ""Id"": ""5ab65e51-465e-4961-8ac0-d583db3f073a""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 71.31298666666667,
-            ""Y"": -20.757373333333334,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 71.31298666666667,
-            ""Y"": -20.757373333333334,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 82.71869,
-                  ""Y"": -17.3217,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 67.09656,
-                  ""Y"": -17.3217,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 67.09656,
-                  ""Y"": -17.5249,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 64.12371,
-                  ""Y"": -17.5249,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 64.12371,
-                  ""Y"": -27.42552,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 82.71869,
-                  ""Y"": -27.42552,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""95d20912-353b-461f-8184-8b15185809d4"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""a390ecae-d54e-4617-b23a-345303f1183d""
-      },
-      {
-        ""value"": {
-          ""Id"": ""c713beb0-bc4a-4fd7-a752-e542511339aa"",
-          ""Program Type"": ""Meeting Room""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 22.640140000000002,
-            ""Y"": -7.334995,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 22.640140000000002,
-            ""Y"": -7.334995,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 18.16437,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 18.16437,
-                  ""Y"": -10.11269,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -10.11269,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""517a6fd6-9747-46b8-bca5-0257d3833a62"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""4fcaabb5-7dc6-47eb-b591-cf45c4df6371""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Reception"",
-          ""Id"": ""211c37f0-8052-4b41-80fc-8308bf2f5e7d""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 29.672945,
-            ""Y"": -7.334995,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 29.672945,
-            ""Y"": -7.334995,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 32.22998,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -4.5573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -10.11269,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 32.22998,
-                  ""Y"": -10.11269,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""434a7e7b-bbf5-42fd-9bc9-3d166c3e2572"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""8d5c3b3b-c1b5-45d2-b65f-828de43f10e0""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Lounge"",
-          ""Id"": ""67e6f713-a99e-41e4-b7db-31ad633a044a""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 30.161690000000004,
-            ""Y"": -13.353466666666668,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 30.161690000000004,
-            ""Y"": -13.353466666666668,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 31.13918,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 32.22998,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 32.22998,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -10.23867,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 27.11591,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 31.13918,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""f9d0b24d-6f3f-4080-9cd0-150459538cd4"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""9f630018-aea6-4ad8-9bc2-a3b9a57afa84""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Private Office"",
-          ""Id"": ""9bdc165e-22bf-4d99-b87a-77bc00d2bbcb""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 49.06676454545454,
-            ""Y"": -13.672860909090911,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": 49.06676454545454,
-            ""Y"": -13.672860909090911,
-            ""Z"": 0
-          },
-          ""AlignmentEdge"": null,
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -10.14771,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.76667,
-                  ""Y"": -10.17663,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.72998,
-                  ""Y"": -10.17663,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.72998,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.93318,
-                  ""Y"": -14.2737,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 33.93318,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.43098,
-                  ""Y"": -15.54803,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 54.43098,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 56.43377,
-                  ""Y"": -14.51816,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 56.43377,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 63.95596,
-                  ""Y"": -15.61036,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""53e8d7ff-dbf2-49d8-8f93-24509eb5434c"",
-            ""discriminator"": ""Elements.Geometry.Profile"",
-            ""Name"": null
-          }
-        },
-        ""id"": ""d0f13df8-8b47-4265-9e0a-2f64702c0a1c""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Open Office"",
-          ""Id"": ""6907b5a7-9a27-46bb-94e1-49547b8fe8e3""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": -2.775114285714286,
-            ""Y"": -19.661674285714287,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": -2.775114285714286,
-            ""Y"": -19.661674285714287,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": -0.27152,
-                  ""Y"": -27.42332,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -0.3811,
-                  ""Y"": -17.29352,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -17.29352,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -10.38516,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": -10.38516,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": -27.42552,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -0.47472,
-                  ""Y"": -27.42552,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""ae7baa5f-db6c-4975-b4c0-45c27a6ea7ad"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""b375f3f0-32ee-4249-8eda-f00962e54fd5""
-      },
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Id"": ""fdd3e9e5-e45e-431f-8510-0e4d8b62a922"",
-          ""Program Type"": ""Meeting Room""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": -4.5746150000000005,
-            ""Y"": -6.72123,
-            ""Z"": 0
-          },
-          ""IndividualCentroid"": {
-            ""X"": -4.5746150000000005,
-            ""Y"": -6.72123,
-            ""Z"": 0
-          },
-          ""AutoPlaced"": false,
-          ""Boundary"": {
-            ""Voids"": [],
-            ""Perimeter"": {
-              ""discriminator"": ""Elements.Geometry.Polygon"",
-              ""Vertices"": [
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": -3.0573,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": -9.59514,
-                  ""Y"": -10.38516,
-                  ""Z"": 0
-                },
-                {
-                  ""X"": 0.44591,
-                  ""Y"": -10.38516,
-                  ""Z"": 0
-                }
-              ]
-            },
-            ""Id"": ""a7fabb6d-3927-4410-87e6-060e1d2c78d8"",
-            ""AdditionalProperties"": null,
-            ""Name"": null,
-            ""discriminator"": ""Elements.Geometry.Profile""
-          }
-        },
-        ""id"": ""5fa29075-e27e-4c24-8a95-b9fb8d0a75d3""
-      }
-    ]
-  },
-  ""Additional Corridor Locations"": []
+    ""Levels"": ""efb4a51c-b972-4139-8bd6-144020a22d8d_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Program Requirements"": ""680925ee-38bf-484f-9478-a87086e121ee_ac2d042f-ede8-4f11-9d6e-ae3ffe849e81_elements.zip"",
+    ""Floors"": ""9bc9e634-cbf2-4fb0-bff8-8720386c02d9_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip"",
+    ""Core"": ""9bc9e634-cbf2-4fb0-bff8-8720386c02d9_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip""
+  }
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesInputs>(inputText);

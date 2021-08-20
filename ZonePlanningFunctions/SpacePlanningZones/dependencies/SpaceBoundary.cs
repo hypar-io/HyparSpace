@@ -26,6 +26,8 @@ namespace Elements
 
         public bool AutoPlaced { get; set; } = false;
 
+        public int CountPlaced { get; set; } = 0;
+
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements Level { get; set; }
 

@@ -24,21 +24,16 @@
   ],
   "overrides": {
     "Furniture Locations": {
-      "context": "[*discriminator=Elements.PointTranslation]",
+      "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {
           "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
         }
       },
-      "paradigm": "edit",
       "schema": {
-        "Location": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        "Transform": {
+          "$ref": "https://prod-api.hypar.io/schemas/Transform"
         }
-      },
-      "verbs": {
-        "edit": null,
-        "revert": null
       }
     }
   },

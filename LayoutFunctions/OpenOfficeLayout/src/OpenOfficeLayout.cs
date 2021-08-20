@@ -40,10 +40,10 @@ namespace OpenOfficeLayout
             var overridesByCentroid = new Dictionary<Guid, SpaceSettingsOverride>();
             foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
             {
-                var matchingBoundary = levels.SelectMany(l => l.Elements).OfType<SpaceBoundary>().OrderBy(ob => ((JObject)ob.AdditionalProperties["ParentCentroid"]).ToObject<Vector3>().DistanceTo(spaceOverride.Identity.ParentCentroid)).First();
+                var matchingBoundary = levels.SelectMany(l => l.Elements).OfType<SpaceBoundary>().OrderBy(ob => ob.ParentCentroid.Value.DistanceTo(spaceOverride.Identity.ParentCentroid)).First();
                 if (overridesByCentroid.ContainsKey(matchingBoundary.Id))
                 {
-                    var mbCentroid = ((JObject)matchingBoundary.AdditionalProperties["ParentCentroid"]).ToObject<Vector3>();
+                    var mbCentroid = matchingBoundary.ParentCentroid.Value;
                     if (overridesByCentroid[matchingBoundary.Id].Identity.ParentCentroid.DistanceTo(mbCentroid) > spaceOverride.Identity.ParentCentroid.DistanceTo(mbCentroid))
                     {
                         overridesByCentroid[matchingBoundary.Id] = spaceOverride;
@@ -64,7 +64,7 @@ namespace OpenOfficeLayout
                 {
                     // create a boundary we can use to override individual groups of desks. It's sunk slightly so that, if floors are on, you don't see it. 
                     var overridableBoundary = new SpaceBoundary(ob.Boundary, ob.Cells, ob.Area, ob.Transform.Concatenated(new Transform(0, 0, -0.05)), ob.Material, new Representation(new[] { new Lamina(ob.Boundary.Perimeter, false) }), false, Guid.NewGuid(), "DeskArea");
-                    overridableBoundary.AdditionalProperties.Add("ParentCentroid", (ob.AdditionalProperties["ParentCentroid"] as JObject).ToObject<Vector3>());
+                    overridableBoundary.ParentCentroid = ob.ParentCentroid;
                     overridableBoundary.AdditionalProperties.Add("Desk Type", Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType));
                     overridableBoundary.AdditionalProperties.Add("Integrated Collaboration Space Density", input.IntegratedCollaborationSpaceDensity);
                     overridableBoundary.AdditionalProperties.Add("Grid Rotation", input.GridRotation);

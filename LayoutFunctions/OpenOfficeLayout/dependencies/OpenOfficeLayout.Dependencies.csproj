@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />

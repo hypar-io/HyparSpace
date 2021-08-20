@@ -202,15 +202,15 @@ namespace PrivateOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public FurnitureLocationsValue(Vector3 @location)
+        public FurnitureLocationsValue(Transform @transform)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<FurnitureLocationsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @location});
+                validator.PreConstruct(new object[]{ @transform});
             }
         
-            this.Location = @location;
+            this.Transform = @transform;
         
             if(validator != null)
             {
@@ -218,8 +218,8 @@ namespace PrivateOfficeLayout
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Location", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 Location { get; set; }
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Transform Transform { get; set; }
     
     
     }

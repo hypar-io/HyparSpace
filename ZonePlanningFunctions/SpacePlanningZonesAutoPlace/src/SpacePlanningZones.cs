@@ -2,6 +2,7 @@ using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using Elements.Spatial;
+using Hypar.Optimization;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -471,6 +472,8 @@ namespace SpacePlanningZones
         private static void AutoLayoutProgram(List<SpaceBoundary> allSpaceBoundaries, IEnumerable<ProgramRequirement> programReqs, IEnumerable<ProgramAdjacencyMatrix> adjacencies, string defaultAssignment, Model model = null)
         {
             var boundaries = new List<SpaceBoundary>();
+            var availableBuckets = new List<GroupBucket>();
+            // calculate existing boundary properties
             foreach (var boundary in allSpaceBoundaries.Where(sb => sb.ProgramName == "unspecified" || sb.ProgramName == defaultAssignment))
             {
                 var adjacentEdges = boundary.AdjacentCorridorEdges;
@@ -502,7 +505,14 @@ namespace SpacePlanningZones
                 boundary.FromAlignmentEdge.Invert();
                 boundary.AlignmentEdge = new Line(new Vector3(0, 0), new Vector3(length, 0)).TransformedLine(boundary.FromAlignmentEdge);
                 boundaries.Add(boundary);
+                availableBuckets.Add(new GroupBucket
+                {
+                    AvailableSpace = boundary.Length.Value,
+                    Depth = boundary.Depth.Value
+                });
             }
+
+
 
             // just a preview arranging all the spaces with corridor edge along the x axis, for
             // debugging purposes
@@ -548,6 +558,17 @@ namespace SpacePlanningZones
                 }
             }
             var minDimTolerance = 1.1; // allow spaces that are *slightly* too small for the program size.
+
+
+
+            // var buckets =
+
+            // var optimizationProblem = new OptimizationInputData
+            // {
+            //     Paradigm = Paradigm.GroupStacking,
+
+            // };
+
 
             foreach (var req in programReqs.OrderByDescending(r => r.Depth))
             {

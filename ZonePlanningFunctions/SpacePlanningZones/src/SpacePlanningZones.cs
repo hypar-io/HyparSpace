@@ -331,22 +331,22 @@ namespace SpacePlanningZones
 
                 // These are the new, correct methods using the split inputs: 
                 //Manual Corridor Splits
-                foreach (var pt in input.AddCorridors.SplitLocations)
-                {
-                    SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
-                }
-                // SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
+                // foreach (var pt in input.AddCorridors.SplitLocations)
+                // {
+                //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
+                // }
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
 
                 //Create snapping geometry for splits
                 CreateSnappingGeometry(output, spaceBoundaries, "splits");
 
 
                 // Manual Split Locations
-                foreach (var pt in input.SplitZones.SplitLocations)
-                {
-                    SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
-                }
-                // SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.SplitZones.SplitLocations, false, output.Model);
+                // foreach (var pt in input.SplitZones.SplitLocations)
+                // {
+                //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
+                // }
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.SplitZones.SplitLocations, false, output.Model);
 
 
                 // These are the old style methods, just left in place for backwards compatibility. 
