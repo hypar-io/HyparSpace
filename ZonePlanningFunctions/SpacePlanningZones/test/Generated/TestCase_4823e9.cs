@@ -25,6 +25,7 @@ namespace SpacePlanningZones
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
+            result.Model.AddCurvesForSpaceBoundaries();
             result.Model.ToGlTF("../../../Generated/results/TestCase_4823e9.glb");
             File.WriteAllText("../../../Generated/results/TestCase_4823e9.json", result.Model.ToJson());
         }

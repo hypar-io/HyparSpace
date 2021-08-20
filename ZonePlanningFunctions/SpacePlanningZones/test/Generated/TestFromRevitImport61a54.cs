@@ -26,6 +26,7 @@ namespace SpacePlanningZones
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
+            result.Model.AddCurvesForSpaceBoundaries();
             result.Model.ToGlTF("../../../Generated/results/TestFromRevitImport61a54.glb");
             File.WriteAllText("../../../Generated/results/TestFromRevitImport61a54.json", result.Model.ToJson());
         }

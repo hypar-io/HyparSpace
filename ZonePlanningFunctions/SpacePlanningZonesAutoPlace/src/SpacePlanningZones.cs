@@ -505,11 +505,11 @@ namespace SpacePlanningZones
                 boundary.FromAlignmentEdge.Invert();
                 boundary.AlignmentEdge = new Line(new Vector3(0, 0), new Vector3(length, 0)).TransformedLine(boundary.FromAlignmentEdge);
                 boundaries.Add(boundary);
-                availableBuckets.Add(new GroupBucket
-                {
-                    AvailableSpace = boundary.Length.Value,
-                    Depth = boundary.Depth.Value
-                });
+                // availableBuckets.Add(new GroupBucket
+                // {
+                //     AvailableSpace = boundary.Length.Value,
+                //     Depth = boundary.Depth.Value
+                // });
             }
 
 
@@ -695,7 +695,10 @@ namespace SpacePlanningZones
                 {
                     if (remainingSpace.Perimeter.Vertices.Any(v => v.DistanceTo(levelBoundary.Perimeter) < 0.1))
                     {
+
                         var linearZones = thickerOffsetProfiles == null ? new List<Profile> { remainingSpace } : Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
+                        var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
+
                         foreach (var linearZone in linearZones)
                         {
                             // spaceCandidates.Add(linearZone);
@@ -708,7 +711,6 @@ namespace SpacePlanningZones
                                 var extended = l.ExtendToWithEndInfo(linearZone.Segments(), double.MaxValue, out var dirAtStart, out var dirAtEnd);
                                 var endDistance = extended.End.DistanceTo(l.End);
                                 var startDistance = extended.Start.DistanceTo(l.Start);
-                                var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
                                 var startDot = Math.Abs(dirAtStart.Dot(l.Direction()));
                                 var endDot = Math.Abs(dirAtEnd.Dot(l.Direction()));
                                 var minAngleTolerance = 0.2;

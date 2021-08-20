@@ -623,7 +623,8 @@ namespace SpacePlanningZones
                         var linearZones = thickerOffsetProfiles == null ? new List<Profile> { remainingSpace } : Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
                         var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
 
-                        // these zones are long, skinny, and at the edge of the floorplate, typically, and try to split them at their corners, so we don't
+                        // these zones are long, skinny, and at the edge of the floorplate, typically, 
+                        // so we try to split them at their corners, so we don't
                         // have linear zones wrapping a corner.
 
                         foreach (var linearZone in linearZones)
@@ -637,9 +638,21 @@ namespace SpacePlanningZones
                                 {
                                     // extend a line
                                     var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
-                                    var extended = l.ExtendTo(linearZone);
+                                    var extended = l.ExtendToWithEndInfo(linearZone.Segments(), double.MaxValue, out var dirAtStart, out var dirAtEnd);
+
+                                    // check distance extended
                                     var endDistance = extended.End.DistanceTo(l.End);
                                     var startDistance = extended.Start.DistanceTo(l.Start);
+
+                                    // check the angle of the other lines we hit. we only want to extend if we have something close to a right angle. 
+                                    var startDot = Math.Abs(dirAtStart.Dot(l.Direction()));
+                                    var endDot = Math.Abs(dirAtEnd.Dot(l.Direction()));
+                                    var minAngleTolerance = 0.2;
+                                    var maxAngleTolerance = 0.8;
+                                    var startAngleValid = (startDot < minAngleTolerance || startDot > maxAngleTolerance);
+                                    var endAngleValid = (endDot < minAngleTolerance || endDot > maxAngleTolerance);
+
+
                                     // if it went a reasonable amount — more than 0.1 and less than maxExtension
                                     // add it to our split candidates
                                     if (startDistance > 0.1 && startDistance < maxExtension)
@@ -917,7 +930,16 @@ namespace SpacePlanningZones
                 else
                 {
                     var extensionsAsPolylines = extensions.Select(e => e.ToPolyline(1));
-                    newSbs = Profile.Split(new[] { containingBoundary.Boundary }, extensionsAsPolylines, Vector3.EPSILON);
+                    try
+                    {
+
+                        newSbs = Profile.Split(new[] { containingBoundary.Boundary }, extensionsAsPolylines, Vector3.EPSILON);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("A split failed.");
+                        newSbs = new[] { containingBoundary.Boundary }.ToList();
+                    }
                 }
                 spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
             }
@@ -946,6 +968,82 @@ namespace SpacePlanningZones
             var rotation = new Transform();
             rotation.Rotate(dominantAngle);
             return rotation.OfVector(refVec);
+        }
+
+        /// <summary>
+        /// A modified version of Line.ExtendTo that provides information about the direction of the lines that were extended to.
+        /// </summary>
+        public static Line ExtendToWithEndInfo(this Line line, IEnumerable<Line> otherLines, double maxDistance, out Vector3 dirAtStart, out Vector3 dirAtEnd, bool bothSides = true, bool extendToFurthest = false, double tolerance = Vector3.EPSILON)
+        {
+            // this test line — inset slightly from the line — helps treat the ends as valid intersection points, to prevent
+            // extension beyond an immediate intersection.
+            var testLine = new Line(line.PointAt(0.001), line.PointAt(0.999));
+            var intersectionsForLine = new List<(Vector3 pt, Vector3 dir)>();
+            foreach (var segment in otherLines)
+            {
+                bool pointAdded = false;
+                // Special case for parallel + collinear lines:
+                // ____   |__________
+                // We want to extend only to the first corner of the other lines,
+                // not all the way through to the other end
+                if (segment.Direction().IsParallelTo(testLine.Direction(), tolerance) && // if the two lines are parallel
+                    (new[] { segment.End, segment.Start, testLine.Start, testLine.End }).AreCollinear())// and collinear
+                {
+                    if (!line.PointOnLine(segment.End, true))
+                    {
+                        intersectionsForLine.Add((segment.End, segment.Direction()));
+                        pointAdded = true;
+                    }
+
+                    if (!line.PointOnLine(segment.Start, true))
+                    {
+                        intersectionsForLine.Add((segment.Start, segment.Direction()));
+                        pointAdded = true;
+                    }
+                }
+                if (extendToFurthest || !pointAdded)
+                {
+                    var intersects = testLine.Intersects(segment, out Vector3 intersection, true, true);
+
+                    // if the intersection lies on the obstruction, but is beyond the segment, we collect it
+                    if (segment.PointOnLine(intersection, true) && !testLine.PointOnLine(intersection, true))
+                    {
+                        intersectionsForLine.Add((intersection, segment.Direction()));
+                    }
+                }
+            }
+
+            var dir = line.Direction();
+            var intersectionsOrdered = intersectionsForLine.OrderBy(i => (testLine.Start - i.pt).Dot(dir));
+
+            var start = line.Start;
+            var end = line.End;
+            dirAtStart = line.Direction();
+            dirAtEnd = line.Direction();
+
+            var startCandidates = intersectionsOrdered
+                    .Where(i => (testLine.Start - i.pt).Dot(dir) > 0);
+
+            var endCandidates = intersectionsOrdered
+                .Where(i => (testLine.Start - i.pt).Dot(dir) < testLine.Length() * -1)
+                .Reverse();
+
+            ((Vector3 pt, Vector3 dir) Start, (Vector3 pt, Vector3 dir) End) startEndCandidates = extendToFurthest ?
+                (startCandidates.LastOrDefault(p => p.pt.DistanceTo(start) < maxDistance), endCandidates.LastOrDefault(p => p.pt.DistanceTo(end) < maxDistance)) :
+                (startCandidates.FirstOrDefault(p => p.pt.DistanceTo(start) < maxDistance), endCandidates.FirstOrDefault(p => p.pt.DistanceTo(end) < maxDistance));
+
+            if (bothSides && startEndCandidates.Start != default((Vector3 pt, Vector3 dir)))
+            {
+                start = startEndCandidates.Start.pt;
+                dirAtStart = startEndCandidates.Start.dir;
+            }
+            if (startEndCandidates.End != default((Vector3 pt, Vector3 dir)))
+            {
+                end = startEndCandidates.End.pt;
+                dirAtEnd = startEndCandidates.End.dir;
+            }
+
+            return new Line(start, end);
         }
     }
 }
