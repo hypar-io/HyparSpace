@@ -319,7 +319,7 @@ namespace SpacePlanningZones
                 }
 
                 // Generate space boundaries from level boundary and corridor locations
-                SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, input, lvl, corridorProfiles, levelBoundary, thickerOffsetProfiles);
+                SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, input, lvl, corridorProfiles, levelBoundary, thickerOffsetProfiles, angleCheckForWallExtensions: walls != null && walls.Count() > 0);
 
                 // Construct LevelElements to contain space boundaries
                 var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
