@@ -4,6 +4,7 @@ using Elements.Geometry.Solids;
 using Elements.Spatial;
 using Hypar.Optimization;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -331,7 +332,7 @@ namespace SpacePlanningZones
             Dictionary<string, AreaTally> areas = new Dictionary<string, AreaTally>();
 
             // AutoLayout
-            if (hasProgramRequirements)
+            if (hasProgramRequirements && input.AutomaticallyPlaceProgram)
             {
                 foreach (var req in programReqs)
                 {
@@ -345,6 +346,7 @@ namespace SpacePlanningZones
                     }
                 }
                 AutoLayoutProgram(allSpaceBoundaries, programReqs, adjacencies, input.DefaultProgramAssignment, output.Model);
+
             }
 
 
@@ -472,7 +474,7 @@ namespace SpacePlanningZones
         private static void AutoLayoutProgram(List<SpaceBoundary> allSpaceBoundaries, IEnumerable<ProgramRequirement> programReqs, IEnumerable<ProgramAdjacencyMatrix> adjacencies, string defaultAssignment, Model model = null)
         {
             var boundaries = new List<SpaceBoundary>();
-            var availableBuckets = new List<GroupBucket>();
+
             // calculate existing boundary properties
             foreach (var boundary in allSpaceBoundaries.Where(sb => sb.ProgramName == "unspecified" || sb.ProgramName == defaultAssignment))
             {
@@ -505,14 +507,11 @@ namespace SpacePlanningZones
                 boundary.FromAlignmentEdge.Invert();
                 boundary.AlignmentEdge = new Line(new Vector3(0, 0), new Vector3(length, 0)).TransformedLine(boundary.FromAlignmentEdge);
                 boundaries.Add(boundary);
-                // availableBuckets.Add(new GroupBucket
-                // {
-                //     AvailableSpace = boundary.Length.Value,
-                //     Depth = boundary.Depth.Value
-                // });
             }
-
-
+            if (programReqs == null || programReqs.Count() == 0)
+            {
+                return;
+            }
 
             // just a preview arranging all the spaces with corridor edge along the x axis, for
             // debugging purposes
@@ -530,7 +529,7 @@ namespace SpacePlanningZones
             // make sure all reqs have depth and width
             foreach (var req in programReqs)
             {
-                if (req.HyparSpaceType == "Circulation")
+                if (req.HyparSpaceType == "Circulation" || req.HyparSpaceType == defaultAssignment)
                 {
                     continue;
                 }
@@ -559,30 +558,59 @@ namespace SpacePlanningZones
             }
             var minDimTolerance = 1.1; // allow spaces that are *slightly* too small for the program size.
 
+            var optimizationRequest = new OptimizationInputData();
+            optimizationRequest.Paradigm = Paradigm.Bucketing;
+            var fitObjective = new FitObjective();
+            optimizationRequest.Objectives.Add(fitObjective);
 
+            var reqsAsList = new List<ProgramRequirement>();
 
-            // var buckets =
-
-            // var optimizationProblem = new OptimizationInputData
-            // {
-            //     Paradigm = Paradigm.GroupStacking,
-
-            // };
-
-
-            foreach (var req in programReqs.OrderByDescending(r => r.Depth))
+            foreach (var boundary in boundaries)
             {
-                var remainingToPlace = req.RemainingToPlace;
-                for (int i = 0; i < remainingToPlace; i++)
+                optimizationRequest.Buckets.Add(new Bucket { Size = boundary.Length.Value });
+                fitObjective.BucketValues.Add(boundary.Depth.Value);
+            }
+            foreach (var req in programReqs)
+            {
+                if (req.Width.HasValue && req.Depth.HasValue)
                 {
-                    var candidateSpaces = boundaries.Where(b => b.Depth * minDimTolerance > req.Depth && b.AvailableLength * minDimTolerance > req.Width).OrderBy(b => Math.Abs(b.Depth.Value - req.Depth.Value));
-
-                    if (candidateSpaces.Count() > 0)
+                    for (int i = 0; i < req.SpaceCount; i++)
                     {
-                        candidateSpaces.First().Collect(req);
+                        reqsAsList.Add(req);
+                        optimizationRequest.BucketItems.Add(new BucketItem { Size = req.Width.Value });
+                        fitObjective.BucketItemTargets.Add(req.Depth.Value);
                     }
                 }
             }
+
+            var url = "https://ah-sand.api.hypar.io/optimize";
+            var result = OptimizationRequest.GetResult<BucketingResultData>(optimizationRequest, url);
+
+            var bestResult = result.Results.First();
+            for (int i = 0; i < bestResult.Result.Count; i++)
+            {
+                var boundary = boundaries[i];
+                List<int> bucketResult = bestResult.Result[i];
+                foreach (var j in bucketResult)
+                {
+                    var spaceToPlace = reqsAsList[j];
+                    boundary.Collect(spaceToPlace);
+                }
+            }
+
+            // foreach (var req in programReqs.OrderByDescending(r => r.Depth))
+            // {
+            //     var remainingToPlace = req.RemainingToPlace;
+            //     for (int i = 0; i < remainingToPlace; i++)
+            //     {
+            //         var candidateSpaces = boundaries.Where(b => b.Depth * minDimTolerance > req.Depth && b.AvailableLength * minDimTolerance > req.Width).OrderBy(b => Math.Abs(b.Depth.Value - req.Depth.Value));
+
+            //         if (candidateSpaces.Count() > 0)
+            //         {
+            //             candidateSpaces.First().Collect(req);
+            //         }
+            //     }
+            // }
             foreach (var boundary in boundaries)
             {
                 if (boundary.CollectedSpaces.Count > 0)

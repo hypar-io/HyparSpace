@@ -608,7 +608,7 @@ namespace SpacePlanningZones
             }
         }
 
-        private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null)
+        private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null, bool angleCheckForWallExtensions = false)
         {
             // subtract corridors from level boundary
             var remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
@@ -655,12 +655,12 @@ namespace SpacePlanningZones
 
                                     // if it went a reasonable amount — more than 0.1 and less than maxExtension
                                     // add it to our split candidates
-                                    if (startDistance > 0.1 && startDistance < maxExtension)
+                                    if (startDistance > 0.1 && startDistance < maxExtension && (!angleCheckForWallExtensions || startAngleValid))
                                     {
                                         var startLine = new Line(extended.Start, line.Start);
                                         segmentsExtended.Add(startLine.ToPolyline(1));
                                     }
-                                    if (endDistance > 0.1 && endDistance < maxExtension)
+                                    if (endDistance > 0.1 && endDistance < maxExtension && (!angleCheckForWallExtensions || endAngleValid))
                                     {
                                         var endLine = new Line(extended.End, line.End);
                                         segmentsExtended.Add(endLine.ToPolyline(1));
@@ -909,7 +909,8 @@ namespace SpacePlanningZones
                     {
                         line = new Line(pt.Position, pt.Position + pt.Direction * 0.1);
                     }
-                    var extension = line.ExtendTo(containingBoundary.Boundary);
+                    var extension = line.ExtendTo(containingBoundary.Boundary.Segments().Union(extensions));
+                    // var extension = line.ExtendTo(containingBoundary.Boundary);
                     extensions.Add(extension);
                 }
                 List<Profile> newSbs = new List<Profile>();
