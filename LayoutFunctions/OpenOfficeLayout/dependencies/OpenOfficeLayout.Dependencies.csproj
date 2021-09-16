@@ -5,16 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.3-alpha.12" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
   </ItemGroup>
 
 </Project>

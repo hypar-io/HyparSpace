@@ -8,6 +8,7 @@ using Xunit;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
+using System;
 
 namespace OpenOfficeLayout
 {
@@ -19,8 +20,12 @@ namespace OpenOfficeLayout
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> {
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/model.json"), out var errors, true) },
             };
+            foreach (var err in errors)
+            {
+                Console.WriteLine(err);
+            }
 
             var result = OpenOfficeLayout.Execute(modelDependencies, input);
             result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.glb");
@@ -34,46 +39,9 @@ namespace OpenOfficeLayout
   ""Grid Rotation"": 0,
   ""Integrated Collaboration Space Density"": 0.2,
   ""model_input_keys"": {
-    ""Space Planning Zones"": ""c50a89b7-391c-439d-bb18-c1fbdca0b7ba_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
+    ""Space Planning Zones"": ""de407f09-55d2-41ed-afcf-c11af62beaf5_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
   },
-  ""Desk Type"": ""Simple Desk - 30x60"",
-  ""overrides"": {
-    ""Furniture Locations"": [
-      {
-        ""value"": {
-          ""Location"": {
-            ""X"": -7.967484813029899,
-            ""Y"": -8.146985335270632,
-            ""Z"": 12.3
-          }
-        },
-        ""identity"": {},
-        ""id"": ""61022f82-a146-4564-bab4-e568429427ac""
-      },
-      {
-        ""value"": {
-          ""Location"": {
-            ""X"": -8.034488492447409,
-            ""Y"": -11.081758157602858,
-            ""Z"": 12.3
-          }
-        },
-        ""identity"": {},
-        ""id"": ""5617fc82-afda-4eed-bcd0-33b9eaef3100""
-      },
-      {
-        ""value"": {
-          ""Location"": {
-            ""X"": -8.005178185987688,
-            ""Y"": -7.929706276577335,
-            ""Z"": 12.3
-          }
-        },
-        ""identity"": {},
-        ""id"": ""58d0abf8-6fa5-475a-b07d-8e098f3daa3f""
-      }
-    ]
-  }
+  ""Desk Type"": ""Simple Desk - 29x70""
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(inputText);

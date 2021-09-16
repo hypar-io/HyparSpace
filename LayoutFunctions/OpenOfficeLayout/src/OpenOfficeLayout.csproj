@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\dependencies\OpenOfficeLayout.Dependencies.csproj" />
+    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
+    <ProjectReference Include="..\..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -19,11 +21,6 @@
 
   <ItemGroup>
     <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.3-alpha.12" />
-    <PackageReference Include="Hypar.Functions" Version="0.8.9" />
   </ItemGroup>
 
 </Project>

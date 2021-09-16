@@ -1,3 +1,6 @@
+using System;
+using Newtonsoft.Json;
+
 namespace Elements
 {
     public partial class ProgramRequirement
@@ -11,9 +14,7 @@ namespace Elements
             }
         }
 
-        public string GetKey()
-        {
-            return $"{this.ProgramGroup} - ${this.ProgramName}";
-        }
+        [JsonProperty("Qualified Program Name")]
+        public string QualifiedProgramName => String.IsNullOrWhiteSpace(this.ProgramGroup) ? this.ProgramName : $"{this.ProgramGroup} - {this.ProgramName}";
     }
 }

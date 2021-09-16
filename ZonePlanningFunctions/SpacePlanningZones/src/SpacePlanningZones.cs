@@ -211,7 +211,7 @@ namespace SpacePlanningZones
                 }
                 if (!areas.ContainsKey(programName))
                 {
-                    var areaTarget = SpaceBoundary.Requirements.TryGetValue(programName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
+                    var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
                     areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
                 }
                 else
@@ -236,6 +236,11 @@ namespace SpacePlanningZones
                 {
                     areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
                 }
+                else
+                {
+                    areas[circulationKey].AchievedArea += corridorFloor.Area();
+                    areas[circulationKey].DistinctAreaCount += 1;
+                }
             }
 
             if (hasProgramRequirements)
@@ -243,7 +248,7 @@ namespace SpacePlanningZones
                 foreach (var req in SpaceBoundary.Requirements)
                 {
                     var r = req.Value;
-                    var name = r.ProgramName;
+                    var name = r.QualifiedProgramName;
                     if (!areas.ContainsKey(name))
                     {
                         areas[name] = new AreaTally(name, r.Color, r.AreaPerSpace * r.SpaceCount, 0, 0, null, Guid.NewGuid());
@@ -611,7 +616,15 @@ namespace SpacePlanningZones
         private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null, bool angleCheckForWallExtensions = false)
         {
             // subtract corridors from level boundary
-            var remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+            var remainingSpaces = new List<Profile>();
+            try
+            {
+                remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+            }
+            catch
+            {
+                remainingSpaces.Add(levelBoundary);
+            }
             // for every space that's left
             foreach (var remainingSpace in remainingSpaces)
             {
@@ -938,11 +951,23 @@ namespace SpacePlanningZones
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("A split failed.");
-                        newSbs = new[] { containingBoundary.Boundary }.ToList();
+                        // last ditch attempt
+                        Console.WriteLine("A split failed - trying again");
+                        Console.WriteLine(e.Message);
+                        try
+                        {
+                            var offsetProfiles = Profile.Offset(new[] { containingBoundary.Boundary }, -0.02);
+                            var insetProfiles = Profile.Offset(offsetProfiles, 0.02);
+                            newSbs = Profile.Split(insetProfiles, extensionsAsPolylines, Vector3.EPSILON);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("A split failed.");
+                            newSbs = new[] { containingBoundary.Boundary }.ToList();
+                        }
                     }
                 }
-                spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
+                spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.ProgramName, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
             }
         }
         private static Vector3 GetDominantAxis(IEnumerable<Line> allLines, Model model = null)

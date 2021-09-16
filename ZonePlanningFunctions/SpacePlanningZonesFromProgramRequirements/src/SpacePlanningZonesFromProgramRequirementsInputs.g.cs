@@ -21,6 +21,54 @@ namespace SpacePlanningZonesFromProgramRequirements
 {
     #pragma warning disable // Disable all warnings
 
+    /// <summary>A polyline that has been thickened into a polygon.</summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class ThickenedPolyline 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public ThickenedPolyline(Polyline @polyline, double @width, bool @flip, double @leftWidth, double @rightWidth)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<ThickenedPolyline>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @polyline, @width, @flip, @leftWidth, @rightWidth});
+            }
+        
+            this.Polyline = @polyline;
+            this.Width = @width;
+            this.Flip = @flip;
+            this.LeftWidth = @leftWidth;
+            this.RightWidth = @rightWidth;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("polyline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Polyline Polyline { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Width { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("flip", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Flip { get; set; }
+    
+        /// <summary>The amount to thicken the polyline on its "left" side, imagining that the polyline is extending away from you. That is, if the polyline starts at (0,0,0) and follows the +Z axis, the left side extends into the -X quadrant.</summary>
+        [Newtonsoft.Json.JsonProperty("leftWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double LeftWidth { get; set; }
+    
+        /// <summary>The amount to thicken the polyline on its "right" side, imagining that the polyline is extending away from you. That is, if the polyline starts at (0,0,0) and follows the +Z axis, the right side extends into the +X quadrant.</summary>
+        [Newtonsoft.Json.JsonProperty("rightWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double RightWidth { get; set; }
+    
+    
+    }
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class SpacePlanningZonesFromProgramRequirementsInputs : S3Args
@@ -28,16 +76,17 @@ namespace SpacePlanningZonesFromProgramRequirements
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningZonesFromProgramRequirementsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @overrides});
+                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @overrides});
             }
         
             this.DefaultProgramAssignment = @defaultProgramAssignment;
+            this.Corridors = @corridors;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -49,6 +98,10 @@ namespace SpacePlanningZonesFromProgramRequirements
         /// <summary>What would you like the default program for all zones to be? If specified, this program type will be used to fill all floor area not specified with specific blocks.</summary>
         [Newtonsoft.Json.JsonProperty("Default Program Assignment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DefaultProgramAssignment { get; set; } = "unspecified";
+    
+        /// <summary>Define the circulation network by drawing one or more corridor paths.</summary>
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<ThickenedPolyline> Corridors { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
@@ -274,5 +327,20 @@ namespace SpacePlanningZonesFromProgramRequirements
         public Polygon EditBoundary { get; set; }
     
     
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true)]
+    internal class JsonInheritanceAttribute : System.Attribute
+    {
+        public JsonInheritanceAttribute(string key, System.Type type)
+        {
+            Key = key;
+            Type = type;
+        }
+    
+        public string Key { get; }
+    
+        public System.Type Type { get; }
     }
 }

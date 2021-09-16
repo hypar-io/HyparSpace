@@ -50,17 +50,19 @@
           "query": "[*discriminator=Elements.ProgramRequirement].Program Name"
         },
         "default": "unspecified"
+      },
+      "Corridors": {
+        "type": "array",
+        "description": "Define the circulation network by drawing one or more corridor paths.",
+        "items": {
+          "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+          "$hyparAllowIntersection": true,
+          "$hyparConstrainToGround": true,
+          "default": null
+        }
       }
     }
   },
-  "outputs": [
-    {
-      "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
-      "type": "number"
-    }
-  ],
   "overrides": {
     "Arrange Spaces": {
       "verbs": {

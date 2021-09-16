@@ -31,10 +31,11 @@ namespace Elements
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements Level { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public ProgramRequirement FulfilledProgramRequirement = null;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
-            Requirements = reqs.ToDictionary(v => v.GetKey(), v => v);
+            Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);
             foreach (var kvp in Requirements)
             {
                 var color = kvp.Value.Color;
@@ -102,7 +103,23 @@ namespace Elements
             }
             return newSpaces;
         }
-
+        public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)
+        {
+            if (Requirements.TryGetValue(nameToFind, out fullRequirement))
+            {
+                return true;
+            }
+            else
+            {
+                var keyMatch = Requirements.Keys.FirstOrDefault(k => k.EndsWith($" - {nameToFind}"));
+                if (keyMatch != null)
+                {
+                    fullRequirement = Requirements[keyMatch];
+                    return true;
+                }
+            }
+            return false;
+        }
         public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
 
         private static Dictionary<string, Material> materialDefaults = new Dictionary<string, Material> {
@@ -134,7 +151,7 @@ namespace Elements
             }
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
-            var hasReqMatch = Requirements.TryGetValue(displayName, out var fullReq);
+            var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             if (hasReqMatch)
@@ -179,7 +196,7 @@ namespace Elements
             {
                 this.FulfilledProgramRequirement.CountPlaced--;
             }
-            var hasReqMatch = Requirements.TryGetValue(displayName, out var fullReq);
+            var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {

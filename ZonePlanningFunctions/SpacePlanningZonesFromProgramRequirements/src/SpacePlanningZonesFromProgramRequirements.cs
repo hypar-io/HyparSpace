@@ -53,7 +53,16 @@ namespace SpacePlanningZonesFromProgramRequirements
                 floorsOrLevels = floorsModel.AllElementsOfType<Floor>().Select(FloorOrLevel.FromFloor);
             }
 
+            var positionTransform = new Transform();
+            if (floorsOrLevels.Count() > 0)
+            {
+                var bbox = new BBox3(floorsOrLevels.SelectMany(f => f.Profile.Perimeter.Vertices).ToList());
+                positionTransform = new Transform(bbox.Min.X, bbox.Max.Y + 10, 0);
+            }
+
             var groupedProgramReqs = programReqs.GroupBy(p => p.ProgramGroup);
+            var texts = new List<(Vector3 location, Vector3 facingDirection, Vector3 lineDirection, string text, Color? color)>();
+
             foreach (var group in groupedProgramReqs)
             {
                 var coords = new List<Vector3>();
@@ -111,7 +120,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                     {
                         var profile = Polygon.Rectangle(width, depth);
                         var parentCentroid = profile.Centroid();
-                        var transform = new Transform(runningXPosition + width / 2, runningYPosition + depth / 2, 0);
+                        var transform = positionTransform.Concatenated(new Transform(runningXPosition + width / 2, runningYPosition + depth / 2, 0));
                         var identifier = $"{req.ProgramName}: {i}";
                         ArrangeSpacesOverride match = null;
                         if (input.Overrides?.ArrangeSpaces != null)
@@ -168,8 +177,17 @@ namespace SpacePlanningZonesFromProgramRequirements
                     var bbox = new BBox3(coords);
                     var inflatedBox = new BBox3(bbox.Min + new Vector3(-1, -1), bbox.Max + new Vector3(1, 1));
                     output.Model.AddElements(inflatedBox.ToModelCurves());
+                    var textPt = ((inflatedBox.Max.X + inflatedBox.Min.X) / 2, inflatedBox.Max.Y + 0.5, 0);
+                    texts.Add((textPt, Vector3.ZAxis, Vector3.XAxis, group.Key ?? "Program Requirements", Colors.Black));
                 }
             }
+
+            if (texts.Count() > 0)
+            {
+                var grouplabels = new ModelText(texts, FontSize.PT48, 50);
+                output.Model.AddElement(grouplabels);
+            }
+            var corridorMat = SpaceBoundary.MaterialDict["Circulation"];
 
             // create level elements
             var levels = new List<LevelElements>();
@@ -178,7 +196,17 @@ namespace SpacePlanningZonesFromProgramRequirements
                 var levelElementList = new List<Element>();
                 var levelElement = new LevelElements(levelElementList, Guid.NewGuid(), floor.Name);
                 levels.Add(levelElement);
+                // create corridors
+                if (input.Corridors != null && input.Corridors.Count() > 0)
+                {
+                    var corridorProfiles = ProcessManualCirculation(input);
+                    foreach (var p in corridorProfiles)
+                    {
+                        corridorProfiles.Select(p => new Floor(p, 0.1, floor.Transform, corridorMat)).ToList().ForEach(f => levelElement.Elements.Add(f));
+                    }
+                }
             }
+
 
             // create "default" boundary from levels or floors, if present.
             // Also associate space boundaries with level elements
@@ -348,6 +376,23 @@ namespace SpacePlanningZonesFromProgramRequirements
                 transform.Move(0, 0, heightAdjustment);
             }
             return transform;
+        }
+
+        private static List<Profile> ProcessManualCirculation(SpacePlanningZonesFromProgramRequirementsInputs input)
+        {
+            List<Profile> corridorProfiles;
+            var corridorProfilesForUnion = new List<Profile>();
+            foreach (var corridorPolyline in input.Corridors)
+            {
+                if (corridorPolyline == null || corridorPolyline.Polyline == null)
+                {
+                    continue;
+                }
+                var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
+                corridorProfilesForUnion.AddRange(corrPgons.Select(p => new Profile(p)));
+            }
+            corridorProfiles = Profile.UnionAll(corridorProfilesForUnion);
+            return corridorProfiles;
         }
     }
 }

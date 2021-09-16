@@ -16,12 +16,6 @@ namespace SpacePlanningZonesFromProgramRequirements
 {
     public class SpacePlanningZonesFromProgramRequirementsOutputs: ResultsBase
     {
-		/// <summary>
-		/// The volume.
-		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
-
 
 
         /// <summary>
@@ -34,21 +28,5 @@ namespace SpacePlanningZonesFromProgramRequirements
         }
 
 
-        /// <summary>
-        /// Construct a SpacePlanningZonesFromProgramRequirementsOutputs specifying all inputs.
-        /// </summary>
-        /// <returns></returns>
-        [JsonConstructor]
-        public SpacePlanningZonesFromProgramRequirementsOutputs(double volume): base()
-        {
-			this.Volume = volume;
-
-		}
-
-		public override string ToString()
-		{
-			var json = JsonConvert.SerializeObject(this);
-			return json;
-		}
 	}
 }
