@@ -2,6 +2,7 @@ using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using Elements.Spatial;
+using Hypar.Optimization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace SpacePlanningZones
             // Get program requirements
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
             var programReqs = programReqsModel?.AllElementsOfType<ProgramRequirement>();
+            var adjacencies = programReqsModel?.AllElementsOfType<ProgramAdjacencyMatrix>();
 
             // Reset static properties on SpaceBoundary
             SpaceBoundary.Reset();
@@ -75,8 +77,60 @@ namespace SpacePlanningZones
             // process merge overrides
             ProcessMergeOverrides(input, allSpaceBoundaries);
 
+            // assignment overrides for auto-placed spaces
+            if (input.Overrides?.ProgramAssignments != null && input.Overrides.ProgramAssignments.Count > 0)
+            {
+                foreach (var overrideValue in input.Overrides.ProgramAssignments.Where(o => o.Identity.AutoPlaced))
+                {
+                    // If we've got an override from a space that was autoplaced, 
+                    // we have to manually reproduce the split and reinsert the space
+                    if (overrideValue.Identity.AutoPlaced)
+                    {
+                        var frontEdge = overrideValue.Identity.AlignmentEdge;
+                        var matchingSb = allSpaceBoundaries.OrderBy(s => s.ParentCentroid.Value.DistanceTo(overrideValue.Identity.ParentCentroid)).First();
+                        allSpaceBoundaries.Remove(matchingSb);
+                        matchingSb.Remove();
+                        var newZone = SplitZone(matchingSb, frontEdge, overrideValue.Identity.Boundary, out List<SpaceBoundary> remainderZones);
+                        remainderZones.ForEach((z) =>
+                        {
+                            z.Level = matchingSb.Level;
+                        });
+                        allSpaceBoundaries.AddRange(remainderZones);
+                        Identity.AddOverrideIdentity(newZone, "Program Assignments", overrideValue.Id, overrideValue.Identity);
+                        newZone.SetProgram(overrideValue.Value.ProgramType);
+                        newZone.Level = matchingSb.Level;
+                        allSpaceBoundaries.Add(newZone);
+                    }
+                }
+            }
+
+
             // process assignment overrides
             ProcessProgramAssignmentOverrides(input, allSpaceBoundaries);
+
+            if (hasProgramRequirements && input.AutomaticallyPlaceProgram)
+            {
+                foreach (var req in programReqs)
+                {
+                    if (req.Width == 0)
+                    {
+                        req.Width = null;
+                    }
+                    if (req.Depth == 0)
+                    {
+                        req.Depth = null;
+                    }
+                }
+                AutoLayoutProgram(allSpaceBoundaries, programReqs, adjacencies, input.DefaultProgramAssignment, out var messages, output.Model);
+                output.Warnings.AddRange(messages);
+            }
+            else
+            {
+                allSpaceBoundaries.ForEach((sb) =>
+                {
+                    sb.CalculateDimensions();
+                });
+            }
 
             // exclude bad spaces and add boundaries to their levels.
             foreach (var sb in allSpaceBoundaries)
@@ -527,6 +581,145 @@ namespace SpacePlanningZones
             }
         }
 
+
+        private static void AutoLayoutProgram(List<SpaceBoundary> allSpaceBoundaries, IEnumerable<ProgramRequirement> programReqs, IEnumerable<ProgramAdjacencyMatrix> adjacencies, string defaultAssignment, out List<string> messages, Model model = null)
+        {
+            var boundaries = new List<SpaceBoundary>();
+            messages = new List<string>();
+
+            // calculate existing boundary properties
+            foreach (var boundary in allSpaceBoundaries.Where(sb => sb.ProgramName == "unspecified" || sb.ProgramName == defaultAssignment))
+            {
+                boundary.CalculateDimensions();
+                boundaries.Add(boundary);
+            }
+            if (programReqs == null || programReqs.Count() == 0)
+            {
+                return;
+            }
+
+            // make sure all reqs have depth and width
+            foreach (var req in programReqs)
+            {
+                if (req.HyparSpaceType == "Circulation" || req.HyparSpaceType == defaultAssignment)
+                {
+                    continue;
+                }
+                if ((req.Width != null && req.Width != 0) && (req.Depth != null && req.Depth != 0))
+                {
+                    // just hold on to existing width / depth
+                }
+                else if ((req.Width == null || req.Width == 0) && (req.Depth == null || req.Depth == 0) && req.AreaPerSpace != 0)
+                {
+                    req.Depth = Math.Sqrt(req.AreaPerSpace);
+                    req.Width = Math.Sqrt(req.AreaPerSpace);
+                }
+                else if ((req.Width != null && req.Width != 0) && req.AreaPerSpace != 0)
+                {
+                    req.Depth = req.AreaPerSpace / req.Width;
+                }
+                else if ((req.Depth != null && req.Depth != 0) && req.AreaPerSpace != 0)
+                {
+                    req.Width = req.AreaPerSpace / req.Depth;
+                }
+                else
+                {
+                    req.Width = 3;
+                    req.Depth = 3;
+                }
+            }
+            var minDimTolerance = 1.1; // allow spaces that are *slightly* too small for the program size.
+
+
+            // filter out boundaries that are too small to be viable
+            var minDepth = programReqs.Min(p => p.Depth);
+            var minWidth = programReqs.Min(p => p.Width);
+
+            boundaries = boundaries.Where(b => b.Depth > minDepth * 0.75 && b.AvailableLength > minWidth * 0.75).ToList();
+
+            var optimizationRequest = new OptimizationInputData {
+                Paradigm = Paradigm.Bucketing
+            };
+
+            var fitObjective = new FitObjective();
+            optimizationRequest.Objectives.Add(fitObjective);
+
+            if (adjacencies != null && adjacencies.Count() > 0)
+            {
+                Dictionary<int, Dictionary<int, double>> adjacencyMap = new Dictionary<int, Dictionary<int, double>>();
+                
+                var adjacencyPreferences = new Dictionary<string, Dictionary<string, double>>();
+
+                // populate adjacency preferences 
+                var adjacencyObjective = new AdjacencyObjective {
+                    Name = "adjacencies",
+                    Adjacencies = "connectivity",
+                    Affinity = adjacencyPreferences,
+                };
+                optimizationRequest.Objectives.Add(adjacencyObjective);
+            }
+
+            var reqsAsList = new List<ProgramRequirement>();
+
+            foreach (var boundary in boundaries)
+            {
+                optimizationRequest.Buckets.Add(new Bucket { Size = boundary.Length.Value });
+                fitObjective.BucketValues.Add(boundary.Depth.Value);
+            }
+            foreach (var req in programReqs)
+            {
+                if (req.Width.HasValue && req.Depth.HasValue)
+                {
+                    for (int i = 0; i < req.SpaceCount; i++)
+                    {
+                        reqsAsList.Add(req);
+                        optimizationRequest.BucketItems.Add(new BucketItem { Size = req.Width.Value });
+                        fitObjective.BucketItemTargets.Add(req.Depth.Value);
+                    }
+                }
+            }
+
+            var url = "https://ah-sand.api.hypar.io/optimize";
+            BucketingResultData result = null;
+            try
+            {
+                result = OptimizationRequest.GetResult<BucketingResultData>(optimizationRequest, url);
+            }
+            catch (Exception e)
+            {
+                messages.Add($"The space optimization server returned an invalid result: {e.Message}");
+            }
+            if (result == null)
+            {
+                return;
+            }
+            var bestResult = result.Results.First();
+            for (int i = 0; i < bestResult.Result.Count; i++)
+            {
+                var boundary = boundaries[i];
+                List<int> bucketResult = bestResult.Result[i];
+                foreach (var j in bucketResult)
+                {
+                    var spaceToPlace = reqsAsList[j];
+                    boundary.Collect(spaceToPlace);
+                }
+            }
+
+            foreach (var boundary in boundaries)
+            {
+                if (boundary.CollectedSpaces.Count > 0)
+                {
+                    var newSpaces = boundary.ResolveCollected();
+                    allSpaceBoundaries.Remove(boundary);
+                    allSpaceBoundaries.AddRange(newSpaces);
+                    newSpaces.ForEach((sb) =>
+                    {
+                        sb.AutoPlaced = true;
+                    });
+                }
+            }
+        }
+
         private static void IdentifyShortEdges(Polygon perimeter, Line[] perimeterSegments, out List<Line> shortEdges, out List<int> shortEdgeIndices)
         {
             var TOO_SHORT = 9.0;
@@ -878,6 +1071,23 @@ namespace SpacePlanningZones
             }
         }
 
+        private static SpaceBoundary SplitZone(SpaceBoundary matchingSb, Line frontEdge, Profile splittingProfile, out List<SpaceBoundary> remainderZones)
+        {
+            var perpDir = frontEdge.Direction().Cross(Vector3.ZAxis);
+            var splitLines = new List<Polyline> {
+                new Line(frontEdge.Start - perpDir * 50,frontEdge.Start + perpDir * 50).ToPolyline(1),
+                new Line(frontEdge.End - perpDir * 50,frontEdge.End + perpDir * 50).ToPolyline(1),
+            };
+            var profile = matchingSb.Boundary;
+            var splitResults = Profile.Split(new[] { profile }, splitLines, Vector3.EPSILON);
+            var midPt = frontEdge.PointAt(0.5);
+            var thisSplit = splitResults.OrderBy(s => s.Perimeter.Centroid().DistanceTo(midPt)).First();
+            var otherSplits = splitResults.Except(new[] { thisSplit });
+            remainderZones = otherSplits.Select((p) =>
+                 SpaceBoundary.Make(p, matchingSb.Name, matchingSb.Transform, matchingSb.Representation.SolidOperations.OfType<Extrude>().First().Height, corridorSegments: matchingSb.AdjacentCorridorEdges)
+            ).ToList();
+            return SpaceBoundary.Make(splittingProfile, matchingSb.Name, matchingSb.Transform, matchingSb.Representation.SolidOperations.OfType<Extrude>().First().Height, corridorSegments: new[] { frontEdge });
+        }
         private static void SplitZonesMultiple(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, IEnumerable<SplitLocations> pts, bool addCorridor = true, Model m = null)
         {
             var corridorSegments = corridorProfiles.SelectMany(c => c.Segments());

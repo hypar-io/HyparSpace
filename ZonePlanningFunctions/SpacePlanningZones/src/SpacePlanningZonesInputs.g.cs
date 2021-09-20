@@ -107,15 +107,16 @@ namespace SpacePlanningZones
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningZonesInputs(string @defaultProgramAssignment, SpacePlanningZonesInputsCirculationMode @circulationMode, IList<ThickenedPolyline> @corridors, double @corridorWidth, double @outerBandDepth, double @depthAtEnds, IList<Vector3> @additionalCorridorLocations, IList<Vector3> @manualSplitLocations, PolygonSplitCollection @addCorridors, PolygonSplitCollection @splitZones, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningZonesInputs(bool @automaticallyPlaceProgram, string @defaultProgramAssignment, SpacePlanningZonesInputsCirculationMode @circulationMode, IList<ThickenedPolyline> @corridors, double @corridorWidth, double @outerBandDepth, double @depthAtEnds, IList<Vector3> @additionalCorridorLocations, IList<Vector3> @manualSplitLocations, PolygonSplitCollection @addCorridors, PolygonSplitCollection @splitZones, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningZonesInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @circulationMode, @corridors, @corridorWidth, @outerBandDepth, @depthAtEnds, @additionalCorridorLocations, @manualSplitLocations, @addCorridors, @splitZones, @overrides});
+                validator.PreConstruct(new object[]{ @automaticallyPlaceProgram, @defaultProgramAssignment, @circulationMode, @corridors, @corridorWidth, @outerBandDepth, @depthAtEnds, @additionalCorridorLocations, @manualSplitLocations, @addCorridors, @splitZones, @overrides});
             }
         
+            this.AutomaticallyPlaceProgram = @automaticallyPlaceProgram;
             this.DefaultProgramAssignment = @defaultProgramAssignment;
             this.CirculationMode = @circulationMode;
             this.Corridors = @corridors;
@@ -133,6 +134,10 @@ namespace SpacePlanningZones
                 validator.PostConstruct(this);
             }
         }
+    
+        /// <summary>If enabled, this function will attempt to place the program elements in your Program Requirements automatically. Disable to arrange spaces manually.</summary>
+        [Newtonsoft.Json.JsonProperty("Automatically Place Program", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool AutomaticallyPlaceProgram { get; set; } = false;
     
         /// <summary>What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.</summary>
         [Newtonsoft.Json.JsonProperty("Default Program Assignment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -344,16 +349,19 @@ namespace SpacePlanningZones
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramAssignmentsIdentity(Vector3 @parentCentroid, Vector3 @individualCentroid)
+        public ProgramAssignmentsIdentity(Vector3 @parentCentroid, Vector3 @individualCentroid, bool @autoPlaced, Line @alignmentEdge, Profile @boundary)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramAssignmentsIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @parentCentroid, @individualCentroid});
+                validator.PreConstruct(new object[]{ @parentCentroid, @individualCentroid, @autoPlaced, @alignmentEdge, @boundary});
             }
         
             this.ParentCentroid = @parentCentroid;
             this.IndividualCentroid = @individualCentroid;
+            this.AutoPlaced = @autoPlaced;
+            this.AlignmentEdge = @alignmentEdge;
+            this.Boundary = @boundary;
         
             if(validator != null)
             {
@@ -366,6 +374,15 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("IndividualCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 IndividualCentroid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("AutoPlaced", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool AutoPlaced { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("AlignmentEdge", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Line AlignmentEdge { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Profile Boundary { get; set; }
     
     
     }

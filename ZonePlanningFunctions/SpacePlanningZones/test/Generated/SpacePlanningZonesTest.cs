@@ -18,14 +18,15 @@ namespace SpacePlanningZones
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) },
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Program Requirements/model.json")) },
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) },
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) }, 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Program Requirements/model.json")) }, 
+                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) }, 
+                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) }, 
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
+            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
             File.WriteAllText("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.json", result.Model.ToJson());
         }
@@ -34,82 +35,25 @@ namespace SpacePlanningZones
         {
             var inputText = @"
             {
+  ""Automatically Place Program"": true,
   ""Default Program Assignment"": ""Open Office"",
   ""Circulation Mode"": ""Automatic"",
   ""Add Corridors"": {
-    ""SplitLocations"": [
-      {
-        ""position"": {
-          ""X"": 2.930087415595262,
-          ""Y"": 15.546125732271134,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": -1,
-          ""Y"": 0,
-          ""Z"": 0
-        }
-      }
-    ]
+    ""SplitLocations"": []
   },
   ""Depth at Ends"": 8,
   ""Split Zones"": {
     ""SplitLocations"": []
   },
-  ""Corridor Width"": 1.5,
   ""Corridors"": [],
-  ""Outer Band Depth"": 6,
+  ""Corridor Width"": 1.5,
+  ""Outer Band Depth"": 7.03,
   ""Manual Split Locations"": [],
   ""model_input_keys"": {
-    ""Levels"": ""3189c279-9206-4419-889c-469ccf018521_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Program Requirements"": ""34a87c13-3a11-4d89-ad5b-42fb535f82ad_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
-    ""Floors"": ""b9014931-637b-4bc0-a83d-6d0a2031ffdc_31ec3b95-5062-47b9-a1e0-e3550bf7e2d1_elements.zip"",
-    ""Core"": ""683f0718-0c90-4c9e-b856-9ed097728079_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
-  },
-  ""overrides"": {
-    ""Merge Zones"": [
-      {
-        ""id"": ""81ba2aa0-e504-4248-b20a-814af1e822c7"",
-        ""identities"": [
-          {
-            ""ParentCentroid"": {
-              ""X"": 6.572695999999999,
-              ""Y"": 5.181404,
-              ""Z"": 0.3
-            }
-          },
-          {
-            ""ParentCentroid"": {
-              ""X"": 15.604959999999998,
-              ""Y"": 3,
-              ""Z"": 0.3
-            }
-          }
-        ]
-      }
-    ],
-    ""Program Assignments"": [
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Private Office"",
-          ""Id"": ""74d3a0c6-efa8-4f86-bcbe-31165e9dbaee""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 24.354145,
-            ""Y"": 3,
-            ""Z"": 0.3
-          },
-          ""IndividualCentroid"": {
-            ""X"": 24.354145,
-            ""Y"": 3,
-            ""Z"": 0.3
-          }
-        },
-        ""id"": ""3d845269-384c-4683-8d58-5a49268e122e""
-      }
-    ]
+    ""Levels"": ""1e9e0e70-9220-41ad-926b-1ee0c366bb8b_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Program Requirements"": ""3f271e92-e0b6-4f41-8f29-9bacb90396cd_ac2d042f-ede8-4f11-9d6e-ae3ffe849e81_elements.zip"",
+    ""Floors"": ""9bc9e634-cbf2-4fb0-bff8-8720386c02d9_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip"",
+    ""Core"": ""9bc9e634-cbf2-4fb0-bff8-8720386c02d9_6a8c567d-6a2e-4402-a713-7474170bd302_elements.zip""
   },
   ""Additional Corridor Locations"": []
 }

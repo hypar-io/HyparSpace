@@ -78,13 +78,26 @@ namespace Elements
                 }
                 foreach (var space in this.CollectedSpaces)
                 {
-                    var depth = space.Depth.Value;
+                    var depth = space.Depth.Value * 1.5; // overhang our spaces, since we'll trim them out later
                     var width = space.Width.Value + bonus;
                     if (Math.Abs(this.Depth.Value - depth) < 3)
                     {
                         depth = this.Depth.Value;
                     }
-                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(width + runningX, depth)).TransformedPolygon(this.FromAlignmentEdge);
+                    Profile idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(width + runningX, depth)).TransformedPolygon(this.FromAlignmentEdge);
+                    try
+                    {
+                        var intersection = Profile.Intersection(new[] { idealRect }, new[] { this.Boundary });
+                        var largest = intersection.OrderBy(p => p.Area()).LastOrDefault();
+                        if (largest != null)
+                        {
+                            idealRect = largest;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                     var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(width + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
                     var newSb = SpaceBoundary.Make(idealRect, space.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
                     newSb.AlignmentEdge = edge;
@@ -92,12 +105,26 @@ namespace Elements
                     runningX += width;
                     newSpaces.Add(newSb);
                 }
-                if (this.AvailableLength > 3)
+                if (this.AvailableLength >= 3)
                 {
-                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, this.Depth.Value)).TransformedPolygon(this.FromAlignmentEdge);
+                    Profile idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, this.Depth.Value)).TransformedPolygon(this.FromAlignmentEdge);
+                    try
+                    {
+                        var intersection = Profile.Intersection(new[] { idealRect }, new[] { this.Boundary });
+                        var largest = intersection.OrderBy(p => p.Area()).LastOrDefault();
+                        if (largest != null)
+                        {
+                            idealRect = largest;
+                        }
+                    }
+                    catch
+                    {
+
+                    }
                     var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
                     var newSb = SpaceBoundary.Make(idealRect, this.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
                     newSb.Level = Level;
+                    newSb.CalculateDimensions();
                     newSpaces.Add(newSb);
                 }
             }
@@ -205,5 +232,38 @@ namespace Elements
             }
 
         }
+
+        public void CalculateDimensions()
+        {
+            var adjacentEdges = AdjacentCorridorEdges;
+            Line alignmentEdge = null;
+            // if we're not adjacent to a corridor, use the longest edge
+            if (adjacentEdges == null || adjacentEdges.Count() == 0)
+            {
+                alignmentEdge = Boundary.Perimeter.Segments().OrderBy(s => s.Length()).Last();
+            }
+            else
+            {
+                // otherwise use the longest edge that is adjacent to a corridor
+                alignmentEdge = adjacentEdges.OrderBy(e => e.Length()).Last();
+            }
+            var alignmentVector = alignmentEdge.Direction();
+            var alignmentTransform = new Transform(alignmentEdge.Start, alignmentVector, Vector3.ZAxis);
+            var inverse = new Transform(alignmentTransform);
+            inverse.Invert();
+            var transformedProfile = Boundary.Perimeter.TransformedPolygon(inverse);
+            var bbox = new BBox3(transformedProfile);
+            var length = bbox.Max.X - bbox.Min.X;
+            var depth = bbox.Max.Y - bbox.Min.Y;
+            Length = length;
+            Depth = depth;
+            AvailableLength = length;
+            inverse.Concatenate(new Transform(-bbox.Min.X, 0, 0));
+            ToAlignmentEdge = new Transform(inverse);
+            FromAlignmentEdge = new Transform(inverse);
+            FromAlignmentEdge.Invert();
+            AlignmentEdge = new Line(new Vector3(0, 0), new Vector3(length, 0)).TransformedLine(FromAlignmentEdge);
+        }
+
     }
 }
