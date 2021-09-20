@@ -10,6 +10,7 @@ namespace SpacePlanningZones
 {
     public static class SpacePlanningZones
     {
+        private static List<string> Warnings = new List<string>();
         /// <summary>
         /// The SpacePlanningZones function.
         /// </summary>
@@ -18,6 +19,7 @@ namespace SpacePlanningZones
         /// <returns>A SpacePlanningZonesOutputs instance containing computed results and the model with any new elements.</returns>
         public static SpacePlanningZonesOutputs Execute(Dictionary<string, Model> inputModels, SpacePlanningZonesInputs input)
         {
+            Warnings.Clear();
             #region Gather Inputs
 
             // Set up output object
@@ -101,6 +103,7 @@ namespace SpacePlanningZones
             // adding levels also adds the space boundaries, since they're in the levels' own elements collections
             output.Model.AddElements(levels);
 
+            output.Warnings.AddRange(Warnings);
             return output;
         }
 
@@ -623,7 +626,21 @@ namespace SpacePlanningZones
             }
             catch
             {
-                remainingSpaces.Add(levelBoundary);
+                // last ditch attempt to save the profile difference by force-cleaning
+                // the corridor profiles
+                try
+                {
+                    Elements.Validators.Validator.DisableValidationOnConstruction = true;
+                    var insetProfiles = ForceCleanProfiles(corridorProfiles, 0.03);
+                    var levelBoundaryCleaned = ForceCleanProfiles(new[] { levelBoundary }, 0.03);
+                    remainingSpaces = Profile.Difference(levelBoundaryCleaned, insetProfiles).Where(p => p.Area() > 0.1).ToList();
+                    Elements.Validators.Validator.DisableValidationOnConstruction = false;
+                }
+                catch
+                {
+                    Warnings.Add("Unable to subtract corridors from spaces. Try adjusting your corridor geometry — watch out for points that are too close together.");
+                    remainingSpaces.Add(levelBoundary);
+                }
             }
             // for every space that's left
             foreach (var remainingSpace in remainingSpaces)
@@ -956,8 +973,7 @@ namespace SpacePlanningZones
                         Console.WriteLine(e.Message);
                         try
                         {
-                            var offsetProfiles = Profile.Offset(new[] { containingBoundary.Boundary }, -0.02);
-                            var insetProfiles = Profile.Offset(offsetProfiles, 0.02);
+                            var insetProfiles = ForceCleanProfiles(new[] { containingBoundary.Boundary });
                             newSbs = Profile.Split(insetProfiles, extensionsAsPolylines, Vector3.EPSILON);
                         }
                         catch
@@ -969,6 +985,13 @@ namespace SpacePlanningZones
                 }
                 spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.ProgramName, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
             }
+        }
+
+        private static List<Profile> ForceCleanProfiles(IEnumerable<Profile> profiles, double dist = 0.02)
+        {
+            var offsetProfiles = Profile.Offset(profiles, -dist);
+            var insetProfiles = Profile.Offset(offsetProfiles, dist);
+            return insetProfiles;
         }
         private static Vector3 GetDominantAxis(IEnumerable<Line> allLines, Model model = null)
         {

@@ -35,81 +35,84 @@ namespace SpacePlanningZones
             var inputText = @"
             {
   ""Default Program Assignment"": ""Open Office"",
-  ""Circulation Mode"": ""Automatic"",
+  ""Circulation Mode"": ""Manual"",
   ""Add Corridors"": {
-    ""SplitLocations"": [
-      {
-        ""position"": {
-          ""X"": 2.930087415595262,
-          ""Y"": 15.546125732271134,
-          ""Z"": 0
-        },
-        ""direction"": {
-          ""X"": -1,
-          ""Y"": 0,
-          ""Z"": 0
-        }
-      }
-    ]
+    ""SplitLocations"": []
   },
   ""Depth at Ends"": 8,
   ""Split Zones"": {
     ""SplitLocations"": []
   },
   ""Corridor Width"": 1.5,
-  ""Corridors"": [],
+  ""Corridors"": [
+    {
+      ""width"": 1,
+      ""leftWidth"": 1,
+      ""flip"": true,
+      ""polyline"": {
+        ""Vertices"": [
+          {
+            ""X"": -29.44879421996542,
+            ""Y"": -2.112098698847898,
+            ""Z"": 0
+          },
+          {
+            ""X"": -63.33322147508574,
+            ""Y"": -2.0755043768892074,
+            ""Z"": 0
+          },
+          {
+            ""X"": -63.33327,
+            ""Y"": 7.60158,
+            ""Z"": 0
+          },
+          {
+            ""X"": -50.99225523014507,
+            ""Y"": 7.601641882966001,
+            ""Z"": 0
+          },
+          {
+            ""X"": -50.99227338117946,
+            ""Y"": 11.22141316901595,
+            ""Z"": 0
+          },
+          {
+            ""X"": -37.79884986895761,
+            ""Y"": 11.259494062706377,
+            ""Z"": 0
+          },
+          {
+            ""X"": -37.44387016440702,
+            ""Y"": 7.538892994735187,
+            ""Z"": 0
+          },
+          {
+            ""X"": -22.893153131400076,
+            ""Y"": 7.524495623111104,
+            ""Z"": 0
+          },
+          {
+            ""X"": -20.523222454538445,
+            ""Y"": 4.507206154403624,
+            ""Z"": 0
+          },
+          {
+            ""X"": -29.448979828339514,
+            ""Y"": -2.2839623408908976,
+            ""Z"": 0
+          }
+        ],
+        ""discriminator"": ""Elements.Geometry.Polyline""
+      }
+    }
+  ],
   ""Outer Band Depth"": 6,
   ""Manual Split Locations"": [],
   ""model_input_keys"": {
-    ""Levels"": ""3189c279-9206-4419-889c-469ccf018521_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Program Requirements"": ""34a87c13-3a11-4d89-ad5b-42fb535f82ad_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
-    ""Floors"": ""b9014931-637b-4bc0-a83d-6d0a2031ffdc_31ec3b95-5062-47b9-a1e0-e3550bf7e2d1_elements.zip"",
-    ""Core"": ""683f0718-0c90-4c9e-b856-9ed097728079_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
-  },
-  ""overrides"": {
-    ""Merge Zones"": [
-      {
-        ""id"": ""81ba2aa0-e504-4248-b20a-814af1e822c7"",
-        ""identities"": [
-          {
-            ""ParentCentroid"": {
-              ""X"": 6.572695999999999,
-              ""Y"": 5.181404,
-              ""Z"": 0.3
-            }
-          },
-          {
-            ""ParentCentroid"": {
-              ""X"": 15.604959999999998,
-              ""Y"": 3,
-              ""Z"": 0.3
-            }
-          }
-        ]
-      }
-    ],
-    ""Program Assignments"": [
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Program Type"": ""Private Office"",
-          ""Id"": ""74d3a0c6-efa8-4f86-bcbe-31165e9dbaee""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": 24.354145,
-            ""Y"": 3,
-            ""Z"": 0.3
-          },
-          ""IndividualCentroid"": {
-            ""X"": 24.354145,
-            ""Y"": 3,
-            ""Z"": 0.3
-          }
-        },
-        ""id"": ""3d845269-384c-4683-8d58-5a49268e122e""
-      }
-    ]
+    ""Levels"": ""e3dbf65e-47f5-4815-baea-cbfe329221ee_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Program Requirements"": ""2b2955b0-9d59-4c0f-9fb5-0fcc916381c9_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
+    ""Floors"": ""f907a7bc-ec25-4743-83e7-cca3e45b6f28_31ec3b95-5062-47b9-a1e0-e3550bf7e2d1_elements.zip"",
+    ""Core"": ""c35d43d9-c4cb-4925-9cbf-91f9ce8d9d20_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
   },
   ""Additional Corridor Locations"": []
 }
