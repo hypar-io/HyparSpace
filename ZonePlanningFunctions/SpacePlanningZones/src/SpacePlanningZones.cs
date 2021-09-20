@@ -121,7 +121,7 @@ namespace SpacePlanningZones
                     var centroid = overrideValue.Identity.ParentCentroid;
                     var matchingSB = allSpaceBoundaries
                         .OrderBy(sb => sb.IndividualCentroid.Value.DistanceTo(centroid))
-                        .FirstOrDefault(sb => sb.IndividualCentroid.Value.DistanceTo(centroid) < 2.0);
+                        .FirstOrDefault(); //sb => sb.IndividualCentroid.Value.DistanceTo(centroid) < 2.0);
                     if (matchingSB != null)
                     {
                         if (overrideValue.Value.Split <= 1)
@@ -636,11 +636,11 @@ namespace SpacePlanningZones
                     // Elements.Validators.Validator.DisableValidationOnConstruction = true;
                     var insetProfiles = ForceCleanProfiles(corridorProfiles, 0.03);
                     var levelBoundaryCleaned = ForceCleanProfiles(new[] { levelBoundary }, 0.03);
-                    remainingSpaces = ForceCleanProfiles(Profile.Difference(levelBoundaryCleaned, insetProfiles).Where(p => p.Area() > 0.1));
                     JsonInheritanceConverter.ElementwiseSerialization = true;
                     var path = "/Users/andrewheumann/Desktop/profiles_we_got.json";
-                    File.WriteAllText(path, JsonConvert.SerializeObject(remainingSpaces));
+                    File.WriteAllText(path, JsonConvert.SerializeObject(new Dictionary<string, IEnumerable<Profile>> { { "levelBoundaryCleaned", levelBoundaryCleaned }, { "insetProfiles", insetProfiles } }));
                     JsonInheritanceConverter.ElementwiseSerialization = false;
+                    remainingSpaces = ForceCleanProfiles(Profile.Difference(levelBoundaryCleaned, insetProfiles).Where(p => p.Area() > 0.1));
                     // Elements.Validators.Validator.DisableValidationOnConstruction = false;
                 }
                 catch
