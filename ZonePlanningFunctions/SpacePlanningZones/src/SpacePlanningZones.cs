@@ -1,9 +1,12 @@
 using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
+using Elements.Serialization.JSON;
 using Elements.Spatial;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace SpacePlanningZones
@@ -630,11 +633,15 @@ namespace SpacePlanningZones
                 // the corridor profiles
                 try
                 {
-                    Elements.Validators.Validator.DisableValidationOnConstruction = true;
+                    // Elements.Validators.Validator.DisableValidationOnConstruction = true;
                     var insetProfiles = ForceCleanProfiles(corridorProfiles, 0.03);
                     var levelBoundaryCleaned = ForceCleanProfiles(new[] { levelBoundary }, 0.03);
-                    remainingSpaces = Profile.Difference(levelBoundaryCleaned, insetProfiles).Where(p => p.Area() > 0.1).ToList();
-                    Elements.Validators.Validator.DisableValidationOnConstruction = false;
+                    remainingSpaces = ForceCleanProfiles(Profile.Difference(levelBoundaryCleaned, insetProfiles).Where(p => p.Area() > 0.1));
+                    JsonInheritanceConverter.ElementwiseSerialization = true;
+                    var path = "/Users/andrewheumann/Desktop/profiles_we_got.json";
+                    File.WriteAllText(path, JsonConvert.SerializeObject(remainingSpaces));
+                    JsonInheritanceConverter.ElementwiseSerialization = false;
+                    // Elements.Validators.Validator.DisableValidationOnConstruction = false;
                 }
                 catch
                 {
@@ -991,8 +998,48 @@ namespace SpacePlanningZones
         {
             var offsetProfiles = Profile.Offset(profiles, -dist);
             var insetProfiles = Profile.Offset(offsetProfiles, dist);
-            return insetProfiles;
+            return insetProfiles.Select(p => p.RemoveDuplicateVertices()).ToList();
         }
+
+        private static Profile RemoveDuplicateVertices(this Profile profile)
+        {
+            var perimeter = profile.Perimeter.RemoveDuplicateVertices();
+            var voids = profile.Voids.Select(v => v.RemoveDuplicateVertices()).ToList();
+            return new Profile(perimeter, voids);
+        }
+
+        private static Polygon RemoveDuplicateVertices(this Polygon polygon)
+        {
+            return new Polygon(polygon.Vertices.RemoveSequentialDuplicates(true));
+        }
+
+        // copy-paste from elements, b/c internal
+        internal static IList<Vector3> RemoveSequentialDuplicates(this IList<Vector3> vertices, bool wrap = false, double tolerance = Vector3.EPSILON)
+        {
+            List<Vector3> newList = new List<Vector3> { vertices[0] };
+            for (int i = 1; i < vertices.Count; i++)
+            {
+                var vertex = vertices[i];
+                var prevVertex = newList[newList.Count - 1];
+                if (!vertex.IsAlmostEqualTo(prevVertex, tolerance))
+                {
+                    // if we wrap, and we're at the last vertex, also check for a zero-length segment between first and last.
+                    if (wrap && i == vertices.Count - 1)
+                    {
+                        if (!vertex.IsAlmostEqualTo(vertices[0], tolerance))
+                        {
+                            newList.Add(vertex);
+                        }
+                    }
+                    else
+                    {
+                        newList.Add(vertex);
+                    }
+                }
+            }
+            return newList;
+        }
+
         private static Vector3 GetDominantAxis(IEnumerable<Line> allLines, Model model = null)
         {
             var refVec = new Vector3(1, 0, 0);
