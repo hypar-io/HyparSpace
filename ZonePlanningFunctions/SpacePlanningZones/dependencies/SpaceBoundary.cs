@@ -122,21 +122,22 @@ namespace Elements
         }
         public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
         private static double specularFactor = 0.00;
+        private static double glossinessFactor = 0.00;
         private static Dictionary<string, Material> materialDefaults = new Dictionary<string, Material> {
-            {"unspecified", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.8, 0.3), specularFactor)},
-            {"unrecognized", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.2, 0.3), specularFactor)},
-            {"Circulation", new Material("Circulation", new Color(0.996,0.965,0.863,0.5), specularFactor)}, //✅
-            {"Open Office", new Material("Open Office", new Color(0.435,0.627,0.745,0.5), specularFactor)}, //✅  https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/35cb4053-4d39-47ef-9673-2dccdae1433b/SteelcaseOpenOffice-35cb4053-4d39-47ef-9673-2dccdae1433b.json
-            {"Private Office", new Material("Private Office", new Color(0.122,0.271,0.361,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/69be76de-aaa1-4097-be0c-a97eb44d62e6/Private+Office-69be76de-aaa1-4097-be0c-a97eb44d62e6.json
-            {"Lounge", new Material("Lounge", new Color(1.000,0.584,0.196,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/52df2dc8-3107-43c9-8a9f-e4b745baca1c/Steelcase-Lounge-52df2dc8-3107-43c9-8a9f-e4b745baca1c.json
-            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json 
-            {"Pantry", new Material("Pantry", new Color(0.5,0.714,0.745,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/599d1640-2584-42f7-8de1-e988267c360a/Pantry-599d1640-2584-42f7-8de1-e988267c360a.json
-            {"Meeting Room", new Material("Meeting Room", new Color(0.380,0.816,0.608,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/251d637c-c570-43bd-ab33-f59f337506bb/Catalog-251d637c-c570-43bd-ab33-f59f337506bb.json
-            {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5), specularFactor)},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
-            {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5), specularFactor)},
-            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), specularFactor)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
-            {"Open Collaboration", new Material("Open Collaboration", new Color(209.0/255, 224.0/255, 178.0/255, 0.5), specularFactor)},
-            {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5), specularFactor)}
+            {"unspecified", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.8, 0.3), specularFactor, glossinessFactor, null, true)},
+            {"unrecognized", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.2, 0.3), specularFactor, glossinessFactor, null, true)},
+            {"Circulation", new Material("Circulation", new Color(0.996,0.965,0.863,0.5), specularFactor, glossinessFactor, null, true)}, //✅
+            {"Open Office", new Material("Open Office", new Color(0.435,0.627,0.745,0.5), specularFactor, glossinessFactor, null, true)}, //✅  https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/35cb4053-4d39-47ef-9673-2dccdae1433b/SteelcaseOpenOffice-35cb4053-4d39-47ef-9673-2dccdae1433b.json
+            {"Private Office", new Material("Private Office", new Color(0.122,0.271,0.361,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/69be76de-aaa1-4097-be0c-a97eb44d62e6/Private+Office-69be76de-aaa1-4097-be0c-a97eb44d62e6.json
+            {"Lounge", new Material("Lounge", new Color(1.000,0.584,0.196,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/52df2dc8-3107-43c9-8a9f-e4b745baca1c/Steelcase-Lounge-52df2dc8-3107-43c9-8a9f-e4b745baca1c.json
+            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json 
+            {"Pantry", new Material("Pantry", new Color(0.5,0.714,0.745,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/599d1640-2584-42f7-8de1-e988267c360a/Pantry-599d1640-2584-42f7-8de1-e988267c360a.json
+            {"Meeting Room", new Material("Meeting Room", new Color(0.380,0.816,0.608,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/251d637c-c570-43bd-ab33-f59f337506bb/Catalog-251d637c-c570-43bd-ab33-f59f337506bb.json
+            {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5), specularFactor, glossinessFactor, null, true)},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
+            {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5), specularFactor, glossinessFactor, null, true)},
+            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), specularFactor, glossinessFactor, null, true)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Open Collaboration", new Material("Open Collaboration", new Color(209.0/255, 224.0/255, 178.0/255, 0.5), specularFactor, glossinessFactor, null, true)},
+            {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5), specularFactor, glossinessFactor, null, true)}
         };
         public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);
 
@@ -187,7 +188,7 @@ namespace Elements
             {
                 var color = random.NextColor();
                 color.Alpha = 0.5;
-                MaterialDict[displayName] = new Material(displayName, color, specularFactor: 0.0);
+                MaterialDict[displayName] = new Material(displayName, color, specularFactor: 0.0, glossinessFactor: 0.0);
                 material = MaterialDict[displayName];
             }
             this.Material = material;
