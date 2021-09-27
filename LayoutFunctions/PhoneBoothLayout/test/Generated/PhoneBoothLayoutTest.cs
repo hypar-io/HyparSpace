@@ -19,11 +19,11 @@ namespace PhoneBoothLayout
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> {
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Levels/model.json")) },
                 {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
             };
 
             var result = PhoneBoothLayout.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.glb");
             File.WriteAllText("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.json", result.Model.ToJson());
         }
@@ -34,7 +34,8 @@ namespace PhoneBoothLayout
             {
   ""Minimum Size"": 2,
   ""model_input_keys"": {
-    ""Space Planning Zones"": ""9e935104-a1bc-4dd0-8080-dc086f46de1f_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
+    ""Levels"": ""67066002-819f-47bb-90a1-75b0c4164826_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Space Planning Zones"": ""804e8528-cd3b-4ef1-97a9-d114c24b6dcd_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
   },
   ""Create Walls"": true
 }

@@ -678,7 +678,7 @@ namespace SpacePlanningZones
             {
                 if (req.Width.HasValue && req.Depth.HasValue)
                 {
-                    for (int i = 0; i < req.SpaceCount; i++)
+                    for (int i = 0; i < req.RemainingToPlace; i++)
                     {
                         reqsAsList.Add(req);
                         optimizationRequest.BucketItems.Add(new BucketItem { Size = req.Width.Value });
