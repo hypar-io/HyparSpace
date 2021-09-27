@@ -201,6 +201,7 @@ namespace SpacePlanningZones
         private static Dictionary<string, AreaTally> CalculateAreas(bool hasProgramRequirements, List<LevelElements> levels, List<SpaceBoundary> allSpaceBoundaries)
         {
             Dictionary<string, AreaTally> areas = new Dictionary<string, AreaTally>();
+            Dictionary<string, ProgramRequirement> matchingReqs = new Dictionary<string, ProgramRequirement>();
             foreach (var sb in allSpaceBoundaries)
             {
                 var area = sb.Boundary.Area();
@@ -211,8 +212,13 @@ namespace SpacePlanningZones
                 }
                 if (!areas.ContainsKey(programName))
                 {
-                    var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.AreaPerSpace * req.SpaceCount : 0.0;
-                    areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.Name);
+                    var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.GetAreaPerSpace() * req.SpaceCount : 0.0;
+                    matchingReqs[programName] = req;
+                    areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1)
+                    {
+                        Name = sb.Name,
+                        TargetCount = req?.SpaceCount ?? 0,
+                    };
                 }
                 else
                 {
@@ -220,6 +226,32 @@ namespace SpacePlanningZones
                     existingTally.AchievedArea += area;
                     existingTally.DistinctAreaCount += 1;
                 }
+            }
+
+            // calculate achieved counts by "count type"
+            foreach (var areakvp in areas)
+            {
+                var programName = areakvp.Key;
+                var req = matchingReqs[programName];
+                if (req == null || req.CountType == ProgramRequirementCountType.Item)
+                {
+                    areakvp.Value.AchievedCount = areakvp.Value.DistinctAreaCount;
+                    continue;
+                }
+                // if the user specified a different "count type" for this requirement, adjust the achieved count accordingly.
+                if (req.CountType == ProgramRequirementCountType.Sum)
+                {
+                    areakvp.Value.AchievedCount = null;
+                }
+                else if (req.CountType == ProgramRequirementCountType.Unit)
+                {
+                    var areaPerSpace = req.GetAreaPerSpace();
+                    if (areaPerSpace != 0)
+                    {
+                        areakvp.Value.AchievedCount = (int)Math.Round(areakvp.Value.AchievedArea / areaPerSpace);
+                    }
+                }
+
             }
 
             // count corridors in area
@@ -230,11 +262,17 @@ namespace SpacePlanningZones
                 circulationKey = circReq.Value.ProgramName;
             }
 
+            // calculate circulation areas (stored as floors, not space boundaries)
+
             foreach (var corridorFloor in levels.SelectMany(lev => lev.Elements.OfType<Floor>()))
             {
                 if (!areas.ContainsKey(circulationKey))
                 {
-                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
+                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1)
+                    {
+                        Name = circulationKey,
+                        TargetCount = 1,
+                    };
                 }
                 else
                 {
@@ -243,15 +281,21 @@ namespace SpacePlanningZones
                 }
             }
 
+            // create area tallies for unfulfilled requirements, with achieved areas of 0
+
             if (hasProgramRequirements)
             {
                 foreach (var req in SpaceBoundary.Requirements)
                 {
                     var r = req.Value;
                     var name = r.QualifiedProgramName;
+                    var type = r.CountType;
                     if (!areas.ContainsKey(name))
                     {
-                        areas[name] = new AreaTally(name, r.Color, r.AreaPerSpace * r.SpaceCount, 0, 0, null, Guid.NewGuid());
+                        areas[name] = new AreaTally(name, r.Color, r.GetAreaPerSpace() * r.SpaceCount, 0, 0)
+                        {
+                            TargetCount = r.SpaceCount
+                        };
                     }
                 }
             }

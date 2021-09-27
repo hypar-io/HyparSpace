@@ -6,7 +6,6 @@ Generate a circulation path and high-level zones for a schematic space plan.
 
 |Input Name|Type|Description|
 |---|---|---|
-|Automatically Place Program|boolean|If enabled, this function will attempt to place the program elements in your Program Requirements automatically. Disable to arrange spaces manually.|
 |Default Program Assignment|string|What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.|
 |Circulation Mode|string|How should circulation be calculated? 
 Automatic: a typical circulation network will be generated for you. 

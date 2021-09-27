@@ -14,9 +14,6 @@ namespace Elements
 
         public string ProgramGroup { get; set; }
         public Line AlignmentEdge { get; set; } = null;
-        public double? Length { get; set; } = null;
-        public double? Depth { get; set; } = null;
-
         public double AvailableLength { get; set; } = 0;
         public Transform ToAlignmentEdge = null;
         public Transform FromAlignmentEdge = null;
@@ -153,7 +150,7 @@ namespace Elements
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), null, null, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
