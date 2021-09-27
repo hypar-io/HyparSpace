@@ -8,6 +8,10 @@
   "input_schema": {
     "type": "object",
     "properties": {
+      "Show Advanced Options": {
+        "type": "boolean",
+        "default": false
+      },
       "Program Requirements": {
         "$hyparCanPopOut": true,
         "type": "array",

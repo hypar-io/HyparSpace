@@ -26,13 +26,13 @@ namespace Elements
     public partial class AreaTally : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public AreaTally(string @programType, Color @programColor, double @areaTarget, double @achievedArea, double @distinctAreaCount, string @cost, System.Guid @id = default, string @name = null)
+        public AreaTally(string @programType, Color @programColor, double @areaTarget, double @achievedArea, double @distinctAreaCount, double? @targetCount, double? @achievedCount, string @cost, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<AreaTally>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programType, @programColor, @areaTarget, @achievedArea, @distinctAreaCount, @cost, @id, @name});
+                validator.PreConstruct(new object[]{ @programType, @programColor, @areaTarget, @achievedArea, @distinctAreaCount, @targetCount, @achievedCount, @cost, @id, @name});
             }
         
             this.ProgramType = @programType;
@@ -40,6 +40,8 @@ namespace Elements
             this.AreaTarget = @areaTarget;
             this.AchievedArea = @achievedArea;
             this.DistinctAreaCount = @distinctAreaCount;
+            this.TargetCount = @targetCount;
+            this.AchievedCount = @achievedCount;
             this.Cost = @cost;
             
             if(validator != null)
@@ -62,6 +64,12 @@ namespace Elements
     
         [Newtonsoft.Json.JsonProperty("Distinct Area Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double DistinctAreaCount { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Target Count", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? TargetCount { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Achieved Count", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AchievedCount { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Cost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Cost { get; set; }
