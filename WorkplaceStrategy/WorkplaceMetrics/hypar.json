@@ -73,56 +73,7 @@
         "type": "array",
         "$hyparOrder": 3,
         "items": {
-          "$schema": "http://json-schema.org/draft-07/schema#",
-          "x-namespace": "Elements.Geometry",
-          "description": "A boundary around an area to be excluded from USF Calculation. This area will be excluded from each floor.",
-          "additionalProperties": false,
-          "title": "Polygon",
-          "type": "object",
-          "required": [
-            "Vertices",
-            "discriminator"
-          ],
-          "properties": {
-            "discriminator": {
-              "type": "string"
-            },
-            "Vertices": {
-              "minItems": 2,
-              "description": "The vertices of the polygon.",
-              "type": "array",
-              "items": {
-                "$schema": "http://json-schema.org/draft-07/schema#",
-                "x-namespace": "Elements.Geometry",
-                "description": "A 3D vector.",
-                "additionalProperties": false,
-                "title": "Vector3",
-                "type": "object",
-                "required": [
-                  "X",
-                  "Y",
-                  "Z"
-                ],
-                "properties": {
-                  "X": {
-                    "type": "number",
-                    "description": "The X component of the vector."
-                  },
-                  "Y": {
-                    "type": "number",
-                    "description": "The Y component of the vector."
-                  },
-                  "Z": {
-                    "type": "number",
-                    "description": "The Z component of the vector."
-                  }
-                },
-                "$id": "https://hypar.io/Schemas/Geometry/Vector3.json"
-              }
-            }
-          },
-          "$id": "https://hypar.io/Schemas/Geometry/Polygon.json",
-          "discriminator": "discriminator"
+          "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
         }
       }
     }
