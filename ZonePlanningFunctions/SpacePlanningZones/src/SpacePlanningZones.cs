@@ -89,6 +89,10 @@ namespace SpacePlanningZones
                 }
                 // set levels
                 sb.Level.Elements.Add(sb);
+
+                // copy level volume properties
+                var lvlVolume = levelsModel.Elements[sb.Level.LevelVolumeId] as LevelVolume;
+                sb.SetLevelProperties(lvlVolume);
                 // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
                 sb.Level = null;
             }
@@ -239,16 +243,16 @@ namespace SpacePlanningZones
                     continue;
                 }
                 // if the user specified a different "count type" for this requirement, adjust the achieved count accordingly.
-                if (req.CountType == ProgramRequirementCountType.Sum)
-                {
-                    areakvp.Value.AchievedCount = null;
-                }
-                else if (req.CountType == ProgramRequirementCountType.Unit)
+                if (req.CountType == ProgramRequirementCountType.Area_Total)
                 {
                     var areaPerSpace = req.GetAreaPerSpace();
                     if (areaPerSpace != 0)
                     {
                         areakvp.Value.AchievedCount = (int)Math.Round(areakvp.Value.AchievedArea / areaPerSpace);
+                    }
+                    else
+                    {
+                        areakvp.Value.AchievedCount = null;
                     }
                 }
 

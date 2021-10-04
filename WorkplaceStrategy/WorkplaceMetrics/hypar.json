@@ -2,37 +2,46 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "5915b2f2-09c9-4273-a151-0876b602e9e5",
   "name": "Workplace Metrics",
-  "description": "The WorkplaceMetrics function.",
+  "description": "Calculate various workplace metrics from a layout.",
+  "language": "C#",
   "model_dependencies": [
     {
-      "name": "Floors"
+      "autohide": false,
+      "name": "Floors",
+      "optional": false
     },
     {
-      "name": "Space Planning Zones"
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
     },
     {
+      "autohide": false,
       "name": "Open Office Layout",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Meeting Room Layout",
       "optional": true
     }
   ],
-  "language": "C#",
   "input_schema": {
     "type": "object",
     "properties": {
       "Calculation Mode": {
+        "default": "Fixed Headcount",
         "type": "string",
+        "$hyparOrder": 0,
         "enum": [
           "Fixed Headcount",
           "Fixed Sharing Ratio"
-        ],
-        "default": "Fixed Sharing Ratio"
+        ]
       },
       "Total Headcount": {
         "description": "How many people will occupy this workspace?",
+        "type": "integer",
+        "$hyparOrder": 1,
         "$hyparShowIf": {
           "conditions": [
             {
@@ -41,11 +50,13 @@
             }
           ]
         },
-        "type": "integer",
         "minimum": 0
       },
       "Desk Sharing Ratio": {
         "description": "What is the assumed sharing ratio: How many people for every desk? A value of 1 means one desk for every person; A value of 2 means there's only one desk for every two people.",
+        "default": 1,
+        "type": "number",
+        "$hyparOrder": 2,
         "$hyparShowIf": {
           "conditions": [
             {
@@ -54,71 +65,117 @@
             }
           ]
         },
-        "type": "number",
-        "minimum": 1,
-        "default": 1
+        "minimum": 1
       },
       "USF Exclusions": {
         "description": "Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.",
+        "default": [],
         "type": "array",
+        "$hyparOrder": 3,
         "items": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "x-namespace": "Elements.Geometry",
           "description": "A boundary around an area to be excluded from USF Calculation. This area will be excluded from each floor.",
-          "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
+          "additionalProperties": false,
+          "title": "Polygon",
+          "type": "object",
+          "required": [
+            "Vertices",
+            "discriminator"
+          ],
+          "properties": {
+            "discriminator": {
+              "type": "string"
+            },
+            "Vertices": {
+              "minItems": 2,
+              "description": "The vertices of the polygon.",
+              "type": "array",
+              "items": {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "x-namespace": "Elements.Geometry",
+                "description": "A 3D vector.",
+                "additionalProperties": false,
+                "title": "Vector3",
+                "type": "object",
+                "required": [
+                  "X",
+                  "Y",
+                  "Z"
+                ],
+                "properties": {
+                  "X": {
+                    "type": "number",
+                    "description": "The X component of the vector."
+                  },
+                  "Y": {
+                    "type": "number",
+                    "description": "The Y component of the vector."
+                  },
+                  "Z": {
+                    "type": "number",
+                    "description": "The Z component of the vector."
+                  }
+                },
+                "$id": "https://hypar.io/Schemas/Geometry/Vector3.json"
+              }
+            }
+          },
+          "$id": "https://hypar.io/Schemas/Geometry/Polygon.json",
+          "discriminator": "discriminator"
         }
       }
     }
   },
   "outputs": [
     {
+      "unit_type": "area",
       "name": "Total Usable Floor Area",
       "description": "The total usable floor area of the project.",
-      "type": "number",
-      "unit_type": "area"
+      "type": "number"
     },
     {
+      "unit_type": "area",
       "name": "Area per Person",
-      "type": "number",
       "description": "The usable floor area per person.",
-      "unit_type": "area"
+      "type": "number"
     },
     {
+      "unit_type": "none",
       "name": "Total Desk Count",
-      "type": "number",
       "description": "The total number of desks.",
-      "unit_type": "none"
+      "type": "number"
     },
     {
+      "unit_type": "none",
       "name": "Total Headcount",
-      "type": "number",
       "description": "The total number of employees and visitors accommodated.",
-      "unit_type": "none"
+      "type": "number"
     },
     {
+      "unit_type": "area",
       "name": "Area per Desk",
-      "type": "number",
       "description": "The usable floor area per desk.",
-      "unit_type": "area"
+      "type": "number"
     },
     {
+      "unit_type": "none",
       "name": "Desk Sharing Ratio",
       "description": "How many people are there for each desk?",
-      "type": "number",
-      "unit_type": "none"
+      "type": "number"
     },
     {
+      "unit_type": "none",
       "name": "Meeting room ratio",
       "description": "On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.",
-      "type": "number",
-      "unit_type": "none"
+      "type": "number"
     }
   ],
-  "repository_url": "https://github.com/hypar-io/function",
-  "source_file_key": null,
-  "preview_image": null,
-  "thumbnail_id": null,
-  "last_updated": "0001-01-01T00:00:00",
   "element_types": [
     "https://prod-api.hypar.io/schemas/WorkpointCount",
     "https://prod-api.hypar.io/schemas/SpaceBoundary"
-  ]
+  ],
+  "repository_url": "https://github.com/hypar-io/HyparSpace",
+  "last_updated": "2021-05-27T17:38:11.597789",
+  "cli_version": "0.9.6-alpha.2"
 }

@@ -14,5 +14,4 @@ Define a set of program requirements for Hypar Space.
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
 

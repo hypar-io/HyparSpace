@@ -87,8 +87,8 @@ namespace Elements
     
         /// <summary>How should this requirement be counted? 
         /// 
-        /// Use "Item" for individual spaces (e.g. 3 conference rooms), 
-        /// "Sum" for spaces where you only care about the total (e.g. 1000 SF of circulation), and 
+        /// Use "Item" for individual spaces (e.g. 3 conference rooms),
+        /// "Area Total" for spaces where you only care about the total (e.g. 1000 SF of circulation), and 
         /// "Unit" where you want total area divided by a "unit" size (e.g. this space supports 400 people at 120 SF / person)</summary>
         [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
