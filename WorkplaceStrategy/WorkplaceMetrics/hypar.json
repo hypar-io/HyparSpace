@@ -73,6 +73,7 @@
         "type": "array",
         "$hyparOrder": 3,
         "items": {
+          "description": "A boundary around an area to be excluded from USF Calculation. This area will be excluded from each floor.",
           "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
         }
       }
