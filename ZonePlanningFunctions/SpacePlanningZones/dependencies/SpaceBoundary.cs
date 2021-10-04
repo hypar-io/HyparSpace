@@ -12,6 +12,7 @@ namespace Elements
 
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
 
+        [JsonProperty("Program Group")]
         public string ProgramGroup { get; set; }
         public Line AlignmentEdge { get; set; } = null;
         public double AvailableLength { get; set; } = 0;
@@ -24,6 +25,8 @@ namespace Elements
         public bool AutoPlaced { get; set; } = false;
 
         public int CountPlaced { get; set; } = 0;
+
+        public int SpaceCount { get; set; } = 1;
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements Level { get; set; }
@@ -155,6 +158,7 @@ namespace Elements
             {
                 fullReq.CountPlaced++;
                 sb.FulfilledProgramRequirement = fullReq;
+                sb.ProgramGroup = fullReq.ProgramGroup;
             }
             sb.ProgramName = displayName;
             sb.ParentCentroid = parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
@@ -201,6 +205,12 @@ namespace Elements
                 this.FulfilledProgramRequirement = fullReq;
             }
 
+        }
+
+        public void SetLevelProperties(LevelVolume volume)
+        {
+            this.AdditionalProperties["Building Name"] = volume.BuildingName;
+            this.AdditionalProperties["Level Name"] = volume.Name;
         }
     }
 }

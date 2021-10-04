@@ -61,11 +61,8 @@ namespace DefineProgramRequirements
         [System.Runtime.Serialization.EnumMember(Value = @"Item")]
         Item = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"Sum")]
-        Sum = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Unit")]
-        Unit = 2,
+        [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
+        Area_Total = 1,
     
     }
 }
