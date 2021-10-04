@@ -26,6 +26,8 @@ namespace Elements
 
         public int CountPlaced { get; set; } = 0;
 
+        public int SpaceCount { get; set; } = 1;
+
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements Level { get; set; }
 

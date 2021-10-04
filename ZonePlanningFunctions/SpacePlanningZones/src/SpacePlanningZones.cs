@@ -223,6 +223,10 @@ namespace SpacePlanningZones
                         Name = sb.Name,
                         TargetCount = req?.SpaceCount ?? 0,
                     };
+                    if (req.CountType == ProgramRequirementCountType.Area_Total && req.AreaPerSpace != 0)
+                    {
+                        sb.SpaceCount = (int)Math.Round(area / req.AreaPerSpace);
+                    }
                 }
                 else
                 {
@@ -249,6 +253,7 @@ namespace SpacePlanningZones
                     if (areaPerSpace != 0)
                     {
                         areakvp.Value.AchievedCount = (int)Math.Round(areakvp.Value.AchievedArea / areaPerSpace);
+
                     }
                     else
                     {
