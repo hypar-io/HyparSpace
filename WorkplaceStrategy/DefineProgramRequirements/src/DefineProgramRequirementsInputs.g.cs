@@ -28,15 +28,16 @@ namespace DefineProgramRequirements
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DefineProgramRequirementsInputs(IList<ProgramRequirement> @programRequirements, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public DefineProgramRequirementsInputs(bool @showAdvancedOptions, IList<ProgramRequirement> @programRequirements, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DefineProgramRequirementsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programRequirements});
+                validator.PreConstruct(new object[]{ @showAdvancedOptions, @programRequirements});
             }
         
+            this.ShowAdvancedOptions = @showAdvancedOptions;
             this.ProgramRequirements = @programRequirements;
         
             if(validator != null)
@@ -45,9 +46,23 @@ namespace DefineProgramRequirements
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Show Advanced Options", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool ShowAdvancedOptions { get; set; } = false;
+    
         [Newtonsoft.Json.JsonProperty("Program Requirements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramRequirement> ProgramRequirements { get; set; }
     
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ProgramRequirementCountType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Item")]
+        Item = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
+        Area_Total = 1,
     
     }
 }

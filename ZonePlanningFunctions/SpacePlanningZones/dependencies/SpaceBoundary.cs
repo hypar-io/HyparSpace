@@ -12,11 +12,9 @@ namespace Elements
 
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
 
+        [JsonProperty("Program Group")]
         public string ProgramGroup { get; set; }
         public Line AlignmentEdge { get; set; } = null;
-        public double? Length { get; set; } = null;
-        public double? Depth { get; set; } = null;
-
         public double AvailableLength { get; set; } = 0;
         public Transform ToAlignmentEdge = null;
         public Transform FromAlignmentEdge = null;
@@ -27,6 +25,8 @@ namespace Elements
         public bool AutoPlaced { get; set; } = false;
 
         public int CountPlaced { get; set; } = 0;
+
+        public int SpaceCount { get; set; } = 1;
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements Level { get; set; }
@@ -181,11 +181,12 @@ namespace Elements
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), null, null, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
                 sb.FulfilledProgramRequirement = fullReq;
+                sb.ProgramGroup = fullReq.ProgramGroup;
             }
             sb.ProgramName = displayName;
             sb.ParentCentroid = parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
@@ -266,5 +267,10 @@ namespace Elements
             AlignmentEdge = new Line(new Vector3(0, 0), new Vector3(length, 0)).TransformedLine(FromAlignmentEdge);
         }
 
+        public void SetLevelProperties(LevelVolume volume)
+        {
+            this.AdditionalProperties["Building Name"] = volume.BuildingName;
+            this.AdditionalProperties["Level Name"] = volume.Name;
+        }
     }
 }

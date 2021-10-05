@@ -1,1 +1,182 @@
-{"Transform":{"Matrix":{"Components":[1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0]}},"Elements":{"a43726a1-c643-4061-8068-6fe5e3c49e2c":{"discriminator":"Elements.ProgramRequirement","Qualified Program Name":"Meeting Room","Program Name":"Meeting Room","Color":{"Red":0.8809013874306966,"Green":0.49120268088015995,"Blue":0.3927388157307825,"Alpha":1.0},"Area per Space":0.0,"Space Count":4,"Width":5.0,"Depth":4.6,"Hypar Space Type":"Meeting Room","Id":"a43726a1-c643-4061-8068-6fe5e3c49e2c","Name":null},"d8eef9e6-868c-4b96-9670-6d073d46fd31":{"discriminator":"Elements.ProgramRequirement","Qualified Program Name":"Private Office","Program Name":"Private Office","Color":{"Red":0.14170333660215517,"Green":0.07719685674954602,"Blue":0.7616758297530382,"Alpha":1.0},"Area per Space":0.0,"Space Count":10,"Width":6.0,"Depth":6.0,"Hypar Space Type":"Private Office","Id":"d8eef9e6-868c-4b96-9670-6d073d46fd31","Name":null},"899ee17d-b784-4517-af39-e6c1a7806d3f":{"discriminator":"Elements.ProgramRequirement","Qualified Program Name":"Lounge","Program Name":"Lounge","Color":{"Red":0.706764128082344,"Green":0.6061834542095124,"Blue":0.17615914477297445,"Alpha":1.0},"Area per Space":0.0,"Space Count":2,"Width":13.0,"Depth":13.0,"Hypar Space Type":"Lounge","Id":"899ee17d-b784-4517-af39-e6c1a7806d3f","Name":null},"dc583831-11f6-4a11-92d8-a3b0bd2d6994":{"discriminator":"Elements.ProgramAdjacencyMatrix","Nodes":["a43726a1-c643-4061-8068-6fe5e3c49e2c","d8eef9e6-868c-4b96-9670-6d073d46fd31","899ee17d-b784-4517-af39-e6c1a7806d3f"],"Edges":[{"discriminator":"Elements.Adjacency","From":3,"To":3,"Weight":1.0},{"discriminator":"Elements.Adjacency","From":4,"To":3,"Weight":2.0},{"discriminator":"Elements.Adjacency","From":5,"To":3,"Weight":1.0},{"discriminator":"Elements.Adjacency","From":7,"To":3,"Weight":1.0},{"discriminator":"Elements.Adjacency","From":7,"To":6,"Weight":1.0}],"Id":"dc583831-11f6-4a11-92d8-a3b0bd2d6994","Name":null}}}
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "f9bd61b3-9478-4655-9f6d-9a7c97d985d9": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Workplace - Workstations",
+            "Program Group": "Workplace",
+            "Program Name": "Workstations",
+            "Color": {
+                "Red": 0.10196078431372549,
+                "Green": 0.45098039215686275,
+                "Blue": 0.7176470588235294,
+                "Alpha": 1.0
+            },
+            "Area per Space": 3.994834585977202,
+            "Space Count": 6460,
+            "Width": 1.828799941478402,
+            "Depth": 2.133599931724802,
+            "Hypar Space Type": "Open Office",
+            "Count Type": "Unit",
+            "Id": "f9bd61b3-9478-4655-9f6d-9a7c97d985d9",
+            "Name": null
+        },
+        "31894548-dfc5-4236-b9fa-2e238d8a79af": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Workplace - Team Rooms",
+            "Program Group": "Workplace",
+            "Program Name": "Team Rooms",
+            "Color": {
+                "Red": 0.11372549019607843,
+                "Green": 0.06666666666666667,
+                "Blue": 0.3058823529411765,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 2.4383999219712025,
+            "Depth": 3.047999902464003,
+            "Hypar Space Type": "Team Room",
+            "Count Type": "Item",
+            "Id": "31894548-dfc5-4236-b9fa-2e238d8a79af",
+            "Name": null
+        },
+        "a5631d40-c55b-429c-b0ec-2d3e45cd3a52": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Workplace - Enclosed Office",
+            "Program Group": "Workplace",
+            "Program Name": "Enclosed Office",
+            "Color": {
+                "Red": 0.7137254901960784,
+                "Green": 0.37254901960784315,
+                "Blue": 0.807843137254902,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 2.4383999219712025,
+            "Depth": 3.047999902464003,
+            "Hypar Space Type": "Enclosed Office",
+            "Count Type": "Item",
+            "Id": "a5631d40-c55b-429c-b0ec-2d3e45cd3a52",
+            "Name": null
+        },
+        "3eea5c17-d864-46b8-a549-1bd103f93e02": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Amenity - MK",
+            "Program Group": "Amenity",
+            "Program Name": "MK",
+            "Color": {
+                "Red": 0.9607843137254902,
+                "Green": 0.7333333333333333,
+                "Blue": 0.09803921568627451,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "unspecified",
+            "Count Type": "Item",
+            "Id": "3eea5c17-d864-46b8-a549-1bd103f93e02",
+            "Name": null
+        },
+        "2d07a369-69ff-4985-959f-41908d4f2329": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Amenity - Anchor",
+            "Program Group": "Amenity",
+            "Program Name": "Anchor",
+            "Color": {
+                "Red": 0.9764705882352941,
+                "Green": 0.9450980392156862,
+                "Blue": 0.08235294117647059,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "unspecified",
+            "Count Type": "Item",
+            "Id": "2d07a369-69ff-4985-959f-41908d4f2329",
+            "Name": null
+        },
+        "206f71c2-19dc-4def-837f-94a3ded7d49d": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Green Space - Outdoor",
+            "Program Group": "Green Space",
+            "Program Name": "Outdoor",
+            "Color": {
+                "Red": 0.5215686274509804,
+                "Green": 0.8352941176470589,
+                "Blue": 0.26666666666666666,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "unspecified",
+            "Count Type": "Item",
+            "Id": "206f71c2-19dc-4def-837f-94a3ded7d49d",
+            "Name": null
+        },
+        "354bcd54-4818-4e68-9560-6b90186bc075": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Public Space - Retail",
+            "Program Group": "Public Space",
+            "Program Name": "Retail",
+            "Color": {
+                "Red": 0.6078431372549019,
+                "Green": 0.03529411764705882,
+                "Blue": 0.6509803921568628,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "unspecified",
+            "Count Type": "Item",
+            "Id": "354bcd54-4818-4e68-9560-6b90186bc075",
+            "Name": null
+        },
+        "38f37343-890b-4a4a-90f7-9ef298864f7a": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Public Space - Restaurant",
+            "Program Group": "Public Space",
+            "Program Name": "Restaurant",
+            "Color": {
+                "Red": 0.596078431372549,
+                "Green": 0.3254901960784314,
+                "Blue": 0.20392156862745098,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "unspecified",
+            "Count Type": "Item",
+            "Id": "38f37343-890b-4a4a-90f7-9ef298864f7a",
+            "Name": null
+        }
+    }
+}

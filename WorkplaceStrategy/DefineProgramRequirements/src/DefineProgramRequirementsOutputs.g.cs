@@ -16,12 +16,6 @@ namespace DefineProgramRequirements
 {
     public class DefineProgramRequirementsOutputs: ResultsBase
     {
-		/// <summary>
-		/// The volume.
-		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
-
 
 
         /// <summary>
@@ -34,21 +28,5 @@ namespace DefineProgramRequirements
         }
 
 
-        /// <summary>
-        /// Construct a DefineProgramRequirementsOutputs specifying all inputs.
-        /// </summary>
-        /// <returns></returns>
-        [JsonConstructor]
-        public DefineProgramRequirementsOutputs(double volume): base()
-        {
-			this.Volume = volume;
-
-		}
-
-		public override string ToString()
-		{
-			var json = JsonConvert.SerializeObject(this);
-			return json;
-		}
 	}
 }
