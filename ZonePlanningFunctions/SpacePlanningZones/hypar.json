@@ -237,6 +237,29 @@
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
                 }
             }
+        },
+        "Split Level Zones": {
+            "dependency": "Levels",
+            "context": "[*discriminator=Elements.LevelVolume]",
+            "identity": {
+                "Name": {
+                    "type": "string"
+                },
+                "Building Name": {
+                    "type": "string"
+                }
+            },
+            "paradigm": "edit",
+            "schema": {
+                "Splits": {
+                    "$ref": "https://prod-api.hypar.io/schemas/PolygonSplitCollection",
+                    "description": "Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.",
+                    "$hyparPolygonQuery": {
+                        "query": "[*discriminator=Elements.PolygonReference&Name=splits].Boundary",
+                        "selfDependency": true
+                    }
+                }
+            }
         }
     },
     "element_types": [
