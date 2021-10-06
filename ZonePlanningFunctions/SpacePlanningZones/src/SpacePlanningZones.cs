@@ -223,7 +223,7 @@ namespace SpacePlanningZones
                         Name = sb.Name,
                         TargetCount = req?.SpaceCount ?? 0,
                     };
-                    if (req.CountType == ProgramRequirementCountType.Area_Total && req.AreaPerSpace != 0)
+                    if (req != null && req.CountType == ProgramRequirementCountType.Area_Total && req.AreaPerSpace != 0)
                     {
                         sb.SpaceCount = (int)Math.Round(area / req.AreaPerSpace);
                     }
