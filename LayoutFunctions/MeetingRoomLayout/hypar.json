@@ -27,8 +27,8 @@
   "outputs": [
     {
       "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
+      "name": "Total Seat Count",
+      "description": "Total Seat Count",
       "type": "number"
     }
   ],

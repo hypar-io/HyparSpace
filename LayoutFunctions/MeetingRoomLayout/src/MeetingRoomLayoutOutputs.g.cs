@@ -17,10 +17,10 @@ namespace MeetingRoomLayout
     public class MeetingRoomLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total Seat Count
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
+		[JsonProperty("Total Seat Count")]
+		public double TotalSeatCount {get;}
 
 
 
@@ -39,9 +39,9 @@ namespace MeetingRoomLayout
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public MeetingRoomLayoutOutputs(double volume): base()
+        public MeetingRoomLayoutOutputs(double totalSeatCount): base()
         {
-			this.Volume = volume;
+			this.TotalSeatCount = totalSeatCount;
 
 		}
 

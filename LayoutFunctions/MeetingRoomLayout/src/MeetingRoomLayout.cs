@@ -11,8 +11,19 @@ using LayoutFunctionCommon;
 
 namespace MeetingRoomLayout
 {
+    using RoomCapacity = Tuple<string, uint>;
+
     public static class MeetingRoomLayout
     {
+        private class LayoutInstantiated
+        {
+            ComponentInstance instance;
+            RoomCapacity capacity;
+
+            public ComponentInstance Instance { get; set; }
+            public RoomCapacity Capacity { get; set; }
+        };
+
         /// <summary>
         /// The MeetingRoomLayout function.
         /// </summary>
@@ -25,10 +36,12 @@ namespace MeetingRoomLayout
             inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
-            var output = new MeetingRoomLayoutOutputs();
             var configJson = File.ReadAllText("./ConferenceRoomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
+            var outputModel = new Model();
+            uint totalSeats = 0u;
+            var seatsTable = new Dictionary<RoomCapacity, uint>();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<Floor>();
@@ -60,14 +73,16 @@ namespace MeetingRoomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable);
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable);
                         }
                     }
 
@@ -76,28 +91,46 @@ namespace MeetingRoomLayout
                 if (levelVolume == null)
                 {
                     // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume(null, 3, 0, new Transform(), null, null, false, Guid.NewGuid(), null);
+                    levelVolume = new LevelVolume(null, 3, 0, "BuildingName", new Transform(), null, null, false, Guid.NewGuid(), null);
                 }
 
                 if (input.CreateWalls)
                 {
-                    WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                    WallGeneration.GenerateWalls(outputModel, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
                 }
             }
-            OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
+            OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
+
+            var output = new MeetingRoomLayoutOutputs(totalSeats);
+            output.Model = outputModel;
             return output;
         }
 
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static uint AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<RoomCapacity, uint> seatsTable)
+        {
+            model.AddElement(layout.Instance);
+            if(seatsTable.ContainsKey(layout.Capacity))
+            {
+                seatsTable[layout.Capacity]++;
+            }
+            else
+            {
+                seatsTable[layout.Capacity] = 1u;
+            }
+            return layout.Capacity.Item2;
+        }
+
+        private static LayoutInstantiated InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
             ContentConfiguration selectedConfig = null;
-            var orderedKeys = new[] { "22P", "20P", "14P", "13P", "8P", "6P-A", "6P-B", "4P-A", "4P-B" };
-            foreach (var key in orderedKeys)
+            var result = new LayoutInstantiated();
+            for ( int i = 0; i < orderedKeys.Length; ++i )
             {
-                var config = configs[key];
+                var config = configs[orderedKeys[i]];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
                     selectedConfig = config;
+                    result.Capacity = new RoomCapacity(orderedKeys[i], orderedKeysCapacity[i]);
                     break;
                 }
             }
@@ -109,9 +142,12 @@ namespace MeetingRoomLayout
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            return instance;
+            result.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+            return result;
         }
+
+        private static string[] orderedKeys = new[] { "22P", "20P", "14P", "13P", "8P", "6P-A", "6P-B", "4P-A", "4P-B" };
+        private static uint[] orderedKeysCapacity = new[] { 22u, 20u, 14u, 13u, 8u, 6u, 6u, 4u, 4u };
     }
 
 }
