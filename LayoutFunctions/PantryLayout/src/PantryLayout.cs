@@ -26,9 +26,10 @@ namespace PantryLayout
             inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             // var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
-            var output = new PantryLayoutOutputs();
+            var outputModel = new Model();
             var configJson = File.ReadAllText("./PantryConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            int totalCountableSeats = 0;
 
             foreach (var lvl in levels)
             {
@@ -56,7 +57,9 @@ namespace PantryLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            outputModel.AddElement(layout.Item1);
+                            totalCountableSeats = layout.Item2;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -64,14 +67,20 @@ namespace PantryLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            outputModel.AddElement(layout.Item1);
+                            totalCountableSeats = layout.Item2;
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
                     }
 
                 }
             }
-            OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
+            OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
+
+
+            var output = new PantryLayoutOutputs(totalCountableSeats);
+            output.Model = outputModel;
             return output;
         }
 
@@ -125,8 +134,12 @@ namespace PantryLayout
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
         }
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static Tuple<ComponentInstance, int> InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
+            string[] countableSeats = new[] { "Steelcase - Seating - Nooi - Cafeteria Chair - Chair", 
+                                              "Steelcase - Seating - Nooi - Stool - Bar Height" };
+
+            int countableSeatCount = 0;
             ContentConfiguration selectedConfig = null;
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             foreach (var key in orderedKeys)
@@ -134,6 +147,17 @@ namespace PantryLayout
                 var config = configs[key];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
+                    foreach( var item in config.ContentItems )
+                    {
+                        foreach( var countableSeat in countableSeats )
+                        {
+                            if ( item.ContentElement.Name.Contains(countableSeat) )
+                            {
+                                countableSeatCount++;
+                            }
+                        }
+                    }
+
                     selectedConfig = config;
                     break;
                 }
@@ -148,14 +172,7 @@ namespace PantryLayout
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             var allPlacedInstances = instance.Instances;
-            // foreach (var item in allPlacedInstances)
-            // {
-            //     if (item is ElementInstance ei && !rectangle.Contains(ei.Transform.Origin))
-            //     {
-
-            //     }
-            // }
-            return instance;
+            return new Tuple<ComponentInstance, int>(instance, countableSeatCount);
         }
     }
 

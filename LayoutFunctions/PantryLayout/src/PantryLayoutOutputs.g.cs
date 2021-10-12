@@ -16,6 +16,12 @@ namespace PantryLayout
 {
     public class PantryLayoutOutputs: ResultsBase
     {
+		/// <summary>
+		/// Total count of cafeteria chairs and bar heights
+		/// </summary>
+		[JsonProperty("Total cafe chairs count")]
+		public double TotalCafeChairsCount {get;}
+
 
 
         /// <summary>
@@ -28,5 +34,21 @@ namespace PantryLayout
         }
 
 
+        /// <summary>
+        /// Construct a PantryLayoutOutputs specifying all inputs.
+        /// </summary>
+        /// <returns></returns>
+        [JsonConstructor]
+        public PantryLayoutOutputs(double totalCafeChairsCount): base()
+        {
+			this.TotalCafeChairsCount = totalCafeChairsCount;
+
+		}
+
+		public override string ToString()
+		{
+			var json = JsonConvert.SerializeObject(this);
+			return json;
+		}
 	}
 }
