@@ -16,9 +16,6 @@ namespace MeetingRoomLayout
     {
         private class LayoutInstantiated
         {
-            ComponentInstance instance;
-            RoomTally tally;
-
             public ComponentInstance Instance { get; set; }
             public RoomTally Tally { get; set; }
         };
@@ -116,7 +113,7 @@ namespace MeetingRoomLayout
             }
             else
             {
-                seatsTable[layout.Tally.RoomType] = new RoomTally(layout.Tally.SeatsCount, layout.Tally.RoomType);
+                seatsTable[layout.Tally.RoomType] = new RoomTally(layout.Tally.RoomType, layout.Tally.SeatsCount);
             }
             return (uint)layout.Tally.SeatsCount;
         }
@@ -131,7 +128,7 @@ namespace MeetingRoomLayout
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
                     selectedConfig = config;
-                    result.Tally = new RoomTally(orderedKeysCapacity[i], orderedKeys[i]);
+                    result.Tally = new RoomTally(orderedKeys[i], orderedKeysCapacity[i]);
                     break;
                 }
             }
@@ -148,7 +145,7 @@ namespace MeetingRoomLayout
         }
 
         private static string[] orderedKeys = new[] { "22P", "20P", "14P", "13P", "8P", "6P-A", "6P-B", "4P-A", "4P-B" };
-        private static uint[] orderedKeysCapacity = new[] { 22u, 20u, 14u, 13u, 8u, 6u, 6u, 4u, 4u };
+        private static int[] orderedKeysCapacity = new[] { 22, 20, 14, 13, 8, 6, 6, 4, 4 };
     }
 
 }

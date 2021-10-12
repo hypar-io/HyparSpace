@@ -26,17 +26,17 @@ namespace Elements
     public partial class RoomTally : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public RoomTally(double @seatsCount, string @roomType, System.Guid @id = default, string @name = null)
+        public RoomTally(string @roomType, int @seatsCount, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<RoomTally>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @seatsCount, @roomType, @id, @name});
+                validator.PreConstruct(new object[]{ @roomType, @seatsCount, @id, @name});
             }
         
-            this.SeatsCount = @seatsCount;
             this.RoomType = @roomType;
+            this.SeatsCount = @seatsCount;
             
             if(validator != null)
             {
@@ -44,11 +44,11 @@ namespace Elements
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("SeatsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double SeatsCount { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("Room type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RoomType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("SeatsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SeatsCount { get; set; }
     
     
     }
