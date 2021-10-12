@@ -18,13 +18,14 @@ namespace SpacePlanningZones
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) },
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) },
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) }, 
+                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) }, 
+                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) }, 
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
+            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
             File.WriteAllText("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.json", result.Model.ToJson());
         }
@@ -34,7 +35,7 @@ namespace SpacePlanningZones
             var inputText = @"
             {
   ""Default Program Assignment"": ""unspecified"",
-  ""Circulation Mode"": ""Automatic"",
+  ""Circulation Mode"": ""Manual"",
   ""Add Corridors"": {
     ""SplitLocations"": []
   },
@@ -47,9 +48,74 @@ namespace SpacePlanningZones
   ""Outer Band Depth"": 6,
   ""Manual Split Locations"": [],
   ""model_input_keys"": {
-    ""Levels"": ""dd19b10f-eadc-4b63-9f79-2fbce40f63b9_2c571838-6789-48e3-819f-edcf448c3085_elements.zip"",
-    ""Floors"": ""9ea4727c-1f5d-4d95-87ea-44458964fac4_c3bb78fd-7dee-41cc-ae2e-f1b4b4ae2794_elements.zip"",
-    ""Core"": ""7500e400-5002-4918-bc26-2e309bcf633a_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
+    ""Levels"": ""367324f6-254c-404d-8566-d579d2eb880f_2c571838-6789-48e3-819f-edcf448c3085_elements.zip"",
+    ""Floors"": ""067f5d89-da60-4b05-a4db-926aa064a3f7_c3bb78fd-7dee-41cc-ae2e-f1b4b4ae2794_elements.zip"",
+    ""Core"": ""1bc65287-c25b-4935-aacb-335c38701837_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
+  },
+  ""overrides"": {
+    ""Split Zones"": [
+      {
+        ""value"": {
+          ""Splits"": {
+            ""SplitLocations"": [
+              {
+                ""position"": {
+                  ""X"": 51.034279764206495,
+                  ""Y"": -99.16234059270332,
+                  ""Z"": 0
+                },
+                ""direction"": {
+                  ""X"": 0,
+                  ""Y"": 1,
+                  ""Z"": 0
+                }
+              },
+              {
+                ""position"": {
+                  ""X"": 74.03839144869814,
+                  ""Y"": -95.90585905312591,
+                  ""Z"": 0
+                },
+                ""direction"": {
+                  ""X"": -1,
+                  ""Y"": 0,
+                  ""Z"": 0
+                }
+              },
+              {
+                ""position"": {
+                  ""X"": 70.59032806833514,
+                  ""Y"": -85.71640882008144,
+                  ""Z"": 0
+                },
+                ""direction"": {
+                  ""X"": 0,
+                  ""Y"": 1,
+                  ""Z"": 0
+                }
+              },
+              {
+                ""position"": {
+                  ""X"": 81.58194369730937,
+                  ""Y"": -102.77665945458308,
+                  ""Z"": 0
+                },
+                ""direction"": {
+                  ""X"": 0,
+                  ""Y"": -0.9999999999999999,
+                  ""Z"": 0
+                }
+              }
+            ]
+          }
+        },
+        ""identity"": {
+          ""Name"": ""Level 05"",
+          ""Building Name"": ""Building B""
+        },
+        ""id"": ""c63fcd74-bb66-4b25-93e3-600400b3c5fa""
+      }
+    ]
   },
   ""Additional Corridor Locations"": []
 }

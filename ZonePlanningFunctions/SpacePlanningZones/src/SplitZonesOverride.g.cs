@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace SpacePlanningZones
 {
 	/// <summary>
-	/// Override metadata for SplitLevelZonesOverride
+	/// Override metadata for SplitZonesOverride
 	/// </summary>
-	public partial class SplitLevelZonesOverride : IOverride
+	public partial class SplitZonesOverride : IOverride
 	{
-        public static string Name = "Split Level Zones";
+        public static string Name = "Split Zones";
         public static string Dependency = "Levels";
         public static string Context = "[*discriminator=Elements.LevelVolume]";
 		public static string Paradigm = "Edit";

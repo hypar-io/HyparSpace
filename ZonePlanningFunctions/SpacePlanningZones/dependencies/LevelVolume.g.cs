@@ -29,22 +29,11 @@ namespace Elements
         public LevelVolume(Profile @profile, double @height, double @area, string @buildingName, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<LevelVolume>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @profile, @height, @area, @buildingName, @transform, @material, @representation, @isElementDefinition, @id, @name});
-            }
-        
             this.Profile = @profile;
             this.Height = @height;
             this.Area = @area;
             this.BuildingName = @buildingName;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         /// <summary>The profile of the level Volume</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

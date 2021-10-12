@@ -29,19 +29,8 @@ namespace Elements
         public PolygonReference(Polygon @boundary, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<PolygonReference>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @boundary, @id, @name});
-            }
-        
             this.Boundary = @boundary;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polygon Boundary { get; set; }

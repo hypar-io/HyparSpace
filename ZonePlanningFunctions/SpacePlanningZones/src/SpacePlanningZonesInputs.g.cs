@@ -244,17 +244,17 @@ namespace SpacePlanningZones
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<ProgramAssignmentsOverride> @programAssignments, IList<MergeZonesOverride> @mergeZones, IList<SplitLevelZonesOverride> @splitLevelZones)
+        public Overrides(IList<ProgramAssignmentsOverride> @programAssignments, IList<MergeZonesOverride> @mergeZones, IList<SplitZonesOverride> @splitZones)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programAssignments, @mergeZones, @splitLevelZones});
+                validator.PreConstruct(new object[]{ @programAssignments, @mergeZones, @splitZones});
             }
         
             this.ProgramAssignments = @programAssignments;
             this.MergeZones = @mergeZones;
-            this.SplitLevelZones = @splitLevelZones;
+            this.SplitZones = @splitZones;
         
             if(validator != null)
             {
@@ -268,8 +268,8 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Merge Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<MergeZonesOverride> MergeZones { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("Split Level Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<SplitLevelZonesOverride> SplitLevelZones { get; set; }
+        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SplitZonesOverride> SplitZones { get; set; }
     
     
     }
@@ -344,13 +344,13 @@ namespace SpacePlanningZones
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public partial class SplitLevelZonesOverride 
+    public partial class SplitZonesOverride 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SplitLevelZonesOverride(string @id, SplitLevelZonesIdentity @identity, SplitLevelZonesValue @value)
+        public SplitZonesOverride(string @id, SplitZonesIdentity @identity, SplitZonesValue @value)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SplitLevelZonesOverride>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SplitZonesOverride>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @id, @identity, @value});
@@ -370,10 +370,10 @@ namespace SpacePlanningZones
         public string Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SplitLevelZonesIdentity Identity { get; set; }
+        public SplitZonesIdentity Identity { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SplitLevelZonesValue Value { get; set; }
+        public SplitZonesValue Value { get; set; }
     
     
     }
@@ -474,13 +474,13 @@ namespace SpacePlanningZones
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public partial class SplitLevelZonesIdentity 
+    public partial class SplitZonesIdentity 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SplitLevelZonesIdentity(string @name, string @buildingName)
+        public SplitZonesIdentity(string @name, string @buildingName)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SplitLevelZonesIdentity>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SplitZonesIdentity>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @name, @buildingName});
@@ -506,13 +506,13 @@ namespace SpacePlanningZones
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public partial class SplitLevelZonesValue 
+    public partial class SplitZonesValue 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SplitLevelZonesValue(PolygonSplitCollection @splits)
+        public SplitZonesValue(PolygonSplitCollection @splits)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SplitLevelZonesValue>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SplitZonesValue>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @splits});

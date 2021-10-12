@@ -238,7 +238,7 @@
                 }
             }
         },
-        "Split Level Zones": {
+        "Split Zones": {
             "dependency": "Levels",
             "context": "[*discriminator=Elements.LevelVolume]",
             "identity": {
