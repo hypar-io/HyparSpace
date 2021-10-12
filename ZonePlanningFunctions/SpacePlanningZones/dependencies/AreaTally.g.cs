@@ -29,12 +29,6 @@ namespace Elements
         public AreaTally(string @programType, Color @programColor, double @areaTarget, double @achievedArea, double @distinctAreaCount, double? @targetCount, double? @achievedCount, string @cost, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<AreaTally>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @programType, @programColor, @areaTarget, @achievedArea, @distinctAreaCount, @targetCount, @achievedCount, @cost, @id, @name});
-            }
-        
             this.ProgramType = @programType;
             this.ProgramColor = @programColor;
             this.AreaTarget = @areaTarget;
@@ -43,12 +37,7 @@ namespace Elements
             this.TargetCount = @targetCount;
             this.AchievedCount = @achievedCount;
             this.Cost = @cost;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramType { get; set; }
