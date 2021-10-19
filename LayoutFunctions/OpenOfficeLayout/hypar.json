@@ -99,6 +99,7 @@
           "minimum": 0
         },
         "Desk Type": {
+          "$hyparOrder": 0,
           "type": "string",
           "enum": [
             "Simple Desk - 24x48",
@@ -113,6 +114,7 @@
           "default": "Simple Desk - 29x70"
         },
         "Custom Workstation Properties": {
+          "$hyparOrder": 0.5,
           "type": "object",
           "$hyparShowIf": {
             "conditions": [
