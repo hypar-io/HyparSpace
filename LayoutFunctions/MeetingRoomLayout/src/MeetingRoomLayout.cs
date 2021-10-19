@@ -36,7 +36,7 @@ namespace MeetingRoomLayout
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
             var outputModel = new Model();
-            uint totalSeats = 0u;
+            int totalSeats = 0;
             var seatsTable = new Dictionary<string, RoomTally>();
             foreach (var lvl in levels)
             {
@@ -97,6 +97,7 @@ namespace MeetingRoomLayout
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
 
+            outputModel.AddElement(new WorkpointCount(totalSeats, "Meeting Room Seat"));
             outputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
 
             var output = new MeetingRoomLayoutOutputs(totalSeats);
@@ -104,18 +105,29 @@ namespace MeetingRoomLayout
             return output;
         }
 
-        private static uint AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable)
+        private static int AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable)
         {
+            if(layout == null)
+            {
+                return 0;
+            }
+
             model.AddElement(layout.Instance);
-            if(seatsTable.ContainsKey(layout.Tally.RoomType))
+            int seatsCount = 0;
+            if (layout.Tally != null)
             {
-                seatsTable[layout.Tally.RoomType].SeatsCount += layout.Tally.SeatsCount;
+                if (seatsTable.ContainsKey(layout.Tally.RoomType))
+                {
+                    seatsTable[layout.Tally.RoomType].SeatsCount += layout.Tally.SeatsCount;
+                }
+                else
+                {
+                    seatsTable[layout.Tally.RoomType] = new RoomTally(layout.Tally.RoomType, layout.Tally.SeatsCount);
+                }
+                seatsCount = layout.Tally.SeatsCount;
             }
-            else
-            {
-                seatsTable[layout.Tally.RoomType] = new RoomTally(layout.Tally.RoomType, layout.Tally.SeatsCount);
-            }
-            return (uint)layout.Tally.SeatsCount;
+
+            return seatsCount;
         }
 
         private static LayoutInstantiated InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)

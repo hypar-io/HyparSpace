@@ -13,5 +13,5 @@ Lay out meeting rooms.
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
+|Total Seat Count|Number|Total Seat Count|
 

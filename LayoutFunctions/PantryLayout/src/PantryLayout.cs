@@ -58,8 +58,8 @@ namespace PantryLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                            outputModel.AddElement(layout.Item1);
-                            totalCountableSeats = layout.Item2;
+                            outputModel.AddElement(layout.instance);
+                            totalCountableSeats += layout.count;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -68,8 +68,8 @@ namespace PantryLayout
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                            outputModel.AddElement(layout.Item1);
-                            totalCountableSeats = layout.Item2;
+                            outputModel.AddElement(layout.instance);
+                            totalCountableSeats += layout.count;
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
                     }
@@ -134,7 +134,7 @@ namespace PantryLayout
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
         }
-        private static Tuple<ComponentInstance, int> InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
             string[] countableSeats = new[] { "Steelcase - Seating - Nooi - Cafeteria Chair - Chair", 
                                               "Steelcase - Seating - Nooi - Stool - Bar Height" };
@@ -164,7 +164,7 @@ namespace PantryLayout
             }
             if (selectedConfig == null)
             {
-                return null;
+                return (null, 0);
             }
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
             var rules = selectedConfig.Rules();
@@ -172,7 +172,7 @@ namespace PantryLayout
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             var allPlacedInstances = instance.Instances;
-            return new Tuple<ComponentInstance, int>(instance, countableSeatCount);
+            return (instance, countableSeatCount);
         }
     }
 

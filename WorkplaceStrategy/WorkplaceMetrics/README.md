@@ -2,7 +2,7 @@
 
 # Workplace Metrics
 
-The WorkplaceMetrics function.
+Calculate various workplace metrics from a layout.
 
 |Input Name|Type|Description|
 |---|---|---|
@@ -19,6 +19,7 @@ The WorkplaceMetrics function.
 |Total Usable Floor Area|Number|The total usable floor area of the project.|
 |Area per Person|Number|The usable floor area per person.|
 |Total Desk Count|Number|The total number of desks.|
+|Meeting room seats|Number|The total number of seats in th meeting rooms.|
 |Total Headcount|Number|The total number of employees and visitors accommodated.|
 |Area per Desk|Number|The usable floor area per desk.|
 |Desk Sharing Ratio|Number|How many people are there for each desk?|

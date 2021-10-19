@@ -54,6 +54,7 @@
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/RoomTally"
+    "https://prod-api.hypar.io/schemas/RoomTally",
+    "https://prod-api.hypar.io/schemas/WorkpointCount"
   ]
 }
