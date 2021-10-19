@@ -63,7 +63,7 @@ namespace OpenOfficeLayout
                 foreach (var ob in officeBoundaries)
                 {
                     // create a boundary we can use to override individual groups of desks. It's sunk slightly so that, if floors are on, you don't see it. 
-                    var overridableBoundary = new SpaceBoundary(ob.Boundary, ob.Cells, ob.Area, ob.Transform.Concatenated(new Transform(0, 0, -0.05)), ob.Material, new Representation(new[] { new Lamina(ob.Boundary.Perimeter, false) }), false, Guid.NewGuid(), "DeskArea");
+                    var overridableBoundary = new SpaceBoundary(ob.Boundary, ob.Cells, ob.Area, null, null, ob.Transform.Concatenated(new Transform(0, 0, -0.05)), ob.Material, new Representation(new[] { new Lamina(ob.Boundary.Perimeter, false) }), false, Guid.NewGuid(), "DeskArea");
                     overridableBoundary.ParentCentroid = ob.ParentCentroid;
                     overridableBoundary.AdditionalProperties.Add("Desk Type", Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType));
                     overridableBoundary.AdditionalProperties.Add("Integrated Collaboration Space Density", input.IntegratedCollaborationSpaceDensity);
@@ -223,7 +223,8 @@ namespace OpenOfficeLayout
 
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             var model = output.Model;
-            model.AddElement(new WorkpointCount(deskCount, Guid.NewGuid(), null));
+
+            model.AddElement(new WorkpointCount(deskCount, "Desk", Guid.NewGuid(), null));
             var outputWithData = new OpenOfficeLayoutOutputs(deskCount);
             outputWithData.Model = model;
 
