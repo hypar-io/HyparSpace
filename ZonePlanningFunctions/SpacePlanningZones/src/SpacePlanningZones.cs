@@ -18,6 +18,7 @@ namespace SpacePlanningZones
         /// <returns>A SpacePlanningZonesOutputs instance containing computed results and the model with any new elements.</returns>
         public static SpacePlanningZonesOutputs Execute(Dictionary<string, Model> inputModels, SpacePlanningZonesInputs input)
         {
+
             #region Gather Inputs
 
             // Set up output object
@@ -53,6 +54,9 @@ namespace SpacePlanningZones
 
             // Reset static properties on SpaceBoundary
             SpaceBoundary.Reset();
+
+            // clear element proxy cache
+            ElementProxy.ClearCache();
 
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
             if (programReqs != null && programReqs.Count() > 0)
@@ -104,7 +108,6 @@ namespace SpacePlanningZones
 
             // adding levels also adds the space boundaries, since they're in the levels' own elements collections
             output.Model.AddElements(levels);
-
             return output;
         }
 
@@ -408,7 +411,7 @@ namespace SpacePlanningZones
                 var levelProxy = lvl.Proxy("Levels");
                 lvl.Proxy = levelProxy;
                 // if we've overridden splits per-level, use those split locations.
-                if (input.Overrides?.SplitZones != null)
+                if (input.Overrides?.SplitZones != null && input.Overrides?.SplitZones.Count > 0)
                 {
                     var matchingOverride = input.Overrides.SplitZones.FirstOrDefault(o => o.Identity.BuildingName == lvl.BuildingName && o.Identity.Name == lvl.Name);
                     if (matchingOverride != null)
