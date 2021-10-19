@@ -29,22 +29,11 @@ namespace Elements
         public ServiceCore(Profile @profile, double @elevation, double @height, Vector3 @centroid, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<ServiceCore>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @profile, @elevation, @height, @centroid, @transform, @material, @representation, @isElementDefinition, @id, @name});
-            }
-        
             this.Profile = @profile;
             this.Elevation = @elevation;
             this.Height = @height;
             this.Centroid = @centroid;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         /// <summary>The profile of this Core</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

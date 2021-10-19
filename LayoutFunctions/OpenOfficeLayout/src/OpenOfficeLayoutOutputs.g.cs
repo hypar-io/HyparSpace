@@ -20,7 +20,7 @@ namespace OpenOfficeLayout
 		/// The number of desks.
 		/// </summary>
 		[JsonProperty("Total Desk Count")]
-		public double TotalDeskCount {get;}
+		public double TotalDeskCount {get; set;}
 
 
 

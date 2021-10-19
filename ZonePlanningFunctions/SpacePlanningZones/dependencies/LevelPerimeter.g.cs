@@ -29,21 +29,10 @@ namespace Elements
         public LevelPerimeter(double @area, double @elevation, Polygon @perimeter, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<LevelPerimeter>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @area, @elevation, @perimeter, @id, @name});
-            }
-        
             this.Area = @area;
             this.Elevation = @elevation;
             this.Perimeter = @perimeter;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         /// <summary>The area of the level perimeter.</summary>
         [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
