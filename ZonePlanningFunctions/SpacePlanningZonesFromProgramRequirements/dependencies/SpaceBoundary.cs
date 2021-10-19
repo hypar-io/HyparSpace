@@ -57,7 +57,7 @@ namespace Elements
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), null, null, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
             sb.ProgramName = displayName;
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));

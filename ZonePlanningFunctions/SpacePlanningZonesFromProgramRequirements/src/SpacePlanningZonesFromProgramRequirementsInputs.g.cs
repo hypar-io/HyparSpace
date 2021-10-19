@@ -76,17 +76,20 @@ namespace SpacePlanningZonesFromProgramRequirements
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, double @defaultHeight, double @defaultAspectRatio, Vector3 @unplacedSpaceLocation, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningZonesFromProgramRequirementsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @overrides});
+                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @defaultHeight, @defaultAspectRatio, @unplacedSpaceLocation, @overrides});
             }
         
             this.DefaultProgramAssignment = @defaultProgramAssignment;
             this.Corridors = @corridors;
+            this.DefaultHeight = @defaultHeight;
+            this.DefaultAspectRatio = @defaultAspectRatio;
+            this.UnplacedSpaceLocation = @unplacedSpaceLocation;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -102,6 +105,16 @@ namespace SpacePlanningZonesFromProgramRequirements
         /// <summary>Define the circulation network by drawing one or more corridor paths.</summary>
         [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ThickenedPolyline> Corridors { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Default Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double DefaultHeight { get; set; } = 3D;
+    
+        /// <summary>If width and depth aren't supplied, what rectangular aspect ratio should be used for each space? 1.0 will be a square.</summary>
+        [Newtonsoft.Json.JsonProperty("Default Aspect Ratio", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double DefaultAspectRatio { get; set; } = 1.8D;
+    
+        [Newtonsoft.Json.JsonProperty("Unplaced Space Location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 UnplacedSpaceLocation { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }

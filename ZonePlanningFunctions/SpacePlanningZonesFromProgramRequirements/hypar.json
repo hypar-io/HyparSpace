@@ -60,6 +60,24 @@
           "$hyparConstrainToGround": true,
           "default": null
         }
+      },
+      "Default Height": {
+        "type": "number",
+        "$hyparUnitType": "length",
+        "default": 3.0
+      },
+      "Default Aspect Ratio": {
+        "description": "If width and depth aren't supplied, what rectangular aspect ratio should be used for each space? 1.0 will be a square.",
+        "type": "number",
+        "default": 1.8
+      },
+      "Unplaced Space Location": {
+        "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json",
+        "default": {
+          "X": 0,
+          "Y": 0,
+          "Z": 0
+        }
       }
     }
   },
