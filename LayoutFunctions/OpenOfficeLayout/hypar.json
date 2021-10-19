@@ -42,8 +42,34 @@
           "Simple Desk - 30x72",
           "L-Shaped",
           "Double Desk",
-          "Enclosed Pair"
+          "Enclosed Pair",
+          "Custom"
         ]
+      },
+      "Custom Workstation Properties": {
+        "type": "object",
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Desk Type",
+              "value": "Custom"
+            }
+          ]
+        },
+        "properties": {
+          "Width": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          },
+          "Length": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          }
+        }
       }
     }
   },
@@ -80,9 +106,35 @@
             "Simple Desk - 30x72",
             "L-Shaped",
             "Double Desk",
-            "Enclosed Pair"
+            "Enclosed Pair",
+            "Custom"
           ],
           "default": "Simple Desk - 29x70"
+        },
+        "Custom Workstation Properties": {
+          "type": "object",
+          "$hyparShowIf": {
+            "conditions": [
+              {
+                "property": "Desk Type",
+                "value": "Custom"
+              }
+            ]
+          },
+          "properties": {
+            "Width": {
+              "type": "number",
+              "$hyparUnitType": "length",
+              "minimum": 0.1,
+              "default": 2.0
+            },
+            "Length": {
+              "type": "number",
+              "$hyparUnitType": "length",
+              "minimum": 0.1,
+              "default": 2.0
+            }
+          }
         }
       },
       "verbs": {
