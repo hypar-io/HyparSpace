@@ -224,7 +224,7 @@ namespace OpenOfficeLayout
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             var model = output.Model;
 
-            model.AddElement(new WorkpointCount(deskCount, "Desk", Guid.NewGuid(), null));
+            model.AddElement(new WorkpointCount() { Count = deskCount, Type = "Desk" });
             var outputWithData = new OpenOfficeLayoutOutputs(deskCount);
             outputWithData.Model = model;
 

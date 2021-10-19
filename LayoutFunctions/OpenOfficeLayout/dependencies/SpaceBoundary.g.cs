@@ -35,6 +35,12 @@ namespace Elements
             this.Length = @length;
             this.Depth = @depth;
             }
+        
+        // Empty constructor
+        public SpaceBoundary()
+            : base()
+        {
+        }
     
         /// <summary>The boundary of the space</summary>
         [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

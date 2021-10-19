@@ -38,6 +38,12 @@ namespace Elements
             this.AchievedCount = @achievedCount;
             this.Cost = @cost;
             }
+        
+        // Empty constructor
+        public AreaTally()
+            : base()
+        {
+        }
     
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramType { get; set; }

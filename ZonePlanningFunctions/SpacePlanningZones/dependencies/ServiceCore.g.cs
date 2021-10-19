@@ -34,6 +34,12 @@ namespace Elements
             this.Height = @height;
             this.Centroid = @centroid;
             }
+        
+        // Empty constructor
+        public ServiceCore()
+            : base()
+        {
+        }
     
         /// <summary>The profile of this Core</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

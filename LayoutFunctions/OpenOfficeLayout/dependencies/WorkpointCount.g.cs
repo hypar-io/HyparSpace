@@ -32,6 +32,12 @@ namespace Elements
             this.Count = @count;
             this.Type = @type;
             }
+        
+        // Empty constructor
+        public WorkpointCount()
+            : base()
+        {
+        }
     
         /// <summary>The number of workpoints</summary>
         [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

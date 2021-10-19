@@ -289,7 +289,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                 if (!areas.ContainsKey(sb.ProgramName))
                 {
                     var areaTarget = SpaceBoundary.Requirements.TryGetValue(sb.ProgramName, out var requirement) ? requirement.AreaPerSpace * requirement.SpaceCount : 0.0;
-                    areas[sb.ProgramName] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.ProgramName);
+                    areas[sb.ProgramName] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, null, null, Guid.NewGuid(), sb.ProgramName);
                 }
                 else
                 {
@@ -310,7 +310,7 @@ namespace SpacePlanningZonesFromProgramRequirements
             {
                 if (!areas.ContainsKey(circulationKey))
                 {
-                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
+                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, null, null, Guid.NewGuid(), circulationKey);
                 }
             }
 

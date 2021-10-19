@@ -76,7 +76,7 @@ namespace MeetingRoomLayout
                 if (levelVolume == null)
                 {
                     // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume(null, 3, 0, new Transform(), null, null, false, Guid.NewGuid(), null);
+                    levelVolume = new LevelVolume() { Height = 3 };
                 }
 
                 if (input.CreateWalls)

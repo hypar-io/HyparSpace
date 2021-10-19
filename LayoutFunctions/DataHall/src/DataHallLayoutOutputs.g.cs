@@ -20,13 +20,13 @@ namespace DataHallLayout
 		/// The number of server cabinets.
 		/// </summary>
 		[JsonProperty("Rack Count")]
-		public double RackCount {get;}
+		public double RackCount {get; set;}
 
 		/// <summary>
 		/// Watts per square foot
 		/// </summary>
 		[JsonProperty("Watts/sf")]
-		public string Wattssf {get;}
+		public string Wattssf {get; set;}
 
 
 

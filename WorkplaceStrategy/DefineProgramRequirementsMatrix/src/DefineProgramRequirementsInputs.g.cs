@@ -90,6 +90,17 @@ namespace DefineProgramRequirements
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum ProgramRequirementCountType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Item")]
+        Item = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
+        Area_Total = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true)]
     internal class JsonInheritanceAttribute : System.Attribute
     {

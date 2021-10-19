@@ -2,7 +2,7 @@
 
 # Workplace Metrics
 
-The WorkplaceMetrics function.
+Calculate various workplace metrics from a layout.
 
 |Input Name|Type|Description|
 |---|---|---|

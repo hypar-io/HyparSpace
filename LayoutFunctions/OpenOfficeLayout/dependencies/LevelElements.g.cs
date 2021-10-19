@@ -31,6 +31,12 @@ namespace Elements
         {
             this.Elements = @elements;
             }
+        
+        // Empty constructor
+        public LevelElements()
+            : base()
+        {
+        }
     
         /// <summary>The list of elements.</summary>
         [Newtonsoft.Json.JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

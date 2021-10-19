@@ -29,19 +29,8 @@ namespace Elements
         public LevelElements(IList<Element> @elements, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<LevelElements>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @elements, @id, @name});
-            }
-        
             this.Elements = @elements;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         /// <summary>The list of elements.</summary>
         [Newtonsoft.Json.JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
