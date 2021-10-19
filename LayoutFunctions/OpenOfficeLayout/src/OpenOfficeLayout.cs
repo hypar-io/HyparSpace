@@ -94,9 +94,9 @@ namespace OpenOfficeLayout
                     if (overridesByCentroid.ContainsKey(ob.Id))
                     {
                         var spaceOverride = overridesByCentroid[ob.Id];
-                        if (spaceOverride.Value.DeskType == SpaceSettingsValueDeskType.Custom)
+                        isCustom = spaceOverride.Value.DeskType == SpaceSettingsValueDeskType.Custom;
+                        if (isCustom)
                         {
-                            isCustom = true;
                             selectedConfig = new ContentConfiguration()
                             {
                                 CellBoundary = new ContentConfiguration.BoundaryDefinition()

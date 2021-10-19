@@ -48,6 +48,7 @@
       },
       "Custom Workstation Properties": {
         "type": "object",
+        "$hyparOrder": 0.5,
         "$hyparShowIf": {
           "conditions": [
             {
