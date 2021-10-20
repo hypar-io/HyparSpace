@@ -218,8 +218,13 @@ namespace SpacePlanningZones
                 {
                     var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.GetAreaPerSpace() * req.SpaceCount : 0.0;
                     matchingReqs[programName] = req;
-                    areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1)
+                    areas[programName] = new AreaTally()
                     {
+                        ProgramType = programName,
+                        ProgramColor = sb.Material.Color,
+                        AreaTarget = areaTarget,
+                        AchievedArea = area,
+                        DistinctAreaCount = 1,
                         Name = sb.Name,
                         TargetCount = req?.SpaceCount ?? 0,
                     };
@@ -277,8 +282,13 @@ namespace SpacePlanningZones
             {
                 if (!areas.ContainsKey(circulationKey))
                 {
-                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1)
+                    areas[circulationKey] = new AreaTally()
                     {
+                        ProgramType = circulationKey,
+                        ProgramColor = corridorFloor.Material.Color,
+                        AreaTarget = circReq.Value?.AreaPerSpace ?? 0,
+                        AchievedArea = corridorFloor.Area(),
+                        DistinctAreaCount = 1,
                         Name = circulationKey,
                         TargetCount = 1,
                     };
@@ -301,8 +311,13 @@ namespace SpacePlanningZones
                     var type = r.CountType;
                     if (!areas.ContainsKey(name))
                     {
-                        areas[name] = new AreaTally(name, r.Color, r.GetAreaPerSpace() * r.SpaceCount, 0, 0)
+                        areas[name] = new AreaTally()
                         {
+                            ProgramType = name,
+                            ProgramColor = r.Color,
+                            AreaTarget = r.GetAreaPerSpace() * r.SpaceCount,
+                            AchievedArea = 0,
+                            DistinctAreaCount = 0,
                             TargetCount = r.SpaceCount
                         };
                     }
@@ -380,7 +395,11 @@ namespace SpacePlanningZones
                 SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, input, lvl, corridorProfiles, levelBoundary, thickerOffsetProfiles, angleCheckForWallExtensions: walls != null && walls.Count() > 0);
 
                 // Construct LevelElements to contain space boundaries
-                var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
+                var level = new LevelElements()
+                {
+                    Name = lvl.Name,
+                    Elements = new List<Element>()
+                };
                 level.LevelVolumeId = lvl.Id;
                 levels.Add(level);
 
@@ -462,10 +481,10 @@ namespace SpacePlanningZones
             foreach (var sb in spaceBoundaries)
             {
                 var boundary = sb as SpaceBoundary;
-                output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), type));
+                output.Model.AddElement(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
                 if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
                 {
-                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), type)));
+                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference() { Boundary = v, Name = type }));
                 }
             }
         }

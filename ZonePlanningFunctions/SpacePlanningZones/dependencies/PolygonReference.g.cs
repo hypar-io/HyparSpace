@@ -31,6 +31,12 @@ namespace Elements
         {
             this.Boundary = @boundary;
             }
+        
+        // Empty constructor
+        public PolygonReference()
+            : base()
+        {
+        }
     
         [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polygon Boundary { get; set; }

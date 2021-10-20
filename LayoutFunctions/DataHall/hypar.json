@@ -75,6 +75,9 @@
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements"
   ],
+  "content_catalogs": [
+    "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/56433155-6494-428c-b800-53d18234e5cf/data-rack-56433155-6494-428c-b800-53d18234e5cf-model.json"
+  ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,

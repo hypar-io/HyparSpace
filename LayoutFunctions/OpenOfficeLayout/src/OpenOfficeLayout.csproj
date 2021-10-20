@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements.Components" Version="0.9.3-alpha.12" />
+    <PackageReference Include="Hypar.Elements.Components" Version="0.9.5-alpha.13" />
   </ItemGroup>
 
 

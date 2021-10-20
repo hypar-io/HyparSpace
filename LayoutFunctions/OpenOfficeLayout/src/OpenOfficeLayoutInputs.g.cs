@@ -28,18 +28,19 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType, CustomWorkstationProperties @customWorkstationProperties, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @overrides});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @customWorkstationProperties, @overrides});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
             this.DeskType = @deskType;
+            this.CustomWorkstationProperties = @customWorkstationProperties;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -60,6 +61,9 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk__29x70;
+    
+        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomWorkstationProperties CustomWorkstationProperties { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
@@ -90,6 +94,52 @@ namespace OpenOfficeLayout
     
         [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
         Enclosed_Pair = 6,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CustomWorkstationProperties 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CustomWorkstationProperties(double @width, double @length)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CustomWorkstationProperties>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @width, @length});
+            }
+        
+            this.Width = @width;
+            this.Length = @length;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.1D, double.MaxValue)]
+        public double Width { get; set; } = 2D;
+    
+        [Newtonsoft.Json.JsonProperty("Length", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.1D, double.MaxValue)]
+        public double Length { get; set; } = 2D;
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
     
     }
     
@@ -231,17 +281,18 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, SpaceSettingsValueDeskType @deskType)
+        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, SpaceSettingsValueDeskType @deskType, SpaceSettingsValueCustomWorkstationProperties @customWorkstationProperties)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @customWorkstationProperties});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
             this.DeskType = @deskType;
+            this.CustomWorkstationProperties = @customWorkstationProperties;
         
             if(validator != null)
             {
@@ -261,6 +312,9 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SpaceSettingsValueDeskType DeskType { get; set; } = SpaceSettingsValueDeskType.Simple_Desk__29x70;
+    
+        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValueCustomWorkstationProperties CustomWorkstationProperties { get; set; }
     
     
     }
@@ -344,6 +398,52 @@ namespace OpenOfficeLayout
     
         [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
         Enclosed_Pair = 6,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsValueCustomWorkstationProperties 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsValueCustomWorkstationProperties(double @width, double @length)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValueCustomWorkstationProperties>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @width, @length});
+            }
+        
+            this.Width = @width;
+            this.Length = @length;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.1D, double.MaxValue)]
+        public double Width { get; set; } = 2D;
+    
+        [Newtonsoft.Json.JsonProperty("Length", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.1D, double.MaxValue)]
+        public double Length { get; set; } = 2D;
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
     
     }
 }

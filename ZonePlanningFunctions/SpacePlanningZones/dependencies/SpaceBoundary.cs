@@ -157,7 +157,16 @@ namespace Elements
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), null, null, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary()
+            {
+                Boundary = profile,
+                Cells = new List<Polygon> { profile.Perimeter },
+                Area = profile.Area(),
+                Transform = xform,
+                Material = material ?? MaterialDict["unrecognized"],
+                Representation = representation,
+                Name = name
+            };
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
