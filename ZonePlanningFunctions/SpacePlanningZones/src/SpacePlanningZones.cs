@@ -88,13 +88,13 @@ namespace SpacePlanningZones
                     continue;
                 }
                 // set levels
-                sb.Level.Elements.Add(sb);
+                sb.LevelElements.Elements.Add(sb);
 
                 // copy level volume properties
-                var lvlVolume = levelsModel.Elements[sb.Level.LevelVolumeId] as LevelVolume;
+                var lvlVolume = levelsModel.Elements[sb.LevelElements.LevelVolumeId] as LevelVolume;
                 sb.SetLevelProperties(lvlVolume);
                 // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
-                sb.Level = null;
+                sb.LevelElements = null;
             }
 
             // calculate area tallies
@@ -129,7 +129,7 @@ namespace SpacePlanningZones
                         }
                         else // Split input on overrides is now deprecated — we shouldn't typically hit this code.
                         {
-                            var level = matchingSB.Level;
+                            var level = matchingSB.LevelElements;
                             matchingSB.Remove();
                             var boundaries = new List<Polygon>(matchingSB.Boundary.Voids) { matchingSB.Boundary.Perimeter };
                             var guideVector = GetDominantAxis(boundaries.SelectMany(b => b.Segments()));
@@ -143,7 +143,7 @@ namespace SpacePlanningZones
                                 Identity.AddOverrideIdentity(newCellSb, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                                 newCellSb.AdditionalProperties["Split"] = overrideValue.Value.Split;
                                 SubdividedBoundaries.Add(newCellSb);
-                                newCellSb.Level = level;
+                                newCellSb.LevelElements = level;
 
                             }
                         }
@@ -175,10 +175,10 @@ namespace SpacePlanningZones
                     {
                         allSpaceBoundaries.Remove(msb);
                     }
-                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.Level?.Id ?? Guid.Empty);
+                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.LevelElements?.Id ?? Guid.Empty);
                     foreach (var lvlGrp in sbsByLevel)
                     {
-                        var level = lvlGrp.First().Level;
+                        var level = lvlGrp.First().LevelElements;
                         var profiles = lvlGrp.Select(sb => sb.Boundary);
                         var baseobj = lvlGrp.FirstOrDefault(n => n.Name != null && n.Name != "unspecified");
                         if (baseobj == default)
@@ -194,7 +194,7 @@ namespace SpacePlanningZones
                             var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.ParentCentroid, (Vector3)baseSB.ParentCentroid);
                             newSB.SetProgram(baseSB.Name);
                             Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
-                            newSB.Level = level;
+                            newSB.LevelElements = level;
                             allSpaceBoundaries.Add(newSB);
                         }
                     }
@@ -423,7 +423,24 @@ namespace SpacePlanningZones
                 // {
                 //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
                 // }
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.SplitZones.SplitLocations, false, output.Model);
+                var splitLocations = input.SplitZones.SplitLocations;
+                var levelProxy = lvl.Proxy("Levels");
+                lvl.Proxy = levelProxy;
+                // if we've overridden splits per-level, use those split locations.
+                if (input.Overrides?.SplitZones != null)
+                {
+                    var matchingOverride = input.Overrides.SplitZones.FirstOrDefault(o => o.Identity.BuildingName == lvl.BuildingName && o.Identity.Name == lvl.Name);
+                    if (matchingOverride != null)
+                    {
+                        splitLocations = matchingOverride.Value.Splits.SplitLocations;
+
+                        Identity.AddOverrideIdentity(levelProxy, matchingOverride);
+                        Identity.AddOverrideValue(levelProxy, matchingOverride.GetName(), matchingOverride.Value);
+                        output.Model.AddElement(levelProxy);
+                    }
+                }
+
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, splitLocations, false, output.Model);
 
 
                 // These are the old style methods, just left in place for backwards compatibility. 
@@ -442,7 +459,7 @@ namespace SpacePlanningZones
 
                 foreach (SpaceBoundary b in spaceBoundaries)
                 {
-                    b.Level = level;
+                    b.LevelElements = level;
                 }
 
                 allSpaceBoundaries.AddRange(spaceBoundaries.OfType<SpaceBoundary>());

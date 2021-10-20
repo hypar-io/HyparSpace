@@ -28,8 +28,10 @@ namespace Elements
 
         public int SpaceCount { get; set; } = 1;
 
+        public ElementProxy<LevelVolume> Level { get; set; }
+
         [Newtonsoft.Json.JsonIgnore]
-        public LevelElements Level { get; set; }
+        public LevelElements LevelElements { get; set; }
 
         [Newtonsoft.Json.JsonIgnore]
         public ProgramRequirement FulfilledProgramRequirement = null;
@@ -88,6 +90,7 @@ namespace Elements
                     var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(width + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
                     var newSb = SpaceBoundary.Make(idealRect, space.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
                     newSb.AlignmentEdge = edge;
+                    newSb.LevelElements = LevelElements;
                     newSb.Level = Level;
                     runningX += width;
                     newSpaces.Add(newSb);
@@ -97,6 +100,7 @@ namespace Elements
                     var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, this.Depth.Value)).TransformedPolygon(this.FromAlignmentEdge);
                     var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
                     var newSb = SpaceBoundary.Make(idealRect, this.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
+                    newSb.LevelElements = LevelElements;
                     newSb.Level = Level;
                     newSpaces.Add(newSb);
                 }
@@ -182,9 +186,9 @@ namespace Elements
 
         public void Remove()
         {
-            if (this.Level?.Elements != null && this.Level.Elements.Contains(this))
+            if (this.LevelElements?.Elements != null && this.LevelElements.Elements.Contains(this))
             {
-                this.Level.Elements.Remove(this);
+                this.LevelElements.Elements.Remove(this);
             }
             if (this.FulfilledProgramRequirement != null)
             {
@@ -220,6 +224,7 @@ namespace Elements
         {
             this.AdditionalProperties["Building Name"] = volume.BuildingName;
             this.AdditionalProperties["Level Name"] = volume.Name;
+            this.Level = volume.Proxy;
         }
     }
 }
