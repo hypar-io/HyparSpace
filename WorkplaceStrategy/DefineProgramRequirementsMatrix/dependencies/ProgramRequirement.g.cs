@@ -39,6 +39,12 @@ namespace Elements
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
             }
+        
+        // Empty constructor
+        public ProgramRequirement()
+            : base()
+        {
+        }
     
         /// <summary>What group does this program belong to?</summary>
         [Newtonsoft.Json.JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

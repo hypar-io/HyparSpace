@@ -32,6 +32,11 @@ namespace Elements
             this.To = @to;
             this.Weight = @weight;
             }
+        
+        // Empty constructor
+        public Adjacency()
+        {
+        }
     
         [Newtonsoft.Json.JsonProperty("From", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int From { get; set; }
