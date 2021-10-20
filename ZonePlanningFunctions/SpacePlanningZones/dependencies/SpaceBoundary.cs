@@ -224,7 +224,7 @@ namespace Elements
         {
             this.AdditionalProperties["Building Name"] = volume.BuildingName;
             this.AdditionalProperties["Level Name"] = volume.Name;
-            this.Level = volume.Proxy;
+            // this.Level = volume.Proxy;
         }
     }
 }
