@@ -31,6 +31,22 @@ namespace OpenOfficeLayout
 
             var configJson = File.ReadAllText("OpenOfficeDeskConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            if (input.CustomWorkstationProperties == null)
+            {
+                input.CustomWorkstationProperties = new CustomWorkstationProperties(2, 2);
+            }
+            configs["Custom"] = new ContentConfiguration()
+            {
+                CellBoundary = new ContentConfiguration.BoundaryDefinition()
+                {
+                    Min = (0, 0, 0),
+                    Max = (input.CustomWorkstationProperties.Width, input.CustomWorkstationProperties.Length, 0)
+                },
+                ContentItems = new List<ContentConfiguration.ContentItem>()
+            };
+
+            var defaultCustomDesk = new CustomWorkstation(input.CustomWorkstationProperties.Width, input.CustomWorkstationProperties.Length);
+
             var defaultConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType)];
 
             var desksPerInstance = input.DeskType == OpenOfficeLayoutInputsDeskType.Enclosed_Pair || input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? 2 : 1;
@@ -73,10 +89,30 @@ namespace OpenOfficeLayout
                     var selectedConfig = defaultConfig;
                     var rotation = input.GridRotation;
                     var density = input.IntegratedCollaborationSpaceDensity;
+                    var customDesk = defaultCustomDesk;
+                    var isCustom = input.DeskType == OpenOfficeLayoutInputsDeskType.Custom;
                     if (overridesByCentroid.ContainsKey(ob.Id))
                     {
                         var spaceOverride = overridesByCentroid[ob.Id];
-                        selectedConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType)];
+                        isCustom = spaceOverride.Value.DeskType == SpaceSettingsValueDeskType.Custom;
+                        if (isCustom)
+                        {
+                            selectedConfig = new ContentConfiguration()
+                            {
+                                CellBoundary = new ContentConfiguration.BoundaryDefinition()
+                                {
+                                    Min = (0, 0, 0),
+                                    Max = (spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length, 0)
+                                },
+                                ContentItems = new List<ContentConfiguration.ContentItem>()
+                            };
+                            customDesk = new CustomWorkstation(spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length);
+                            Identity.AddOverrideIdentity(ob, spaceOverride);
+                        }
+                        else
+                        {
+                            selectedConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType)];
+                        }
                         overridableBoundary.AdditionalProperties["Desk Type"] = Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType);
                         overridableBoundary.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                         overridableBoundary.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
@@ -187,7 +223,14 @@ namespace OpenOfficeLayout
                                     // output.Model.AddElement(cell.GetCellGeometry());
                                     var cellGeo = cell.GetCellGeometry() as Polygon;
                                     var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, -90)).Concatenated(new Transform(cellGeo.Vertices[3])).Concatenated(ob.Transform);
-                                    output.Model.AddElements(selectedConfig.Instantiate(transform));
+                                    if (isCustom)
+                                    {
+                                        output.Model.AddElement(customDesk.CreateInstance(transform, null));
+                                    }
+                                    else
+                                    {
+                                        output.Model.AddElements(selectedConfig.Instantiate(transform));
+                                    }
                                     // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.YAxis));
                                     deskCount += desksPerInstance;
                                 }
@@ -197,7 +240,14 @@ namespace OpenOfficeLayout
                                     var cellGeo = cell.GetCellGeometry() as Polygon;
                                     var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, 90)).Concatenated(new Transform(cellGeo.Vertices[1])).Concatenated(ob.Transform);
                                     // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.XAxis));
-                                    output.Model.AddElements(selectedConfig.Instantiate(transform));
+                                    if (isCustom)
+                                    {
+                                        output.Model.AddElement(customDesk.CreateInstance(transform, null));
+                                    }
+                                    else
+                                    {
+                                        output.Model.AddElements(selectedConfig.Instantiate(transform));
+                                    }
                                     deskCount += desksPerInstance;
                                 }
                             }

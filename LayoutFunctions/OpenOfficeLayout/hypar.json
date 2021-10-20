@@ -42,8 +42,35 @@
           "Simple Desk - 30x72",
           "L-Shaped",
           "Double Desk",
-          "Enclosed Pair"
+          "Enclosed Pair",
+          "Custom"
         ]
+      },
+      "Custom Workstation Properties": {
+        "type": "object",
+        "$hyparOrder": 0.5,
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Desk Type",
+              "value": "Custom"
+            }
+          ]
+        },
+        "properties": {
+          "Width": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          },
+          "Length": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          }
+        }
       }
     }
   },
@@ -72,6 +99,7 @@
           "minimum": 0
         },
         "Desk Type": {
+          "$hyparOrder": 0,
           "type": "string",
           "enum": [
             "Simple Desk - 24x48",
@@ -80,9 +108,36 @@
             "Simple Desk - 30x72",
             "L-Shaped",
             "Double Desk",
-            "Enclosed Pair"
+            "Enclosed Pair",
+            "Custom"
           ],
           "default": "Simple Desk - 29x70"
+        },
+        "Custom Workstation Properties": {
+          "$hyparOrder": 0.5,
+          "type": "object",
+          "$hyparShowIf": {
+            "conditions": [
+              {
+                "property": "Desk Type",
+                "value": "Custom"
+              }
+            ]
+          },
+          "properties": {
+            "Width": {
+              "type": "number",
+              "$hyparUnitType": "length",
+              "minimum": 0.1,
+              "default": 2.0
+            },
+            "Length": {
+              "type": "number",
+              "$hyparUnitType": "length",
+              "minimum": 0.1,
+              "default": 2.0
+            }
+          }
         }
       },
       "verbs": {
