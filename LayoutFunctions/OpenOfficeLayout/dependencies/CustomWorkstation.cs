@@ -6,7 +6,7 @@ namespace Elements
 {
     public class CustomWorkstation : GeometricElement
     {
-        private static Material CustomWorkstationMaterial = new Material("Workstation", (0.7, 0.7, 0.7, 0.6));
+        private static Material CustomWorkstationMaterial = new Material("Workstation", (0.7, 0.7, 0.7, 1.0));
         public CustomWorkstation(double length, double width)
         {
             var boundary = Polygon.Rectangle((0, 0), (length, width)).Offset(-0.05).First();
