@@ -19,7 +19,7 @@ Calculate various workplace metrics from a layout.
 |Total Usable Floor Area|Number|The total usable floor area of the project.|
 |Area per Person|Number|The usable floor area per person.|
 |Total Desk Count|Number|The total number of desks.|
-|Meeting room seats|Number|The total number of seats in th meeting rooms.|
+|Meeting room seats|Number|The total number of seats in the meeting rooms.|
 |Total Headcount|Number|The total number of employees and visitors accommodated.|
 |Area per Desk|Number|The usable floor area per desk.|
 |Desk Sharing Ratio|Number|How many people are there for each desk?|

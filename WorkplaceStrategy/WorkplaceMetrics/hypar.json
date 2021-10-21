@@ -101,7 +101,7 @@
     {
       "unit_type": "none",
       "name": "Meeting room seats",
-      "description": "The total number of seats in th meeting rooms.",
+      "description": "The total number of seats in the meeting rooms.",
       "type": "number"
     },
     {

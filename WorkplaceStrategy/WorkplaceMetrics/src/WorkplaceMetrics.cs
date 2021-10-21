@@ -39,7 +39,7 @@ namespace WorkplaceMetrics
                                                         .Sum((wc => (wc.Type != null && wc.Type.Contains("Meeting Room Seat")) ? wc.Count : 0));
             }
 
-            var meetingRoomCount = 0;// zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
+            var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
 
             var headcount = -1;
             var deskSharingRatio = 1.0;

@@ -35,7 +35,7 @@ namespace WorkplaceMetrics
 		public double TotalDeskCount {get;}
 
 		/// <summary>
-		/// The total number of seats in th meeting rooms.
+		/// The total number of seats in the meeting rooms.
 		/// </summary>
 		[JsonProperty("Meeting room seats")]
 		public double MeetingRoomSeats {get;}
