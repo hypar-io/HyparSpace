@@ -32,14 +32,12 @@ namespace Elements
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceBoundary>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @boundary, @cells, @area, @length, @depth, @transform, @material, @representation, @isElementDefinition, @id, @name});
+                validator.PreConstruct(new object[]{ @boundary, @cells, @area, @transform, @material, @representation, @isElementDefinition, @id, @name});
             }
         
             this.Boundary = @boundary;
             this.Cells = @cells;
             this.Area = @area;
-            this.Length = @length;
-            this.Depth = @depth;
             
             if(validator != null)
             {

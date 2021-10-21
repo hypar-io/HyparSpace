@@ -20,7 +20,7 @@ namespace MeetingRoomLayout
 		/// Total Seat Count
 		/// </summary>
 		[JsonProperty("Total Seat Count")]
-		public double TotalSeatCount {get;}
+		public double TotalSeatCount {get; set;}
 
 
 

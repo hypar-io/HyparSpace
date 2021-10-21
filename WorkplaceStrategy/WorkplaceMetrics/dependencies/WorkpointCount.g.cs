@@ -29,20 +29,9 @@ namespace Elements
         public WorkpointCount(int @count, string @type, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCount>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @count, @type, @id, @name});
-            }
-        
             this.Count = @count;
             this.Type = @type;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         /// <summary>The number of workpoints</summary>
         [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

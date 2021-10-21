@@ -87,7 +87,14 @@ namespace PrivateOfficeLayout
                                     if (cell.Type != null && cell.Type.Contains("Office"))
                                     {
                                         var profile = new Profile(cellBoundaries);
-                                        returnCells.Add(new SpaceBoundary(profile, null, profile.Area(), room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name));
+                                        returnCells.Add(new SpaceBoundary()
+                                        {
+                                            Boundary = profile,
+                                            Area = profile.Area(),
+                                            Transform = room.Transform,
+                                            Material = room.Material,
+                                            Name = room.Name
+                                        });
                                     }
                                     else
                                     {
@@ -104,7 +111,14 @@ namespace PrivateOfficeLayout
                                 return tempGrid.GetCells().Select(c =>
                                 {
                                     var profile = new Profile(c.GetTrimmedCellGeometry().OfType<Polygon>().ToList());
-                                    return new SpaceBoundary(profile, null, profile.Area(), room.Transform, room.Material, null, false, Guid.NewGuid(), room.Name);
+                                    return new SpaceBoundary()
+                                    {
+                                        Boundary = profile,
+                                        Area = profile.Area(),
+                                        Transform = room.Transform,
+                                        Material = room.Material,
+                                        Name = room.Name
+                                    };
                                 }
                                 );
                             }
@@ -174,7 +188,7 @@ namespace PrivateOfficeLayout
                 if (levelVolume == null)
                 {
                     // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume(null, 4, 0, new Transform(), null, null, false, Guid.NewGuid(), null);
+                    levelVolume = new LevelVolume() { Height = 4 };
                 }
 
                 if (input.CreateWalls)

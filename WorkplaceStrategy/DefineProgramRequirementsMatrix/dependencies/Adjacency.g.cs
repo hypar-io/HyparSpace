@@ -28,21 +28,10 @@ namespace Elements
         [Newtonsoft.Json.JsonConstructor]
         public Adjacency(int @from, int @to, double @weight)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<Adjacency>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @from, @to, @weight});
-            }
-        
             this.From = @from;
             this.To = @to;
             this.Weight = @weight;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
-        }
     
         [Newtonsoft.Json.JsonProperty("From", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int From { get; set; }

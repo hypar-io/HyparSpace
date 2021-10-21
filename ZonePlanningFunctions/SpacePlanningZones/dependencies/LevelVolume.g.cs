@@ -34,6 +34,12 @@ namespace Elements
             this.Area = @area;
             this.BuildingName = @buildingName;
             }
+        
+        // Empty constructor
+        public LevelVolume()
+            : base()
+        {
+        }
     
         /// <summary>The profile of the level Volume</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

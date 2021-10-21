@@ -26,15 +26,9 @@ namespace Elements
     public partial class ProgramRequirement : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, System.Guid @id = default, string @name = null)
+        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirement>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @areaPerSpace, @spaceCount, @width, @depth, @hyparSpaceType, @id, @name});
-            }
-        
             this.ProgramGroup = @programGroup;
             this.ProgramName = @programName;
             this.Color = @color;
@@ -43,12 +37,8 @@ namespace Elements
             this.Width = @width;
             this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
+            this.CountType = @countType;
             }
-        }
     
         /// <summary>What group does this program belong to?</summary>
         [Newtonsoft.Json.JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -83,6 +73,15 @@ namespace Elements
         [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string HyparSpaceType { get; set; } = "unspecified";
+    
+        /// <summary>How should this requirement be counted? 
+        /// 
+        /// Use "Item" for individual spaces (e.g. 3 conference rooms),
+        /// "Area Total" for spaces where you only care about the total (e.g. 1000 SF of circulation), and 
+        /// "Unit" where you want total area divided by a "unit" size (e.g. this space supports 400 people at 120 SF / person)</summary>
+        [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ProgramRequirementCountType CountType { get; set; } = Elements.ProgramRequirementCountType.Item;
     
     
     }

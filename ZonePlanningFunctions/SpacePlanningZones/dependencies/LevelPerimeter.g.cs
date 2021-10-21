@@ -33,6 +33,12 @@ namespace Elements
             this.Elevation = @elevation;
             this.Perimeter = @perimeter;
             }
+        
+        // Empty constructor
+        public LevelPerimeter()
+            : base()
+        {
+        }
     
         /// <summary>The area of the level perimeter.</summary>
         [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

@@ -88,13 +88,13 @@ namespace SpacePlanningZones
                     continue;
                 }
                 // set levels
-                sb.Level.Elements.Add(sb);
+                sb.LevelElements.Elements.Add(sb);
 
                 // copy level volume properties
-                var lvlVolume = levelsModel.Elements[sb.Level.LevelVolumeId] as LevelVolume;
+                var lvlVolume = levelsModel.Elements[sb.LevelElements.LevelVolumeId] as LevelVolume;
                 sb.SetLevelProperties(lvlVolume);
                 // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
-                sb.Level = null;
+                sb.LevelElements = null;
             }
 
             // calculate area tallies
@@ -129,7 +129,7 @@ namespace SpacePlanningZones
                         }
                         else // Split input on overrides is now deprecated — we shouldn't typically hit this code.
                         {
-                            var level = matchingSB.Level;
+                            var level = matchingSB.LevelElements;
                             matchingSB.Remove();
                             var boundaries = new List<Polygon>(matchingSB.Boundary.Voids) { matchingSB.Boundary.Perimeter };
                             var guideVector = GetDominantAxis(boundaries.SelectMany(b => b.Segments()));
@@ -143,7 +143,7 @@ namespace SpacePlanningZones
                                 Identity.AddOverrideIdentity(newCellSb, "Program Assignments", overrideValue.Id, overrideValue.Identity);
                                 newCellSb.AdditionalProperties["Split"] = overrideValue.Value.Split;
                                 SubdividedBoundaries.Add(newCellSb);
-                                newCellSb.Level = level;
+                                newCellSb.LevelElements = level;
 
                             }
                         }
@@ -175,10 +175,10 @@ namespace SpacePlanningZones
                     {
                         allSpaceBoundaries.Remove(msb);
                     }
-                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.Level?.Id ?? Guid.Empty);
+                    var sbsByLevel = matchingSbs.GroupBy(sb => sb.LevelElements?.Id ?? Guid.Empty);
                     foreach (var lvlGrp in sbsByLevel)
                     {
-                        var level = lvlGrp.First().Level;
+                        var level = lvlGrp.First().LevelElements;
                         var profiles = lvlGrp.Select(sb => sb.Boundary);
                         var baseobj = lvlGrp.FirstOrDefault(n => n.Name != null && n.Name != "unspecified");
                         if (baseobj == default)
@@ -194,7 +194,7 @@ namespace SpacePlanningZones
                             var newSB = SpaceBoundary.Make(newProfile, baseSB.Name, baseSB.Transform, rep.Height, (Vector3)baseSB.ParentCentroid, (Vector3)baseSB.ParentCentroid);
                             newSB.SetProgram(baseSB.Name);
                             Identity.AddOverrideIdentity(newSB, "Merge Zones", mz.Id, mz.Identities[0]);
-                            newSB.Level = level;
+                            newSB.LevelElements = level;
                             allSpaceBoundaries.Add(newSB);
                         }
                     }
@@ -218,8 +218,13 @@ namespace SpacePlanningZones
                 {
                     var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.GetAreaPerSpace() * req.SpaceCount : 0.0;
                     matchingReqs[programName] = req;
-                    areas[programName] = new AreaTally(programName, sb.Material.Color, areaTarget, area, 1)
+                    areas[programName] = new AreaTally()
                     {
+                        ProgramType = programName,
+                        ProgramColor = sb.Material.Color,
+                        AreaTarget = areaTarget,
+                        AchievedArea = area,
+                        DistinctAreaCount = 1,
                         Name = sb.Name,
                         TargetCount = req?.SpaceCount ?? 0,
                     };
@@ -277,8 +282,13 @@ namespace SpacePlanningZones
             {
                 if (!areas.ContainsKey(circulationKey))
                 {
-                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1)
+                    areas[circulationKey] = new AreaTally()
                     {
+                        ProgramType = circulationKey,
+                        ProgramColor = corridorFloor.Material.Color,
+                        AreaTarget = circReq.Value?.AreaPerSpace ?? 0,
+                        AchievedArea = corridorFloor.Area(),
+                        DistinctAreaCount = 1,
                         Name = circulationKey,
                         TargetCount = 1,
                     };
@@ -301,8 +311,13 @@ namespace SpacePlanningZones
                     var type = r.CountType;
                     if (!areas.ContainsKey(name))
                     {
-                        areas[name] = new AreaTally(name, r.Color, r.GetAreaPerSpace() * r.SpaceCount, 0, 0)
+                        areas[name] = new AreaTally()
                         {
+                            ProgramType = name,
+                            ProgramColor = r.Color,
+                            AreaTarget = r.GetAreaPerSpace() * r.SpaceCount,
+                            AchievedArea = 0,
+                            DistinctAreaCount = 0,
                             TargetCount = r.SpaceCount
                         };
                     }
@@ -380,7 +395,11 @@ namespace SpacePlanningZones
                 SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, input, lvl, corridorProfiles, levelBoundary, thickerOffsetProfiles, angleCheckForWallExtensions: walls != null && walls.Count() > 0);
 
                 // Construct LevelElements to contain space boundaries
-                var level = new LevelElements(new List<Element>(), Guid.NewGuid(), lvl.Name);
+                var level = new LevelElements()
+                {
+                    Name = lvl.Name,
+                    Elements = new List<Element>()
+                };
                 level.LevelVolumeId = lvl.Id;
                 levels.Add(level);
 
@@ -404,7 +423,24 @@ namespace SpacePlanningZones
                 // {
                 //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
                 // }
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.SplitZones.SplitLocations, false, output.Model);
+                var splitLocations = input.SplitZones.SplitLocations;
+                var levelProxy = lvl.Proxy("Levels");
+                lvl.Proxy = levelProxy;
+                // if we've overridden splits per-level, use those split locations.
+                if (input.Overrides?.SplitZones != null)
+                {
+                    var matchingOverride = input.Overrides.SplitZones.FirstOrDefault(o => o.Identity.BuildingName == lvl.BuildingName && o.Identity.Name == lvl.Name);
+                    if (matchingOverride != null)
+                    {
+                        splitLocations = matchingOverride.Value.Splits.SplitLocations;
+
+                        Identity.AddOverrideIdentity(levelProxy, matchingOverride);
+                        Identity.AddOverrideValue(levelProxy, matchingOverride.GetName(), matchingOverride.Value);
+                        output.Model.AddElement(levelProxy);
+                    }
+                }
+
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, splitLocations, false, output.Model);
 
 
                 // These are the old style methods, just left in place for backwards compatibility. 
@@ -423,7 +459,7 @@ namespace SpacePlanningZones
 
                 foreach (SpaceBoundary b in spaceBoundaries)
                 {
-                    b.Level = level;
+                    b.LevelElements = level;
                 }
 
                 allSpaceBoundaries.AddRange(spaceBoundaries.OfType<SpaceBoundary>());
@@ -445,10 +481,10 @@ namespace SpacePlanningZones
             foreach (var sb in spaceBoundaries)
             {
                 var boundary = sb as SpaceBoundary;
-                output.Model.AddElement(new PolygonReference(boundary.Boundary.Perimeter, Guid.NewGuid(), type));
+                output.Model.AddElement(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
                 if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
                 {
-                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference(v, Guid.NewGuid(), type)));
+                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference() { Boundary = v, Name = type }));
                 }
             }
         }
