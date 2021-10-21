@@ -29,19 +29,14 @@ namespace Elements
         public RoomTally(string @roomType, int @seatsCount, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<RoomTally>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @roomType, @seatsCount, @id, @name});
-            }
-        
             this.RoomType = @roomType;
             this.SeatsCount = @seatsCount;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
+        
+        // Empty constructor
+        public RoomTally()
+            : base()
+        {
         }
     
         [Newtonsoft.Json.JsonProperty("Room type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

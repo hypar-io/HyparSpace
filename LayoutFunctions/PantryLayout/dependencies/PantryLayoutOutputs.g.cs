@@ -20,7 +20,7 @@ namespace PantryLayout
 		/// Total count of cafeteria chairs and bar heights
 		/// </summary>
 		[JsonProperty("Total cafe chairs count")]
-		public double TotalCafeChairsCount {get;}
+		public double TotalCafeChairsCount {get; set;}
 
 
 

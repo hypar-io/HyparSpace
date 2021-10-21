@@ -29,20 +29,17 @@ namespace Elements
         public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceBoundary>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @boundary, @cells, @area, @transform, @material, @representation, @isElementDefinition, @id, @name});
-            }
-        
             this.Boundary = @boundary;
             this.Cells = @cells;
             this.Area = @area;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
+            this.Length = @length;
+            this.Depth = @depth;
             }
+        
+        // Empty constructor
+        public SpaceBoundary()
+            : base()
+        {
         }
     
         /// <summary>The boundary of the space</summary>
