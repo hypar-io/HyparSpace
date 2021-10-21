@@ -20,32 +20,30 @@ namespace Elements
 {
     #pragma warning disable // Disable all warnings
 
-    /// <summary>A number of desks or other workpoints</summary>
+    /// <summary>Table of present seats by room type</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class WorkpointCount : Element
+    public partial class RoomTally : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCount(int @count, string @type, System.Guid @id = default, string @name = null)
+        public RoomTally(string @roomType, int @seatsCount, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            this.Count = @count;
-            this.Type = @type;
+            this.RoomType = @roomType;
+            this.SeatsCount = @seatsCount;
             }
         
         // Empty constructor
-        public WorkpointCount()
+        public RoomTally()
             : base()
         {
         }
     
-        /// <summary>The number of workpoints</summary>
-        [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Count { get; set; }
+        [Newtonsoft.Json.JsonProperty("Room type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RoomType { get; set; }
     
-        /// <summary>Type of the workpoint</summary>
-        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
+        [Newtonsoft.Json.JsonProperty("SeatsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SeatsCount { get; set; }
     
     
     }

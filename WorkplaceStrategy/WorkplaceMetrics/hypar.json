@@ -100,6 +100,12 @@
     },
     {
       "unit_type": "none",
+      "name": "Meeting room seats",
+      "description": "The total number of seats in the meeting rooms.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
       "name": "Total Headcount",
       "description": "The total number of employees and visitors accommodated.",
       "type": "number"
