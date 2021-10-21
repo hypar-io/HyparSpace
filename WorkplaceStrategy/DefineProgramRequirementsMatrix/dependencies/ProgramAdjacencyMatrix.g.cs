@@ -32,6 +32,12 @@ namespace Elements
             this.Nodes = @nodes;
             this.Edges = @edges;
             }
+        
+        // Empty constructor
+        public ProgramAdjacencyMatrix()
+            : base()
+        {
+        }
     
         [Newtonsoft.Json.JsonProperty("Nodes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramRequirement> Nodes { get; set; }

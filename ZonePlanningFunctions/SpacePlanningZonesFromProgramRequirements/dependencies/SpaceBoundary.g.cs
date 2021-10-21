@@ -18,7 +18,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     /// <summary>A profile with a program assigned to it, and optional internal cell geometry. </summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -34,28 +34,34 @@ namespace Elements
             this.Area = @area;
             this.Length = @length;
             this.Depth = @depth;
-            }
-    
+        }
+
+        // Empty constructor
+        public SpaceBoundary()
+            : base()
+        {
+        }
+
         /// <summary>The boundary of the space</summary>
         [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Profile Boundary { get; set; }
-    
+
         /// <summary>Component cells making up the boundary</summary>
         [Newtonsoft.Json.JsonProperty("Cells", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> Cells { get; set; }
-    
+
         /// <summary>The area of the boundary</summary>
         [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Area { get; set; }
-    
+
         /// <summary>The rough length of this space boundary, parallel to the accessible edge</summary>
         [Newtonsoft.Json.JsonProperty("Length", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Length { get; set; }
-    
+
         /// <summary>The rough depth of the space boundary, perpendicular to the accessible edge</summary>
         [Newtonsoft.Json.JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Depth { get; set; }
-    
-    
+
+
     }
 }
