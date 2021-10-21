@@ -5,17 +5,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.9.5" />
     <PackageReference Include="Hypar.Elements.Components" Version="0.9.5-alpha.13" />
+    <PackageReference Include="Hypar.Functions" Version="0.9.6" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\ReceptionConfigurations.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.5-alpha.13" />
-    <PackageReference Include="Hypar.Functions" Version="0.9.5" />
   </ItemGroup>
 
   <PropertyGroup>

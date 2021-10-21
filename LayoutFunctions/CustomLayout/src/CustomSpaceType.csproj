@@ -4,9 +4,6 @@
     <ProjectReference Include="..\dependencies\CustomSpaceType.Dependencies.csproj" />
     <!-- <PackageReference Include="Hypar.Elements" Version="0.9.2-alpha.3" />
     <PackageReference Include="Hypar.Functions" Version="0.9.5" /> -->
-
-    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
-    <ProjectReference Include="..\..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -20,32 +20,30 @@ namespace Elements
 {
     #pragma warning disable // Disable all warnings
 
-    /// <summary>Represents an edge in an adjacency graph.</summary>
+    /// <summary>Table of present seats by room type</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class Adjacency 
+    public partial class RoomTally : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Adjacency(int @from, int @to, double @weight)
+        public RoomTally(string @roomType, int @seatsCount, System.Guid @id = default, string @name = null)
+            : base(id, name)
         {
-            this.From = @from;
-            this.To = @to;
-            this.Weight = @weight;
+            this.RoomType = @roomType;
+            this.SeatsCount = @seatsCount;
             }
         
         // Empty constructor
-        public Adjacency()
+        public RoomTally()
+            : base()
         {
         }
     
-        [Newtonsoft.Json.JsonProperty("From", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int From { get; set; }
+        [Newtonsoft.Json.JsonProperty("Room type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RoomType { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("To", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int To { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Weight", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Weight { get; set; }
+        [Newtonsoft.Json.JsonProperty("SeatsCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SeatsCount { get; set; }
     
     
     }
