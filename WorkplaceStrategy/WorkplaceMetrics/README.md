@@ -22,6 +22,7 @@ Calculate various workplace metrics from a layout.
 |Meeting room seats|Number|The total number of seats in the meeting rooms.|
 |Classroom seats|Number|The total number of classroom seats.|
 |Phone Booths|Number|The total number of seats in the Phone Booths.|
+|Collaboration seats|Number|The total number of seats in open collaborations.|
 |Total Headcount|Number|The total number of employees and visitors accommodated.|
 |Area per Desk|Number|The usable floor area per desk.|
 |Desk Sharing Ratio|Number|How many people are there for each desk?|

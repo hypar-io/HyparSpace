@@ -22,6 +22,7 @@ namespace OpenCollaborationLayout
         public static OpenCollaborationLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenCollaborationLayoutInputs input)
         {
             varietyCounter = 0;
+            int totalCountableSeats = 0;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             inputModels.TryGetValue("Levels", out var levelsModel);
             var hasOpenOffice = inputModels.TryGetValue("Open Office Layout", out var openOfficeModel);
@@ -73,7 +74,9 @@ namespace OpenCollaborationLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            output.Model.AddElement(layout.instance);
+                            totalCountableSeats += layout.count;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -83,11 +86,13 @@ namespace OpenCollaborationLayout
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
                             try
                             {
-                                output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+                                var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                                output.Model.AddElement(layout.instance);
+                                totalCountableSeats += layout.count;
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine("Failed to instantiate config");
+                                Console.WriteLine("Failed to instantiate config\n" + e.ToString());
                             }
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
@@ -95,6 +100,7 @@ namespace OpenCollaborationLayout
 
                 }
             }
+            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Collaboration seat" });
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }
@@ -182,10 +188,11 @@ namespace OpenCollaborationLayout
 
 
         private static int varietyCounter = 0;
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             var configsThatFitWell = new List<ContentConfiguration>();
+            int countableSeatCount = 0;
             foreach (var key in orderedKeys)
             {
                 var config = configs[key];
@@ -209,9 +216,28 @@ namespace OpenCollaborationLayout
             }
             if (configsThatFitWell.Count == 0)
             {
-                return null;
+                return (null, 0);
             }
             var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
+
+            
+            string[] countableOneSeaters = new[] { 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Mattiazzi-Branca-BarStool-BarStool-NaturalAsh.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Orangebox_Seating_Stool_Cubb_Bar-WireBase.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideRight-LeftTable.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideLeft-RightTable.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Steelcase-Seating-Series1-Stool-Stool.glb"
+            };
+            string[] countableTwoSeaters = new[] { 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-LowBackScreen-LeftCornerCushion.glb", 
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-HighBackScreen-LeftCornerCushion.glb", 
+            };
+            countableSeatCount += CountConfigSeats(selectedConfig, countableOneSeaters, 1);
+            countableSeatCount += CountConfigSeats(selectedConfig, countableTwoSeaters, 2);
+
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
 
             var rules = selectedConfig.Rules();
@@ -219,8 +245,25 @@ namespace OpenCollaborationLayout
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             var allPlacedInstances = instance.Instances;
-            return instance;
+            return (instance, countableSeatCount);
 
+        }
+
+        private static int CountConfigSeats(ContentConfiguration config, string[] countableSeaters, int seatsPerSeater)
+        {
+            int countableSeatCount = 0;
+            foreach (var item in config.ContentItems)
+            {
+                foreach (var countableSeat in countableSeaters)
+                {
+                    if (item.ContentElement.GltfLocation.Contains(countableSeat))
+                    {
+                        countableSeatCount += seatsPerSeater;
+                        break;
+                    }
+                }
+            }
+            return countableSeatCount;
         }
     }
 

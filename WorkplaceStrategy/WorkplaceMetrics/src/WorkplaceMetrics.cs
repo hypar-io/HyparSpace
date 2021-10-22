@@ -26,10 +26,11 @@ namespace WorkplaceMetrics
                 totalFloorArea += difference.Sum(d => d.Area());
             }
 
-            var totalDeskCount        = CountWorkplaceTyped(inputModels, "Open Office Layout",  "Desk");
-            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout", "Meeting Room Seat");
-            var totalClassroomSeats   = CountWorkplaceTyped(inputModels, "Classroom Layout",    "Classroom Seat");
-            var totalPhoneBooths      = CountWorkplaceTyped(inputModels, "Phone Booth Layout",  "Phone Booth");
+            var totalDeskCount        = CountWorkplaceTyped(inputModels, "Open Office Layout",        "Desk");
+            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout",       "Meeting Room Seat");
+            var totalClassroomSeats   = CountWorkplaceTyped(inputModels, "Classroom Layout",          "Classroom Seat");
+            var totalPhoneBooths      = CountWorkplaceTyped(inputModels, "Phone Booth Layout",        "Phone Booth");
+            var totalOpenCollabSeats  = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
 
             var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
 
@@ -57,6 +58,7 @@ namespace WorkplaceMetrics
                                                     totalMeetingRoomSeats,
                                                     totalClassroomSeats,
                                                     totalPhoneBooths,
+                                                    totalOpenCollabSeats,
                                                     headcount, 
                                                     areaPerDesk, 
                                                     deskSharingRatio, 

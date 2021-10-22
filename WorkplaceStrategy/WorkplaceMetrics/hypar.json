@@ -34,6 +34,11 @@
       "autohide": false,
       "name": "Phone Booth Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Open Collaboration Layout",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -124,6 +129,12 @@
       "unit_type": "none",
       "name": "Phone Booths",
       "description": "The total number of seats in the Phone Booths.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
+      "name": "Collaboration seats",
+      "description": "The total number of seats in open collaborations.",
       "type": "number"
     },
     {
