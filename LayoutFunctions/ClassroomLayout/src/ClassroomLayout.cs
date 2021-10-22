@@ -32,6 +32,8 @@ namespace ClassroomLayout
             var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
+            
+            int totalCountableSeats = 0;
 
             foreach (var lvl in levels)
             {
@@ -64,14 +66,18 @@ namespace ClassroomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            output.Model.AddElement(layout.instance);
+                            totalCountableSeats += layout.count;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            output.Model.AddElement(layout.instance);
+                            totalCountableSeats += layout.count;
                         }
                         try
                         {
@@ -126,12 +132,17 @@ namespace ClassroomLayout
                     WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
                 }
             }
+            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }
 
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
+            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair", 
+                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
+            
+            int countableSeatCount = 0;
             ContentConfiguration selectedConfig = null;
             var orderedKeys = new[] { "Classroom-A", "Classroom-B", "Classroom-C" };
             foreach (var key in orderedKeys)
@@ -139,20 +150,31 @@ namespace ClassroomLayout
                 var config = configs[key];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
+                    foreach( var item in config.ContentItems )
+                    {
+                        foreach( var countableSeat in countableSeats )
+                        {
+                            if ( item.ContentElement.Name.Contains(countableSeat) )
+                            {
+                                countableSeatCount++;
+                            }
+                        }
+                    }
+
                     selectedConfig = config;
                     break;
                 }
             }
             if (selectedConfig == null)
             {
-                return null;
+                return (null, 0);
             }
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            return instance;
+            return (instance, countableSeatCount);
         }
     }
 

@@ -41,6 +41,18 @@ namespace WorkplaceMetrics
 		public double MeetingRoomSeats {get; set;}
 
 		/// <summary>
+		/// The total number of classroom seats.
+		/// </summary>
+		[JsonProperty("Classroom seats")]
+		public double ClassroomSeats {get; set;}
+
+		/// <summary>
+		/// The total number of seats in the Phone Booths.
+		/// </summary>
+		[JsonProperty("Phone Booths")]
+		public double PhoneBooths {get; set;}
+
+		/// <summary>
 		/// The total number of employees and visitors accommodated.
 		/// </summary>
 		[JsonProperty("Total Headcount")]
@@ -81,12 +93,14 @@ namespace WorkplaceMetrics
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double areaPerPerson, double totalDeskCount, double meetingRoomSeats, double totalHeadcount, double areaPerDesk, double deskSharingRatio, double meetingRoomRatio): base()
+        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double areaPerPerson, double totalDeskCount, double meetingRoomSeats, double classroomSeats, double phoneBooths, double totalHeadcount, double areaPerDesk, double deskSharingRatio, double meetingRoomRatio): base()
         {
 			this.TotalUsableFloorArea = totalUsableFloorArea;
 			this.AreaPerPerson = areaPerPerson;
 			this.TotalDeskCount = totalDeskCount;
 			this.MeetingRoomSeats = meetingRoomSeats;
+			this.ClassroomSeats = classroomSeats;
+			this.PhoneBooths = phoneBooths;
 			this.TotalHeadcount = totalHeadcount;
 			this.AreaPerDesk = areaPerDesk;
 			this.DeskSharingRatio = deskSharingRatio;
