@@ -26,10 +26,17 @@ namespace WorkplaceMetrics
                 totalFloorArea += difference.Sum(d => d.Area());
             }
 
-            var deskCount = 0;
+            var totalDeskCount = 0;
             if (inputModels.TryGetValue("Open Office Layout", out var openOfficeModel))
             {
-                deskCount += openOfficeModel.AllElementsOfType<WorkpointCount>().Sum(wc => wc.Count);
+                totalDeskCount += openOfficeModel.AllElementsOfType<WorkpointCount>()
+                                                .Sum((wc => (wc.Type != null && wc.Type.Contains("Desk"))?wc.Count:0));
+            }
+            var totalMeetingRoomSeats = 0;
+            if (inputModels.TryGetValue("Meeting Room Layout", out var meetingRoomModel))
+            {
+                totalMeetingRoomSeats += meetingRoomModel.AllElementsOfType<WorkpointCount>()
+                                                        .Sum((wc => (wc.Type != null && wc.Type.Contains("Meeting Room Seat")) ? wc.Count : 0));
             }
 
             var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
@@ -40,19 +47,19 @@ namespace WorkplaceMetrics
             if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Fixed_Headcount)
             {
                 headcount = input.TotalHeadcount;
-                deskSharingRatio = headcount / (double)deskCount;
+                deskSharingRatio = headcount / (double)totalDeskCount;
             }
             else // fixed sharing ratio
             {
                 deskSharingRatio = input.DeskSharingRatio;
-                headcount = (int)Math.Round(deskCount * deskSharingRatio);
+                headcount = (int)Math.Round(totalDeskCount * deskSharingRatio);
 
             }
             var areaPerPerson = totalFloorArea / headcount;
-            var totalDeskCount = deskCount;
-            var areaPerDesk = totalFloorArea / deskCount;
+            var areaPerDesk = totalFloorArea / totalDeskCount;
             var meetingRoomRatio = meetingRoomCount == 0 ? 0 : (int)Math.Round(headcount / (double)meetingRoomCount);
-            var output = new WorkplaceMetricsOutputs(totalFloorArea, areaPerPerson, totalDeskCount, headcount, areaPerDesk, deskSharingRatio, meetingRoomRatio);
+            var output = new WorkplaceMetricsOutputs(totalFloorArea, areaPerPerson, totalDeskCount, totalMeetingRoomSeats, 
+                                                    headcount, areaPerDesk, deskSharingRatio, meetingRoomRatio);
             return output;
         }
     }

@@ -12,36 +12,36 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace MeetingRoomLayout
+namespace PantryLayout
 {
-    public class MeetingRoomLayoutOutputs: ResultsBase
+    public class PantryLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total count of cafeteria chairs and bar heights
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
+		[JsonProperty("Total cafe chairs count")]
+		public double TotalCafeChairsCount {get; set;}
 
 
 
         /// <summary>
-        /// Construct a MeetingRoomLayoutOutputs with default inputs.
+        /// Construct a PantryLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public MeetingRoomLayoutOutputs() : base()
+        public PantryLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a MeetingRoomLayoutOutputs specifying all inputs.
+        /// Construct a PantryLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public MeetingRoomLayoutOutputs(double volume): base()
+        public PantryLayoutOutputs(double totalCafeChairsCount): base()
         {
-			this.Volume = volume;
+			this.TotalCafeChairsCount = totalCafeChairsCount;
 
 		}
 

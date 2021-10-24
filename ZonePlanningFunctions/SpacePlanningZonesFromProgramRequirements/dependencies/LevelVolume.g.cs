@@ -18,7 +18,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     /// <summary>Describes the volume of occupiable space between a level and the next level above it.</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -26,37 +26,37 @@ namespace Elements
     public partial class LevelVolume : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public LevelVolume(Profile @profile, double @height, double @area, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public LevelVolume(Profile @profile, double @height, double @area, string @buildingName, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<LevelVolume>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @profile, @height, @area, @transform, @material, @representation, @isElementDefinition, @id, @name});
-            }
-        
             this.Profile = @profile;
             this.Height = @height;
             this.Area = @area;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
+            this.BuildingName = @buildingName;
         }
-    
+
+        // Empty constructor
+        public LevelVolume()
+            : base()
+        {
+        }
+
         /// <summary>The profile of the level Volume</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Profile Profile { get; set; }
-    
+
         /// <summary>The floor-to-floor height of this level</summary>
         [Newtonsoft.Json.JsonProperty("Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Height { get; set; }
-    
+
         /// <summary>The area of the level's profile.</summary>
         [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Area { get; set; }
-    
-    
+
+        /// <summary>The name of the building or mass this level belongs to (optional)</summary>
+        [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BuildingName { get; set; }
+
+
     }
 }

@@ -12,43 +12,36 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace DataHallLayout
+namespace OpenCollaborationLayout
 {
-    public class DataHallLayoutOutputs: ResultsBase
+    public class OpenCollaborationLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The number of server cabinets.
+		/// The volume.
 		/// </summary>
-		[JsonProperty("Rack Count")]
-		public double RackCount {get;}
-
-		/// <summary>
-		/// Watts per square foot
-		/// </summary>
-		[JsonProperty("Watts/sf")]
-		public string Wattssf {get;}
+		[JsonProperty("Volume")]
+		public double Volume {get; set;}
 
 
 
         /// <summary>
-        /// Construct a DataHallLayoutOutputs with default inputs.
+        /// Construct a OpenCollaborationLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public DataHallLayoutOutputs() : base()
+        public OpenCollaborationLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a DataHallLayoutOutputs specifying all inputs.
+        /// Construct a OpenCollaborationLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DataHallLayoutOutputs(double rackCount, string wattssf): base()
+        public OpenCollaborationLayoutOutputs(double volume): base()
         {
-			this.RackCount = rackCount;
-			this.Wattssf = wattssf;
+			this.Volume = volume;
 
 		}
 

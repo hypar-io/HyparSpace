@@ -12,34 +12,34 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace PhoneBoothLayout
+namespace DefineProgramRequirements
 {
-    public class PhoneBoothLayoutOutputs: ResultsBase
+    public class DefineProgramRequirementsOutputs: ResultsBase
     {
 		/// <summary>
 		/// The volume.
 		/// </summary>
 		[JsonProperty("Volume")]
-		public double Volume {get;}
+		public double Volume {get; set;}
 
 
 
         /// <summary>
-        /// Construct a PhoneBoothLayoutOutputs with default inputs.
+        /// Construct a DefineProgramRequirementsOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public PhoneBoothLayoutOutputs() : base()
+        public DefineProgramRequirementsOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a PhoneBoothLayoutOutputs specifying all inputs.
+        /// Construct a DefineProgramRequirementsOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PhoneBoothLayoutOutputs(double volume): base()
+        public DefineProgramRequirementsOutputs(double volume): base()
         {
 			this.Volume = volume;
 

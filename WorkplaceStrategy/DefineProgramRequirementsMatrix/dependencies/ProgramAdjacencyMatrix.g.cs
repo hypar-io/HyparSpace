@@ -29,19 +29,14 @@ namespace Elements
         public ProgramAdjacencyMatrix(IList<ProgramRequirement> @nodes, IList<Adjacency> @edges, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<ProgramAdjacencyMatrix>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @nodes, @edges, @id, @name});
-            }
-        
             this.Nodes = @nodes;
             this.Edges = @edges;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
+        
+        // Empty constructor
+        public ProgramAdjacencyMatrix()
+            : base()
+        {
         }
     
         [Newtonsoft.Json.JsonProperty("Nodes", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

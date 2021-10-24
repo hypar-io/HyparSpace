@@ -27,8 +27,8 @@
   "outputs": [
     {
       "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
+      "name": "Total Seat Count",
+      "description": "Total Seat Count",
       "type": "number"
     }
   ],
@@ -53,6 +53,8 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
-    "https://prod-api.hypar.io/schemas/LevelVolume"
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/RoomTally",
+    "https://prod-api.hypar.io/schemas/WorkpointCount"
   ]
 }

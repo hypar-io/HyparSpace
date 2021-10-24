@@ -1,4 +1,4 @@
-using Elements;
+åusing Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using System;
@@ -32,7 +32,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                 SpaceBoundary.SetRequirements(programReqs);
             }
 
-            var defaultAspectRatio = 1.8;
+            var defaultAspectRatio = input.DefaultAspectRatio;
             var fixedDepths = new Dictionary<string, double>() {
                 {"Phone Booth", 2}
             };
@@ -53,8 +53,8 @@ namespace SpacePlanningZonesFromProgramRequirements
                 floorsOrLevels = floorsModel.AllElementsOfType<Floor>().Select(FloorOrLevel.FromFloor);
             }
 
-            var positionTransform = new Transform();
-            if (floorsOrLevels.Count() > 0)
+            var positionTransform = new Transform(input.UnplacedSpaceLocation);
+            if (floorsOrLevels.Count() > 0 && input.UnplacedSpaceLocation.DistanceTo(new Vector3()) < 0.1)
             {
                 var bbox = new BBox3(floorsOrLevels.SelectMany(f => f.Profile.Perimeter.Vertices).ToList());
                 positionTransform = new Transform(bbox.Min.X, bbox.Max.Y + 10, 0);
@@ -118,6 +118,10 @@ namespace SpacePlanningZonesFromProgramRequirements
                     var runningYPosition = 0.0;
                     for (int i = 0; i < req.SpaceCount; i++)
                     {
+                        if (width == 0 || depth == 0)
+                        {
+                            continue;
+                        }
                         var profile = Polygon.Rectangle(width, depth);
                         var parentCentroid = profile.Centroid();
                         var transform = positionTransform.Concatenated(new Transform(runningXPosition + width / 2, runningYPosition + depth / 2, 0));
@@ -148,7 +152,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                         }
                         // var rep = new Representation(new[] { new Extrude(profile, 3, Vector3.ZAxis, false) });
                         // var sb = new SpaceBoundary(profile, null, transform, mat, rep, false, Guid.NewGuid(), req.HyparSpaceType);
-                        var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, 3, parentCentroid, parentCentroid);
+                        var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, input.DefaultHeight, parentCentroid, parentCentroid);
                         sb.AdditionalProperties["Identifier"] = identifier;
                         sb.AdditionalProperties["Program Group"] = req.ProgramGroup;
                         if (match != null)
@@ -279,7 +283,9 @@ namespace SpacePlanningZonesFromProgramRequirements
 
             // tally up areas
             Dictionary<string, AreaTally> areas = new Dictionary<string, AreaTally>();
-            foreach (var sb in levels.SelectMany(lev => lev.Elements.OfType<SpaceBoundary>()))
+            var sbsInLevels = levels.SelectMany(lev => lev.Elements.OfType<SpaceBoundary>());
+            var sbs = sbsInLevels.Count() > 0 ? sbsInLevels : output.Model.AllElementsOfType<SpaceBoundary>();
+            foreach (var sb in sbs)
             {
                 var area = sb.Boundary.Area();
                 if (sb.ProgramName == null)
@@ -289,13 +295,14 @@ namespace SpacePlanningZonesFromProgramRequirements
                 if (!areas.ContainsKey(sb.ProgramName))
                 {
                     var areaTarget = SpaceBoundary.Requirements.TryGetValue(sb.ProgramName, out var requirement) ? requirement.AreaPerSpace * requirement.SpaceCount : 0.0;
-                    areas[sb.ProgramName] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, Guid.NewGuid(), sb.ProgramName);
+                    areas[sb.ProgramName] = new AreaTally(sb.ProgramName, sb.Material.Color, areaTarget, area, 1, null, 1, null, Guid.NewGuid(), sb.ProgramName);
                 }
                 else
                 {
                     var existingTally = areas[sb.ProgramName];
                     existingTally.AchievedArea += area;
                     existingTally.DistinctAreaCount++;
+                    existingTally.AchievedCount++;
                 }
             }
             // count corridors in area
@@ -310,7 +317,7 @@ namespace SpacePlanningZonesFromProgramRequirements
             {
                 if (!areas.ContainsKey(circulationKey))
                 {
-                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, Guid.NewGuid(), circulationKey);
+                    areas[circulationKey] = new AreaTally(circulationKey, corridorFloor.Material.Color, circReq.Value?.AreaPerSpace ?? 0, corridorFloor.Area(), 1, null, 1, null, Guid.NewGuid(), circulationKey);
                 }
             }
 

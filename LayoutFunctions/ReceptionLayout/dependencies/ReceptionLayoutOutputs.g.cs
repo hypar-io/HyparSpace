@@ -12,34 +12,34 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace DefineProgramRequirements
+namespace ReceptionLayout
 {
-    public class DefineProgramRequirementsOutputs: ResultsBase
+    public class ReceptionLayoutOutputs: ResultsBase
     {
 		/// <summary>
 		/// The volume.
 		/// </summary>
 		[JsonProperty("Volume")]
-		public double Volume {get;}
+		public double Volume {get; set;}
 
 
 
         /// <summary>
-        /// Construct a DefineProgramRequirementsOutputs with default inputs.
+        /// Construct a ReceptionLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public DefineProgramRequirementsOutputs() : base()
+        public ReceptionLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a DefineProgramRequirementsOutputs specifying all inputs.
+        /// Construct a ReceptionLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DefineProgramRequirementsOutputs(double volume): base()
+        public ReceptionLayoutOutputs(double volume): base()
         {
 			this.Volume = volume;
 

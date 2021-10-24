@@ -12,36 +12,36 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace OpenCollaborationLayout
+namespace MeetingRoomLayout
 {
-    public class OpenCollaborationLayoutOutputs: ResultsBase
+    public class MeetingRoomLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total Seat Count
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get;}
+		[JsonProperty("Total Seat Count")]
+		public double TotalSeatCount {get; set;}
 
 
 
         /// <summary>
-        /// Construct a OpenCollaborationLayoutOutputs with default inputs.
+        /// Construct a MeetingRoomLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public OpenCollaborationLayoutOutputs() : base()
+        public MeetingRoomLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a OpenCollaborationLayoutOutputs specifying all inputs.
+        /// Construct a MeetingRoomLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public OpenCollaborationLayoutOutputs(double volume): base()
+        public MeetingRoomLayoutOutputs(double totalSeatCount): base()
         {
-			this.Volume = volume;
+			this.TotalSeatCount = totalSeatCount;
 
 		}
 

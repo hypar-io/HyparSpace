@@ -12,34 +12,34 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
-namespace PrivateOfficeLayout
+namespace PhoneBoothLayout
 {
-    public class PrivateOfficeLayoutOutputs: ResultsBase
+    public class PhoneBoothLayoutOutputs: ResultsBase
     {
 		/// <summary>
 		/// The volume.
 		/// </summary>
 		[JsonProperty("Volume")]
-		public double Volume {get;}
+		public double Volume {get; set;}
 
 
 
         /// <summary>
-        /// Construct a PrivateOfficeLayoutOutputs with default inputs.
+        /// Construct a PhoneBoothLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
-        public PrivateOfficeLayoutOutputs() : base()
+        public PhoneBoothLayoutOutputs() : base()
         {
 
         }
 
 
         /// <summary>
-        /// Construct a PrivateOfficeLayoutOutputs specifying all inputs.
+        /// Construct a PhoneBoothLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PrivateOfficeLayoutOutputs(double volume): base()
+        public PhoneBoothLayoutOutputs(double volume): base()
         {
 			this.Volume = volume;
 
