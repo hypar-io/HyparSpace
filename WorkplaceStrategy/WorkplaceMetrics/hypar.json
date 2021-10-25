@@ -128,13 +128,13 @@
     {
       "unit_type": "none",
       "name": "Phone Booths",
-      "description": "The total number of seats in the Phone Booths.",
+      "description": "Total number of Phone booths.",
       "type": "number"
     },
     {
       "unit_type": "none",
       "name": "Collaboration seats",
-      "description": "The total number of seats in open collaborations.",
+      "description": "Total seats in open collaboration areas.",
       "type": "number"
     },
     {
