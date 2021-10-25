@@ -28,7 +28,7 @@ namespace Elements
 
         public int SpaceCount { get; set; } = 1;
 
-        public ElementProxy<LevelVolume> Level { get; set; }
+        public Guid Level { get; set; }
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
@@ -224,7 +224,7 @@ namespace Elements
         {
             this.AdditionalProperties["Building Name"] = volume.BuildingName;
             this.AdditionalProperties["Level Name"] = volume.Name;
-            // this.Level = volume.Proxy;
+            this.Level = volume.Id;
         }
     }
 }

@@ -55,9 +55,6 @@ namespace SpacePlanningZones
             // Reset static properties on SpaceBoundary
             SpaceBoundary.Reset();
 
-            // clear element proxy cache
-            ElementProxy.ClearCache();
-
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
             if (programReqs != null && programReqs.Count() > 0)
             {
