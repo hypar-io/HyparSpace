@@ -118,6 +118,20 @@
           "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
         }
       }
+    },
+    "Space Properties": {
+      "context": "[*discriminator=Elements.SpaceBoundary]",
+      "identity": {
+        "Identifier": {
+          "type": "string"
+        }
+      },
+      "schema": {
+        "Height": {
+          "type": "number",
+          "$hyparUnitType": "length"
+        }
+      }
     }
   },
   "repository_url": "https://github.com/hypar-io/function",

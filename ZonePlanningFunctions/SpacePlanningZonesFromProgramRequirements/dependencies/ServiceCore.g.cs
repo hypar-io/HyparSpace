@@ -18,7 +18,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-#pragma warning disable // Disable all warnings
+    #pragma warning disable // Disable all warnings
 
     /// <summary>Represents a building service core.</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -33,30 +33,30 @@ namespace Elements
             this.Elevation = @elevation;
             this.Height = @height;
             this.Centroid = @centroid;
-        }
-
+            }
+        
         // Empty constructor
         public ServiceCore()
             : base()
         {
         }
-
+    
         /// <summary>The profile of this Core</summary>
         [Newtonsoft.Json.JsonProperty("Profile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Profile Profile { get; set; }
-
+    
         /// <summary>The elevation of the core.</summary>
         [Newtonsoft.Json.JsonProperty("Elevation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Elevation { get; set; }
-
+    
         /// <summary>The height of the core. </summary>
         [Newtonsoft.Json.JsonProperty("Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Height { get; set; }
-
+    
         /// <summary>A reference location for the centroid of the Core's profile.</summary>
         [Newtonsoft.Json.JsonProperty("Centroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 Centroid { get; set; }
-
-
+    
+    
     }
 }

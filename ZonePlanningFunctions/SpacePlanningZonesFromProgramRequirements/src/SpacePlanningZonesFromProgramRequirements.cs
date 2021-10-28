@@ -1,4 +1,4 @@
-åusing Elements;
+using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using System;
@@ -150,18 +150,32 @@ namespace SpacePlanningZonesFromProgramRequirements
                                 profile = unTransformedBoundary.Project(xyPlane);
                             }
                         }
+                        SpacePropertiesOverride propMatch = null;
+                        var height = input.DefaultHeight;
+                        if (input.Overrides?.SpaceProperties != null)
+                        {
+                            propMatch = input.Overrides.SpaceProperties.FirstOrDefault((ov) => ov.Identity.Identifier == identifier);
+                            if (propMatch != null)
+                            {
+                                height = propMatch.Value.Height;
+                            }
+                        }
                         // var rep = new Representation(new[] { new Extrude(profile, 3, Vector3.ZAxis, false) });
                         // var sb = new SpaceBoundary(profile, null, transform, mat, rep, false, Guid.NewGuid(), req.HyparSpaceType);
-                        var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, input.DefaultHeight, parentCentroid, parentCentroid);
+                        var sb = SpaceBoundary.Make(profile, req.ProgramName, transform, height, parentCentroid, parentCentroid);
                         sb.AdditionalProperties["Identifier"] = identifier;
                         sb.AdditionalProperties["Program Group"] = req.ProgramGroup;
                         if (match != null)
                         {
-                            Identity.AddOverrideIdentity(sb, "Arrange Spaces", match.Id, match.Identity);
+                            Identity.AddOverrideIdentity(sb, match);
                         }
                         if (boundaryMatch != null)
                         {
-                            Identity.AddOverrideIdentity(sb, "Mass Boundaries", boundaryMatch.Id, boundaryMatch.Identity);
+                            Identity.AddOverrideIdentity(sb, boundaryMatch);
+                        }
+                        if (propMatch != null)
+                        {
+                            Identity.AddOverrideIdentity(sb, propMatch);
                         }
                         sb.AdditionalProperties["EditBoundary"] = profile.TransformedPolygon(transform);
                         sb.AdditionalProperties["EditBoundaryTransform"] = transform;
