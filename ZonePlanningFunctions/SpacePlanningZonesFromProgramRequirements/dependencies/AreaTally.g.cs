@@ -18,7 +18,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-#pragma warning disable // Disable all warnings
+    #pragma warning disable // Disable all warnings
 
     /// <summary>A tally of the area deltas between targets + results</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -37,38 +37,38 @@ namespace Elements
             this.TargetCount = @targetCount;
             this.AchievedCount = @achievedCount;
             this.Cost = @cost;
-        }
-
+            }
+        
         // Empty constructor
         public AreaTally()
             : base()
         {
         }
-
+    
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramType { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Program Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color ProgramColor { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Area Target", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AreaTarget { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Achieved Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AchievedArea { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Distinct Area Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double DistinctAreaCount { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Target Count", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? TargetCount { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Achieved Count", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? AchievedCount { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Cost", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Cost { get; set; }
-
-
+    
+    
     }
 }

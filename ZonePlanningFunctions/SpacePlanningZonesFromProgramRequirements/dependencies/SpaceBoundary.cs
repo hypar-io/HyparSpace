@@ -51,13 +51,24 @@ namespace Elements
 
         [JsonProperty("Program Type")]
         public string ProgramName { get; set; }
+
         private static Random random = new Random(4);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
-            var sb = new SpaceBoundary(profile, new List<Polygon> { profile.Perimeter }, profile.Area(), null, null, xform, material ?? MaterialDict["unrecognized"], representation, false, Guid.NewGuid(), name);
+            var sb = new SpaceBoundary()
+            {
+                Boundary = profile,
+                Cells = new List<Polygon> { profile.Perimeter },
+                Area = profile.Area(),
+                Transform = xform,
+                Material = material ?? MaterialDict["unrecognized"],
+                Representation = representation,
+                Name = name,
+                Height = height
+            };
             sb.ProgramName = displayName;
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));
             sb.AdditionalProperties.Add("IndividualCentroid", individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));

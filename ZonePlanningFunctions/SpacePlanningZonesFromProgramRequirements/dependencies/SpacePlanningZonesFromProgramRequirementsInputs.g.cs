@@ -128,16 +128,17 @@ namespace SpacePlanningZonesFromProgramRequirements
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<ArrangeSpacesOverride> @arrangeSpaces, IList<MassBoundariesOverride> @massBoundaries)
+        public Overrides(IList<ArrangeSpacesOverride> @arrangeSpaces, IList<MassBoundariesOverride> @massBoundaries, IList<SpacePropertiesOverride> @spaceProperties)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @arrangeSpaces, @massBoundaries});
+                validator.PreConstruct(new object[]{ @arrangeSpaces, @massBoundaries, @spaceProperties});
             }
         
             this.ArrangeSpaces = @arrangeSpaces;
             this.MassBoundaries = @massBoundaries;
+            this.SpaceProperties = @spaceProperties;
         
             if(validator != null)
             {
@@ -150,6 +151,9 @@ namespace SpacePlanningZonesFromProgramRequirements
     
         [Newtonsoft.Json.JsonProperty("Mass Boundaries", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<MassBoundariesOverride> MassBoundaries { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Space Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpacePropertiesOverride> SpaceProperties { get; set; }
     
     
     }
@@ -222,6 +226,42 @@ namespace SpacePlanningZonesFromProgramRequirements
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MassBoundariesValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpacePropertiesOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacePropertiesOverride(string @id, SpacePropertiesIdentity @identity, SpacePropertiesValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacePropertiesOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacePropertiesIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacePropertiesValue Value { get; set; }
     
     
     }
@@ -338,6 +378,62 @@ namespace SpacePlanningZonesFromProgramRequirements
     
         [Newtonsoft.Json.JsonProperty("EditBoundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polygon EditBoundary { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpacePropertiesIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacePropertiesIdentity(string @identifier)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacePropertiesIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @identifier});
+            }
+        
+            this.Identifier = @identifier;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Identifier", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Identifier { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpacePropertiesValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacePropertiesValue(double @height)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacePropertiesValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @height});
+            }
+        
+            this.Height = @height;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Height { get; set; }
     
     
     }
