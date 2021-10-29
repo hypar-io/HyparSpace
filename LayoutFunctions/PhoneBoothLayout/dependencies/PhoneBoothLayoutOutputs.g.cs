@@ -17,10 +17,10 @@ namespace PhoneBoothLayout
     public class PhoneBoothLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total number of Phone booths
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
+		[JsonProperty("Phone Booths")]
+		public double PhoneBooths {get; set;}
 
 
 
@@ -39,9 +39,9 @@ namespace PhoneBoothLayout
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PhoneBoothLayoutOutputs(double volume): base()
+        public PhoneBoothLayoutOutputs(double phoneBooths): base()
         {
-			this.Volume = volume;
+			this.PhoneBooths = phoneBooths;
 
 		}
 

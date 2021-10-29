@@ -37,8 +37,8 @@
   "outputs": [
     {
       "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
+      "name": "Phone Booths",
+      "description": "Total number of Phone booths",
       "type": "number"
     }
   ],

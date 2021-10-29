@@ -110,6 +110,7 @@ namespace PhoneBoothLayout
                 }
             }
             output.Model.AddElement( new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount } );
+            output.PhoneBooths = totalBoothCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }

@@ -37,6 +37,14 @@
       }
     }
   },
+  "outputs": [
+    {
+      "unit_type": "none",
+      "name": "Collaboration seats",
+      "description": "Total seats in open collaboration areas.",
+      "type": "number"
+    }
+  ],
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",

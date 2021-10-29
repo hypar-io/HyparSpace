@@ -16,6 +16,12 @@ namespace OpenCollaborationLayout
 {
     public class OpenCollaborationLayoutOutputs: ResultsBase
     {
+		/// <summary>
+		/// Total seats in open collaboration areas.
+		/// </summary>
+		[JsonProperty("Collaboration seats")]
+		public double CollaborationSeats {get; set;}
+
 
 
         /// <summary>
@@ -28,5 +34,21 @@ namespace OpenCollaborationLayout
         }
 
 
+        /// <summary>
+        /// Construct a OpenCollaborationLayoutOutputs specifying all inputs.
+        /// </summary>
+        /// <returns></returns>
+        [JsonConstructor]
+        public OpenCollaborationLayoutOutputs(double collaborationSeats): base()
+        {
+			this.CollaborationSeats = collaborationSeats;
+
+		}
+
+		public override string ToString()
+		{
+			var json = JsonConvert.SerializeObject(this);
+			return json;
+		}
 	}
 }

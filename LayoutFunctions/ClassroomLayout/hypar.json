@@ -30,7 +30,8 @@
   "outputs": [
     {
       "unit_type": "volume",
-      "name": "Total count of seats",
+      "name": "Total count of desk seats",
+      "description": "Total count of seats",
       "type": "number"
     }
   ],

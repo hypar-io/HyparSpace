@@ -143,7 +143,7 @@ namespace ClassroomLayout
                 }
             }
             output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });
-            output.TotalCountOfSeats = totalCountableSeats;
+            output.TotalCountOfDeskSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }

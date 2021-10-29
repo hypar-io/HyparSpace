@@ -17,7 +17,7 @@ namespace PantryLayout
     public class PantryLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// Total count of seats
+		/// Total count of seats.
 		/// </summary>
 		[JsonProperty("Total cafe chairs count")]
 		public double TotalCafeChairsCount {get; set;}

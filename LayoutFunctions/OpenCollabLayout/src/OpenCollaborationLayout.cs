@@ -101,6 +101,7 @@ namespace OpenCollaborationLayout
                 }
             }
             output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Collaboration seat" });
+            output.CollaborationSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }

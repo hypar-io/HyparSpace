@@ -14,5 +14,5 @@ Lay out phone booths
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
+|Phone Booths|Number|Total number of Phone booths|
 
