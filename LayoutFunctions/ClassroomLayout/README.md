@@ -13,5 +13,4 @@ Generate an interior layout for classroom zones.
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
 

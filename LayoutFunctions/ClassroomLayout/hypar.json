@@ -27,14 +27,6 @@
       }
     }
   },
-  "outputs": [
-    {
-      "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
-      "type": "number"
-    }
-  ],
   "overrides": {
     "Furniture Locations": {
       "context": "[*discriminator=Elements.ElementInstance]",

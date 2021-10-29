@@ -16,12 +16,6 @@ namespace ClassroomLayout
 {
     public class ClassroomLayoutOutputs: ResultsBase
     {
-		/// <summary>
-		/// The volume.
-		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
-
 
 
         /// <summary>
@@ -34,21 +28,5 @@ namespace ClassroomLayout
         }
 
 
-        /// <summary>
-        /// Construct a ClassroomLayoutOutputs specifying all inputs.
-        /// </summary>
-        /// <returns></returns>
-        [JsonConstructor]
-        public ClassroomLayoutOutputs(double volume): base()
-        {
-			this.Volume = volume;
-
-		}
-
-		public override string ToString()
-		{
-			var json = JsonConvert.SerializeObject(this);
-			return json;
-		}
 	}
 }

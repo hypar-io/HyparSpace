@@ -12,5 +12,4 @@ Layout lounge spaces
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
 

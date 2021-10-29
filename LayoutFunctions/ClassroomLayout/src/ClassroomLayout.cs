@@ -34,6 +34,20 @@ namespace ClassroomLayout
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
             
             int totalCountableSeats = 0;
+            int seatsAtDesk = 0;
+            var deskConfig = configs["Desk"];
+            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
+            foreach ( var item in deskConfig.ContentItems )
+            {
+                foreach ( var countableSeat in countableSeats )
+                {
+                    if ( item.ContentElement.Name.Contains(countableSeat) )
+                    {
+                        seatsAtDesk++;
+                    }
+                }
+            }
 
             foreach (var lvl in levels)
             {
@@ -56,7 +70,6 @@ namespace ClassroomLayout
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
                     var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    var deskConfig = configs["Desk"];
                     foreach (var cell in grid.GetCells())
                     {
                         var rect = cell.GetCellGeometry() as Polygon;
@@ -66,18 +79,14 @@ namespace ClassroomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                            output.Model.AddElement(layout.instance);
-                            totalCountableSeats += layout.count;
+                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                            output.Model.AddElement(layout.instance);
-                            totalCountableSeats += layout.count;
+                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
                         }
                         try
                         {
@@ -99,6 +108,7 @@ namespace ClassroomLayout
                                     }
                                     if (trimmedShape.Area().ApproximatelyEquals(deskConfig.Width * deskConfig.Depth, 0.1))
                                     {
+                                        totalCountableSeats += seatsAtDesk;
                                         foreach (var contentItem in deskConfig.ContentItems)
                                         {
                                             var instance = contentItem.ContentElement.CreateInstance(
@@ -137,12 +147,8 @@ namespace ClassroomLayout
             return output;
         }
 
-        private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
-            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair", 
-                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
-            
-            int countableSeatCount = 0;
             ContentConfiguration selectedConfig = null;
             var orderedKeys = new[] { "Classroom-A", "Classroom-B", "Classroom-C" };
             foreach (var key in orderedKeys)
@@ -150,31 +156,19 @@ namespace ClassroomLayout
                 var config = configs[key];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
-                    foreach( var item in config.ContentItems )
-                    {
-                        foreach( var countableSeat in countableSeats )
-                        {
-                            if ( item.ContentElement.Name.Contains(countableSeat) )
-                            {
-                                countableSeatCount++;
-                            }
-                        }
-                    }
-
                     selectedConfig = config;
                     break;
                 }
             }
             if (selectedConfig == null)
             {
-                return (null, 0);
+                return null;
             }
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            return (instance, countableSeatCount);
+            return componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
         }
     }
 

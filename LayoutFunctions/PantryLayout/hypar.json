@@ -36,7 +36,7 @@
     {
       "unit_type": "none",
       "name": "Total cafe chairs count",
-      "description": "Total count of cafeteria chairs and bar heights",
+      "description": "Total count of seats",
       "type": "number"
     }
   ],

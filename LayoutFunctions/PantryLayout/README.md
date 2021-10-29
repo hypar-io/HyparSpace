@@ -12,5 +12,5 @@ Layout Pantry spaces
 
 |Output Name|Type|Description|
 |---|---|---|
-|Total cafe chairs count|Number|Total count of cafeteria chairs and bar heights|
+|Total cafe chairs count|Number|Total count of seats|
 

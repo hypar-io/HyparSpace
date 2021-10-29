@@ -37,14 +37,6 @@
       }
     }
   },
-  "outputs": [
-    {
-      "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
-      "type": "number"
-    }
-  ],
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
