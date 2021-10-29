@@ -16,6 +16,12 @@ namespace ClassroomLayout
 {
     public class ClassroomLayoutOutputs: ResultsBase
     {
+		/// <summary>
+		/// 
+		/// </summary>
+		[JsonProperty("Total count of seats")]
+		public double TotalCountOfSeats {get; set;}
+
 
 
         /// <summary>
@@ -28,5 +34,21 @@ namespace ClassroomLayout
         }
 
 
+        /// <summary>
+        /// Construct a ClassroomLayoutOutputs specifying all inputs.
+        /// </summary>
+        /// <returns></returns>
+        [JsonConstructor]
+        public ClassroomLayoutOutputs(double totalCountOfSeats): base()
+        {
+			this.TotalCountOfSeats = totalCountOfSeats;
+
+		}
+
+		public override string ToString()
+		{
+			var json = JsonConvert.SerializeObject(this);
+			return json;
+		}
 	}
 }

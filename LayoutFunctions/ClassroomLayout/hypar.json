@@ -27,6 +27,13 @@
       }
     }
   },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Total count of seats",
+      "type": "number"
+    }
+  ],
   "overrides": {
     "Furniture Locations": {
       "context": "[*discriminator=Elements.ElementInstance]",
