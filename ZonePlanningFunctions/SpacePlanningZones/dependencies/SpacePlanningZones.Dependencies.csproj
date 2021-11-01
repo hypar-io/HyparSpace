@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.5-alpha.7" />
+    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    <ProjectReference Include="..\..\..\..\Hypar.Optimization\Hypar.Optimization.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-    <ProjectReference Include="..\..\..\..\Hypar.Optimization\Hypar.Optimization.csproj" />
+    <PackageReference Include="Hypar.Elements" Version="0.9.5" />
+    <PackageReference Include="Hypar.Functions" Version="0.9.6" />
   </ItemGroup>
 
 </Project>

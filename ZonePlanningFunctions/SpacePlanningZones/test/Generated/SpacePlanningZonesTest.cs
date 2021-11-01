@@ -8,6 +8,8 @@ using Xunit;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
+using System;
+using System.Linq;
 
 namespace SpacePlanningZones
 {
@@ -16,18 +18,26 @@ namespace SpacePlanningZones
         [Fact]
         public void TestExecute()
         {
-            var input = GetInput();
+            var path = "/Users/andrewheumann/Hypar Dropbox/Andrew Heumann/HyparSpace Examples/Example Plan from Revit.json";
+            var json = File.ReadAllText(path);
+            var model = Model.FromJson(json, out var deserErrors);
+            var walls = model.AllElementsOfType<Elements.WallByProfile>();
+            Console.WriteLine($"Found {walls.Count()} walls");
+            // var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) },
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Program Requirements/model.json")) },
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) },
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) },
-            };
+            // var modelDependencies = new Dictionary<string, Model> {
+            //     {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) },
+            //     {"Columns", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Columns/model.json")) },
+            //     {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) },
+            //     // {"Walls", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Walls/model.json"),out var deserializationErrors) },
+            //     {"Walls", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Hypar Dropbox/Andrew Heumann/HyparSpace Examples/Example Plan from Revit.json"),out var deserializationErrors) },
+            // };
 
-            var result = SpacePlanningZones.Execute(modelDependencies, input);
-            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
-            File.WriteAllText("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.json", result.Model.ToJson());
+            // var walls = new List<WallByProfile>(modelDependencies["Walls"].AllElementsOfType<WallByProfile>());
+
+            // var result = SpacePlanningZones.Execute(modelDependencies, input);
+            // result.Model.ToGlTF("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.glb");
+            // File.WriteAllText("../../../Generated/SpacePlanningZonesTest/results/SpacePlanningZonesTest.json", result.Model.ToJson());
         }
 
         public SpacePlanningZonesInputs GetInput()
@@ -345,7 +355,62 @@ namespace SpacePlanningZones
   },
   ""Corridors"": [
     {
-      ""width"": 1,
+      ""width"": 1.5,
+      ""leftWidth"": 1.5,
+      ""flip"": true,
+      ""polyline"": {
+        ""Vertices"": [
+          {
+            ""X"": -17.420742467767155,
+            ""Y"": 10.898938250007381,
+            ""Z"": 0
+          },
+          {
+            ""X"": -12.019009923920352,
+            ""Y"": 16.20681719719487,
+            ""Z"": 0
+          },
+          {
+            ""X"": 11.187703133569235,
+            ""Y"": 16.20681719719487,
+            ""Z"": 0
+          },
+          {
+            ""X"": 16.658487200353864,
+            ""Y"": 10.294840866956921,
+            ""Z"": 0
+          },
+          {
+            ""X"": 11.376516268082199,
+            ""Y"": 5.407046869931837,
+            ""Z"": 0
+          },
+          {
+            ""X"": 11.376516268082199,
+            ""Y"": -9.647049441009894,
+            ""Z"": 0
+          },
+          {
+            ""X"": 16.393771842283645,
+            ""Y"": -12.205964569023335,
+            ""Z"": 0
+          },
+          {
+            ""X"": 16.393771842283645,
+            ""Y"": -16.000218034698428,
+            ""Z"": 0
+          },
+          {
+            ""X"": -21.10757055099803,
+            ""Y"": -16.000218034698428,
+            ""Z"": 0
+          }
+        ],
+        ""discriminator"": ""Elements.Geometry.Polyline""
+      }
+    },
+    {
+      ""width"": 1.5,
       ""flip"": false,
       ""polyline"": {
         ""Vertices"": [
@@ -387,7 +452,52 @@ namespace SpacePlanningZones
         ],
         ""discriminator"": ""Elements.Geometry.Polyline""
       },
-      ""rightWidth"": 1
+      ""rightWidth"": 1.5
+    },
+    {
+      ""width"": 1,
+      ""leftWidth"": 1,
+      ""flip"": true,
+      ""polyline"": {
+        ""Vertices"": [
+          {
+            ""X"": -13.709595365810841,
+            ""Y"": -27.624328666836156,
+            ""Z"": 0
+          },
+          {
+            ""X"": -13.709595365810841,
+            ""Y"": -20.725555934815045,
+            ""Z"": 0
+          },
+          {
+            ""X"": -5.691952162140358,
+            ""Y"": -17.570303290167253,
+            ""Z"": 0
+          },
+          {
+            ""X"": 6.120708824168886,
+            ""Y"": -17.570303290167253,
+            ""Z"": 0
+          },
+          {
+            ""X"": 13.550391525871875,
+            ""Y"": -20.672077077221907,
+            ""Z"": 0
+          },
+          {
+            ""X"": 13.550391525871875,
+            ""Y"": -22.543837120799072,
+            ""Z"": 0
+          },
+          {
+            ""X"": 19.989273764952134,
+            ""Y"": -28.129673711865326,
+            ""Z"": 0
+          }
+        ],
+        ""discriminator"": ""Elements.Geometry.Polyline""
+      }
     }
   ],
   ""Corridor Width"": 1.5,

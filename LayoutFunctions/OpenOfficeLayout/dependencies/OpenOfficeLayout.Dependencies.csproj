@@ -7,11 +7,15 @@
   <ItemGroup>
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirementCountType.g.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-    <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.9.5" />
+    <PackageReference Include="Hypar.Functions" Version="0.9.6" />
   </ItemGroup>
 
 </Project>

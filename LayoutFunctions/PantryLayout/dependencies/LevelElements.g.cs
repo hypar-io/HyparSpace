@@ -29,18 +29,13 @@ namespace Elements
         public LevelElements(IList<Element> @elements, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<LevelElements>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @elements, @id, @name});
+            this.Elements = @elements;
             }
         
-            this.Elements = @elements;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
+        // Empty constructor
+        public LevelElements()
+            : base()
+        {
         }
     
         /// <summary>The list of elements.</summary>

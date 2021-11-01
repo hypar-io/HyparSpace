@@ -29,12 +29,6 @@ namespace Elements
         public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirement>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @areaPerSpace, @spaceCount, @width, @depth, @hyparSpaceType, @countType, @id, @name});
-            }
-        
             this.ProgramGroup = @programGroup;
             this.ProgramName = @programName;
             this.Color = @color;
@@ -44,11 +38,12 @@ namespace Elements
             this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
             }
+        
+        // Empty constructor
+        public ProgramRequirement()
+            : base()
+        {
         }
     
         /// <summary>What group does this program belong to?</summary>

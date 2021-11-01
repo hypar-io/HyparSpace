@@ -26,23 +26,21 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceBoundary>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @boundary, @cells, @area, @transform, @material, @representation, @isElementDefinition, @id, @name});
-            }
-        
             this.Boundary = @boundary;
             this.Cells = @cells;
             this.Area = @area;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
+            this.Length = @length;
+            this.Depth = @depth;
+            this.Height = @height;
             }
+        
+        // Empty constructor
+        public SpaceBoundary()
+            : base()
+        {
         }
     
         /// <summary>The boundary of the space</summary>
@@ -56,6 +54,18 @@ namespace Elements
         /// <summary>The area of the boundary</summary>
         [Newtonsoft.Json.JsonProperty("Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Area { get; set; }
+    
+        /// <summary>The rough length of this space boundary, parallel to the accessible edge</summary>
+        [Newtonsoft.Json.JsonProperty("Length", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Length { get; set; }
+    
+        /// <summary>The rough depth of the space boundary, perpendicular to the accessible edge</summary>
+        [Newtonsoft.Json.JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Depth { get; set; }
+    
+        /// <summary>The height of this space boundary</summary>
+        [Newtonsoft.Json.JsonProperty("Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Height { get; set; }
     
     
     }

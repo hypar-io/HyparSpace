@@ -32,6 +32,14 @@
       }
     }
   },
+  "outputs": [
+    {
+      "unit_type": "none",
+      "name": "Total cafe chairs count",
+      "description": "Total count of cafeteria chairs and bar heights",
+      "type": "number"
+    }
+  ],
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",

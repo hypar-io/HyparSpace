@@ -26,26 +26,26 @@ namespace Elements
     public partial class WorkpointCount : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCount(int @count, System.Guid @id = default, string @name = null)
+        public WorkpointCount(int @count, string @type, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCount>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @count, @id, @name});
+            this.Count = @count;
+            this.Type = @type;
             }
         
-            this.Count = @count;
-            
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
+        // Empty constructor
+        public WorkpointCount()
+            : base()
+        {
         }
     
         /// <summary>The number of workpoints</summary>
         [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Count { get; set; }
+    
+        /// <summary>Type of the workpoint</summary>
+        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Type { get; set; }
     
     
     }
