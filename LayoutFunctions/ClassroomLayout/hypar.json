@@ -29,7 +29,7 @@
   },
   "outputs": [
     {
-      "unit_type": "volume",
+      "unit_type": "none",
       "name": "Total count of desk seats",
       "description": "Total count of seats",
       "type": "number"

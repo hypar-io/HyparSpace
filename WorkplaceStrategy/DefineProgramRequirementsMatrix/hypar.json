@@ -15,14 +15,6 @@
       }
     }
   },
-  "outputs": [
-    {
-      "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
-      "type": "number"
-    }
-  ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,

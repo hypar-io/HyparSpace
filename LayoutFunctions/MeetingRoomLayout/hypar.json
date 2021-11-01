@@ -26,7 +26,7 @@
   },
   "outputs": [
     {
-      "unit_type": "volume",
+      "unit_type": "none",
       "name": "Total Seat Count",
       "description": "Total Seat Count",
       "type": "number"
