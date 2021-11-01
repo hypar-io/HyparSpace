@@ -167,7 +167,8 @@
           "X": 0.028200295751602766,
           "Y": 5.924135377775599,
           "Z": 0.0
-        }
+        },
+        "Name": "Steelcase Turnstone - Shortcut - Stool - Chair"
       },
       {
         "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Coalesse+-+Montara650+-+Table+-+Cafe+Height+-+Square+-+Bar+Height+-+36D+x+36W.glb",
@@ -417,7 +418,8 @@
           "X": 0.028200295751599214,
           "Y": 4.7216266161666738,
           "Z": 0.0
-        }
+        },
+        "Name": "Steelcase Turnstone - Shortcut - Stool - Chair"
       }
     ]
   },
@@ -459,7 +461,8 @@
           "X": 0.028200295751592108,
           "Y": 3.568480490437679,
           "Z": 0.0
-        }
+        },
+        "Name": "Steelcase Turnstone - Shortcut - Stool - Chair"
       },
       {
         "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+Coalesse+-+Montara650+-+Table+-+Cafe+Height+-+Square+-+Bar+Height+-+36D+x+36W.glb",
@@ -631,7 +634,8 @@
           "X": -0.0029972146730905536,
           "Y": 0.91664374215682187,
           "Z": 0.0
-        }
+        },
+        "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair"
       },
       {
         "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/da0d0a40-aff1-4bda-a118-8e432fa8b08c/Steelcase+-+Akira+-+Table+-+Rectangle+Fixed+Top+-+L+Base+-+Standard+-+Glide+-+72L+x+30W.glb",
@@ -683,7 +687,8 @@
           "X": -0.0029972146730905536,
           "Y": 0.91664374215682187,
           "Z": 0.0
-        }
+        },
+        "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair"
       }
     ]
   }

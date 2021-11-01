@@ -26,18 +26,11 @@ namespace WorkplaceMetrics
                 totalFloorArea += difference.Sum(d => d.Area());
             }
 
-            var totalDeskCount = 0;
-            if (inputModels.TryGetValue("Open Office Layout", out var openOfficeModel))
-            {
-                totalDeskCount += openOfficeModel.AllElementsOfType<WorkpointCount>()
-                                                .Sum((wc => (wc.Type != null && wc.Type.Contains("Desk"))?wc.Count:0));
-            }
-            var totalMeetingRoomSeats = 0;
-            if (inputModels.TryGetValue("Meeting Room Layout", out var meetingRoomModel))
-            {
-                totalMeetingRoomSeats += meetingRoomModel.AllElementsOfType<WorkpointCount>()
-                                                        .Sum((wc => (wc.Type != null && wc.Type.Contains("Meeting Room Seat")) ? wc.Count : 0));
-            }
+            var totalDeskCount        = CountWorkplaceTyped(inputModels, "Open Office Layout",        "Desk");
+            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout",       "Meeting Room Seat");
+            var totalClassroomSeats   = CountWorkplaceTyped(inputModels, "Classroom Layout",          "Classroom Seat");
+            var totalPhoneBooths      = CountWorkplaceTyped(inputModels, "Phone Booth Layout",        "Phone Booth");
+            var totalOpenCollabSeats  = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
 
             var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
 
@@ -58,9 +51,31 @@ namespace WorkplaceMetrics
             var areaPerPerson = totalFloorArea / headcount;
             var areaPerDesk = totalFloorArea / totalDeskCount;
             var meetingRoomRatio = meetingRoomCount == 0 ? 0 : (int)Math.Round(headcount / (double)meetingRoomCount);
-            var output = new WorkplaceMetricsOutputs(totalFloorArea, areaPerPerson, totalDeskCount, totalMeetingRoomSeats, 
-                                                    headcount, areaPerDesk, deskSharingRatio, meetingRoomRatio);
+            var output = new WorkplaceMetricsOutputs(
+                                                    totalFloorArea, 
+                                                    areaPerPerson, 
+                                                    totalDeskCount, 
+                                                    totalMeetingRoomSeats,
+                                                    totalClassroomSeats,
+                                                    totalPhoneBooths,
+                                                    totalOpenCollabSeats,
+                                                    headcount, 
+                                                    areaPerDesk, 
+                                                    deskSharingRatio, 
+                                                    meetingRoomRatio
+                                                    );
             return output;
+        }
+
+        private static int CountWorkplaceTyped(Dictionary<string, Model> inputModels, string layoutName, string seatType)
+        {
+            var count = 0;
+            if (inputModels.TryGetValue(layoutName, out var layoutModel))
+            {
+                count += layoutModel.AllElementsOfType<WorkpointCount>()
+                                                .Sum((wc => (wc.Type != null && wc.Type.Contains(seatType)) ? wc.Count : 0));
+            }
+            return count;
         }
     }
 }

@@ -30,8 +30,8 @@
   "outputs": [
     {
       "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
+      "name": "Total count of desk seats",
+      "description": "Total count of seats",
       "type": "number"
     }
   ],
@@ -53,7 +53,8 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
-    "https://prod-api.hypar.io/schemas/LevelVolume"
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/WorkpointCount"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,

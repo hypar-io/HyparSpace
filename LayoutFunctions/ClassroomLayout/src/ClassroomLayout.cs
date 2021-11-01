@@ -32,6 +32,22 @@ namespace ClassroomLayout
             var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
+            
+            int totalCountableSeats = 0;
+            int seatsAtDesk = 0;
+            var deskConfig = configs["Desk"];
+            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
+            foreach ( var item in deskConfig.ContentItems )
+            {
+                foreach ( var countableSeat in countableSeats )
+                {
+                    if ( item.ContentElement.Name.Contains(countableSeat) )
+                    {
+                        seatsAtDesk++;
+                    }
+                }
+            }
 
             foreach (var lvl in levels)
             {
@@ -54,7 +70,6 @@ namespace ClassroomLayout
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
                     var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    var deskConfig = configs["Desk"];
                     foreach (var cell in grid.GetCells())
                     {
                         var rect = cell.GetCellGeometry() as Polygon;
@@ -93,6 +108,7 @@ namespace ClassroomLayout
                                     }
                                     if (trimmedShape.Area().ApproximatelyEquals(deskConfig.Width * deskConfig.Depth, 0.1))
                                     {
+                                        totalCountableSeats += seatsAtDesk;
                                         foreach (var contentItem in deskConfig.ContentItems)
                                         {
                                             var instance = contentItem.ContentElement.CreateInstance(
@@ -126,6 +142,8 @@ namespace ClassroomLayout
                     WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
                 }
             }
+            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });
+            output.TotalCountOfDeskSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }
@@ -151,8 +169,7 @@ namespace ClassroomLayout
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            return instance;
+            return componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
         }
     }
 

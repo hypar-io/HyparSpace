@@ -24,6 +24,21 @@
       "autohide": false,
       "name": "Meeting Room Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Classroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Phone Booth Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Open Collaboration Layout",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -102,6 +117,24 @@
       "unit_type": "none",
       "name": "Meeting room seats",
       "description": "The total number of seats in the meeting rooms.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
+      "name": "Classroom seats",
+      "description": "The total number of classroom seats.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
+      "name": "Phone Booths",
+      "description": "Total number of Phone booths.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
+      "name": "Collaboration seats",
+      "description": "Total seats in open collaboration areas.",
       "type": "number"
     },
     {

@@ -17,10 +17,10 @@ namespace ClassroomLayout
     public class ClassroomLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total count of seats
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
+		[JsonProperty("Total count of desk seats")]
+		public double TotalCountOfDeskSeats {get; set;}
 
 
 
@@ -39,9 +39,9 @@ namespace ClassroomLayout
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public ClassroomLayoutOutputs(double volume): base()
+        public ClassroomLayoutOutputs(double totalCountOfDeskSeats): base()
         {
-			this.Volume = volume;
+			this.TotalCountOfDeskSeats = totalCountOfDeskSeats;
 
 		}
 

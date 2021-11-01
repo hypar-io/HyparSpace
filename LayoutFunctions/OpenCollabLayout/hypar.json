@@ -39,9 +39,9 @@
   },
   "outputs": [
     {
-      "unit_type": "volume",
-      "name": "Volume",
-      "description": "The volume.",
+      "unit_type": "none",
+      "name": "Collaboration seats",
+      "description": "Total seats in open collaboration areas.",
       "type": "number"
     }
   ],
@@ -49,7 +49,8 @@
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/ServiceCore"
+    "https://prod-api.hypar.io/schemas/ServiceCore",
+    "https://prod-api.hypar.io/schemas/WorkpointCount"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,

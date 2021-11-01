@@ -16,12 +16,6 @@ namespace PrivateOfficeLayout
 {
     public class PrivateOfficeLayoutOutputs: ResultsBase
     {
-		/// <summary>
-		/// The volume.
-		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
-
 
 
         /// <summary>
@@ -34,21 +28,5 @@ namespace PrivateOfficeLayout
         }
 
 
-        /// <summary>
-        /// Construct a PrivateOfficeLayoutOutputs specifying all inputs.
-        /// </summary>
-        /// <returns></returns>
-        [JsonConstructor]
-        public PrivateOfficeLayoutOutputs(double volume): base()
-        {
-			this.Volume = volume;
-
-		}
-
-		public override string ToString()
-		{
-			var json = JsonConvert.SerializeObject(this);
-			return json;
-		}
 	}
 }

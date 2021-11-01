@@ -14,5 +14,4 @@ Lay out private offices.
 
 |Output Name|Type|Description|
 |---|---|---|
-|Volume|Number|The volume.|
 

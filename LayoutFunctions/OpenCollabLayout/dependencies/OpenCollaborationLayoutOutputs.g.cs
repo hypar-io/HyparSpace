@@ -17,10 +17,10 @@ namespace OpenCollaborationLayout
     public class OpenCollaborationLayoutOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// Total seats in open collaboration areas.
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
+		[JsonProperty("Collaboration seats")]
+		public double CollaborationSeats {get; set;}
 
 
 
@@ -39,9 +39,9 @@ namespace OpenCollaborationLayout
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public OpenCollaborationLayoutOutputs(double volume): base()
+        public OpenCollaborationLayoutOutputs(double collaborationSeats): base()
         {
-			this.Volume = volume;
+			this.CollaborationSeats = collaborationSeats;
 
 		}
 
