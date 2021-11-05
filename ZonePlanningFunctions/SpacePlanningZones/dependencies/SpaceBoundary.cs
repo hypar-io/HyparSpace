@@ -154,7 +154,7 @@ namespace Elements
                 profile = profile.Reversed();
             }
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
-            var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
+            var representation = new Representation(new[] { new Extrude(profile.Transformed(new Transform(0, 0, 0.01)), height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary()
@@ -166,6 +166,12 @@ namespace Elements
                 Material = material ?? MaterialDict["unrecognized"],
                 Representation = representation,
                 Name = name
+            };
+            sb.Material.DoubleSided = false;
+            sb.Material.Unlit = true;
+            sb.ModifyVertexAttributes = (vertexInfo) =>
+            {
+                return (vertexInfo.position, vertexInfo.normal.Negate(), vertexInfo.uv, vertexInfo.color);
             };
             if (hasReqMatch)
             {
