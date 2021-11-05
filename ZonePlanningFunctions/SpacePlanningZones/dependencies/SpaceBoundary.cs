@@ -167,12 +167,6 @@ namespace Elements
                 Representation = representation,
                 Name = name
             };
-            sb.Material.DoubleSided = false;
-            sb.Material.Unlit = true;
-            sb.ModifyVertexAttributes = (vertexInfo) =>
-            {
-                return (vertexInfo.position, vertexInfo.normal.Negate(), vertexInfo.uv, vertexInfo.color);
-            };
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
