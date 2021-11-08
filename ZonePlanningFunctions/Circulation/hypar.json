@@ -1,0 +1,181 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "d7702a20-66d8-4a6e-9199-553fa754e7ca",
+  "name": "Circulation",
+  "description": "Generate a circulation path",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": true,
+      "name": "Levels",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Core",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Floors",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Program Requirements",
+      "optional": true
+    }
+  ],
+  "model_output": "Circulation",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Default Program Assignment": {
+        "type": "string",
+        "description": "What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.",
+        "$hyparAutocomplete": [
+          "unspecified",
+          "Open Office",
+          "Private Office",
+          "Lounge",
+          "Classroom",
+          "Pantry",
+          "Meeting Room",
+          "Phone Booth",
+          "Support",
+          "Reception",
+          "Open Collaboration",
+          "Data Hall"
+        ],
+        "$hyparAutocompleteQuery": {
+          "dependency": "Program Requirements",
+          "query": "[*discriminator=Elements.ProgramRequirement].Qualified Program Name"
+        },
+        "default": "unspecified"
+      },
+      "Corridors": {
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Circulation Mode",
+              "value": "Manual"
+            }
+          ]
+        },
+        "type": "array",
+        "description": "Define the circulation network by drawing one or more corridor paths.",
+        "items": {
+          "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+          "$hyparAllowIntersection": true,
+          "$hyparConstrainToGround": true,
+          "default": null
+        }
+      },
+      "Corridor Width": {
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Circulation Mode",
+              "value": "Automatic"
+            }
+          ]
+        },
+        "description": "How wide should circulation paths be?",
+        "type": "number",
+        "minimum": 0.3,
+        "multipleOf": 0.01,
+        "default": 1.5,
+        "$hyparUnitType": "length"
+      },
+      "Outer Band Depth": {
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Circulation Mode",
+              "value": "Automatic"
+            }
+          ]
+        },
+        "type": "number",
+        "description": "For the \"outer band\" of program running along the floor perimeter, how deep should the spaces be?",
+        "minimum": 1.0,
+        "maximum": 20.0,
+        "multipleOf": 0.01,
+        "default": 6,
+        "$hyparUnitType": "length"
+      },
+      "Circulation Mode": {
+        "description": "How should circulation be calculated? \nAutomatic: a typical circulation network will be generated for you. \nManual: you draw the circulation paths yourself.",
+        "type": "string",
+        "enum": [
+          "Automatic",
+          "Manual"
+        ],
+        "default": "Automatic"
+      },
+      "Depth at Ends": {
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Circulation Mode",
+              "value": "Automatic"
+            }
+          ]
+        },
+        "type": "number",
+        "description": "If your floorplate is rectangular, or has roughly rectangular ends, how deep should the spaces be at these ends?",
+        "minimum": 1.0,
+        "maximum": 20.0,
+        "multipleOf": 0.01,
+        "default": 8,
+        "$hyparUnitType": "length"
+      },
+      "Additional Corridor Locations": {
+        "$hyparDeprecated": true,
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Circulation Mode",
+              "value": "Automatic"
+            }
+          ]
+        },
+        "$hyparDisplayName": "Add Corridors",
+        "description": "Add new points to this list to insert additional corridor locations, to further subdivide the space. Corridors extend perpendicularly from the closest point on the boundary.",
+        "type": "array",
+        "items": {
+          "$hyparDisplayName": "Corridor",
+          "type": [
+            "object",
+            "null"
+          ],
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "Add Corridors": {
+        "$hyparDisplayName": "Add Corridors",
+        "description": "Insert additional corridors, to further subdivide the space.",
+        "$ref": "https://prod-api.hypar.io/schemas/PolygonSplitCollection",
+        "$hyparPreviewWidth": 1.5,
+        "$hyparPolygonQuery": {
+          "query": "[*discriminator=Elements.PolygonReference&Name=corridors].Boundary",
+          "selfDependency": true
+        }
+      }
+    }
+  },
+  "outputs": [],
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://raw.githubusercontent.com/hypar-io/Schemas/master/LevelPerimeter.json",
+    "https://prod-api.hypar.io/schemas/ServiceCore",
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/AreaTally",
+    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://prod-api.hypar.io/schemas/PolygonReference"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "0.9.6"
+}
