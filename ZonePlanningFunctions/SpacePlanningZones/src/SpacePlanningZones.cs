@@ -105,6 +105,10 @@ namespace SpacePlanningZones
 
             // adding levels also adds the space boundaries, since they're in the levels' own elements collections
             output.Model.AddElements(levels);
+            foreach (var sb in output.Model.AllElementsOfType<SpaceBoundary>().ToList())
+            {
+                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform, sb.Material));
+            }
             return output;
         }
 
