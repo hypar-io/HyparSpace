@@ -147,14 +147,14 @@ namespace Circulation
                     spaceBoundaries.Add(zone);
                 });
 
-                List<Profile> corridorProfiles = new List<Profile>();
+                List<Profile> corridorProfiles = null;
 
                 List<Profile> thickerOffsetProfiles = null;
 
                 // Process circulation
                 if (input.CirculationMode == CirculationInputsCirculationMode.Automatic)
                 {
-                    thickerOffsetProfiles = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles);
+                    (corridorProfiles, thickerOffsetProfiles) = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary);
                 }
                 else if (input.CirculationMode == CirculationInputsCirculationMode.Manual && input.Corridors != null && input.Corridors.Count > 0)
                 {
@@ -186,14 +186,6 @@ namespace Circulation
 
                 //Create snapping geometry for splits
                 CreateSnappingGeometry(output, spaceBoundaries, "splits");
-
-                // These are the old style methods, just left in place for backwards compatibility. 
-                // Most of the time we expect these values to be empty.
-                // Manual Corridor Splits
-                foreach (var pt in input.AdditionalCorridorLocations)
-                {
-                    SplitZonesDeprecated(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
-                }
 
                 foreach (SpaceBoundary b in spaceBoundaries)
                 {
@@ -468,8 +460,9 @@ namespace Circulation
             return corridorProfiles;
         }
 
-        private static List<Profile> GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, List<Profile> corridorProfiles)
+        private static (List<Profile> corridorProfiles, List<Profile> thickenedOffsetProfile)  GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary)
         {
+            List<Profile> corridorProfiles = new List<Profile>();
             var perimeter = levelBoundary.Perimeter;
             var perimeterSegments = perimeter.Segments();
 
@@ -487,7 +480,7 @@ namespace Circulation
             ThickenAndExtendSingleLoaded(corridorWidth, corridorProfiles, coresInBoundary, thickenedEnds, innerOffsetMinusThickenedEnds, allCenterLines);
 
             CorridorsFromCore(corridorWidth, corridorProfiles, levelBoundary, coresInBoundary, innerOffsetMinusThickenedEnds, exclusionRegions);
-            return thickerOffsetProfiles;
+            return (corridorProfiles, thickerOffsetProfiles);
         }
 
         private static Line GetCenterlineFromWall(Element w)

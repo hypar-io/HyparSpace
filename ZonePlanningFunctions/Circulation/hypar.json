@@ -130,28 +130,6 @@
         "default": 8,
         "$hyparUnitType": "length"
       },
-      "Additional Corridor Locations": {
-        "$hyparDeprecated": true,
-        "$hyparShowIf": {
-          "conditions": [
-            {
-              "property": "Circulation Mode",
-              "value": "Automatic"
-            }
-          ]
-        },
-        "$hyparDisplayName": "Add Corridors",
-        "description": "Add new points to this list to insert additional corridor locations, to further subdivide the space. Corridors extend perpendicularly from the closest point on the boundary.",
-        "type": "array",
-        "items": {
-          "$hyparDisplayName": "Corridor",
-          "type": [
-            "object",
-            "null"
-          ],
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        }
-      },
       "Add Corridors": {
         "$hyparDisplayName": "Add Corridors",
         "description": "Insert additional corridors, to further subdivide the space.",
