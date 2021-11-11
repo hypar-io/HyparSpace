@@ -30,47 +30,6 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "Default Program Assignment": {
-        "type": "string",
-        "description": "What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.",
-        "$hyparAutocomplete": [
-          "unspecified",
-          "Open Office",
-          "Private Office",
-          "Lounge",
-          "Classroom",
-          "Pantry",
-          "Meeting Room",
-          "Phone Booth",
-          "Support",
-          "Reception",
-          "Open Collaboration",
-          "Data Hall"
-        ],
-        "$hyparAutocompleteQuery": {
-          "dependency": "Program Requirements",
-          "query": "[*discriminator=Elements.ProgramRequirement].Qualified Program Name"
-        },
-        "default": "unspecified"
-      },
-      "Corridors": {
-        "$hyparShowIf": {
-          "conditions": [
-            {
-              "property": "Circulation Mode",
-              "value": "Manual"
-            }
-          ]
-        },
-        "type": "array",
-        "description": "Define the circulation network by drawing one or more corridor paths.",
-        "items": {
-          "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
-          "$hyparAllowIntersection": true,
-          "$hyparConstrainToGround": true,
-          "default": null
-        }
-      },
       "Corridor Width": {
         "$hyparShowIf": {
           "conditions": [
@@ -133,11 +92,12 @@
       "Add Corridors": {
         "$hyparDisplayName": "Add Corridors",
         "description": "Insert additional corridors, to further subdivide the space.",
-        "$ref": "https://prod-api.hypar.io/schemas/PolygonSplitCollection",
-        "$hyparPreviewWidth": 1.5,
-        "$hyparPolygonQuery": {
-          "query": "[*discriminator=Elements.PolygonReference&Name=corridors].Boundary",
-          "selfDependency": true
+        "type": "array",
+        "items": {
+          "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+          "$hyparAllowIntersection": true,
+          "$hyparConstrainToGround": true,
+          "default": null
         }
       }
     }
