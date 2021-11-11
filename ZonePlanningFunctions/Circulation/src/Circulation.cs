@@ -137,18 +137,7 @@ namespace Circulation
                     levelBoundary = newLevelBoundary;
                 }
 
-                var spaceBoundaries = new List<SpaceBoundary>();
-
-                // take enclosed zones generated from the walls process, if any, and generate these as "unspecified" zones, regardless
-                // of the program default.
-                interiorZones.ForEach((z) =>
-                {
-                    var zone = SpaceBoundary.Make(z, "unspecified", lvl.Transform, lvl.Height);
-                    spaceBoundaries.Add(zone);
-                });
-
-                List<Profile> corridorProfiles = null;
-
+                List<Profile> corridorProfiles = new List<Profile>();
                 List<Profile> thickerOffsetProfiles = null;
 
                 // Process circulation
@@ -156,13 +145,6 @@ namespace Circulation
                 {
                     (corridorProfiles, thickerOffsetProfiles) = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary);
                 }
-                else if (input.CirculationMode == CirculationInputsCirculationMode.Manual && input.Corridors != null && input.Corridors.Count > 0)
-                {
-                    corridorProfiles = ProcessManualCirculation(input);
-                }
-
-                // Generate space boundaries from level boundary and corridor locations
-                SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, input, lvl, corridorProfiles, levelBoundary, thickerOffsetProfiles, angleCheckForWallExtensions: walls != null && walls.Count() > 0);
 
                 // Construct LevelElements to contain space boundaries
                 var level = new LevelElements()
@@ -173,26 +155,8 @@ namespace Circulation
                 level.LevelVolumeId = lvl.Id;
                 levels.Add(level);
 
-                // Create snapping geometry for corridors
-                CreateSnappingGeometry(output, spaceBoundaries, "corridors");
+                ProcessManuallyAddedCorridors(input, corridorProfiles);
 
-                // These are the new, correct methods using the split inputs: 
-                //Manual Corridor Splits
-                // foreach (var pt in input.AddCorridors.SplitLocations)
-                // {
-                //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
-                // }
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
-
-                //Create snapping geometry for splits
-                CreateSnappingGeometry(output, spaceBoundaries, "splits");
-
-                foreach (SpaceBoundary b in spaceBoundaries)
-                {
-                    b.LevelElements = level;
-                }
-
-                allSpaceBoundaries.AddRange(spaceBoundaries.OfType<SpaceBoundary>());
                 // create floors for corridors and add them to the associated level.
                 try
                 {
@@ -206,248 +170,10 @@ namespace Circulation
             }
         }
 
-        private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, CirculationInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null, bool angleCheckForWallExtensions = false)
+        private static void ProcessManuallyAddedCorridors(CirculationInputs input, List<Profile> corridorProfiles)
         {
-            // subtract corridors from level boundary
-            var remainingSpaces = new List<Profile>();
-            try
-            {
-                remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
-            }
-            catch
-            {
-                remainingSpaces.Add(levelBoundary);
-            }
-            // for every space that's left
-            foreach (var remainingSpace in remainingSpaces)
-            {
-                try
-                {
-                    // if we're along the boundary of the level, try to look for linear zones to add corner splits
-                    if (remainingSpace.Perimeter.Vertices.Any(v => v.DistanceTo(levelBoundary.Perimeter) < 0.1))
-                    {
-                        var linearZones = thickerOffsetProfiles == null ? new List<Profile> { remainingSpace } : Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
-                        var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
-
-                        // these zones are long, skinny, and at the edge of the floorplate, typically, 
-                        // so we try to split them at their corners, so we don't
-                        // have linear zones wrapping a corner.
-
-                        foreach (var linearZone in linearZones)
-                        {
-                            var segmentsExtended = new List<Polyline>();
-                            foreach (var line in linearZone.Segments())
-                            {
-                                // consider only longer lines
-                                if (line.Length() < 2) continue;
-                                try
-                                {
-                                    // extend a line
-                                    var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
-                                    var extended = l.ExtendToWithEndInfo(linearZone.Segments(), double.MaxValue, out var dirAtStart, out var dirAtEnd);
-
-                                    // check distance extended
-                                    var endDistance = extended.End.DistanceTo(l.End);
-                                    var startDistance = extended.Start.DistanceTo(l.Start);
-
-                                    // check the angle of the other lines we hit. we only want to extend if we have something close to a right angle. 
-                                    var startDot = Math.Abs(dirAtStart.Dot(l.Direction()));
-                                    var endDot = Math.Abs(dirAtEnd.Dot(l.Direction()));
-                                    var minAngleTolerance = 0.2;
-                                    var maxAngleTolerance = 0.8;
-                                    var startAngleValid = (startDot < minAngleTolerance || startDot > maxAngleTolerance);
-                                    var endAngleValid = (endDot < minAngleTolerance || endDot > maxAngleTolerance);
-
-
-                                    // if it went a reasonable amount — more than 0.1 and less than maxExtension
-                                    // add it to our split candidates
-                                    if (startDistance > 0.1 && startDistance < maxExtension && (!angleCheckForWallExtensions || startAngleValid))
-                                    {
-                                        var startLine = new Line(extended.Start, line.Start);
-                                        segmentsExtended.Add(startLine.ToPolyline(1));
-                                    }
-                                    if (endDistance > 0.1 && endDistance < maxExtension && (!angleCheckForWallExtensions || endAngleValid))
-                                    {
-                                        var endLine = new Line(extended.End, line.End);
-                                        segmentsExtended.Add(endLine.ToPolyline(1));
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    Console.WriteLine("Exception extending lines");
-                                    Console.WriteLine(e.Message);
-                                    // just ignore
-                                }
-                            }
-                            // split the linear zone with these segments, and add the results as spaces. 
-                            var splits = Profile.Split(new[] { linearZone }, segmentsExtended, Vector3.EPSILON);
-                            spaceBoundaries.AddRange(splits.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
-                        }
-                        // if we had "thicker end zones" — these are only added with automatic circulation
-                        // at "squarish" ends of hthe floorplate — subtract these from the zones we just made and add the "end zones"
-                        // as spaces directly
-                        if (thickerOffsetProfiles != null)
-                        {
-                            var endCapZones = Profile.Intersection(new[] { remainingSpace }, thickerOffsetProfiles);
-                            spaceBoundaries.AddRange(endCapZones.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
-                        }
-                    }
-                    else // otherwise just add each chunk cut by the circulation (non-exterior) as a boundary
-                    {
-                        spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("🚨");
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                    spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
-                }
-            }
-        }
-
-        private static void SplitZonesMultiple(CirculationInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, IEnumerable<SplitLocations> pts, bool addCorridor = true, Model m = null)
-        {
-            var corridorSegments = corridorProfiles.SelectMany(c => c.Segments());
-            var allBoundaries = spaceBoundaries.OfType<SpaceBoundary>();
-            var boundariesByPoint = pts.Select((pt) =>
-            {
-                var bd = allBoundaries.FirstOrDefault(b => b.Boundary.Contains(pt.Position));
-                var id = bd?.Id ?? default(Guid);
-                return (pt, bd, id);
-            }).GroupBy((i) => i.id);
-            foreach (var grp in boundariesByPoint)
-            {
-                if (grp.First().id == default(Guid))
-                {
-                    continue;
-                }
-                var containingBoundary = grp.First().bd;
-
-                spaceBoundaries.Remove(containingBoundary);
-                containingBoundary.Remove();
-                var perim = containingBoundary.Boundary.Perimeter;
-                List<Line> extensions = new List<Line>();
-                foreach (var grpItem in grp)
-                {
-                    var pt = grpItem.pt;
-                    Line line;
-                    if (pt.Direction == Vector3.ZAxis)
-                    {
-                        pt.Position.DistanceTo(perim as Polyline, out var cp);
-                        line = new Line(pt.Position, cp);
-                    }
-                    else
-                    {
-                        line = new Line(pt.Position, pt.Position + pt.Direction * 0.1);
-                    }
-                    var extension = line.ExtendTo(containingBoundary.Boundary.Segments().Union(extensions));
-                    // var extension = line.ExtendTo(containingBoundary.Boundary);
-                    extensions.Add(extension);
-                }
-                List<Profile> newSbs = new List<Profile>();
-                if (addCorridor)
-                {
-                    var corridorShapesIntersected = new List<Profile>();
-                    var csAsProfiles = new List<Profile>();
-                    extensions.ForEach((extension) =>
-                    {
-                        var corridorShape = extension.ToPolyline(1).Offset(corridorWidth / 2, EndType.Square);
-                        var csAsProfilesLocal = corridorShape.Select(s => new Profile(s));
-                        csAsProfiles.AddRange(csAsProfilesLocal);
-                        corridorShapesIntersected.AddRange(Profile.Intersection(new[] { containingBoundary.Boundary }, csAsProfilesLocal));
-                    });
-                    corridorProfiles.AddRange(corridorShapesIntersected);
-                    newSbs = Profile.Difference(new[] { containingBoundary.Boundary }, csAsProfiles);
-                }
-                else
-                {
-                    var extensionsAsPolylines = extensions.Select(e => e.ToPolyline(1));
-                    try
-                    {
-
-                        newSbs = Profile.Split(new[] { containingBoundary.Boundary }, extensionsAsPolylines, Vector3.EPSILON);
-                    }
-                    catch (Exception e)
-                    {
-                        // last ditch attempt
-                        Console.WriteLine("A split failed - trying again");
-                        Console.WriteLine(e.Message);
-                        try
-                        {
-                            var offsetProfiles = Profile.Offset(new[] { containingBoundary.Boundary }, -0.02);
-                            var insetProfiles = Profile.Offset(offsetProfiles, 0.02);
-                            newSbs = Profile.Split(insetProfiles, extensionsAsPolylines, Vector3.EPSILON);
-                        }
-                        catch
-                        {
-                            Console.WriteLine("A split failed.");
-                            newSbs = new[] { containingBoundary.Boundary }.ToList();
-                        }
-                    }
-                }
-                spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.ProgramName, containingBoundary.Transform, lvl.Height, corridorSegments: corridorSegments)));
-            }
-        }
-        private static void SplitZonesDeprecated(CirculationInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, Vector3 pt, bool addCorridor = true)
-        {
-            // this is a hack — we're constructing a new SplitLocations w/ ZAxis as a sentinel meaning "null";
-            SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, new SplitLocations(pt, Vector3.ZAxis), addCorridor);
-        }
-        private static void SplitZones(CirculationInputs input, double corridorWidth, LevelVolume lvl, List<SpaceBoundary> spaceBoundaries, List<Profile> corridorProfiles, SplitLocations pt, bool addCorridor = true)
-        {
-            var containingBoundary = spaceBoundaries.OfType<SpaceBoundary>().FirstOrDefault(b => b.Boundary.Contains(pt.Position));
-            if (containingBoundary != null)
-            {
-                spaceBoundaries.Remove(containingBoundary);
-                var perim = containingBoundary.Boundary.Perimeter;
-                Line line;
-                if (pt.Direction == Vector3.ZAxis)
-                {
-                    pt.Position.DistanceTo(perim as Polyline, out var cp);
-                    line = new Line(pt.Position, cp);
-                }
-                else
-                {
-                    line = new Line(pt.Position, pt.Position + pt.Direction * 0.1);
-                }
-                var extension = line.ExtendTo(containingBoundary.Boundary);
-                List<Profile> newSbs = new List<Profile>();
-                if (addCorridor)
-                {
-                    var corridorShape = extension.ToPolyline(1).Offset(corridorWidth / 2, EndType.Square);
-                    var csAsProfiles = corridorShape.Select(s => new Profile(s));
-                    var corridorShapesIntersected = Profile.Intersection(new[] { containingBoundary.Boundary }, csAsProfiles);
-                    corridorProfiles.AddRange(corridorShapesIntersected);
-                    newSbs = Profile.Difference(new[] { containingBoundary.Boundary }, csAsProfiles);
-                }
-                else
-                {
-                    newSbs = Profile.Split(new[] { containingBoundary.Boundary }, new[] { extension.ToPolyline(1) }, Vector3.EPSILON);
-                }
-                spaceBoundaries.AddRange(newSbs.Select(p => SpaceBoundary.Make(p, containingBoundary.Name, containingBoundary.Transform, lvl.Height)));
-            }
-        }
-
-        private static void CreateSnappingGeometry(CirculationOutputs output, List<SpaceBoundary> spaceBoundaries, string type)
-        {
-            foreach (var sb in spaceBoundaries)
-            {
-                var boundary = sb as SpaceBoundary;
-                output.Model.AddElement(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
-                if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
-                {
-                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference() { Boundary = v, Name = type }));
-                }
-            }
-        }
-
-        private static List<Profile> ProcessManualCirculation(CirculationInputs input)
-        {
-            List<Profile> corridorProfiles;
             var corridorProfilesForUnion = new List<Profile>();
-            foreach (var corridorPolyline in input.Corridors)
+            foreach (var corridorPolyline in input.AddCorridors)
             {
                 if (corridorPolyline == null || corridorPolyline.Polyline == null)
                 {
@@ -456,8 +182,7 @@ namespace Circulation
                 var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
                 corridorProfilesForUnion.AddRange(corrPgons.Select(p => new Profile(p)));
             }
-            corridorProfiles = Profile.UnionAll(corridorProfilesForUnion);
-            return corridorProfiles;
+            corridorProfiles.AddRange(corridorProfilesForUnion);
         }
 
         private static (List<Profile> corridorProfiles, List<Profile> thickenedOffsetProfile)  GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary)
