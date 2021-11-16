@@ -28,7 +28,7 @@ namespace Elements
 
         public int SpaceCount { get; set; } = 1;
 
-        public ElementProxy<LevelVolume> Level { get; set; }
+        public Guid Level { get; set; }
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
@@ -154,7 +154,7 @@ namespace Elements
                 profile = profile.Reversed();
             }
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
-            var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
+            var representation = new Representation(new[] { new Extrude(profile.Transformed(new Transform(0, 0, 0.01)), height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             var sb = new SpaceBoundary()
@@ -224,7 +224,7 @@ namespace Elements
         {
             this.AdditionalProperties["Building Name"] = volume.BuildingName;
             this.AdditionalProperties["Level Name"] = volume.Name;
-            // this.Level = volume.Proxy;
+            this.Level = volume.Id;
         }
     }
 }

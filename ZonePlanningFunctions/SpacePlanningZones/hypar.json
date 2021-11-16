@@ -243,10 +243,16 @@
             "context": "[*discriminator=Elements.LevelVolume]",
             "identity": {
                 "Name": {
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "Building Name": {
-                    "type": "string"
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "paradigm": "edit",
