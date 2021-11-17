@@ -49,16 +49,6 @@ namespace Circulation
 
             // Get program requirements
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
-            var programReqs = programReqsModel?.AllElementsOfType<ProgramRequirement>();
-
-            // Reset static properties on SpaceBoundary
-            SpaceBoundary.Reset();
-
-            // Populate SpaceBoundary's program requirement dictionary with loaded requirements
-            if (programReqs != null && programReqs.Count() > 0)
-            {
-                SpaceBoundary.SetRequirements(programReqs);
-            }
 
             #endregion
 
@@ -66,30 +56,8 @@ namespace Circulation
             // to add to the model
             var levels = new List<LevelElements>();
 
-            // create a collection of all the final space boundaries we'll pass to the model
-            var allSpaceBoundaries = new List<SpaceBoundary>();
-
             // For every level volume, create space boundaries with corridors and splits
-            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries);
-
-            // exclude bad spaces and add boundaries to their levels.
-            foreach (var sb in allSpaceBoundaries)
-            {
-                // ignore skinny spaces
-                var minDepth = 1.0;
-                if ((sb.Depth ?? 10) < minDepth || (sb.Length ?? 10) < minDepth)
-                {
-                    continue;
-                }
-                // set levels
-                sb.LevelElements.Elements.Add(sb);
-
-                // copy level volume properties
-                var lvlVolume = levelsModel.Elements[sb.LevelElements.LevelVolumeId] as LevelVolume;
-                sb.SetLevelProperties(lvlVolume);
-                // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
-                sb.LevelElements = null;
-            }
+            CreateCorridors(input, output, levelVolumes, floorsModel, cores, levels, walls);
 
             // adding levels also adds the space boundaries, since they're in the levels' own elements collections
             output.Model.AddElements(levels);
@@ -97,17 +65,17 @@ namespace Circulation
             return output;
         }
 
-        private static void CreateInitialSpaceBoundaries(CirculationInputs input,
+        private static void CreateCorridors(CirculationInputs input,
                                                         CirculationOutputs output,
                                                         IEnumerable<LevelVolume> levelVolumes,
                                                         Model floorsModel,
                                                         IEnumerable<ServiceCore> cores,
                                                         List<LevelElements> levels,
-                                                        IEnumerable<Element> walls,
-                                                        List<SpaceBoundary> allSpaceBoundaries)
+                                                        IEnumerable<Element> walls)
         {
             var corridorWidth = input.CorridorWidth;
-            var corridorMat = SpaceBoundary.MaterialDict["Circulation"];
+            Color CORRIDOR_MATERIAL_COLOR = new Color(0.996, 0.965, 0.863, 1.0);
+            var corridorMat = new Material("Circulation", CORRIDOR_MATERIAL_COLOR, doubleSided: true);
             // for every level volume
             foreach (var lvl in levelVolumes)
             {
