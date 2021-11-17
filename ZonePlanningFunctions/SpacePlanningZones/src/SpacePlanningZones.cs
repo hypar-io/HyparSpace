@@ -218,9 +218,10 @@ namespace SpacePlanningZones
                 {
                     continue;
                 }
+                SpaceBoundary.TryGetRequirementsMatch(programName, out var req);
                 if (!areas.ContainsKey(programName))
                 {
-                    var areaTarget = SpaceBoundary.TryGetRequirementsMatch(programName, out var req) ? req.GetAreaPerSpace() * req.SpaceCount : 0.0;
+                    var areaTarget = req != null ? req.GetAreaPerSpace() * req.SpaceCount : 0.0;
                     matchingReqs[programName] = req;
                     areas[programName] = new AreaTally()
                     {
@@ -232,16 +233,16 @@ namespace SpacePlanningZones
                         Name = sb.Name,
                         TargetCount = req?.SpaceCount ?? 0,
                     };
-                    if (req != null && req.CountType == ProgramRequirementCountType.Area_Total && req.AreaPerSpace != 0)
-                    {
-                        sb.SpaceCount = (int)Math.Round(area / req.AreaPerSpace);
-                    }
                 }
                 else
                 {
                     var existingTally = areas[programName];
                     existingTally.AchievedArea += area;
                     existingTally.DistinctAreaCount += 1;
+                }
+                if (req != null && req.CountType == ProgramRequirementCountType.Area_Total && req.AreaPerSpace != 0)
+                {
+                    sb.SpaceCount = (int)Math.Round(area / req.AreaPerSpace);
                 }
             }
 
