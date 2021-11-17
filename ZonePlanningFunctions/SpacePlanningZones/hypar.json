@@ -2,7 +2,7 @@
     "$schema": "https://hypar.io/Schemas/Function.json",
     "id": "09b8407f-6c93-4741-ad6c-31288213f4f7",
     "name": "Space Planning Zones",
-    "description": "Generate a circulation path and high-level zones for a schematic space plan.",
+    "description": "Generate high-level zones for a schematic space plan.",
     "language": "C#",
     "model_dependencies": [
         {
@@ -14,6 +14,10 @@
             "autohide": false,
             "name": "Core",
             "optional": true
+        },
+        {
+            "name": "Circulation",
+            "optional": false
         },
         {
             "name": "Floors",
@@ -51,42 +55,8 @@
                 },
                 "default": "unspecified"
             },
-            "Circulation Mode": {
-                "description": "How should circulation be calculated? \nAutomatic: a typical circulation network will be generated for you. \nManual: you draw the circulation paths yourself.",
-                "type": "string",
-                "enum": [
-                    "Automatic",
-                    "Manual"
-                ],
-                "default": "Automatic"
-            },
-            "Corridors": {
-                "$hyparShowIf": {
-                    "conditions": [
-                        {
-                            "property": "Circulation Mode",
-                            "value": "Manual"
-                        }
-                    ]
-                },
-                "type": "array",
-                "description": "Define the circulation network by drawing one or more corridor paths.",
-                "items": {
-                    "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
-                    "$hyparAllowIntersection": true,
-                    "$hyparConstrainToGround": true,
-                    "default": null
-                }
-            },
             "Corridor Width": {
-                "$hyparShowIf": {
-                    "conditions": [
-                        {
-                            "property": "Circulation Mode",
-                            "value": "Automatic"
-                        }
-                    ]
-                },
+                "$hyparDeprecated": true,
                 "description": "How wide should circulation paths be?",
                 "type": "number",
                 "minimum": 0.3,
@@ -95,14 +65,6 @@
                 "$hyparUnitType": "length"
             },
             "Outer Band Depth": {
-                "$hyparShowIf": {
-                    "conditions": [
-                        {
-                            "property": "Circulation Mode",
-                            "value": "Automatic"
-                        }
-                    ]
-                },
                 "type": "number",
                 "description": "For the \"outer band\" of program running along the floor perimeter, how deep should the spaces be?",
                 "minimum": 1.0,
@@ -112,14 +74,6 @@
                 "$hyparUnitType": "length"
             },
             "Depth at Ends": {
-                "$hyparShowIf": {
-                    "conditions": [
-                        {
-                            "property": "Circulation Mode",
-                            "value": "Automatic"
-                        }
-                    ]
-                },
                 "type": "number",
                 "description": "If your floorplate is rectangular, or has roughly rectangular ends, how deep should the spaces be at these ends?",
                 "minimum": 1.0,
@@ -162,16 +116,6 @@
                         "null"
                     ],
                     "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-                }
-            },
-            "Add Corridors": {
-                "$hyparDisplayName": "Add Corridors",
-                "description": "Insert additional corridors, to further subdivide the space.",
-                "$ref": "https://prod-api.hypar.io/schemas/PolygonSplitCollection",
-                "$hyparPreviewWidth": 1.5,
-                "$hyparPolygonQuery": {
-                    "query": "[*discriminator=Elements.PolygonReference&Name=corridors].Boundary",
-                    "selfDependency": true
                 }
             },
             "Split Zones": {
