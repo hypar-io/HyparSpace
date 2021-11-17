@@ -107,10 +107,8 @@
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://raw.githubusercontent.com/hypar-io/Schemas/master/LevelPerimeter.json",
     "https://prod-api.hypar.io/schemas/ServiceCore",
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/AreaTally",
-    "https://prod-api.hypar.io/schemas/ProgramRequirement",
     "https://prod-api.hypar.io/schemas/PolygonReference"
   ],
   "repository_url": "https://github.com/hypar-io/function",
