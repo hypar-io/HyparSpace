@@ -392,15 +392,12 @@ namespace SpacePlanningZones
 
                 var corridorProfiles = circulationModel.AllElementsOfType<Floor>().Select(corridor => corridor.Profile);
 
-                List<Profile> thickerOffsetProfiles = null;
-
                 // Generate space boundaries from level boundary and corridor locations
                 SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, 
                                                        input, 
                                                        lvl, 
                                                        corridorProfiles, 
                                                        levelBoundary, 
-                                                       thickerOffsetProfiles, 
                                                        angleCheckForWallExtensions: walls != null && walls.Count() > 0);
 
                 // Construct LevelElements to contain space boundaries
@@ -574,7 +571,6 @@ namespace SpacePlanningZones
                                                                         LevelVolume lvl, 
                                                                         IEnumerable<Profile> corridorProfiles, 
                                                                         Profile levelBoundary, 
-                                                                        List<Profile> thickerOffsetProfiles = null, 
                                                                         bool angleCheckForWallExtensions = false
                                                                     )
         {
@@ -596,7 +592,7 @@ namespace SpacePlanningZones
                     // if we're along the boundary of the level, try to look for linear zones to add corner splits
                     if (remainingSpace.Perimeter.Vertices.Any(v => v.DistanceTo(levelBoundary.Perimeter) < 0.1))
                     {
-                        var linearZones = thickerOffsetProfiles == null ? new List<Profile> { remainingSpace } : Profile.Difference(new[] { remainingSpace }, thickerOffsetProfiles);
+                        var linearZones = new List<Profile> { remainingSpace };
                         var maxExtension = Math.Max(input.OuterBandDepth, input.DepthAtEnds) * 1.6;
                         var MIN_EXTENTION = 0.1;
 
@@ -610,7 +606,7 @@ namespace SpacePlanningZones
                             foreach (var line in linearZone.Segments())
                             {
                                 // consider only longer lines
-                                if (line.Length() < 2) continue;
+                                if (line.Length() < 2.0) continue;
                                 try
                                 {
                                     // extend a line
@@ -652,15 +648,9 @@ namespace SpacePlanningZones
                             }
                             // split the linear zone with these segments, and add the results as spaces. 
                             var splits = Profile.Split(new[] { linearZone }, segmentsExtended, Vector3.EPSILON);
+                            UniteSmallBoundaries(splits, input.MinimumRoomArea);
+
                             spaceBoundaries.AddRange(splits.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
-                        }
-                        // if we had "thicker end zones" — these are only added with automatic circulation
-                        // at "squarish" ends of hthe floorplate — subtract these from the zones we just made and add the "end zones"
-                        // as spaces directly
-                        if (thickerOffsetProfiles != null)
-                        {
-                            var endCapZones = Profile.Intersection(new[] { remainingSpace }, thickerOffsetProfiles);
-                            spaceBoundaries.AddRange(endCapZones.Select(s => SpaceBoundary.Make(s, input.DefaultProgramAssignment, lvl.Transform, lvl.Height)));
                         }
                     }
                     else // otherwise just add each chunk cut by the circulation (non-exterior) as a boundary
@@ -674,6 +664,51 @@ namespace SpacePlanningZones
                     Console.WriteLine(e.Message);
                     Console.WriteLine(e.StackTrace);
                     spaceBoundaries.Add(SpaceBoundary.Make(remainingSpace, input.DefaultProgramAssignment, lvl.Transform, lvl.Height));
+                }
+            }
+        }
+
+        private static void UniteSmallBoundaries(List<Profile> splits, double minRoomArea)
+        {
+            for (int i = 0; i < splits.Count(); ++i)
+            {
+                if (splits[i].Area() < minRoomArea)
+                {
+                    // All boundaries neighbouring current small one
+                    int minNeighbourIndex = -1;
+                    double minLocalArea = Double.MaxValue;
+
+                    for (int j = 0; j < splits.Count(); ++j)
+                    {
+                        if (j != i)
+                        {
+                            if (
+                                splits[i].Segments().Exists(
+                                        x => splits[j].Segments().Exists(
+                                                y => y.IsAlmostEqualTo(x, false)
+                                            )
+                                    )
+                                && minLocalArea > splits[j].Area()
+                              )
+                            {
+                                minLocalArea = splits[j].Area();
+                                minNeighbourIndex = j;
+                            }
+                        }
+                    }
+
+                    if (minNeighbourIndex >= 0)
+                    {
+                        var union = splits[i].Union(splits[minNeighbourIndex]);
+                        splits.RemoveAt(minNeighbourIndex);
+                        if (minNeighbourIndex < i)
+                        {
+                            --i;
+                        }
+                        splits.RemoveAt(i);
+                        --i;
+                        splits.Add(union);
+                    }
                 }
             }
         }
