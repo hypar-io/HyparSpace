@@ -1,10 +1,9 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "eeff6967-22a7-4490-b86c-5e842deaf212",
+  "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
   "name": "Open Office Layout",
   "description": "Lay out desks with optional open collaboration areas distributed throughout.",
   "language": "C#",
-  "display_name": "Leland - Office Layout Space Planning",
   "model_dependencies": [
     {
       "autohide": false,
