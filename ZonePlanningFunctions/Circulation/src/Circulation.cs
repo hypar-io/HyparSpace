@@ -114,6 +114,8 @@ namespace Circulation
                     (corridorProfiles, thickerOffsetProfiles) = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary);
                 }
 
+                output.Model.AddElements(thickerOffsetProfiles);
+
                 // Construct LevelElements to contain space boundaries
                 var level = new LevelElements()
                 {

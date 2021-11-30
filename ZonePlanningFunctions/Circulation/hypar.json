@@ -104,6 +104,7 @@
   },
   "outputs": [],
   "element_types": [
+    "https://prod-api.hypar.io/schemas/Polygon",
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://raw.githubusercontent.com/hypar-io/Schemas/master/LevelPerimeter.json",
     "https://prod-api.hypar.io/schemas/ServiceCore",

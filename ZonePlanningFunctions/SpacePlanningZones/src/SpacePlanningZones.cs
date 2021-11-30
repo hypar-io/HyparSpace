@@ -392,7 +392,7 @@ namespace SpacePlanningZones
 
                 var corridorProfiles = circulationModel.AllElementsOfType<Floor>().Select(corridor => corridor.Profile);
 
-                List<Profile> thickerOffsetProfiles = null;
+                var thickerOffsetProfiles = circulationModel.AllElementsOfType<Profile>().Except(corridorProfiles);
 
                 // Generate space boundaries from level boundary and corridor locations
                 SplitCornersAndGenerateSpaceBoundaries(spaceBoundaries, 
@@ -573,8 +573,8 @@ namespace SpacePlanningZones
                                                                         SpacePlanningZonesInputs input, 
                                                                         LevelVolume lvl, 
                                                                         IEnumerable<Profile> corridorProfiles, 
-                                                                        Profile levelBoundary, 
-                                                                        List<Profile> thickerOffsetProfiles = null, 
+                                                                        Profile levelBoundary,
+                                                                        IEnumerable<Profile> thickerOffsetProfiles = null, 
                                                                         bool angleCheckForWallExtensions = false
                                                                     )
         {
