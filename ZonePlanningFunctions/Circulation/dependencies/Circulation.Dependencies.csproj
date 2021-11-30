@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+	
+    <ItemGroup>
+	    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.9.5" />
+    <PackageReference Include="Hypar.Functions" Version="0.9.6" />
+  </ItemGroup>
+
+</Project>
