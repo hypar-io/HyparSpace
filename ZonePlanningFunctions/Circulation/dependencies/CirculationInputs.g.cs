@@ -69,37 +69,6 @@ namespace Circulation
     
     }
     
-    /// <summary>A collection of points used to split a set of polygons </summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class PolygonSplitCollection 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public PolygonSplitCollection(IList<SplitLocations> @splitLocations)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<PolygonSplitCollection>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @splitLocations});
-            }
-        
-            this.SplitLocations = @splitLocations;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        /// <summary>The lines representing split locations. The start of each line should be treated as its anchor - the second is only an indication of its direction</summary>
-        [Newtonsoft.Json.JsonProperty("SplitLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<SplitLocations> SplitLocations { get; set; }
-    
-    
-    }
-    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class CirculationInputs : S3Args
@@ -107,22 +76,19 @@ namespace Circulation
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public CirculationInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, double @corridorWidth, double @outerBandDepth, CirculationInputsCirculationMode @circulationMode, double @depthAtEnds, IList<Vector3> @additionalCorridorLocations, PolygonSplitCollection @addCorridors, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public CirculationInputs(double @corridorWidth, double @outerBandDepth, CirculationInputsCirculationMode @circulationMode, double @depthAtEnds, IList<ThickenedPolyline> @addCorridors, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<CirculationInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @corridorWidth, @outerBandDepth, @circulationMode, @depthAtEnds, @additionalCorridorLocations, @addCorridors});
+                validator.PreConstruct(new object[]{ @corridorWidth, @outerBandDepth, @circulationMode, @depthAtEnds, @addCorridors});
             }
         
-            this.DefaultProgramAssignment = @defaultProgramAssignment;
-            this.Corridors = @corridors;
             this.CorridorWidth = @corridorWidth;
             this.OuterBandDepth = @outerBandDepth;
             this.CirculationMode = @circulationMode;
             this.DepthAtEnds = @depthAtEnds;
-            this.AdditionalCorridorLocations = @additionalCorridorLocations;
             this.AddCorridors = @addCorridors;
         
             if(validator != null)
@@ -130,14 +96,6 @@ namespace Circulation
                 validator.PostConstruct(this);
             }
         }
-    
-        /// <summary>What would you like the default program for all zones to be? This program type will be assigned to all spaces, and then you can pick specific programs for individual spaces with the Edit Program Assignments button.</summary>
-        [Newtonsoft.Json.JsonProperty("Default Program Assignment", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DefaultProgramAssignment { get; set; } = "unspecified";
-    
-        /// <summary>Define the circulation network by drawing one or more corridor paths.</summary>
-        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<ThickenedPolyline> Corridors { get; set; }
     
         /// <summary>How wide should circulation paths be?</summary>
         [Newtonsoft.Json.JsonProperty("Corridor Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -161,54 +119,9 @@ namespace Circulation
         [System.ComponentModel.DataAnnotations.Range(1.0D, 20.0D)]
         public double DepthAtEnds { get; set; } = 8D;
     
-        /// <summary>Add new points to this list to insert additional corridor locations, to further subdivide the space. Corridors extend perpendicularly from the closest point on the boundary.</summary>
-        [Newtonsoft.Json.JsonProperty("Additional Corridor Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<Vector3> AdditionalCorridorLocations { get; set; }
-    
         /// <summary>Insert additional corridors, to further subdivide the space.</summary>
         [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PolygonSplitCollection AddCorridors { get; set; }
-    
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class SplitLocations 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public SplitLocations(Vector3 @position, Vector3 @direction)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<SplitLocations>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @position, @direction});
-            }
-        
-            this.Position = @position;
-            this.Direction = @direction;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("position", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 Position { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("direction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 Direction { get; set; }
-    
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
-    
-        [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties; }
-            set { _additionalProperties = value; }
-        }
+        public IList<ThickenedPolyline> AddCorridors { get; set; }
     
     
     }

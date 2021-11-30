@@ -5,6 +5,6 @@ namespace Elements
 {
     public partial class LevelElements : Element
     {
-        public Guid LevelVolumeId { get; set; }
+        public Guid Level { get; set; }
     }
 }

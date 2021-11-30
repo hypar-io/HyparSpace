@@ -30,6 +30,15 @@
   "input_schema": {
     "type": "object",
     "properties": {
+      "Circulation Mode": {
+        "description": "How should circulation be calculated? \nAutomatic: a typical circulation network will be generated for you. \nManual: you draw the circulation paths yourself.",
+        "type": "string",
+        "enum": [
+          "Automatic",
+          "Manual"
+        ],
+        "default": "Automatic"
+      },
       "Corridor Width": {
         "$hyparShowIf": {
           "conditions": [
@@ -62,15 +71,6 @@
         "multipleOf": 0.01,
         "default": 6,
         "$hyparUnitType": "length"
-      },
-      "Circulation Mode": {
-        "description": "How should circulation be calculated? \nAutomatic: a typical circulation network will be generated for you. \nManual: you draw the circulation paths yourself.",
-        "type": "string",
-        "enum": [
-          "Automatic",
-          "Manual"
-        ],
-        "default": "Automatic"
       },
       "Depth at Ends": {
         "$hyparShowIf": {
@@ -111,6 +111,10 @@
     "https://prod-api.hypar.io/schemas/AreaTally",
     "https://prod-api.hypar.io/schemas/PolygonReference"
   ],
+  "default_camera": {
+    "named_position": "top",
+    "projection": "orthographic"
+  },
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",
   "cli_version": "0.9.6"

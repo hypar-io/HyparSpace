@@ -143,7 +143,7 @@ namespace SpacePlanningZones
         /// Manual: you draw the circulation paths yourself.</summary>
         [Newtonsoft.Json.JsonProperty("Circulation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SpacePlanningZonesInputsCirculationMode CirculationMode { get; set; } = SpacePlanningZonesInputsCirculationMode.Automatic;
+        public SpacePlanningZonesInputsCirculationMode CirculationMode { get; set; } = SpacePlanningZonesInputsCirculationMode.Manual;
     
         /// <summary>Define the circulation network by drawing one or more corridor paths.</summary>
         [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

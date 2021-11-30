@@ -103,11 +103,12 @@ namespace Circulation
                 }
 
                 List<Profile> corridorProfiles = new List<Profile>();
+                List<Profile> thickerOffsetProfiles = null;
 
                 // Process circulation
                 if (input.CirculationMode == CirculationInputsCirculationMode.Automatic)
                 {
-                    corridorProfiles = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary);
+                    thickerOffsetProfiles = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles);
                 }
 
                 // Construct LevelElements to contain space boundaries
@@ -116,10 +117,21 @@ namespace Circulation
                     Name = lvl.Name,
                     Elements = new List<Element>()
                 };
-                level.LevelVolumeId = lvl.Id;
+                level.Level = lvl.Id;
                 levels.Add(level);
 
                 ProcessManuallyAddedCorridors(input, corridorProfiles);
+
+                corridorProfiles.ForEach(p =>
+                {
+                    p.Name = "Corridor";
+                    level.Elements.Add(p);
+                });
+                thickerOffsetProfiles?.ForEach(p =>
+                {
+                    p.Name = "Thicker Offset";
+                    level.Elements.Add(p);
+                });
 
                 // create floors for corridors and add them to the associated level.
                 try
@@ -149,7 +161,29 @@ namespace Circulation
             corridorProfiles.AddRange(corridorProfilesForUnion);
         }
 
-        private static List<Profile>  GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary)
+        private static List<Profile> GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, List<Profile> corridorProfiles)
+        {
+            var perimeter = levelBoundary.Perimeter;
+            var perimeterSegments = perimeter.Segments();
+
+            IdentifyShortEdges(perimeter, perimeterSegments, out var shortEdges, out var shortEdgeIndices);
+
+            // Single Loaded Zones
+            var singleLoadedZones = CalculateSingleLoadedZones(input, corridorWidth, perimeterSegments, shortEdgeIndices);
+
+            GenerateEndZones(input, corridorWidth, lvl, corridorProfiles, perimeterSegments, shortEdges, singleLoadedZones, out var thickenedEnds, out var thickerOffsetProfiles, out var innerOffsetMinusThickenedEnds, out var exclusionRegions);
+
+            // join single loaded zones to each other (useful in bent-bar case)
+            var allCenterLines = JoinSingleLoaded(singleLoadedZones);
+
+            // thicken and extend single loaded
+            ThickenAndExtendSingleLoaded(corridorWidth, corridorProfiles, coresInBoundary, thickenedEnds, innerOffsetMinusThickenedEnds, allCenterLines);
+
+            CorridorsFromCore(corridorWidth, corridorProfiles, levelBoundary, coresInBoundary, innerOffsetMinusThickenedEnds, exclusionRegions);
+            return thickerOffsetProfiles;
+        }
+
+        private static List<Profile> GenerateAutomaticCirculationOld(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary)
         {
             List<Profile> corridorProfiles = new List<Profile>();
             var perimeter = levelBoundary.Perimeter;
@@ -160,15 +194,15 @@ namespace Circulation
             // Single Loaded Zones
             var singleLoadedZones = CalculateSingleLoadedZones(input, corridorWidth, perimeterSegments, shortEdgeIndices);
 
-            GenerateEndZones(input, 
-                             corridorWidth, 
-                             lvl, 
-                             corridorProfiles, 
-                             perimeterSegments, 
-                             shortEdges, 
-                             singleLoadedZones, 
-                             out var thickenedEnds, 
-                             out var innerOffsetMinusThickenedEnds, 
+            GenerateEndZonesOld(input,
+                             corridorWidth,
+                             lvl,
+                             corridorProfiles,
+                             perimeterSegments,
+                             shortEdges,
+                             singleLoadedZones,
+                             out var thickenedEnds,
+                             out var innerOffsetMinusThickenedEnds,
                              out var exclusionRegions);
 
             // join single loaded zones to each other (useful in bent-bar case)
@@ -242,16 +276,39 @@ namespace Circulation
             }
         }
 
-        private static void GenerateEndZones(
-                                                CirculationInputs input, 
-                                                double corridorWidth, 
-                                                LevelVolume lvl, 
-                                                List<Profile> corridorProfiles, 
-                                                Line[] perimeterSegments, 
-                                                List<Line> shortEdges, 
-                                                List<(Polygon hull, Line centerLine)> singleLoadedZones, 
-                                                out List<Polygon> thickenedEndsOut, 
-                                                out IEnumerable<Polygon> innerOffsetMinusThickenedEnds, 
+        private static void GenerateEndZones(CirculationInputs input, double corridorWidth, LevelVolume lvl, List<Profile> corridorProfiles, Line[] perimeterSegments, List<Line> shortEdges, List<(Polygon hull, Line centerLine)> singleLoadedZones, out List<Polygon> thickenedEndsOut, out List<Profile> thickerOffsetProfiles, out IEnumerable<Polygon> innerOffsetMinusThickenedEnds, out IEnumerable<Polygon> exclusionRegions)
+        {
+            // separate out short and long perimeter edges
+            var shortEdgesExtended = shortEdges.Select(l => new Line(l.Start - l.Direction() * 0.2, l.End + l.Direction() * 0.2));
+            var longEdges = perimeterSegments.Except(shortEdges);
+            var shortEdgeDepth = Math.Max(input.DepthAtEnds, input.OuterBandDepth);
+            var longEdgeDepth = input.OuterBandDepth;
+
+            var perimeterMinusSingleLoaded = new List<Profile>();
+            perimeterMinusSingleLoaded.AddRange(Profile.Difference(new[] { lvl.Profile }, singleLoadedZones.Select(p => new Profile(p.hull))));
+            var innerOffset = perimeterMinusSingleLoaded.SelectMany(p => p.Perimeter.Offset(-longEdgeDepth));
+            // calculate zones at rectangular "ends"
+            var thickenedEnds = shortEdgesExtended.SelectMany(s => s.ToPolyline(1).Offset(shortEdgeDepth, EndType.Butt)).ToList();
+            thickerOffsetProfiles = thickenedEnds.Select(o => new Profile(o.Offset(0.01))).ToList();
+
+            innerOffsetMinusThickenedEnds = innerOffset.SelectMany(i => Polygon.Difference(new[] { i }, thickenedEnds));
+            exclusionRegions = innerOffsetMinusThickenedEnds.SelectMany(r => r.Offset(2 * corridorWidth, EndType.Square));
+
+            var corridorInset = innerOffsetMinusThickenedEnds.Select(p => new Profile(p, p.Offset(-corridorWidth), Guid.NewGuid(), "Corridor"));
+            corridorProfiles.AddRange(corridorInset);
+            thickenedEndsOut = thickenedEnds;
+        }
+
+        private static void GenerateEndZonesOld(
+                                                CirculationInputs input,
+                                                double corridorWidth,
+                                                LevelVolume lvl,
+                                                List<Profile> corridorProfiles,
+                                                Line[] perimeterSegments,
+                                                List<Line> shortEdges,
+                                                List<(Polygon hull, Line centerLine)> singleLoadedZones,
+                                                out List<Polygon> thickenedEndsOut,
+                                                out IEnumerable<Polygon> innerOffsetMinusThickenedEnds,
                                                 out IEnumerable<Polygon> exclusionRegions
                                             )
         {
@@ -395,13 +452,13 @@ namespace Circulation
             return allCenterLines;
         }
 
-        private static List<(Polygon hull, Line centerLine)> CalculateSingleLoadedZones(CirculationInputs input, double corridorWidth, 
+        private static List<(Polygon hull, Line centerLine)> CalculateSingleLoadedZones(CirculationInputs input, double corridorWidth,
                                                                                         Line[] perimeterSegments, List<int> shortEdgeIndices)
         {
             var singleLoadedZones = new List<(Polygon hull, Line centerLine)>();
             const double SPACE_TOLERANCE = 5.0;
             // (two offsets, two corridors, and a usable space width)
-            var singleLoadedLengthThreshold = input.OuterBandDepth * 2.0 + corridorWidth * 2.0 + SPACE_TOLERANCE; 
+            var singleLoadedLengthThreshold = input.OuterBandDepth * 2.0 + corridorWidth * 2.0 + SPACE_TOLERANCE;
             foreach (var sei in shortEdgeIndices)
             {
                 var ps = perimeterSegments;
@@ -426,8 +483,8 @@ namespace Circulation
             return singleLoadedZones;
         }
 
-        private static Profile AttemptToSplitWallsAndYieldLargestZone(Profile levelBoundary, List<Element> wallsInBoundary, 
-                                                                      out IEnumerable<Polyline> wallCenterlines, out List<Profile> otherProfiles, 
+        private static Profile AttemptToSplitWallsAndYieldLargestZone(Profile levelBoundary, List<Element> wallsInBoundary,
+                                                                      out IEnumerable<Polyline> wallCenterlines, out List<Profile> otherProfiles,
                                                                       Model m = null)
         {
             var centerlines = wallsInBoundary.Select(w => GetCenterlineFromWall(w).Extend(0.1)).Where(w => w != null).Select(l => l.ToPolyline(1));
