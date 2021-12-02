@@ -2,7 +2,7 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "d7702a20-66d8-4a6e-9199-553fa754e7ca",
   "name": "Circulation",
-  "description": "Generate a circulation path",
+  "description": "Generate building circulation.",
   "language": "C#",
   "model_dependencies": [
     {
@@ -90,6 +90,7 @@
         "$hyparUnitType": "length"
       },
       "Add Corridors": {
+        "$hyparDeprecated": true,
         "$hyparDisplayName": "Add Corridors",
         "description": "Insert additional corridors, to further subdivide the space.",
         "type": "array",
@@ -97,7 +98,61 @@
           "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
           "$hyparAllowIntersection": true,
           "$hyparConstrainToGround": true,
-          "default": null
+          "default": {
+            "rightWidth": 1.5
+          }
+        }
+      }
+    }
+  },
+  "overrides": {
+    "Corridors": {
+      "context": "[*discriminator=Elements.CirculationSegment]",
+      "identity": {
+        "Original Geometry": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Polyline.json"
+        },
+        "Level": {
+          "type": "object",
+          "properties": {
+            "Transform": {
+              "$ref": "https://prod-api.hypar.io/schemas/Transform"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Building Name": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Geometry": {
+              "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+              "$hyparAllowIntersection": true,
+              "$hyparConstrainToGround": true,
+              "default": {
+                "rightWidth": 1.5
+              }
+            },
+            "Level": {
+              "$ref": "https://prod-api.hypar.io/schemas/ActiveViewScopeInfo"
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "Geometry": {
+          "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+          "$hyparAllowIntersection": true,
+          "$hyparConstrainToGround": true,
+          "default": {
+            "rightWidth": 1.5
+          }
         }
       }
     }

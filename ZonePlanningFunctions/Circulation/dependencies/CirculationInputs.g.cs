@@ -69,6 +69,127 @@ namespace Circulation
     
     }
     
+    /// <summary>Represents camera settings</summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class Camera 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public Camera(Vector3 @angle, CameraNamedPosition? @namedPosition, CameraProjection @projection)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<Camera>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @angle, @namedPosition, @projection});
+            }
+        
+            this.Angle = @angle;
+            this.NamedPosition = @namedPosition;
+            this.Projection = @projection;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>A unit vector in model coordinates indicating which direction the camera is pointing.</summary>
+        [Newtonsoft.Json.JsonProperty("angle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 Angle { get; set; }
+    
+        /// <summary>Camera positions, viewing from this direction to the opposite direction. Do not set angle if setting this.</summary>
+        [Newtonsoft.Json.JsonProperty("named_position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CameraNamedPosition? NamedPosition { get; set; }
+    
+        /// <summary>How the camera collapses the 3d scene into a 2d image</summary>
+        [Newtonsoft.Json.JsonProperty("projection", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CameraProjection Projection { get; set; }
+    
+    
+    }
+    
+    /// <summary>Represents a preset view attached to an element.</summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class ViewScope : Element
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public ViewScope(BBox3 @boundingBox, Camera @camera, bool @inclusive, System.Guid @id, string @name)
+            : base(id, name)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<ViewScope>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @boundingBox, @camera, @inclusive, @id, @name});
+            }
+        
+            this.BoundingBox = @boundingBox;
+            this.Camera = @camera;
+            this.Inclusive = @inclusive;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>The "focus" extent for this view.</summary>
+        [Newtonsoft.Json.JsonProperty("Bounding Box", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public BBox3 BoundingBox { get; set; }
+    
+        /// <summary>The camera to use for this view.</summary>
+        [Newtonsoft.Json.JsonProperty("Camera", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Camera Camera { get; set; }
+    
+        /// <summary>Should the bounding box be treated as Inclusive?</summary>
+        [Newtonsoft.Json.JsonProperty("Inclusive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Inclusive { get; set; }
+    
+    
+    }
+    
+    /// <summary>An input schema which renders no visible input, but captures information about the currently active view scope, if present.</summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class ActiveViewScopeInfo 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public ActiveViewScopeInfo(ViewScope @scope, Element @sourceElement)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<ActiveViewScopeInfo>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @scope, @sourceElement});
+            }
+        
+            this.Scope = @scope;
+            this.SourceElement = @sourceElement;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>The active view scope</summary>
+        [Newtonsoft.Json.JsonProperty("Scope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ViewScope Scope { get; set; }
+    
+        /// <summary>The element associated with the active view scope</summary>
+        [Newtonsoft.Json.JsonProperty("Source Element", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Element SourceElement { get; set; }
+    
+    
+    }
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class CirculationInputs : S3Args
@@ -76,26 +197,34 @@ namespace Circulation
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public CirculationInputs(double @corridorWidth, double @outerBandDepth, CirculationInputsCirculationMode @circulationMode, double @depthAtEnds, IList<ThickenedPolyline> @addCorridors, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public CirculationInputs(CirculationInputsCirculationMode @circulationMode, double @corridorWidth, double @outerBandDepth, double @depthAtEnds, IList<ThickenedPolyline> @addCorridors, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<CirculationInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @corridorWidth, @outerBandDepth, @circulationMode, @depthAtEnds, @addCorridors});
+                validator.PreConstruct(new object[]{ @circulationMode, @corridorWidth, @outerBandDepth, @depthAtEnds, @addCorridors, @overrides});
             }
         
+            this.CirculationMode = @circulationMode;
             this.CorridorWidth = @corridorWidth;
             this.OuterBandDepth = @outerBandDepth;
-            this.CirculationMode = @circulationMode;
             this.DepthAtEnds = @depthAtEnds;
             this.AddCorridors = @addCorridors;
+            this.Overrides = @overrides;
         
             if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
+    
+        /// <summary>How should circulation be calculated? 
+        /// Automatic: a typical circulation network will be generated for you. 
+        /// Manual: you draw the circulation paths yourself.</summary>
+        [Newtonsoft.Json.JsonProperty("Circulation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public CirculationInputsCirculationMode CirculationMode { get; set; } = CirculationInputsCirculationMode.Automatic;
     
         /// <summary>How wide should circulation paths be?</summary>
         [Newtonsoft.Json.JsonProperty("Corridor Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -107,13 +236,6 @@ namespace Circulation
         [System.ComponentModel.DataAnnotations.Range(1.0D, 20.0D)]
         public double OuterBandDepth { get; set; } = 6D;
     
-        /// <summary>How should circulation be calculated? 
-        /// Automatic: a typical circulation network will be generated for you. 
-        /// Manual: you draw the circulation paths yourself.</summary>
-        [Newtonsoft.Json.JsonProperty("Circulation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CirculationInputsCirculationMode CirculationMode { get; set; } = CirculationInputsCirculationMode.Automatic;
-    
         /// <summary>If your floorplate is rectangular, or has roughly rectangular ends, how deep should the spaces be at these ends?</summary>
         [Newtonsoft.Json.JsonProperty("Depth at Ends", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1.0D, 20.0D)]
@@ -123,6 +245,40 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ThickenedPolyline> AddCorridors { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Overrides Overrides { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum CameraNamedPosition
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"east")]
+        East = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"north")]
+        North = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"south")]
+        South = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"top")]
+        Top = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"west")]
+        West = 4,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum CameraProjection
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"orthographic")]
+        Orthographic = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"perspective")]
+        Perspective = 1,
     
     }
     
@@ -134,6 +290,339 @@ namespace Circulation
     
         [System.Runtime.Serialization.EnumMember(Value = @"Manual")]
         Manual = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class Overrides 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<CorridorsOverride> @corridors)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @additions, @removals, @corridors});
+            }
+        
+            this.Additions = @additions;
+            this.Removals = @removals;
+            this.Corridors = @corridors;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Additions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideAdditions Additions { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Removals", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideRemovals Removals { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverride> Corridors { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class OverrideAdditions 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public OverrideAdditions(IList<CorridorsOverrideAddition> @corridors)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<OverrideAdditions>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @corridors});
+            }
+        
+            this.Corridors = @corridors;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverrideAddition> Corridors { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class OverrideRemovals 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public OverrideRemovals(IList<CorridorsOverrideRemoval> @corridors)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<OverrideRemovals>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @corridors});
+            }
+        
+            this.Corridors = @corridors;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverrideRemoval> Corridors { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsOverride(string @id, CorridorsIdentity @identity, CorridorsValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsOverrideAddition 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsOverrideAddition(string @id, CorridorsIdentity @identity, CorridorsOverrideAdditionValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverrideAddition>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsOverrideAdditionValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsOverrideRemoval 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsOverrideRemoval(string @id, CorridorsIdentity @identity)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverrideRemoval>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsIdentity Identity { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsIdentity(Polyline @originalGeometry, CorridorsIdentityLevel @level)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @originalGeometry, @level});
+            }
+        
+            this.OriginalGeometry = @originalGeometry;
+            this.Level = @level;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Original Geometry", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Polyline OriginalGeometry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CorridorsIdentityLevel Level { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsValue(ThickenedPolyline @geometry)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @geometry});
+            }
+        
+            this.Geometry = @geometry;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Geometry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ThickenedPolyline Geometry { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsOverrideAdditionValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsOverrideAdditionValue(ThickenedPolyline @geometry, ActiveViewScopeInfo @level)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverrideAdditionValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @geometry, @level});
+            }
+        
+            this.Geometry = @geometry;
+            this.Level = @level;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Geometry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ThickenedPolyline Geometry { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ActiveViewScopeInfo Level { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class CorridorsIdentityLevel 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public CorridorsIdentityLevel(Transform @transform, string @name, string @buildingName)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsIdentityLevel>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @transform, @name, @buildingName});
+            }
+        
+            this.Transform = @transform;
+            this.Name = @name;
+            this.BuildingName = @buildingName;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Transform Transform { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BuildingName { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    
     
     }
     

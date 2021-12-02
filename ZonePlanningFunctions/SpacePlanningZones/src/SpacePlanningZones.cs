@@ -431,22 +431,28 @@ namespace SpacePlanningZones
                 level.Level = lvl.Id;
                 levels.Add(level);
 
+                // construct a cross-function level proxy
+                var levelProxy = lvl.Proxy("Levels");
+                lvl.Proxy = levelProxy;
+
                 if (input.AddCorridors?.SplitLocations?.Count() > 0)
                 {
                     // Create snapping geometry for corridors
-                    CreateSnappingGeometry(output, spaceBoundaries, "corridors");
+                    output.Model.AddElements(CreateSnappingGeometry(spaceBoundaries, "corridors"));
                 }
 
 
                 // These are the new, correct methods using the split inputs: 
                 SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
 
-                //Create snapping geometry for splits
-                CreateSnappingGeometry(output, spaceBoundaries, "splits");
+                // Create snapping geometry for splits
+                var splitReferences = CreateSnappingGeometry(spaceBoundaries, "splits");
+                // add the per-level split references to the level proxy, and add them to the model as well.
+                levelProxy.AdditionalProperties["SplitBoundaries"] = splitReferences;
+                output.Model.AddElements(splitReferences);
+                output.Model.AddElement(levelProxy);
 
                 var splitLocations = input.SplitZones.SplitLocations;
-                var levelProxy = lvl.Proxy("Levels");
-                lvl.Proxy = levelProxy;
                 // if we've overridden splits per-level, use those split locations.
                 if (input.Overrides?.SplitZones != null && input.Overrides?.SplitZones.Count > 0)
                 {
@@ -497,17 +503,19 @@ namespace SpacePlanningZones
             }
         }
 
-        private static void CreateSnappingGeometry(SpacePlanningZonesOutputs output, List<SpaceBoundary> spaceBoundaries, string type)
+        private static List<PolygonReference> CreateSnappingGeometry(List<SpaceBoundary> spaceBoundaries, string type)
         {
+            List<PolygonReference> references = new List<PolygonReference>();
             foreach (var sb in spaceBoundaries)
             {
-                var boundary = sb as SpaceBoundary;
-                output.Model.AddElement(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
+                var boundary = sb;
+                references.Add(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
                 if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
                 {
-                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference() { Boundary = v, Name = type }));
+                    boundary.Boundary.Voids.ToList().ForEach(v => references.Add(new PolygonReference() { Boundary = v, Name = type }));
                 }
             }
+            return references;
         }
 
         // This method is an old deprecated pathway
