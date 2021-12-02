@@ -10,6 +10,8 @@ namespace Circulation
 {
     public static class Circulation
     {
+
+        private static Model model = null;
         /// <summary>
         /// Generate a circulation path
         /// </summary>
@@ -22,7 +24,7 @@ namespace Circulation
 
             // Set up output object
             var output = new CirculationOutputs();
-
+            model = output.Model;
             // Get Levels
             var levelsModel = inputModels["Levels"];
             var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
@@ -61,6 +63,8 @@ namespace Circulation
 
             return output;
         }
+        private static Color CORRIDOR_MATERIAL_COLOR = new Color(0.996, 0.965, 0.863, 1.0);
+        private static readonly Material CorridorMat = new Material("Circulation", CORRIDOR_MATERIAL_COLOR, doubleSided: true);
 
         private static void CreateCorridors(CirculationInputs input,
                                             CirculationOutputs output,
@@ -71,8 +75,7 @@ namespace Circulation
                                             IEnumerable<Element> walls)
         {
             var corridorWidth = input.CorridorWidth;
-            Color CORRIDOR_MATERIAL_COLOR = new Color(0.996, 0.965, 0.863, 1.0);
-            var corridorMat = new Material("Circulation", CORRIDOR_MATERIAL_COLOR, doubleSided: true);
+
             // for every level volume
             foreach (var lvl in levelVolumes)
             {
@@ -104,11 +107,12 @@ namespace Circulation
 
                 List<Profile> corridorProfiles = new List<Profile>();
                 List<Profile> thickerOffsetProfiles = new List<Profile>();
+                List<CirculationSegment> circulationSegments = new List<CirculationSegment>();
 
                 // Process circulation
                 if (input.CirculationMode == CirculationInputsCirculationMode.Automatic)
                 {
-                    GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles, thickerOffsetProfiles);
+                    circulationSegments.AddRange(GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles, thickerOffsetProfiles));
                 }
 
                 // Construct LevelElements to contain space boundaries
@@ -122,7 +126,6 @@ namespace Circulation
 
                 // Add corridors (migration pathway)
                 ProcessManuallyAddedCorridors(input, corridorProfiles);
-                List<CirculationSegment> circulationSegments = new List<CirculationSegment>();
                 //Add corridors (add override)
                 if (input.Overrides?.Additions?.Corridors != null)
                 {
@@ -138,15 +141,15 @@ namespace Circulation
                         var p = Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
                         corridorProfiles.Add(p);
 
+                        corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
                         var segment = new CirculationSegment(p, 0.11)
                         {
-                            Material = corridorMat,
-                            Transform = lvl.Transform
+                            Material = CorridorMat,
+                            Transform = lvl.Transform,
+                            OriginalGeometry = corridorPolyline.Polyline,
+                            Geometry = corridorPolyline,
+                            Level = lvl.Id
                         };
-                        corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
-                        segment.OriginalGeometry = corridorPolyline.Polyline;
-                        segment.Geometry = corridorPolyline;
-                        segment.Level = lvl.Id;
                         circulationSegments.Add(segment);
                         Identity.AddOverrideIdentity(segment, addedCorridor);
 
@@ -177,7 +180,7 @@ namespace Circulation
                         corridorProfiles.Add(p);
                         var segment = new CirculationSegment(p, 0.11)
                         {
-                            Material = corridorMat,
+                            Material = CorridorMat,
                             Transform = lvl.Transform
                         };
                         corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
@@ -185,7 +188,10 @@ namespace Circulation
                         segment.Geometry = corridorPolyline;
                         segment.Level = lvl.Id;
                         circulationSegments.Add(segment);
-                        segment.AdditionalProperties["associatedIdentities"] = matchingCorridor.AdditionalProperties["associatedIdentities"];
+                        if (matchingCorridor.AdditionalProperties.ContainsKey("associatedIdentities"))
+                        {
+                            segment.AdditionalProperties["associatedIdentities"] = matchingCorridor.AdditionalProperties["associatedIdentities"];
+                        }
                         Identity.AddOverrideIdentity(segment, corridorOverride);
 
                     }
@@ -208,11 +214,11 @@ namespace Circulation
                 try
                 {
                     var cpUnion = Profile.UnionAll(corridorProfiles);
-                    cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                    cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
                 }
                 catch
                 {
-                    corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                    corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
                 }
             }
         }
@@ -233,8 +239,9 @@ namespace Circulation
             corridorProfiles.AddRange(corridorProfilesForUnion);
         }
 
-        private static void GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, List<Profile> corridorProfiles, List<Profile> thickerOffsetProfiles)
+        private static List<CirculationSegment> GenerateAutomaticCirculation(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, List<Profile> corridorProfiles, List<Profile> thickerOffsetProfiles)
         {
+            var segments = new List<CirculationSegment>();
             var perimeter = levelBoundary.Perimeter;
             var perimeterSegments = perimeter.Segments();
 
@@ -243,47 +250,16 @@ namespace Circulation
             // Single Loaded Zones
             var singleLoadedZones = CalculateSingleLoadedZones(input, corridorWidth, perimeterSegments, shortEdgeIndices);
 
-            GenerateEndZones(input, corridorWidth, lvl, corridorProfiles, perimeterSegments, shortEdges, singleLoadedZones, thickerOffsetProfiles, out var thickenedEnds, out var innerOffsetMinusThickenedEnds, out var exclusionRegions);
+            GenerateEndZones(input, corridorWidth, lvl, corridorProfiles, segments, perimeterSegments, shortEdges, singleLoadedZones, thickerOffsetProfiles, out var thickenedEnds, out var innerOffsetMinusThickenedEnds, out var exclusionRegions);
 
             // join single loaded zones to each other (useful in bent-bar case)
             var allCenterLines = JoinSingleLoaded(singleLoadedZones);
 
             // thicken and extend single loaded
-            ThickenAndExtendSingleLoaded(corridorWidth, corridorProfiles, coresInBoundary, thickenedEnds, innerOffsetMinusThickenedEnds, allCenterLines);
+            ThickenAndExtendSingleLoaded(corridorWidth, corridorProfiles, segments, lvl, coresInBoundary, thickenedEnds, innerOffsetMinusThickenedEnds, allCenterLines);
 
-            CorridorsFromCore(corridorWidth, corridorProfiles, levelBoundary, coresInBoundary, innerOffsetMinusThickenedEnds, exclusionRegions);
-        }
-
-        private static List<Profile> GenerateAutomaticCirculationOld(CirculationInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary)
-        {
-            List<Profile> corridorProfiles = new List<Profile>();
-            var perimeter = levelBoundary.Perimeter;
-            var perimeterSegments = perimeter.Segments();
-
-            IdentifyShortEdges(perimeter, perimeterSegments, out var shortEdges, out var shortEdgeIndices);
-
-            // Single Loaded Zones
-            var singleLoadedZones = CalculateSingleLoadedZones(input, corridorWidth, perimeterSegments, shortEdgeIndices);
-
-            GenerateEndZonesOld(input,
-                             corridorWidth,
-                             lvl,
-                             corridorProfiles,
-                             perimeterSegments,
-                             shortEdges,
-                             singleLoadedZones,
-                             out var thickenedEnds,
-                             out var innerOffsetMinusThickenedEnds,
-                             out var exclusionRegions);
-
-            // join single loaded zones to each other (useful in bent-bar case)
-            var allCenterLines = JoinSingleLoaded(singleLoadedZones);
-
-            // thicken and extend single loaded
-            ThickenAndExtendSingleLoaded(corridorWidth, corridorProfiles, coresInBoundary, thickenedEnds, innerOffsetMinusThickenedEnds, allCenterLines);
-
-            CorridorsFromCore(corridorWidth, corridorProfiles, levelBoundary, coresInBoundary, innerOffsetMinusThickenedEnds, exclusionRegions);
-            return corridorProfiles;
+            CorridorsFromCore(corridorWidth, corridorProfiles, segments, lvl, levelBoundary, coresInBoundary, innerOffsetMinusThickenedEnds, exclusionRegions);
+            return segments;
         }
 
         private static Line GetCenterlineFromWall(Element w)
@@ -347,7 +323,19 @@ namespace Circulation
             }
         }
 
-        private static void GenerateEndZones(CirculationInputs input, double corridorWidth, LevelVolume lvl, List<Profile> corridorProfiles, Line[] perimeterSegments, List<Line> shortEdges, List<(Polygon hull, Line centerLine)> singleLoadedZones, List<Profile> thickerOffsetProfiles, out List<Polygon> thickenedEndsOut, out IEnumerable<Polygon> innerOffsetMinusThickenedEnds, out IEnumerable<Polygon> exclusionRegions)
+        private static void GenerateEndZones(
+            CirculationInputs input,
+            double corridorWidth,
+             LevelVolume lvl,
+             List<Profile> corridorProfiles,
+             List<CirculationSegment> segments,
+             Line[] perimeterSegments,
+             List<Line> shortEdges,
+             List<(Polygon hull, Line centerLine)> singleLoadedZones,
+             List<Profile> thickerOffsetProfiles,
+             out List<Polygon> thickenedEndsOut,
+             out IEnumerable<Polygon> innerOffsetMinusThickenedEnds,
+             out IEnumerable<Polygon> exclusionRegions)
         {
             // separate out short and long perimeter edges
             var shortEdgesExtended = shortEdges.Select(l => new Line(l.Start - l.Direction() * 0.2, l.End + l.Direction() * 0.2));
@@ -365,45 +353,29 @@ namespace Circulation
             innerOffsetMinusThickenedEnds = innerOffset.SelectMany(i => Polygon.Difference(new[] { i }, thickenedEnds));
             exclusionRegions = innerOffsetMinusThickenedEnds.SelectMany(r => r.Offset(2 * corridorWidth, EndType.Square));
 
-            var corridorInset = innerOffsetMinusThickenedEnds.Select(p => new Profile(p, p.Offset(-corridorWidth), Guid.NewGuid(), "Corridor"));
-            corridorProfiles.AddRange(corridorInset);
+            var cSegments = innerOffsetMinusThickenedEnds.Select(p =>
+            {
+                Polyline pl = new Polyline(p.Vertices);
+                pl.Vertices.Add(p.Vertices.First());
+                var offsets = pl.OffsetOnSide(corridorWidth, true);
+                var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
+                var corridorPolyline = new ThickenedPolyline(pl.TransformedPolyline(lvl.Transform), corridorWidth, true, corridorWidth, 0);
+                profile.Name = "Corridor";
+                return new CirculationSegment(profile, 0.11)
+                {
+                    Material = CorridorMat,
+                    Transform = lvl.Transform,
+                    OriginalGeometry = corridorPolyline.Polyline,
+                    Geometry = corridorPolyline,
+                    Level = lvl.Id
+                };
+            });
+            segments.AddRange(cSegments);
+            corridorProfiles.AddRange(cSegments.Select(s => s.Profile));
             thickenedEndsOut = thickenedEnds;
         }
 
-        private static void GenerateEndZonesOld(
-                                                CirculationInputs input,
-                                                double corridorWidth,
-                                                LevelVolume lvl,
-                                                List<Profile> corridorProfiles,
-                                                Line[] perimeterSegments,
-                                                List<Line> shortEdges,
-                                                List<(Polygon hull, Line centerLine)> singleLoadedZones,
-                                                out List<Polygon> thickenedEndsOut,
-                                                out IEnumerable<Polygon> innerOffsetMinusThickenedEnds,
-                                                out IEnumerable<Polygon> exclusionRegions
-                                            )
-        {
-            // separate out short and long perimeter edges
-            const double EXTEND_FACTOR = 0.2;
-            var shortEdgesExtended = shortEdges.Select(l => new Line(l.Start - l.Direction() * EXTEND_FACTOR, l.End + l.Direction() * EXTEND_FACTOR));
-            var longEdges = perimeterSegments.Except(shortEdges);
-            var shortEdgeDepth = Math.Max(input.DepthAtEnds, input.OuterBandDepth);
-
-            var perimeterMinusSingleLoaded = new List<Profile>();
-            perimeterMinusSingleLoaded.AddRange(Profile.Difference(new[] { lvl.Profile }, singleLoadedZones.Select(p => new Profile(p.hull))));
-            var innerOffset = perimeterMinusSingleLoaded.SelectMany(p => p.Perimeter.Offset(-input.OuterBandDepth));
-            // calculate zones at rectangular "ends"
-            var thickenedEnds = shortEdgesExtended.SelectMany(s => s.ToPolyline(1).Offset(shortEdgeDepth, EndType.Butt)).ToList();
-
-            innerOffsetMinusThickenedEnds = innerOffset.SelectMany(i => Polygon.Difference(new[] { i }, thickenedEnds));
-            exclusionRegions = innerOffsetMinusThickenedEnds.SelectMany(r => r.Offset(2.0 * corridorWidth, EndType.Square));
-
-            var corridorInset = innerOffsetMinusThickenedEnds.Select(p => new Profile(p, p.Offset(-corridorWidth), Guid.NewGuid(), "Corridor"));
-            corridorProfiles.AddRange(corridorInset);
-            thickenedEndsOut = thickenedEnds;
-        }
-
-        private static void CorridorsFromCore(double corridorWidth, List<Profile> corridorProfiles, Profile levelBoundary, List<ServiceCore> coresInBoundary, IEnumerable<Polygon> innerOffsetMinusThickenedEnds, IEnumerable<Polygon> exclusionRegions)
+        private static void CorridorsFromCore(double corridorWidth, List<Profile> corridorProfiles, List<CirculationSegment> segments, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, IEnumerable<Polygon> innerOffsetMinusThickenedEnds, IEnumerable<Polygon> exclusionRegions)
         {
             var coreSegments = coresInBoundary.SelectMany(c => c.Profile.Perimeter.Offset((corridorWidth / 2.0) * 0.999).FirstOrDefault()?.Segments());
 
@@ -422,36 +394,59 @@ namespace Circulation
                     {
                         continue;
                     }
-                    var thickenedCorridor = extendedSegment.ToPolyline(1).Offset(corridorWidth / 2.0, EndType.Butt);
-                    var difference = new List<Profile>();
-
-                    difference = Profile.Difference(corridorProfiles, exclusionRegions.Select(r => new Profile(r)));
-
-                    if (difference.Count > 0 && difference.Sum(d => d.Perimeter.Area()) > 10.0)
+                    foreach (var r in exclusionRegions)
                     {
-                        corridorProfiles.AddRange(Profile.Intersection(thickenedCorridor.Select(c => new Profile(c)), new[] { levelBoundary }));
+                        model.AddElements(new ModelCurve(r, BuiltInMaterials.YAxis, new Transform(0, 0, 1)));
                     }
+                    // var trimmedSegments = TrimLinesWithRegions(new, new List<Line> { extendedSegment });
+                    var trimmedSegments = extendedSegment.Trim(levelBoundary.Perimeter, out _);
+                    foreach (var ts in trimmedSegments)
+                    {
+                        var clOffset = ts.Offset(-corridorWidth / 2.0, false).ToPolyline(1);
+                        var corridorPolyline = new ThickenedPolyline(clOffset.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
+                        var offsets = clOffset.OffsetOnSide(corridorWidth, false);
+                        var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
+                        var difference = Profile.Difference(new[] { profile }, exclusionRegions.Select(r => new Profile(r)));
+                        if (difference.Count > 0 && difference.Sum(d => d.Perimeter.Area()) > 10.0)
+                        {
+                            profile.Name = "Corridor";
+                            corridorProfiles.Add(profile);
+                            var cSegment = new CirculationSegment(profile, 0.11)
+                            {
+                                Material = CorridorMat,
+                                Transform = lvl.Transform,
+                                OriginalGeometry = corridorPolyline.Polyline,
+                                Geometry = corridorPolyline,
+                                Level = lvl.Id
+                            };
+                            segments.Add(cSegment);
+                        }
+                    }
+
+                    var thickenedCorridor = extendedSegment.ToPolyline(1).Offset(corridorWidth / 2.0, EndType.Butt);
+                    // var difference = Profile.Difference(corridorProfiles, exclusionRegions.Select(r => new Profile(r)));
+
+                    // if (difference.Count > 0 && difference.Sum(d => d.Perimeter.Area()) > 10.0)
+                    // {
+                    //     var oldResults = Profile.Intersection(thickenedCorridor.Select(c => new Profile(c)), new[] { levelBoundary });
+                    //     foreach (var r in oldResults)
+                    //     {
+                    //         model.AddElements(r.ToModelCurves(new Transform(0, 0, 1), BuiltInMaterials.XAxis));
+                    //     }
+                    //     // corridorProfiles.AddRange(Profile.Intersection(thickenedCorridor.Select(c => new Profile(c)), new[] { levelBoundary }));
+                    // }
                 }
             }
         }
 
-        private static void ThickenAndExtendSingleLoaded(double corridorWidth, List<Profile> corridorProfiles, List<ServiceCore> coresInBoundary, List<Polygon> thickerOffsets, IEnumerable<Polygon> innerOffsetMinusThicker, (Polygon hull, Line centerLine)[] allCenterLines)
+        private static void ThickenAndExtendSingleLoaded(double corridorWidth, List<Profile> corridorProfiles, List<CirculationSegment> segments, LevelVolume lvl, List<ServiceCore> coresInBoundary, List<Polygon> thickerOffsets, IEnumerable<Polygon> innerOffsetMinusThicker, (Polygon hull, Line centerLine)[] allCenterLines)
         {
             // thicken and extend single loaded
             foreach (var singleLoadedZone in allCenterLines)
             {
                 var cl = singleLoadedZone.centerLine;
                 List<Line> centerlines = new List<Line> { cl };
-                foreach (var core in coresInBoundary)
-                {
-                    List<Line> linesRunning = new List<Line>();
-                    foreach (var curve in centerlines)
-                    {
-                        curve.Trim(core.Profile.Perimeter, out var linesTrimmedByCore);
-                        linesRunning.AddRange(linesTrimmedByCore);
-                    }
-                    centerlines = linesRunning;
-                }
+                centerlines = TrimLinesWithRegions(coresInBoundary.Select(c => c.Profile.Perimeter), centerlines);
                 cl = centerlines.OrderBy(l => l.Length()).Last();
                 foreach (var clCandidate in centerlines)
                 {
@@ -473,12 +468,98 @@ namespace Circulation
                         }
                         extended = new Polyline(new[] { extended.Start, extended.End, runningPt.Value });
                     }
-                    //TODO - verify that newly constructed line is contained within building perimeter
-                    var thickenedCorridor = extended.Offset(corridorWidth / 2.0, EndType.Square);
-                    corridorProfiles.AddRange(Profile.Difference(thickenedCorridor.Select(c => new Profile(c)), thickerOffsets.Select(c => new Profile(c))));
+                    List<Line> containedLines = new List<Line> {
+                        new Line(extended.Start, extended.End)
+                    };
+                    // trim the centerlines so they don't go all the way to the end of the single-loaded zone
+                    containedLines = TrimLinesWithRegions(thickerOffsets, containedLines);
+
+                    foreach (var extendedLine in containedLines)
+                    {
+                        var ext = extendedLine.ToPolyline(1);
+                        var clOffset = OffsetOpen(ext, -corridorWidth / 2.0);
+                        var corridorPolyline = new ThickenedPolyline(clOffset.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
+                        var offsets = clOffset.OffsetOnSide(corridorWidth, false);
+                        var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
+                        profile.Name = "Corridor";
+                        corridorProfiles.Add(profile);
+                        var segment = new CirculationSegment(profile, 0.11)
+                        {
+                            Material = CorridorMat,
+                            Transform = lvl.Transform,
+                            OriginalGeometry = corridorPolyline.Polyline,
+                            Geometry = corridorPolyline,
+                            Level = lvl.Id
+                        };
+                        segments.Add(segment);
+                    }
+
                 }
 
             }
+        }
+
+        private static List<Line> TrimLinesWithRegions(IEnumerable<Polygon> regions, List<Line> lines)
+        {
+            foreach (var region in regions)
+            {
+                List<Line> linesRunning = new List<Line>();
+                foreach (var curve in lines)
+                {
+                    curve.Trim(region, out var linesOutsideRegions);
+                    linesRunning.AddRange(linesOutsideRegions);
+                }
+                lines = linesRunning;
+            }
+
+            return lines;
+        }
+
+        // TODO - use the method from elments once it's merged
+        private static Polyline OffsetOpen(Polyline pl, double offset)
+        {
+            var newVertices = new List<Vector3>();
+            var segments = pl.Segments().Select(s => s.Offset(offset, false)).ToList();
+            if (segments.Count == 1)
+            {
+                return new Polyline(segments[0].Start, segments[0].End);
+            }
+            for (int i = 0; i < segments.Count - 1; i++)
+            {
+                var currSegment = segments[i];
+                var nextSegment = segments[i + 1];
+                if (i == 0)
+                {
+                    newVertices.Add(currSegment.Start);
+                }
+
+                if (currSegment.Direction().Dot(nextSegment.Direction()) > 1 - Vector3.EPSILON)
+                {
+                    newVertices.Add(currSegment.End);
+                }
+                else
+                {
+                    if (currSegment.Intersects(nextSegment, out Vector3 intersection, true, true))
+                    {
+                        newVertices.Add(intersection);
+                    }
+                    else
+                    {
+                        newVertices.Add(currSegment.End);
+                    }
+                }
+
+                if (i == segments.Count - 2)
+                {
+                    newVertices.Add(nextSegment.End);
+                }
+            }
+            var polyline = new Polyline(newVertices);
+            if (polyline.Vertices.Count < 2)
+            {
+                throw new Exception("The offset of the polyline resulted in invalid geometry, such as a single point.");
+            }
+            return polyline;
         }
 
         private static (Polygon hull, Line centerLine)[] JoinSingleLoaded(List<(Polygon hull, Line centerLine)> singleLoadedZones)

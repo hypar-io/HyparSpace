@@ -7,10 +7,10 @@
     <ItemGroup>
 	    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
     </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.5" />
-    <PackageReference Include="Hypar.Functions" Version="0.9.6" />
-  </ItemGroup>
+	
+    <ItemGroup>
+      <PackageReference Include="Hypar.Elements" Version="0.9.6" />
+      <PackageReference Include="Hypar.Functions" Version="0.9.9" />
+    </ItemGroup>
 
 </Project>
