@@ -89,7 +89,7 @@ namespace PrivateOfficeLayout
     
         /// <summary>How large should the auto-generated offices be?</summary>
         [Newtonsoft.Json.JsonProperty("Office Size", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(3.7D, 10D)]
+        [System.ComponentModel.DataAnnotations.Range(2.7432D, 10D)]
         public double OfficeSize { get; set; } = 5D;
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();

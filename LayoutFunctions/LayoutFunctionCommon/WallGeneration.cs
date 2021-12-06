@@ -242,8 +242,10 @@ namespace Elements
                 var cellSeparators = grid.GetCellSeparators(GridDirection.V, true);
                 wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => (c, "Partition")));
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine("Couldn't get grid cell separators");
+                Console.WriteLine(e.Message);
                 // exception in cell separators
             }
             var glassLines = wallCandidateLines.Where(l => l.type == "Glass-Edge").Select(w => w.line);
