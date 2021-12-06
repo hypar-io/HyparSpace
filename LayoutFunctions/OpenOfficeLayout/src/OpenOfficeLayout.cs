@@ -152,7 +152,7 @@ namespace OpenOfficeLayout
                     }
 
                     var spaceBoundary = ob.Boundary;
-                    Line orientationGuideEdge = FindEdgeAdjacentToCorridor(spaceBoundary.Perimeter, corridorSegments);
+                    Line orientationGuideEdge = FindEdgeAdjacentToCorridor(spaceBoundary.Perimeter, corridorSegments);                  
                     var dir = orientationGuideEdge.Direction();
                     if (rotation != 0)
                     {
@@ -199,6 +199,39 @@ namespace OpenOfficeLayout
 
                     grid.U.DivideByPattern(chosenDeskAislePattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
                     
+                    // Split grid by column locations
+                    foreach(var p in boundaryCurves.SelectMany(bc => columnSearchTree.FindWithinBounds(bc.Bounds()))){
+                        // Get profile
+                        var columnProfile = columnSearchTree.GetElementsAtPoint(p).First();
+                        var profileBounds = columnProfile.Perimeter.Bounds();
+                        grid.SplitAtPoints(new[]{ profileBounds.Min, profileBounds.Max });
+                    }
+
+                    // Iterate through 
+                    // U is always the dominant (long) axis
+                    
+                    List<int> Uskips = new List<int>();
+                    BBox3 columnProfileSize = modelColumnLocations.FirstOrDefault().Item2.Perimeter.Bounds();
+                    double skipDistance =  
+                        Math.Max(columnProfileSize.Max.X - columnProfileSize.Min.X,
+                                columnProfileSize.Max.Y - columnProfileSize.Min.Y);
+                    Vector3 skipVector = grid.U.Curve is Line l ? l.Direction().Unitized() * skipDistance : Vector3.Origin;
+                    bool skipEnabled = skipVector != Vector3.Origin;
+                    
+                    if(skipEnabled){
+                        // Calculate U skip cells
+                        for(int u = 0; u<grid.U.Cells.Count; u++){
+                            if(grid.V.Cells.Any(c => {
+                                var nearestColumnLocation = columnSearchTree.FindClosestPoint(c.Curve.Bounds().Center());
+                                return (c.GetCellGeometry() as Polygon).Contains(nearestColumnLocation);
+                            }))
+                            {
+                                // U should be skipped
+                                Uskips.Add(u);
+                            }
+                        }
+                    }
+
                     // Insert interstitial collab spaces
                     if (collabDensity > 0.0)
                     {
@@ -259,77 +292,90 @@ namespace OpenOfficeLayout
                             }
                         }
                     }
+
+                    SortedDictionary<int,SortedDictionary<int, List<ElementInstance>>> placedDesksByUV = 
+                        new SortedDictionary<int, SortedDictionary<int, List<ElementInstance>>>();
+
                     // output.Model.AddElements(grid.ToModelCurves());
-                    foreach (var cell in grid.GetCells())
-                    {
-                        try
-                        {
-                            if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
+                    for(int u = 0; u < grid.U.Cells.Count; u++){
+                        placedDesksByUV.Add(u, new SortedDictionary<int, List<ElementInstance>>());
+                        for(int v = 0; v<grid.V.Cells.Count; v++){
+                            var cell = grid[u,v];
+                            try
                             {
-                                var cellGeo = cell.GetCellGeometry() as Polygon;
-                                var cellBounds = cellGeo.Bounds();
-                                
-                                // Get closest columns from cell location
-                                var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
-                                var columnProfilesCollection = 
-                                    nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
-                                                 .Select(e => e.FirstOrDefault());
-                                if(
-                                    nearbyColumns.Any(
-                                        c => cellGeo.Contains(c)) || 
-                                        columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
+                                if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
                                 {
-                                    desksSkippedTotal++;
-                                    continue;                                   
-                                }
-                                if (cell.Type?.Contains("Backward") ?? false)
-                                {
-                                    // output.Model.AddElement(cell.GetCellGeometry());
-                                    var transform = 
-                                    orientationTransform
-                                        .Concatenated(new Transform(Vector3.Origin, -90))
-                                        .Concatenated(new Transform(cellGeo.Vertices[3]))
-                                        .Concatenated(ob.Transform);
-                                    if (isCustom)
+                                    var cellGeo = cell.GetCellGeometry() as Polygon;
+                                    var cellBounds = cellGeo.Bounds();
+                                    
+                                    // Get closest columns from cell location
+                                    var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
+                                    var columnProfilesCollection = 
+                                        nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
+                                                    .Select(e => e.FirstOrDefault());
+                                    if(
+                                        nearbyColumns.Any(
+                                            c => cellGeo.Contains(c)) || 
+                                            columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
                                     {
-                                        output.Model.AddElement(customDesk.CreateInstance(transform, null));
+                                        desksSkippedTotal++;
+                                        continue;                                   
                                     }
-                                    else
-                                    {
-                                        output.Model.AddElements(selectedConfig.Instantiate(transform));
-                                    }
-                                    // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.YAxis));
-                                    deskCount += desksPerInstance;
-                                }
-                                else if (cell.Type?.Contains("Forward") ?? false)
-                                {
-                                    // output.Model.AddElement(cell.GetCellGeometry());
+                                    if ((cell.Type?.Contains("Backward") ?? false) || (cell.Type?.Contains("Forward") ?? false)){
+                                        var transform = (cell.Type.Contains("Backward") 
+                                        ?
+                                        // Backward
+                                        orientationTransform
+                                            .Concatenated(new Transform(Vector3.Origin, -90))
+                                            .Concatenated(new Transform(cellGeo.Vertices[3]))
+                                            .Concatenated(ob.Transform)
+                                        :
+                                        // Forward
+                                        orientationTransform
+                                            .Concatenated(new Transform(Vector3.Origin, 90))
+                                            .Concatenated(new Transform(cellGeo.Vertices[1]))
+                                            .Concatenated(ob.Transform));
 
-                                    var transform = 
-                                    orientationTransform
-                                        .Concatenated(new Transform(Vector3.Origin, 90))
-                                        .Concatenated(new Transform(cellGeo.Vertices[1]))
-                                        .Concatenated(ob.Transform);
+                                        var deskElements = isCustom 
+                                        ? 
+                                            new List<ElementInstance>(){ customDesk.CreateInstance(transform, null) } 
+                                            : 
+                                            selectedConfig.Instantiate(transform);
 
-                                    // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.XAxis));
-                                    if (isCustom)
-                                    {
-                                        output.Model.AddElement(customDesk.CreateInstance(transform, null));
+                                        output.Model.AddElements(deskElements);
+                                        placedDesksByUV[u].Add(v, deskElements);
+
+                                        deskCount += desksPerInstance;
                                     }
-                                    else
-                                    {
-                                        output.Model.AddElements(selectedConfig.Instantiate(transform));
+                                    else{
+                                        Console.WriteLine(
+                                            "Desk placement was skipped because a desk " + 
+                                            "direction wasn't provided for this cell.");
                                     }
-                                    deskCount += desksPerInstance;
                                 }
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                            Console.WriteLine(e.StackTrace);
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                Console.WriteLine(e.StackTrace);
+                            }
                         }
                     }
+
+                    // Shift elements at U
+                    if(skipEnabled){
+                        foreach(var u in placedDesksByUV.Keys){
+                            // Get number of skips at U.
+                            int skipsAtU = ~Uskips.BinarySearch(u);
+                            if(skipsAtU == 0){ continue; }
+                            // Get displacement vector at current U
+                            var totalDisplacement = skipVector * skipsAtU;
+                            foreach(var element in placedDesksByUV[u].Values.SelectMany(v => v)){
+                                element.Transform.Move(totalDisplacement);
+                            }
+                        }
+                    }
+
 
                     var collabSpaceCells = grid.GetCells()
                         .Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true)
