@@ -82,14 +82,14 @@ namespace OpenOfficeLayout
             }
 
             // Get column locations from model
-            List<Vector3> modelColumnLocations = new List<Vector3>();
+            List<(Vector3,Profile)> modelColumnLocations = new List<(Vector3,Profile)>();
             foreach(var source in _columnSources){
                 if(inputModels.ContainsKey(source)){
                     var sourceData = inputModels[source];
                     modelColumnLocations.AddRange(GetColumnLocations(sourceData));
                 }
             }
-            SearchablePointCollection columnSearchTree = new SearchablePointCollection(modelColumnLocations);
+            SearchablePointCollection<Profile> columnSearchTree = new SearchablePointCollection<Profile>(modelColumnLocations);
 
             foreach (var lvl in levels)
             {
@@ -173,7 +173,7 @@ namespace OpenOfficeLayout
                         continue;
                     }
 
-                    var aisleWidth = 1.0;
+                    var aisleWidth = 1.0; // LJ
                     grid.V.DivideByPattern(
                         new[] { 
                             ("Desk", selectedConfig.Width), 
@@ -265,15 +265,19 @@ namespace OpenOfficeLayout
                         {
                             if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
                             {
-                                // Get closest columns from cell location
                                 var cellGeo = cell.GetCellGeometry() as Polygon;
                                 var cellBounds = cellGeo.Bounds();
-                                if(columnSearchTree.HasPointInBounds(cellBounds, 0.3, 2)){
-                                    // Column found at locatoin
-                                    desksSkipped++;
-                                    continue;
+                                
+                                // Get closest columns from cell location
+                                var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
+                                var columnProfilesCollection = nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c)).ToList();
+                                foreach(var p in columnProfilesCollection){
+                                    if(p.FirstOrDefault()?.Perimeter.Intersects(cellGeo) ?? false){
+                                          // Column found at location
+                                        desksSkipped++;
+                                        continue;
+                                    }
                                 }
-                                // if(columnSearchTree.FindClosest())
 
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {
@@ -348,16 +352,16 @@ namespace OpenOfficeLayout
             return outputWithData;
         }
 
-        public static IEnumerable<Vector3> GetColumnLocations(Model m) {
+        public static IEnumerable<(Vector3,Profile)> GetColumnLocations(Model m) {
             if(m == null){ throw new Exception("Model provided was null."); }
             foreach(var ge in m.AllElementsOfType<Column>()){
                 if(!ge.IsElementDefinition){
-                    yield return ge.Location;
+                    yield return (ge.Location, ge.ProfileTransformed());
                 }
                 else{
                     Vector3 geOrigin =  ge.Location;
                     foreach(var e in m.AllElementsOfType<ElementInstance>().Where(e => e.BaseDefinition == ge)){
-                        yield return e.Transform.OfPoint(geOrigin);
+                        yield return (e.Transform.OfPoint(geOrigin),ge.Profile.Transformed(e.Transform));
                     }
                 }
             }
@@ -393,161 +397,6 @@ namespace OpenOfficeLayout
                 }
             }
             return minSeg;
-        }
-    }
-
-    /// <summary>
-    /// Fast way to retreive points within a range
-    /// or near a location
-    /// </summary>
-    public class SearchablePointCollection {
-        public int Count => _count;
-        private int _count = 0;
-
-        List<SortedDictionary<double, List<Vector3>>> _coords
-         = new List<SortedDictionary<double, List<Vector3>>>();
-
-         List<List<double>> _keys => __keys ?? (__keys = _coords.Select(c => c.Keys.ToList()).ToList());
-         List<List<double>> __keys;
-
-        public readonly int Dimensions;
-
-        public SearchablePointCollection(IEnumerable<Vector3> points = null, int dimensions = 3){
-            Dimensions = dimensions;
-            for(int i = 0; i<dimensions; i++){
-                _coords.Add(new SortedDictionary<double, List<Vector3>>());
-                _keys.Add(new List<double>{});
-            }
-            if(points != null){
-                foreach(var p in points){
-                    Add(p);
-                }
-            }
-        }
-
-        public bool IsWithinTolerance(double a, double b, double tolerance){
-            return Math.Abs(a-b) <= tolerance;
-        }
-
-        public IEnumerable<Vector3> FindWithinRange(List<(double,double)> bounds, double tolerance = 0){
-            if(bounds == null || bounds.Count == 0){ yield break; }
-            HashSet<Vector3> prev = null;
-            for(int i = 0; i<bounds.Count; i++){
-                List<Vector3> found = new List<Vector3>();
-                int dMin = Math.Max(0,(~_keys[i].BinarySearch(bounds[i].Item1 - tolerance) - 1));
-                int dMax = Math.Min(_keys[i].Count -1, ~_keys[i].BinarySearch(bounds[i].Item2 + tolerance));
-                int j = dMin;
-                while(j <= dMax){
-                    double coord = _keys[i][j];
-                    if(coord < (bounds[i].Item1 - tolerance)){ j++; continue; }
-                    if(coord > (bounds[i].Item2 + tolerance)){ break;}
-                    foreach(var potential in _coords[i][coord]){
-                        found.Add(potential);
-                    }
-                    j++;
-                }
-                if(prev != null){
-                    prev = prev.Intersect(found).ToHashSet();
-                    // If no matches here, then there are no items within the provided range.
-                }
-                else{
-                    prev = found.ToHashSet();
-                }
-                if(prev.Count == 0){ yield break;}
-            }           
-            foreach(var v in prev){
-                yield return v;
-            }
-        }
-
-        public bool HasPointInBounds(BBox3 bbox, double tolerance = 0, int dimensions = 3){
-            List<(double,double)> bounds = new List<(double, double)>();
-            for(int i =0; i<Math.Min(dimensions, 3); i++)
-            {
-                bounds.Add(GetDimensionalRange(i,bbox));
-            }
-            return FindWithinRange(bounds, tolerance).Any();
-        }
-
-        public Vector3 FindClosestPoint(Vector3 location, int dimensions = 2){
-            List<Vector3> potential = new List<Vector3>();
-            for(int d = 0; d<Math.Min(dimensions, Dimensions); d++){
-                var dVal = GetDimensionalValue(d, location);
-                int min = Math.Max(0,(~_keys[d].BinarySearch(dVal))-1);
-                potential.AddRange(_coords[d][_keys[d][min]]);
-            }
-            return potential.OrderBy(p => p.DistanceTo(location)).First();
-        }
-
-        public IEnumerable<Vector3> FindClosestPoints(Vector3 location, double distance, int dimensions = 2) => FindWithinRange(Inflate(location,distance));     
-
-        public List<(double,double)> Inflate(Vector3 center, double radius, int dimensions = 2){
-            var output =  new List<(double, double)>();
-            for(int d = 0; d<Math.Min(Dimensions,dimensions); d++){
-                output.Add(
-                    (GetDimensionalValue(d, center) - radius,
-                     GetDimensionalValue(d, center) + radius)
-                     );
-            }
-            return output;
-        }
-
-        public void Add(Vector3 point){
-            for(int d = 0; d<Dimensions; d++){
-                var dval = GetDimensionalValue(d,point);
-                if(!_coords[d].ContainsKey(dval)){
-                    _coords[d].Add(dval, new List<Vector3>(){ point });
-                }
-                else{ _coords[d][dval].Add(point); }
-            }
-            __keys = null;
-            _count++;
-        }
-
-        public void Remove(Vector3 point){
-            for(int d = 0; d<Dimensions; d++){
-                var dval = GetDimensionalValue(d,point);
-                if(!_coords[d].ContainsKey(dval)){
-                    // Could not find
-                    return;
-                }
-                else if(_coords[d][dval].Count == 1){
-                    // Only point which has this dimensional value
-                    _coords[d].Remove(dval);
-                }
-                else{
-                    _coords[d][dval].Remove(point);
-                }
-            }
-            __keys = null;
-            _count--;
-        }
-
-        double GetDimensionalValue(int dim, Vector3 point){
-            switch(dim){
-                case 0:
-                return point.X;
-                case 1:
-                return point.Y;
-                case 2:
-                return point.Z;
-                default:
-                throw new Exception($"Can't handle dimension {dim}");
-            }
-        }
-
-        
-        (double,double) GetDimensionalRange(int dim, BBox3 bounds){
-            switch(dim){
-                case 0:
-                return (bounds.Min.X,bounds.Max.X);
-                case 1:
-                return (bounds.Min.Y,bounds.Max.Y);
-                case 2:
-                return (bounds.Min.Z,bounds.Max.Z);
-                default:
-                throw new Exception($"Can't handle dimension {dim}");
-            }
         }
     }
 
