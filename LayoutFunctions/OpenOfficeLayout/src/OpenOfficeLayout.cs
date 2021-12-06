@@ -91,6 +91,8 @@ namespace OpenOfficeLayout
             }
             SearchablePointCollection<Profile> columnSearchTree = new SearchablePointCollection<Profile>(modelColumnLocations);
 
+            int desksSkippedTotal = 0;
+
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<Floor>();
@@ -257,7 +259,6 @@ namespace OpenOfficeLayout
                             }
                         }
                     }
-                    int desksSkipped = 0;
                     // output.Model.AddElements(grid.ToModelCurves());
                     foreach (var cell in grid.GetCells())
                     {
@@ -270,15 +271,17 @@ namespace OpenOfficeLayout
                                 
                                 // Get closest columns from cell location
                                 var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
-                                var columnProfilesCollection = nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c)).ToList();
-                                foreach(var p in columnProfilesCollection){
-                                    if(p.FirstOrDefault()?.Perimeter.Intersects(cellGeo) ?? false){
-                                          // Column found at location
-                                        desksSkipped++;
-                                        continue;
-                                    }
+                                var columnProfilesCollection = 
+                                    nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
+                                                 .Select(e => e.FirstOrDefault());
+                                if(
+                                    nearbyColumns.Any(
+                                        c => cellGeo.Contains(c)) || 
+                                        columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
+                                {
+                                    desksSkippedTotal++;
+                                    continue;                                   
                                 }
-
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {
                                     // output.Model.AddElement(cell.GetCellGeometry());

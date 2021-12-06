@@ -2,9 +2,9 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "eeff6967-22a7-4490-b86c-5e842deaf212",
   "name": "Open Office Layout",
+  "display_name": "Leland - Office Layout Space Planning",
   "description": "Lay out desks with optional open collaboration areas distributed throughout.",
   "language": "C#",
-  "display_name": "Leland - Office Layout Space Planning",
   "model_dependencies": [
     {
       "autohide": false,
@@ -19,7 +19,7 @@
     {
       "autohide": false,
       "name": "Columns",
-      "optional": true
+      "optional": false
     }
   ],
   "model_output": "Open Office Layout",
@@ -42,6 +42,34 @@
         "$hyparOrder": 1,
         "minimum": 0
       },
+      "Custom Workstation Properties": {
+        "type": "object",
+        "$hyparOrder": 0.5,
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Desk Type",
+              "value": "Custom"
+            }
+          ]
+        },
+        "properties": {
+          "Width": {
+            "default": 2,
+            "type": "number",
+            "$hyparUnitType": "length",
+            "$hyparOrder": 0,
+            "minimum": 0.1
+          },
+          "Length": {
+            "default": 2,
+            "type": "number",
+            "$hyparUnitType": "length",
+            "$hyparOrder": 1,
+            "minimum": 0.1
+          }
+        }
+      },
       "Desk Type": {
         "default": "Simple Desk - 29x70",
         "type": "string",
@@ -56,32 +84,6 @@
           "Enclosed Pair",
           "Custom"
         ]
-      },
-      "Custom Workstation Properties": {
-        "type": "object",
-        "$hyparOrder": 0.5,
-        "$hyparShowIf": {
-          "conditions": [
-            {
-              "property": "Desk Type",
-              "value": "Custom"
-            }
-          ]
-        },
-        "properties": {
-          "Width": {
-            "type": "number",
-            "$hyparUnitType": "length",
-            "minimum": 0.1,
-            "default": 2.0
-          },
-          "Length": {
-            "type": "number",
-            "$hyparUnitType": "length",
-            "minimum": 0.1,
-            "default": 2.0
-          }
-        }
       }
     }
   },
@@ -109,21 +111,6 @@
           "type": "number",
           "minimum": 0
         },
-        "Desk Type": {
-          "$hyparOrder": 0,
-          "type": "string",
-          "enum": [
-            "Simple Desk - 24x48",
-            "Simple Desk - 30x60",
-            "Simple Desk - 29x70",
-            "Simple Desk - 30x72",
-            "L-Shaped",
-            "Double Desk",
-            "Enclosed Pair",
-            "Custom"
-          ],
-          "default": "Simple Desk - 29x70"
-        },
         "Custom Workstation Properties": {
           "$hyparOrder": 0.5,
           "type": "object",
@@ -137,25 +124,43 @@
           },
           "properties": {
             "Width": {
+              "default": 2,
               "type": "number",
               "$hyparUnitType": "length",
-              "minimum": 0.1,
-              "default": 2.0
+              "minimum": 0.1
             },
             "Length": {
+              "default": 2,
               "type": "number",
               "$hyparUnitType": "length",
-              "minimum": 0.1,
-              "default": 2.0
+              "minimum": 0.1
             }
           }
+        },
+        "Desk Type": {
+          "default": "Simple Desk - 29x70",
+          "$hyparOrder": 0,
+          "type": "string",
+          "enum": [
+            "Simple Desk - 24x48",
+            "Simple Desk - 30x60",
+            "Simple Desk - 29x70",
+            "Simple Desk - 30x72",
+            "L-Shaped",
+            "Double Desk",
+            "Enclosed Pair",
+            "Custom"
+          ]
         }
       },
       "verbs": {
+        "add": null,
+        "remove": null,
         "edit": null,
         "revert": null
       },
-      "default": {}
+      "dependency": null,
+      "behaviors": null
     },
     "Furniture Locations": {
       "context": "[*discriminator=Elements.ElementInstance]",
@@ -171,9 +176,13 @@
         }
       },
       "verbs": {
+        "add": null,
+        "remove": null,
         "edit": null,
         "revert": null
-      }
+      },
+      "dependency": null,
+      "behaviors": null
     }
   },
   "outputs": [
@@ -195,5 +204,6 @@
     "named_position": "top",
     "projection": "orthographic"
   },
-  "last_updated": "2021-08-12T18:10:46.74885"
+  "last_updated": "2021-12-06T18:48:15.811175",
+  "cli_version": "0.9.7"
 }
