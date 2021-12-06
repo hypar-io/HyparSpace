@@ -14,7 +14,12 @@
     {
       "autohide": false,
       "name": "Structure",
-      "optional": false
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Columns",
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",
