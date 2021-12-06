@@ -19,7 +19,7 @@
     {
       "autohide": false,
       "name": "Columns",
-      "optional": false
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",
