@@ -69,127 +69,6 @@ namespace Circulation
     
     }
     
-    /// <summary>Represents camera settings</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class Camera 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public Camera(Vector3 @angle, CameraNamedPosition? @namedPosition, CameraProjection @projection)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<Camera>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @angle, @namedPosition, @projection});
-            }
-        
-            this.Angle = @angle;
-            this.NamedPosition = @namedPosition;
-            this.Projection = @projection;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        /// <summary>A unit vector in model coordinates indicating which direction the camera is pointing.</summary>
-        [Newtonsoft.Json.JsonProperty("angle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 Angle { get; set; }
-    
-        /// <summary>Camera positions, viewing from this direction to the opposite direction. Do not set angle if setting this.</summary>
-        [Newtonsoft.Json.JsonProperty("named_position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CameraNamedPosition? NamedPosition { get; set; }
-    
-        /// <summary>How the camera collapses the 3d scene into a 2d image</summary>
-        [Newtonsoft.Json.JsonProperty("projection", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CameraProjection Projection { get; set; }
-    
-    
-    }
-    
-    /// <summary>Represents a preset view attached to an element.</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class ViewScope : Element
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public ViewScope(BBox3 @boundingBox, Camera @camera, bool @inclusive, System.Guid @id, string @name)
-            : base(id, name)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<ViewScope>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @boundingBox, @camera, @inclusive, @id, @name});
-            }
-        
-            this.BoundingBox = @boundingBox;
-            this.Camera = @camera;
-            this.Inclusive = @inclusive;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        /// <summary>The "focus" extent for this view.</summary>
-        [Newtonsoft.Json.JsonProperty("Bounding Box", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public BBox3 BoundingBox { get; set; }
-    
-        /// <summary>The camera to use for this view.</summary>
-        [Newtonsoft.Json.JsonProperty("Camera", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Camera Camera { get; set; }
-    
-        /// <summary>Should the bounding box be treated as Inclusive?</summary>
-        [Newtonsoft.Json.JsonProperty("Inclusive", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool Inclusive { get; set; }
-    
-    
-    }
-    
-    /// <summary>An input schema which renders no visible input, but captures information about the currently active view scope, if present.</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class ActiveViewScopeInfo 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public ActiveViewScopeInfo(ViewScope @scope, Element @sourceElement)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<ActiveViewScopeInfo>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @scope, @sourceElement});
-            }
-        
-            this.Scope = @scope;
-            this.SourceElement = @sourceElement;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        /// <summary>The active view scope</summary>
-        [Newtonsoft.Json.JsonProperty("Scope", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ViewScope Scope { get; set; }
-    
-        /// <summary>The element associated with the active view scope</summary>
-        [Newtonsoft.Json.JsonProperty("Source Element", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Element SourceElement { get; set; }
-    
-    
-    }
-    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public  class CirculationInputs : S3Args
@@ -248,37 +127,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
     
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum CameraNamedPosition
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"east")]
-        East = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"north")]
-        North = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"south")]
-        South = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"top")]
-        Top = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"west")]
-        West = 4,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum CameraProjection
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"orthographic")]
-        Orthographic = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"perspective")]
-        Perspective = 1,
     
     }
     
@@ -495,16 +343,15 @@ namespace Circulation
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public CorridorsIdentity(Polyline @originalGeometry, CorridorsIdentityLevel @level)
+        public CorridorsIdentity(Polyline @originalGeometry)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<CorridorsIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @originalGeometry, @level});
+                validator.PreConstruct(new object[]{ @originalGeometry});
             }
         
             this.OriginalGeometry = @originalGeometry;
-            this.Level = @level;
         
             if(validator != null)
             {
@@ -514,9 +361,6 @@ namespace Circulation
     
         [Newtonsoft.Json.JsonProperty("Original Geometry", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polyline OriginalGeometry { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CorridorsIdentityLevel Level { get; set; }
     
     
     }
@@ -555,7 +399,7 @@ namespace Circulation
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public CorridorsOverrideAdditionValue(ThickenedPolyline @geometry, ActiveViewScopeInfo @level)
+        public CorridorsOverrideAdditionValue(ThickenedPolyline @geometry, CorridorsOverrideAdditionValueLevel @level)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverrideAdditionValue>();
             if(validator != null)
@@ -576,20 +420,20 @@ namespace Circulation
         public ThickenedPolyline Geometry { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ActiveViewScopeInfo Level { get; set; }
+        public CorridorsOverrideAdditionValueLevel Level { get; set; }
     
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
-    public partial class CorridorsIdentityLevel 
+    public partial class CorridorsOverrideAdditionValueLevel 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public CorridorsIdentityLevel(Transform @transform, string @name, string @buildingName)
+        public CorridorsOverrideAdditionValueLevel(Transform @transform, string @name, string @buildingName)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsIdentityLevel>();
+            var validator = Validator.Instance.GetFirstValidatorForType<CorridorsOverrideAdditionValueLevel>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @transform, @name, @buildingName});

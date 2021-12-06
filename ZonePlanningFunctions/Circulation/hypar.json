@@ -111,20 +111,6 @@
       "identity": {
         "Original Geometry": {
           "$ref": "https://hypar.io/Schemas/Geometry/Polyline.json"
-        },
-        "Level": {
-          "type": "object",
-          "properties": {
-            "Transform": {
-              "$ref": "https://prod-api.hypar.io/schemas/Transform"
-            },
-            "Name": {
-              "type": "string"
-            },
-            "Building Name": {
-              "type": "string"
-            }
-          }
         }
       },
       "behaviors": {
@@ -139,7 +125,21 @@
               }
             },
             "Level": {
-              "$ref": "https://prod-api.hypar.io/schemas/ActiveViewScopeInfo"
+              "$hyparRelation": {
+                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+              },
+              "type": "object",
+              "properties": {
+                "Transform": {
+                  "$ref": "https://prod-api.hypar.io/schemas/Transform"
+                },
+                "Name": {
+                  "type": "string"
+                },
+                "Building Name": {
+                  "type": "string"
+                }
+              }
             }
           }
         },

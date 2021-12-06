@@ -115,6 +115,23 @@ namespace Circulation
                     circulationSegments.AddRange(GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles, thickerOffsetProfiles));
                 }
 
+                // handle removals of any auto-generated corridor
+                if (input.Overrides?.Removals?.Corridors != null)
+                {
+                    foreach (var removalOverride in input.Overrides.Removals.Corridors)
+                    {
+                        var match = circulationSegments.FirstOrDefault(c =>
+                        {
+                            return c.OriginalGeometry.Start == removalOverride.Identity.OriginalGeometry.Start;
+                        });
+                        if (match != null)
+                        {
+                            circulationSegments.Remove(match);
+                            corridorProfiles.Remove(match.Profile);
+                        }
+                    }
+                }
+
                 // Construct LevelElements to contain space boundaries
                 var level = new LevelElements()
                 {
@@ -131,7 +148,7 @@ namespace Circulation
                 {
                     foreach (var addedCorridor in input.Overrides.Additions.Corridors)
                     {
-                        if (addedCorridor.Value?.Level != null && addedCorridor.Value.Level.SourceElement.Name != lvl.Name)
+                        if (addedCorridor.Value?.Level != null && addedCorridor.Value.Level.Name != lvl.Name)
                         {
                             continue;
                         }
@@ -160,10 +177,10 @@ namespace Circulation
                 {
                     foreach (var corridorOverride in input.Overrides.Corridors)
                     {
-                        if (corridorOverride.Identity?.Level != null && corridorOverride.Identity.Level.Name != lvl.Name)
-                        {
-                            continue;
-                        }
+                        // if (corridorOverride.Identity?.Level != null && corridorOverride.Identity.Level.Name != lvl.Name)
+                        // {
+                        //     continue;
+                        // }
 
                         var identity = corridorOverride.Identity.OriginalGeometry;
                         var matchingCorridor = circulationSegments.FirstOrDefault(s => s.OriginalGeometry.PointAt(0.5).DistanceTo(identity.PointAt(0.5)) < 0.01);
@@ -394,10 +411,7 @@ namespace Circulation
                     {
                         continue;
                     }
-                    foreach (var r in exclusionRegions)
-                    {
-                        model.AddElements(new ModelCurve(r, BuiltInMaterials.YAxis, new Transform(0, 0, 1)));
-                    }
+
                     // var trimmedSegments = TrimLinesWithRegions(new, new List<Line> { extendedSegment });
                     var trimmedSegments = extendedSegment.Trim(levelBoundary.Perimeter, out _);
                     foreach (var ts in trimmedSegments)

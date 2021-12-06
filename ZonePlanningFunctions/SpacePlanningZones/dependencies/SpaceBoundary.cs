@@ -157,6 +157,10 @@ namespace Elements
             var representation = new Representation(new[] { new Extrude(profile.Transformed(new Transform(0, 0, 0.01)), height, Vector3.ZAxis, false) });
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             var name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            if (name == "unspecified")
+            {
+                name = "Unassigned Space Type";
+            }
             var sb = new SpaceBoundary()
             {
                 Boundary = profile,
