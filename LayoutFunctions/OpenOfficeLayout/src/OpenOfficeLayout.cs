@@ -14,7 +14,9 @@ using LayoutFunctionCommon;
 namespace OpenOfficeLayout
 {
     public static class OpenOfficeLayout
-    {
+    { 
+        static string[] _columnSources = new []{ "Columns", "Structure" };
+
         /// <summary>
         /// The OpenOfficeLayout function.
         /// </summary>
@@ -27,10 +29,12 @@ namespace OpenOfficeLayout
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+
             var deskCount = 0;
 
             var configJson = File.ReadAllText("OpenOfficeDeskConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            
             if (input.CustomWorkstationProperties == null)
             {
                 input.CustomWorkstationProperties = new CustomWorkstationProperties(2, 2);
@@ -56,7 +60,13 @@ namespace OpenOfficeLayout
             var overridesByCentroid = new Dictionary<Guid, SpaceSettingsOverride>();
             foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
             {
-                var matchingBoundary = levels.SelectMany(l => l.Elements).OfType<SpaceBoundary>().OrderBy(ob => ob.ParentCentroid.Value.DistanceTo(spaceOverride.Identity.ParentCentroid)).First();
+                var matchingBoundary = 
+                levels.SelectMany(l => l.Elements)
+                    .OfType<SpaceBoundary>()
+                    .OrderBy(ob => ob.ParentCentroid.Value
+                    .DistanceTo(spaceOverride.Identity.ParentCentroid))
+                    .First();
+
                 if (overridesByCentroid.ContainsKey(matchingBoundary.Id))
                 {
                     var mbCentroid = matchingBoundary.ParentCentroid.Value;
@@ -70,6 +80,16 @@ namespace OpenOfficeLayout
                     overridesByCentroid.Add(matchingBoundary.Id, spaceOverride);
                 }
             }
+
+            // Get column locations from model
+            List<Vector3> modelColumnLocations = new List<Vector3>();
+            foreach(var source in _columnSources){
+                if(inputModels.ContainsKey(source)){
+                    var sourceData = inputModels[source];
+                    modelColumnLocations.AddRange(GetColumnLocations(sourceData));
+                }
+            }
+            SearchablePointCollection columnSearchTree = new SearchablePointCollection(modelColumnLocations);
 
             foreach (var lvl in levels)
             {
@@ -97,7 +117,7 @@ namespace OpenOfficeLayout
 
                     var selectedConfig = defaultConfig;
                     var rotation = input.GridRotation;
-                    var density = input.IntegratedCollaborationSpaceDensity;
+                    var collabDensity = input.IntegratedCollaborationSpaceDensity;
                     var customDesk = defaultCustomDesk;
                     var isCustom = input.DeskType == OpenOfficeLayoutInputsDeskType.Custom;
                     if (overridesByCentroid.ContainsKey(ob.Id))
@@ -126,7 +146,7 @@ namespace OpenOfficeLayout
                         overridableBoundary.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                         overridableBoundary.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
                         rotation = spaceOverride.Value.GridRotation;
-                        density = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                        collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                     }
 
                     var spaceBoundary = ob.Boundary;
@@ -154,35 +174,52 @@ namespace OpenOfficeLayout
                     }
 
                     var aisleWidth = 1.0;
-                    grid.V.DivideByPattern(new[] { ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Aisle", aisleWidth) }, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
-                    var mainVPattern = new[] { ("Aisle", aisleWidth), ("Forward", selectedConfig.Depth), ("Backward", selectedConfig.Depth) };
-                    var nonMirroredVPattern = new[] { ("Forward", selectedConfig.Depth), ("Aisle", aisleWidth) };
-                    var pattern = input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? nonMirroredVPattern : mainVPattern;
-                    grid.U.DivideByPattern(pattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
-                    var random = new Random();
+                    grid.V.DivideByPattern(
+                        new[] { 
+                            ("Desk", selectedConfig.Width), 
+                            ("Desk", selectedConfig.Width), 
+                            ("Desk", selectedConfig.Width), 
+                            ("Desk", selectedConfig.Width), 
+                            ("Aisle", aisleWidth) }, 
+                        PatternMode.Cycle, 
+                        FixedDivisionMode.RemainderAtBothEnds);
 
-                    if (density > 0.0)
+                    var mainVPattern = new[] { 
+                        ("Aisle", aisleWidth), 
+                        ("Forward", selectedConfig.Depth), 
+                        ("Backward", selectedConfig.Depth) 
+                    };
+                    var nonMirroredVPattern = new[] { 
+                        ("Forward", selectedConfig.Depth), 
+                        ("Aisle", aisleWidth) };
+
+                    var chosenDeskAislePattern = input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? nonMirroredVPattern : mainVPattern;
+
+                    grid.U.DivideByPattern(chosenDeskAislePattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
+                    
+                    // Insert interstitial collab spaces
+                    if (collabDensity > 0.0)
                     {
                         var spaceEveryURows = 4;
                         var numDesksToConsume = 1;
 
-                        if (density >= 0.3)
+                        if (collabDensity >= 0.3)
                         {
                             spaceEveryURows = 3;
                         }
-                        if (density >= 0.5)
+                        if (collabDensity >= 0.5)
                         {
                             numDesksToConsume = 2;
                         }
-                        if (density >= 0.7)
+                        if (collabDensity >= 0.7)
                         {
                             spaceEveryURows = 2;
                         }
-                        if (density >= 0.8)
+                        if (collabDensity >= 0.8)
                         {
                             numDesksToConsume = 3;
                         }
-                        if (density >= 0.9)
+                        if (collabDensity >= 0.9)
                         {
                             numDesksToConsume = 4;
                         }
@@ -220,6 +257,7 @@ namespace OpenOfficeLayout
                             }
                         }
                     }
+                    int desksSkipped = 0;
                     // output.Model.AddElements(grid.ToModelCurves());
                     foreach (var cell in grid.GetCells())
                     {
@@ -227,11 +265,24 @@ namespace OpenOfficeLayout
                         {
                             if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
                             {
+                                // Get closest columns from cell location
+                                var cellGeo = cell.GetCellGeometry() as Polygon;
+                                var cellBounds = cellGeo.Bounds();
+                                if(columnSearchTree.HasPointInBounds(cellBounds, 0.3, 2)){
+                                    // Column found at locatoin
+                                    desksSkipped++;
+                                    continue;
+                                }
+                                // if(columnSearchTree.FindClosest())
+
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {
                                     // output.Model.AddElement(cell.GetCellGeometry());
-                                    var cellGeo = cell.GetCellGeometry() as Polygon;
-                                    var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, -90)).Concatenated(new Transform(cellGeo.Vertices[3])).Concatenated(ob.Transform);
+                                    var transform = 
+                                    orientationTransform
+                                        .Concatenated(new Transform(Vector3.Origin, -90))
+                                        .Concatenated(new Transform(cellGeo.Vertices[3]))
+                                        .Concatenated(ob.Transform);
                                     if (isCustom)
                                     {
                                         output.Model.AddElement(customDesk.CreateInstance(transform, null));
@@ -246,8 +297,13 @@ namespace OpenOfficeLayout
                                 else if (cell.Type?.Contains("Forward") ?? false)
                                 {
                                     // output.Model.AddElement(cell.GetCellGeometry());
-                                    var cellGeo = cell.GetCellGeometry() as Polygon;
-                                    var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, 90)).Concatenated(new Transform(cellGeo.Vertices[1])).Concatenated(ob.Transform);
+
+                                    var transform = 
+                                    orientationTransform
+                                        .Concatenated(new Transform(Vector3.Origin, 90))
+                                        .Concatenated(new Transform(cellGeo.Vertices[1]))
+                                        .Concatenated(ob.Transform);
+
                                     // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.XAxis));
                                     if (isCustom)
                                     {
@@ -268,7 +324,10 @@ namespace OpenOfficeLayout
                         }
                     }
 
-                    var collabSpaceCells = grid.GetCells().Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true).Select(c => new Profile(c.GetCellGeometry() as Polygon));
+                    var collabSpaceCells = grid.GetCells()
+                        .Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true)
+                        .Select(c => new Profile(c.GetCellGeometry() as Polygon));
+
                     var union = Profile.UnionAll(collabSpaceCells);
                     foreach (var profile in union)
                     {
@@ -286,9 +345,25 @@ namespace OpenOfficeLayout
             model.AddElement(new WorkpointCount() { Count = deskCount, Type = "Desk" });
             var outputWithData = new OpenOfficeLayoutOutputs(deskCount);
             outputWithData.Model = model;
-
             return outputWithData;
         }
+
+        public static IEnumerable<Vector3> GetColumnLocations(Model m) {
+            if(m == null){ throw new Exception("Model provided was null."); }
+            foreach(var ge in m.AllElementsOfType<Column>()){
+                if(!ge.IsElementDefinition){
+                    yield return ge.Location;
+                }
+                else{
+                    Vector3 geOrigin =  ge.Location;
+                    foreach(var e in m.AllElementsOfType<ElementInstance>().Where(e => e.BaseDefinition == ge)){
+                        yield return e.Transform.OfPoint(geOrigin);
+                    }
+                }
+            }
+            yield break;
+        }
+
 
         private static Line FindEdgeAdjacentToCorridor(Polygon perimeter, IEnumerable<Line> corridorSegments)
         {
@@ -320,4 +395,161 @@ namespace OpenOfficeLayout
             return minSeg;
         }
     }
+
+    /// <summary>
+    /// Fast way to retreive points within a range
+    /// or near a location
+    /// </summary>
+    public class SearchablePointCollection {
+        public int Count => _count;
+        private int _count = 0;
+
+        List<SortedDictionary<double, List<Vector3>>> _coords
+         = new List<SortedDictionary<double, List<Vector3>>>();
+
+         List<List<double>> _keys => __keys ?? (__keys = _coords.Select(c => c.Keys.ToList()).ToList());
+         List<List<double>> __keys;
+
+        public readonly int Dimensions;
+
+        public SearchablePointCollection(IEnumerable<Vector3> points = null, int dimensions = 3){
+            Dimensions = dimensions;
+            for(int i = 0; i<dimensions; i++){
+                _coords.Add(new SortedDictionary<double, List<Vector3>>());
+                _keys.Add(new List<double>{});
+            }
+            if(points != null){
+                foreach(var p in points){
+                    Add(p);
+                }
+            }
+        }
+
+        public bool IsWithinTolerance(double a, double b, double tolerance){
+            return Math.Abs(a-b) <= tolerance;
+        }
+
+        public IEnumerable<Vector3> FindWithinRange(List<(double,double)> bounds, double tolerance = 0){
+            if(bounds == null || bounds.Count == 0){ yield break; }
+            HashSet<Vector3> prev = null;
+            for(int i = 0; i<bounds.Count; i++){
+                List<Vector3> found = new List<Vector3>();
+                int dMin = Math.Max(0,(~_keys[i].BinarySearch(bounds[i].Item1 - tolerance) - 1));
+                int dMax = Math.Min(_keys[i].Count -1, ~_keys[i].BinarySearch(bounds[i].Item2 + tolerance));
+                int j = dMin;
+                while(j <= dMax){
+                    double coord = _keys[i][j];
+                    if(coord < (bounds[i].Item1 - tolerance)){ j++; continue; }
+                    if(coord > (bounds[i].Item2 + tolerance)){ break;}
+                    foreach(var potential in _coords[i][coord]){
+                        found.Add(potential);
+                    }
+                    j++;
+                }
+                if(prev != null){
+                    prev = prev.Intersect(found).ToHashSet();
+                    // If no matches here, then there are no items within the provided range.
+                }
+                else{
+                    prev = found.ToHashSet();
+                }
+                if(prev.Count == 0){ yield break;}
+            }           
+            foreach(var v in prev){
+                yield return v;
+            }
+        }
+
+        public bool HasPointInBounds(BBox3 bbox, double tolerance = 0, int dimensions = 3){
+            List<(double,double)> bounds = new List<(double, double)>();
+            for(int i =0; i<Math.Min(dimensions, 3); i++)
+            {
+                bounds.Add(GetDimensionalRange(i,bbox));
+            }
+            return FindWithinRange(bounds, tolerance).Any();
+        }
+
+        public Vector3 FindClosestPoint(Vector3 location, int dimensions = 2){
+            List<Vector3> potential = new List<Vector3>();
+            for(int d = 0; d<Math.Min(dimensions, Dimensions); d++){
+                var dVal = GetDimensionalValue(d, location);
+                int min = Math.Max(0,(~_keys[d].BinarySearch(dVal))-1);
+                potential.AddRange(_coords[d][_keys[d][min]]);
+            }
+            return potential.OrderBy(p => p.DistanceTo(location)).First();
+        }
+
+        public IEnumerable<Vector3> FindClosestPoints(Vector3 location, double distance, int dimensions = 2) => FindWithinRange(Inflate(location,distance));     
+
+        public List<(double,double)> Inflate(Vector3 center, double radius, int dimensions = 2){
+            var output =  new List<(double, double)>();
+            for(int d = 0; d<Math.Min(Dimensions,dimensions); d++){
+                output.Add(
+                    (GetDimensionalValue(d, center) - radius,
+                     GetDimensionalValue(d, center) + radius)
+                     );
+            }
+            return output;
+        }
+
+        public void Add(Vector3 point){
+            for(int d = 0; d<Dimensions; d++){
+                var dval = GetDimensionalValue(d,point);
+                if(!_coords[d].ContainsKey(dval)){
+                    _coords[d].Add(dval, new List<Vector3>(){ point });
+                }
+                else{ _coords[d][dval].Add(point); }
+            }
+            __keys = null;
+            _count++;
+        }
+
+        public void Remove(Vector3 point){
+            for(int d = 0; d<Dimensions; d++){
+                var dval = GetDimensionalValue(d,point);
+                if(!_coords[d].ContainsKey(dval)){
+                    // Could not find
+                    return;
+                }
+                else if(_coords[d][dval].Count == 1){
+                    // Only point which has this dimensional value
+                    _coords[d].Remove(dval);
+                }
+                else{
+                    _coords[d][dval].Remove(point);
+                }
+            }
+            __keys = null;
+            _count--;
+        }
+
+        double GetDimensionalValue(int dim, Vector3 point){
+            switch(dim){
+                case 0:
+                return point.X;
+                case 1:
+                return point.Y;
+                case 2:
+                return point.Z;
+                default:
+                throw new Exception($"Can't handle dimension {dim}");
+            }
+        }
+
+        
+        (double,double) GetDimensionalRange(int dim, BBox3 bounds){
+            switch(dim){
+                case 0:
+                return (bounds.Min.X,bounds.Max.X);
+                case 1:
+                return (bounds.Min.Y,bounds.Max.Y);
+                case 2:
+                return (bounds.Min.Z,bounds.Max.Z);
+                default:
+                throw new Exception($"Can't handle dimension {dim}");
+            }
+        }
+    }
+
+
 }
