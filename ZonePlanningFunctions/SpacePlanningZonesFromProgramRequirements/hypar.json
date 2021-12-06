@@ -141,6 +141,7 @@
   "last_updated": "0001-01-01T00:00:00",
   "element_types": [
     "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/Level",
     "https://prod-api.hypar.io/schemas/ProgramRequirement",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
