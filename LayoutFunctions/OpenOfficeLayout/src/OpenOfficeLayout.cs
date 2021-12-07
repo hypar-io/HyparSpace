@@ -84,8 +84,7 @@ namespace OpenOfficeLayout
             // Get column locations from model
             List<(Vector3,Profile)> modelColumnLocations = new List<(Vector3,Profile)>();
             foreach(var source in _columnSources){
-                if(inputModels.ContainsKey(source)){
-                    var sourceData = inputModels[source];
+                if(inputModels.TryGetValue(source, out var sourceData)){
                     modelColumnLocations.AddRange(GetColumnLocations(sourceData));
                 }
             }
@@ -164,6 +163,8 @@ namespace OpenOfficeLayout
                     var boundaryCurves = new List<Polygon>();
                     boundaryCurves.Add(spaceBoundary.Perimeter);
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+
+                    
                     Grid2d grid;
                     try
                     {

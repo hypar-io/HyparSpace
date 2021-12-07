@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace OpenOfficeLayout
 {
+    // TODO: Move to Elements kernel..
     /// <summary>
     /// Fast way to retreive points within a range
     /// or near a location
@@ -13,14 +14,16 @@ namespace OpenOfficeLayout
         public int Count => _count;
         private int _count = 0;
 
+        public readonly int Dimensions;
+
+
         private Dictionary<Vector3, List<T>> _map = new Dictionary<Vector3, List<T>>();
-        List<SortedDictionary<double, List<Vector3>>> _coords
+        private List<SortedDictionary<double, List<Vector3>>> _coords
          = new List<SortedDictionary<double, List<Vector3>>>();
 
-         List<List<double>> _keys => __keys ?? (__keys = _coords.Select(c => c.Keys.ToList()).ToList());
-         List<List<double>> __keys;
+        private List<List<double>> _keys => __keys ??= _coords.Select(c => c.Keys.ToList()).ToList();
+        private List<List<double>> __keys;
 
-        public readonly int Dimensions;
 
         public SearchablePointCollection(IEnumerable<Vector3> points = null, IEnumerable<T> elements = null, int dimensions = 3){
             Dimensions = dimensions;
@@ -47,7 +50,7 @@ namespace OpenOfficeLayout
             }
         }
 
-        public SearchablePointCollection(IEnumerable<(Vector3,T)> pointsAndElements = null, int dimensions = 3){
+        public SearchablePointCollection(IEnumerable<(Vector3 Loc,T Elem)> pointsAndElements = null, int dimensions = 3){
             Dimensions = dimensions;
             for(int i = 0; i<dimensions; i++){
                 _coords.Add(new SortedDictionary<double, List<Vector3>>());
@@ -55,7 +58,7 @@ namespace OpenOfficeLayout
             }
             if(pointsAndElements != null){
                 foreach(var pE in pointsAndElements){
-                    Add(pE.Item1, pE.Item2);
+                    Add(pE.Loc, pE.Elem);
                 }
             }
         }
@@ -74,22 +77,18 @@ namespace OpenOfficeLayout
             }
         }
 
-        public bool IsWithinTolerance(double a, double b, double tolerance){
-            return Math.Abs(a-b) <= tolerance;
-        }
-
-        public IEnumerable<Vector3> FindWithinRange(List<(double,double)> bounds, double tolerance = 0){
+        public IEnumerable<Vector3> FindWithinRange(List<(double Min,double Max)> bounds, double tolerance = 0){
             if(bounds == null || bounds.Count == 0){ yield break; }
             HashSet<Vector3> prev = null;
             for(int i = 0; i<bounds.Count; i++){
                 List<Vector3> found = new List<Vector3>();
-                int dMin = Math.Max(0,(~_keys[i].BinarySearch(bounds[i].Item1 - tolerance) - 1));
-                int dMax = Math.Min(_keys[i].Count -1, ~_keys[i].BinarySearch(bounds[i].Item2 + tolerance));
+                int dMin = Math.Max(0,(~_keys[i].BinarySearch(bounds[i].Min - tolerance) - 1));
+                int dMax = Math.Min(_keys[i].Count -1, ~_keys[i].BinarySearch(bounds[i].Max + tolerance));
                 int j = dMin;
                 while(j <= dMax){
                     double coord = _keys[i][j];
-                    if(coord < (bounds[i].Item1 - tolerance)){ j++; continue; }
-                    if(coord > (bounds[i].Item2 + tolerance)){ break;}
+                    if(coord < (bounds[i].Min - tolerance)){ j++; continue; }
+                    if(coord > (bounds[i].Max + tolerance)){ break;}
                     foreach(var potential in _coords[i][coord]){
                         found.Add(potential);
                     }
