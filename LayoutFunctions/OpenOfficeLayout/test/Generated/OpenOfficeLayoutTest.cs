@@ -17,9 +17,13 @@ namespace OpenOfficeLayout
         public void TestExecute()
         {
             var input = GetInput();
-
+            string curLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
+            
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/f4683c51-56e3-4bbf-9c8b-2ad2aa71471e.json")) }, 
+                //{"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/f4683c51-56e3-4bbf-9c8b-2ad2aa71471e.json")) }, 
+                // {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\Space Planning Zones\f4683c51-56e3-4bbf-9c8b-2ad2aa71471e.json")) }, 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\HyparSpace_Column_Problem\model.json")) }, 
+                {"Structure", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\HyparSpace_Column_Problem\model.json")) }, 
             };
 
             var result = OpenOfficeLayout.Execute(modelDependencies, input);

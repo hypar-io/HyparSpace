@@ -15,6 +15,8 @@ namespace OpenOfficeLayout
 {
     public static class OpenOfficeLayout
     {
+        static string[] _columnSources = new[] { "Columns", "Structure" };
+
         /// <summary>
         /// The OpenOfficeLayout function.
         /// </summary>
@@ -27,10 +29,12 @@ namespace OpenOfficeLayout
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+
             var deskCount = 0;
 
             var configJson = File.ReadAllText("OpenOfficeDeskConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+
             if (input.CustomWorkstationProperties == null)
             {
                 input.CustomWorkstationProperties = new CustomWorkstationProperties(2, 2);
@@ -56,7 +60,13 @@ namespace OpenOfficeLayout
             var overridesByCentroid = new Dictionary<Guid, SpaceSettingsOverride>();
             foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
             {
-                var matchingBoundary = levels.SelectMany(l => l.Elements).OfType<SpaceBoundary>().OrderBy(ob => ob.ParentCentroid.Value.DistanceTo(spaceOverride.Identity.ParentCentroid)).First();
+                var matchingBoundary =
+                levels.SelectMany(l => l.Elements)
+                    .OfType<SpaceBoundary>()
+                    .OrderBy(ob => ob.ParentCentroid.Value
+                    .DistanceTo(spaceOverride.Identity.ParentCentroid))
+                    .First();
+
                 if (overridesByCentroid.ContainsKey(matchingBoundary.Id))
                 {
                     var mbCentroid = matchingBoundary.ParentCentroid.Value;
@@ -70,6 +80,19 @@ namespace OpenOfficeLayout
                     overridesByCentroid.Add(matchingBoundary.Id, spaceOverride);
                 }
             }
+
+            // Get column locations from model
+            List<(Vector3, Profile)> modelColumnLocations = new List<(Vector3, Profile)>();
+            foreach (var source in _columnSources)
+            {
+                if (inputModels.TryGetValue(source, out var sourceData))
+                {
+                    modelColumnLocations.AddRange(GetColumnLocations(sourceData));
+                }
+            }
+            SearchablePointCollection<Profile> columnSearchTree = new SearchablePointCollection<Profile>(modelColumnLocations);
+
+            int desksSkippedTotal = 0;
 
             foreach (var lvl in levels)
             {
@@ -97,7 +120,7 @@ namespace OpenOfficeLayout
 
                     var selectedConfig = defaultConfig;
                     var rotation = input.GridRotation;
-                    var density = input.IntegratedCollaborationSpaceDensity;
+                    var collabDensity = input.IntegratedCollaborationSpaceDensity;
                     var customDesk = defaultCustomDesk;
                     var isCustom = input.DeskType == OpenOfficeLayoutInputsDeskType.Custom;
                     if (overridesByCentroid.ContainsKey(ob.Id))
@@ -126,7 +149,7 @@ namespace OpenOfficeLayout
                         overridableBoundary.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                         overridableBoundary.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
                         rotation = spaceOverride.Value.GridRotation;
-                        density = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                        collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                     }
 
                     var spaceBoundary = ob.Boundary;
@@ -142,6 +165,8 @@ namespace OpenOfficeLayout
                     var boundaryCurves = new List<Polygon>();
                     boundaryCurves.Add(spaceBoundary.Perimeter);
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+
+
                     Grid2d grid;
                     try
                     {
@@ -153,36 +178,53 @@ namespace OpenOfficeLayout
                         continue;
                     }
 
-                    var aisleWidth = 1.0;
-                    grid.V.DivideByPattern(new[] { ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Desk", selectedConfig.Width), ("Aisle", aisleWidth) }, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
-                    var mainVPattern = new[] { ("Aisle", aisleWidth), ("Forward", selectedConfig.Depth), ("Backward", selectedConfig.Depth) };
-                    var nonMirroredVPattern = new[] { ("Forward", selectedConfig.Depth), ("Aisle", aisleWidth) };
-                    var pattern = input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? nonMirroredVPattern : mainVPattern;
-                    grid.U.DivideByPattern(pattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
-                    var random = new Random();
+                    var aisleWidth = 1.0; // LJ
+                    grid.V.DivideByPattern(
+                        new[] {
+                            ("Desk", selectedConfig.Width),
+                            ("Desk", selectedConfig.Width),
+                            ("Desk", selectedConfig.Width),
+                            ("Desk", selectedConfig.Width),
+                            ("Aisle", aisleWidth) },
+                        PatternMode.Cycle,
+                        FixedDivisionMode.RemainderAtBothEnds);
 
-                    if (density > 0.0)
+                    var mainVPattern = new[] {
+                        ("Aisle", aisleWidth),
+                        ("Forward", selectedConfig.Depth),
+                        ("Backward", selectedConfig.Depth)
+                    };
+                    var nonMirroredVPattern = new[] {
+                        ("Forward", selectedConfig.Depth),
+                        ("Aisle", aisleWidth) };
+
+                    var chosenDeskAislePattern = input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? nonMirroredVPattern : mainVPattern;
+
+                    grid.U.DivideByPattern(chosenDeskAislePattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
+
+                    // Insert interstitial collab spaces
+                    if (collabDensity > 0.0)
                     {
                         var spaceEveryURows = 4;
                         var numDesksToConsume = 1;
 
-                        if (density >= 0.3)
+                        if (collabDensity >= 0.3)
                         {
                             spaceEveryURows = 3;
                         }
-                        if (density >= 0.5)
+                        if (collabDensity >= 0.5)
                         {
                             numDesksToConsume = 2;
                         }
-                        if (density >= 0.7)
+                        if (collabDensity >= 0.7)
                         {
                             spaceEveryURows = 2;
                         }
-                        if (density >= 0.8)
+                        if (collabDensity >= 0.8)
                         {
                             numDesksToConsume = 3;
                         }
-                        if (density >= 0.9)
+                        if (collabDensity >= 0.9)
                         {
                             numDesksToConsume = 4;
                         }
@@ -227,11 +269,30 @@ namespace OpenOfficeLayout
                         {
                             if ((cell.Type?.Contains("Desk") ?? true) && !cell.IsTrimmed())
                             {
+                                var cellGeo = cell.GetCellGeometry() as Polygon;
+                                var cellBounds = cellGeo.Bounds();
+
+                                // Get closest columns from cell location
+                                var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
+                                var columnProfilesCollection =
+                                    nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
+                                                 .Select(e => e.FirstOrDefault());
+                                if (
+                                    nearbyColumns.Any(
+                                        c => cellGeo.Contains(c)) ||
+                                        columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
+                                {
+                                    desksSkippedTotal++;
+                                    continue;
+                                }
                                 if (cell.Type?.Contains("Backward") ?? false)
                                 {
                                     // output.Model.AddElement(cell.GetCellGeometry());
-                                    var cellGeo = cell.GetCellGeometry() as Polygon;
-                                    var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, -90)).Concatenated(new Transform(cellGeo.Vertices[3])).Concatenated(ob.Transform);
+                                    var transform =
+                                    orientationTransform
+                                        .Concatenated(new Transform(Vector3.Origin, -90))
+                                        .Concatenated(new Transform(cellGeo.Vertices[3]))
+                                        .Concatenated(ob.Transform);
                                     if (isCustom)
                                     {
                                         output.Model.AddElement(customDesk.CreateInstance(transform, null));
@@ -246,8 +307,13 @@ namespace OpenOfficeLayout
                                 else if (cell.Type?.Contains("Forward") ?? false)
                                 {
                                     // output.Model.AddElement(cell.GetCellGeometry());
-                                    var cellGeo = cell.GetCellGeometry() as Polygon;
-                                    var transform = orientationTransform.Concatenated(new Transform(Vector3.Origin, 90)).Concatenated(new Transform(cellGeo.Vertices[1])).Concatenated(ob.Transform);
+
+                                    var transform =
+                                    orientationTransform
+                                        .Concatenated(new Transform(Vector3.Origin, 90))
+                                        .Concatenated(new Transform(cellGeo.Vertices[1]))
+                                        .Concatenated(ob.Transform);
+
                                     // output.Model.AddElement(new ModelCurve(cellGeo, BuiltInMaterials.XAxis));
                                     if (isCustom)
                                     {
@@ -268,7 +334,10 @@ namespace OpenOfficeLayout
                         }
                     }
 
-                    var collabSpaceCells = grid.GetCells().Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true).Select(c => new Profile(c.GetCellGeometry() as Polygon));
+                    var collabSpaceCells = grid.GetCells()
+                        .Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true)
+                        .Select(c => new Profile(c.GetCellGeometry() as Polygon));
+
                     var union = Profile.UnionAll(collabSpaceCells);
                     foreach (var profile in union)
                     {
@@ -286,9 +355,30 @@ namespace OpenOfficeLayout
             model.AddElement(new WorkpointCount() { Count = deskCount, Type = "Desk" });
             var outputWithData = new OpenOfficeLayoutOutputs(deskCount);
             outputWithData.Model = model;
-
             return outputWithData;
         }
+
+        public static IEnumerable<(Vector3, Profile)> GetColumnLocations(Model m)
+        {
+            if (m == null) { throw new Exception("Model provided was null."); }
+            foreach (var ge in m.AllElementsOfType<Column>())
+            {
+                if (!ge.IsElementDefinition)
+                {
+                    yield return (ge.Location, ge.ProfileTransformed());
+                }
+                else
+                {
+                    Vector3 geOrigin = ge.Location;
+                    foreach (var e in m.AllElementsOfType<ElementInstance>().Where(e => e.BaseDefinition == ge))
+                    {
+                        yield return (e.Transform.OfPoint(geOrigin), ge.Profile.Transformed(e.Transform));
+                    }
+                }
+            }
+            yield break;
+        }
+
 
         private static Line FindEdgeAdjacentToCorridor(Polygon perimeter, IEnumerable<Line> corridorSegments)
         {
@@ -320,4 +410,6 @@ namespace OpenOfficeLayout
             return minSeg;
         }
     }
+
+
 }

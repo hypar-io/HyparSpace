@@ -9,6 +9,16 @@
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Structure",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Columns",
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",
