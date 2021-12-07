@@ -47,13 +47,13 @@ namespace WorkplaceMetrics
 		public double ClassroomSeats {get; set;}
 
 		/// <summary>
-		/// The total number of seats in the Phone Booths.
+		/// Total number of Phone booths.
 		/// </summary>
 		[JsonProperty("Phone Booths")]
 		public double PhoneBooths {get; set;}
 
 		/// <summary>
-		/// The total number of seats in open collaborations.
+		/// Total seats in open collaboration areas.
 		/// </summary>
 		[JsonProperty("Collaboration seats")]
 		public double CollaborationSeats {get; set;}

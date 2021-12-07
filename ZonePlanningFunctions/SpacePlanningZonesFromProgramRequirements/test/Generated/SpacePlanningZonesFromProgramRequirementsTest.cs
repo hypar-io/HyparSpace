@@ -18,14 +18,12 @@ namespace SpacePlanningZonesFromProgramRequirements
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/model.json")) },
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Levels/model.json")) },
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Floors/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/6522294b-4246-463b-9d08-633880403d31.json")) }, 
             };
 
             var result = SpacePlanningZonesFromProgramRequirements.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.gltf", false);
+            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.glb");
             File.WriteAllText("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.json", result.Model.ToJson());
         }
@@ -34,13 +32,13910 @@ namespace SpacePlanningZonesFromProgramRequirements
         {
             var inputText = @"
             {
+  ""Default Height"": 4.5719998536960045,
   ""Default Program Assignment"": ""unspecified"",
+  ""Length"": 1,
   ""Corridors"": [],
+  ""Default Aspect Ratio"": 1.8,
+  ""Unplaced Space Location"": {
+    ""X"": 0,
+    ""Y"": 0,
+    ""Z"": 0
+  },
   ""model_input_keys"": {
-    ""Program Requirements"": ""ce590695-7b6f-4272-9792-9ce4dc5f327a_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
-    ""Levels"": ""db65a6bd-bf47-484b-89a4-13c91f5cfbee_2c571838-6789-48e3-819f-edcf448c3085_elements.zip"",
-    ""Floors"": ""b69bc208-5fe1-46a4-b030-fa7fae659385_c3bb78fd-7dee-41cc-ae2e-f1b4b4ae2794_elements.zip""
-  }
+    ""Program Requirements"": ""6522294b-4246-463b-9d08-633880403d31_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip""
+  },
+  ""overrides"": {
+    ""Arrange Spaces"": [
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.08758758633725,
+                0,
+                1,
+                0,
+                -122.71207308433159,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -15.08758758633725,
+            ""Y"": -122.71207308433159,
+            ""Z"": 6.095999804928006
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Googler Store: 1""
+        },
+        ""id"": ""281c485c-47c7-4727-9086-b3f2677171b7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -9.928100625029977,
+                0,
+                1,
+                0,
+                -141.00007308433158,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -9.928100625029977,
+            ""Y"": -141.00007308433158,
+            ""Z"": 0
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Lobby Atrium: 0""
+        },
+        ""id"": ""94ee2a4b-ff7e-4e0f-b4c4-68aead1b7132""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.09102846521991,
+                0,
+                1,
+                0,
+                -260.5942816935023,
+                0,
+                0,
+                1,
+                10.667999658624046
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.09102846521991,
+            ""Y"": -260.5942816935023,
+            ""Z"": 10.667999658624046
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 0""
+        },
+        ""id"": ""abf14eea-6ee3-4f63-9df2-d2ef24f9b30d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.09102846521991,
+                0,
+                1,
+                0,
+                -260.5942816935023,
+                0,
+                0,
+                1,
+                24.383999219712052
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.09102846521991,
+            ""Y"": -260.5942816935023,
+            ""Z"": 24.383999219712052
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 1""
+        },
+        ""id"": ""3e9b36e9-0601-4760-914e-fb84e615c35d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.09102846521991,
+                0,
+                1,
+                0,
+                -260.5942816935023,
+                0,
+                0,
+                1,
+                38.099998780800036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.09102846521991,
+            ""Y"": -260.5942816935023,
+            ""Z"": 38.099998780800036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 2""
+        },
+        ""id"": ""9750db91-0d8e-4a38-9d85-57017f6433d3""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.09102846521991,
+                0,
+                1,
+                0,
+                -260.5942816935023,
+                0,
+                0,
+                1,
+                51.81599834188805
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.09102846521991,
+            ""Y"": -260.5942816935023,
+            ""Z"": 51.81599834188805
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 3""
+        },
+        ""id"": ""00fffdc7-b056-4f4b-b5f2-af321fcc5c5e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.43338557347838,
+                0,
+                1,
+                0,
+                -80.26527920023177,
+                0,
+                0,
+                1,
+                10.667999658623994
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.43338557347838,
+            ""Y"": -80.26527920023177,
+            ""Z"": 10.667999658623994
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 4""
+        },
+        ""id"": ""b13d8555-7d84-4517-a7dc-fcc71d68f384""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.570160348891264,
+                0,
+                1,
+                0,
+                -171.67124353356022,
+                0,
+                0,
+                1,
+                10.667999658623964
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.570160348891264,
+            ""Y"": -171.67124353356022,
+            ""Z"": 10.667999658623964
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 0""
+        },
+        ""id"": ""2085769f-4d53-4adb-a093-890c0c7ae675""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.152477663879534,
+                0,
+                1,
+                0,
+                -172.1855943265707,
+                0,
+                0,
+                1,
+                24.383999219712052
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.152477663879534,
+            ""Y"": -172.1855943265707,
+            ""Z"": 24.383999219712052
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 1""
+        },
+        ""id"": ""a8a3c246-d718-479b-bb0c-0e4b9112de54""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.152477663879534,
+                0,
+                1,
+                0,
+                -172.1855943265707,
+                0,
+                0,
+                1,
+                38.09999878080008
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.152477663879534,
+            ""Y"": -172.1855943265707,
+            ""Z"": 38.09999878080008
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 2""
+        },
+        ""id"": ""4c33dd1a-6b4b-4862-a1a0-1f4c7e5f0fec""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.152477663879534,
+                0,
+                1,
+                0,
+                -172.1855943265707,
+                0,
+                0,
+                1,
+                51.81599834188815
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.152477663879534,
+            ""Y"": -172.1855943265707,
+            ""Z"": 51.81599834188815
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 3""
+        },
+        ""id"": ""4925f522-9a11-4da1-bc4d-cbd6f8880214""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.25914817037157,
+                0,
+                1,
+                0,
+                -171.63543431993054,
+                0,
+                0,
+                1,
+                28.955999073408037
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.25914817037157,
+            ""Y"": -171.63543431993054,
+            ""Z"": 28.955999073408037
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 4""
+        },
+        ""id"": ""1afc84fb-a81f-423c-8b96-1599787547c6""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.3006637654084,
+                0,
+                1,
+                0,
+                -18.427489167409504,
+                0,
+                0,
+                1,
+                10.66799965862401
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.3006637654084,
+            ""Y"": -18.427489167409504,
+            ""Z"": 10.66799965862401
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 0""
+        },
+        ""id"": ""744e7c3a-6280-4488-b879-6394d55c6585""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.43338557347838,
+                0,
+                1,
+                0,
+                -80.26527920023177,
+                0,
+                0,
+                1,
+                24.383999219712052
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.43338557347838,
+            ""Y"": -80.26527920023177,
+            ""Z"": 24.383999219712052
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 1""
+        },
+        ""id"": ""2e78ccb4-1053-48e1-8d61-37f74aea59d0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.43338557347838,
+                0,
+                1,
+                0,
+                -80.26527920023177,
+                0,
+                0,
+                1,
+                38.099998780800036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.43338557347838,
+            ""Y"": -80.26527920023177,
+            ""Z"": 38.099998780800036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 2""
+        },
+        ""id"": ""dd0dbcfa-5a06-4b34-abfe-f2b8db97f102""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.43338557347838,
+                0,
+                1,
+                0,
+                -80.26527920023177,
+                0,
+                0,
+                1,
+                51.81599834188805
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.43338557347838,
+            ""Y"": -80.26527920023177,
+            ""Z"": 51.81599834188805
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 3""
+        },
+        ""id"": ""7a2f7449-8a99-4332-b651-9ee3ef6e760d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                64.29831580639996,
+                0,
+                1,
+                0,
+                -147.54454557166213,
+                0,
+                0,
+                1,
+                -3.019806626980426E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": 64.29831580639996,
+            ""Y"": -147.54454557166213,
+            ""Z"": -3.019806626980426E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Footprint: 0""
+        },
+        ""id"": ""264af53e-b6a7-4caf-a047-09139f7d3ae2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                60.22304078294474,
+                0,
+                1,
+                0,
+                -159.65365597692227,
+                0,
+                0,
+                1,
+                3.1280533718813786E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": 60.22304078294474,
+            ""Y"": -159.65365597692227,
+            ""Z"": 3.1280533718813786E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""guide blocks: 0""
+        },
+        ""id"": ""be41b023-f17d-4570-b37d-d1d0aa0f22f3""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.08545895201587,
+                0,
+                1,
+                0,
+                -272.8984476759395,
+                0,
+                0,
+                1,
+                18.287999414784004
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -12.08545895201587,
+            ""Y"": -272.8984476759395,
+            ""Z"": 18.287999414784004
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 1 Meandering Ramp Loss Factor: 0""
+        },
+        ""id"": ""5d8efa8b-9d10-4533-9e0b-802fedd1dc16""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                17.11395573307564,
+                0,
+                1,
+                0,
+                -150.40505541062998,
+                0,
+                0,
+                1,
+                18.28799941478399
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": 17.11395573307564,
+            ""Y"": -150.40505541062998,
+            ""Z"": 18.28799941478399
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 1 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""67451a62-e091-4ddd-b746-86fead4af19e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.15786199044883,
+                0,
+                1,
+                0,
+                -73.28914807336392,
+                0,
+                0,
+                1,
+                18.287999414784
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.15786199044883,
+            ""Y"": -73.28914807336392,
+            ""Z"": 18.287999414784
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 1 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""9e8f3769-d18c-4c01-9abf-a4c6014d5433""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.2158287834398562,
+                0,
+                1,
+                0,
+                -255.04128275484808,
+                0,
+                0,
+                1,
+                -2.220446049250313E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -1.2158287834398562,
+            ""Y"": -255.04128275484808,
+            ""Z"": -2.220446049250313E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 3 Meandering Ramp Loss Factor: 0""
+        },
+        ""id"": ""18de9302-b56e-4229-bc4a-ec68ecfee0fd""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                19.715822457497516,
+                0,
+                1,
+                0,
+                -116.34939778549993,
+                0,
+                0,
+                1,
+                21.335999317248028
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": 19.715822457497516,
+            ""Y"": -116.34939778549993,
+            ""Z"": 21.335999317248028
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 3 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""c0c289bf-f7ea-4b72-85bc-800ee230899b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.175353383028144,
+                0,
+                1,
+                0,
+                -41.48272980967817,
+                0,
+                0,
+                1,
+                21.33599931724801
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.175353383028144,
+            ""Y"": -41.48272980967817,
+            ""Z"": 21.33599931724801
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 3 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""378e2f9d-5dd2-4c0c-a2be-78b28b884c29""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.024272651330655,
+                0,
+                1,
+                0,
+                -196.89056715652586,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.024272651330655,
+            ""Y"": -196.89056715652586,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 0""
+        },
+        ""id"": ""13051694-0a17-4f24-a306-80739a88880d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -41.258752847489355,
+                0,
+                1,
+                0,
+                -103.43376481470516,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -41.258752847489355,
+            ""Y"": -103.43376481470516,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 1""
+        },
+        ""id"": ""0cb61d6c-11d0-4f79-9b35-80e27c1a7dc8""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -41.258752847489355,
+                0,
+                1,
+                0,
+                -103.43376481470516,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -41.258752847489355,
+            ""Y"": -103.43376481470516,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 2""
+        },
+        ""id"": ""bc7cb2da-578a-45f6-8c95-2fec80f2a126""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -40.88011048802734,
+                0,
+                1,
+                0,
+                -3.442563497655639,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -40.88011048802734,
+            ""Y"": -3.442563497655639,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 3""
+        },
+        ""id"": ""d3df9aca-0dbb-4094-a41e-9aab36fdfd0a""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -40.88011048802734,
+                0,
+                1,
+                0,
+                -3.442563497655639,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -40.88011048802734,
+            ""Y"": -3.442563497655639,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 4""
+        },
+        ""id"": ""2934c1d2-f612-4fbb-9300-4a3eee3a7ef7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.024272651330655,
+                0,
+                1,
+                0,
+                -196.89056715652586,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.024272651330655,
+            ""Y"": -196.89056715652586,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 5""
+        },
+        ""id"": ""6d53c4d5-bcc1-4332-bb88-2577d929586c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.024272651330655,
+                0,
+                1,
+                0,
+                -196.89056715652586,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.024272651330655,
+            ""Y"": -196.89056715652586,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 6""
+        },
+        ""id"": ""356159cc-8840-4a4b-bb97-b08c359d168e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -40.88011048802734,
+                0,
+                1,
+                0,
+                -3.442563497655639,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -40.88011048802734,
+            ""Y"": -3.442563497655639,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 7""
+        },
+        ""id"": ""8478b6fb-5b31-4906-b190-c14ddd8196cc""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -41.258752847489355,
+                0,
+                1,
+                0,
+                -103.43376481470516,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -41.258752847489355,
+            ""Y"": -103.43376481470516,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Exterior Communicating Stair Loss Factor: 8""
+        },
+        ""id"": ""5fcf2c65-b813-4962-bba4-c9257e190c1d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                6.622371306274323,
+                0,
+                1,
+                0,
+                -192.2832197141233,
+                0,
+                0,
+                1,
+                2.1316282072803006E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": 6.622371306274323,
+            ""Y"": -192.2832197141233,
+            ""Z"": 2.1316282072803006E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Test Program 1: 0""
+        },
+        ""id"": ""7747b8e6-244e-4d20-8d35-048e57a1b823""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -42.655464593915475,
+                0,
+                1,
+                0,
+                -247.14415088835673,
+                0,
+                0,
+                1,
+                7.238654120556021E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -42.655464593915475,
+            ""Y"": -247.14415088835673,
+            ""Z"": 7.238654120556021E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Building Floor Plate: 0""
+        },
+        ""id"": ""7223f1c7-100b-49c3-bb7d-754e78d66cfa""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.86854596233723,
+                0,
+                1,
+                0,
+                -156.72340818494,
+                0,
+                0,
+                1,
+                4.9960036108132044E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.86854596233723,
+            ""Y"": -156.72340818494,
+            ""Z"": 4.9960036108132044E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Building Floor Plate: 1""
+        },
+        ""id"": ""7aacc20f-be68-4daa-abbb-12feb8ec3f2c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -40.53623342084209,
+                0,
+                1,
+                0,
+                -57.009992990949556,
+                0,
+                0,
+                1,
+                1.3100631690576847E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -40.53623342084209,
+            ""Y"": -57.009992990949556,
+            ""Z"": 1.3100631690576847E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Building Floor Plate: 2""
+        },
+        ""id"": ""ae6640bc-48de-4ee6-b571-1c51e36ef86d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.498853318425319,
+                0,
+                1,
+                0,
+                -75.64589939202054,
+                0,
+                0,
+                1,
+                68.57999780544007
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.498853318425319,
+            ""Y"": -75.64589939202054,
+            ""Z"": 68.57999780544007
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe: 0""
+        },
+        ""id"": ""b85997fb-64e5-4b15-9566-af8dfd759bb7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -17.78506758633719,
+                0,
+                1,
+                0,
+                -219.5063304755143,
+                0,
+                0,
+                1,
+                12.191999609856012
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -17.78506758633719,
+            ""Y"": -219.5063304755143,
+            ""Z"": 12.191999609856012
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe: 1""
+        },
+        ""id"": ""029fb7da-f62e-4e3e-a134-8be621f7d9e0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.861917465305,
+                0,
+                1,
+                0,
+                -209.75792885576098,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.861917465305,
+            ""Y"": -209.75792885576098,
+            ""Z"": 50.291998390656055
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe: 0""
+        },
+        ""id"": ""09cb4949-35c5-431a-9db4-2c7beb317bae""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.498853318425319,
+                0,
+                1,
+                0,
+                -85.74184402294371,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.498853318425319,
+            ""Y"": -85.74184402294371,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe: 1""
+        },
+        ""id"": ""430b8c6a-4bec-4846-9bda-cb273f94200d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -2.4333452386640957,
+                0,
+                1,
+                0,
+                -177.57607308433163,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -2.4333452386640957,
+            ""Y"": -177.57607308433163,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 0""
+        },
+        ""id"": ""bead2382-ecdd-4dcc-9c23-bf552f05248b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.538149408323383,
+                0,
+                1,
+                0,
+                -210.90258305406348,
+                0,
+                0,
+                1,
+                36.57599882956794
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -10.538149408323383,
+            ""Y"": -210.90258305406348,
+            ""Z"": 36.57599882956794
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 1""
+        },
+        ""id"": ""5f3597bc-f66a-4b3e-8585-5a369ccd18e1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.167917399753513,
+                0,
+                1,
+                0,
+                -231.47749313844147,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -24.167917399753513,
+            ""Y"": -231.47749313844147,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 2""
+        },
+        ""id"": ""b4cc481a-900f-4e7e-9892-35f9c735c339""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.115110767529467,
+                0,
+                1,
+                0,
+                -92.0812894943557,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -12.115110767529467,
+            ""Y"": -92.0812894943557,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 3""
+        },
+        ""id"": ""5e48cd89-fd29-43da-a0f3-3b294f60e515""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.115110767529467,
+                0,
+                1,
+                0,
+                -92.0812894943557,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -12.115110767529467,
+            ""Y"": -92.0812894943557,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 4""
+        },
+        ""id"": ""c2a86bfe-a164-4f8d-8585-77245b5c4a13""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -26.92906758633719,
+                0,
+                1,
+                0,
+                -228.5470855213064,
+                0,
+                0,
+                1,
+                68.57999780544007
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -26.92906758633719,
+            ""Y"": -228.5470855213064,
+            ""Z"": 68.57999780544007
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 5""
+        },
+        ""id"": ""e841f3cf-864d-4e27-ad94-c0057c7ceda1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.343500831859096,
+                0,
+                1,
+                0,
+                -87.89735405782739,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.343500831859096,
+            ""Y"": -87.89735405782739,
+            ""Z"": 32.00399897587203
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 0""
+        },
+        ""id"": ""b8416974-d468-4482-a3a8-953301edefa7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.01738562658448,
+                0,
+                1,
+                0,
+                -205.03981540505322,
+                0,
+                0,
+                1,
+                64.00799795174403
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -54.01738562658448,
+            ""Y"": -205.03981540505322,
+            ""Z"": 64.00799795174403
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 1""
+        },
+        ""id"": ""e57d3e51-08fb-4f6e-be78-6d2140b9d25d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.01738562658448,
+                0,
+                1,
+                0,
+                -205.03981540505322,
+                0,
+                0,
+                1,
+                45.71999853696002
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -54.01738562658448,
+            ""Y"": -205.03981540505322,
+            ""Z"": 45.71999853696002
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 2""
+        },
+        ""id"": ""0b52e8fc-b4cb-4e2e-885f-93ebaef5395f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.30090979243202,
+                0,
+                1,
+                0,
+                -11.972135342964288,
+                0,
+                0,
+                1,
+                18.287999414784103
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.30090979243202,
+            ""Y"": -11.972135342964288,
+            ""Z"": 18.287999414784103
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 3""
+        },
+        ""id"": ""d3f12afd-c44f-4415-ade7-91612391740e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -45.58282758633708,
+                0,
+                1,
+                0,
+                -90.47947308433152,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -45.58282758633708,
+            ""Y"": -90.47947308433152,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 4""
+        },
+        ""id"": ""c60a76b9-17e1-41c8-b152-3cfb31ba8ef0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -36.43882758633702,
+                0,
+                1,
+                0,
+                -41.959879421772506,
+                0,
+                0,
+                1,
+                -2.627342787775433E-13
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -36.43882758633702,
+            ""Y"": -41.959879421772506,
+            ""Z"": -2.627342787775433E-13
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 1: 0""
+        },
+        ""id"": ""daf168b9-fca7-4190-93c9-fc787eaa0464""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -36.43882758633708,
+                0,
+                1,
+                0,
+                -145.83996460882952,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -36.43882758633708,
+            ""Y"": -145.83996460882952,
+            ""Z"": 0
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 2: 0""
+        },
+        ""id"": ""0493d5d8-abc0-4e87-8b18-64a4aca8c9a2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -44.673866436440186,
+                0,
+                1,
+                0,
+                -237.70819262945614,
+                0,
+                0,
+                1,
+                7.37188088351104E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -44.673866436440186,
+            ""Y"": -237.70819262945614,
+            ""Z"": 7.37188088351104E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 3: 0""
+        },
+        ""id"": ""fd26f94b-e3ca-4750-8dbc-e3497b700f30""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.726827586337,
+                0,
+                1,
+                0,
+                -35.615473084331484,
+                0,
+                0,
+                1,
+                -2.930988785010413E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -54.726827586337,
+            ""Y"": -35.615473084331484,
+            ""Z"": -2.930988785010413E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Regional Events Studio: 0""
+        },
+        ""id"": ""b632636a-5a3d-4080-adc5-425e71a0ece7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -11.283889059211504,
+                0,
+                1,
+                0,
+                -168.20599392434514,
+                0,
+                0,
+                1,
+                6.095999804927986
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -11.283889059211504,
+            ""Y"": -168.20599392434514,
+            ""Z"": 6.095999804927986
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 0""
+        },
+        ""id"": ""ebc3db78-395f-4286-ba49-221ef15add3e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.0060301756019001,
+                0,
+                1,
+                0,
+                -122.71207308433164,
+                0,
+                0,
+                1,
+                -8.959499808725013E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -1.0060301756019001,
+            ""Y"": -122.71207308433164,
+            ""Z"": -8.959499808725013E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 1""
+        },
+        ""id"": ""11be8809-ebda-4df4-b05a-887e003a42a7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -33.37558758633723,
+                0,
+                1,
+                0,
+                -115.96828273763442,
+                0,
+                0,
+                1,
+                2.028377465990161E-13
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -33.37558758633723,
+            ""Y"": -115.96828273763442,
+            ""Z"": 2.028377465990161E-13
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 2""
+        },
+        ""id"": ""a1082bed-5681-4b7e-8b5f-0e24e56341b7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.231587586337334,
+                0,
+                1,
+                0,
+                -174.01996937525354,
+                0,
+                0,
+                1,
+                1.2434497875801753E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -24.231587586337334,
+            ""Y"": -174.01996937525354,
+            ""Z"": 1.2434497875801753E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 3""
+        },
+        ""id"": ""5793bc66-6dc7-4a33-8d4f-fe8fe78cf5f7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -31.78618885682679,
+                0,
+                1,
+                0,
+                -237.7081926294561,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -31.78618885682679,
+            ""Y"": -237.7081926294561,
+            ""Z"": 0
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 4""
+        },
+        ""id"": ""297c232e-371b-4af1-a935-905de0d59d9d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -34.871879250036514,
+                0,
+                1,
+                0,
+                -266.6331144463999,
+                0,
+                0,
+                1,
+                6.095999804927974
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -34.871879250036514,
+            ""Y"": -266.6331144463999,
+            ""Z"": 6.095999804927974
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 5""
+        },
+        ""id"": ""6d0444ef-fd79-4525-8e1d-9ead67c42da9""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -33.37558758633723,
+                0,
+                1,
+                0,
+                -115.96828273763442,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -33.37558758633723,
+            ""Y"": -115.96828273763442,
+            ""Z"": 6.095999804928006
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 6""
+        },
+        ""id"": ""d1780dc4-2599-4bb8-9989-596dd59fdf8f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.0060301756019001,
+                0,
+                1,
+                0,
+                -122.71207308433164,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -1.0060301756019001,
+            ""Y"": -122.71207308433164,
+            ""Z"": 6.095999804928006
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 7""
+        },
+        ""id"": ""4d909008-05ee-41b7-bea1-12f14792783f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.08758758633725,
+                0,
+                1,
+                0,
+                -122.71207308433159,
+                0,
+                0,
+                1,
+                3.808064974464287E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -15.08758758633725,
+            ""Y"": -122.71207308433159,
+            ""Z"": 3.808064974464287E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Googler Store: 0""
+        },
+        ""id"": ""9473eb2d-a519-48e7-9dcb-de2a8d7715fc""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.087341552795728,
+                0,
+                1,
+                0,
+                -141.00007308433158,
+                0,
+                0,
+                1,
+                7.593925488436071E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -10.087341552795728,
+            ""Y"": -141.00007308433158,
+            ""Z"": 7.593925488436071E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Lobby: 0""
+        },
+        ""id"": ""13b114dc-e0f7-415d-8933-530cc0019b58""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                -5.911937606128959E-14
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -56.16783135123133,
+            ""Y"": -145.63743163348408,
+            ""Z"": -5.911937606128959E-14
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 0""
+        },
+        ""id"": ""3a7bd7e6-db13-44be-8ead-8a0da3f5a6ac""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -58.56203903930982,
+                0,
+                1,
+                0,
+                -228.54708552130631,
+                0,
+                0,
+                1,
+                0
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -58.56203903930982,
+            ""Y"": -228.54708552130631,
+            ""Z"": 0
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 1""
+        },
+        ""id"": ""88bf6a8a-b1ce-4f9c-b7c0-f1d8c3154894""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -56.16783135123133,
+            ""Y"": -145.63743163348408,
+            ""Z"": 6.095999804928006
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 2""
+        },
+        ""id"": ""8fde3d6b-466a-49c8-aa42-43c8ea30a46b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -58.56203903930982,
+                0,
+                1,
+                0,
+                -228.54708552130631,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -58.56203903930982,
+            ""Y"": -228.54708552130631,
+            ""Z"": 6.095999804928006
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 3""
+        },
+        ""id"": ""8b719791-7a68-43fa-90d4-48610bc7ab35""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -20.345661622368674,
+                0,
+                1,
+                0,
+                -141.00007308433155,
+                0,
+                0,
+                1,
+                68.57999780544007
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -20.345661622368674,
+            ""Y"": -141.00007308433155,
+            ""Z"": 68.57999780544007
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Executive Lobby: 0""
+        },
+        ""id"": ""b5f82583-3feb-4560-9208-027d42ee4f18""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                6.095999804928043
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -37.77937765252439,
+            ""Y"": -84.27822550851332,
+            ""Z"": 6.095999804928043
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 0""
+        },
+        ""id"": ""efbd8a80-130b-428a-99ab-1056d239573c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.211491614818186,
+                0,
+                1,
+                0,
+                -88.9657380572025,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -24.211491614818186,
+            ""Y"": -88.9657380572025,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 1""
+        },
+        ""id"": ""fd1524b5-9ea6-4777-82b5-da1e508d91f4""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.092655834752644,
+                0,
+                1,
+                0,
+                -45.88748024024033,
+                0,
+                0,
+                1,
+                12.191999609855907
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -12.092655834752644,
+            ""Y"": -45.88748024024033,
+            ""Z"": 12.191999609855907
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 2""
+        },
+        ""id"": ""4895c7b1-7f80-44fc-8170-97cb6c39b8cf""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.943587586337331,
+                0,
+                1,
+                0,
+                -168.4320730843316,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -5.943587586337331,
+            ""Y"": -168.4320730843316,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 3""
+        },
+        ""id"": ""8c55113c-a739-4af2-838d-4948f3fad276""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.768527027357585,
+                0,
+                1,
+                0,
+                -61.2594508081887,
+                0,
+                0,
+                1,
+                6.095999804927966
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.768527027357585,
+            ""Y"": -61.2594508081887,
+            ""Z"": 6.095999804927966
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 0""
+        },
+        ""id"": ""0e8d9375-479f-4322-a4b0-de83b9d69672""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -39.31538750147472,
+                0,
+                1,
+                0,
+                -7.767860546741357,
+                0,
+                0,
+                1,
+                12.191999609855953
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -39.31538750147472,
+            ""Y"": -7.767860546741357,
+            ""Z"": 12.191999609855953
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 1""
+        },
+        ""id"": ""35c23f07-f113-4c00-bd41-fcc31b7bb2a1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.94358758633723,
+                0,
+                1,
+                0,
+                -115.99437357874743,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -5.94358758633723,
+            ""Y"": -115.99437357874743,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 2""
+        },
+        ""id"": ""44abd9c1-e29e-411b-94ff-4db700afbede""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -7.3647387250150365,
+                0,
+                1,
+                0,
+                -53.75326387466117,
+                0,
+                0,
+                1,
+                18.287999414783947
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -7.3647387250150365,
+            ""Y"": -53.75326387466117,
+            ""Z"": 18.287999414783947
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 3""
+        },
+        ""id"": ""e5c90f57-b5a2-41ce-8ca5-f8d3e62768e7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.802557662536582,
+                0,
+                1,
+                0,
+                -48.91328661083295,
+                0,
+                0,
+                1,
+                6.095999804928049
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.802557662536582,
+            ""Y"": -48.91328661083295,
+            ""Z"": 6.095999804928049
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 0""
+        },
+        ""id"": ""e29f4332-ce8b-47bd-8a40-192ea349e2fa""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -19.061939417838783,
+                0,
+                1,
+                0,
+                -86.50401973645188,
+                0,
+                0,
+                1,
+                12.191999609856
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -19.061939417838783,
+            ""Y"": -86.50401973645188,
+            ""Z"": 12.191999609856
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 1""
+        },
+        ""id"": ""2bfba594-a6c3-4b3e-b0ef-09a6c81c0c7e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.314979061012856,
+                0,
+                1,
+                0,
+                -113.56807308433159,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -12.314979061012856,
+            ""Y"": -113.56807308433159,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 2""
+        },
+        ""id"": ""a7ec26b9-97fb-4bae-bd58-f78182331dd1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.46758573305091,
+                0,
+                1,
+                0,
+                -42.737322501125156,
+                0,
+                0,
+                1,
+                18.287999414784036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.46758573305091,
+            ""Y"": -42.737322501125156,
+            ""Z"": 18.287999414784036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 3""
+        },
+        ""id"": ""7d9658e5-f961-4903-ba39-85f78ad291fa""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.322924109492121,
+                0,
+                1,
+                0,
+                -85.36107791252863,
+                0,
+                0,
+                1,
+                6.09599980492805
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -5.322924109492121,
+            ""Y"": -85.36107791252863,
+            ""Z"": 6.09599980492805
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 0""
+        },
+        ""id"": ""31dd1d25-24ba-42d9-9767-21abe34b24a0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.55705854051801,
+                0,
+                1,
+                0,
+                -68.30276046921145,
+                0,
+                0,
+                1,
+                12.191999609855962
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -16.55705854051801,
+            ""Y"": -68.30276046921145,
+            ""Z"": 12.191999609855962
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 1""
+        },
+        ""id"": ""504c1169-dbba-4de8-b0ca-bb45325a4954""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.69435542934758,
+                0,
+                1,
+                0,
+                -131.85607308433146,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.69435542934758,
+            ""Y"": -131.85607308433146,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 2""
+        },
+        ""id"": ""d6246e5b-a0fa-4696-b030-e129daf5ad25""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.19027940598974,
+                0,
+                1,
+                0,
+                -82.78372456248015,
+                0,
+                0,
+                1,
+                18.287999414784046
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.19027940598974,
+            ""Y"": -82.78372456248015,
+            ""Z"": 18.287999414784046
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 3""
+        },
+        ""id"": ""de464cc5-d4a8-49be-936f-4901ee7fca5f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -46.18920749298616,
+                0,
+                1,
+                0,
+                -87.55769480649194,
+                0,
+                0,
+                1,
+                22.85999926848001
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -46.18920749298616,
+            ""Y"": -87.55769480649194,
+            ""Z"": 22.85999926848001
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 0""
+        },
+        ""id"": ""b11dc9b5-8941-42f3-83d5-0f51da3e9f0d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -27.58958618512441,
+                0,
+                1,
+                0,
+                -81.72730440554858,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -27.58958618512441,
+            ""Y"": -81.72730440554858,
+            ""Z"": 32.00399897587203
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 1""
+        },
+        ""id"": ""60240f63-d1c5-4275-8b0e-921204b8c943""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -37.77937765252439,
+            ""Y"": -84.27822550851332,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 2""
+        },
+        ""id"": ""5029fea1-cc82-468f-b233-e14293018e3c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -37.77937765252439,
+            ""Y"": -84.27822550851332,
+            ""Z"": 50.291998390656055
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 3""
+        },
+        ""id"": ""0d509a77-a759-4ce4-8435-e1a31af3dd60""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -37.77937765252439,
+            ""Y"": -84.27822550851332,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 4""
+        },
+        ""id"": ""4098cabe-2eb3-4487-b9d9-6f2f02f24233""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -27.816203258937378,
+                0,
+                1,
+                0,
+                -84.89762934347449,
+                0,
+                0,
+                1,
+                68.57999780544007
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -27.816203258937378,
+            ""Y"": -84.89762934347449,
+            ""Z"": 68.57999780544007
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 5""
+        },
+        ""id"": ""28bc9a11-63a0-4f97-afb0-3cc2106fa034""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -47.83352804442133,
+                0,
+                1,
+                0,
+                -174.88114857322623,
+                0,
+                0,
+                1,
+                12.191999609856012
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -47.83352804442133,
+            ""Y"": -174.88114857322623,
+            ""Z"": 12.191999609856012
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Center: 0""
+        },
+        ""id"": ""49aad653-2f67-49a1-b0a8-1821fd1833ef""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.024849765443705,
+                0,
+                1,
+                0,
+                -159.28807308433142,
+                0,
+                0,
+                1,
+                12.191999609856012
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -56.024849765443705,
+            ""Y"": -159.28807308433142,
+            ""Z"": 12.191999609856012
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Massage Rooms: 0""
+        },
+        ""id"": ""1e6327b5-7d7e-4347-b64f-03ea1c42150b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -57.74722210362757,
+                0,
+                1,
+                0,
+                -177.87123876853278,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -57.74722210362757,
+            ""Y"": -177.87123876853278,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Massage Rooms: 1""
+        },
+        ""id"": ""12b50340-0e20-463e-a413-5b5a8a7745eb""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.583736096942445,
+                0,
+                1,
+                0,
+                -127.83860370698949,
+                0,
+                0,
+                1,
+                12.191999609856012
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.583736096942445,
+            ""Y"": -127.83860370698949,
+            ""Z"": 12.191999609856012
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 0""
+        },
+        ""id"": ""19bac077-372c-4819-be08-eb5f44b6c01f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.957809044709656,
+                0,
+                1,
+                0,
+                -150.1440730843315,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.957809044709656,
+            ""Y"": -150.1440730843315,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 1""
+        },
+        ""id"": ""8de98efe-a4b9-4820-99c4-2bb129d16e60""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -59.05790936956206,
+                0,
+                1,
+                0,
+                -148.39439486755535,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -59.05790936956206,
+            ""Y"": -148.39439486755535,
+            ""Z"": 50.291998390656055
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 2""
+        },
+        ""id"": ""1c6d11dc-3539-47f7-b4c6-274c387c40f7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -46.06407178880768,
+                0,
+                1,
+                0,
+                -271.94905118529323,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -46.06407178880768,
+            ""Y"": -271.94905118529323,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Hub: 0""
+        },
+        ""id"": ""abc09a65-49ad-41cd-856c-d01c3aaf03df""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.232959364391924,
+                0,
+                1,
+                0,
+                -49.958931308909364,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -55.232959364391924,
+            ""Y"": -49.958931308909364,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 0""
+        },
+        ""id"": ""33fa9411-3635-4f79-9370-12c2b117f6a0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -56.16783135123133,
+            ""Y"": -145.63743163348408,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 1""
+        },
+        ""id"": ""f82b3869-75ca-4aa9-a9e8-f6f7e8977c81""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.40959421637369,
+                0,
+                1,
+                0,
+                -210.2219579720235,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -54.40959421637369,
+            ""Y"": -210.2219579720235,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 2""
+        },
+        ""id"": ""13e58022-3fcc-4d13-b871-7306383af81a""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -20.198557565382725,
+                0,
+                1,
+                0,
+                -180.58026675339426,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -20.198557565382725,
+            ""Y"": -180.58026675339426,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 0""
+        },
+        ""id"": ""8665f0f2-ff86-486b-93e1-160bd30349ff""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.82173958960364,
+                0,
+                1,
+                0,
+                -169.79391974557265,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.82173958960364,
+            ""Y"": -169.79391974557265,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 1""
+        },
+        ""id"": ""1bdd8f50-e75d-4df4-bb15-be3d1e8f0137""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.75846907189654,
+                0,
+                1,
+                0,
+                -95.97638455901712,
+                0,
+                0,
+                1,
+                36.575998829568036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.75846907189654,
+            ""Y"": -95.97638455901712,
+            ""Z"": 36.575998829568036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 2""
+        },
+        ""id"": ""1c67f11f-b898-4c05-aa3a-adba051090cd""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -36.5510815075222,
+                0,
+                1,
+                0,
+                -216.7499661120799,
+                0,
+                0,
+                1,
+                45.71999853696005
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -36.5510815075222,
+            ""Y"": -216.7499661120799,
+            ""Z"": 45.71999853696005
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 3""
+        },
+        ""id"": ""0dc9eb39-34f1-4a03-b208-3a470cde2e64""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.182536227570886,
+                0,
+                1,
+                0,
+                -169.91914682678973,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.182536227570886,
+            ""Y"": -169.91914682678973,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 4""
+        },
+        ""id"": ""82fcec6b-2348-48af-91b4-93027bcf2bb6""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.75846907189654,
+                0,
+                1,
+                0,
+                -95.97638455901712,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.75846907189654,
+            ""Y"": -95.97638455901712,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 5""
+        },
+        ""id"": ""08105b40-3175-4f42-b1f3-b4905a88611c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 0""
+        },
+        ""id"": ""1f8be691-7ae5-4198-b117-a11211abcc08""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -30.80125809827949,
+                0,
+                1,
+                0,
+                -176.1183287132045,
+                0,
+                0,
+                1,
+                32.00399897587209
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -30.80125809827949,
+            ""Y"": -176.1183287132045,
+            ""Z"": 32.00399897587209
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 1""
+        },
+        ""id"": ""c0e279a7-f218-46eb-b6f4-a43ed17862c9""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.91227275462951,
+                0,
+                1,
+                0,
+                -71.51194818533041,
+                0,
+                0,
+                1,
+                36.575998829567986
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.91227275462951,
+            ""Y"": -71.51194818533041,
+            ""Z"": 36.575998829567986
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 2""
+        },
+        ""id"": ""62f21b0b-bff8-45fc-863f-b7787a4675d2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 3""
+        },
+        ""id"": ""89a70c54-f202-414d-aff0-01e01b501176""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -42.973904468094275,
+                0,
+                1,
+                0,
+                -172.1110394246469,
+                0,
+                0,
+                1,
+                45.71999853696005
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -42.973904468094275,
+            ""Y"": -172.1110394246469,
+            ""Z"": 45.71999853696005
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 4""
+        },
+        ""id"": ""373009ff-3c09-4c8e-aae9-ce5912e759f0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.14813664334016,
+                0,
+                1,
+                0,
+                -81.06458007040854,
+                0,
+                0,
+                1,
+                50.291998390656126
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.14813664334016,
+            ""Y"": -81.06458007040854,
+            ""Z"": 50.291998390656126
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 5""
+        },
+        ""id"": ""477e712c-afb3-476e-b4a7-e60fe84cc53a""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 6""
+        },
+        ""id"": ""0be324bc-8fd2-4c9f-b175-79149726bf25""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.30317789262018,
+                0,
+                1,
+                0,
+                -174.12761388217226,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.30317789262018,
+            ""Y"": -174.12761388217226,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 7""
+        },
+        ""id"": ""188eaca4-0da9-43c8-a7f7-e3f019ac94da""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.91227275462951,
+                0,
+                1,
+                0,
+                -71.51194818533041,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.91227275462951,
+            ""Y"": -71.51194818533041,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 8""
+        },
+        ""id"": ""6822a513-f260-4940-9e56-b1daea4c7aa9""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -8.271439281865849,
+                0,
+                1,
+                0,
+                -139.98322776566917,
+                0,
+                0,
+                1,
+                6.095999804928055
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -8.271439281865849,
+            ""Y"": -139.98322776566917,
+            ""Z"": 6.095999804928055
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Atrium Loss Factor: 0""
+        },
+        ""id"": ""38f66aa2-dbed-4999-9ef5-67fb64b0efc3""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.058007992654363,
+                0,
+                1,
+                0,
+                -140.73479723784644,
+                0,
+                0,
+                1,
+                12.191999609856065
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -5.058007992654363,
+            ""Y"": -140.73479723784644,
+            ""Z"": 12.191999609856065
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Atrium Loss Factor: 1""
+        },
+        ""id"": ""f9d7dc91-9733-4534-aa46-a4e983bbd7de""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                41.14799868326404
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 41.14799868326404
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 0""
+        },
+        ""id"": ""f372a671-e3b2-4b35-a8a9-060d6691db67""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                54.863998244352054
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 54.863998244352054
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 1""
+        },
+        ""id"": ""61cab589-385e-4125-b2b1-1722cea6fbae""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                36.575998829567915
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 36.575998829567915
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 2""
+        },
+        ""id"": ""ef01d090-20a0-4f48-a90b-6dc3f279fbf2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 32.00399897587203
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 3""
+        },
+        ""id"": ""72dcafbb-25b6-4bec-9a6a-b3663b2ed8bb""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.37300514285213,
+                0,
+                1,
+                0,
+                -11.021027430674954,
+                0,
+                0,
+                1,
+                18.28799941478408
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.37300514285213,
+            ""Y"": -11.021027430674954,
+            ""Z"": 18.28799941478408
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 4""
+        },
+        ""id"": ""d3a2f04b-5e52-4363-a574-ec1852024f90""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                18.287999414784085
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 18.287999414784085
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 5""
+        },
+        ""id"": ""3e2bd06e-b8a7-40b3-8588-d605b2128f3b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                36.575998829568036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 36.575998829568036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 6""
+        },
+        ""id"": ""089c2358-5c71-44e8-8c8e-ec4ba8dfc732""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                45.71999853696002
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 45.71999853696002
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 7""
+        },
+        ""id"": ""18c7299c-0883-4f98-b29c-4fe0344b69d4""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                36.57599882956794
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 36.57599882956794
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 8""
+        },
+        ""id"": ""6158335f-0b1b-4094-bbea-f1e4ceffa4f6""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                41.147998683264014
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 41.147998683264014
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 9""
+        },
+        ""id"": ""48a107b0-76c8-4f20-8739-ed5b8c4a295e""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 10""
+        },
+        ""id"": ""ed331284-f0c5-4f02-a3ca-9393715aa0f1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                45.71999853696005
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 45.71999853696005
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 11""
+        },
+        ""id"": ""70dc8e67-a43e-4d55-97f3-aa1ac6c98572""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 27.431999122176027
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 12""
+        },
+        ""id"": ""e17481df-7222-4b89-92b3-3a86e9f39a83""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 13""
+        },
+        ""id"": ""9f6c6772-38d8-4252-8105-4872376eda9b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                68.57999780544009
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 68.57999780544009
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 14""
+        },
+        ""id"": ""69ecf9f6-8f10-43e6-b88c-61b718d93d65""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 15""
+        },
+        ""id"": ""42d2e5ea-0df0-4da0-aab6-a08aafef4bd6""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                68.57999780544012
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 68.57999780544012
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 16""
+        },
+        ""id"": ""f2c2411c-09b7-4c9a-b6b7-0fcd5907d681""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                64.00799795174403
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 64.00799795174403
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 17""
+        },
+        ""id"": ""1882f7ba-57a3-40a9-a031-c38757abd878""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                50.29199839065605
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 50.29199839065605
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 18""
+        },
+        ""id"": ""6d1a3f34-e237-4808-8bfd-c5e7349a1dd9""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                50.29199839065605
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 50.29199839065605
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 19""
+        },
+        ""id"": ""50c06068-a720-4dd0-b687-e269ddcc97dd""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.31833104048646,
+                0,
+                1,
+                0,
+                -72.89354991453928,
+                0,
+                0,
+                1,
+                50.29199839065602
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.31833104048646,
+            ""Y"": -72.89354991453928,
+            ""Z"": 50.29199839065602
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 20""
+        },
+        ""id"": ""7399ba19-d8df-491f-b26e-86e6ad0e1243""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.63587553155269,
+                0,
+                1,
+                0,
+                -171.8352712912209,
+                0,
+                0,
+                1,
+                22.85999926847998
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.63587553155269,
+            ""Y"": -171.8352712912209,
+            ""Z"": 22.85999926847998
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 21""
+        },
+        ""id"": ""5b9e836a-104f-4731-a5fd-7cf3308c8cc0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.18864764094563,
+                0,
+                1,
+                0,
+                -196.93953413485013,
+                0,
+                0,
+                1,
+                22.85999926847998
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.18864764094563,
+            ""Y"": -196.93953413485013,
+            ""Z"": 22.85999926847998
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 22""
+        },
+        ""id"": ""9ef6ceae-eb37-4f24-9c84-a294f634e93d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.37300514285213,
+                0,
+                1,
+                0,
+                -11.021027430674954,
+                0,
+                0,
+                1,
+                22.859999268480017
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.37300514285213,
+            ""Y"": -11.021027430674954,
+            ""Z"": 22.859999268480017
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair Loss Factor: 23""
+        },
+        ""id"": ""480037b1-b12d-4170-b53b-0b4551c0c78b""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -25.694646772699862,
+            ""Y"": -216.2533147938725,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 0""
+        },
+        ""id"": ""a6b0f1fa-311b-4bfa-a66d-f4b5f02afb36""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -144.13237528094467,
+                0,
+                0,
+                1,
+                22.859999268480063
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.847217950596516,
+            ""Y"": -144.13237528094467,
+            ""Z"": 22.859999268480063
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""d78accc6-194f-4de4-8b5c-9cca5e0ae703""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.517512367401649,
+            ""Y"": -50.37920466430795,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""184c07f0-0a2c-4932-a57e-25bcedbaf0df""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                36.575998829568036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -25.694646772699862,
+            ""Y"": -216.2533147938725,
+            ""Z"": 36.575998829568036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 3""
+        },
+        ""id"": ""15614acd-7e05-4157-8335-bb9b18c99939""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                45.71999853696005
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -25.694646772699862,
+            ""Y"": -216.2533147938725,
+            ""Z"": 45.71999853696005
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 4""
+        },
+        ""id"": ""bc76f114-d98e-4fc5-94c1-63a7c8595045""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -25.694646772699862,
+            ""Y"": -216.2533147938725,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 5""
+        },
+        ""id"": ""a7588b23-f2f6-43bf-b88c-9207fbc98c8f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -144.13237528094467,
+                0,
+                0,
+                1,
+                32.003998975871994
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.847217950596516,
+            ""Y"": -144.13237528094467,
+            ""Z"": 32.003998975871994
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 6""
+        },
+        ""id"": ""8812b772-3c53-4d14-89c1-d77ffeb74a40""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -144.1273547923637,
+                0,
+                0,
+                1,
+                50.29199839065605
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.847217950596516,
+            ""Y"": -144.1273547923637,
+            ""Z"": 50.29199839065605
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 7""
+        },
+        ""id"": ""d444411c-c72e-4850-a8de-b029624ac8a3""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -144.13237528094467,
+                0,
+                0,
+                1,
+                59.435998098048096
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -13.847217950596516,
+            ""Y"": -144.13237528094467,
+            ""Z"": 59.435998098048096
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 8""
+        },
+        ""id"": ""b4339239-f097-41b9-b1da-1ef6e17bd962""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.517512367401649,
+            ""Y"": -50.37920466430795,
+            ""Z"": 50.291998390656055
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 9""
+        },
+        ""id"": ""70577205-0de1-40c7-a377-f5bb5e5a3cf3""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.517512367401649,
+            ""Y"": -50.37920466430795,
+            ""Z"": 32.00399897587203
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 10""
+        },
+        ""id"": ""035092f0-f8ab-4795-8e6e-99dbce869720""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -14.517512367401649,
+            ""Y"": -50.37920466430795,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 11""
+        },
+        ""id"": ""2621e418-f490-4977-adf3-fe990c9cad31""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.034661834391233,
+                0,
+                1,
+                0,
+                -57.37169231721167,
+                0,
+                0,
+                1,
+                22.859999268480024
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.034661834391233,
+            ""Y"": -57.37169231721167,
+            ""Z"": 22.859999268480024
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 0""
+        },
+        ""id"": ""9757b2f2-9703-42e2-9daf-46b091437502""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -31.78618885682679,
+                0,
+                1,
+                0,
+                -225.3706287588722,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -31.78618885682679,
+            ""Y"": -225.3706287588722,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 1""
+        },
+        ""id"": ""480b790c-14a2-4980-a620-70a5eac59fdd""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.11794643899761,
+                0,
+                1,
+                0,
+                -151.41630005144052,
+                0,
+                0,
+                1,
+                22.859999268480063
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.11794643899761,
+            ""Y"": -151.41630005144052,
+            ""Z"": 22.859999268480063
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 2""
+        },
+        ""id"": ""3e7071a9-bb1f-4d8e-a13c-6f003dfaefc2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -31.78618885682679,
+                0,
+                1,
+                0,
+                -225.3706287588722,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -31.78618885682679,
+            ""Y"": -225.3706287588722,
+            ""Z"": 64.00799795174406
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 3""
+        },
+        ""id"": ""28fa6091-e0dc-44c9-92f6-8b997031bb2d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                2.4492935982947064E-16,
+                0,
+                -31.78618885682679,
+                -2.4492935982947064E-16,
+                1,
+                0,
+                -225.3706287588722,
+                0,
+                0,
+                1,
+                45.71999853696005
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -31.78618885682679,
+            ""Y"": -225.3706287588722,
+            ""Z"": 45.71999853696005
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 4""
+        },
+        ""id"": ""c21c61f5-7728-4af9-938c-794f4223b0c1""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                2.4492935982947064E-16,
+                0,
+                -31.78618885682679,
+                -2.4492935982947064E-16,
+                1,
+                0,
+                -225.3706287588722,
+                0,
+                0,
+                1,
+                36.575998829568036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -31.78618885682679,
+            ""Y"": -225.3706287588722,
+            ""Z"": 36.575998829568036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 5""
+        },
+        ""id"": ""2778c999-ef5c-489c-a470-838e9ed17025""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.0346618343912,
+                0,
+                1,
+                0,
+                -57.37169231721167,
+                0,
+                0,
+                1,
+                32.00399897587198
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.0346618343912,
+            ""Y"": -57.37169231721167,
+            ""Z"": 32.00399897587198
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 6""
+        },
+        ""id"": ""6ef67fb5-aaa5-4c9f-a87a-f5c6096d272f""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.11794643899761,
+                0,
+                1,
+                0,
+                -151.41630005144052,
+                0,
+                0,
+                1,
+                32.003998975871994
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.11794643899761,
+            ""Y"": -151.41630005144052,
+            ""Z"": 32.003998975871994
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 7""
+        },
+        ""id"": ""25e6c476-fb16-4a47-9d18-5d8534e43ac0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.0346618343912,
+                0,
+                1,
+                0,
+                -57.37169231721167,
+                0,
+                0,
+                1,
+                50.29199839065614
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.0346618343912,
+            ""Y"": -57.37169231721167,
+            ""Z"": 50.29199839065614
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 8""
+        },
+        ""id"": ""2144da54-d203-42da-b010-137d4e1c9218""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.0346618343912,
+                0,
+                1,
+                0,
+                -57.37169231721167,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.0346618343912,
+            ""Y"": -57.37169231721167,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 9""
+        },
+        ""id"": ""daf57a86-84d5-4c58-b7ae-63307f6d39d2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.11794643899761,
+                0,
+                1,
+                0,
+                -151.41127956285953,
+                0,
+                0,
+                1,
+                59.43599809804805
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.11794643899761,
+            ""Y"": -151.41127956285953,
+            ""Z"": 59.43599809804805
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 10""
+        },
+        ""id"": ""4e781424-d516-46c2-bbae-5c913d4176e0""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.11794643899761,
+                0,
+                1,
+                0,
+                -151.41630005144052,
+                0,
+                0,
+                1,
+                50.291998390656104
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -18.11794643899761,
+            ""Y"": -151.41630005144052,
+            ""Z"": 50.291998390656104
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 11""
+        },
+        ""id"": ""2ce7dc5e-6f12-4b86-9222-5a30893f3497""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -3.132506666430933,
+                0,
+                1,
+                0,
+                -77.49529032284869,
+                0,
+                0,
+                1,
+                74.67599761036811
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -3.132506666430933,
+            ""Y"": -77.49529032284869,
+            ""Z"": 74.67599761036811
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe Loss Factor 2: 0""
+        },
+        ""id"": ""7c695d6d-5f9d-43d2-b1a0-63bb098b88d4""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.634448342104946,
+                0,
+                1,
+                0,
+                -214.72625253430542,
+                0,
+                0,
+                1,
+                18.28799941478396
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -15.634448342104946,
+            ""Y"": -214.72625253430542,
+            ""Z"": 18.28799941478396
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe Loss Factor 2: 1""
+        },
+        ""id"": ""0cb8f48f-eacd-4941-b3ee-eb8b124488e6""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -7.701845096238911,
+                0,
+                1,
+                0,
+                -94.3178361173158,
+                0,
+                0,
+                1,
+                32.00399897587199
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -7.701845096238911,
+            ""Y"": -94.3178361173158,
+            ""Z"": 32.00399897587199
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe Loss Factor: 0""
+        },
+        ""id"": ""1df73195-d89b-46b7-aa4a-5390899c9b59""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -8.568112607350507,
+                0,
+                1,
+                0,
+                -206.44373487092832,
+                0,
+                0,
+                1,
+                54.863998244352075
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -8.568112607350507,
+            ""Y"": -206.44373487092832,
+            ""Z"": 54.863998244352075
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe Loss Factor: 1""
+        },
+        ""id"": ""30b38bea-245d-4324-9c74-acd00eb4a523""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -2.842603508593113,
+                0,
+                1,
+                0,
+                -157.5579722802229,
+                0,
+                0,
+                1,
+                22.859999268480067
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -2.842603508593113,
+            ""Y"": -157.5579722802229,
+            ""Z"": 22.859999268480067
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Loss Factor: 0""
+        },
+        ""id"": ""940bf067-3907-475c-a4ef-392d4748f31d""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -11.49616654983351,
+                0,
+                1,
+                0,
+                -23.092843863423,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -11.49616654983351,
+            ""Y"": -23.092843863423,
+            ""Z"": 18.287999414784018
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Loss Factor: 1""
+        },
+        ""id"": ""06929005-0932-4cad-9abb-82e65f066708""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.122449065746771,
+                0,
+                1,
+                0,
+                -85.2819886723406,
+                0,
+                0,
+                1,
+                22.85999926847998
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -10.122449065746771,
+            ""Y"": -85.2819886723406,
+            ""Z"": 22.85999926847998
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Loss Factor: 2""
+        },
+        ""id"": ""a670f22b-80e2-4dbe-9c23-b33ab1083669""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -50.72776740695462,
+                0,
+                1,
+                0,
+                -83.47412490856433,
+                0,
+                0,
+                1,
+                12.191999609856046
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -50.72776740695462,
+            ""Y"": -83.47412490856433,
+            ""Z"": 12.191999609856046
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Loss Factor: 3""
+        },
+        ""id"": ""8af25b27-441e-4fe2-b597-ecd22e5e71c5""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.1696100424012963,
+                0,
+                1,
+                0,
+                -117.15300002053904,
+                0,
+                0,
+                1,
+                22.85999926848001
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -1.1696100424012963,
+            ""Y"": -117.15300002053904,
+            ""Z"": 22.85999926848001
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 0""
+        },
+        ""id"": ""4f21143b-ab70-4933-9ddd-93c90e0f2c4a""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.153195179378569,
+                0,
+                1,
+                0,
+                -55.52733404599801,
+                0,
+                0,
+                1,
+                22.859999268479992
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -5.153195179378569,
+            ""Y"": -55.52733404599801,
+            ""Z"": 22.859999268479992
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 1""
+        },
+        ""id"": ""2b7dd72f-895d-4eaf-9942-27ac6de76e54""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.092160232970734,
+                0,
+                1,
+                0,
+                -3.8554040211251137,
+                0,
+                0,
+                1,
+                18.287999414783958
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.092160232970734,
+            ""Y"": -3.8554040211251137,
+            ""Z"": 18.287999414783958
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 2""
+        },
+        ""id"": ""92859c00-41bb-4a19-8f51-c2f5cf38b48a""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.805403567829906,
+                0,
+                1,
+                0,
+                -64.06086517161617,
+                0,
+                0,
+                1,
+                12.191999609856047
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -56.805403567829906,
+            ""Y"": -64.06086517161617,
+            ""Z"": 12.191999609856047
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 3""
+        },
+        ""id"": ""774799c0-53c4-42f4-be67-30c85f30bc72""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.91227275462951,
+                0,
+                1,
+                0,
+                -71.51194818533041,
+                0,
+                0,
+                1,
+                68.57999780544007
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.91227275462951,
+            ""Y"": -71.51194818533041,
+            ""Z"": 68.57999780544007
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 0""
+        },
+        ""id"": ""03e117cd-7cb2-4174-992f-d044e538eab5""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -42.973904468094275,
+                0,
+                1,
+                0,
+                -172.1110394246469,
+                0,
+                0,
+                1,
+                64.00799795174403
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -42.973904468094275,
+            ""Y"": -172.1110394246469,
+            ""Z"": 64.00799795174403
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 1""
+        },
+        ""id"": ""221aa761-a883-4888-8e51-ce33d338b9e7""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                59.43599809804806
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 59.43599809804806
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 2""
+        },
+        ""id"": ""7a4b60e5-7334-4388-8421-3cf370fb3411""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.38982262457894,
+                0,
+                1,
+                0,
+                -82.43183345118231,
+                0,
+                0,
+                1,
+                54.86399824435204
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -43.38982262457894,
+            ""Y"": -82.43183345118231,
+            ""Z"": 54.86399824435204
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 3""
+        },
+        ""id"": ""0bb4ad0e-db53-45d3-8b2b-6abd19a3a25c""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -42.973904468094275,
+                0,
+                1,
+                0,
+                -172.1110394246469,
+                0,
+                0,
+                1,
+                50.29199839065598
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -42.973904468094275,
+            ""Y"": -172.1110394246469,
+            ""Z"": 50.29199839065598
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 4""
+        },
+        ""id"": ""40ddb129-dec6-4960-9b9c-780cbc2b3797""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                45.71999853696001
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 45.71999853696001
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 5""
+        },
+        ""id"": ""fc1525fd-788e-4329-9c26-115b751e5eb2""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.91227275462951,
+                0,
+                1,
+                0,
+                -71.51194818533041,
+                0,
+                0,
+                1,
+                41.14799868326403
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -32.91227275462951,
+            ""Y"": -71.51194818533041,
+            ""Z"": 41.14799868326403
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 6""
+        },
+        ""id"": ""b7d5a9a1-06cf-4abb-a900-9b3758b1f111""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.635875531540552,
+                0,
+                1,
+                0,
+                -180.3561860500603,
+                0,
+                0,
+                1,
+                36.575998829568036
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -29.635875531540552,
+            ""Y"": -180.3561860500603,
+            ""Z"": 36.575998829568036
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 7""
+        },
+        ""id"": ""9b7199c7-8bd3-4e21-9790-123def48feb4""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.122747888282525,
+                0,
+                1,
+                0,
+                -259.240234749162,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -38.122747888282525,
+            ""Y"": -259.240234749162,
+            ""Z"": 32.00399897587203
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room Loss Factor: 8""
+        },
+        ""id"": ""63506dc2-1ecb-434b-9529-801d699ea9a5""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.98168932779199,
+                0,
+                1,
+                0,
+                -274.04045627416156,
+                0,
+                0,
+                1,
+                22.859999268480035
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -49.98168932779199,
+            ""Y"": -274.04045627416156,
+            ""Z"": 22.859999268480035
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Hub Loss Factor: 0""
+        },
+        ""id"": ""48bd1c45-76c0-4af9-b713-379a18d745ce""
+      },
+      {
+        ""value"": {
+          ""Transform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -52.316532908480326,
+                0,
+                1,
+                0,
+                -176.37549289482286,
+                0,
+                0,
+                1,
+                18.287999414784075
+              ]
+            }
+          },
+          ""origin"": {
+            ""X"": -52.316532908480326,
+            ""Y"": -176.37549289482286,
+            ""Z"": 18.287999414784075
+          }
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Center Loss Factor: 0""
+        },
+        ""id"": ""0d807042-bd95-4663-951e-c12c89ed11f8""
+      }
+    ],
+    ""Space Properties"": [
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""aabc9bd7-2ff2-446f-9eb6-6ac9e67ccb93""
+        },
+        ""identity"": {
+          ""Identifier"": ""Ltd. Term Corp. Accommodation: 0""
+        },
+        ""id"": ""53ded8b1-139f-48eb-8791-c9fa513470c6""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""cfe57464-9902-482f-8a54-c7ff750a1359""
+        },
+        ""identity"": {
+          ""Identifier"": ""Googler Store: 1""
+        },
+        ""id"": ""85e47bb0-6698-4c31-83a6-41b410309b47""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""9ad36677-af79-474c-a7c1-9d9eafb16958""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 0""
+        },
+        ""id"": ""29b4cce7-4882-4bab-bf23-e377adcc7c9c""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""b8ce1142-1603-45d6-b286-41a5107f6381""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 1""
+        },
+        ""id"": ""bfae005a-bee7-42e4-b8b8-2a14a29570ce""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""6fed4433-418c-4a41-b1b1-4f7ea9f8e45d""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 2""
+        },
+        ""id"": ""119f9945-c68f-437a-a667-88580e646bac""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""12e34f6e-6c71-41df-b2c5-6f8d0e946560""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 3""
+        },
+        ""id"": ""d2938f1d-be73-4f7a-8470-25e325f1f05f""
+      },
+      {
+        ""value"": {
+          ""Height"": 9.143999707392009,
+          ""Id"": ""13793a1e-cbad-4d79-86d4-d4b90e2e0c6e""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 1: 4""
+        },
+        ""id"": ""73e82a8c-f3e6-4c24-ae8f-0bb044266102""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""fcd1010f-a58b-4b35-98ba-520f4a6f8418""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 0""
+        },
+        ""id"": ""e8ac447f-c595-431b-91f8-c998b7f45ced""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""0312c933-3ae3-4e19-b26d-7b4cd9d2851a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 1""
+        },
+        ""id"": ""ae799337-d562-4cfb-8dad-dec707fc04d1""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""2e3b7964-5288-4c40-aeca-871ea3038448""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 2""
+        },
+        ""id"": ""5e861bad-7df6-43d5-9236-eca02cc0b607""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""0c5b143e-4ac3-4cc9-85e5-53fa5b667555""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 3""
+        },
+        ""id"": ""f72b09b5-13b5-4189-89d9-76e05cfdc1dd""
+      },
+      {
+        ""value"": {
+          ""Height"": 9.143999707392009,
+          ""Id"": ""15ee1aa0-d004-452c-ab87-93b22250f67a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 2: 4""
+        },
+        ""id"": ""55e304f3-595e-4ca0-b8f8-c89fcf0954a2""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""9b08c4ea-ad3b-4f0b-8291-7ce5839e03d1""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 0""
+        },
+        ""id"": ""67482821-ed5a-4943-93e0-29424caad38a""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""c47b481a-f83e-4bb8-8f4c-fe3c16b7ffbb""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 1""
+        },
+        ""id"": ""714e42c5-f1c5-4638-b812-4cbd4665a6cc""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""8dabe7ac-82c6-428f-9fe8-8fd857d2ca3b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 2""
+        },
+        ""id"": ""9d57bb1d-227a-4422-84d6-424fae1ac986""
+      },
+      {
+        ""value"": {
+          ""Height"": 13.715999561088013,
+          ""Id"": ""c1ed9edc-cb3b-4110-be66-19f42e8c8e14""
+        },
+        ""identity"": {
+          ""Identifier"": ""Communicating Stair 3: 3""
+        },
+        ""id"": ""8f465ce9-b2c3-4ae8-8ecc-3aba8a225bd8""
+      },
+      {
+        ""value"": {
+          ""Height"": 1.5239999512320015,
+          ""Id"": ""75c9b701-76bf-40e4-80a8-6900a8f3e766""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 1 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""cab0eb2b-d1ca-45d5-b08e-fa826fdc2df8""
+      },
+      {
+        ""value"": {
+          ""Height"": 1.5239999512320015,
+          ""Id"": ""90b255ba-7a52-4639-a49d-6f7dcfd12744""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 1 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""72d40717-4369-4094-b481-4480c64bbb71""
+      },
+      {
+        ""value"": {
+          ""Height"": 1.5239999512320015,
+          ""Id"": ""548f1b4c-113d-4e6c-af9b-8a4d29faab1f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 3 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""edbe3a3f-ff91-468e-8613-c581ae700d3f""
+      },
+      {
+        ""value"": {
+          ""Height"": 1.5239999512320015,
+          ""Id"": ""7b032c87-d13b-4434-9bcc-a0831c285a47""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 3 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""1fa27547-3733-4d28-8e8d-b3d90d3c7b58""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""78ad8860-d8e2-4986-ac55-aa72fdc56be7""
+        },
+        ""identity"": {
+          ""Identifier"": ""Lobby Atrium: 0""
+        },
+        ""id"": ""97631bbe-8baf-4e48-b221-2074fac81149""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""ec5c616c-b6bf-4ce3-9160-3338cc7313cc""
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe: 0""
+        },
+        ""id"": ""967b97de-9e17-45d0-a619-8ad604dd89b5""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""a8675570-ecc5-46af-97ea-02fdb3ac479e""
+        },
+        ""identity"": {
+          ""Identifier"": ""Anchor Cafe: 1""
+        },
+        ""id"": ""d84eb5ee-6bc6-46e2-bc4b-dd669511cc72""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""5931fbf8-3035-4a32-9ff8-63fab32c3836""
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe: 0""
+        },
+        ""id"": ""b2fe4435-1d45-44a3-9582-cc9e8740ea4f""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""83787706-0705-47c6-8836-2a46e488ec8f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Neighborhood Cafe: 1""
+        },
+        ""id"": ""f49ba0f6-4057-4864-add4-facd2f01b57a""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""17ef7fe3-c50e-433d-aad7-ab86a7fb544b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 0""
+        },
+        ""id"": ""0f4cece2-4e2d-440e-a19d-c19dbcde5bba""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""194b336a-a473-4006-bc1e-7939e38bc9ac""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 1""
+        },
+        ""id"": ""018f4862-5f85-4059-9711-3ca09421742e""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""018f3f7d-e090-4ad2-bde2-d01c69072525""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 2""
+        },
+        ""id"": ""e70d6c08-2b6b-4490-883d-a4ac5f6b50c2""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""dc1b358c-9246-49a2-aa5f-09872d146112""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 3""
+        },
+        ""id"": ""86bfc7ac-9e87-430c-baee-e038c3004b8e""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""0b42bc5e-35de-456c-bcb5-518a581780a6""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 4""
+        },
+        ""id"": ""0c8d4adf-92aa-4bdd-a99d-436244adf540""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""0bc04bb4-7150-42c2-9b25-a2d1e5a510d3""
+        },
+        ""identity"": {
+          ""Identifier"": ""Express Cafe: 5""
+        },
+        ""id"": ""bed90646-0f90-4f33-92f3-2b8e05e3043d""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""1d1e301d-2cf9-4256-94c7-e1544191fc20""
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 0""
+        },
+        ""id"": ""97fd0ff6-31b1-4471-9f8c-d0e1bc8a219a""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""3a7aca81-bcca-4b7d-bc28-77d2a5ef596a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 1""
+        },
+        ""id"": ""2afa99b1-3e9f-48e2-91f6-cdfb86719e85""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""6e26106a-5db8-4407-a8b6-1d8a7e4514ce""
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 2""
+        },
+        ""id"": ""d137b9f0-0841-4267-bfb1-aec39e8a27ca""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""e2db7ed6-a8eb-42bd-94c8-bbd78146dbb3""
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 3""
+        },
+        ""id"": ""aa051f0c-c19b-4801-b8f1-9c9a6cd06ee6""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""7d9b8c2e-0757-463b-9d0e-f7b795d8ff14""
+        },
+        ""identity"": {
+          ""Identifier"": ""Hub/Barista: 4""
+        },
+        ""id"": ""dfbf75ef-6917-4c48-9c25-84290f5d090b""
+      },
+      {
+        ""value"": {
+          ""Height"": 77.72399751283209,
+          ""Id"": ""a096dc1e-4a88-45a5-8d4a-f4eff2ef521f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 1: 0""
+        },
+        ""id"": ""7b329f65-3ce9-4fcc-be84-4849b7ecbb48""
+      },
+      {
+        ""value"": {
+          ""Height"": 77.72399751283209,
+          ""Id"": ""6b7e9118-bb72-4085-8267-4331776694dd""
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 2: 0""
+        },
+        ""id"": ""ec6df161-eb84-4f8e-8a5c-4ae0a3bec79b""
+      },
+      {
+        ""value"": {
+          ""Height"": 77.72399751283209,
+          ""Id"": ""d6ea6a5d-2a17-4d86-b566-89afae923c51""
+        },
+        ""identity"": {
+          ""Identifier"": ""Core Building 3: 0""
+        },
+        ""id"": ""afb0eb85-543f-4e29-9c8c-25bc914a9842""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""ed4b7efd-9195-466a-9235-6dd91783b99f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Regional Events Studio: 0""
+        },
+        ""id"": ""47f16341-7d5f-4aa6-bbbc-a77378b5fe02""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""ace622bd-31d5-452c-84cb-87ee2fac9897""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 0""
+        },
+        ""id"": ""d6fcbb24-5a81-414a-8ae9-5e7d864bf174""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""3a3f7981-7c0b-4909-858b-d0633df1db82""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 1""
+        },
+        ""id"": ""df1f896d-8dc9-46aa-b7d0-00584d5ca09c""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""cbf0f11d-3d80-4770-a099-ef77000cbe24""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 2""
+        },
+        ""id"": ""ff3b336e-f780-488d-a075-56ace963d7b8""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""ce31e1bb-29f7-49c1-abda-30fe6d722013""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 3""
+        },
+        ""id"": ""07820517-060d-485c-9a59-0d8008728030""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""0e75b479-66a0-4727-9808-596248e509e4""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 4""
+        },
+        ""id"": ""0b079709-8400-4c17-b111-03b0874ae27c""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""54c97ec8-8ba5-4613-a759-9b884a60d28b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 5""
+        },
+        ""id"": ""2954a81a-5acb-4ba2-bf60-abd7fc2b43bd""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""bed8d9e4-6586-4109-8833-39a4559817f7""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 6""
+        },
+        ""id"": ""ef984a7e-97d3-40ae-9008-dc5b92571295""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""9de916de-bb39-4aca-bb35-6112ae10125a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Retail: 7""
+        },
+        ""id"": ""d7c36f45-0ffb-4b18-a818-f10df679b5ac""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""385d87e5-a314-41d3-b4e3-88cb8ab52f45""
+        },
+        ""identity"": {
+          ""Identifier"": ""Googler Store: 0""
+        },
+        ""id"": ""e2134de5-46ff-48af-a84c-8089b2595f8f""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""78f997f2-d82e-44cf-bfa6-d82313fcaca3""
+        },
+        ""identity"": {
+          ""Identifier"": ""Lobby: 0""
+        },
+        ""id"": ""cee3618d-5274-4408-bb67-06c0001437ab""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""c815575f-ccac-431f-8935-57d4ab14ba5c""
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 0""
+        },
+        ""id"": ""ab26cfae-ca68-4dce-9a1f-db0493d50a77""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""1dc4e0a0-8521-4260-aa3d-9e84816b7da7""
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 1""
+        },
+        ""id"": ""25771511-3ab4-4ffd-b7b5-714e518704b0""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""82d464a9-28a5-40a3-9a4a-279c6d238928""
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 2""
+        },
+        ""id"": ""d8bfee32-34ab-40f8-bb05-0dafa6e391cd""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""8a969d68-856d-449a-a8f7-147da81a631c""
+        },
+        ""identity"": {
+          ""Identifier"": ""Logistics: 3""
+        },
+        ""id"": ""d11208ac-d021-4977-9919-5a7759729450""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""9446a2a7-71a2-4900-8dc9-75d140d254c1""
+        },
+        ""identity"": {
+          ""Identifier"": ""Executive Lobby: 0""
+        },
+        ""id"": ""8837d949-dc7a-4e91-92b8-10cdf5decc95""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""8125233c-6b0e-4764-a803-aebee1064701""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 0""
+        },
+        ""id"": ""7edde24e-6abc-416c-a5e5-bdabc9b6950d""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""eaf9ed99-8655-4130-8ab7-df5b4d1cb65b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 1""
+        },
+        ""id"": ""ae10d3b6-0dc7-4e70-910b-25bdcc1af15a""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""16397184-fd1b-44df-9f6c-639ba0e44493""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 2""
+        },
+        ""id"": ""f6132707-1e9d-42ec-991b-b3739286692b""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2585876e-d02f-45ae-b954-d6a968592b13""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk: 3""
+        },
+        ""id"": ""6b2371a9-b0fc-4885-bb26-673b62d576d1""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""ca27cb33-f9f6-4543-892f-f57d72d8277a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 0""
+        },
+        ""id"": ""f557ee2d-6698-49c5-ab01-d1d7bd28a458""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""b9f2889b-9e1c-4651-8b57-9ac1ec6f6a98""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 1""
+        },
+        ""id"": ""11d4dab9-28d6-41f4-bafe-bef733966ee2""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""3084c283-2687-4e82-a73c-f2d0f3da7571""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 2""
+        },
+        ""id"": ""9b84980e-3c62-4827-b04b-dfff858323b4""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""b087b6b9-52b5-4e6a-8cca-6848ebf4d71b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction: 3""
+        },
+        ""id"": ""240c79e4-500b-4c53-8bab-8ddcd0290c23""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""bb6b5d66-399c-439c-b7be-cede03584b55""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 0""
+        },
+        ""id"": ""19ec02ce-9339-499a-81dd-462add8ebc29""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""a1c8f39b-d071-437a-aed5-8443b5a7c9c3""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 1""
+        },
+        ""id"": ""c9d6ba74-b37d-4201-b96e-15f1653b3aaf""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""f401dd6c-f3e7-4aea-a073-c02f67ed3a9e""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 2""
+        },
+        ""id"": ""dd2953d1-86f4-456f-ab2d-c9bff9677c10""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""74a4ce63-da71-470e-a389-323d9102f526""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Production: 3""
+        },
+        ""id"": ""99e92b0f-3cbb-4ada-a89c-cc148138f54d""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""bd575050-f74c-43e1-abdb-8f8181988d1c""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 0""
+        },
+        ""id"": ""cd2579e9-7cca-4077-a31a-3073002056cf""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""e4d8e3fe-62d5-4ca7-a7ed-b7d132feb8ac""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 1""
+        },
+        ""id"": ""44fe3034-4803-4f8a-a97f-33290f234bcd""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""a9f51ed8-8e5c-4c09-bdde-fbbfe5870584""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 2""
+        },
+        ""id"": ""c936fc36-7df4-4013-ba13-e5408183f1e0""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""78222b7b-4c5e-49f7-b423-54d36d9adf49""
+        },
+        ""identity"": {
+          ""Identifier"": ""Event Prep: 3""
+        },
+        ""id"": ""8694c7d5-9bae-42bf-b89a-ae397c12bc74""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""6de66b74-049c-42e9-9d33-706892de24d5""
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 0""
+        },
+        ""id"": ""a8182203-5996-4bb0-8063-5effdff49731""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""d19db1e5-f441-4e67-8a5f-c2ff17c2ab83""
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 1""
+        },
+        ""id"": ""8411b8b0-8381-4c50-bdf9-6ce7d8c70f41""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2cc0e444-24d7-469d-a190-938c0b78bcae""
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 2""
+        },
+        ""id"": ""66883dc9-d832-4406-909e-9bcc5a529fed""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2ec44840-3b7c-4d52-994f-ec45b6e1ff0e""
+        },
+        ""identity"": {
+          ""Identifier"": ""Training Room: 3""
+        },
+        ""id"": ""da9d8ded-7748-44d9-a02f-000eec1ef060""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""399f64ee-9da0-4b46-81cc-46428b1dcd16""
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Center: 0""
+        },
+        ""id"": ""3f2be2a8-456c-4b49-b314-f61e0a9fdcf5""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""6f48f5f2-1f10-494c-8a86-5c8157119ce0""
+        },
+        ""identity"": {
+          ""Identifier"": ""Massage Rooms: 0""
+        },
+        ""id"": ""fa55e8e3-3c1b-4bc1-8967-0dc0d8e19d3f""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""119643ea-e926-47c9-ab7c-3c7c34d1c27e""
+        },
+        ""identity"": {
+          ""Identifier"": ""Massage Rooms: 1""
+        },
+        ""id"": ""39a74019-b705-4b1f-b28d-ca36bcc68f9d""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""e53ed5e8-5f41-4db0-bd03-4505e4cfc1f2""
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 0""
+        },
+        ""id"": ""1452c09b-c3ee-49b2-bb5f-f1d020924a54""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""94f7358a-d6ee-448e-a15b-fdb6a728ed50""
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 1""
+        },
+        ""id"": ""fe4ebb40-7526-420d-801b-6185a677015a""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""31db2d6d-b940-46a4-87fe-30957f636b03""
+        },
+        ""identity"": {
+          ""Identifier"": ""Wellness: 2""
+        },
+        ""id"": ""cd96dcec-acc5-4487-83f1-70a281956321""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2be51d1a-ed51-4462-9b6f-767f24948306""
+        },
+        ""identity"": {
+          ""Identifier"": ""Fitness Hub: 0""
+        },
+        ""id"": ""d457700e-92da-4c20-8e3e-c506487c7e43""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""4a0c30c6-96e2-4f58-915c-e0c7c85d511f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 0""
+        },
+        ""id"": ""39fcb9a7-5310-4a28-b364-a9adb28c3f5a""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""60cc4f68-157d-4267-b6e7-fa6d6db0902b""
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 1""
+        },
+        ""id"": ""10b1176c-dc05-4274-b492-62e3b6658b1e""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""efa8d0be-cac0-4fbb-8524-43e9e42db849""
+        },
+        ""identity"": {
+          ""Identifier"": ""Lab Space: 2""
+        },
+        ""id"": ""e0f0e463-c883-410b-8d39-5fccc109f239""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""a61ad408-5f84-407c-b94f-2fc8b18331d8""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 0""
+        },
+        ""id"": ""564cb173-f83a-4e37-95ee-72a8d7b7e5fb""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2298e3b4-7bc1-48c1-8152-99967566105c""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 1""
+        },
+        ""id"": ""4ce18d9f-7ce4-4df2-9bf8-9a5089492e5a""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""e2a81924-594e-47a4-8c12-42933fe9f2a6""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 2""
+        },
+        ""id"": ""46a9c8e9-94ee-4d17-8418-b6f39b490fc9""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""0d637257-43d1-4aeb-9bc6-96261f6af88f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Stop: 3""
+        },
+        ""id"": ""12fe41f4-e096-4acd-a26c-c5e616610832""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""073c0f3e-a470-42ed-a63a-0f1b0b6004cc""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 0""
+        },
+        ""id"": ""c206fb44-2da9-41fc-b997-dd5f80c3e764""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""d340a136-d422-49a1-8f9b-916fc2b08b4a""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 1""
+        },
+        ""id"": ""a3a7316a-adcc-4250-940d-e36b74290176""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""e319d219-cab7-4dd7-8298-7b39ae4ab74c""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 2""
+        },
+        ""id"": ""eeb56960-e9a7-415d-bee7-e8e83e414029""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""18a1dc44-99ed-41c2-b640-15cc7f22c581""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 3""
+        },
+        ""id"": ""3bc3ca7b-1558-455f-acf5-759a42890d91""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""70cc7a4d-0275-47a1-8da6-9ad937c8d857""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 4""
+        },
+        ""id"": ""0485d8f7-7e1b-4fbe-886c-00fff3508935""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""2f827c2d-670c-4f92-99c1-94379747da0f""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 5""
+        },
+        ""id"": ""e0f5d64e-1691-40d1-8623-a610fecaf829""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""3e565b2a-57b5-4fe5-8aa9-b0d306b376eb""
+        },
+        ""identity"": {
+          ""Identifier"": ""Game Room: 6""
+        },
+        ""id"": ""41b8b02d-a93b-4066-bc7b-27bc696aa47b""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""d0a0335a-557a-4d05-9fd9-e577351d0318""
+        },
+        ""identity"": {
+          ""Identifier"": ""Atrium Loss Factor: 0""
+        },
+        ""id"": ""506fcbf9-bfc3-4adb-9b00-1012728adfbe""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""edd8fa4f-cf29-4d2f-974e-1d37e7c0a7da""
+        },
+        ""identity"": {
+          ""Identifier"": ""Atrium Loss Factor: 1""
+        },
+        ""id"": ""a87accc6-f14c-4d2e-ada1-3f96e889366f""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""6a553b83-5ed7-48a9-917f-750731a66520""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""92c6773c-1a2f-469b-9b4d-7f6bafcecf80""
+      },
+      {
+        ""value"": {
+          ""Height"": 4.5719998536960045,
+          ""Id"": ""d6bd235c-a911-4b10-b49e-8330dc8452a0""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""8bf2c86c-aa47-4bd4-9dd3-8a8d1c5fa1af""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""b004983a-08c0-41e6-ae60-7d9b1f553b77""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Loss Factor: 3""
+        },
+        ""id"": ""82c1b604-34d9-4dda-9635-275323c5034b""
+      },
+      {
+        ""value"": {
+          ""Height"": 6.095999804928006,
+          ""Id"": ""edbd883f-a229-452c-9355-61f3c09a27fe""
+        },
+        ""identity"": {
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 3""
+        },
+        ""id"": ""ecd498be-3a5d-4dca-8240-dbe9e709fb01""
+      }
+    ],
+    ""Mass Boundaries"": [
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.008827952097,
+                ""Y"": -81.33547308433158,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662950905291E-05,
+                ""Y"": -81.33547308433158,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.241366295668248E-05,
+                ""Y"": 0.0004069156683641495,
+                ""Z"": 0
+              },
+              {
+                ""X"": -36.438893440101836,
+                ""Y"": 0.00040691566837480764,
+                ""Z"": 0
+              },
+              {
+                ""X"": -36.46406028184878,
+                ""Y"": -23.017046776642587,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -23.02957170763935,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -9.006827586337025,
+                0,
+                1,
+                0,
+                -49.331473084331606,
+                0,
+                0,
+                1,
+                -1.3922196728799463E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Ltd. Term Corp. Accommodation: 0""
+        },
+        ""id"": ""51b6dbf0-ab6a-464b-a5fd-887879022cfd""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -24.96183960961455,
+                ""Y"": -131.95303185254204,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.896599243854758,
+                ""Y"": -131.9157313426192,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.943587586337336,
+                ""Y"": -107.89879308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.08758758633725,
+                0,
+                1,
+                0,
+                -122.71207308433159,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""Identifier"": ""Googler Store: 1""
+        },
+        ""id"": ""fceb60f3-308f-4b6c-bd05-6ad919fa3ad8""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -14.475918707331672,
+                ""Y"": -150.24708513993644,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -150.14407308433155,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.035052413662953,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.5673587073316,
+                ""Y"": -131.95908513993655,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -9.928100625029977,
+                0,
+                1,
+                0,
+                -141.00007308433158,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""Identifier"": ""Lobby Atrium: 0""
+        },
+        ""id"": ""fc14a65e-ee4f-42ea-8146-4dde4723b01a""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -5.943587586337271,
+                ""Y"": -141.00008222599965,
+                ""Z"": 0
+              },
+              {
+                ""X"": 3.200412121054738,
+                ""Y"": -141.00008222599965,
+                ""Z"": 0
+              },
+              {
+                ""X"": 3.200412121054738,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.943587586337271,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.2614029125481168,
+                0,
+                1,
+                0,
+                -136.39343844345012,
+                0,
+                0,
+                1,
+                -6.394884621840902E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Communicating Stair 1: 0""
+        },
+        ""id"": ""367ec258-e715-431d-b6c3-adf474f97da8""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.150827293729037,
+                ""Y"": -63.04748222599962,
+                ""Z"": 0
+              },
+              {
+                ""X"": -9.006827586337032,
+                ""Y"": -63.04748222599962,
+                ""Z"": 0
+              },
+              {
+                ""X"": -9.006827586337032,
+                ""Y"": -53.903473084331644,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.150827293729037,
+                ""Y"": -53.903473084331644,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.647317937347605,
+                0,
+                1,
+                0,
+                -58.424875788496166,
+                0,
+                0,
+                1,
+                6.095999804927998
+              ]
+            }
+          },
+          ""Identifier"": ""Communicating Stair 2: 0""
+        },
+        ""id"": ""eac7ee9e-0a9f-4453-9f92-1c645dad7df9""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -26.92906729372918,
+                ""Y"": -219.40374405485412,
+                ""Z"": 0
+              },
+              {
+                ""X"": -17.785067586337174,
+                ""Y"": -219.40374405485412,
+                ""Z"": 0
+              },
+              {
+                ""X"": -17.785067586337174,
+                ""Y"": -210.25973491318612,
+                ""Z"": 0
+              },
+              {
+                ""X"": -26.92906729372918,
+                ""Y"": -210.25973491318612,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -22.321296258509175,
+                0,
+                1,
+                0,
+                -214.85833558103255,
+                0,
+                0,
+                1,
+                6.09599980492807
+              ]
+            }
+          },
+          ""Identifier"": ""Communicating Stair 3: 0""
+        },
+        ""id"": ""cccfa816-e352-4610-bcce-f42dc4e541dc""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 65.6106043989393,
+                ""Y"": -157.81981906126444,
+                ""Z"": 0
+              },
+              {
+                ""X"": 73.53540414534572,
+                ""Y"": -157.81981906126444,
+                ""Z"": 0
+              },
+              {
+                ""X"": 73.53540414534572,
+                ""Y"": -155.99101723293083,
+                ""Z"": 0
+              },
+              {
+                ""X"": 65.6106043989393,
+                ""Y"": -155.99101723293083,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                69.57300427214251,
+                0,
+                1,
+                0,
+                -156.9017672466764,
+                0,
+                0,
+                1,
+                6.3178628995075314E-15
+              ]
+            }
+          },
+          ""Identifier"": ""guide blocks: 0""
+        },
+        ""id"": ""f9f3f68e-ea58-4424-96cd-0c9850f1d7a2""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.77677649135662,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.080766044864696,
+                ""Y"": -282.75049341187935,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.49723681259943,
+                ""Y"": -273.0250062074591,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.275212878189713,
+                ""Y"": -269.3246073006308,
+                ""Z"": 0
+              },
+              {
+                ""X"": -27.26937287818994,
+                ""Y"": -263.92964730063113,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.15896506532886,
+                ""Y"": -255.97908552130636,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.43783542171733,
+                ""Y"": -248.92633881363432,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.69375970153176,
+                ""Y"": -241.49263308433177,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.161417398568656,
+                ""Y"": -237.11153033817814,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.282635036408987,
+                ""Y"": -230.53922495726,
+                ""Z"": 0
+              },
+              {
+                ""X"": -7.586474623765557,
+                ""Y"": -221.36475167369673,
+                ""Z"": 0
+              },
+              {
+                ""X"": -4.68369287819003,
+                ""Y"": -215.37500730063104,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.5485299056070367,
+                ""Y"": -210.19305824246908,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7112671218100104,
+                ""Y"": -201.56756730063088,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -42.655464593915475,
+                0,
+                1,
+                0,
+                -247.14415088835673,
+                0,
+                0,
+                1,
+                7.238654120556021E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Building Floor Plate: 0""
+        },
+        ""id"": ""12223a9b-efa8-4107-9276-87ee8bb932d7""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.075223869973442,
+                ""Y"": -183.10683082119175,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.88327298414717,
+                ""Y"": -107.85106814928487,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -38.86854596233723,
+                0,
+                1,
+                0,
+                -156.72340818494,
+                0,
+                0,
+                1,
+                4.9960036108132044E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Building Floor Plate: 1""
+        },
+        ""id"": ""b3ea603f-7a7c-42dd-9ab1-186dcbb10bfe""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -98.70406953505719,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662910762021E-05,
+                ""Y"": -98.70406953505719,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662943799864E-05,
+                ""Y"": 0.07575045285859261,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": 0.07575045285859972,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -40.53623342084209,
+                0,
+                1,
+                0,
+                -57.009992990949556,
+                0,
+                0,
+                1,
+                1.3100631690576847E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Building Floor Plate: 2""
+        },
+        ""id"": ""6f9e015e-c598-4c42-931d-0470c891aa99""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.046925704719236,
+                ""Y"": -98.68897558011452,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662936694436E-05,
+                ""Y"": -98.7040695350572,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.024753586978161084,
+                ""Y"": -57.64851853099371,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -57.633432625083024,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.498853318425319,
+                0,
+                1,
+                0,
+                -75.64589939202054,
+                0,
+                0,
+                1,
+                65.53199790297604
+              ]
+            }
+          },
+          ""Identifier"": ""Anchor Cafe: 0""
+        },
+        ""id"": ""ae88c491-6679-47c5-b3f5-368e145142c6""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -45.230392349819105,
+                ""Y"": -219.42019262945615,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -219.42978810741923,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.35860062333789,
+                ""Y"": -231.43777525858218,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.822333175247596,
+                ""Y"": -231.45232875991005,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.261532878189804,
+                ""Y"": -226.71356730063087,
+                ""Z"": 0
+              },
+              {
+                ""X"": -6.701849057188486,
+                ""Y"": -219.40308552130642,
+                ""Z"": 0
+              },
+              {
+                ""X"": -4.576318797715903,
+                ""Y"": -215.1012439156227,
+                ""Z"": 0
+              },
+              {
+                ""X"": -1.1449637442948948,
+                ""Y"": -206.765799951521,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7112671218100104,
+                ""Y"": -201.56756730063088,
+                ""Z"": 0
+              },
+              {
+                ""X"": -45.217067586337144,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -17.78506758633719,
+                0,
+                1,
+                0,
+                -219.5063304755143,
+                0,
+                0,
+                1,
+                15.239999512320015
+              ]
+            }
+          },
+          ""Identifier"": ""Anchor Cafe: 1""
+        },
+        ""id"": ""64aec181-8317-423a-be5d-fdd966d956a5""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -256.0132997376056,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.63430685882989,
+                ""Y"": -256.0132997376056,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.63430685882989,
+                ""Y"": -265.12308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -27.395056031123666,
+                ""Y"": -265.12308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.55411105396039,
+                ""Y"": -257.5626047805084,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.262281899911773,
+                ""Y"": -253.43351351911826,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.50250209770694,
+                ""Y"": -249.15315752646157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.519280716658866,
+                ""Y"": -243.22247783010314,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.934729578330863,
+                ""Y"": -238.44959627152133,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.021274368997155,
+                ""Y"": -233.55378798076197,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.282635036409022,
+                ""Y"": -230.53922495726005,
+                ""Z"": 0
+              },
+              {
+                ""X"": -9.442112904504928,
+                ""Y"": -225.06373677734905,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.752942751188163,
+                ""Y"": -217.2988761782811,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.93799113681583,
+                ""Y"": -211.05669246670556,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7663199484176477,
+                ""Y"": -201.41339606793497,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -201.41339606793497,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -223.53723956436835,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -239.39142875887222,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -239.39142875887222,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.861917465305,
+                0,
+                1,
+                0,
+                -209.75792885576098,
+                0,
+                0,
+                1,
+                47.24399848819205
+              ]
+            }
+          },
+          ""Identifier"": ""Neighborhood Cafe: 0""
+        },
+        ""id"": ""0a09c433-7f50-4856-92d7-d46dbe9524d0""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -33.8962159257776,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662931365366E-05,
+                ""Y"": -98.75479308433164,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662931365366E-05,
+                ""Y"": -73.0944137687293,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -73.0944137687293,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -75.7331743647145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -33.8962159257776,
+                ""Y"": -75.7331743647145,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.498853318425319,
+                0,
+                1,
+                0,
+                -85.74184402294371,
+                0,
+                0,
+                1,
+                24.383999219712017
+              ]
+            }
+          },
+          ""Identifier"": ""Neighborhood Cafe: 1""
+        },
+        ""id"": ""e113c21f-5106-46ae-9ec0-eb1eb15d5c80""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -15.40340119130633,
+                ""Y"": -183.31666907220114,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.075223869973438,
+                ""Y"": -183.31666907220114,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.03505241366291,
+                ""Y"": -167.161042280002,
+                ""Z"": 0
+              },
+              {
+                ""X"": -15.40340119130633,
+                ""Y"": -167.21434964550576,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -2.4333452386640957,
+                0,
+                1,
+                0,
+                -177.57607308433163,
+                0,
+                0,
+                1,
+                19.811999366016188
+              ]
+            }
+          },
+          ""Identifier"": ""Express Cafe: 0""
+        },
+        ""id"": ""17ec164f-92bf-4514-8d9f-25ff36e463ed""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -218.2181042172512,
+                ""Z"": 0
+              },
+              {
+                ""X"": -6.040625497485909,
+                ""Y"": -218.2181042172512,
+                ""Z"": 0
+              },
+              {
+                ""X"": -4.393026387014583,
+                ""Y"": -214.65599019088128,
+                ""Z"": 0
+              },
+              {
+                ""X"": -3.246113359455574,
+                ""Y"": -211.86991031162626,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.240911846993205,
+                ""Y"": -209.42807589072982,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.9305828989097442,
+                ""Y"": -206.06711289088543,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7112671218100104,
+                ""Y"": -201.56756730063088,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -201.41339606793497,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.538149408323383,
+                0,
+                1,
+                0,
+                -210.90258305406348,
+                0,
+                0,
+                1,
+                36.57599882956794
+              ]
+            }
+          },
+          ""Identifier"": ""Express Cafe: 1""
+        },
+        ""id"": ""4a507729-49ee-4d29-acea-b982595a08e3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -31.755925133445796,
+                ""Y"": -241.49263308433177,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.69375970153176,
+                ""Y"": -241.49263308433177,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.496271767770402,
+                ""Y"": -237.6910855213064,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.496271767770402,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -31.755925133445796,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.167917399753513,
+                0,
+                1,
+                0,
+                -231.47749313844147,
+                0,
+                0,
+                1,
+                51.81599834188805
+              ]
+            }
+          },
+          ""Identifier"": ""Express Cafe: 2""
+        },
+        ""id"": ""93c55834-47a1-4bdc-81c1-66d0f583ed4d""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -31.761493129322794,
+                ""Y"": -241.49263308433177,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.69375970153176,
+                ""Y"": -241.49263308433177,
+                ""Z"": 0
+              },
+              {
+                ""X"": -17.805332878189866,
+                ""Y"": -239.84435130063105,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.475810257611776,
+                ""Y"": -237.6910855213064,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.496271767770402,
+                ""Y"": -219.4030855213064,
+                ""Z"": 0
+              },
+              {
+                ""X"": -31.78618885682679,
+                ""Y"": -219.42019262945615,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -26.92906758633719,
+                0,
+                1,
+                0,
+                -228.5470855213064,
+                0,
+                0,
+                1,
+                65.53199790297595
+              ]
+            }
+          },
+          ""Identifier"": ""Express Cafe: 5""
+        },
+        ""id"": ""c3a126b4-d19a-4e12-9aed-e45cace2c0a5""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -48.00538542717439,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.861385719782376,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.861385719782376,
+                ""Y"": -84.83728377106577,
+                ""Z"": 0
+              },
+              {
+                ""X"": -48.00538542717439,
+                ""Y"": -84.83728377106577,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.343500831859096,
+                0,
+                1,
+                0,
+                -87.89735405782739,
+                0,
+                0,
+                1,
+                28.95599907340794
+              ]
+            }
+          },
+          ""Identifier"": ""Hub/Barista: 0""
+        },
+        ""id"": ""bee33969-1359-4853-a5e2-73366a81a2c0""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -38.76669732821612,
+                ""Y"": -15.564239529511006,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.08361241510662,
+                ""Y"": -15.64545311408353,
+                ""Z"": 0
+              },
+              {
+                ""X"": -31.91514917164509,
+                ""Y"": -1.7825733173409475,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.76669732821612,
+                ""Y"": -1.7825733173409457,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.30090979243202,
+                0,
+                1,
+                0,
+                -11.972135342964288,
+                0,
+                0,
+                1,
+                18.287999414784103
+              ]
+            }
+          },
+          ""Identifier"": ""Hub/Barista: 3""
+        },
+        ""id"": ""c724392c-8747-4e57-bedc-3e9a3d502e85""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -48.05301003388131,
+                ""Y"": -95.3019978834724,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.809903428787614,
+                ""Y"": -95.3019978834724,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.798105733359186,
+                ""Y"": -84.83728377106577,
+                ""Z"": 0
+              },
+              {
+                ""X"": -48.04120059063957,
+                ""Y"": -84.8268633031226,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -45.58282758633708,
+                0,
+                1,
+                0,
+                -90.47947308433152,
+                0,
+                0,
+                1,
+                56.387998195584046
+              ]
+            }
+          },
+          ""Identifier"": ""Hub/Barista: 4""
+        },
+        ""id"": ""3cfd60cb-b4fa-4234-9858-1ad5f8942bdb""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -54.361067586337185,
+                ""Y"": -255.97908552130622,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.329390006723806,
+                ""Y"": -255.97908552130622,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.329390006723806,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -54.3610675863372,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -45.2170675863372,
+                0,
+                1,
+                0,
+                -237.69108552130632,
+                0,
+                0,
+                1,
+                1.1091128016005314E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Core Building 3: 0""
+        },
+        ""id"": ""59603b19-d1de-4f4d-a3d8-c2d7c8d9640c""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -68.27430572946147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -15.645453114083537,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -15.645453114083537,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097,
+                ""Y"": -98.7189123951411,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662936694436E-05,
+                ""Y"": -98.48306033410438,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662936694436E-05,
+                ""Y"": -23.017046776642587,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662943799864E-05,
+                ""Y"": 0.07575045285859261,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": 0.07575045285859972,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.726827586337,
+                0,
+                1,
+                0,
+                -35.615473084331484,
+                0,
+                0,
+                1,
+                -2.930988785010413E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Regional Events Studio: 0""
+        },
+        ""id"": ""998537a9-1114-4163-ab91-4734f4baf676""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.034908713437112,
+                ""Y"": -183.36376207038742,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.107781613661976,
+                ""Y"": -150.1895773965078,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.60730521468633,
+                ""Y"": -150.14407308433158,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.567182433330867,
+                ""Y"": -131.87883931143895,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.931131446672595,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -167.2261243861606,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -11.283889059211504,
+                0,
+                1,
+                0,
+                -168.20599392434514,
+                0,
+                0,
+                1,
+                6.095999804927986
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 0""
+        },
+        ""id"": ""33047656-c350-4887-8c64-0e11c69b8f62""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.0060301756019001,
+                0,
+                1,
+                0,
+                -122.71207308433164,
+                0,
+                0,
+                1,
+                -8.959499808725013E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 1""
+        },
+        ""id"": ""daa56862-d724-4054-b215-ccb91e7b2f96""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -124.5039432782709,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -124.5039432782709,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -33.37558758633723,
+                0,
+                1,
+                0,
+                -115.96828273763442,
+                0,
+                0,
+                1,
+                2.028377465990161E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 2""
+        },
+        ""id"": ""09cf98f9-4756-4c3a-8ed3-fdecc8bc6ec2""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.0752238699734376,
+                ""Y"": -183.10683082119175,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.075223869973496,
+                ""Y"": -150.1440730843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -150.14407308433155,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097125,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.231587586337334,
+                0,
+                1,
+                0,
+                -174.01996937525354,
+                0,
+                0,
+                1,
+                1.2434497875801753E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 3""
+        },
+        ""id"": ""3cf08668-ca58-4fc4-9d45-fbaa6b1c907b""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -22.98200753776173,
+                ""Y"": -246.85219262945597,
+                ""Z"": 0
+              },
+              {
+                ""X"": -31.266659098015154,
+                ""Y"": -246.85219262945597,
+                ""Z"": 0
+              },
+              {
+                ""X"": -31.266659098015154,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -273.76250570256764,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.730525117375038,
+                ""Y"": -273.87950019248115,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.90756511737498,
+                ""Y"": -260.16350019248114,
+                ""Z"": 0
+              },
+              {
+                ""X"": -17.901725117375207,
+                ""Y"": -254.76854019248142,
+                ""Z"": 0
+              },
+              {
+                ""X"": -15.819463160818934,
+                ""Y"": -246.85219262945614,
+                ""Z"": 0
+              },
+              {
+                ""X"": -13.969805117375145,
+                ""Y"": -241.69262019248103,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.966024989619264,
+                ""Y"": -235.2571612159445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.437685117375132,
+                ""Y"": -230.68324419248137,
+                ""Z"": 0
+              },
+              {
+                ""X"": -3.454205117375146,
+                ""Y"": -222.39878019248127,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.8938851173750706,
+                ""Y"": -217.5524601924812,
+                ""Z"": 0
+              },
+              {
+                ""X"": 2.745133492250531,
+                ""Y"": -210.27619262945615,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.683954882624704,
+                ""Y"": -206.21390019248136,
+                ""Z"": 0
+              },
+              {
+                ""X"": 8.15867488262478,
+                ""Y"": -197.6185401924815,
+                ""Z"": 0
+              },
+              {
+                ""X"": 10.078914882624744,
+                ""Y"": -192.4064601924812,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.98200753776173,
+                ""Y"": -192.4064601924813,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -22.418541096012056,
+                0,
+                1,
+                0,
+                -228.54708552130643,
+                0,
+                0,
+                1,
+                1.1712852909795402E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 4""
+        },
+        ""id"": ""15ab33bc-4b40-42d2-acd2-3ca13cc9cced""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.09265120635432,
+                ""Y"": -282.94857943670644,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.275212878189713,
+                ""Y"": -269.3246073006308,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.24974902413485,
+                ""Y"": -256.2514373977242,
+                ""Z"": 0
+              },
+              {
+                ""X"": -23.317187586337234,
+                ""Y"": -250.81951308433133,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.06950281431193,
+                ""Y"": -242.13130981236262,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.109640734036283,
+                ""Y"": -233.70068692888208,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.261532878189804,
+                ""Y"": -226.71356730063087,
+                ""Z"": 0
+              },
+              {
+                ""X"": -7.404304604261609,
+                ""Y"": -220.96078781063102,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.1854981969067167,
+                ""Y"": -209.388031752044,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7238723593939653,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -34.871879250036514,
+                0,
+                1,
+                0,
+                -266.6331144463999,
+                0,
+                0,
+                1,
+                6.095999804927974
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 5""
+        },
+        ""id"": ""8df5bc54-5dce-4144-9626-8f1121a6a5f7""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097057,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097057,
+                ""Y"": -131.85590241036505,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -131.9159662843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -33.37558758633723,
+                0,
+                1,
+                0,
+                -115.96828273763442,
+                0,
+                0,
+                1,
+                27.431999122176077
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 6""
+        },
+        ""id"": ""3ff3858c-2862-4267-a6d2-c7f6adc2c521""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.0060301756019001,
+                0,
+                1,
+                0,
+                -122.71207308433164,
+                0,
+                0,
+                1,
+                27.431999122176027
+              ]
+            }
+          },
+          ""Identifier"": ""Retail: 7""
+        },
+        ""id"": ""d66d9849-efb2-4ad3-9012-8ab793d82bda""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.008827952097057,
+                ""Y"": -131.85607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -131.85607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -5.94358758633723,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097057,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.08758758633725,
+                0,
+                1,
+                0,
+                -122.71207308433159,
+                0,
+                0,
+                1,
+                3.808064974464287E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Googler Store: 0""
+        },
+        ""id"": ""9dc2703d-70a4-443f-8c1a-a7ff58ff9440""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -24.957803699235587,
+                ""Y"": -150.14407308433266,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -150.14407308433266,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.957803699235587,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.087341552795728,
+                0,
+                1,
+                0,
+                -141.00007308433158,
+                0,
+                0,
+                1,
+                7.593925488436071E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Lobby: 0""
+        },
+        ""id"": ""1ef9852e-f3af-4a05-8933-73aaed06af95""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442133,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -107.89879308433164,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                -5.911937606128959E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Logistics: 0""
+        },
+        ""id"": ""dba683c0-3c26-46f8-8790-10cf82e52335""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -265.12308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -265.12308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -255.97908552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -54.3610675863372,
+                ""Y"": -255.97908552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -54.3610675863372,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.32939000672382,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.32939000672382,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -58.56203903930982,
+                0,
+                1,
+                0,
+                -228.54708552130631,
+                0,
+                0,
+                1,
+                1.1290968160437842E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Logistics: 1""
+        },
+        ""id"": ""169db4fd-d010-4819-85b8-58d8d7a37682""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -107.89879308433164,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""Identifier"": ""Logistics: 2""
+        },
+        ""id"": ""aca6e552-b31e-42cf-b410-8e61266439b0""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -40.61404156697726,
+                ""Y"": -255.97908552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -54.361067586337214,
+                ""Y"": -255.97908552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -54.361067586337214,
+                ""Y"": -219.40308552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.32939000672382,
+                ""Y"": -219.40308552130625,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.32939000672382,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -58.56203903930982,
+                0,
+                1,
+                0,
+                -228.54708552130631,
+                0,
+                0,
+                1,
+                6.095999804928006
+              ]
+            }
+          },
+          ""Identifier"": ""Logistics: 3""
+        },
+        ""id"": ""df01336a-3bcc-43f5-86f6-7bb0373fcfdf""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633716,
+                ""Y"": -98.6466422547002,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.498853318425319,
+                ""Y"": -98.6466422547002,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.498853318425319,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633716,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                6.095999804928043
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk: 0""
+        },
+        ""id"": ""fef6b266-2711-46d1-9e4a-f933db9682d3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -49.03696543783971,
+                ""Y"": -98.80150107618277,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333055773751994,
+                ""Y"": -98.80150107618277,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333055773751994,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -49.03696543783971,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -24.211491614818186,
+                0,
+                1,
+                0,
+                -88.9657380572025,
+                0,
+                0,
+                1,
+                18.287999414784036
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk: 1""
+        },
+        ""id"": ""a33a5e73-3298-4acd-9fe0-54b9723d418b""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.018728622837042,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333055773751994,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.0183330557737647,
+                ""Y"": -8.274246666469608,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.018728622837042,
+                ""Y"": -8.274246666469608,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.066087339234365,
+                0,
+                1,
+                0,
+                -54.321617488949876,
+                0,
+                0,
+                1,
+                12.191999609856005
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk: 2""
+        },
+        ""id"": ""c0e046d2-0ea3-46dd-aae0-ec911f9626a5""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.0350524136629105,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.0350524136629105,
+                ""Y"": -131.85607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -131.85607308433154,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.943587586337331,
+                0,
+                1,
+                0,
+                -168.4320730843316,
+                0,
+                0,
+                1,
+                15.239999512320122
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk: 3""
+        },
+        ""id"": ""3b4bea3d-958a-446f-94a7-88f2be22cd39""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -39.89893890553816,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -39.89893890553816,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.768527027357585,
+                0,
+                1,
+                0,
+                -61.2594508081887,
+                0,
+                0,
+                1,
+                6.095999804927966
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction: 0""
+        },
+        ""id"": ""475299f3-3b07-45c9-9c70-94ef96323cbc""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -12.31497906101286,
+                ""Y"": -131.78603479626057,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.035052413662953,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.31497906101286,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.94358758633723,
+                0,
+                1,
+                0,
+                -115.99437357874743,
+                0,
+                0,
+                1,
+                15.239999512320065
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction: 2""
+        },
+        ""id"": ""c7c9fdfb-b539-4ff9-8893-67b0d20640b3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.010902111448914,
+                ""Y"": -59.8686232205019,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.023415692502073298,
+                ""Y"": -59.8686232205019,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.02341569250207586,
+                ""Y"": -41.85762517702132,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.010902111448914,
+                ""Y"": -41.85762517702132,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -7.3647387250150365,
+                0,
+                1,
+                0,
+                -53.75326387466117,
+                0,
+                0,
+                1,
+                18.287999414783947
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction: 3""
+        },
+        ""id"": ""d80b2aff-769a-42bd-8b5f-eb4d9fdba731""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.018728622837042,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.009888257077097506,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.009888257077090401,
+                ""Y"": -30.18802977958186,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.018728622837042,
+                ""Y"": -30.18802977958186,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.802557662536582,
+                0,
+                1,
+                0,
+                -48.91328661083295,
+                0,
+                0,
+                1,
+                6.095999804928049
+              ]
+            }
+          },
+          ""Identifier"": ""Event Production: 0""
+        },
+        ""id"": ""30f3d5b6-05e8-4f72-9aaa-01c95b19af59""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -39.25135452735927,
+                ""Y"": -91.90256888918219,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333666386705267,
+                ""Y"": -91.90256888918219,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333666386709524,
+                ""Y"": -68.30174721689616,
+                ""Z"": 0
+              },
+              {
+                ""X"": -39.25135452735927,
+                ""Y"": -68.30174721689616,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -19.061939417838783,
+                0,
+                1,
+                0,
+                -79.51808894440754,
+                0,
+                0,
+                1,
+                12.191999609855996
+              ]
+            }
+          },
+          ""Identifier"": ""Event Production: 1""
+        },
+        ""id"": ""5966bb17-71f7-4d9e-93f1-f5c5508cab87""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633718,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097057,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.31497906101286,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.31497906101286,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633718,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -12.314979061012856,
+                0,
+                1,
+                0,
+                -113.56807308433159,
+                0,
+                0,
+                1,
+                15.239999512320015
+              ]
+            }
+          },
+          ""Identifier"": ""Event Production: 2""
+        },
+        ""id"": ""fe32dd2a-4e37-4a59-81a7-45a242417f24""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -60.94642577348583,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -60.946425773485814,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -3.9673584432402578,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -3.9673584432402578,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.46758573305091,
+                0,
+                1,
+                0,
+                -42.737322501125156,
+                0,
+                0,
+                1,
+                18.287999414784036
+              ]
+            }
+          },
+          ""Identifier"": ""Event Production: 3""
+        },
+        ""id"": ""b24c489d-a5b7-4eab-81cd-44354fdb228d""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -14.497233289950675,
+                ""Y"": -95.80552360051635,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.0016324421375681908,
+                ""Y"": -95.81432498855025,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018333055773751994,
+                ""Y"": -68.30276046921193,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.4805326763145,
+                ""Y"": -68.29395908117803,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.322924109492121,
+                0,
+                1,
+                0,
+                -85.36107791252863,
+                0,
+                0,
+                1,
+                6.09599980492805
+              ]
+            }
+          },
+          ""Identifier"": ""Event Prep: 0""
+        },
+        ""id"": ""8378c104-4cc1-46f9-9c6a-575b13404c15""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.02018004687434,
+                ""Y"": -75.27259166777336,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.014123757610249844,
+                ""Y"": -75.2876780089405,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.023415692502073298,
+                ""Y"": -59.8686232205019,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.010888111982524,
+                ""Y"": -59.85353687933476,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.55705854051801,
+                0,
+                1,
+                0,
+                -68.30276046921145,
+                0,
+                0,
+                1,
+                12.191999609855962
+              ]
+            }
+          },
+          ""Identifier"": ""Event Prep: 1""
+        },
+        ""id"": ""d1db95f4-ceef-4375-9361-575c1cc36004""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -141.00007308433146,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -141.00007308433146,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.69435542934758,
+                0,
+                1,
+                0,
+                -131.85607308433146,
+                0,
+                0,
+                1,
+                15.239999512320022
+              ]
+            }
+          },
+          ""Identifier"": ""Event Prep: 2""
+        },
+        ""id"": ""492bb7a0-ee35-4692-a517-bbedf24713d4""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -49.03696543783971,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -49.03696543783971,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.19027940598974,
+                0,
+                1,
+                0,
+                -82.78372456248015,
+                0,
+                0,
+                1,
+                18.287999414784046
+              ]
+            }
+          },
+          ""Identifier"": ""Event Prep: 3""
+        },
+        ""id"": ""4d78213f-83dd-4d9b-905c-cc48b51b42db""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -38.809903428787614,
+                ""Y"": -95.3019978834724,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.044889620242582,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033091924814293,
+                ""Y"": -75.7331743647145,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.798105733359186,
+                ""Y"": -75.72487919916435,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                19.811999366016003
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 0""
+        },
+        ""id"": ""18ab8505-6e66-4e09-9746-08e751febbd7""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -38.91213438306406,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033039330581047,
+                ""Y"": -75.64589939202054,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.861385719782376,
+                ""Y"": -75.64589939202054,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -27.58958618512441,
+                0,
+                1,
+                0,
+                -81.72730440554858,
+                0,
+                0,
+                1,
+                28.95599907340814
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 1""
+        },
+        ""id"": ""7536d538-c0b8-42b4-ac02-31c49dd07a1c""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -39.02128115560639,
+                ""Y"": -95.3103263499385,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.98963001569801,
+                ""Y"": -95.3103263499385,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033092067450326,
+                ""Y"": -75.73341105522599,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.89715690130638,
+                ""Y"": -75.64589939202054,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                38.09999878080013
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 2""
+        },
+        ""id"": ""7d231807-b54a-446a-8c4a-c513817d65e4""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -38.861385719782376,
+                ""Y"": -95.31030015854346,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033092067450326,
+                ""Y"": -95.31030015854346,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033092067450326,
+                ""Y"": -75.73341105522599,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.798105733359186,
+                ""Y"": -75.73341105522599,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                47.24399848819202
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 3""
+        },
+        ""id"": ""cbdc22e8-fc4c-4a95-a2a3-e26755d5e123""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -38.798105733359186,
+                ""Y"": -95.32738385167596,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.033092067450326,
+                ""Y"": -75.73341105522599,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.798105733359186,
+                ""Y"": -75.65710897795107,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -37.77937765252439,
+                0,
+                1,
+                0,
+                -84.27822550851332,
+                0,
+                0,
+                1,
+                56.38799819558409
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 4""
+        },
+        ""id"": ""75dcee38-3d6f-4fcc-8ccf-e98a14f7f197""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -39.015275781861,
+                ""Y"": -95.3275381985826,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097,
+                ""Y"": -95.31029304902255,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.9493726635398,
+                ""Y"": -75.64589939202054,
+                ""Z"": 0
+              },
+              {
+                ""X"": -39.015275781861,
+                ""Y"": -75.64589939202054,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -27.816203258937378,
+                0,
+                1,
+                0,
+                -84.89762934347449,
+                0,
+                0,
+                1,
+                65.5319979029761
+              ]
+            }
+          },
+          ""Identifier"": ""Training Room: 5""
+        },
+        ""id"": ""cacdc6bc-3137-49bc-a25c-442d115c952e""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -33.37558758633725,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -33.37558758633725,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -47.83352804442133,
+                0,
+                1,
+                0,
+                -174.88114857322623,
+                0,
+                0,
+                1,
+                10.66799965862393
+              ]
+            }
+          },
+          ""Identifier"": ""Fitness Center: 0""
+        },
+        ""id"": ""9b1229c3-7c58-4b64-82d1-ed9d4a6f7f90""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -154.46762785432244,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -154.46762785432244,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.024849765443705,
+                0,
+                1,
+                0,
+                -159.28807308433142,
+                0,
+                0,
+                1,
+                10.667999658623984
+              ]
+            }
+          },
+          ""Identifier"": ""Massage Rooms: 0""
+        },
+        ""id"": ""f0c90dff-b239-41cb-a476-6a4498eea279""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433144,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -183.24535308433144,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057709,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -57.74722210362757,
+                0,
+                1,
+                0,
+                -177.87123876853278,
+                0,
+                0,
+                1,
+                24.38399921971217
+              ]
+            }
+          },
+          ""Identifier"": ""Massage Rooms: 1""
+        },
+        ""id"": ""eb29bc78-d40c-4daf-af66-ad4fc7080bd5""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.84291450702306,
+                ""Y"": -154.46762785432244,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.942687460966965,
+                ""Y"": -154.46762785432244,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -107.93609359425437,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.583736096942445,
+                0,
+                1,
+                0,
+                -127.83860370698949,
+                0,
+                0,
+                1,
+                10.66799965862402
+              ]
+            }
+          },
+          ""Identifier"": ""Wellness: 0""
+        },
+        ""id"": ""cf53141c-f545-4ece-9748-289094fd1e9c""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442133,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.84707487626269,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.74721441817853,
+                ""Y"": -124.00546073919767,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.957809044709656,
+                0,
+                1,
+                0,
+                -150.1440730843315,
+                0,
+                0,
+                1,
+                24.383999219712187
+              ]
+            }
+          },
+          ""Identifier"": ""Wellness: 1""
+        },
+        ""id"": ""fd54f617-7c1b-4bf5-9c64-d7f2071af8cd""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442132,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -59.05790936956206,
+                0,
+                1,
+                0,
+                -148.39439486755535,
+                0,
+                0,
+                1,
+                47.2439984881921
+              ]
+            }
+          },
+          ""Identifier"": ""Wellness: 2""
+        },
+        ""id"": ""bc52b57a-6cd0-4044-8968-393585c1bb32""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.079660825211803,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.496613038365687,
+                ""Y"": -273.0666952348585,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.275212878189713,
+                ""Y"": -269.3246073006308,
+                ""Z"": 0
+              },
+              {
+                ""X"": -27.029437866041462,
+                ""Y"": -263.5517916375229,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.24974902413485,
+                ""Y"": -256.2514373977242,
+                ""Z"": 0
+              },
+              {
+                ""X"": -23.317187586337234,
+                ""Y"": -250.81951308433133,
+                ""Z"": 0
+              },
+              {
+                ""X"": -20.598403334123446,
+                ""Y"": -245.25851891842052,
+                ""Z"": 0
+              },
+              {
+                ""X"": -17.444738929583302,
+                ""Y"": -239.39142875887222,
+                ""Z"": 0
+              },
+              {
+                ""X"": -23.861388856826764,
+                ""Y"": -239.39142875887222,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.223704690204787,
+                ""Y"": -225.3706287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -225.3706287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -255.88467289853313,
+                ""Z"": 0
+              },
+              {
+                ""X"": -44.58283755476543,
+                ""Y"": -256.06472433138765,
+                ""Z"": 0
+              },
+              {
+                ""X"": -53.817866436440184,
+                ""Y"": -256.06472433138765,
+                ""Z"": 0
+              },
+              {
+                ""X"": -53.817866436440184,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.63578885682676,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.63578885682676,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -201.53335308433157,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -46.06407178880768,
+                0,
+                1,
+                0,
+                -271.94905118529323,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""Identifier"": ""Fitness Hub: 0""
+        },
+        ""id"": ""32ff3e8d-3d35-4199-ad48-6714576c7205""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -98.6633530843315,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": 0.07575045285859862,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": 0.07575045285859972,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -55.232959364391924,
+                0,
+                1,
+                0,
+                -49.958931308909364,
+                0,
+                0,
+                1,
+                19.81199936601603
+              ]
+            }
+          },
+          ""Identifier"": ""Lab Space: 0""
+        },
+        ""id"": ""e5066b45-87e6-483e-ba1e-bc7456b13c0d""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -183.24535308433147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -176.28597498428198,
+                ""Z"": 0
+              },
+              {
+                ""X"": -34.01797355390077,
+                ""Y"": -176.29384997106368,
+                ""Z"": 0
+              },
+              {
+                ""X"": -34.0259373365552,
+                ""Y"": -167.16892421717824,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.83352804442133,
+                ""Y"": -167.1809747975714,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.87121384586407,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -124.00047188101448,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097064,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -107.89879308433163,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.16783135123133,
+                0,
+                1,
+                0,
+                -145.63743163348408,
+                0,
+                0,
+                1,
+                15.23999951231998
+              ]
+            }
+          },
+          ""Identifier"": ""Lab Space: 1""
+        },
+        ""id"": ""541f8730-13a3-400b-89dc-4ef5df5dda63""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.349655298576465,
+                ""Y"": -219.40308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.34965529857647,
+                ""Y"": -201.54293863603996,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -201.54293863603996,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -54.361067586337185,
+                0,
+                1,
+                0,
+                -210.2590855213063,
+                0,
+                0,
+                1,
+                19.811999366015858
+              ]
+            }
+          },
+          ""Identifier"": ""Lab Space: 2""
+        },
+        ""id"": ""26b7ceaf-6004-4bd8-acb3-eb0b7f680028""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -34.11025185039567,
+                ""Y"": -177.57607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.01808191505799,
+                ""Y"": -177.57607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.01808191505799,
+                ""Y"": -167.2484592749974,
+                ""Z"": 0
+              },
+              {
+                ""X"": -34.02658321552724,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -30.801258098291626,
+                0,
+                1,
+                0,
+                -170.46133493234942,
+                0,
+                0,
+                1,
+                28.95599907340804
+              ]
+            }
+          },
+          ""Identifier"": ""Game Room: 1""
+        },
+        ""id"": ""525a0243-3f23-4b06-8951-4a3d22c26e1b""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -34.11025185039567,
+                ""Y"": -177.57607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -177.57607308433154,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99479037400819,
+                ""Y"": -167.24864665529685,
+                ""Z"": 0
+              },
+              {
+                ""X"": -34.02658321552724,
+                ""Y"": -167.24864665529685,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.152477663879534,
+                0,
+                1,
+                0,
+                -172.1855943265707,
+                0,
+                0,
+                1,
+                42.67199863449604
+              ]
+            }
+          },
+          ""Identifier"": ""Game Room: 4""
+        },
+        ""id"": ""a37d5b1d-afc0-4ea6-a77f-9eb57556bdfc""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -48.00538542717439,
+                ""Y"": -93.31240879564135,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.929048492169585,
+                ""Y"": -93.31240879564135,
+                ""Z"": 0
+              },
+              {
+                ""X"": -38.80359711212097,
+                ""Y"": -84.83728377106577,
+                ""Z"": 0
+              },
+              {
+                ""X"": -48.04115660869839,
+                ""Y"": -84.83728377106577,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -43.343500831859096,
+                0,
+                1,
+                0,
+                -87.89735405782739,
+                0,
+                0,
+                1,
+                28.955999073407927
+              ]
+            }
+          },
+          ""Identifier"": ""Game Room: 5""
+        },
+        ""id"": ""4c03463d-b175-4a73-8c03-72915920875e""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -33.942811665288815,
+                ""Y"": -177.62730193891903,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.940117415407506,
+                ""Y"": -177.627301938919,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.024475448253394,
+                ""Y"": -167.17598593938814,
+                ""Z"": 0
+              },
+              {
+                ""X"": -34.02658321552724,
+                ""Y"": -167.24864665529685,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -29.37072100034212,
+                0,
+                1,
+                0,
+                -174.41442628156702,
+                0,
+                0,
+                1,
+                56.38799819558396
+              ]
+            }
+          },
+          ""Identifier"": ""Game Room: 7""
+        },
+        ""id"": ""d0dfa7c1-92ce-4f38-acf9-8931d4544cce""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -14.567341031747908,
+                ""Y"": -150.1440730843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.18650117621824,
+                ""Y"": -150.1440730843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.567341031747908,
+                ""Y"": -131.95103862228913,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -8.271439281865849,
+                0,
+                1,
+                0,
+                -139.98322776566917,
+                0,
+                0,
+                1,
+                6.095999804928055
+              ]
+            }
+          },
+          ""Identifier"": ""Atrium Loss Factor: 0""
+        },
+        ""id"": ""cf8523ea-4ad9-402a-a205-8123b7ccb7a3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -14.567341031747908,
+                ""Y"": -150.1440730843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.075223869973496,
+                ""Y"": -150.1440730843316,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662693,
+                ""Y"": -131.85607308433165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.567341031747908,
+                ""Y"": -131.88879767642914,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.058007992654363,
+                0,
+                1,
+                0,
+                -140.73479723784644,
+                0,
+                0,
+                1,
+                12.191999609856065
+              ]
+            }
+          },
+          ""Identifier"": ""Atrium Loss Factor: 1""
+        },
+        ""id"": ""776baa5d-ff82-456f-ac9f-b735486218af""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -150.8923374572158,
+                0,
+                0,
+                1,
+                18.287999414784075
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 0""
+        },
+        ""id"": ""9fba15f7-4432-4dad-954b-3b4955e3f784""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -150.8923374572158,
+                0,
+                0,
+                1,
+                19.811999366016035
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 1""
+        },
+        ""id"": ""6ac2b91e-7cbe-4eac-afcd-5ae7578a0adb""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                18.287999414784032
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 2""
+        },
+        ""id"": ""0df5018d-d6f6-4996-b8e8-98708fae04ce""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -223.53723956436835,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -223.53723956436835,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                32.00399897587203
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 3""
+        },
+        ""id"": ""1e1ac5f7-3a78-4dca-b5bd-3637bba9b86f""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -223.5418287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -223.5418287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 4""
+        },
+        ""id"": ""078e59ea-61d7-4856-8c41-0a67430e118d""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -223.5418287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -223.5418287588722,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.04057526110096,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.957388856826732,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -25.694646772699862,
+                0,
+                1,
+                0,
+                -216.2533147938725,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 5""
+        },
+        ""id"": ""20f09380-15a8-4026-9f08-51f70126ead9""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.0945039780062,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.0945039780062,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -150.8923374572158,
+                0,
+                0,
+                1,
+                -5.062616992290714E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 6""
+        },
+        ""id"": ""e89240da-b3dd-4ee1-957f-7c782b1b6087""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.300995650014972,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.0945039780062,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -150.8923374572158,
+                0,
+                0,
+                1,
+                50.291998390656055
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 7""
+        },
+        ""id"": ""9768cae8-d5ce-4027-94f1-339e31725474""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.15546222771167,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -13.847217950596516,
+                0,
+                1,
+                0,
+                -150.8923374572158,
+                0,
+                0,
+                1,
+                64.00799795174406
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 8""
+        },
+        ""id"": ""9d863863-6210-4161-b013-e352c3f5e5d9""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                -5.062616992290714E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 9""
+        },
+        ""id"": ""8b8281db-2a30-46a7-b392-5af9502953e3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                -5.062616992290714E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 10""
+        },
+        ""id"": ""e47e7b80-093d-4c69-a44b-15aaf21ae336""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.0346618343912,
+                ""Y"": -43.3508923172117,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -14.517512367401649,
+                0,
+                1,
+                0,
+                -50.37920466430795,
+                0,
+                0,
+                1,
+                -1.0136336214827679E-13
+              ]
+            }
+          },
+          ""Identifier"": ""Tier 2 Meandering Ramp Loss Factor: 11""
+        },
+        ""id"": ""95c4cd1f-b499-475b-ad08-589b13f768d0""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 1.1191420862261323,
+                ""Y"": -8.69212728472044,
+                ""Z"": 0
+              },
+              {
+                ""X"": 9.043942086226153,
+                ""Y"": -8.692127284720469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 9.043942086226103,
+                ""Y"": -22.712927284720465,
+                ""Z"": 0
+              },
+              {
+                ""X"": 10.872742086226157,
+                ""Y"": -22.71292728472047,
+                ""Z"": 0
+              },
+              {
+                ""X"": 10.872742086226157,
+                ""Y"": -6.863327284720448,
+                ""Z"": 0
+              },
+              {
+                ""X"": 2.9479420862261927,
+                ""Y"": -6.863327284720448,
+                ""Z"": 0
+              },
+              {
+                ""X"": 2.9479420862261927,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": 10.872742086226186,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": 10.872742086226186,
+                ""Y"": 24.835872715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.1191420862262298,
+                ""Y"": 24.835872715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.1191420862262293,
+                ""Y"": 23.007072715279573,
+                ""Z"": 0
+              },
+              {
+                ""X"": 9.043942086226235,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": 9.043942086226185,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.1191420862261952,
+                ""Y"": 8.986272715279542,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                2.9479420862261616,
+                0,
+                1,
+                0,
+                -6.863327284720448,
+                0,
+                0,
+                1,
+                0.3
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 0""
+        },
+        ""id"": ""06c36fde-0c1f-4391-a86d-22a609b94f76""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 20.626342086226195,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -6.863327284720544,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": -6.863327284720544,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.626342086226195,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                20.62634208622614,
+                0,
+                1,
+                0,
+                -8.69212728472051,
+                0,
+                0,
+                1,
+                0.3
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 1""
+        },
+        ""id"": ""33bf7929-f20a-4d47-905c-8cc2976ec66a""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -19.94674643899757,
+                ""Y"": -128.30586222771163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.021946438997569,
+                ""Y"": -128.30586222771163,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.021946438997569,
+                ""Y"": -142.3266622277117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.946746438997607,
+                ""Y"": -142.3266622277117,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.946746438997607,
+                ""Y"": -160.00506222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.02194643899765,
+                ""Y"": -160.00506222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.02194643899765,
+                ""Y"": -174.02586222771166,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -174.02586222771166,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -158.17626222771165,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.11794643899761,
+                ""Y"": -144.0945039780062,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -144.0945039780062,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -126.47706222771168,
+                ""Z"": 0
+              },
+              {
+                ""X"": -19.94674643899757,
+                ""Y"": -126.47706222771168,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -18.11794643899761,
+                0,
+                1,
+                0,
+                -158.17626222771165,
+                0,
+                0,
+                1,
+                -2.883804306463844E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 2""
+        },
+        ""id"": ""b1f26caf-ba2b-4230-944d-b706e8b0486b""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226144,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -6.863327284720544,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                20.62634208622614,
+                0,
+                1,
+                0,
+                -8.69212728472051,
+                0,
+                0,
+                1,
+                0.3
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 3""
+        },
+        ""id"": ""fd0a0d14-7910-4e99-ace4-5d8659a9cfc2""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.18882625284814,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 26.22456649464967,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                2.4492935982947064E-16,
+                0,
+                20.62634208622614,
+                -2.4492935982947064E-16,
+                1,
+                0,
+                -8.69212728472051,
+                0,
+                0,
+                1,
+                0.3
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 4""
+        },
+        ""id"": ""7ad98560-d0e1-4fe7-8503-3b82425c64c8""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 5.328672715279517,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.605542086226173,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": 13.253472715279468,
+                ""Z"": 0
+              },
+              {
+                ""X"": 20.62634208622614,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.18882625284814,
+                ""Y"": -8.69212728472051,
+                ""Z"": 0
+              },
+              {
+                ""X"": 28.551142086226164,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226144,
+                ""Y"": -22.71292728472054,
+                ""Z"": 0
+              },
+              {
+                ""X"": 30.379942086226166,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": -6.86332728472053,
+                ""Z"": 0
+              },
+              {
+                ""X"": 22.455142086226196,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              },
+              {
+                ""X"": 4.776742086226172,
+                ""Y"": 15.082272715279469,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                2.4492935982947064E-16,
+                0,
+                20.62634208622614,
+                -2.4492935982947064E-16,
+                1,
+                0,
+                -8.69212728472051,
+                0,
+                0,
+                1,
+                0.3
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 5""
+        },
+        ""id"": ""82941a73-9dea-4f8e-b7bf-082423f131fb""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279516,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773852,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773793,
+                ""Y"": 8.986272715279544,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773856,
+                ""Y"": -8.692127284720442,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773834,
+                ""Y"": -8.69212728472047,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773884,
+                ""Y"": -22.72686250908115,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773845,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773795,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.83587271527951,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773845,
+                0,
+                1,
+                0,
+                -6.8633272847204445,
+                0,
+                0,
+                1,
+                -3.907985046680551E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 6""
+        },
+        ""id"": ""33618e35-cef3-40fc-bfac-16394c1a9c93""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.388057913773793,
+                ""Y"": 8.986272715279544,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773856,
+                ""Y"": -8.692127284720442,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773834,
+                ""Y"": -8.69212728472047,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773884,
+                ""Y"": -22.71292728472046,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773845,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773795,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.83587271527951,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279516,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773852,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773845,
+                0,
+                1,
+                0,
+                -6.8633272847204445,
+                0,
+                0,
+                1,
+                -4.590772206825022E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 7""
+        },
+        ""id"": ""b88ed07f-842f-4c8f-9593-a8e2dd97157c""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -10.463257913773884,
+                ""Y"": -22.71292728472046,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773845,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773795,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.83587271527951,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279516,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773852,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773793,
+                ""Y"": 8.986272715279544,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773856,
+                ""Y"": -8.692127284720442,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773834,
+                ""Y"": -8.69212728472047,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773845,
+                0,
+                1,
+                0,
+                -6.8633272847204445,
+                0,
+                0,
+                1,
+                -6.217248937900877E-15
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 8""
+        },
+        ""id"": ""226ad557-2df3-4401-a7e2-6fa4bb1ecad8""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.388057913773878,
+                ""Y"": -8.692127284720438,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773834,
+                ""Y"": -8.692127284720481,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773909,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720475,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773827,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773777,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.835872715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -13.611276090673597,
+                ""Y"": 24.83587271527953,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773793,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773827,
+                0,
+                1,
+                0,
+                -6.863327284720448,
+                0,
+                0,
+                1,
+                -8.781864124784988E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 9""
+        },
+        ""id"": ""63ac5afa-5fe6-4b8f-9c33-a3b053c7936c""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.388057913773814,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773878,
+                ""Y"": -8.692127284720438,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773859,
+                ""Y"": -8.692127284720467,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773909,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720475,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773827,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773777,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.835872715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279516,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773852,
+                ""Y"": 8.986272715279487,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773827,
+                0,
+                1,
+                0,
+                -6.8633272847204445,
+                0,
+                0,
+                1,
+                -8.37108160567368E-14
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 10""
+        },
+        ""id"": ""721d5a00-0136-4870-95a1-0a1533a8c4e2""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -18.388057913773764,
+                ""Y"": 23.007072715279545,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773802,
+                ""Y"": 23.007072715279516,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773852,
+                ""Y"": 8.986272715279515,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773793,
+                ""Y"": 8.986272715279544,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773856,
+                ""Y"": -8.692127284720442,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773834,
+                ""Y"": -8.69212728472047,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.463257913773857,
+                ""Y"": -22.712927284720465,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.63445791377397,
+                ""Y"": -22.712927284720468,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773913,
+                ""Y"": -6.863327284720473,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773845,
+                ""Y"": -6.8633272847204445,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.559257913773795,
+                ""Y"": 7.157472715279546,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773863,
+                ""Y"": 7.157472715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.634457913773801,
+                ""Y"": 24.835872715279518,
+                ""Z"": 0
+              },
+              {
+                ""X"": -18.388057913773757,
+                ""Y"": 24.835872715279546,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -16.559257913773827,
+                0,
+                1,
+                0,
+                -6.863327284720448,
+                0,
+                0,
+                1,
+                9.547918011776346E-15
+              ]
+            }
+          },
+          ""Identifier"": ""Meandering Stair Ramp Loss Factor: 11""
+        },
+        ""id"": ""1461aa5f-8c32-41f1-9f20-0d6dbf7b7ff4""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -10.128546007820324,
+                ""Y"": -98.69796579480257,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.018729920240748044,
+                ""Y"": -98.80150107618277,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662936694436E-05,
+                ""Y"": -57.64850362130081,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -57.643899275309025,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.125213701848507,
+                ""Y"": -91.35236726248868,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.0401113489645,
+                ""Y"": -91.34557456185617,
+                ""Z"": 0
+              },
+              {
+                ""X"": -24.99620739389963,
+                ""Y"": -98.69796579480257,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -3.132506666430933,
+                0,
+                1,
+                0,
+                -77.49529032284869,
+                0,
+                0,
+                1,
+                74.67599761036811
+              ]
+            }
+          },
+          ""Identifier"": ""Anchor Cafe Loss Factor 2: 0""
+        },
+        ""id"": ""e8107188-40d5-401b-96de-d147bea17c1e""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -227.24527252430104,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.557636979436792,
+                ""Y"": -227.24527252430104,
+                ""Z"": 0
+              },
+              {
+                ""X"": -9.550314371300473,
+                ""Y"": -225.29147615270062,
+                ""Z"": 0
+              },
+              {
+                ""X"": -7.2717256013536105,
+                ""Y"": -220.73540669145012,
+                ""Z"": 0
+              },
+              {
+                ""X"": -4.558190872041855,
+                ""Y"": -215.06455496963295,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.9379911368158496,
+                ""Y"": -211.05669246670558,
+                ""Z"": 0
+              },
+              {
+                ""X"": -1.2089728781899538,
+                ""Y"": -206.77964730063118,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.7112671218100104,
+                ""Y"": -201.56756730063088,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.957388856826736,
+                ""Y"": -201.56756730063097,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.957388856826707,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              },
+              {
+                ""X"": -22.032588856826763,
+                ""Y"": -209.51643956436837,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -15.634448342104946,
+                0,
+                1,
+                0,
+                -214.72625253430542,
+                0,
+                0,
+                1,
+                18.28799941478396
+              ]
+            }
+          },
+          ""Identifier"": ""Anchor Cafe Loss Factor 2: 1""
+        },
+        ""id"": ""0d7d83ce-4c97-4639-9dc8-89de3b1a5fbb""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -16.260524571701815,
+                ""Y"": -98.63640935410983,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.08053372480910456,
+                ""Y"": -98.80150107618277,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.030099153076180635,
+                ""Y"": -73.09435474188138,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.310572356381808,
+                ""Y"": -73.12641332818616,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -7.701845096238911,
+                0,
+                1,
+                0,
+                -94.3178361173158,
+                0,
+                0,
+                1,
+                32.00399897587199
+              ]
+            }
+          },
+          ""Identifier"": ""Neighborhood Cafe Loss Factor: 0""
+        },
+        ""id"": ""d784b87a-b5dd-4707-b5db-52aee070d5ff""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -16.47587381656899,
+                ""Y"": -237.63427807158786,
+                ""Z"": 0
+              },
+              {
+                ""X"": -14.245867418913088,
+                ""Y"": -233.9311970832952,
+                ""Z"": 0
+              },
+              {
+                ""X"": -12.82185287818988,
+                ""Y"": -231.55988730063095,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.852470093716342,
+                ""Y"": -227.80709673555336,
+                ""Z"": 0
+              },
+              {
+                ""X"": -8.796050523521325,
+                ""Y"": -223.70392302028245,
+                ""Z"": 0
+              },
+              {
+                ""X"": -6.631762529161738,
+                ""Y"": -219.42978810741923,
+                ""Z"": 0
+              },
+              {
+                ""X"": -4.393026387014583,
+                ""Y"": -214.65599019088128,
+                ""Z"": 0
+              },
+              {
+                ""X"": -2.113806764353825,
+                ""Y"": -209.01792059798382,
+                ""Z"": 0
+              },
+              {
+                ""X"": -0.561146647508874,
+                ""Y"": -205.14578653012435,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.8218257864393443,
+                ""Y"": -201.26889976738423,
+                ""Z"": 0
+              },
+              {
+                ""X"": -20.770158317862478,
+                ""Y"": -201.41339606793497,
+                ""Z"": 0
+              },
+              {
+                ""X"": -20.770158317862478,
+                ""Y"": -219.42978810741923,
+                ""Z"": 0
+              },
+              {
+                ""X"": -16.47587381656899,
+                ""Y"": -219.42978810741923,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -8.568112607350507,
+                0,
+                1,
+                0,
+                -206.44373487092832,
+                0,
+                0,
+                1,
+                54.863998244352075
+              ]
+            }
+          },
+          ""Identifier"": ""Neighborhood Cafe Loss Factor: 1""
+        },
+        ""id"": ""6ff7bb87-7b15-4008-8cb3-8be14c589047""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -10.19314643899762,
+                ""Y"": -167.16104228000162,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.035052413662909,
+                ""Y"": -167.16104228000162,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -121.40703959429003,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.19314643899762,
+                ""Y"": -121.40703959429003,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -2.842603508593113,
+                0,
+                1,
+                0,
+                -157.5579722802229,
+                0,
+                0,
+                1,
+                22.859999268480067
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Loss Factor: 0""
+        },
+        ""id"": ""866d2faf-3548-4d9f-9d64-57659b4f2ae3""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": -25.759292358043957,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -25.672492317211702,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391209,
+                ""Y"": -36.55923798350327,
+                ""Z"": 0
+              },
+              {
+                ""X"": -1.7763568394002505E-15,
+                ""Y"": -36.55923798350327,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0,
+                ""Y"": 0,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.008827952097008,
+                ""Y"": 0,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -11.49616654983351,
+                0,
+                1,
+                0,
+                -23.092843863423,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Loss Factor: 1""
+        },
+        ""id"": ""857f7d24-3cb5-4462-8c91-72fed1bf60a1""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -33.31048666812408,
+                ""Y"": -98.80941044103851,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.018369686046016298,
+                ""Y"": -98.80941044103851,
+                ""Z"": 0
+              },
+              {
+                ""X"": 1.2413662936694436E-05,
+                ""Y"": -73.0944137687293,
+                ""Z"": 0
+              },
+              {
+                ""X"": -33.31048666812408,
+                ""Y"": -73.11819327423152,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -10.122485085406078,
+                0,
+                1,
+                0,
+                -85.36107791252863,
+                0,
+                0,
+                1,
+                18.287999414784018
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Loss Factor: 2""
+        },
+        ""id"": ""9b7ddfdb-c12e-4739-abab-61102428e2d4""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -39.113999663089885,
+                ""Y"": -98.66335308433149,
+                ""Z"": 0
+              },
+              {
+                ""X"": -39.113999663089885,
+                ""Y"": -68.27430572946147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -68.27430572946147,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -50.72776740695462,
+                0,
+                1,
+                0,
+                -83.47412490856433,
+                0,
+                0,
+                1,
+                12.191999609856046
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Loss Factor: 3""
+        },
+        ""id"": ""26a6d2e6-1a4d-40b4-8439-45999a93d3db""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -121.40703959429003,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.074934220876739,
+                ""Y"": -121.40703959429003,
+                ""Z"": 0
+              },
+              {
+                ""X"": 6.126492413662692,
+                ""Y"": -114.02944177814676,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.193146438997617,
+                ""Y"": -114.02944177814676,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -1.1696100424012963,
+                0,
+                1,
+                0,
+                -117.15300002053904,
+                0,
+                0,
+                1,
+                22.85999926848001
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 0""
+        },
+        ""id"": ""61e7cbed-f662-4851-981f-fae896f583cf""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -10.109861834391237,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.01833305577375228,
+                ""Y"": -68.30276046921145,
+                ""Z"": 0
+              },
+              {
+                ""X"": 0.01833305577375421,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              },
+              {
+                ""X"": -10.109861834391237,
+                ""Y"": -57.37169231721167,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -5.153195179378569,
+                0,
+                1,
+                0,
+                -63.9392165968888,
+                0,
+                0,
+                1,
+                22.859999268480045
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 1""
+        },
+        ""id"": ""e049ae09-bd65-4586-96ae-7e45345441e7""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -32.08361241510662,
+                ""Y"": -15.64545311408353,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.009244862201356,
+                ""Y"": -15.64545311408353,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.009244862201356,
+                ""Y"": 0.07954896263565203,
+                ""Z"": 0
+              },
+              {
+                ""X"": -32.08361241510662,
+                ""Y"": 0.07954896263565321,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -32.092160232970734,
+                0,
+                1,
+                0,
+                -3.8554040211251137,
+                0,
+                0,
+                1,
+                18.287999414783958
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 2""
+        },
+        ""id"": ""14301e34-bde4-4c11-a6ed-c84c42454138""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -68.27430572946147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -68.27430572946147,
+                ""Z"": 0
+              },
+              {
+                ""X"": -47.86882722057703,
+                ""Y"": -60.94642577348582,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -60.94642577348582,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -56.805403567829906,
+                0,
+                1,
+                0,
+                -64.06086517161617,
+                0,
+                0,
+                1,
+                12.191999609856047
+              ]
+            }
+          },
+          ""Identifier"": ""Tech Talk Prefunction Loss Factor: 3""
+        },
+        ""id"": ""4b862b61-1be9-4177-b87a-b0f926795acf""
+      },
+      {
+        ""value"": {
+          ""EditBoundary"": {
+            ""Vertices"": [
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -29.079660825211803,
+                ""Y"": -282.73207308433143,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.823881565732997,
+                ""Y"": -279.1066765528312,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.496613038365687,
+                ""Y"": -273.0666952348585,
+                ""Z"": 0
+              },
+              {
+                ""X"": -28.136371062172326,
+                ""Y"": -268.7246653618135,
+                ""Z"": 0
+              },
+              {
+                ""X"": -27.302873929810843,
+                ""Y"": -265.12308552130634,
+                ""Z"": 0
+              },
+              {
+                ""X"": -26.458520664896803,
+                ""Y"": -261.47459582756863,
+                ""Z"": 0
+              },
+              {
+                ""X"": -25.15893844433011,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -44.616520563602236,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -53.817866436440184,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              },
+              {
+                ""X"": -63.73366758633717,
+                ""Y"": -255.99619262945603,
+                ""Z"": 0
+              }
+            ],
+            ""discriminator"": ""Elements.Geometry.Polygon""
+          }
+        },
+        ""identity"": {
+          ""EditBoundaryTransform"": {
+            ""Matrix"": {
+              ""Components"": [
+                1,
+                0,
+                0,
+                -49.98168932779199,
+                0,
+                1,
+                0,
+                -274.04045627416156,
+                0,
+                0,
+                1,
+                22.859999268480035
+              ]
+            }
+          },
+          ""Identifier"": ""Fitness Hub Loss Factor: 0""
+        },
+        ""id"": ""5b304db1-5990-4ae0-90fc-4874024106e1""
+      }
+    ]
+  },
+  ""Width"": 1
 }
             ";
             return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesFromProgramRequirementsInputs>(inputText);

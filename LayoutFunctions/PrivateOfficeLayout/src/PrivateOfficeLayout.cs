@@ -26,7 +26,9 @@ namespace PrivateOfficeLayout
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
             var output = new PrivateOfficeLayoutOutputs();
-            var configJson = File.ReadAllText("./PrivateOfficeConfigurations.json");
+            var assmLoc = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            var dir = Path.GetDirectoryName(assmLoc);
+            var configJson = File.ReadAllText(Path.Combine(dir, "PrivateOfficeConfigurations.json"));
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
             var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
@@ -182,7 +184,6 @@ namespace PrivateOfficeLayout
                             // }
                         }
                     }
-
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
                 }
                 if (levelVolume == null)

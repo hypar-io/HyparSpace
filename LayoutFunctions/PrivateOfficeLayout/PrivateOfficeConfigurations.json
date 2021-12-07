@@ -2481,5 +2481,106 @@
         "Name": "West Elm Work Collection - Sterling - Chair - Conference - Armless - Four Legs"
       }
     ]
+  },
+  "Configuration F": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.114638703967371,
+        "Y": 2.5447346143028478,
+        "Z": 0.0
+      },
+      "Width": 2.114638703967371,
+      "Depth": 2.5447346143028478
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/POTypical-POTypical.glb",
+        "Name": "PO Typical - PO Typical",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              7.216449660063518E-16,
+              1.0,
+              0.0,
+              2.1146386353537014,
+              -1.0,
+              7.216449660063518E-16,
+              0.0,
+              0.9942869553825595,
+              0.0,
+              0.0,
+              1.0,
+              -1.870707339001416E-15
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.114638703967371,
+          "Y": 2.5447346143028478,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/SteelcaseCoalesse-Chord-Seating-MidBack-StandardTilt-AluminiumArm.glb",
+        "Name": "Steelcase Coalesse - Chord - Seating - Mid Back - Standard Tilt - Aluminium Arm",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.8660254037844443,
+              -0.4999999999999902,
+              0.0,
+              1.0657360852585125,
+              0.4999999999999902,
+              0.8660254037844443,
+              0.0,
+              1.7252946516749335,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.114638703967371,
+          "Y": 2.5447346143028478,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/WestElmWorkCollection-Sterling-Chair-Conference-Armless-FourLegs.glb",
+        "Name": "West Elm Work Collection - Sterling - Chair - Conference - Armless - Four Legs",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.9939681603644048,
+              0.10966903018537516,
+              0.0,
+              1.0320880270188955,
+              -0.10966903018537516,
+              -0.9939681603644048,
+              0.0,
+              0.5194118427960408,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.114638703967371,
+          "Y": 2.5447346143028478,
+          "Z": 0.0
+        }
+      }
+    ],
+    "Width": 2.114638703967371,
+    "Depth": 2.5447346143028478
   }
 }

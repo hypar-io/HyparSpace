@@ -58,6 +58,10 @@ namespace Elements
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
+            if (name == "unspecified")
+            {
+                name = displayName;
+            }
             var sb = new SpaceBoundary()
             {
                 Boundary = profile,
