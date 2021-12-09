@@ -9,6 +9,8 @@ namespace Hypar.Server
     {
         public static async Task Main(string[] args)
         {
+            Elements.Serialization.glTF.GltfExtensions.GltfCachePath = "/Users/andrewheumann/Desktop/Test-disk-cache";
+
             await HyparServer.StartAsync(
                 args,
                 Path.GetFullPath(Path.Combine(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/server", "..")),

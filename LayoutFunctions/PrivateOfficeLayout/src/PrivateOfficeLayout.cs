@@ -134,6 +134,22 @@ namespace PrivateOfficeLayout
                         return new[] { room };
                     });
                 }
+                else
+                {
+                    meetingRmBoundaries.ToList().ForEach((room) =>
+                    {
+                        var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
+                                      .Select(w =>
+                                      {
+                                          if (w.type == "Glass")
+                                          {
+                                              w.type = "Glass-Edge";
+                                          }
+                                          return w;
+                                      });
+                        wallCandidateLines.AddRange(initialWallCandidates);
+                    });
+                }
 
                 foreach (var room in meetingRmBoundaries)
                 {
