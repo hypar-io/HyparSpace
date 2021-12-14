@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Elements.Components;
-using Newtonsoft.Json.Linq;
 using Elements.Geometry.Solids;
 using LayoutFunctionCommon;
 
@@ -237,34 +236,6 @@ namespace OpenOfficeLayout
 
                         grid.U.DivideByPattern(chosenDeskAislePattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
 
-                        // Iterate through 
-                        // U is always the dominant (long) axis
-
-                        // List<int> Uskips = new List<int>();
-                        // BBox3 columnProfileSize = modelColumnLocations.FirstOrDefault().Item2.Perimeter.Bounds();
-                        // double skipDistance =
-                        //     Math.Max(columnProfileSize.Max.X - columnProfileSize.Min.X,
-                        //             columnProfileSize.Max.Y - columnProfileSize.Min.Y);
-                        // Vector3 skipVector = grid.U.Curve is Line l ? l.Direction().Unitized() * skipDistance : Vector3.Origin;
-                        // bool skipEnabled = skipVector != Vector3.Origin;
-
-                        // if (skipEnabled)
-                        // {
-                        //     // Calculate U skip cells
-                        //     for (int u = 0; u < grid.U.Cells.Count; u++)
-                        //     {
-                        //         if (grid.V.Cells.Any(c =>
-                        //         {
-                        //             var nearestColumnLocation = columnSearchTree.FindClosestPoint(c.Curve.Bounds().Center());
-                        //             return (c.GetCellGeometry() as Polygon).Contains(nearestColumnLocation);
-                        //         }))
-                        //         {
-                        //             // U should be skipped
-                        //             Uskips.Add(u);
-                        //         }
-                        //     }
-                        // }
-
                         // Insert interstitial collab spaces
                         if (collabDensity > 0.0)
                         {
@@ -398,24 +369,6 @@ namespace OpenOfficeLayout
                                 }
                             }
                         }
-
-                        // // Shift elements at U
-                        // if (skipEnabled)
-                        // {
-                        //     foreach (var u in placedDesksByUV.Keys)
-                        //     {
-                        //         // Get number of skips at U.
-                        //         int skipsAtU = ~Uskips.BinarySearch(u);
-                        //         if (skipsAtU == 0) { continue; }
-                        //         // Get displacement vector at current U
-                        //         var totalDisplacement = skipVector * skipsAtU;
-                        //         foreach (var element in placedDesksByUV[u].Values.SelectMany(v => v))
-                        //         {
-                        //             element.Transform.Move(totalDisplacement);
-                        //         }
-                        //     }
-                        // }
-
 
                         var collabSpaceCells = grid.GetCells()
                             .Where(c => !c.IsTrimmed() && c.Type?.Contains("Collab Space") == true)
