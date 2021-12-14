@@ -11,7 +11,7 @@ namespace Hypar.Server
         {
             await HyparServer.StartAsync(
                 args,
-                Path.GetFullPath(Path.Combine(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\server", "..")),
+                Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
                 typeof(OpenOfficeLayout.Function),
                 typeof(OpenOfficeLayout.OpenOfficeLayoutInputs));
         }
