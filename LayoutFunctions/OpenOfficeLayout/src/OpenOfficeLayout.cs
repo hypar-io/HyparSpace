@@ -184,30 +184,22 @@ namespace OpenOfficeLayout
                     {
                         bool contains = spaceBoundary.Perimeter.Contains(p);
                         if (!contains) { continue; }
-                        // Get profile
                         var columnProfile = columnSearchTree.GetElementsAtPoint(p).First();
                         var profileBounds = columnProfile.Perimeter.Bounds();
                         var flattenedMin = new Vector3(profileBounds.Min.X, profileBounds.Min.Y, 0);
                         var flattenedMax = new Vector3(profileBounds.Max.X, profileBounds.Max.Y, 0);
                         columnMaxWidth = Math.Max(columnMaxWidth, flattenedMin.DistanceTo(flattenedMax));
                         mainGrid.U.SplitAtPoints(new[] { flattenedMin, flattenedMax });
-                        // grid.SplitAtPoints();
                     }
                     // Extract valid cells
                     // Add tolerance to max width
                     columnMaxWidth *= 1.05;
-                    int totalCells = mainGrid.Cells.Select(cl => cl.Count).Sum();
-                    var validGrids =
+                    IEnumerable<Grid2d> validGrids =
                         mainGrid.Cells.SelectMany(
                             cl => cl.Where(
                                 c => c.U.Domain.Length > columnMaxWidth &&
                                      c.V.Domain.Length > columnMaxWidth)
-                                     ).ToList();
-                    int validCellCt = validGrids.Count();
-                    foreach (var c in validGrids)
-                    {
-                        output.Model.AddElements(c.ToModelCurves());
-                    }
+                                     );
 
                     foreach (var grid in validGrids)
                     {
