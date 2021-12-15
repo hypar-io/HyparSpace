@@ -20,32 +20,26 @@ namespace Elements
 {
     #pragma warning disable // Disable all warnings
 
-    /// <summary>An element containing a collection of Elements that belong to one level.</summary>
+    /// <summary>An elevation level for a building</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public partial class LevelElements : Element
+    public partial class Level : GeometricElement
     {
         [Newtonsoft.Json.JsonConstructor]
-        public LevelElements(IList<Element> @elements, string @level, System.Guid @id = default, string @name = null)
-            : base(id, name)
+        public Level(double @elevation, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+            : base(transform, material, representation, isElementDefinition, id, name)
         {
-            this.Elements = @elements;
-            this.Level = @level;
+            this.Elevation = @elevation;
             }
         
         // Empty constructor
-        public LevelElements()
+        public Level()
             : base()
         {
         }
     
-        /// <summary>The list of elements.</summary>
-        [Newtonsoft.Json.JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<Element> Elements { get; set; }
-    
-        /// <summary>The Level element this set of elements is associated with</summary>
-        [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Level { get; set; }
+        [Newtonsoft.Json.JsonProperty("Elevation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Elevation { get; set; }
     
     
     }

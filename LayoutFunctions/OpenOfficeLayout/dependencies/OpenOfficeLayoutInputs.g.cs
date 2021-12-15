@@ -28,7 +28,7 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, CustomWorkstationProperties @customWorkstationProperties, OpenOfficeLayoutInputsDeskType @deskType, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType,  CustomWorkstationProperties @customWorkstationProperties, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
@@ -39,9 +39,9 @@ namespace OpenOfficeLayout
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
-            this.CustomWorkstationProperties = @customWorkstationProperties;
             this.DeskType = @deskType;
             this.ColumnAvoidanceStrategy = @columnAvoidanceStrategy;
+            this.CustomWorkstationProperties = @customWorkstationProperties;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -59,9 +59,6 @@ namespace OpenOfficeLayout
         [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
         public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
     
-        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CustomWorkstationProperties CustomWorkstationProperties { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk__29x70;
@@ -69,10 +66,41 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Column Avoidance Strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsColumnAvoidanceStrategy ColumnAvoidanceStrategy { get; set; } = OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid;
+        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public CustomWorkstationProperties CustomWorkstationProperties { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
     
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum OpenOfficeLayoutInputsDeskType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
+        Simple_Desk__24x48 = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
+        Simple_Desk__30x60 = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
+        Simple_Desk__29x70 = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
+        Simple_Desk__30x72 = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
+        LShaped = 4,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
+        Double_Desk = 5,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
+        Enclosed_Pair = 6,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 7,
     
     }
     
@@ -116,35 +144,6 @@ namespace OpenOfficeLayout
             set { _additionalProperties = value; }
         }
     
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum OpenOfficeLayoutInputsDeskType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
-        Simple_Desk__24x48 = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
-        Simple_Desk__30x60 = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
-        Simple_Desk__29x70 = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
-        Simple_Desk__30x72 = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
-        LShaped = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
-        Double_Desk = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
-        Enclosed_Pair = 6,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 7,
     
     }
     
@@ -300,18 +299,18 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, SpaceSettingsValueCustomWorkstationProperties @customWorkstationProperties, SpaceSettingsValueDeskType @deskType)
+        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, SpaceSettingsValueDeskType @deskType, SpaceSettingsValueCustomWorkstationProperties @customWorkstationProperties)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @customWorkstationProperties, @deskType});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @customWorkstationProperties});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
-            this.CustomWorkstationProperties = @customWorkstationProperties;
             this.DeskType = @deskType;
+            this.CustomWorkstationProperties = @customWorkstationProperties;
         
             if(validator != null)
             {
@@ -328,12 +327,12 @@ namespace OpenOfficeLayout
         [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
         public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
     
-        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpaceSettingsValueCustomWorkstationProperties CustomWorkstationProperties { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SpaceSettingsValueDeskType DeskType { get; set; } = SpaceSettingsValueDeskType.Simple_Desk__29x70;
+    
+        [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValueCustomWorkstationProperties CustomWorkstationProperties { get; set; }
     
     
     }
@@ -395,6 +394,35 @@ namespace OpenOfficeLayout
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum SpaceSettingsValueDeskType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
+        Simple_Desk__24x48 = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
+        Simple_Desk__30x60 = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
+        Simple_Desk__29x70 = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
+        Simple_Desk__30x72 = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
+        LShaped = 4,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
+        Double_Desk = 5,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
+        Enclosed_Pair = 6,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
+        Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     
     public partial class SpaceSettingsValueCustomWorkstationProperties 
     
@@ -433,36 +461,6 @@ namespace OpenOfficeLayout
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum SpaceSettingsValueDeskType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
-        Simple_Desk__24x48 = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x60")]
-        Simple_Desk__30x60 = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 29x70")]
-        Simple_Desk__29x70 = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 30x72")]
-        Simple_Desk__30x72 = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"L-Shaped")]
-        LShaped = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Double Desk")]
-        Double_Desk = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Enclosed Pair")]
-        Enclosed_Pair = 6,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
-        Custom = 7,
-    
+
     }
 }

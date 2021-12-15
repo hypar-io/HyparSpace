@@ -41,34 +41,6 @@
         "$hyparOrder": 1,
         "minimum": 0
       },
-      "Custom Workstation Properties": {
-        "type": "object",
-        "$hyparOrder": 0.5,
-        "$hyparShowIf": {
-          "conditions": [
-            {
-              "property": "Desk Type",
-              "value": "Custom"
-            }
-          ]
-        },
-        "properties": {
-          "Width": {
-            "default": 2,
-            "type": "number",
-            "$hyparUnitType": "length",
-            "$hyparOrder": 0,
-            "minimum": 0.1
-          },
-          "Length": {
-            "default": 2,
-            "type": "number",
-            "$hyparUnitType": "length",
-            "$hyparOrder": 1,
-            "minimum": 0.1
-          }
-        }
-      },
       "Desk Type": {
         "default": "Simple Desk - 29x70",
         "type": "string",
@@ -92,6 +64,32 @@
           "Cull",
           "None"
         ]
+      },
+      "Custom Workstation Properties": {
+        "type": "object",
+        "$hyparOrder": 0.5,
+        "$hyparShowIf": {
+          "conditions": [
+            {
+              "property": "Desk Type",
+              "value": "Custom"
+            }
+          ]
+        },
+        "properties": {
+          "Width": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          },
+          "Length": {
+            "type": "number",
+            "$hyparUnitType": "length",
+            "minimum": 0.1,
+            "default": 2.0
+          }
+        }
       }
     }
   },
@@ -119,6 +117,21 @@
           "type": "number",
           "minimum": 0
         },
+        "Desk Type": {
+          "$hyparOrder": 0,
+          "type": "string",
+          "enum": [
+            "Simple Desk - 24x48",
+            "Simple Desk - 30x60",
+            "Simple Desk - 29x70",
+            "Simple Desk - 30x72",
+            "L-Shaped",
+            "Double Desk",
+            "Enclosed Pair",
+            "Custom"
+          ],
+          "default": "Simple Desk - 29x70"
+        },
         "Custom Workstation Properties": {
           "$hyparOrder": 0.5,
           "type": "object",
@@ -132,43 +145,25 @@
           },
           "properties": {
             "Width": {
-              "default": 2,
               "type": "number",
               "$hyparUnitType": "length",
-              "minimum": 0.1
+              "minimum": 0.1,
+              "default": 2.0
             },
             "Length": {
-              "default": 2,
               "type": "number",
               "$hyparUnitType": "length",
-              "minimum": 0.1
+              "minimum": 0.1,
+              "default": 2.0
             }
           }
-        },
-        "Desk Type": {
-          "default": "Simple Desk - 29x70",
-          "$hyparOrder": 0,
-          "type": "string",
-          "enum": [
-            "Simple Desk - 24x48",
-            "Simple Desk - 30x60",
-            "Simple Desk - 29x70",
-            "Simple Desk - 30x72",
-            "L-Shaped",
-            "Double Desk",
-            "Enclosed Pair",
-            "Custom"
-          ]
         }
       },
       "verbs": {
-        "add": null,
-        "remove": null,
         "edit": null,
         "revert": null
       },
-      "dependency": null,
-      "behaviors": null
+      "default": {}
     },
     "Furniture Locations": {
       "context": "[*discriminator=Elements.ElementInstance]",
@@ -184,13 +179,9 @@
         }
       },
       "verbs": {
-        "add": null,
-        "remove": null,
         "edit": null,
         "revert": null
-      },
-      "dependency": null,
-      "behaviors": null
+      }
     }
   },
   "outputs": [
@@ -211,7 +202,5 @@
   "default_camera": {
     "named_position": "top",
     "projection": "orthographic"
-  },
-  "last_updated": "2021-12-06T18:48:15.811175",
-  "cli_version": "0.9.7"
+  }
 }

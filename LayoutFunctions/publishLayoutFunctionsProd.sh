@@ -1,21 +1,21 @@
 #!/bin/bash
 cd ClassroomLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../DataHall
-hypar publish
+hypar publish --disable-pull-check
 cd ../LoungeLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../MeetingRoomLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../OpenCollabLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../OpenOfficeLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../PantryLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../PhoneBoothLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../PrivateOfficeLayout
-hypar publish
+hypar publish --disable-pull-check
 cd ../ReceptionLayout
-hypar publish
+hypar publish --disable-pull-check
