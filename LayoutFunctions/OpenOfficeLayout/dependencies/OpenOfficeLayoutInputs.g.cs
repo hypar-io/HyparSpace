@@ -28,19 +28,20 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, CustomWorkstationProperties @customWorkstationProperties, OpenOfficeLayoutInputsDeskType @deskType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, CustomWorkstationProperties @customWorkstationProperties, OpenOfficeLayoutInputsDeskType @deskType, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @customWorkstationProperties, @deskType, @overrides});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @customWorkstationProperties, @deskType, @columnAvoidanceStrategy, @overrides});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
             this.CustomWorkstationProperties = @customWorkstationProperties;
             this.DeskType = @deskType;
+            this.ColumnAvoidanceStrategy = @columnAvoidanceStrategy;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -64,6 +65,10 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk__29x70;
+    
+        [Newtonsoft.Json.JsonProperty("Column Avoidance Strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public OpenOfficeLayoutInputsColumnAvoidanceStrategy ColumnAvoidanceStrategy { get; set; } = OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }
@@ -140,6 +145,20 @@ namespace OpenOfficeLayout
     
         [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
         Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum OpenOfficeLayoutInputsColumnAvoidanceStrategy
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Adaptive Grid")]
+        Adaptive_Grid = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Cull")]
+        Cull = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 2,
     
     }
     

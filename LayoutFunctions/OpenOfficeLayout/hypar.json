@@ -84,6 +84,15 @@
           "Enclosed Pair",
           "Custom"
         ]
+      },
+      "Column Avoidance Strategy": {
+        "default": "Adaptive Grid",
+        "type": "string",
+        "enum":[
+          "Adaptive Grid",
+          "Cull",
+          "None"
+        ]
       }
     }
   },

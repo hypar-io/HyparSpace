@@ -56,6 +56,8 @@ namespace OpenOfficeLayout
 
             var output = new OpenOfficeLayoutOutputs();
 
+            OpenOfficeLayoutInputsColumnAvoidanceStrategy avoidanceStrat = input.ColumnAvoidanceStrategy;
+
             var overridesByCentroid = new Dictionary<Guid, SpaceSettingsOverride>();
             foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
             {
@@ -82,15 +84,20 @@ namespace OpenOfficeLayout
 
             // Get column locations from model
             List<(Vector3, Profile)> modelColumnLocations = new List<(Vector3, Profile)>();
-            foreach (var source in _columnSources)
+
+            if (avoidanceStrat != OpenOfficeLayoutInputsColumnAvoidanceStrategy.None)
             {
-                if (inputModels.ContainsKey(source))
+                foreach (var source in _columnSources)
                 {
-                    var sourceData = inputModels[source];
-                    modelColumnLocations.AddRange(GetColumnLocations(sourceData));
+                    if (inputModels.ContainsKey(source))
+                    {
+                        var sourceData = inputModels[source];
+                        modelColumnLocations.AddRange(GetColumnLocations(sourceData));
+                    }
                 }
             }
-            SearchablePointCollection<Profile> columnSearchTree = new SearchablePointCollection<Profile>(modelColumnLocations);
+            SearchablePointCollection<Profile> columnSearchTree =
+                new SearchablePointCollection<Profile>(modelColumnLocations);
 
 
             int desksSkippedTotal = 0;
@@ -178,28 +185,34 @@ namespace OpenOfficeLayout
                         continue;
                     }
 
-                    // Split grid by column locations
-                    double columnMaxWidth = 0;
-                    foreach (var p in columnSearchTree.FindWithinBounds(spaceBoundary.Perimeter.Bounds(), 0, 2))
-                    {
-                        bool contains = spaceBoundary.Perimeter.Contains(p);
-                        if (!contains) { continue; }
-                        var columnProfile = columnSearchTree.GetElementsAtPoint(p).First();
-                        var profileBounds = columnProfile.Perimeter.Bounds();
-                        var flattenedMin = new Vector3(profileBounds.Min.X, profileBounds.Min.Y, 0);
-                        var flattenedMax = new Vector3(profileBounds.Max.X, profileBounds.Max.Y, 0);
-                        columnMaxWidth = Math.Max(columnMaxWidth, flattenedMin.DistanceTo(flattenedMax));
-                        mainGrid.U.SplitAtPoints(new[] { flattenedMin, flattenedMax });
+                    IEnumerable<Grid2d> validGrids = new List<Grid2d>(){ mainGrid };
+
+                    if(avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid){
+                        // Split grid by column locations
+                        double columnMaxWidth = 0;
+                        foreach (var p in columnSearchTree.FindWithinBounds(spaceBoundary.Perimeter.Bounds(), 0, 2))
+                        {
+                            bool contains = spaceBoundary.Perimeter.Contains(p);
+                            if (!contains) { continue; }
+                            var columnProfile = columnSearchTree.GetElementsAtPoint(p).First();
+                            var profileBounds = columnProfile.Perimeter.Bounds();
+                            var flattenedMin = new Vector3(profileBounds.Min.X, profileBounds.Min.Y, 0);
+                            var flattenedMax = new Vector3(profileBounds.Max.X, profileBounds.Max.Y, 0);
+                            columnMaxWidth = Math.Max(columnMaxWidth, flattenedMin.DistanceTo(flattenedMax));
+                            mainGrid.U.SplitAtPoints(new[] { flattenedMin, flattenedMax });
+                        }
+                        // Extract valid cells
+                        // Add tolerance to max width
+                        columnMaxWidth *= 1.05;
+
+                        validGrids =
+                            mainGrid.Cells.SelectMany(
+                                cl => cl.Where(
+                                    c => c.U.Domain.Length > columnMaxWidth &&
+                                        c.V.Domain.Length > columnMaxWidth)
+                                        );
+
                     }
-                    // Extract valid cells
-                    // Add tolerance to max width
-                    columnMaxWidth *= 1.05;
-                    IEnumerable<Grid2d> validGrids =
-                        mainGrid.Cells.SelectMany(
-                            cl => cl.Where(
-                                c => c.U.Domain.Length > columnMaxWidth &&
-                                     c.V.Domain.Length > columnMaxWidth)
-                                     );
 
                     foreach (var grid in validGrids)
                     {
@@ -306,19 +319,22 @@ namespace OpenOfficeLayout
                                         var cellGeo = cell.GetCellGeometry() as Polygon;
                                         var cellBounds = cellGeo.Bounds();
 
-                                        // Get closest columns from cell location
-                                        var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
-                                        var columnProfilesCollection =
-                                            nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
-                                                        .Select(e => e.FirstOrDefault());
-                                        if (
-                                            nearbyColumns.Any(
-                                                c => cellGeo.Contains(c)) ||
-                                                columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
-                                        {
-                                            desksSkippedTotal++;
-                                            continue;
+                                        if(avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Cull){
+                                            // Get closest columns from cell location
+                                            var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
+                                            var columnProfilesCollection =
+                                                nearbyColumns.Select(c => columnSearchTree.GetElementsAtPoint(c))
+                                                            .Select(e => e.FirstOrDefault());
+                                            if (
+                                                nearbyColumns.Any(
+                                                    c => cellGeo.Contains(c)) ||
+                                                    columnProfilesCollection.Any(cp => cp != null && cp.Perimeter.Intersects(cellGeo)))
+                                            {
+                                                desksSkippedTotal++;
+                                                continue;
+                                            }
                                         }
+
                                         if ((cell.Type?.Contains("Backward") ?? false) || (cell.Type?.Contains("Forward") ?? false))
                                         {
                                             var transform = (cell.Type.Contains("Backward")
