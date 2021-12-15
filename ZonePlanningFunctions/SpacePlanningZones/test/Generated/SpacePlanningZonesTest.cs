@@ -19,9 +19,10 @@ namespace SpacePlanningZones
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/model.json")) }, 
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/model.json")) }, 
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/model.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Levels/39280c22-dcf0-42d9-b261-b7ddc08847ce.json")) }, 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Program Requirements/2db7ec57-b21b-4449-a569-8364706c1d64.json")) }, 
+                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Floors/e6bd228a-549e-46d2-807f-d4ecef34d157.json")) }, 
+                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/test/Generated/SpacePlanningZonesTest/model_dependencies/Core/e6bd228a-549e-46d2-807f-d4ecef34d157.json")) }, 
             };
 
             var result = SpacePlanningZones.Execute(modelDependencies, input);
@@ -32,54 +33,8 @@ namespace SpacePlanningZones
 
         public SpacePlanningZonesInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""Default Program Assignment"": ""unspecified"",
-  ""Circulation Mode"": ""Manual"",
-  ""Add Corridors"": {
-    ""SplitLocations"": []
-  },
-  ""Depth at Ends"": 8,
-  ""Split Zones"": {
-    ""SplitLocations"": []
-  },
-  ""Corridors"": [],
-  ""Corridor Width"": 1.5,
-  ""Outer Band Depth"": 6,
-  ""Manual Split Locations"": [],
-  ""model_input_keys"": {
-    ""Levels"": ""1793d93b-9594-4956-96e1-a812b6ec0f88_2c571838-6789-48e3-819f-edcf448c3085_elements.zip"",
-    ""Floors"": ""bcae7650-78cf-4b4e-8de8-7def24bd3d51_c3bb78fd-7dee-41cc-ae2e-f1b4b4ae2794_elements.zip"",
-    ""Core"": ""51042f62-976b-435b-8ebf-2916967250b3_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
-  },
-  ""overrides"": {
-    ""Program Assignments"": [
-      {
-        ""value"": {
-          ""Split"": 1,
-          ""Id"": ""6ce5b07e-4f5c-4db1-8a93-56c8e868cb26"",
-          ""Program Type"": ""Private Office""
-        },
-        ""identity"": {
-          ""ParentCentroid"": {
-            ""X"": -54.019177272727276,
-            ""Y"": -99.78101909090907,
-            ""Z"": 16.764
-          },
-          ""IndividualCentroid"": {
-            ""X"": -54.019177272727276,
-            ""Y"": -99.78101909090907,
-            ""Z"": 16.764
-          }
-        },
-        ""id"": ""9c4b180a-55e6-4088-9bc5-b2ec5890118b""
-      }
-    ]
-  },
-  ""Additional Corridor Locations"": []
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/SpacePlanningZonesTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesInputs>(json);
         }
     }
 }

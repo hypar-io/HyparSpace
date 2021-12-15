@@ -237,8 +237,17 @@ namespace Elements
         public static List<(Line line, string type)> PartitionsAndGlazingCandidatesFromGrid(List<(Line line, string type)> wallCandidateLines, Grid2d grid, Profile levelBoundary)
         {
             var wallCandidatesOut = new List<(Line line, string type)>();
-            var cellSeparators = grid.GetCellSeparators(GridDirection.V, true);
-            wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => (c, "Partition")));
+            try
+            {
+                var cellSeparators = grid.GetCellSeparators(GridDirection.V, true);
+                wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => (c, "Partition")));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Couldn't get grid cell separators");
+                Console.WriteLine(e.Message);
+                // exception in cell separators
+            }
             var glassLines = wallCandidateLines.Where(l => l.type == "Glass-Edge").Select(w => w.line);
             foreach (var gridCell in grid.GetCells())
             {

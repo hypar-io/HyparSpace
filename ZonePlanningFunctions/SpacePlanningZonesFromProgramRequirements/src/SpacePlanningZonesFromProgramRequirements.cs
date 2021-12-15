@@ -46,7 +46,15 @@ namespace SpacePlanningZonesFromProgramRequirements
             IEnumerable<FloorOrLevel> floorsOrLevels = new List<FloorOrLevel>();
             if (hasLevels)
             {
-                floorsOrLevels = levelsModel.AllElementsOfType<LevelVolume>().Select(FloorOrLevel.FromLevelVolume);
+                var lvlVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+                if (lvlVolumes.Count() > 0)
+                {
+                    floorsOrLevels = lvlVolumes.Select(FloorOrLevel.FromLevelVolume);
+                }
+                else
+                {
+                    hasLevels = false;
+                }
             }
             else if (hasFloors)
             {
@@ -56,8 +64,11 @@ namespace SpacePlanningZonesFromProgramRequirements
             var positionTransform = new Transform(input.UnplacedSpaceLocation);
             if (floorsOrLevels.Count() > 0 && input.UnplacedSpaceLocation.DistanceTo(new Vector3()) < 0.1)
             {
-                var bbox = new BBox3(floorsOrLevels.SelectMany(f => f.Profile.Perimeter.Vertices).ToList());
-                positionTransform = new Transform(bbox.Min.X, bbox.Max.Y + 10, 0);
+                var bbox = new BBox3(floorsOrLevels.SelectMany(f => f.Profile?.Perimeter.Vertices ?? new Vector3[] { }).ToList());
+                if (bbox.IsValid())
+                {
+                    positionTransform = new Transform(bbox.Min.X, bbox.Max.Y + 10, 0);
+                }
             }
 
             var groupedProgramReqs = programReqs.GroupBy(p => p.ProgramGroup);
@@ -212,7 +223,12 @@ namespace SpacePlanningZonesFromProgramRequirements
             foreach (var floor in floorsOrLevels)
             {
                 var levelElementList = new List<Element>();
-                var levelElement = new LevelElements(levelElementList, Guid.NewGuid(), floor.Name);
+                var levelElement = new LevelElements()
+                {
+                    Elements = levelElementList,
+                    Name = floor.Name
+                };
+                levelElement.Level = floor.Id.ToString();
                 levels.Add(levelElement);
                 // create corridors
                 if (input.Corridors != null && input.Corridors.Count() > 0)
@@ -238,9 +254,10 @@ namespace SpacePlanningZonesFromProgramRequirements
             {
                 foreach (var floor in floorsOrLevels)
                 {
-                    var levelElement = levels.First((l) => l.Name == floor.Name);
+                    var lvlVol = levelsModel.Elements[floor.Id] as LevelVolume;
+                    var levelElement = levels.First((l) => l.Level == floor.Id.ToString());
                     var levelElementList = levelElement.Elements as List<Element>;
-                    var otherSpaceBoundariesAtFloorLevel = FindOtherSpaceBoundariesAtFloorLevel(output.Model.AllElementsOfType<SpaceBoundary>(), floor);
+                    var otherSpaceBoundariesAtFloorLevel = FindOtherSpaceBoundariesOnLevel(output.Model.AllElementsOfType<SpaceBoundary>(), floor);
                     levelElementList.AddRange(otherSpaceBoundariesAtFloorLevel);
                     // don't try to subtract anything if we had no default space
                     if (defaultReq == null)
@@ -252,6 +269,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                     {
                         shapesToSubtract.AddRange(coresModel.AllElementsOfType<ServiceCore>().Select(sc => sc.Profile.TransformedProfile(sc.Transform)));
                     }
+
                     var profileDifference = Profile.Difference(new[] { floor.Profile }, shapesToSubtract);
 
                     for (int i = 0; i < profileDifference.Count; i++)
@@ -288,12 +306,38 @@ namespace SpacePlanningZonesFromProgramRequirements
                 foreach (var height in uniqueHeights)
                 {
                     var elements = output.Model.AllElementsOfType<SpaceBoundary>().Where((sb) => sb.Transform.Origin.Z == height);
-                    var levelElement = new LevelElements(new List<Element>(elements), Guid.NewGuid(), $"Level {levelCounter++}");
+                    var levelElement = new LevelElements()
+                    {
+                        Elements = new List<Element>(elements),
+                        Name = $"Level {levelCounter++}"
+                    };
+                    foreach (var sb in elements)
+                    {
+                        sb.AdditionalProperties["Level Name"] = levelElement.Name;
+                    }
                     levels.Add(levelElement);
                 }
             }
 
             output.Model.AddElements(levels);
+
+            foreach (var lvl in levels)
+            {
+                var lvlSbs = lvl.Elements.OfType<SpaceBoundary>();
+                foreach (var sb in lvlSbs)
+                {
+                    sb.AdditionalProperties["Level"] = lvl.Level;
+                    if (lvl != null && lvl.Level != null && hasLevels && levelsModel != null)
+                    {
+                        var id = new Guid(lvl.Level);
+                        if (levelsModel.Elements.TryGetValue(id, out var lvlVol))
+                        {
+                            sb.AdditionalProperties["Level Name"] = lvlVol.Name;
+                            sb.AdditionalProperties["Building Name"] = (lvlVol as LevelVolume)?.BuildingName;
+                        }
+                    }
+                }
+            }
 
             // tally up areas
             Dictionary<string, AreaTally> areas = new Dictionary<string, AreaTally>();
@@ -346,16 +390,23 @@ namespace SpacePlanningZonesFromProgramRequirements
             public Profile Profile;
             public Transform Transform;
 
+            public Guid Id { get; set; }
+
             public string Name;
 
             public static FloorOrLevel FromFloor(Floor f)
             {
-                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name };
+                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name, Id = f.Id };
             }
 
             public static FloorOrLevel FromLevelVolume(LevelVolume f)
             {
-                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name };
+                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name, Id = f.Id };
+            }
+
+            public static FloorOrLevel FromLevel(Level l)
+            {
+                return new FloorOrLevel { Profile = null, Transform = new Transform(0, 0, l.Elevation), Name = l.Name, Id = l.Id };
             }
         }
 
@@ -363,7 +414,7 @@ namespace SpacePlanningZonesFromProgramRequirements
         {
             return new Profile(profile.Perimeter.TransformedPolygon(t), new List<Polygon>(profile.Voids.Select((v) => v.TransformedPolygon(t))), Guid.NewGuid(), profile.Name);
         }
-        private static IEnumerable<SpaceBoundary> FindOtherSpaceBoundariesAtFloorLevel(IEnumerable<SpaceBoundary> allBoundaries, FloorOrLevel floor)
+        private static IEnumerable<SpaceBoundary> FindOtherSpaceBoundariesOnLevel(IEnumerable<SpaceBoundary> allBoundaries, FloorOrLevel floor)
         {
             return allBoundaries.Where((sb) =>
             {
