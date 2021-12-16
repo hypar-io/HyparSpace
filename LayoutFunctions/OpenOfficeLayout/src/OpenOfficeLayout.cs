@@ -220,7 +220,7 @@ namespace OpenOfficeLayout
                         try
                         {
                             // Divide by pattern
-                            var aisleWidth = 1.0; // LJ
+                            var aisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
                             grid.V.DivideByPattern(
                                 new[] {
                             ("Desk", selectedConfig.Width),
