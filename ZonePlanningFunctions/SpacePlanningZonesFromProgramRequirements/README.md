@@ -11,6 +11,7 @@ The SpacePlanningZonesFromProgramRequirements function.
 |Default Height|number||
 |Default Aspect Ratio|number|If width and depth aren't supplied, what rectangular aspect ratio should be used for each space? 1.0 will be a square.|
 |Unplaced Space Location|https://hypar.io/Schemas/Geometry/Vector3.json||
+|Material Opacity|number||
 
 
 <br>

@@ -380,7 +380,10 @@ namespace SpacePlanningZonesFromProgramRequirements
             }
 
             output.Model.AddElements(areas.Select(kvp => kvp.Value).OrderByDescending(a => a.AchievedArea));
-
+            if (input.MaterialOpacity != 0.5)
+            {
+                output.Model.AllElementsOfType<Material>().ToList().ForEach(m => m.Color = new Color(m.Color.Red, m.Color.Green, m.Color.Blue, input.MaterialOpacity));
+            }
 
             return output;
         }

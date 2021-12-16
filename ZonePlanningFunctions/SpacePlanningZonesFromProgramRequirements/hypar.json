@@ -78,6 +78,13 @@
           "Y": 0,
           "Z": 0
         }
+      },
+      "Material Opacity": {
+        "type": "number",
+        "default": 0.5,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "multipleOf": 0.01
       }
     }
   },
