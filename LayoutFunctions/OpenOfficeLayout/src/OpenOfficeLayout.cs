@@ -220,29 +220,36 @@ namespace OpenOfficeLayout
                         try
                         {
                             // Divide by pattern
-                            var aisleWidth = 1.0; // LJ
+                            var aisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
                             grid.V.DivideByPattern(
                                 new[] {
-                            ("Desk", selectedConfig.Width),
-                            ("Desk", selectedConfig.Width),
-                            ("Desk", selectedConfig.Width),
-                            ("Desk", selectedConfig.Width),
-                            ("Aisle", aisleWidth) },
-                                PatternMode.Cycle,
-                                FixedDivisionMode.RemainderAtBothEnds);
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Aisle", aisleWidth)
+                            },
+
+                            PatternMode.Cycle,
+                            FixedDivisionMode.RemainderAtBothEnds);
 
                             var mainVPattern = new[] {
-                        ("Aisle", aisleWidth),
-                        ("Forward", selectedConfig.Depth),
-                        ("Backward", selectedConfig.Depth)
-                    };
+                                ("Aisle", aisleWidth),
+                                ("Forward", selectedConfig.Depth),
+                                ("Backward", selectedConfig.Depth)
+                            };
+
                             var nonMirroredVPattern = new[] {
-                        ("Forward", selectedConfig.Depth),
-                        ("Aisle", aisleWidth) };
+                                ("Forward", selectedConfig.Depth),
+                                ("Aisle", aisleWidth)
+                            };
 
                             var chosenDeskAislePattern = input.DeskType == OpenOfficeLayoutInputsDeskType.Double_Desk ? nonMirroredVPattern : mainVPattern;
 
-                            grid.U.DivideByPattern(chosenDeskAislePattern, PatternMode.Cycle, FixedDivisionMode.RemainderAtBothEnds);
+                            grid.U.DivideByPattern(
+                                chosenDeskAislePattern,
+                                PatternMode.Cycle,
+                                FixedDivisionMode.RemainderAtBothEnds);
 
                             // Insert interstitial collab spaces
                             if (collabDensity > 0.0)
