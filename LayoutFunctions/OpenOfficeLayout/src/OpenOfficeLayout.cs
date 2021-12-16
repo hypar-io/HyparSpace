@@ -185,9 +185,10 @@ namespace OpenOfficeLayout
                         continue;
                     }
 
-                    IEnumerable<Grid2d> validGrids = new List<Grid2d>(){ mainGrid };
+                    IEnumerable<Grid2d> validGrids = new List<Grid2d>() { mainGrid };
 
-                    if(avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid){
+                    if (avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid)
+                    {
                         // Split grid by column locations
                         double columnMaxWidth = 0;
                         foreach (var p in columnSearchTree.FindWithinBounds(spaceBoundary.Perimeter.Bounds(), 0, 2))
@@ -319,7 +320,8 @@ namespace OpenOfficeLayout
                                         var cellGeo = cell.GetCellGeometry() as Polygon;
                                         var cellBounds = cellGeo.Bounds();
 
-                                        if(avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Cull){
+                                        if (avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Cull)
+                                        {
                                             // Get closest columns from cell location
                                             var nearbyColumns = columnSearchTree.FindWithinBounds(cellBounds, 0.3, 2).ToList();
                                             var columnProfilesCollection =
@@ -411,7 +413,7 @@ namespace OpenOfficeLayout
             {
                 if (!ge.IsElementDefinition)
                 {
-                    yield return (ge.Location, ge.ProfileTransformed());
+                    yield return (ge.Location, ge.Profile.Transformed(new Transform(ge.Location)));
                 }
                 else
                 {
