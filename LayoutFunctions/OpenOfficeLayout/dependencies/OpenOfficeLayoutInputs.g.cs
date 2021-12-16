@@ -28,13 +28,13 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType,  CustomWorkstationProperties @customWorkstationProperties, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, CustomWorkstationProperties @customWorkstationProperties, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @customWorkstationProperties, @deskType, @columnAvoidanceStrategy, @overrides});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @columnAvoidanceStrategy, @customWorkstationProperties, @overrides});
             }
         
             this.GridRotation = @gridRotation;
@@ -66,6 +66,7 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Column Avoidance Strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsColumnAvoidanceStrategy ColumnAvoidanceStrategy { get; set; } = OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid;
+    
         [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomWorkstationProperties CustomWorkstationProperties { get; set; }
     
@@ -101,6 +102,20 @@ namespace OpenOfficeLayout
     
         [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
         Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum OpenOfficeLayoutInputsColumnAvoidanceStrategy
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Adaptive Grid")]
+        Adaptive_Grid = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Cull")]
+        Cull = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 2,
     
     }
     
@@ -144,20 +159,6 @@ namespace OpenOfficeLayout
             set { _additionalProperties = value; }
         }
     
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum OpenOfficeLayoutInputsColumnAvoidanceStrategy
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Adaptive Grid")]
-        Adaptive_Grid = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Cull")]
-        Cull = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"None")]
-        None = 2,
     
     }
     
@@ -461,6 +462,7 @@ namespace OpenOfficeLayout
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-
+    
+    
     }
 }
