@@ -173,14 +173,15 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<SpaceSettingsOverride> @spaceSettings, IList<FurnitureLocationsOverride> @furnitureLocations)
+        public Overrides(IList<DeskRotationOverride> @deskRotation, IList<SpaceSettingsOverride> @spaceSettings, IList<FurnitureLocationsOverride> @furnitureLocations)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @spaceSettings, @furnitureLocations});
+                validator.PreConstruct(new object[]{ @deskRotation, @spaceSettings, @furnitureLocations});
             }
         
+            this.DeskRotation = @deskRotation;
             this.SpaceSettings = @spaceSettings;
             this.FurnitureLocations = @furnitureLocations;
         
@@ -190,11 +191,50 @@ namespace OpenOfficeLayout
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Desk Rotation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<DeskRotationOverride> DeskRotation { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Space Settings", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SpaceSettingsOverride> SpaceSettings { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class DeskRotationOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public DeskRotationOverride(string @id, DeskRotationIdentity @identity, DeskRotationValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<DeskRotationOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DeskRotationIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DeskRotationValue Value { get; set; }
     
     
     }
@@ -267,6 +307,63 @@ namespace OpenOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class DeskRotationIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public DeskRotationIdentity(Vector3 @centroid)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<DeskRotationIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @centroid});
+            }
+        
+            this.Centroid = @centroid;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Centroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 Centroid { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class DeskRotationValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public DeskRotationValue(double @xAxisRotation)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<DeskRotationValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @xAxisRotation});
+            }
+        
+            this.XAxisRotation = @xAxisRotation;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("X Axis Rotation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 180D)]
+        public double XAxisRotation { get; set; } = 0D;
     
     
     }

@@ -1,7 +1,8 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "eeff6967-22a7-4490-b86c-5e842deaf219",
+  "id": "bbff6967-22a7-4490-b82c-5e842deaf212",
   "name": "Open Office Layout",
+  "display_name": "LJ Override Desk Layout",
   "description": "Lay out desks with optional open collaboration areas distributed throughout.",
   "language": "C#",
   "model_dependencies": [
@@ -100,6 +101,23 @@
     }
   },
   "overrides": {
+    "Desk Rotation": {
+      "context": "[*discriminator=Elements.ElementInstance]",
+      "identity": {
+        "Centroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "X Axis Rotation": {
+          "maximum": 180,
+          "default": 0,
+          "type": "number",
+          "$hyparUnitType": "plane_angle",
+          "minimum": 0
+        }
+      }
+    },
     "Space Settings": {
       "context": "[*discriminator=Elements.SpaceBoundary&Name=DeskArea]",
       "identity": {
