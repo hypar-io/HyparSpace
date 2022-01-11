@@ -154,21 +154,28 @@ namespace Circulation
                         }
 
                         var corridorPolyline = addedCorridor.Value.Geometry;
-                        var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
-                        var p = Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
-                        corridorProfiles.Add(p);
-
-                        corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
-                        var segment = new CirculationSegment(p, 0.11)
+                        try
                         {
-                            Material = CorridorMat,
-                            Transform = lvl.Transform,
-                            OriginalGeometry = corridorPolyline.Polyline,
-                            Geometry = corridorPolyline,
-                            Level = lvl.Id
-                        };
-                        circulationSegments.Add(segment);
-                        Identity.AddOverrideIdentity(segment, addedCorridor);
+                            var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
+                            var p = Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
+                            corridorProfiles.Add(p);
+
+                            corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
+                            var segment = new CirculationSegment(p, 0.11)
+                            {
+                                Material = CorridorMat,
+                                Transform = lvl.Transform,
+                                OriginalGeometry = corridorPolyline.Polyline,
+                                Geometry = corridorPolyline,
+                                Level = lvl.Id
+                            };
+                            circulationSegments.Add(segment);
+                            Identity.AddOverrideIdentity(segment, addedCorridor);
+                        }
+                        catch (Exception e)
+                        {
+                            output.Warnings.Add("A corridor segment failed to offset.");
+                        }
 
                     }
                 }
