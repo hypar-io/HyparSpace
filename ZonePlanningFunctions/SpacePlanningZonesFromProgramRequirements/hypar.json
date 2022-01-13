@@ -52,6 +52,7 @@
         "default": "unspecified"
       },
       "Corridors": {
+        "$hyparDeprecated": true,
         "type": "array",
         "description": "Define the circulation network by drawing one or more corridor paths.",
         "items": {
@@ -145,6 +146,7 @@
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/AreaTally",
-    "https://prod-api.hypar.io/schemas/ServiceCore"
+    "https://prod-api.hypar.io/schemas/ServiceCore",
+    "https://prod-api.hypar.io/schemas/LabelConfiguration"
   ]
 }

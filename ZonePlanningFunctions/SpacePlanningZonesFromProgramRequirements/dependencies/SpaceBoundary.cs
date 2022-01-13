@@ -9,6 +9,9 @@ namespace Elements
 {
     public partial class SpaceBoundary
     {
+
+
+        public LabelConfiguration LabelConfiguration { get; set; } = null;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
             Requirements = reqs.ToDictionary(v => v.ProgramName, v => v);
@@ -53,11 +56,18 @@ namespace Elements
         public string ProgramName { get; set; }
 
         private static Random random = new Random(4);
+
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null)
         {
             MaterialDict.TryGetValue(displayName ?? "unspecified", out var material);
             var representation = new Representation(new[] { new Extrude(profile, height, Vector3.ZAxis, false) });
             var name = Requirements.TryGetValue(displayName, out var fullReq) ? fullReq.HyparSpaceType : displayName;
+            var color = material?.Color ?? Colors.White;
+            var labelConfig = new LabelConfiguration()
+            {
+                Offset = (0, 20),
+                Color = color
+            };
             var sb = new SpaceBoundary()
             {
                 Boundary = profile,
@@ -67,7 +77,8 @@ namespace Elements
                 Material = material ?? MaterialDict["unrecognized"],
                 Representation = representation,
                 Name = name,
-                Height = height
+                Height = height,
+                LabelConfiguration = labelConfig
             };
             sb.ProgramName = displayName;
             sb.AdditionalProperties.Add("ParentCentroid", parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid()));

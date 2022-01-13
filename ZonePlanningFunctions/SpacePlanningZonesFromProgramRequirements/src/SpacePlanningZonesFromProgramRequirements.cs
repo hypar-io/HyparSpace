@@ -196,7 +196,8 @@ namespace SpacePlanningZonesFromProgramRequirements
                     var inflatedBox = new BBox3(bbox.Min + new Vector3(-1, -1), bbox.Max + new Vector3(1, 1));
                     output.Model.AddElements(inflatedBox.ToModelCurves());
                     var textPt = ((inflatedBox.Max.X + inflatedBox.Min.X) / 2, inflatedBox.Max.Y + 0.5, 0);
-                    texts.Add((textPt, Vector3.ZAxis, Vector3.XAxis, group.Key ?? "Program Requirements", Colors.Black));
+                    var key = string.IsNullOrEmpty(group.Key) ? "Program Requirements" : group.Key;
+                    texts.Add((textPt, Vector3.ZAxis, Vector3.XAxis, key, Colors.Black));
                 }
             }
 
@@ -212,7 +213,13 @@ namespace SpacePlanningZonesFromProgramRequirements
             foreach (var floor in floorsOrLevels)
             {
                 var levelElementList = new List<Element>();
-                var levelElement = new LevelElements(levelElementList, Guid.NewGuid(), floor.Name);
+                var levelElement = new LevelElements()
+                {
+                    Elements = levelElementList,
+                    Name = floor.Name,
+                    Level = floor.Id
+                };
+
                 levels.Add(levelElement);
                 // create corridors
                 if (input.Corridors != null && input.Corridors.Count() > 0)
@@ -288,7 +295,11 @@ namespace SpacePlanningZonesFromProgramRequirements
                 foreach (var height in uniqueHeights)
                 {
                     var elements = output.Model.AllElementsOfType<SpaceBoundary>().Where((sb) => sb.Transform.Origin.Z == height);
-                    var levelElement = new LevelElements(new List<Element>(elements), Guid.NewGuid(), $"Level {levelCounter++}");
+                    var levelElement = new LevelElements()
+                    {
+                        Elements = new List<Element>(elements),
+                        Name = $"Level {levelCounter++}",
+                    };
                     levels.Add(levelElement);
                 }
             }
@@ -348,14 +359,16 @@ namespace SpacePlanningZonesFromProgramRequirements
 
             public string Name;
 
+            public Guid Id;
+
             public static FloorOrLevel FromFloor(Floor f)
             {
-                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name };
+                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name, Id = f.Id };
             }
 
             public static FloorOrLevel FromLevelVolume(LevelVolume f)
             {
-                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name };
+                return new FloorOrLevel { Profile = f.Profile, Transform = f.Transform, Name = f.Name, Id = f.Id };
             }
         }
 

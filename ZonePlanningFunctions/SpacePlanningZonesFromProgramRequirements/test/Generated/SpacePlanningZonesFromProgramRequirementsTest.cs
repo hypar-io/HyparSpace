@@ -18,32 +18,20 @@ namespace SpacePlanningZonesFromProgramRequirements
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/model.json")) },
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Levels/model.json")) },
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Floors/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/f346e6d0-ef5e-472b-8f5d-42b5f5a55e39.json")) }, 
             };
 
             var result = SpacePlanningZonesFromProgramRequirements.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.gltf", false);
+            result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.glb");
             File.WriteAllText("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/results/SpacePlanningZonesFromProgramRequirementsTest.json", result.Model.ToJson());
         }
 
         public SpacePlanningZonesFromProgramRequirementsInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""Default Program Assignment"": ""unspecified"",
-  ""Corridors"": [],
-  ""model_input_keys"": {
-    ""Program Requirements"": ""ce590695-7b6f-4272-9792-9ce4dc5f327a_9448d3bc-c7a0-4cee-9757-4752b8ba9958_elements.zip"",
-    ""Levels"": ""db65a6bd-bf47-484b-89a4-13c91f5cfbee_2c571838-6789-48e3-819f-edcf448c3085_elements.zip"",
-    ""Floors"": ""b69bc208-5fe1-46a4-b030-fa7fae659385_c3bb78fd-7dee-41cc-ae2e-f1b4b4ae2794_elements.zip""
-  }
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesFromProgramRequirementsInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/SpacePlanningZonesFromProgramRequirementsTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SpacePlanningZonesFromProgramRequirementsInputs>(json);
         }
     }
 }
