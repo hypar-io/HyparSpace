@@ -111,7 +111,12 @@ namespace SpacePlanningZones
             output.Model.AddElements(levels);
             foreach (var sb in output.Model.AllElementsOfType<SpaceBoundary>().ToList())
             {
-                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform, sb.Material));
+                var crvs = sb.Boundary.ToModelCurves(sb.Transform, sb.Material);
+                foreach (var c in crvs)
+                {
+                    c.SetSelectable(false);
+                }
+                output.Model.AddElements(crvs);
             }
             return output;
         }
@@ -336,7 +341,7 @@ namespace SpacePlanningZones
             return areas;
         }
 
-        private static void CreateInitialSpaceBoundaries(SpacePlanningZonesInputs input,
+        public static void CreateInitialSpaceBoundaries(SpacePlanningZonesInputs input,
                                                         SpacePlanningZonesOutputs output,
                                                         IEnumerable<LevelVolume> levelVolumes,
                                                         Model floorsModel,
@@ -736,6 +741,23 @@ namespace SpacePlanningZones
             }
         }
 
+        // Not called by the function — for debugging only
+        private static void DumpElements(IEnumerable<Element> elements, string name)
+        {
+            var model = new Model();
+            model.AddElements(elements);
+            var path = System.IO.Path.Combine("../../../../", name + ".json");
+            var json = model.ToJson(true);
+            System.IO.File.WriteAllText(path, json);
+        }
+
+        private static void DumpGeometry(object o, string name)
+        {
+            var path = System.IO.Path.Combine("../../../../", name + ".json");
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
+            System.IO.File.WriteAllText(path, json);
+        }
+
         private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null, bool angleCheckForWallExtensions = false)
         {
             // subtract corridors from level boundary
@@ -748,6 +770,7 @@ namespace SpacePlanningZones
             {
                 remainingSpaces.Add(levelBoundary);
             }
+            var extensionLines = new List<(Line l, List<Line> otherLines)>();
             // for every space that's left
             foreach (var remainingSpace in remainingSpaces)
             {
@@ -775,7 +798,7 @@ namespace SpacePlanningZones
                                     // extend a line
                                     var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
                                     var extended = l.ExtendToWithEndInfo(linearZone.Segments(), double.MaxValue, out var dirAtStart, out var dirAtEnd);
-
+                                    extensionLines.Add((l, linearZone.Segments()));
                                     // check distance extended
                                     var endDistance = extended.End.DistanceTo(l.End);
                                     var startDistance = extended.Start.DistanceTo(l.Start);
@@ -1155,7 +1178,7 @@ namespace SpacePlanningZones
                     var intersects = testLine.Intersects(segment, out Vector3 intersection, true, true);
 
                     // if the intersection lies on the obstruction, but is beyond the segment, we collect it
-                    if (segment.PointOnLine(intersection, true) && !testLine.PointOnLine(intersection, true))
+                    if (intersects && segment.PointOnLine(intersection, true) && !testLine.PointOnLine(intersection, true))
                     {
                         intersectionsForLine.Add((intersection, segment.Direction()));
                     }

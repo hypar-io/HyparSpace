@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Server" Version="0.9.9" />
+    <PackageReference Include="Hypar.Server" Version="0.9.10" />
   </ItemGroup>
 
   <PropertyGroup>

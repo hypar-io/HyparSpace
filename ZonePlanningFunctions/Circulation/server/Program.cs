@@ -11,7 +11,7 @@ namespace Hypar.Server
         {
             await HyparServer.StartAsync(
                 args,
-                Path.GetFullPath(Path.Combine(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/server", "..")),
+                Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
                 typeof(Circulation.Function),
                 typeof(Circulation.CirculationInputs));
         }

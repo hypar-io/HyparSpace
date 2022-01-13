@@ -11,7 +11,7 @@ namespace Hypar.Server
         {
             await HyparServer.StartAsync(
                 args,
-                Path.GetFullPath(Path.Combine(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZones/server", "..")),
+                Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
                 typeof(SpacePlanningZones.Function),
                 typeof(SpacePlanningZones.SpacePlanningZonesInputs));
         }
