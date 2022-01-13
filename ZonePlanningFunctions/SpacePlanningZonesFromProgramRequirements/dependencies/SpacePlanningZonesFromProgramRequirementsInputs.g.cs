@@ -76,13 +76,13 @@ namespace SpacePlanningZonesFromProgramRequirements
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, double @defaultHeight, double @defaultAspectRatio, Vector3 @unplacedSpaceLocation, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningZonesFromProgramRequirementsInputs(string @defaultProgramAssignment, IList<ThickenedPolyline> @corridors, double @defaultHeight, double @defaultAspectRatio, Vector3 @unplacedSpaceLocation, double @materialOpacity, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningZonesFromProgramRequirementsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @defaultHeight, @defaultAspectRatio, @unplacedSpaceLocation, @overrides});
+                validator.PreConstruct(new object[]{ @defaultProgramAssignment, @corridors, @defaultHeight, @defaultAspectRatio, @unplacedSpaceLocation, @materialOpacity, @overrides});
             }
         
             this.DefaultProgramAssignment = @defaultProgramAssignment;
@@ -90,6 +90,7 @@ namespace SpacePlanningZonesFromProgramRequirements
             this.DefaultHeight = @defaultHeight;
             this.DefaultAspectRatio = @defaultAspectRatio;
             this.UnplacedSpaceLocation = @unplacedSpaceLocation;
+            this.MaterialOpacity = @materialOpacity;
             this.Overrides = @overrides;
         
             if(validator != null)
@@ -115,6 +116,10 @@ namespace SpacePlanningZonesFromProgramRequirements
     
         [Newtonsoft.Json.JsonProperty("Unplaced Space Location", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 UnplacedSpaceLocation { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Material Opacity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.0D, 1.0D)]
+        public double MaterialOpacity { get; set; } = 0.5D;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; }

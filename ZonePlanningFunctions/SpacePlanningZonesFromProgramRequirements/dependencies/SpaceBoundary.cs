@@ -68,6 +68,10 @@ namespace Elements
                 Offset = (0, 20),
                 Color = color
             };
+            if (name == "unspecified")
+            {
+                name = displayName;
+            }
             var sb = new SpaceBoundary()
             {
                 Boundary = profile,

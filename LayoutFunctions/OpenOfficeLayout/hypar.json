@@ -9,6 +9,16 @@
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Structure",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Columns",
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",
@@ -31,6 +41,12 @@
         "$hyparOrder": 1,
         "minimum": 0
       },
+      "Aisle Width": {
+        "maximum": 2,
+        "default": 1,
+        "type": "number",
+        "minimum": 0.5
+      },
       "Desk Type": {
         "default": "Simple Desk - 29x70",
         "type": "string",
@@ -44,6 +60,15 @@
           "Double Desk",
           "Enclosed Pair",
           "Custom"
+        ]
+      },
+      "Column Avoidance Strategy": {
+        "default": "Adaptive Grid",
+        "type": "string",
+        "enum":[
+          "Adaptive Grid",
+          "Cull",
+          "None"
         ]
       },
       "Custom Workstation Properties": {
@@ -183,6 +208,5 @@
   "default_camera": {
     "named_position": "top",
     "projection": "orthographic"
-  },
-  "last_updated": "2021-08-12T18:10:46.74885"
+  }
 }

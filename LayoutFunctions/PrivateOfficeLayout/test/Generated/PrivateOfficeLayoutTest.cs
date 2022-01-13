@@ -16,14 +16,16 @@ namespace PrivateOfficeLayout
         [Fact]
         public void TestExecute()
         {
+            // GltfExtensions.GltfCachePath = "/Users/andrewheumann/Desktop/Test-disk-cache";
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Levels/model.json")) },
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Levels/09fa5ad7-f5e4-43a0-9e48-31319a4f59ec.json")) },
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Space Planning Zones/2475065a-1007-4aea-bf59-5e3807f92e1c.json")) },
             };
 
             var result = PrivateOfficeLayout.Execute(modelDependencies, input);
+            // result.Model.ToGlTF("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.glb");
             File.WriteAllText("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.json", result.Model.ToJson());
         }
@@ -33,13 +35,13 @@ namespace PrivateOfficeLayout
             var inputText = @"
             {
   ""model_input_keys"": {
-    ""Levels"": ""428f73b3-5b89-42ea-94c7-98729753ebbb_96796046-99de-4f31-94db-4a52eb1405fb_elements.zip"",
-    ""Space Planning Zones"": ""66fd864a-0c7b-4a99-9af6-0ad26fc9802a_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
+    ""Levels"": ""09fa5ad7-f5e4-43a0-9e48-31319a4f59ec_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
+    ""Space Planning Zones"": ""2475065a-1007-4aea-bf59-5e3807f92e1c_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
   },
   ""Create Walls"": true,
   ""Office Sizing"": {
-    ""Automate Office Subdivisions"": true,
-    ""Office Size"": 5
+    ""Automate Office Subdivisions"": false,
+    ""Office Size"": 3.047999902464003
   }
 }
             ";

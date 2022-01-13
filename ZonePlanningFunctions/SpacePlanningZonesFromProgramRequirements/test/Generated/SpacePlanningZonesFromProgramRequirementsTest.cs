@@ -18,8 +18,8 @@ namespace SpacePlanningZonesFromProgramRequirements
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> { 
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/f346e6d0-ef5e-472b-8f5d-42b5f5a55e39.json")) }, 
+            var modelDependencies = new Dictionary<string, Model> {
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/SpacePlanningZonesFromProgramRequirements/test/Generated/SpacePlanningZonesFromProgramRequirementsTest/model_dependencies/Program Requirements/f346e6d0-ef5e-472b-8f5d-42b5f5a55e39.json")) },
             };
 
             var result = SpacePlanningZonesFromProgramRequirements.Execute(modelDependencies, input);

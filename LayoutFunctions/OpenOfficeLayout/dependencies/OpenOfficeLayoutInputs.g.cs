@@ -28,18 +28,20 @@ namespace OpenOfficeLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, OpenOfficeLayoutInputsDeskType @deskType, CustomWorkstationProperties @customWorkstationProperties, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public OpenOfficeLayoutInputs(double @gridRotation, double @integratedCollaborationSpaceDensity, double @aisleWidth, OpenOfficeLayoutInputsDeskType @deskType, OpenOfficeLayoutInputsColumnAvoidanceStrategy @columnAvoidanceStrategy, CustomWorkstationProperties @customWorkstationProperties, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<OpenOfficeLayoutInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @customWorkstationProperties, @overrides});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @aisleWidth, @deskType, @columnAvoidanceStrategy, @customWorkstationProperties, @overrides});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
+            this.AisleWidth = @aisleWidth;
             this.DeskType = @deskType;
+            this.ColumnAvoidanceStrategy = @columnAvoidanceStrategy;
             this.CustomWorkstationProperties = @customWorkstationProperties;
             this.Overrides = @overrides;
         
@@ -58,9 +60,17 @@ namespace OpenOfficeLayout
         [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
         public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
     
+        [Newtonsoft.Json.JsonProperty("Aisle Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.5D, 2D)]
+        public double AisleWidth { get; set; } = 1D;
+    
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OpenOfficeLayoutInputsDeskType DeskType { get; set; } = OpenOfficeLayoutInputsDeskType.Simple_Desk__29x70;
+    
+        [Newtonsoft.Json.JsonProperty("Column Avoidance Strategy", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public OpenOfficeLayoutInputsColumnAvoidanceStrategy ColumnAvoidanceStrategy { get; set; } = OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid;
     
         [Newtonsoft.Json.JsonProperty("Custom Workstation Properties", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomWorkstationProperties CustomWorkstationProperties { get; set; }
@@ -97,6 +107,20 @@ namespace OpenOfficeLayout
     
         [System.Runtime.Serialization.EnumMember(Value = @"Custom")]
         Custom = 7,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    public enum OpenOfficeLayoutInputsColumnAvoidanceStrategy
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Adaptive Grid")]
+        Adaptive_Grid = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Cull")]
+        Cull = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 2,
     
     }
     
