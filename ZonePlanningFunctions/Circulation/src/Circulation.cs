@@ -156,8 +156,7 @@ namespace Circulation
                         var corridorPolyline = addedCorridor.Value.Geometry;
                         try
                         {
-                            var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
-                            var p = Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
+                            var p = OffsetOnSideAndUnionSafe(corridorPolyline, output);
                             corridorProfiles.Add(p);
 
                             corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
@@ -199,8 +198,7 @@ namespace Circulation
                         circulationSegments.Remove(matchingCorridor);
 
                         var corridorPolyline = corridorOverride.Value.Geometry;
-                        var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
-                        var p = Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
+                        var p = OffsetOnSideAndUnionSafe(corridorPolyline, output);
                         corridorProfiles.Add(p);
                         var segment = new CirculationSegment(p, 0.11)
                         {
@@ -247,6 +245,28 @@ namespace Circulation
             }
         }
 
+        private static IEnumerable<Polygon> OffsetOnSideSafe(ThickenedPolyline corridorPolyline, CirculationOutputs output = null)
+        {
+            try
+            {
+                Elements.Validators.Validator.DisableValidationOnConstruction = true;
+                var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
+                Elements.Validators.Validator.DisableValidationOnConstruction = false;
+                return corrPgons;
+            }
+            catch
+            {
+                output?.Warnings.Add("A corridor segment failed to offset.");
+            }
+            return null;
+        }
+
+        private static Profile OffsetOnSideAndUnionSafe(ThickenedPolyline corridorPolyline, CirculationOutputs output = null)
+        {
+            var corrPgons = OffsetOnSideSafe(corridorPolyline, output);
+            return Profile.UnionAll(corrPgons.Select(p => new Profile(p))).OrderBy(p => p.Area()).Last();
+        }
+
         private static void ProcessManuallyAddedCorridors(CirculationInputs input, List<Profile> corridorProfiles)
         {
             var corridorProfilesForUnion = new List<Profile>();
@@ -257,8 +277,8 @@ namespace Circulation
                 {
                     continue;
                 }
-                var corrPgons = corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip);
-                corridorProfilesForUnion.AddRange(corrPgons.Select(p => new Profile(p)));
+                var p = OffsetOnSideSafe(corridorPolyline);
+                corridorProfilesForUnion.AddRange(p.Where(p => p != null).Select(p => new Profile(p)));
             }
             corridorProfiles.AddRange(corridorProfilesForUnion);
         }
@@ -381,9 +401,8 @@ namespace Circulation
             {
                 Polyline pl = new Polyline(p.Vertices);
                 pl.Vertices.Add(p.Vertices.First());
-                var offsets = pl.OffsetOnSide(corridorWidth, true);
-                var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
                 var corridorPolyline = new ThickenedPolyline(pl.TransformedPolyline(lvl.Transform), corridorWidth, true, corridorWidth, 0);
+                var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
                 profile.Name = "Corridor";
                 return new CirculationSegment(profile, 0.11)
                 {
@@ -425,8 +444,7 @@ namespace Circulation
                     {
                         var clOffset = ts.Offset(-corridorWidth / 2.0, false).ToPolyline(1);
                         var corridorPolyline = new ThickenedPolyline(clOffset.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
-                        var offsets = clOffset.OffsetOnSide(corridorWidth, false);
-                        var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
+                        var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
                         var difference = Profile.Difference(new[] { profile }, exclusionRegions.Select(r => new Profile(r)));
                         if (difference.Count > 0 && difference.Sum(d => d.Perimeter.Area()) > 10.0)
                         {
@@ -500,8 +518,7 @@ namespace Circulation
                         var ext = extendedLine.ToPolyline(1);
                         var clOffset = OffsetOpen(ext, -corridorWidth / 2.0);
                         var corridorPolyline = new ThickenedPolyline(clOffset.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
-                        var offsets = clOffset.OffsetOnSide(corridorWidth, false);
-                        var profile = Profile.UnionAll(offsets.Select(o => new Profile(o))).OrderBy(p => p.Area()).Last();
+                        var profile = OffsetOnSideAndUnionSafe(new ThickenedPolyline(clOffset, corridorWidth, false, corridorWidth, corridorWidth));
                         profile.Name = "Corridor";
                         corridorProfiles.Add(profile);
                         var segment = new CirculationSegment(profile, 0.11)
