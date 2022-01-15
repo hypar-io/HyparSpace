@@ -420,7 +420,22 @@ namespace SpacePlanningZones
                         var circulationProfiles = circLevel.Elements.OfType<Profile>();
                         // this is the new pathway, getting circulation profiles from upstream.
                         corridorProfiles = circulationProfiles.Where(p => p.Name == "Corridor").ToList();
-                        thickerOffsetProfiles = circulationProfiles.Where(p => p.Name == "Thicker Offset").ToList();
+                        thickerOffsetProfiles = circulationProfiles.Where(p =>
+                            p.Name == "Thicker Offset" &&
+                            // we want to exclude thick offset profiles where the circulation has been manually moved away. 
+                            corridorProfiles.Any(corr =>
+                                {
+                                    // offset the midpoints of each segment outward and inward slightly, to avoid an exact overlap
+                                    var offsetPoints = corr.Perimeter.Segments().Select(s =>
+                                    {
+                                        var segmentTransform = Transform.CreateHorizontalFrameAlongCurve(s, 0.5);
+                                        (Vector3 offset, Vector3 inset) pts = (segmentTransform.OfPoint((-0.1, 0)), segmentTransform.OfPoint((0.1, 0)));
+                                        return pts;
+                                    });
+                                    return offsetPoints.Any(o => p.Contains(o.offset) && !p.Contains(o.inset));
+                                }
+                        )).ToList();
+
                     }
                 }
 

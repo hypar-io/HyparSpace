@@ -1,5 +1,5 @@
 {
-  "Default Program Assignment": "Open Office",
+  "Default Program Assignment": "unspecified",
   "Circulation Mode": "Manual",
   "Add Corridors": {
     "SplitLocations": []
@@ -8,8 +8,8 @@
   "Split Zones": {
     "SplitLocations": []
   },
-  "Corridor Width": 1.5,
   "Corridors": [],
+  "Corridor Width": 1.5,
   "Outer Band Depth": 6,
   "Manual Split Locations": [],
   "Additional Corridor Locations": []
