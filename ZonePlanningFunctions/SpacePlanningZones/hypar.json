@@ -1,7 +1,8 @@
 {
     "$schema": "https://hypar.io/Schemas/Function.json",
-    "id": "09b8407f-6c93-4741-ad6c-31288213f4f7",
+    "id": "70d527a3-d0de-4242-ab90-b0fe244b6b3f",
     "name": "Space Planning Zones",
+    "display_name": "SPZ Plus Automation",
     "description": "Generate a circulation path and high-level zones for a schematic space plan.",
     "language": "C#",
     "model_dependencies": [
