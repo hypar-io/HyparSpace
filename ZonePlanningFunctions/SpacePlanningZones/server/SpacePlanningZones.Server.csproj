@@ -5,8 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="hypar.server" Version="0.9.8" /> -->
-    <ProjectReference Include="..\..\..\..\Hypar\Hypar.Server\Hypar.Server.csproj" />
+    <PackageReference Include="Hypar.Server" Version="0.9.10" />
   </ItemGroup>
 
   <PropertyGroup>
