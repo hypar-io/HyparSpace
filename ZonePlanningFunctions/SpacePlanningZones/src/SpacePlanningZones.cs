@@ -52,6 +52,10 @@ namespace SpacePlanningZones
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
             var programReqs = programReqsModel?.AllElementsOfType<ProgramRequirement>();
 
+            // Get Circulation
+            var hasCirculation = inputModels.TryGetValue("Circulation", out var circulationModel);
+            var circulationLevels = circulationModel?.AllElementsOfType<LevelElements>();
+
             // Reset static properties on SpaceBoundary
             SpaceBoundary.Reset();
 
@@ -71,7 +75,7 @@ namespace SpacePlanningZones
             var allSpaceBoundaries = new List<SpaceBoundary>();
 
             // For every level volume, create space boundaries with corridors and splits
-            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries);
+            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries, circulationLevels);
 
             // process merge overrides
             ProcessMergeOverrides(input, allSpaceBoundaries);
@@ -92,7 +96,7 @@ namespace SpacePlanningZones
                 sb.LevelElements.Elements.Add(sb);
 
                 // copy level volume properties
-                var lvlVolume = levelsModel.Elements[sb.LevelElements.LevelVolumeId] as LevelVolume;
+                var lvlVolume = levelsModel.Elements[sb.LevelElements.Level] as LevelVolume;
                 sb.SetLevelProperties(lvlVolume);
                 // we have to make the internal level to be null to avoid a recursive infinite loop when we serialize
                 sb.LevelElements = null;
@@ -107,7 +111,12 @@ namespace SpacePlanningZones
             output.Model.AddElements(levels);
             foreach (var sb in output.Model.AllElementsOfType<SpaceBoundary>().ToList())
             {
-                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform, sb.Material));
+                var crvs = sb.Boundary.ToModelCurves(sb.Transform, sb.Material);
+                foreach (var c in crvs)
+                {
+                    c.SetSelectable(false);
+                }
+                output.Model.AddElements(crvs);
             }
             return output;
         }
@@ -332,14 +341,15 @@ namespace SpacePlanningZones
             return areas;
         }
 
-        private static void CreateInitialSpaceBoundaries(SpacePlanningZonesInputs input,
+        public static void CreateInitialSpaceBoundaries(SpacePlanningZonesInputs input,
                                                         SpacePlanningZonesOutputs output,
                                                         IEnumerable<LevelVolume> levelVolumes,
                                                         Model floorsModel,
                                                         IEnumerable<ServiceCore> cores,
                                                         List<LevelElements> levels,
                                                         IEnumerable<Element> walls,
-                                                        List<SpaceBoundary> allSpaceBoundaries)
+                                                        List<SpaceBoundary> allSpaceBoundaries,
+                                                        IEnumerable<LevelElements> circulationLevels)
         {
             var corridorWidth = input.CorridorWidth;
             var corridorMat = SpaceBoundary.MaterialDict["Circulation"];
@@ -382,18 +392,51 @@ namespace SpacePlanningZones
                     spaceBoundaries.Add(zone);
                 });
 
+
+
                 List<Profile> corridorProfiles = new List<Profile>();
 
                 List<Profile> thickerOffsetProfiles = null;
-
-                // Process circulation
-                if (input.CirculationMode == SpacePlanningZonesInputsCirculationMode.Automatic)
+                // We moved from having circulation generated in-function,
+                // to having it generated in a dependency function. This is the old, deprecated pathway, if no
+                // upstream profiles are present
+                if (circulationLevels == null)
                 {
-                    thickerOffsetProfiles = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles);
+                    // Process circulation
+                    if (input.CirculationMode == SpacePlanningZonesInputsCirculationMode.Automatic)
+                    {
+                        thickerOffsetProfiles = GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles);
+                    }
+                    else if (input.CirculationMode == SpacePlanningZonesInputsCirculationMode.Manual && input.Corridors != null && input.Corridors.Count > 0)
+                    {
+                        corridorProfiles = ProcessManualCirculation(input);
+                    }
                 }
-                else if (input.CirculationMode == SpacePlanningZonesInputsCirculationMode.Manual && input.Corridors != null && input.Corridors.Count > 0)
+                else
                 {
-                    corridorProfiles = ProcessManualCirculation(input);
+                    var circLevel = circulationLevels.FirstOrDefault(l => l.Level == lvl.Id);
+                    if (circLevel != null)
+                    {
+                        var circulationProfiles = circLevel.Elements.OfType<Profile>();
+                        // this is the new pathway, getting circulation profiles from upstream.
+                        corridorProfiles = circulationProfiles.Where(p => p.Name == "Corridor").ToList();
+                        thickerOffsetProfiles = circulationProfiles.Where(p =>
+                            p.Name == "Thicker Offset" &&
+                            // we want to exclude thick offset profiles where the circulation has been manually moved away. 
+                            corridorProfiles.Any(corr =>
+                                {
+                                    // offset the midpoints of each segment outward and inward slightly, to avoid an exact overlap
+                                    var offsetPoints = corr.Perimeter.Segments().Select(s =>
+                                    {
+                                        var segmentTransform = Transform.CreateHorizontalFrameAlongCurve(s, 0.5);
+                                        (Vector3 offset, Vector3 inset) pts = (segmentTransform.OfPoint((-0.1, 0)), segmentTransform.OfPoint((0.1, 0)));
+                                        return pts;
+                                    });
+                                    return offsetPoints.Any(o => p.Contains(o.offset) && !p.Contains(o.inset));
+                                }
+                        )).ToList();
+
+                    }
                 }
 
                 // Generate space boundaries from level boundary and corridor locations
@@ -405,32 +448,31 @@ namespace SpacePlanningZones
                     Name = lvl.Name,
                     Elements = new List<Element>()
                 };
-                level.LevelVolumeId = lvl.Id;
+                level.Level = lvl.Id;
                 levels.Add(level);
 
-                // Create snapping geometry for corridors
-                CreateSnappingGeometry(output, spaceBoundaries, "corridors");
-
-                // These are the new, correct methods using the split inputs: 
-                //Manual Corridor Splits
-                // foreach (var pt in input.AddCorridors.SplitLocations)
-                // {
-                //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
-                // }
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors?.SplitLocations ?? new List<SplitLocations>(), true, output.Model);
-
-                //Create snapping geometry for splits
-                CreateSnappingGeometry(output, spaceBoundaries, "splits");
-
-
-                // Manual Split Locations
-                // foreach (var pt in input.SplitZones.SplitLocations)
-                // {
-                //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
-                // }
-                var splitLocations = input.SplitZones?.SplitLocations ?? new List<SplitLocations>();
+                // construct a cross-function level proxy
                 var levelProxy = lvl.Proxy("Levels");
                 lvl.Proxy = levelProxy;
+
+                if (input.AddCorridors?.SplitLocations?.Count() > 0)
+                {
+                    // Create snapping geometry for corridors
+                    output.Model.AddElements(CreateSnappingGeometry(spaceBoundaries, "corridors"));
+                }
+
+
+                // These are the new, correct methods using the split inputs: 
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors?.SplitLocations ?? new List<SplitLocations>(), true, output.Model);
+
+                // Create snapping geometry for splits
+                var splitReferences = CreateSnappingGeometry(spaceBoundaries, "splits");
+                // add the per-level split references to the level proxy, and add them to the model as well.
+                levelProxy.AdditionalProperties["SplitBoundaries"] = splitReferences;
+                output.Model.AddElements(splitReferences);
+                output.Model.AddElement(levelProxy);
+
+                var splitLocations = input.SplitZones?.SplitLocations ?? new List<SplitLocations>();
                 // if we've overridden splits per-level, use those split locations.
                 if (input.Overrides?.SplitZones != null && input.Overrides?.SplitZones.Count > 0)
                 {
@@ -481,19 +523,23 @@ namespace SpacePlanningZones
             }
         }
 
-        private static void CreateSnappingGeometry(SpacePlanningZonesOutputs output, List<SpaceBoundary> spaceBoundaries, string type)
+        private static List<PolygonReference> CreateSnappingGeometry(List<SpaceBoundary> spaceBoundaries, string type)
         {
+            List<PolygonReference> references = new List<PolygonReference>();
             foreach (var sb in spaceBoundaries)
             {
-                var boundary = sb as SpaceBoundary;
-                output.Model.AddElement(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
+                var boundary = sb;
+                references.Add(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
                 if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
                 {
-                    boundary.Boundary.Voids.ToList().ForEach(v => output.Model.AddElement(new PolygonReference() { Boundary = v, Name = type }));
+                    boundary.Boundary.Voids.ToList().ForEach(v => references.Add(new PolygonReference() { Boundary = v, Name = type }));
                 }
             }
+            return references;
         }
 
+        // This method is an old deprecated pathway
+        // TODO: do a function migration and remove all references.
         private static List<Profile> ProcessManualCirculation(SpacePlanningZonesInputs input)
         {
             List<Profile> corridorProfiles;
@@ -511,6 +557,9 @@ namespace SpacePlanningZones
             return corridorProfiles;
         }
 
+
+        // This method is an old deprecated pathway
+        // TODO: do a function migration and remove all references.
         private static List<Profile> GenerateAutomaticCirculation(SpacePlanningZonesInputs input, double corridorWidth, LevelVolume lvl, Profile levelBoundary, List<ServiceCore> coresInBoundary, List<Profile> corridorProfiles)
         {
             var perimeter = levelBoundary.Perimeter;
@@ -707,6 +756,23 @@ namespace SpacePlanningZones
             }
         }
 
+        // Not called by the function — for debugging only
+        private static void DumpElements(IEnumerable<Element> elements, string name)
+        {
+            var model = new Model();
+            model.AddElements(elements);
+            var path = System.IO.Path.Combine("../../../../", name + ".json");
+            var json = model.ToJson(true);
+            System.IO.File.WriteAllText(path, json);
+        }
+
+        private static void DumpGeometry(object o, string name)
+        {
+            var path = System.IO.Path.Combine("../../../../", name + ".json");
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
+            System.IO.File.WriteAllText(path, json);
+        }
+
         private static void SplitCornersAndGenerateSpaceBoundaries(List<SpaceBoundary> spaceBoundaries, SpacePlanningZonesInputs input, LevelVolume lvl, List<Profile> corridorProfiles, Profile levelBoundary, List<Profile> thickerOffsetProfiles = null, bool angleCheckForWallExtensions = false)
         {
             // subtract corridors from level boundary
@@ -719,6 +785,7 @@ namespace SpacePlanningZones
             {
                 remainingSpaces.Add(levelBoundary);
             }
+            var extensionLines = new List<(Line l, List<Line> otherLines)>();
             // for every space that's left
             foreach (var remainingSpace in remainingSpaces)
             {
@@ -746,7 +813,7 @@ namespace SpacePlanningZones
                                     // extend a line
                                     var l = new Line(line.Start - line.Direction() * 0.1, line.End + line.Direction() * 0.1);
                                     var extended = l.ExtendToWithEndInfo(linearZone.Segments(), double.MaxValue, out var dirAtStart, out var dirAtEnd);
-
+                                    extensionLines.Add((l, linearZone.Segments()));
                                     // check distance extended
                                     var endDistance = extended.End.DistanceTo(l.End);
                                     var startDistance = extended.Start.DistanceTo(l.Start);
@@ -1126,7 +1193,7 @@ namespace SpacePlanningZones
                     var intersects = testLine.Intersects(segment, out Vector3 intersection, true, true);
 
                     // if the intersection lies on the obstruction, but is beyond the segment, we collect it
-                    if (segment.PointOnLine(intersection, true) && !testLine.PointOnLine(intersection, true))
+                    if (intersects && segment.PointOnLine(intersection, true) && !testLine.PointOnLine(intersection, true))
                     {
                         intersectionsForLine.Add((intersection, segment.Direction()));
                     }

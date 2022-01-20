@@ -18,7 +18,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     /// <summary>An element containing a collection of Elements that belong to one level.</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -26,27 +26,27 @@ namespace Elements
     public partial class LevelElements : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public LevelElements(IList<Element> @elements, string @level, System.Guid @id = default, string @name = null)
+        public LevelElements(IList<Element> @elements, System.Guid @level, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.Elements = @elements;
             this.Level = @level;
-            }
-        
+        }
+
         // Empty constructor
         public LevelElements()
             : base()
         {
         }
-    
+
         /// <summary>The list of elements.</summary>
         [Newtonsoft.Json.JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Element> Elements { get; set; }
-    
+
         /// <summary>The Level element this set of elements is associated with</summary>
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Level { get; set; }
-    
-    
+        public System.Guid Level { get; set; }
+
+
     }
 }
