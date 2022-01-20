@@ -463,7 +463,7 @@ namespace SpacePlanningZones
 
 
                 // These are the new, correct methods using the split inputs: 
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors?.SplitLocations ?? new List<SplitLocations>(), true, output.Model);
 
                 // Create snapping geometry for splits
                 var splitReferences = CreateSnappingGeometry(spaceBoundaries, "splits");
@@ -472,7 +472,7 @@ namespace SpacePlanningZones
                 output.Model.AddElements(splitReferences);
                 output.Model.AddElement(levelProxy);
 
-                var splitLocations = input.SplitZones.SplitLocations;
+                var splitLocations = input.SplitZones?.SplitLocations ?? new List<SplitLocations>();
                 // if we've overridden splits per-level, use those split locations.
                 if (input.Overrides?.SplitZones != null && input.Overrides?.SplitZones.Count > 0)
                 {
