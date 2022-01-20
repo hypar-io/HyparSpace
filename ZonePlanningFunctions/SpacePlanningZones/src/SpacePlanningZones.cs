@@ -417,7 +417,7 @@ namespace SpacePlanningZones
                 // {
                 //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt);
                 // }
-                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors.SplitLocations, true, output.Model);
+                SplitZonesMultiple(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, input.AddCorridors?.SplitLocations ?? new List<SplitLocations>(), true, output.Model);
 
                 //Create snapping geometry for splits
                 CreateSnappingGeometry(output, spaceBoundaries, "splits");
@@ -428,7 +428,7 @@ namespace SpacePlanningZones
                 // {
                 //     SplitZones(input, corridorWidth, lvl, spaceBoundaries, corridorProfiles, pt, false);
                 // }
-                var splitLocations = input.SplitZones.SplitLocations;
+                var splitLocations = input.SplitZones?.SplitLocations ?? new List<SplitLocations>();
                 var levelProxy = lvl.Proxy("Levels");
                 lvl.Proxy = levelProxy;
                 // if we've overridden splits per-level, use those split locations.
