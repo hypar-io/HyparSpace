@@ -128,6 +128,7 @@ namespace Elements
 
         private static Dictionary<string, Material> materialDefaults = new Dictionary<string, Material> {
             {"unspecified", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.8, 0.3), doubleSided: true)},
+            {"Unassigned Space Type", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.8, 0.3), doubleSided: true)},
             {"unrecognized", new Material("Unspecified Space Type", new Color(0.8, 0.8, 0.2, 0.3), doubleSided: true)},
             {"Circulation", new Material("Circulation", new Color(0.996,0.965,0.863,0.5), doubleSided: true)}, //✅
             {"Open Office", new Material("Open Office", new Color(0.435,0.627,0.745,0.5), doubleSided: true)}, //✅  https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/35cb4053-4d39-47ef-9673-2dccdae1433b/SteelcaseOpenOffice-35cb4053-4d39-47ef-9673-2dccdae1433b.json
