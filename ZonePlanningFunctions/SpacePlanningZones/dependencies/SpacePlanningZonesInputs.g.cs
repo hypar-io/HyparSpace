@@ -143,7 +143,7 @@ namespace SpacePlanningZones
         /// Manual: you draw the circulation paths yourself.</summary>
         [Newtonsoft.Json.JsonProperty("Circulation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SpacePlanningZonesInputsCirculationMode CirculationMode { get; set; } = SpacePlanningZonesInputsCirculationMode.Automatic;
+        public SpacePlanningZonesInputsCirculationMode CirculationMode { get; set; } = SpacePlanningZonesInputsCirculationMode.Manual;
     
         /// <summary>Define the circulation network by drawing one or more corridor paths.</summary>
         [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -173,11 +173,11 @@ namespace SpacePlanningZones
         public IList<Vector3> ManualSplitLocations { get; set; }
     
         /// <summary>Insert additional corridors, to further subdivide the space.</summary>
-        [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonSplitCollection AddCorridors { get; set; }
     
         /// <summary>Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.</summary>
-        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonSplitCollection SplitZones { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -527,7 +527,7 @@ namespace SpacePlanningZones
         }
     
         /// <summary>Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.</summary>
-        [Newtonsoft.Json.JsonProperty("Splits", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Splits", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonSplitCollection Splits { get; set; }
     
     

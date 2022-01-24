@@ -1,0 +1,223 @@
+{
+  "Corridor Width": 1.5,
+  "Outer Band Depth": 6,
+  "Circulation Mode": "Manual",
+  "Add Corridors": [],
+  "Depth at Ends": 8,
+  "overrides": {
+    "additions": {
+      "Corridors": [
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5239999512320015,
+              "leftWidth": 1.5239999512320015,
+              "flip": true,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 5.230543359305527,
+                    "Y": 19.767999480724825,
+                    "Z": 0
+                  },
+                  {
+                    "X": 5.292353055749624,
+                    "Y": 17.42579629156577,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.517921975532083,
+                    "Y": 17.523530594316398,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.530938806394577,
+                    "Y": 14.829770038226588,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              }
+            }
+          },
+          "id": "106b60b7-ea8c-4bd8-a8dd-7e441777d119"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.2191999609856012,
+              "leftWidth": 1.2191999609856012,
+              "flip": true,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 25.917751853361604,
+                    "Y": 22.742378844664525,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.881982101171605,
+                    "Y": 19.10547111553123,
+                    "Z": 0
+                  },
+                  {
+                    "X": 27.08129516699054,
+                    "Y": 19.09367561936867,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              }
+            }
+          },
+          "id": "9e856ce9-45e1-442e-a712-e14ee6122a91"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.2191999609856012,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 6.4995065508188326,
+                    "Y": 19.78848110545534,
+                    "Z": 0
+                  },
+                  {
+                    "X": 6.503798150376197,
+                    "Y": 17.5566107613665,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.2191999609856012
+            }
+          },
+          "id": "7bf4c3d6-026f-48d5-83bf-4df91fadc4e0"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 6.500085458318811,
+                    "Y": 19.827185827626614,
+                    "Z": 0
+                  },
+                  {
+                    "X": 6.488663314693903,
+                    "Y": 19.008380870841837,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.834660897087495,
+                    "Y": 19.013731185953848,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.5
+            }
+          },
+          "id": "c71de463-c1c5-44bb-996b-a88fb585108a"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 6.481343051165546,
+                    "Y": 19.76931441904332,
+                    "Z": 0
+                  },
+                  {
+                    "X": 6.482767652095914,
+                    "Y": 19.02851350979119,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.86055397158455,
+                    "Y": 19.065778059651283,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.5
+            }
+          },
+          "id": "ea65fa98-0c2e-4ffd-aaff-5d42c9f3f47e"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 6.495857908018394,
+                    "Y": 19.76245878511336,
+                    "Z": 0
+                  },
+                  {
+                    "X": 6.497200946836524,
+                    "Y": 19.064040937126546,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.90106578672639,
+                    "Y": 19.101354049580394,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.893766678931033,
+                    "Y": 22.897094790534897,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.5
+            }
+          },
+          "id": "a1ba29a5-49df-4b84-a5e9-b588e0ab5b19"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "leftWidth": 1.5,
+              "flip": true,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 5.284712001184197,
+                    "Y": 17.662609075287577,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.99482291154368,
+                    "Y": 17.492094164142273,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              }
+            }
+          },
+          "id": "71c75c99-59b8-4338-9e0c-253ac952a937"
+        }
+      ]
+    }
+  }
+}

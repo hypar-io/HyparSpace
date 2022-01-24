@@ -207,7 +207,8 @@ namespace SpacePlanningZonesFromProgramRequirements
                     var inflatedBox = new BBox3(bbox.Min + new Vector3(-1, -1), bbox.Max + new Vector3(1, 1));
                     output.Model.AddElements(inflatedBox.ToModelCurves());
                     var textPt = ((inflatedBox.Max.X + inflatedBox.Min.X) / 2, inflatedBox.Max.Y + 0.5, 0);
-                    texts.Add((textPt, Vector3.ZAxis, Vector3.XAxis, group.Key ?? "Program Requirements", Colors.Black));
+                    var key = string.IsNullOrEmpty(group.Key) ? "Program Requirements" : group.Key;
+                    texts.Add((textPt, Vector3.ZAxis, Vector3.XAxis, key, Colors.Black));
                 }
             }
 
@@ -226,7 +227,8 @@ namespace SpacePlanningZonesFromProgramRequirements
                 var levelElement = new LevelElements()
                 {
                     Elements = levelElementList,
-                    Name = floor.Name
+                    Name = floor.Name,
+                    Level = floor.Id
                 };
                 levelElement.Level = floor.Id.ToString();
                 levels.Add(levelElement);
@@ -396,6 +398,8 @@ namespace SpacePlanningZonesFromProgramRequirements
             public Guid Id { get; set; }
 
             public string Name;
+
+            public Guid Id;
 
             public static FloorOrLevel FromFloor(Floor f)
             {
