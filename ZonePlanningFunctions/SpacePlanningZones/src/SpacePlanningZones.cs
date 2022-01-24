@@ -107,7 +107,12 @@ namespace SpacePlanningZones
             output.Model.AddElements(levels);
             foreach (var sb in output.Model.AllElementsOfType<SpaceBoundary>().ToList())
             {
-                output.Model.AddElements(sb.Boundary.ToModelCurves(sb.Transform, sb.Material));
+                var crvs = sb.Boundary.ToModelCurves(sb.Transform, BuiltInMaterials.Black);
+                foreach (var c in crvs)
+                {
+                    c.SetSelectable(false);
+                }
+                output.Model.AddElements(crvs);
             }
             return output;
         }
