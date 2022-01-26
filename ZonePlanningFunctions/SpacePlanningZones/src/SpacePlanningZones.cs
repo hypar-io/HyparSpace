@@ -529,10 +529,10 @@ namespace SpacePlanningZones
             foreach (var sb in spaceBoundaries)
             {
                 var boundary = sb;
-                references.Add(new PolygonReference() { Boundary = boundary.Boundary.Perimeter, Name = type });
+                references.Add(new PolygonReference() { Boundary = boundary.Boundary.Perimeter.TransformedPolygon(boundary.Transform), Name = type });
                 if ((boundary.Boundary.Voids?.Count() ?? 0) > 0)
                 {
-                    boundary.Boundary.Voids.ToList().ForEach(v => references.Add(new PolygonReference() { Boundary = v, Name = type }));
+                    boundary.Boundary.Voids.ToList().ForEach(v => references.Add(new PolygonReference() { Boundary = v.TransformedPolygon(boundary.Transform), Name = type }));
                 }
             }
             return references;
