@@ -21,6 +21,8 @@ namespace DefineProgramRequirements
             {
                 output.Errors.Add("No two programs can have the same Program Name. Please remove one of the duplicates.");
             }
+            var sum = input.ProgramRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
+            output.TotalProgramArea = sum;
             return output;
         }
     }

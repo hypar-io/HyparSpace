@@ -22,6 +22,14 @@
       }
     }
   },
+  "outputs": [
+    {
+      "name": "Total Program Area",
+      "type": "number",
+      "unit_type": "area",
+      "description": "The total area of all program requirements."
+    }
+  ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,

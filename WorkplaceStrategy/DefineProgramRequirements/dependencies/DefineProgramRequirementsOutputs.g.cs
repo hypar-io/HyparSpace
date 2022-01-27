@@ -16,6 +16,12 @@ namespace DefineProgramRequirements
 {
     public class DefineProgramRequirementsOutputs: ResultsBase
     {
+		/// <summary>
+		/// The total area of all program requirements.
+		/// </summary>
+		[JsonProperty("Total Program Area")]
+		public double TotalProgramArea {get; set;}
+
 
 
         /// <summary>
@@ -28,5 +34,21 @@ namespace DefineProgramRequirements
         }
 
 
+        /// <summary>
+        /// Construct a DefineProgramRequirementsOutputs specifying all inputs.
+        /// </summary>
+        /// <returns></returns>
+        [JsonConstructor]
+        public DefineProgramRequirementsOutputs(double totalProgramArea): base()
+        {
+			this.TotalProgramArea = totalProgramArea;
+
+		}
+
+		public override string ToString()
+		{
+			var json = JsonConvert.SerializeObject(this);
+			return json;
+		}
 	}
 }

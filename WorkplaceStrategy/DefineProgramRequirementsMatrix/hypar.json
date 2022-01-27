@@ -1,5 +1,5 @@
 {
-  "$schema": "https://hypar.io/Schemas/function_2.json",
+  "$schema": "https://hypar.io/Schemas/function.json",
   "id": "ac2d042f-ede8-4f11-9d6e-ae3ffe849e81",
   "name": "Define Program Requirements",
   "display_name": "Define Program Requirements Matrix",
@@ -15,6 +15,14 @@
       }
     }
   },
+  "outputs": [
+    {
+      "name": "Total Program Area",
+      "type": "number",
+      "unit_type": "area",
+      "description": "The total area of all program requirements."
+    }
+  ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,
