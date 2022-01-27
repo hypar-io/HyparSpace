@@ -305,16 +305,17 @@ namespace OpenOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, SpaceSettingsValueDeskType @deskType, SpaceSettingsValueCustomWorkstationProperties @customWorkstationProperties)
+        public SpaceSettingsValue(double @gridRotation, double @integratedCollaborationSpaceDensity, double @aisleWidth, SpaceSettingsValueDeskType @deskType, SpaceSettingsValueCustomWorkstationProperties @customWorkstationProperties)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @deskType, @customWorkstationProperties});
+                validator.PreConstruct(new object[]{ @gridRotation, @integratedCollaborationSpaceDensity, @aisleWidth, @deskType, @customWorkstationProperties});
             }
         
             this.GridRotation = @gridRotation;
             this.IntegratedCollaborationSpaceDensity = @integratedCollaborationSpaceDensity;
+            this.AisleWidth = @aisleWidth;
             this.DeskType = @deskType;
             this.CustomWorkstationProperties = @customWorkstationProperties;
         
@@ -332,6 +333,10 @@ namespace OpenOfficeLayout
         [Newtonsoft.Json.JsonProperty("Integrated Collaboration Space Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
         public double IntegratedCollaborationSpaceDensity { get; set; } = 0.2D;
+    
+        [Newtonsoft.Json.JsonProperty("Aisle Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0.5D, 2D)]
+        public double AisleWidth { get; set; } = 1D;
     
         [Newtonsoft.Json.JsonProperty("Desk Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]

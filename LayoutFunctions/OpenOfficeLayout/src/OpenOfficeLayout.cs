@@ -109,22 +109,13 @@ namespace OpenOfficeLayout
                 var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
                 foreach (var ob in officeBoundaries)
                 {
-                    // create a boundary we can use to override individual groups of desks. It's sunk slightly so that, if floors are on, you don't see it. 
-                    var overridableBoundary = new SpaceBoundary()
-                    {
-                        Boundary = ob.Boundary,
-                        Cells = ob.Cells,
-                        Area = ob.Area,
-                        Transform = ob.Transform.Concatenated(new Transform(0, 0, -0.05)),
-                        Material = ob.Material,
-                        Representation = new Lamina(ob.Boundary.Perimeter, false),
-                        Name = "DeskArea",
-                    };
-                    overridableBoundary.ParentCentroid = ob.ParentCentroid;
-                    overridableBoundary.AdditionalProperties.Add("Desk Type", Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType));
-                    overridableBoundary.AdditionalProperties.Add("Integrated Collaboration Space Density", input.IntegratedCollaborationSpaceDensity);
-                    overridableBoundary.AdditionalProperties.Add("Grid Rotation", input.GridRotation);
-                    output.Model.AddElement(overridableBoundary);
+                    var aisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
+                    var proxy = ob.Proxy("Space Settings");
+                    proxy.AdditionalProperties.Add("Desk Type", Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType));
+                    proxy.AdditionalProperties.Add("Integrated Collaboration Space Density", input.IntegratedCollaborationSpaceDensity);
+                    proxy.AdditionalProperties.Add("Aisle Width", aisleWidth);
+                    proxy.AdditionalProperties.Add("Grid Rotation", input.GridRotation);
+                    output.Model.AddElement(proxy);
 
                     var selectedConfig = defaultConfig;
                     var rotation = input.GridRotation;
@@ -153,11 +144,14 @@ namespace OpenOfficeLayout
                         {
                             selectedConfig = configs[Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType)];
                         }
-                        overridableBoundary.AdditionalProperties["Desk Type"] = Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType);
-                        overridableBoundary.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
-                        overridableBoundary.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
+                        Identity.AddOverrideIdentity(proxy, spaceOverride);
+                        Identity.AddOverrideValue(proxy, "Space Settings", spaceOverride.Value);
+                        // proxy.AdditionalProperties["Desk Type"] = Hypar.Model.Utilities.GetStringValueFromEnum(spaceOverride.Value.DeskType);
+                        // proxy.AdditionalProperties["Integrated Collaboration Space Density"] = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                        // proxy.AdditionalProperties["Grid Rotation"] = spaceOverride.Value.GridRotation;
                         rotation = spaceOverride.Value.GridRotation;
                         collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                        aisleWidth = double.IsNaN(spaceOverride.Value.AisleWidth) ? aisleWidth : spaceOverride.Value.AisleWidth;
                     }
 
                     var spaceBoundary = ob.Boundary;
@@ -187,7 +181,7 @@ namespace OpenOfficeLayout
 
                     IEnumerable<Grid2d> validGrids = new List<Grid2d>() { mainGrid };
 
-                    if (avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid)
+                    if (modelColumnLocations.Count > 0 && avoidanceStrat == OpenOfficeLayoutInputsColumnAvoidanceStrategy.Adaptive_Grid)
                     {
                         // Split grid by column locations
                         double columnMaxWidth = 0;
@@ -220,7 +214,6 @@ namespace OpenOfficeLayout
                         try
                         {
                             // Divide by pattern
-                            var aisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
                             grid.V.DivideByPattern(
                                 new[] {
                                 ("Desk", selectedConfig.Width),
