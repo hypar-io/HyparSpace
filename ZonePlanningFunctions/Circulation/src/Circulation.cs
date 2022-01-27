@@ -122,7 +122,7 @@ namespace Circulation
                     {
                         var match = circulationSegments.FirstOrDefault(c =>
                         {
-                            return c.OriginalGeometry.Start == removalOverride.Identity.OriginalGeometry.Start;
+                            return c.OriginalGeometry.Start.DistanceTo(removalOverride.Identity.OriginalGeometry.Start) < 0.1;
                         });
                         if (match != null)
                         {
@@ -189,7 +189,7 @@ namespace Circulation
                         // }
 
                         var identity = corridorOverride.Identity.OriginalGeometry;
-                        var matchingCorridor = circulationSegments.FirstOrDefault(s => s.OriginalGeometry.PointAt(0.5).DistanceTo(identity.PointAt(0.5)) < 0.01);
+                        var matchingCorridor = circulationSegments.FirstOrDefault(s => s.OriginalGeometry.Start.DistanceTo(identity.Start) < 0.01);
                         if (matchingCorridor == null)
                         {
                             continue;
@@ -394,7 +394,7 @@ namespace Circulation
             var thickenedEnds = shortEdgesExtended.SelectMany(s => s.ToPolyline(1).Offset(shortEdgeDepth, EndType.Butt)).ToList();
             thickerOffsetProfiles.AddRange(thickenedEnds.Select(o => new Profile(o.Offset(0.01))));
 
-            innerOffsetMinusThickenedEnds = innerOffset.SelectMany(i => Polygon.Difference(new[] { i }, thickenedEnds));
+            innerOffsetMinusThickenedEnds = innerOffset.SelectMany(i => Profile.Difference(new[] { new Profile(i) }, thickenedEnds.Select(t => new Profile(t))).ToList()).Select(p => p.Perimeter);
             exclusionRegions = innerOffsetMinusThickenedEnds.SelectMany(r => r.Offset(2 * corridorWidth, EndType.Square));
 
             var cSegments = innerOffsetMinusThickenedEnds.Select(p =>
@@ -516,7 +516,7 @@ namespace Circulation
                     foreach (var extendedLine in containedLines)
                     {
                         var ext = extendedLine.ToPolyline(1);
-                        var clOffset = OffsetOpen(ext, -corridorWidth / 2.0);
+                        var clOffset = ext.OffsetOpen(-corridorWidth / 2.0);
                         var corridorPolyline = new ThickenedPolyline(clOffset.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
                         var profile = OffsetOnSideAndUnionSafe(new ThickenedPolyline(clOffset, corridorWidth, false, corridorWidth, corridorWidth));
                         profile.Name = "Corridor";
@@ -551,53 +551,6 @@ namespace Circulation
             }
 
             return lines;
-        }
-
-        // TODO - use the method from elments once it's merged
-        private static Polyline OffsetOpen(Polyline pl, double offset)
-        {
-            var newVertices = new List<Vector3>();
-            var segments = pl.Segments().Select(s => s.Offset(offset, false)).ToList();
-            if (segments.Count == 1)
-            {
-                return new Polyline(segments[0].Start, segments[0].End);
-            }
-            for (int i = 0; i < segments.Count - 1; i++)
-            {
-                var currSegment = segments[i];
-                var nextSegment = segments[i + 1];
-                if (i == 0)
-                {
-                    newVertices.Add(currSegment.Start);
-                }
-
-                if (currSegment.Direction().Dot(nextSegment.Direction()) > 1 - Vector3.EPSILON)
-                {
-                    newVertices.Add(currSegment.End);
-                }
-                else
-                {
-                    if (currSegment.Intersects(nextSegment, out Vector3 intersection, true, true))
-                    {
-                        newVertices.Add(intersection);
-                    }
-                    else
-                    {
-                        newVertices.Add(currSegment.End);
-                    }
-                }
-
-                if (i == segments.Count - 2)
-                {
-                    newVertices.Add(nextSegment.End);
-                }
-            }
-            var polyline = new Polyline(newVertices);
-            if (polyline.Vertices.Count < 2)
-            {
-                throw new Exception("The offset of the polyline resulted in invalid geometry, such as a single point.");
-            }
-            return polyline;
         }
 
         private static (Polygon hull, Line centerLine)[] JoinSingleLoaded(List<(Polygon hull, Line centerLine)> singleLoadedZones)
