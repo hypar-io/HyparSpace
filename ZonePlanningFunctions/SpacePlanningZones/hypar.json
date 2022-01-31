@@ -234,7 +234,14 @@
                     "type": "integer",
                     "default": 1
                 }
-            }
+            },
+            "validationRules": [
+                {
+                    "type": "required",
+                    "level": "hint",
+                    "message": "Assign program types to different zones"
+                }
+            ]
         },
         "Merge Zones": {
             "verbs": {
@@ -277,7 +284,14 @@
                         "queryOnOverrideTarget": true
                     }
                 }
-            }
+            },
+            "validationRules": [
+                {
+                    "type": "required",
+                    "level": "hint",
+                    "message": "Split zones into rooms"
+                }
+            ]
         }
     },
     "element_types": [
