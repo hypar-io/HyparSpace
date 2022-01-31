@@ -154,7 +154,15 @@
             "rightWidth": 1.5
           }
         }
-      }
+      },
+      "validationRules": [
+        {
+          "type": "any",
+          "value": 1,
+          "level": "hint",
+          "message": "Add, edit, or remove corridors"
+        }
+      ]
     }
   },
   "outputs": [],
