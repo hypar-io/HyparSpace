@@ -148,6 +148,8 @@ namespace Circulation
                 {
                     foreach (var addedCorridor in input.Overrides.Additions.Corridors)
                     {
+                        // If the added corridor has a level associated with it, but
+                        // that level doesn't match the one we're currently processing, ignore.
                         if (addedCorridor.Value?.Level != null && addedCorridor.Value.Level.Name != lvl.Name)
                         {
                             continue;
@@ -158,8 +160,13 @@ namespace Circulation
                         {
                             var p = OffsetOnSideAndUnionSafe(corridorPolyline, output);
                             corridorProfiles.Add(p);
-
-                            corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
+                            // Corridors can be added from a plan view,
+                            // in which case they'll have a level, and we should 
+                            // set the polyline at the correct elevation.
+                            // Otherwise, we should set the polyline at z=0, 
+                            // and let the web UI handle displaying it at the correct elevation.
+                            var plTransform = addedCorridor.Value?.Level != null ? lvl.Transform : new Transform();
+                            corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(plTransform);
                             var segment = new CirculationSegment(p, 0.11)
                             {
                                 Material = CorridorMat,
