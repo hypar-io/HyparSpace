@@ -148,6 +148,8 @@ namespace Circulation
                 {
                     foreach (var addedCorridor in input.Overrides.Additions.Corridors)
                     {
+                        // If the added corridor has a level associated with it, but
+                        // that level doesn't match the one we're currently processing, ignore.
                         if (addedCorridor.Value?.Level != null && addedCorridor.Value.Level.Name != lvl.Name)
                         {
                             continue;
@@ -158,14 +160,22 @@ namespace Circulation
                         {
                             var p = OffsetOnSideAndUnionSafe(corridorPolyline, output);
                             corridorProfiles.Add(p);
-
-                            corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
+                            // We have to create a new ThickenedPolyline and modify this to set the correct 
+                            // elevation, otherwise we will keep modifying the elevation of the original corridorPolyline from the add override,
+                            // and all the segments created from the same "add" operation will share the same geometry.
+                            var modifiedCorridorPolyline = new ThickenedPolyline(
+                                corridorPolyline.Polyline.Project(new Plane((0, 0, 0), (0, 0, 1))).TransformedPolyline(lvl.Transform),
+                                corridorPolyline.Width,
+                                corridorPolyline.Flip,
+                                corridorPolyline.LeftWidth,
+                                corridorPolyline.RightWidth
+                             );
                             var segment = new CirculationSegment(p, 0.11)
                             {
                                 Material = CorridorMat,
                                 Transform = lvl.Transform,
-                                OriginalGeometry = corridorPolyline.Polyline,
-                                Geometry = corridorPolyline,
+                                OriginalGeometry = modifiedCorridorPolyline.Polyline,
+                                Geometry = modifiedCorridorPolyline,
                                 Level = lvl.Id
                             };
                             circulationSegments.Add(segment);
