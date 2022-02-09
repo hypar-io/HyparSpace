@@ -169,7 +169,7 @@ namespace Circulation
                                 corridorPolyline.LeftWidth,
                                 corridorPolyline.RightWidth
                              );
-                            var newCirculationSegments = CreateCirculationSegments(lvl, levelBoundary, modifiedCorridorPolyline, p, modifiedCorridorPolyline.Polyline, circulationSegments);
+                            var newCirculationSegments = CreateCirculationSegments(lvl, levelBoundary, modifiedCorridorPolyline, p, modifiedCorridorPolyline.Polyline);
                             foreach (var circulationSegment in newCirculationSegments)
                             {
                                 corridorProfiles.Add(circulationSegment.Profile);
