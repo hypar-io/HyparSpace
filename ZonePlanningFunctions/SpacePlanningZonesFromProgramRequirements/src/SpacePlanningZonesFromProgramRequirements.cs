@@ -230,7 +230,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                     Name = floor.Name,
                     Level = floor.Id
                 };
-                levelElement.Level = floor.Id.ToString();
+                levelElement.Level = floor.Id;
                 levels.Add(levelElement);
                 // create corridors
                 if (input.Corridors != null && input.Corridors.Count() > 0)
@@ -257,7 +257,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                 foreach (var floor in floorsOrLevels)
                 {
                     var lvlVol = levelsModel.Elements[floor.Id] as LevelVolume;
-                    var levelElement = levels.First((l) => l.Level == floor.Id.ToString());
+                    var levelElement = levels.First((l) => l.Level == floor.Id);
                     var levelElementList = levelElement.Elements as List<Element>;
                     var otherSpaceBoundariesAtFloorLevel = FindOtherSpaceBoundariesOnLevel(output.Model.AllElementsOfType<SpaceBoundary>(), floor);
                     levelElementList.AddRange(otherSpaceBoundariesAtFloorLevel);
@@ -331,7 +331,7 @@ namespace SpacePlanningZonesFromProgramRequirements
                     sb.AdditionalProperties["Level"] = lvl.Level;
                     if (lvl != null && lvl.Level != null && hasLevels && levelsModel != null)
                     {
-                        var id = new Guid(lvl.Level);
+                        var id = lvl.Level;
                         if (levelsModel.Elements.TryGetValue(id, out var lvlVol))
                         {
                             sb.AdditionalProperties["Level Name"] = lvlVol.Name;
@@ -398,8 +398,6 @@ namespace SpacePlanningZonesFromProgramRequirements
             public Guid Id { get; set; }
 
             public string Name;
-
-            public Guid Id;
 
             public static FloorOrLevel FromFloor(Floor f)
             {

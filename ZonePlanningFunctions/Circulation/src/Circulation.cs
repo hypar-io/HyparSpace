@@ -148,6 +148,8 @@ namespace Circulation
                 {
                     foreach (var addedCorridor in input.Overrides.Additions.Corridors)
                     {
+                        // If the added corridor has a level associated with it, but
+                        // that level doesn't match the one we're currently processing, ignore.
                         if (addedCorridor.Value?.Level != null && addedCorridor.Value.Level.Name != lvl.Name)
                         {
                             continue;
@@ -157,8 +159,17 @@ namespace Circulation
                         try
                         {
                             var p = OffsetOnSideAndUnionSafe(corridorPolyline, output);
-                            corridorPolyline.Polyline = corridorPolyline.Polyline.TransformedPolyline(lvl.Transform);
-                            var newCirculationSegments = CreateCirculationSegments(lvl, levelBoundary, corridorPolyline, p, corridorPolyline.Polyline);
+                            // We have to create a new ThickenedPolyline and modify this to set the correct 
+                            // elevation, otherwise we will keep modifying the elevation of the original corridorPolyline from the add override,
+                            // and all the segments created from the same "add" operation will share the same geometry.
+                            var modifiedCorridorPolyline = new ThickenedPolyline(
+                                corridorPolyline.Polyline.Project(new Plane((0, 0, 0), (0, 0, 1))).TransformedPolyline(lvl.Transform),
+                                corridorPolyline.Width,
+                                corridorPolyline.Flip,
+                                corridorPolyline.LeftWidth,
+                                corridorPolyline.RightWidth
+                             );
+                            var newCirculationSegments = CreateCirculationSegments(lvl, levelBoundary, corridorPolyline, p, modifiedCorridorPolyline.Polyline);
                             foreach (var circulationSegment in newCirculationSegments)
                             {
                                 corridorProfiles.Add(circulationSegment.Profile);
