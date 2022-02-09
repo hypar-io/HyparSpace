@@ -174,7 +174,7 @@ namespace Circulation
                             {
                                 corridorProfiles.Add(circulationSegment.Profile);
                                 circulationSegments.Add(circulationSegment);
-                                Identity.AddOverrideIdentity(circulationSegment.Profile, addedCorridor);
+                                Identity.AddOverrideIdentity(circulationSegment, addedCorridor);
                             }
                         }
                         catch (Exception e)
