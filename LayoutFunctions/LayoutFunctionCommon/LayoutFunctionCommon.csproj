@@ -3,6 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="0.9.8" />
+    <PackageReference Include="Hypar.Elements" Version="0.9.9" />
   </ItemGroup>
 </Project>

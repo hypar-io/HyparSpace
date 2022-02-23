@@ -17,10 +17,10 @@ namespace DefineProgramRequirements
     public class DefineProgramRequirementsOutputs: ResultsBase
     {
 		/// <summary>
-		/// The volume.
+		/// The total area of all program requirements.
 		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume {get; set;}
+		[JsonProperty("Total Program Area")]
+		public double TotalProgramArea {get; set;}
 
 
 
@@ -39,9 +39,9 @@ namespace DefineProgramRequirements
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DefineProgramRequirementsOutputs(double volume): base()
+        public DefineProgramRequirementsOutputs(double totalProgramArea): base()
         {
-			this.Volume = volume;
+			this.TotalProgramArea = totalProgramArea;
 
 		}
 
