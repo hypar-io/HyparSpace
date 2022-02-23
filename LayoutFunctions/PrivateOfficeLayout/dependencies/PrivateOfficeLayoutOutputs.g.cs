@@ -16,6 +16,12 @@ namespace PrivateOfficeLayout
 {
     public class PrivateOfficeLayoutOutputs: ResultsBase
     {
+		/// <summary>
+		/// The number of private offices.
+		/// </summary>
+		[JsonProperty("Private offices count")]
+		public double PrivateOfficesCount {get; set;}
+
 
 
         /// <summary>
@@ -28,5 +34,21 @@ namespace PrivateOfficeLayout
         }
 
 
+        /// <summary>
+        /// Construct a PrivateOfficeLayoutOutputs specifying all inputs.
+        /// </summary>
+        /// <returns></returns>
+        [JsonConstructor]
+        public PrivateOfficeLayoutOutputs(double privateOfficesCount): base()
+        {
+			this.PrivateOfficesCount = privateOfficesCount;
+
+		}
+
+		public override string ToString()
+		{
+			var json = JsonConvert.SerializeObject(this);
+			return json;
+		}
 	}
 }

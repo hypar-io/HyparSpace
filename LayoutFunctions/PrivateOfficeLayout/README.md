@@ -14,4 +14,5 @@ Lay out private offices.
 
 |Output Name|Type|Description|
 |---|---|---|
+|Private offices count|Number|The number of private offices.|
 

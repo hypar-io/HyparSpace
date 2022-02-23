@@ -71,7 +71,16 @@
     "element_types": [
         "https://prod-api.hypar.io/schemas/SpaceBoundary",
         "https://prod-api.hypar.io/schemas/LevelElements",
-        "https://prod-api.hypar.io/schemas/LevelVolume"
+        "https://prod-api.hypar.io/schemas/LevelVolume",
+        "https://prod-api.hypar.io/schemas/WorkpointCount"
+    ],
+    "outputs": [
+        {
+            "unit_type": "none",
+            "name": "Private offices count",
+            "description": "The number of private offices.",
+            "type": "number"
+        }
     ],
     "repository_url": "https://github.com/hypar-io/function",
     "source_file_key": null,
