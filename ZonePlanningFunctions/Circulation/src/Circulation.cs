@@ -795,6 +795,13 @@ namespace Circulation
 
         private static Profile AdjustCorridorPolygon(ThickenedPolyline corridorPolyline, Profile profile, IEnumerable<Profile> circulationSegmentsProfiles)
         {
+            var isCycle = corridorPolyline.Polyline.Vertices.Count > 2
+                          && corridorPolyline.Polyline.Vertices[0].DistanceTo(corridorPolyline.Polyline.Vertices.Last()) <= corridorPolyline.Width / 2;
+            if (isCycle)
+            {
+                return profile;
+            }
+
             var allPolylineSegments = corridorPolyline.Polyline.Segments();
             var firstSegment = allPolylineSegments.First().Reversed();
             var lastSegment = allPolylineSegments.Last();
@@ -808,7 +815,7 @@ namespace Circulation
         private static Profile TryAdjustSegmentPolygon(Profile profile, Line segment, IEnumerable<Line> allBoundariesLines, ThickenedPolyline corridorPolyline, bool flip)
         {
             var resultProfile = new Profile(profile.Perimeter, profile.Voids, profile.Id, profile.Name);
-            var maxDistance = Math.Min(2 * corridorPolyline.Width, corridorPolyline.Polyline.Length() / 3);
+            var maxDistance = Math.Min(corridorPolyline.Width, corridorPolyline.Polyline.Length() / 3);
             var transform = new Transform(new Vector3(0, 0, corridorPolyline.Polyline.Start.Z));
             var profileSegments = resultProfile.Segments().Select(s => s.TransformedLine(transform));
             allBoundariesLines = allBoundariesLines.Select(s => s.TransformedLine(transform));
@@ -825,6 +832,10 @@ namespace Circulation
                 offsettedSegment = offsettedSegment.Reversed();
             }
 
+            if (!profileSegments.Any(s => s.IsAlmostEqualTo(new Line(segment.End, offsettedSegment.End), false)))
+            {
+                return resultProfile;
+            }
             var extendedSegment = segment.ExtendTo(allBoundariesLines, false);
             var offsettedExtendedSegment = offsettedSegment.ExtendTo(allBoundariesLines, false);
             var isSegmentExtendedSuccessfully = !segment.End.IsAlmostEqualTo(extendedSegment.End)
