@@ -77,7 +77,7 @@
     "outputs": [
         {
             "unit_type": "none",
-            "name": "Private offices count",
+            "name": "Private office count",
             "description": "The number of private offices.",
             "type": "number"
         }

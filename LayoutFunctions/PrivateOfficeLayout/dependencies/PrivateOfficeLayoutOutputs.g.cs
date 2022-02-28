@@ -19,8 +19,8 @@ namespace PrivateOfficeLayout
 		/// <summary>
 		/// The number of private offices.
 		/// </summary>
-		[JsonProperty("Private offices count")]
-		public double PrivateOfficesCount {get; set;}
+		[JsonProperty("Private office count")]
+		public double PrivateOfficeCount {get; set;}
 
 
 
@@ -39,9 +39,9 @@ namespace PrivateOfficeLayout
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PrivateOfficeLayoutOutputs(double privateOfficesCount): base()
+        public PrivateOfficeLayoutOutputs(double privateOfficeCount): base()
         {
-			this.PrivateOfficesCount = privateOfficesCount;
+			this.PrivateOfficeCount = privateOfficeCount;
 
 		}
 
