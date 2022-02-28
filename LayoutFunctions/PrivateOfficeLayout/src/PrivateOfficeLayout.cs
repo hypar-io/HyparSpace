@@ -35,6 +35,7 @@ namespace PrivateOfficeLayout
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
+            var totalPrivateOfficeCount = 0;
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<Floor>();
@@ -183,6 +184,7 @@ namespace PrivateOfficeLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform()));
+                            totalPrivateOfficeCount++;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -193,6 +195,7 @@ namespace PrivateOfficeLayout
                             if (areaRatio > 0.7)
                             {
                                 output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform()));
+                                totalPrivateOfficeCount++;
                             }
                             // else
                             // {
@@ -213,10 +216,11 @@ namespace PrivateOfficeLayout
                     WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
                 }
             }
+            output.Model.AddElement(new WorkpointCount() { Type = "Private Office", Count = totalPrivateOfficeCount });
+            output.PrivateOfficeCount = totalPrivateOfficeCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
         }
-
 
         private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {

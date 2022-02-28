@@ -31,6 +31,7 @@ namespace WorkplaceMetrics
             var totalClassroomSeats   = CountWorkplaceTyped(inputModels, "Classroom Layout",          "Classroom Seat");
             var totalPhoneBooths      = CountWorkplaceTyped(inputModels, "Phone Booth Layout",        "Phone Booth");
             var totalOpenCollabSeats  = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
+            var totalPrivateOffices   = CountWorkplaceTyped(inputModels, "Private Office Layout",     "Private Office");
 
             var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
 
@@ -62,7 +63,8 @@ namespace WorkplaceMetrics
                                                     headcount, 
                                                     areaPerDesk, 
                                                     deskSharingRatio, 
-                                                    meetingRoomRatio
+                                                    meetingRoomRatio,
+                                                    totalPrivateOffices
                                                     );
             return output;
         }

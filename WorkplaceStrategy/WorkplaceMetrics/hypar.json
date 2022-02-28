@@ -39,6 +39,11 @@
       "autohide": false,
       "name": "Open Collaboration Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Private Office Layout",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -159,6 +164,12 @@
       "unit_type": "none",
       "name": "Meeting room ratio",
       "description": "On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.",
+      "type": "number"
+    },
+    {
+      "unit_type": "none",
+      "name": "Private Office Count",
+      "description": "Total number of private offices.",
       "type": "number"
     }
   ],
