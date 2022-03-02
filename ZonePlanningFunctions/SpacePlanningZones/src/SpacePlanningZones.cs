@@ -789,7 +789,11 @@ namespace SpacePlanningZones
                 {
                     // last ditch difference with validation suspended
                     Elements.Validators.Validator.DisableValidationOnConstruction = true;
-                    remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+                    var possiblyBadResults = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+                    // This hack has a way of cleaning up bad polygons.
+                    var offsetOut = Profile.Offset(possiblyBadResults, 0.01);
+                    var offsetIn = Profile.Offset(offsetOut, -0.01);
+                    remainingSpaces = offsetIn;
                     Elements.Validators.Validator.DisableValidationOnConstruction = false;
                 }
                 catch
