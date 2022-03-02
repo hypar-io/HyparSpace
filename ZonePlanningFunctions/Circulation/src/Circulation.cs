@@ -815,7 +815,7 @@ namespace Circulation
         private static Profile TryAdjustSegmentPolygon(Profile profile, Line segment, IEnumerable<Line> allBoundariesLines, ThickenedPolyline corridorPolyline, bool flip)
         {
             var resultProfile = new Profile(profile.Perimeter, profile.Voids, profile.Id, profile.Name);
-            var maxDistance = Math.Min(corridorPolyline.Width, corridorPolyline.Polyline.Length() / 3);
+            var maxDistance = Math.Min(1.2 * corridorPolyline.Width, corridorPolyline.Polyline.Length() / 3);
             var transform = new Transform(new Vector3(0, 0, corridorPolyline.Polyline.Start.Z));
             var profileSegments = resultProfile.Segments().Select(s => s.TransformedLine(transform));
             allBoundariesLines = allBoundariesLines.Select(s => s.TransformedLine(transform));
