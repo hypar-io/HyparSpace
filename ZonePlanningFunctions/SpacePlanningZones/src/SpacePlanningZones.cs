@@ -769,7 +769,9 @@ namespace SpacePlanningZones
         private static void DumpGeometry(object o, string name)
         {
             var path = System.IO.Path.Combine("../../../../", name + ".json");
+            Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = true;
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(o, Newtonsoft.Json.Formatting.Indented);
+            Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = false;
             System.IO.File.WriteAllText(path, json);
         }
 
@@ -783,7 +785,18 @@ namespace SpacePlanningZones
             }
             catch
             {
-                remainingSpaces.Add(levelBoundary);
+                try
+                {
+                    // last ditch difference with validation suspended
+                    Elements.Validators.Validator.DisableValidationOnConstruction = true;
+                    remainingSpaces = Profile.Difference(new[] { levelBoundary }, corridorProfiles);
+                    Elements.Validators.Validator.DisableValidationOnConstruction = false;
+                }
+                catch
+                {
+
+                    remainingSpaces.Add(levelBoundary);
+                }
             }
             var extensionLines = new List<(Line l, List<Line> otherLines)>();
             // for every space that's left

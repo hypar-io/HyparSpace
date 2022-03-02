@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-	
-    <ItemGroup>
-	    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-    </ItemGroup>
-	
-    <ItemGroup>
-      <PackageReference Include="Hypar.Elements" Version="0.9.8" />
-      <PackageReference Include="Hypar.Functions" Version="0.9.10" />
-    </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="0.9.9" />
+    <PackageReference Include="Hypar.Functions" Version="0.9.10" />
+  </ItemGroup>
 
 </Project>
