@@ -1,7 +1,9 @@
 
+using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Hypar.Server
 {
@@ -9,11 +11,9 @@ namespace Hypar.Server
     {
         public static async Task Main(string[] args)
         {
-            Elements.Serialization.glTF.GltfExtensions.GltfCachePath = "/Users/andrewheumann/Desktop/Test-disk-cache";
-
             await HyparServer.StartAsync(
                 args,
-                Path.GetFullPath(Path.Combine(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/server", "..")),
+                Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
                 typeof(PrivateOfficeLayout.Function),
                 typeof(PrivateOfficeLayout.PrivateOfficeLayoutInputs));
         }

@@ -189,7 +189,7 @@ namespace PrivateOfficeLayout
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                            var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
+                            var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).Distinct().ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             var areaRatio = cinchedPoly.Area() / rect.Area();
                             if (areaRatio > 0.7)
