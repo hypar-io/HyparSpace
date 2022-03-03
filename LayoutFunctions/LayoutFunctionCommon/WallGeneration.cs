@@ -134,7 +134,13 @@ namespace Elements
                 // if we have no corridors, find the best edge not along the floor boundary
                 var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
                 var edgesByLength = edgesNotAlongFloorBoundary.OrderByDescending(l => l.Length());
-                var bestEdge = edgesByLength.First();
+                var bestEdge = edgesByLength.FirstOrDefault();
+                if (bestEdge == null)
+                {
+                    bestEdge = edgesAlongFloorBoundary.OrderBy(e => e.Length()).Last();
+                    otherSegments = edgesAlongFloorBoundary.Except(new[] { bestEdge });
+                    return bestEdge;
+                }
                 otherSegments = edgesByLength.Skip(1).Union(edgesAlongFloorBoundary);
                 if (otherSegments.Count() != edgesToClassify.Count() - 1)
                 {
