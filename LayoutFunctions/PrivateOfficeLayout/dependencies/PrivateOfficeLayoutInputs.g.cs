@@ -110,15 +110,16 @@ namespace PrivateOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations)
+        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations, IList<SpaceSettingsOverride> @spaceSettings)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @furnitureLocations});
+                validator.PreConstruct(new object[]{ @furnitureLocations, @spaceSettings});
             }
         
             this.FurnitureLocations = @furnitureLocations;
+            this.SpaceSettings = @spaceSettings;
         
             if(validator != null)
             {
@@ -128,6 +129,9 @@ namespace PrivateOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Space Settings", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpaceSettingsOverride> SpaceSettings { get; set; }
     
     
     }
@@ -164,6 +168,42 @@ namespace PrivateOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsValue Value { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsOverride(string @id, SpaceSettingsIdentity @identity, SpaceSettingsValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValue Value { get; set; }
     
     
     }
@@ -220,6 +260,111 @@ namespace PrivateOfficeLayout
     
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsIdentity(Vector3 @parentCentroid)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @parentCentroid});
+            }
+        
+            this.ParentCentroid = @parentCentroid;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 ParentCentroid { get; set; }
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsValue(SpaceSettingsValueOfficeSizing @officeSizing, bool @createWalls)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @officeSizing, @createWalls});
+            }
+        
+            this.OfficeSizing = @officeSizing;
+            this.CreateWalls = @createWalls;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Office Sizing", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValueOfficeSizing OfficeSizing { get; set; }
+    
+        /// <summary>Should partitions be added around offices?</summary>
+        [Newtonsoft.Json.JsonProperty("Create Walls", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool CreateWalls { get; set; } = true;
+    
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    
+    public partial class SpaceSettingsValueOfficeSizing 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsValueOfficeSizing(bool @automateOfficeSubdivisions, double @officeSize)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValueOfficeSizing>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @automateOfficeSubdivisions, @officeSize});
+            }
+        
+            this.AutomateOfficeSubdivisions = @automateOfficeSubdivisions;
+            this.OfficeSize = @officeSize;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>Should offices be automatically created from provided zones?</summary>
+        [Newtonsoft.Json.JsonProperty("Automate Office Subdivisions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool AutomateOfficeSubdivisions { get; set; } = true;
+    
+        /// <summary>How large should the auto-generated offices be?</summary>
+        [Newtonsoft.Json.JsonProperty("Office Size", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(2.7432D, 10D)]
+        public double OfficeSize { get; set; } = 5D;
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
     
     
     }

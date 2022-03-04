@@ -66,6 +66,49 @@
                     "$ref": "https://prod-api.hypar.io/schemas/Transform"
                 }
             }
+        },
+        "Space Settings": {
+            "dependency": "Space Planning Zones",
+            "context": "[*discriminator=Elements.SpaceBoundary&Name=Private Office]",
+            "identity": {
+                "ParentCentroid": {
+                    "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                }
+            },
+            "paradigm": "edit",
+            "schema": {
+                "Office Sizing": {
+                    "type": "object",
+                    "properties": {
+                        "Automate Office Subdivisions": {
+                            "description": "Should offices be automatically created from provided zones?",
+                            "type": "boolean",
+                            "default": true
+                        },
+                        "Office Size": {
+                            "description": "How large should the auto-generated offices be?",
+                            "type": "number",
+                            "minimum": 2.7432,
+                            "maximum": 10,
+                            "default": 5,
+                            "$hyparUnitType": "length",
+                            "$hyparShowIf": {
+                                "conditions": [
+                                    {
+                                        "property": "Automate Office Subdivisions",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "Create Walls": {
+                    "type": "boolean",
+                    "description": "Should partitions be added around offices?",
+                    "default": true
+                }
+            }
         }
     },
     "element_types": [
