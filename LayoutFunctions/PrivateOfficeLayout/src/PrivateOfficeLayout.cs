@@ -25,6 +25,7 @@ namespace PrivateOfficeLayout
         /// <returns>A PrivateOfficeLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static PrivateOfficeLayoutOutputs Execute(Dictionary<string, Model> inputModels, PrivateOfficeLayoutInputs input)
         {
+            proxies.Clear();
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
@@ -102,10 +103,6 @@ namespace PrivateOfficeLayout
                                     output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform()));
                                     totalPrivateOfficeCount++;
                                 }
-                                // else
-                                // {
-                                //     output.Model.AddElement(new Panel(cinchedPoly, BuiltInMaterials.XAxis, levelVolume.Transform));
-                                // }
                             }
                         }
 
@@ -350,9 +347,9 @@ namespace PrivateOfficeLayout
             return config;
         }
 
-        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary roofSection, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
+        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary spaceBoundary, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
         {
-            return allSpaceBoundaries.Proxy(roofSection) ?? roofSection.Proxy(SpaceBoundaryDependencyName);
+            return allSpaceBoundaries.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryDependencyName);
         }
     }
 }
