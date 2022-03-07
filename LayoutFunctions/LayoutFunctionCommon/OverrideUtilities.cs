@@ -30,6 +30,7 @@ namespace LayoutFunctionCommon
                     try
                     {
                         matchingElement.Transform.Matrix = positionOverride.Value.Transform.Matrix;
+                        Identity.AddOverrideIdentity(matchingElement, positionOverride);
                     }
                     catch
                     {
