@@ -1,0 +1,21 @@
+#!/bin/bash
+cd ClassroomLayout
+hypar update
+cd ../DataHall
+hypar update
+cd ../LoungeLayout
+hypar update
+cd ../MeetingRoomLayout
+hypar update
+cd ../OpenCollabLayout
+hypar update
+cd ../OpenOfficeLayout
+hypar update
+cd ../PantryLayout
+hypar update
+cd ../PhoneBoothLayout
+hypar update
+cd ../PrivateOfficeLayout
+hypar update
+cd ../ReceptionLayout
+hypar update

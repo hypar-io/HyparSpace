@@ -4,10 +4,6 @@
     <ProjectReference Include="..\src\PrivateOfficeLayout.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Hypar.Server" Version="0.9.10" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
