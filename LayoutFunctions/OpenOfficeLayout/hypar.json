@@ -185,6 +185,9 @@
       "identity": {
         "OriginalLocation": {
           "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        },
+        "gltfLocation": {
+          "type": "string"
         }
       },
       "paradigm": "edit",

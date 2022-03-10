@@ -2,6 +2,7 @@ using System;
 using Elements;
 using Elements.Geometry;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LayoutFunctionCommon
 {
@@ -17,12 +18,20 @@ namespace LayoutFunctionCommon
             foreach (var e in allElementInstances)
             {
                 e.AdditionalProperties["OriginalLocation"] = e.Transform.Origin;
+                e.AdditionalProperties["gltfLocation"] = (e.BaseDefinition as ContentElement)?.GltfLocation;
             }
             if (overrides != null && overrides.FurnitureLocations != null)
             {
                 foreach (var positionOverride in overrides.FurnitureLocations)
                 {
-                    var matchingElement = allElementInstances.OrderBy(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation)).First();
+                    IEnumerable<ElementInstance> elementInstances = allElementInstances;
+                    if (positionOverride.Identity.GltfLocation != null)
+                    {
+                        elementInstances = allElementInstances
+                            .Where(el => el.BaseDefinition is ContentElement contentElement
+                                         && contentElement.GltfLocation.Equals(positionOverride.Identity.GltfLocation));
+                    }
+                    var matchingElement = elementInstances.OrderBy(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation)).FirstOrDefault();
                     if (matchingElement == null)
                     {
                         continue;

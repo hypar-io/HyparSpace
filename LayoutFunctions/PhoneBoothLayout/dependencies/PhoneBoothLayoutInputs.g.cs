@@ -131,15 +131,16 @@ namespace PhoneBoothLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public FurnitureLocationsIdentity(Vector3 @originalLocation)
+        public FurnitureLocationsIdentity(Vector3 @originalLocation, string @gltfLocation)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<FurnitureLocationsIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @originalLocation});
+                validator.PreConstruct(new object[]{ @originalLocation, @gltfLocation});
             }
         
             this.OriginalLocation = @originalLocation;
+            this.GltfLocation = @gltfLocation;
         
             if(validator != null)
             {
@@ -149,6 +150,9 @@ namespace PhoneBoothLayout
     
         [Newtonsoft.Json.JsonProperty("OriginalLocation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 OriginalLocation { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("gltfLocation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string GltfLocation { get; set; }
     
     
     }
