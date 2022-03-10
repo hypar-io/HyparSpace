@@ -97,7 +97,6 @@ namespace OpenCollaborationLayout
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
                     }
-
                 }
             }
             output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Collaboration seat" });
@@ -187,7 +186,6 @@ namespace OpenCollaborationLayout
             return minSeg;
         }
 
-
         private static int varietyCounter = 0;
         private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
@@ -221,7 +219,6 @@ namespace OpenCollaborationLayout
             }
             var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
 
-            
             string[] countableOneSeaters = new[] { 
                 "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Mattiazzi-Branca-BarStool-BarStool-NaturalAsh.glb", 
                 "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb", 
@@ -247,7 +244,6 @@ namespace OpenCollaborationLayout
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             var allPlacedInstances = instance.Instances;
             return (instance, countableSeatCount);
-
         }
 
         private static int CountConfigSeats(ContentConfiguration config, string[] countableSeaters, int seatsPerSeater)
@@ -267,5 +263,4 @@ namespace OpenCollaborationLayout
             return countableSeatCount;
         }
     }
-
 }
