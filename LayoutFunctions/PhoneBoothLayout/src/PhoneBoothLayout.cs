@@ -106,10 +106,10 @@ namespace PhoneBoothLayout
                 }
                 if (input.CreateWalls)
                 {
-                    WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                    output.Model.AddElement(new InteriorPartitionCandidate(wallCandidateLines, levelVolume.Height, levelVolume.Transform, Guid.NewGuid()));
                 }
             }
-            output.Model.AddElement( new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount } );
+            output.Model.AddElement(new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount });
             output.PhoneBooths = totalBoothCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;

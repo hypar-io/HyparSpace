@@ -139,7 +139,7 @@ namespace ClassroomLayout
                 }
                 if (input.CreateWalls)
                 {
-                    WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                    output.Model.AddElement(new InteriorPartitionCandidate(wallCandidateLines, levelVolume.Height, levelVolume.Transform, Guid.NewGuid()));
                 }
             }
             output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });

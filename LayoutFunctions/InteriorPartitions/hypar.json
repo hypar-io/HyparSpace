@@ -1,0 +1,34 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "e691c1d1-8c17-4d5a-9d31-1e651a7b7474",
+  "name": "Interior Partitions",
+  "description": "The InteriorPartitions function.",
+  "language": "C#",
+  "model_output": "Interior Partitions",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Private Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Phone Booth Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Classroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Meeting Room Layout",
+      "optional": true
+    }
+  ],
+  "outputs": [],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "0.9.11-alpha.2"
+}

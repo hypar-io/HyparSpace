@@ -92,7 +92,7 @@ namespace MeetingRoomLayout
 
                 if (input.CreateWalls)
                 {
-                    WallGeneration.GenerateWalls(outputModel, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                    outputModel.AddElement(new InteriorPartitionCandidate(wallCandidateLines, levelVolume.Height, levelVolume.Transform, Guid.NewGuid()));
                 }
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
