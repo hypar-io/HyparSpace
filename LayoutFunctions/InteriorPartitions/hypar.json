@@ -1,8 +1,8 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "e691c1d1-8c17-4d5a-9d31-1e651a7b7474",
+  "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
   "name": "Interior Partitions",
-  "description": "The InteriorPartitions function.",
+  "description": "Produce all interior partition elements.",
   "language": "C#",
   "model_output": "Interior Partitions",
   "model_dependencies": [

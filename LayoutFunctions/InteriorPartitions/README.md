@@ -2,7 +2,7 @@
 
 # Interior Partitions
 
-The InteriorPartitions function.
+Produce all interior partition elements.
 
 |Input Name|Type|Description|
 |---|---|---|
