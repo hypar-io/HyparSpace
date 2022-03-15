@@ -6,18 +6,15 @@ namespace Elements
 {
     public class InteriorPartitionCandidate : Element
     {
-        public List<(Line line, string type)> WallCandidateLines { get; }
+        public List<(Line line, string type)> WallCandidateLines { get; set; }
 
-        public double Height { get; }
+        public double Height { get; set; }
 
-        public Transform LevelTransform { get; }
+        public Transform LevelTransform { get; set; }
 
-        public InteriorPartitionCandidate(List<(Line line, string type)> wallCandidateLines, double height, Transform levelTransform, Guid id = default, string name = null)
+        public InteriorPartitionCandidate(Guid id = default, string name = null)
             : base(id, name)
         {
-            this.WallCandidateLines = wallCandidateLines;
-            this.Height = height;
-            this.LevelTransform = levelTransform;
         }
     }
 }

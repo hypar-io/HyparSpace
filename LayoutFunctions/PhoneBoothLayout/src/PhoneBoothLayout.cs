@@ -106,7 +106,12 @@ namespace PhoneBoothLayout
                 }
                 if (input.CreateWalls)
                 {
-                    output.Model.AddElement(new InteriorPartitionCandidate(wallCandidateLines, levelVolume.Height, levelVolume.Transform, Guid.NewGuid()));
+                    output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    {
+                        WallCandidateLines = wallCandidateLines,
+                        Height = levelVolume.Height,
+                        LevelTransform = levelVolume.Transform
+                    });
                 }
             }
             output.Model.AddElement(new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount });
