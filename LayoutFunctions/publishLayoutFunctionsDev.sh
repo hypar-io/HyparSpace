@@ -1,21 +1,26 @@
 #!/bin/bash
-cd ClassroomLayout
+projects=(
+    "ClassroomLayout"
+    "DataHall"
+    "LoungeLayout"
+    "MeetingRoomLayout"
+    "OpenCollabLayout"
+    "OpenOfficeLayout"
+    "PantryLayout"
+    "PhoneBoothLayout"
+    "PrivateOfficeLayout"
+    "ReceptionLayout"
+)
+
+task() {
+echo $project
+cd ./$project/
 hypar --dev publish --disable-pull-check
-cd ../DataHall
-hypar --dev publish --disable-pull-check
-cd ../LoungeLayout
-hypar --dev publish --disable-pull-check
-cd ../MeetingRoomLayout
-hypar --dev publish --disable-pull-check
-cd ../OpenCollabLayout
-hypar --dev publish --disable-pull-check
-cd ../OpenOfficeLayout
-hypar --dev publish --disable-pull-check
-cd ../PantryLayout
-hypar --dev publish --disable-pull-check
-cd ../PhoneBoothLayout
-hypar --dev publish --disable-pull-check
-cd ../PrivateOfficeLayout
-hypar --dev publish --disable-pull-check
-cd ../ReceptionLayout
-hypar --dev publish --disable-pull-check
+cd ../ 
+}
+
+for project in ${projects[@]};
+do
+    task $project &
+done
+wait
