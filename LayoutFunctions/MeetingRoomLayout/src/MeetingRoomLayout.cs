@@ -92,7 +92,12 @@ namespace MeetingRoomLayout
 
                 if (input.CreateWalls)
                 {
-                    WallGeneration.GenerateWalls(outputModel, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                    outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    {
+                        WallCandidateLines = wallCandidateLines,
+                        Height = levelVolume.Height,
+                        LevelTransform = levelVolume.Transform
+                    });
                 }
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
@@ -107,7 +112,7 @@ namespace MeetingRoomLayout
 
         private static int AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable)
         {
-            if(layout == null)
+            if (layout == null)
             {
                 return 0;
             }
@@ -134,7 +139,7 @@ namespace MeetingRoomLayout
         {
             ContentConfiguration selectedConfig = null;
             var result = new LayoutInstantiated();
-            for ( int i = 0; i < orderedKeys.Length; ++i )
+            for (int i = 0; i < orderedKeys.Length; ++i)
             {
                 var config = configs[orderedKeys[i]];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)

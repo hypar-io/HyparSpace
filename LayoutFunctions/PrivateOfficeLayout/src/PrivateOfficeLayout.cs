@@ -118,7 +118,12 @@ namespace PrivateOfficeLayout
                     levelVolume = new LevelVolume() { Height = 4 };
                 }
 
-                WallGeneration.GenerateWalls(output.Model, wallCandidateLines, levelVolume.Height, levelVolume.Transform);
+                output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                {
+                    WallCandidateLines = wallCandidateLines,
+                    Height = levelVolume.Height,
+                    LevelTransform = levelVolume.Transform
+                });
             }
             output.Model.AddElement(new WorkpointCount() { Type = "Private Office", Count = totalPrivateOfficeCount });
             output.PrivateOfficeCount = totalPrivateOfficeCount;
