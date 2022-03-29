@@ -52,7 +52,10 @@ namespace MeetingRoomLayout
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;
-                    wallCandidateLines.AddRange(WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge));
+                    var levelInvertedTransform = levelVolume.Transform.Inverted();
+                    var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
+                        .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
+                    wallCandidateLines.AddRange(roomWallCandidatesLines);
 
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
                     var boundaryCurves = new List<Polygon>();
@@ -84,19 +87,14 @@ namespace MeetingRoomLayout
 
                 }
 
-                if (levelVolume == null)
-                {
-                    // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume() { Height = 3 };
-                }
-
+                var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
                 {
                     outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
                         WallCandidateLines = wallCandidateLines,
-                        Height = levelVolume.Height,
-                        LevelTransform = levelVolume.Transform
+                        Height = height,
+                        LevelTransform = levelVolume?.Transform ?? new Transform()
                     });
                 }
             }

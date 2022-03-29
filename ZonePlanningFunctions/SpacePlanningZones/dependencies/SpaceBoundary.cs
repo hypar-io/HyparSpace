@@ -167,6 +167,7 @@ namespace Elements
                 Boundary = profile,
                 Cells = new List<Polygon> { profile.Perimeter },
                 Area = profile.Area(),
+                Height = height,
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
                 Representation = representation,
