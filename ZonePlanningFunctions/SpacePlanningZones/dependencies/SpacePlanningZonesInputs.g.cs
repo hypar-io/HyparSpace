@@ -126,7 +126,7 @@ namespace SpacePlanningZones
             this.ManualSplitLocations = @manualSplitLocations;
             this.AddCorridors = @addCorridors;
             this.SplitZones = @splitZones;
-            this.Overrides = @overrides;
+            this.Overrides = @overrides ?? new Overrides();
         
             if(validator != null)
             {
@@ -243,6 +243,8 @@ namespace SpacePlanningZones
     public partial class Overrides 
     
     {
+        public Overrides() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(IList<ProgramAssignmentsOverride> @programAssignments, IList<MergeZonesOverride> @mergeZones, IList<SplitZonesOverride> @splitZones)
         {
