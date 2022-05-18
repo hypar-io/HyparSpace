@@ -5,7 +5,7 @@ using Elements;
 using Elements.Geometry;
 using Elements.Spatial;
 
-namespace Elements
+namespace LayoutFunctionCommon
 {
     public static class WallGeneration
     {
