@@ -10,7 +10,6 @@ using Elements.Geometry.Solids;
 using Elements.Spatial;
 using Elements.Validators;
 using Elements.Serialization.JSON;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;

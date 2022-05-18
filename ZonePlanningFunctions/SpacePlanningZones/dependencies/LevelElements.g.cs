@@ -10,7 +10,6 @@ using Elements.Geometry.Solids;
 using Elements.Spatial;
 using Elements.Validators;
 using Elements.Serialization.JSON;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +21,11 @@ namespace Elements
     #pragma warning disable // Disable all warnings
 
     /// <summary>An element containing a collection of Elements that belong to one level.</summary>
-    [JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class LevelElements : Element
     {
-        [JsonConstructor]
+        [Newtonsoft.Json.JsonConstructor]
         public LevelElements(IList<Element> @elements, System.Guid @level, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
@@ -41,11 +40,11 @@ namespace Elements
         }
     
         /// <summary>The list of elements.</summary>
-        [JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Elements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Element> Elements { get; set; }
     
         /// <summary>The Level element this set of elements is associated with</summary>
-        [JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Level { get; set; }
     
     

@@ -197,6 +197,10 @@
     },
     "overrides": {
         "Program Assignments": {
+            "verbs": {
+                "edit": "Assign Program Types",
+                "revert": "Reset Program Type"
+            },
             "context": "[*discriminator=Elements.SpaceBoundary]",
             "identity": {
                 "ParentCentroid": {
