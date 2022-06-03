@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("rightWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double RightWidth { get; set; }
     
-    
     }
     
     /// <summary>A collection of points used to split a set of polygons </summary>
@@ -97,7 +97,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("SplitLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SplitLocations> SplitLocations { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -126,7 +125,7 @@ namespace SpacePlanningZones
             this.ManualSplitLocations = @manualSplitLocations;
             this.AddCorridors = @addCorridors;
             this.SplitZones = @splitZones;
-            this.Overrides = @overrides;
+            this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
             {
@@ -181,8 +180,7 @@ namespace SpacePlanningZones
         public PolygonSplitCollection SplitZones { get; set; }
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Overrides Overrides { get; set; }
-    
+        public Overrides Overrides { get; set; } = new Overrides();
     
     }
     
@@ -223,8 +221,6 @@ namespace SpacePlanningZones
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -243,6 +239,8 @@ namespace SpacePlanningZones
     public partial class Overrides 
     
     {
+        public Overrides() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(IList<ProgramAssignmentsOverride> @programAssignments, IList<MergeZonesOverride> @mergeZones, IList<SplitZonesOverride> @splitZones)
         {
@@ -252,9 +250,9 @@ namespace SpacePlanningZones
                 validator.PreConstruct(new object[]{ @programAssignments, @mergeZones, @splitZones});
             }
         
-            this.ProgramAssignments = @programAssignments;
-            this.MergeZones = @mergeZones;
-            this.SplitZones = @splitZones;
+            this.ProgramAssignments = @programAssignments ?? this.ProgramAssignments;
+            this.MergeZones = @mergeZones ?? this.MergeZones;
+            this.SplitZones = @splitZones ?? this.SplitZones;
         
             if(validator != null)
             {
@@ -263,14 +261,13 @@ namespace SpacePlanningZones
         }
     
         [Newtonsoft.Json.JsonProperty("Program Assignments", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<ProgramAssignmentsOverride> ProgramAssignments { get; set; }
+        public IList<ProgramAssignmentsOverride> ProgramAssignments { get; set; } = new List<ProgramAssignmentsOverride>();
     
         [Newtonsoft.Json.JsonProperty("Merge Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<MergeZonesOverride> MergeZones { get; set; }
+        public IList<MergeZonesOverride> MergeZones { get; set; } = new List<MergeZonesOverride>();
     
         [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<SplitZonesOverride> SplitZones { get; set; }
-    
+        public IList<SplitZonesOverride> SplitZones { get; set; } = new List<SplitZonesOverride>();
     
     }
     
@@ -307,7 +304,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ProgramAssignmentsValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -338,7 +334,6 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("Identities", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<MergeZonesIdentity> Identities { get; set; }
-    
     
     }
     
@@ -375,7 +370,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SplitZonesValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -406,7 +400,6 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("IndividualCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 IndividualCentroid { get; set; }
-    
     
     }
     
@@ -441,7 +434,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Split", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Split { get; set; } = 1;
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -468,7 +460,6 @@ namespace SpacePlanningZones
     
         [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 ParentCentroid { get; set; }
-    
     
     }
     
@@ -501,7 +492,6 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BuildingName { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -529,7 +519,6 @@ namespace SpacePlanningZones
         /// <summary>Subdivide the space by splitting existing zones. This is similar to the corridor locations input above, but does not insert circulation between split spaces.</summary>
         [Newtonsoft.Json.JsonProperty("Splits", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonSplitCollection Splits { get; set; }
-    
     
     }
     
