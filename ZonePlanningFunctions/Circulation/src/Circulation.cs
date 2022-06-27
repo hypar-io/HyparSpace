@@ -99,11 +99,12 @@ namespace Circulation
                     return pt.HasValue && levelBoundary.Contains(pt.Value);
                 }).ToList();
                 var interiorZones = new List<Profile>();
-                if (wallsInBoundary.Count() > 0)
-                {
-                    var newLevelBoundary = AttemptToSplitWallsAndYieldLargestZone(levelBoundary, wallsInBoundary, out var centerlines, out interiorZones, output.Model);
-                    levelBoundary = newLevelBoundary;
-                }
+                // This was causing issues in plans with lots of complex walls.
+                // if (wallsInBoundary.Count() > 0)
+                // {
+                //     var newLevelBoundary = AttemptToSplitWallsAndYieldLargestZone(levelBoundary, wallsInBoundary, out var centerlines, out interiorZones, output.Model);
+                //     levelBoundary = newLevelBoundary;
+                // }
 
                 List<Profile> corridorProfiles = new List<Profile>();
                 List<Profile> thickerOffsetProfiles = new List<Profile>();

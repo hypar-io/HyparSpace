@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("rightWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double RightWidth { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -90,7 +90,7 @@ namespace Circulation
             this.OuterBandDepth = @outerBandDepth;
             this.DepthAtEnds = @depthAtEnds;
             this.AddCorridors = @addCorridors;
-            this.Overrides = @overrides;
+            this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
             {
@@ -124,9 +124,8 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Add Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ThickenedPolyline> AddCorridors { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Overrides Overrides { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Overrides Overrides { get; set; } = new Overrides();
     
     }
     
@@ -146,6 +145,8 @@ namespace Circulation
     public partial class Overrides 
     
     {
+        public Overrides() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<CorridorsOverride> @corridors)
         {
@@ -155,9 +156,9 @@ namespace Circulation
                 validator.PreConstruct(new object[]{ @additions, @removals, @corridors});
             }
         
-            this.Additions = @additions;
-            this.Removals = @removals;
-            this.Corridors = @corridors;
+            this.Additions = @additions ?? this.Additions;
+            this.Removals = @removals ?? this.Removals;
+            this.Corridors = @corridors ?? this.Corridors;
         
             if(validator != null)
             {
@@ -165,15 +166,14 @@ namespace Circulation
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Additions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public OverrideAdditions Additions { get; set; }
+        [Newtonsoft.Json.JsonProperty("Additions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideAdditions Additions { get; set; } = new OverrideAdditions();
     
-        [Newtonsoft.Json.JsonProperty("Removals", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public OverrideRemovals Removals { get; set; }
+        [Newtonsoft.Json.JsonProperty("Removals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideRemovals Removals { get; set; } = new OverrideRemovals();
     
-        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<CorridorsOverride> Corridors { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverride> Corridors { get; set; } = new List<CorridorsOverride>();
     
     }
     
@@ -182,6 +182,8 @@ namespace Circulation
     public partial class OverrideAdditions 
     
     {
+        public OverrideAdditions() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public OverrideAdditions(IList<CorridorsOverrideAddition> @corridors)
         {
@@ -191,7 +193,7 @@ namespace Circulation
                 validator.PreConstruct(new object[]{ @corridors});
             }
         
-            this.Corridors = @corridors;
+            this.Corridors = @corridors ?? this.Corridors;
         
             if(validator != null)
             {
@@ -199,9 +201,8 @@ namespace Circulation
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<CorridorsOverrideAddition> Corridors { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverrideAddition> Corridors { get; set; } = new List<CorridorsOverrideAddition>();
     
     }
     
@@ -210,6 +211,8 @@ namespace Circulation
     public partial class OverrideRemovals 
     
     {
+        public OverrideRemovals() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public OverrideRemovals(IList<CorridorsOverrideRemoval> @corridors)
         {
@@ -219,7 +222,7 @@ namespace Circulation
                 validator.PreConstruct(new object[]{ @corridors});
             }
         
-            this.Corridors = @corridors;
+            this.Corridors = @corridors ?? this.Corridors;
         
             if(validator != null)
             {
@@ -227,9 +230,8 @@ namespace Circulation
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<CorridorsOverrideRemoval> Corridors { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("Corridors", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<CorridorsOverrideRemoval> Corridors { get; set; } = new List<CorridorsOverrideRemoval>();
     
     }
     
@@ -266,7 +268,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CorridorsValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -302,7 +303,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CorridorsOverrideAdditionValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -334,7 +334,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CorridorsIdentity Identity { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -362,7 +361,6 @@ namespace Circulation
         [Newtonsoft.Json.JsonProperty("Original Geometry", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polyline OriginalGeometry { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -389,7 +387,6 @@ namespace Circulation
     
         [Newtonsoft.Json.JsonProperty("Geometry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ThickenedPolyline Geometry { get; set; }
-    
     
     }
     
@@ -421,7 +418,6 @@ namespace Circulation
     
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CorridorsOverrideAdditionValueLevel Level { get; set; }
-    
     
     }
     
@@ -466,8 +462,6 @@ namespace Circulation
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
