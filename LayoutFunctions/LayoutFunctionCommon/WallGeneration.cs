@@ -101,7 +101,10 @@ namespace LayoutFunctionCommon
                         grid[2].DivideByApproximateLength(2);
                     }
                     var separators = grid.GetCellSeparators(true);
-                    var beam = new Beam(lineProjected, Polygon.Rectangle(mullionSize, mullionSize), mullionMat, 0, 0, 0, isElementDefinition: true);
+                    var beam = new Beam(lineProjected, Polygon.Rectangle(mullionSize, mullionSize), null, mullionMat)
+                    {
+                        IsElementDefinition = true
+                    };
                     model.AddElement(beam.CreateInstance(levelTransform, "Base Mullion"));
                     model.AddElement(beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, doorHeight)), "Base Mullion"));
                     model.AddElement(beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)), "Base Mullion"));

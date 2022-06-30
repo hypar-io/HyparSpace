@@ -60,6 +60,8 @@
           "L-Shaped",
           "Double Desk",
           "Enclosed Pair",
+          "120° Workstations - Pairs",
+          "120° Workstations - Continuous",
           "Custom"
         ]
       },
@@ -143,6 +145,8 @@
             "L-Shaped",
             "Double Desk",
             "Enclosed Pair",
+            "120° Workstations - Pairs",
+            "120° Workstations - Continuous",
             "Custom"
           ],
           "default": "Simple Desk - 29x70"

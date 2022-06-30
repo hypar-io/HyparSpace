@@ -1,15 +1,10 @@
-using Elements.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elements.Geometry;
 
-namespace OpenOfficeLayout
+namespace LayoutFunctionCommon
 {
-    // TODO: Move to Elements kernel..
-    /// <summary>
-    /// Fast way to retreive points within a range
-    /// or near a location
-    /// </summary>
     public class SearchablePointCollection<T>
     {
         public int Count => _count;
@@ -18,13 +13,22 @@ namespace OpenOfficeLayout
         public readonly int Dimensions;
 
 
-        private Dictionary<Vector3, List<T>> _map = new Dictionary<Vector3, List<T>>();
-        private List<SortedDictionary<double, List<Vector3>>> _coords
+        private readonly Dictionary<Vector3, List<T>> _map = new Dictionary<Vector3, List<T>>();
+        private readonly List<SortedDictionary<double, List<Vector3>>> _coords
          = new List<SortedDictionary<double, List<Vector3>>>();
 
         private List<List<double>> _keys => __keys ??= _coords.Select(c => c.Keys.ToList()).ToList();
         private List<List<double>> __keys;
 
+        public SearchablePointCollection()
+        {
+            Dimensions = 3;
+            for (int i = 0; i < 3; i++)
+            {
+                _coords.Add(new SortedDictionary<double, List<Vector3>>());
+                _keys.Add(new List<double> { });
+            }
+        }
 
         public SearchablePointCollection(IEnumerable<Vector3> points = null, IEnumerable<T> elements = null, int dimensions = 3)
         {
@@ -46,15 +50,11 @@ namespace OpenOfficeLayout
             }
 
             if (points == null) { throw new Exception("If elements are provided, points must be provided as well."); }
-            using (var pe = points.GetEnumerator())
+            using var pe = points.GetEnumerator();
+            using var ee = elements.GetEnumerator();
+            while (pe.MoveNext() && ee.MoveNext())
             {
-                using (var ee = elements.GetEnumerator())
-                {
-                    while (pe.MoveNext() && ee.MoveNext())
-                    {
-                        Add(pe.Current, ee.Current);
-                    }
-                }
+                Add(pe.Current, ee.Current);
             }
         }
 
@@ -68,9 +68,9 @@ namespace OpenOfficeLayout
             }
             if (pointsAndElements != null)
             {
-                foreach (var pE in pointsAndElements)
+                foreach (var (Loc, Elem) in pointsAndElements)
                 {
-                    Add(pE.Loc, pE.Elem);
+                    Add(Loc, Elem);
                 }
             }
         }
@@ -179,6 +179,16 @@ namespace OpenOfficeLayout
             return output;
         }
 
+        public void AddRange(IEnumerable<(Vector3 Loc, T Elem)> pointsAndElements)
+        {
+            if (pointsAndElements != null)
+            {
+                foreach (var (Loc, Elem) in pointsAndElements)
+                {
+                    Add(Loc, Elem);
+                }
+            }
+        }
         public void Add(Vector3 point, T element)
         {
             for (int d = 0; d < Dimensions; d++)

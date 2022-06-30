@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -17,38 +18,22 @@ namespace OpenOfficeLayout
         public void TestExecute()
         {
             var input = GetInput();
-            string curLocation = System.Reflection.Assembly.GetEntryAssembly().Location;
-            
+
             var modelDependencies = new Dictionary<string, Model> { 
-                //{"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/f4683c51-56e3-4bbf-9c8b-2ad2aa71471e.json")) }, 
-                // {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\Space Planning Zones\f4683c51-56e3-4bbf-9c8b-2ad2aa71471e.json")) }, 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\HyparSpace_Column_Problem\model.json")) }, 
-                {"Structure", Model.FromJson(File.ReadAllText(@"C:\Users\Leland\Documents\GitHub\HyparSpace\LayoutFunctions\OpenOfficeLayout\test\Generated\OpenOfficeLayoutTest\model_dependencies\HyparSpace_Column_Problem\model.json")) }, 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/OpenOfficeLayout/test/Generated/OpenOfficeLayoutTest/model_dependencies/Space Planning Zones/4c763b90-a35c-443e-9f32-81e7a9349569.json")) }, 
             };
 
             var result = OpenOfficeLayout.Execute(modelDependencies, input);
             result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.glb");
             File.WriteAllText("../../../Generated/OpenOfficeLayoutTest/results/OpenOfficeLayoutTest.json", result.Model.ToJson());
+
         }
 
         public OpenOfficeLayoutInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""Grid Rotation"": 0,
-  ""Integrated Collaboration Space Density"": 0.2,
-  ""Custom Workstation Properties"": {
-    ""Length"": 2,
-    ""Width"": 2
-  },
-  ""model_input_keys"": {
-    ""Space Planning Zones"": ""f4683c51-56e3-4bbf-9c8b-2ad2aa71471e_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
-  },
-  ""Desk Type"": ""Simple Desk - 24x48""
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/OpenOfficeLayoutTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenOfficeLayoutInputs>(json);
         }
     }
 }

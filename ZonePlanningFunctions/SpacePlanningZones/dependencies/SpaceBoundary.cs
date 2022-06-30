@@ -13,8 +13,6 @@ namespace Elements
 
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
 
-        [JsonProperty("Program Group")]
-        public string ProgramGroup { get; set; }
         public Line AlignmentEdge { get; set; } = null;
         public double AvailableLength { get; set; } = 0;
         public Transform ToAlignmentEdge = null;
@@ -146,8 +144,17 @@ namespace Elements
         };
         public static Dictionary<string, Material> MaterialDict { get; private set; } = new Dictionary<string, Material>(materialDefaults);
 
-        [JsonProperty("Program Type")]
-        public string ProgramName { get; set; }
+        public string ProgramName
+        {
+            get
+            {
+                return ProgramType;
+            }
+            set
+            {
+                ProgramType = value;
+            }
+        }
         private static Random random = new Random(11);
         public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
         {
