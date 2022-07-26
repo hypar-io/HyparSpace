@@ -27,7 +27,7 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programName, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.Boundary = @boundary;
@@ -37,7 +37,7 @@ namespace Elements
             this.Depth = @depth;
             this.Height = @height;
             this.ProgramGroup = @programGroup;
-            this.ProgramName = @programName;
+            this.ProgramType = @programType;
             }
         
         // Empty constructor
@@ -71,12 +71,12 @@ namespace Elements
         public double Height { get; set; }
     
         /// <summary>A program grouping, like a department.</summary>
-        [JsonProperty("Program Group", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramGroup { get; set; }
     
         /// <summary>The name of the program type assigned to this space (like "Open Office" or "Meeting Room")</summary>
-        [JsonProperty("Program Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ProgramName { get; set; }
+        [JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProgramType { get; set; }
     
     
     }

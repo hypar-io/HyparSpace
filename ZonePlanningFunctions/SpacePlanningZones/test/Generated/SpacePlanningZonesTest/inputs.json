@@ -1,5 +1,5 @@
 {
-  "Default Program Assignment": "unspecified",
+  "Default Program Assignment": "Open Office",
   "Circulation Mode": "Manual",
   "Add Corridors": {
     "SplitLocations": []
@@ -8,9 +8,1793 @@
   "Split Zones": {
     "SplitLocations": []
   },
-  "Corridors": [],
   "Corridor Width": 1.5,
+  "Corridors": [],
   "Outer Band Depth": 6,
   "Manual Split Locations": [],
-  "Additional Corridor Locations": []
+  "Additional Corridor Locations": [],
+  "overrides": {
+    "Merge Zones": [
+      {
+        "identities": [
+          {
+            "ParentCentroid": {
+              "X": 12.947699999999998,
+              "Y": 32.33691,
+              "Z": 0
+            }
+          },
+          {
+            "ParentCentroid": {
+              "X": 12.947699999999998,
+              "Y": 20.37613,
+              "Z": 0
+            }
+          }
+        ],
+        "id": "57394724-955c-4148-95b5-5e48ea62a79e"
+      },
+      {
+        "identities": [
+          {
+            "ParentCentroid": {
+              "X": 76.63420500000001,
+              "Y": 53.82406,
+              "Z": 0
+            }
+          },
+          {
+            "ParentCentroid": {
+              "X": 76.63420500000001,
+              "Y": 47.63119,
+              "Z": 0
+            }
+          }
+        ],
+        "id": "a891a2d9-b4ce-463a-bbeb-336425b2f604"
+      }
+    ],
+    "Program Assignments": [
+      {
+        "value": {
+          "Split": 1,
+          "Id": "255870de-a012-4217-933c-4798f0eb2844",
+          "Program Type": "Pantry"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 64.850485,
+            "Y": 14.52253,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 64.850485,
+            "Y": 14.52253,
+            "Z": 0
+          }
+        },
+        "id": "e1d8968d-07c1-4761-8a31-2d50bf7faef0"
+      },
+      {
+        "value": {
+          "Id": "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 57.06545,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 57.06545,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "7d7320c6-1b20-4f8d-92ba-0377fd1cccad"
+      },
+      {
+        "value": {
+          "Id": "2612ef19-3081-4c03-9f4a-2b73109c723d",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 52.319995,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 52.319995,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "528670ed-7971-4399-abb0-d3a77e3fb302"
+      },
+      {
+        "value": {
+          "Id": "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 48.665805,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 48.665805,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "797669d3-5e4d-4317-9791-f531b032ba92"
+      },
+      {
+        "value": {
+          "Id": "d63874d0-c854-4b63-ac79-61699736af0e",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 27.857955,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 27.857955,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "98cb1be5-8e26-41eb-a7b3-f11f3746028e"
+      },
+      {
+        "value": {
+          "Id": "01f447a1-7c4d-42ea-b291-c74663a8da72",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 23.16576,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 23.16576,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "af9c4032-d5e7-464e-979e-fda71a71088c"
+      },
+      {
+        "value": {
+          "Id": "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 19.494555,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 19.494555,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "8f6d2006-8c3e-4010-9c7c-ab44813a3c32"
+      },
+      {
+        "value": {
+          "Id": "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 15.866795,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 15.866795,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "3d2edaf2-a734-41d7-a5df-e70430e32be2"
+      },
+      {
+        "value": {
+          "Id": "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 11.08423,
+            "Y": 53.82406,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 11.08423,
+            "Y": 53.82406,
+            "Z": 0
+          }
+        },
+        "id": "6aef5d2d-1adf-475e-b230-35ed8946c3e6"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "68da3086-40ba-43eb-a148-d031cc1aae77",
+          "Program Type": "Classroom"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 65.3477,
+            "Y": 46.88119,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 65.3477,
+            "Y": 46.88119,
+            "Z": 0
+          }
+        },
+        "id": "591c9eed-9bab-4727-ad26-f63ae15bd073"
+      },
+      {
+        "value": {
+          "Id": "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 57.833425000000005,
+            "Y": 46.88119,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 57.833425000000005,
+            "Y": 46.88119,
+            "Z": 0
+          }
+        },
+        "id": "7e7401ad-eb4f-4e18-9951-7b462bb6ea08"
+      },
+      {
+        "value": {
+          "Id": "24a7064b-592a-40c7-97f0-e1615c32a94c",
+          "Split": 1,
+          "$ids": [
+            "24a7064b-592a-40c7-97f0-e1615c32a94c",
+            "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+            "e780fa11-f130-485d-98b8-489c2238973b",
+            "af558f68-b646-4765-b1cf-82f0ae4688e3",
+            "4edf51e8-15c6-44ab-969f-7cadb90a495f"
+          ],
+          "Program Type": "Resource / Printer"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 53.49025,
+            "Y": 48.45478,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 53.49025,
+            "Y": 48.45478,
+            "Z": 0
+          }
+        },
+        "id": "bb871798-a606-43e0-92f0-2404a44eeafa"
+      },
+      {
+        "value": {
+          "Id": "916d858b-73d0-49c1-b815-bc80861bd758",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 49.05317,
+            "Y": 48.45478,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 49.05317,
+            "Y": 48.45478,
+            "Z": 0
+          }
+        },
+        "id": "01ef1ec5-e226-4a61-ba9b-29d0dbc44e8f"
+      },
+      {
+        "value": {
+          "Id": "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 28.748604999999998,
+            "Y": 48.443165,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 28.748604999999998,
+            "Y": 48.443165,
+            "Z": 0
+          }
+        },
+        "id": "7a57d628-74ba-4951-8b0b-95ce22e00d6e"
+      },
+      {
+        "value": {
+          "Id": "eff75711-07a9-469c-b260-a742aca3ea87",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.860165000000002,
+            "Y": 46.88119,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 24.860165000000002,
+            "Y": 46.88119,
+            "Z": 0
+          }
+        },
+        "id": "df18ebec-98b6-4b03-bc09-d05e191d18cc"
+      },
+      {
+        "value": {
+          "Id": "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+          "Split": 1,
+          "$ids": [
+            "24a7064b-592a-40c7-97f0-e1615c32a94c",
+            "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+            "e780fa11-f130-485d-98b8-489c2238973b",
+            "af558f68-b646-4765-b1cf-82f0ae4688e3",
+            "4edf51e8-15c6-44ab-969f-7cadb90a495f"
+          ],
+          "Program Type": "Resource / Printer"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 21.130485,
+            "Y": 47.726305,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 21.130485,
+            "Y": 47.726305,
+            "Z": 0
+          }
+        },
+        "id": "316b6f62-3c97-4ffb-8f76-9fc04a292085"
+      },
+      {
+        "value": {
+          "Id": "d1fc0bd3-64ba-439a-8816-bf004b588374",
+          "Split": 1,
+          "$ids": [
+            "d1fc0bd3-64ba-439a-8816-bf004b588374",
+            "1b3fcb1d-1246-47b1-8546-f381c405d999"
+          ],
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 21.130485,
+            "Y": 44.464015,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 21.130485,
+            "Y": 44.464015,
+            "Z": 0
+          }
+        },
+        "id": "8c6efdb8-9bcd-453e-b39a-af5fe0590d0d"
+      },
+      {
+        "value": {
+          "Id": "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 28.748604999999998,
+            "Y": 45.180875,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 28.748604999999998,
+            "Y": 45.180875,
+            "Z": 0
+          }
+        },
+        "id": "648a5645-2d4f-41ec-ac40-8c8eae2a172d"
+      },
+      {
+        "value": {
+          "Id": "00abf712-983b-4be4-b164-8ff81e2a25af",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 49.05317,
+            "Y": 45.19249,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 49.05317,
+            "Y": 45.19249,
+            "Z": 0
+          }
+        },
+        "id": "48fe7e2d-ae0a-4607-ac05-5530f8a0d0f0"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "f6c51d62-f58c-4081-b843-6ef17d124d58",
+          "Program Type": "Server Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 53.49025,
+            "Y": 45.19249,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 53.49025,
+            "Y": 45.19249,
+            "Z": 0
+          }
+        },
+        "id": "d2e794ae-7af9-4a29-a6e6-5df96d7daabb"
+      },
+      {
+        "value": {
+          "Id": "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 57.4815,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 57.4815,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "14357df9-b816-492e-8756-d00b0d7b4b36"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "6ff02d7b-9bba-4226-bdc8-9dc1361494b1",
+          "Program Type": "Mother's Lounge"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 54.16465,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 54.16465,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "19d054e9-d650-41ea-910d-69e346abc9c1"
+      },
+      {
+        "value": {
+          "Id": "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 28.835495,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 28.835495,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "36443575-d817-43d8-ba06-a3e81dc8773d"
+      },
+      {
+        "value": {
+          "Id": "01546dee-61bc-482c-82b7-3d1313264421",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.94706,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 24.94706,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "1604b24e-a65e-437a-a2ee-422b57d116c5"
+      },
+      {
+        "value": {
+          "Id": "82514efb-c51a-4ebf-b260-3411a391b9cc",
+          "Split": 1,
+          "$ids": [
+            "d5135f6a-3d5b-4eb5-a1ea-919218a205e1",
+            "2612ef19-3081-4c03-9f4a-2b73109c723d",
+            "07e33ce7-0093-472f-8dc1-6fdab2096c4f",
+            "d63874d0-c854-4b63-ac79-61699736af0e",
+            "01f447a1-7c4d-42ea-b291-c74663a8da72",
+            "445ef6f4-4c23-4de8-a7aa-57cdf26fca3b",
+            "09b43961-54e5-4c83-a2f8-4c00af2d868b",
+            "5f25a893-9b67-4b3c-b4b6-56fb0dc2b3a2",
+            "d0a3effe-2a69-45ca-b8ac-a31d165141c6",
+            "01546dee-61bc-482c-82b7-3d1313264421",
+            "82514efb-c51a-4ebf-b260-3411a391b9cc"
+          ],
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 21.25413,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 21.25413,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "98c1ec01-350e-41e6-a678-0f1bc90aa24c"
+      },
+      {
+        "value": {
+          "Id": "1b3fcb1d-1246-47b1-8546-f381c405d999",
+          "Split": 1,
+          "$ids": [
+            "d1fc0bd3-64ba-439a-8816-bf004b588374",
+            "1b3fcb1d-1246-47b1-8546-f381c405d999"
+          ],
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 60.848585,
+            "Y": 20.37613,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 60.848585,
+            "Y": 20.37613,
+            "Z": 0
+          }
+        },
+        "id": "bd25a840-8e13-4293-b7f1-f99c23bd25fa"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "76b16271-0036-4992-8eb1-7fa3942b9324",
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 84.30129,
+            "Y": 40.097335,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 84.30129,
+            "Y": 40.097335,
+            "Z": 0
+          }
+        },
+        "id": "526cac60-ef0f-47ec-b003-d85b01613776"
+      },
+      {
+        "value": {
+          "Id": "e780fa11-f130-485d-98b8-489c2238973b",
+          "Split": 1,
+          "$ids": [
+            "24a7064b-592a-40c7-97f0-e1615c32a94c",
+            "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+            "e780fa11-f130-485d-98b8-489c2238973b",
+            "af558f68-b646-4765-b1cf-82f0ae4688e3",
+            "4edf51e8-15c6-44ab-969f-7cadb90a495f"
+          ],
+          "Program Type": "Resource / Printer"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 84.30129,
+            "Y": 35.098495,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 84.30129,
+            "Y": 35.098495,
+            "Z": 0
+          }
+        },
+        "id": "21a88f0f-6ca3-4d51-9a38-5ee155827948"
+      },
+      {
+        "value": {
+          "Id": "77def624-58c7-4fcb-b773-d8662f98c63f",
+          "Split": 1,
+          "$ids": [
+            "77def624-58c7-4fcb-b773-d8662f98c63f",
+            "5d42651a-14aa-433c-a775-a213f70d0a62"
+          ],
+          "Program Type": "Phone Booth"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 69.05006,
+            "Y": 29.669695,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 69.05006,
+            "Y": 29.669695,
+            "Z": 0
+          }
+        },
+        "id": "aff8c573-7ac4-4208-9e58-82d2c76167cb"
+      },
+      {
+        "value": {
+          "Id": "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 65.34634,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 65.34634,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "0eb2cf83-986b-4157-a733-011f9fe91124"
+      },
+      {
+        "value": {
+          "Id": "0b0d2755-c061-4c2c-978a-392329d45ef2",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 61.373054999999994,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 61.373054999999994,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "fd48b619-8f08-4e63-b6be-b10a96a304c5"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "4f0527be-c6d2-42c2-b9bb-280ffd0f339d",
+          "Program Type": "Coffee"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 59.1348,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 59.1348,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "3999516e-b94f-469d-9e30-eef0f89db7d6"
+      },
+      {
+        "value": {
+          "Id": "af558f68-b646-4765-b1cf-82f0ae4688e3",
+          "Split": 1,
+          "$ids": [
+            "24a7064b-592a-40c7-97f0-e1615c32a94c",
+            "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+            "e780fa11-f130-485d-98b8-489c2238973b",
+            "af558f68-b646-4765-b1cf-82f0ae4688e3",
+            "4edf51e8-15c6-44ab-969f-7cadb90a495f"
+          ],
+          "Program Type": "Resource / Printer"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 69.05006,
+            "Y": 26.405615,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 69.05006,
+            "Y": 26.405615,
+            "Z": 0
+          }
+        },
+        "id": "a7dc5aa4-0045-409e-8865-9a63c072c7d3"
+      },
+      {
+        "value": {
+          "Id": "f1634f19-2574-4a66-8c57-c903ee688a34",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 54.74489,
+            "Y": 29.037580000000002,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 54.74489,
+            "Y": 29.037580000000002,
+            "Z": 0
+          }
+        },
+        "id": "3a455ace-0a68-4317-a9cc-fff57596fef6"
+      },
+      {
+        "value": {
+          "Id": "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 50.735485,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 50.735485,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "e8ad1db8-3368-4594-80ac-95ad7e2b71f7"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "5d04eddc-db04-4a92-b854-f9c89bba38a5",
+          "Program Type": "Reception"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 45.53409,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 45.53409,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "9a47f0be-f135-42d0-93c7-1d07b4ee6757"
+      },
+      {
+        "value": {
+          "Id": "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 40.152095,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 40.152095,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "78f988e1-d51b-462b-8fab-387931f45ef6"
+      },
+      {
+        "value": {
+          "Split": 1,
+          "Id": "903a6867-fbc0-40ac-948f-07404a4dd73b",
+          "Program Type": "Open Collaboration"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 35.23931,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 35.23931,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "67fd7cef-315e-4a95-841e-90549a60dc1d"
+      },
+      {
+        "value": {
+          "Id": "090f0577-c415-4cc1-8692-918d5edb73ee",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 54.74489,
+            "Y": 25.7735,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 54.74489,
+            "Y": 25.7735,
+            "Z": 0
+          }
+        },
+        "id": "9d6d0638-a196-482b-a54d-fe2b3e6e7a73"
+      },
+      {
+        "value": {
+          "Id": "7b1eb035-0f74-453d-b679-631c182abdd6",
+          "Split": 1,
+          "$ids": [
+            "7ff5a577-645b-4842-83b3-aafe9aaf8e62",
+            "916d858b-73d0-49c1-b815-bc80861bd758",
+            "082d3607-cbc7-4794-b6b6-14e8dacd5221",
+            "eff75711-07a9-469c-b260-a742aca3ea87",
+            "4a4f986b-bd85-41c1-a969-b64ab2d43a8e",
+            "00abf712-983b-4be4-b164-8ff81e2a25af",
+            "297daba9-b15c-4a61-8362-ed8f71aba9f1",
+            "51b2dc1f-0b4c-46bb-bb64-f83643a1e73a",
+            "0b0d2755-c061-4c2c-978a-392329d45ef2",
+            "f1634f19-2574-4a66-8c57-c903ee688a34",
+            "e03d56e1-a4ea-4ce1-93a4-29ff6da5ce2a",
+            "c2e3ba00-f4da-4696-97c4-a6478df0525b",
+            "090f0577-c415-4cc1-8692-918d5edb73ee",
+            "7b1eb035-0f74-453d-b679-631c182abdd6"
+          ],
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 26.958125000000003,
+            "Y": 27.35482,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 26.958125000000003,
+            "Y": 27.35482,
+            "Z": 0
+          }
+        },
+        "id": "cf3de8c6-abbe-459f-8a95-8d6315ba77da"
+      },
+      {
+        "value": {
+          "Id": "5d42651a-14aa-433c-a775-a213f70d0a62",
+          "Split": 1,
+          "$ids": [
+            "77def624-58c7-4fcb-b773-d8662f98c63f",
+            "5d42651a-14aa-433c-a775-a213f70d0a62"
+          ],
+          "Program Type": "Phone Booth"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 21.0994,
+            "Y": 29.705815,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 21.0994,
+            "Y": 29.705815,
+            "Z": 0
+          }
+        },
+        "id": "2699fd9a-ff51-4c11-8458-7c1337c5e3b6"
+      },
+      {
+        "value": {
+          "Id": "4edf51e8-15c6-44ab-969f-7cadb90a495f",
+          "Split": 1,
+          "$ids": [
+            "24a7064b-592a-40c7-97f0-e1615c32a94c",
+            "9a9cdd46-97d6-4852-93ff-ae7ed20de197",
+            "e780fa11-f130-485d-98b8-489c2238973b",
+            "af558f68-b646-4765-b1cf-82f0ae4688e3",
+            "4edf51e8-15c6-44ab-969f-7cadb90a495f"
+          ],
+          "Program Type": "Resource / Printer"
+        },
+        "identity": {
+          "ParentCentroid": {
+            "X": 21.0994,
+            "Y": 26.441734999999998,
+            "Z": 0
+          },
+          "IndividualCentroid": {
+            "X": 21.0994,
+            "Y": 26.441734999999998,
+            "Z": 0
+          }
+        },
+        "id": "5af7c5be-99dd-4846-ac9f-09a19a2be613"
+      }
+    ],
+    "Split Zones": [
+      {
+        "value": {
+          "Splits": {
+            "SplitLocations": [
+              {
+                "position": {
+                  "X": 59.97615494623687,
+                  "Y": 53.74441271315712,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": -3.2585034062501743E-15,
+                  "Y": 1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 54.15474853395432,
+                  "Y": 54.27363147791034,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 50.485243017456696,
+                  "Y": 53.3630090945373,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": 1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 46.84636838414325,
+                  "Y": 53.33953248399978,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 4.887755109375261E-15,
+                  "Y": 1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 59.94631706407167,
+                  "Y": 48.15120155520834,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 55.72052716732056,
+                  "Y": 47.86948222875812,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 51.2599711651944,
+                  "Y": 47.98686528144571,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 46.84636838414325,
+                  "Y": 48.6207337659587,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 48.79492705875626,
+                  "Y": 46.766081533494784,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 52.950287123894846,
+                  "Y": 46.766081533494784,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 30.725407102690966,
+                  "Y": 47.91589929855593,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 26.771799855060824,
+                  "Y": 48.002791765536855,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1.6335367236514112E-15,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 27.81450945883141,
+                  "Y": 46.74285099431343,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 30.725407102690966,
+                  "Y": 53.477017185335164,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": 1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 22.948531307902012,
+                  "Y": 47.69866813110359,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": -1.6335367236514112E-15,
+                  "Y": -0.9999999999999999,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 20.906558333851287,
+                  "Y": 45.30912528912814,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0.9999999999999999,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 24.990504281952745,
+                  "Y": 54.95418912401088,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 6.5170068125003376E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 21.341020668755693,
+                  "Y": 54.30249562165394,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 2.4438775546876306E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 17.6480908220682,
+                  "Y": 54.3459418551444,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 14.08549967585203,
+                  "Y": 54.51972678910625,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 2.4438775546876306E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 19.385940161685863,
+                  "Y": 21.196465701921277,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 2.4063245981011234E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 23.122316241863796,
+                  "Y": 21.196465701921277,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 2.4063245981011234E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 26.771799855060845,
+                  "Y": 21.239911935411737,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 2.4063245981011313E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 30.899192036652757,
+                  "Y": 21.2833581689022,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 52.31818514744022,
+                  "Y": 21.066127001449885,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 55.548791997532625,
+                  "Y": 21.15301946843081,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 62.74528118514607,
+                  "Y": 20.675110900035726,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 83.35254826715898,
+                  "Y": 38.07577174663997,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 67.35104306170311,
+                  "Y": 27.78134966186073,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 63.34163656552794,
+                  "Y": 28.395402909023005,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 59.40447162784241,
+                  "Y": 28.864973039205914,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 52.758248246795276,
+                  "Y": 29.370663948633666,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 48.71272097137529,
+                  "Y": 29.51514706561302,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 53.98635474111921,
+                  "Y": 27.456262648657177,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 69.04871968620972,
+                  "Y": 28.72048992222656,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 42.355463824286716,
+                  "Y": 28.937214597695608,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 37.94872875641851,
+                  "Y": 29.009456156185284,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 0,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 22.886363811328,
+                  "Y": 27.67298732412623,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": -1.0884272685720041E-15,
+                  "Y": -1,
+                  "Z": 0
+                }
+              },
+              {
+                "position": {
+                  "X": 20.285667705700863,
+                  "Y": 28.79273148071625,
+                  "Z": 0
+                },
+                "direction": {
+                  "X": 1,
+                  "Y": 0,
+                  "Z": 0
+                }
+              }
+            ]
+          }
+        },
+        "identity": {
+          "Name": "Level 1"
+        },
+        "id": "a5aaabb5-a01c-45c9-b575-abe9c2b2ffb8"
+      }
+    ]
+  }
 }
