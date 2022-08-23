@@ -179,7 +179,7 @@ namespace SpacePlanningZones
         [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PolygonSplitCollection SplitZones { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
     
     }
@@ -260,13 +260,13 @@ namespace SpacePlanningZones
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Program Assignments", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Program Assignments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramAssignmentsOverride> ProgramAssignments { get; set; } = new List<ProgramAssignmentsOverride>();
     
-        [Newtonsoft.Json.JsonProperty("Merge Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Merge Zones", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<MergeZonesOverride> MergeZones { get; set; } = new List<MergeZonesOverride>();
     
-        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Split Zones", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SplitZonesOverride> SplitZones { get; set; } = new List<SplitZonesOverride>();
     
     }
