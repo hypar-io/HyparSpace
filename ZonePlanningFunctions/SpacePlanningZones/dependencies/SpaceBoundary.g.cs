@@ -47,7 +47,7 @@ namespace Elements
         }
     
         /// <summary>The boundary of the space</summary>
-        [JsonProperty("Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Profile Boundary { get; set; }
     
         /// <summary>Component cells making up the boundary</summary>
