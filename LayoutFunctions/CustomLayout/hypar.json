@@ -12,6 +12,11 @@
     },
     {
       "autohide": false,
+      "name": "Circulation",
+      "optional": true
+    },
+    {
+      "autohide": false,
       "name": "Levels",
       "optional": true
     }
@@ -97,6 +102,7 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/CirculationSegment",
     "https://prod-api.hypar.io/schemas/LevelVolume"
   ],
   "repository_url": "https://github.com/hypar-io/function",

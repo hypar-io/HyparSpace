@@ -5,22 +5,6 @@
   "description": "Produce all interior partition elements.",
   "language": "C#",
   "model_output": "Interior Partitions",
-  "names": [
-    "Private Office Layout",
-    "Phone Booth Layout",
-    "Classroom Layout",
-    "Meeting Room Layout",
-    "Space Planning Zones",
-    "Bedroom Layout",
-    "Living Room Layout",
-    "Kitchen Layout",
-    "Workshop Layout",
-    "Home Office Layout",
-    "Bathroom Layout",
-    "Restroom Layout",
-    "Laundry Room Layout",
-    "Entertainment Room Layout"
-  ],
   "model_dependencies": [
     {
       "autohide": false,

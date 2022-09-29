@@ -24,7 +24,23 @@ namespace ClassroomLayout
             var spacePlanningZones = inputModels["Space Planning Zones"];
 
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    if (matchingLevel != null)
+                    {
+                        matchingLevel.Elements.Add(cs);
+                    }
+                }
+            }
             var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                levelVolumes = massModel.AllElementsOfType<LevelVolume>().ToList();
+            }
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -47,7 +63,7 @@ namespace ClassroomLayout
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<Floor>();
+                var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Elements;
+using Elements.Geometry;
 
 namespace Elements
 {
-    public interface ILevelElements
+    public interface ICirculationSegment
     {
-        IList<Element> Elements { get; set; }
-
         Guid Level { get; set; }
     }
 

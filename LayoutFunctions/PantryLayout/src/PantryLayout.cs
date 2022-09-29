@@ -25,6 +25,18 @@ namespace PantryLayout
             var spacePlanningZones = inputModels["Space Planning Zones"];
             inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    if (matchingLevel != null)
+                    {
+                        matchingLevel.Elements.Add(cs);
+                    }
+                }
+            }
             // var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
             var outputModel = new Model();
             var configJson = File.ReadAllText("./PantryConfigurations.json");
@@ -33,7 +45,7 @@ namespace PantryLayout
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<Floor>();
+                var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Pantry");
                 // var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
@@ -136,7 +148,7 @@ namespace PantryLayout
         }
         private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
-            string[] countableSeats = new[] { "Steelcase - Seating - Nooi - Cafeteria Chair - Chair", 
+            string[] countableSeats = new[] { "Steelcase - Seating - Nooi - Cafeteria Chair - Chair",
                                               "Steelcase - Seating - Nooi - Stool - Bar Height" };
 
             int countableSeatCount = 0;
@@ -147,11 +159,11 @@ namespace PantryLayout
                 var config = configs[key];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
-                    foreach( var item in config.ContentItems )
+                    foreach (var item in config.ContentItems)
                     {
-                        foreach( var countableSeat in countableSeats )
+                        foreach (var countableSeat in countableSeats)
                         {
-                            if ( item.ContentElement.Name.Contains(countableSeat) )
+                            if (item.ContentElement.Name.Contains(countableSeat))
                             {
                                 countableSeatCount++;
                             }
