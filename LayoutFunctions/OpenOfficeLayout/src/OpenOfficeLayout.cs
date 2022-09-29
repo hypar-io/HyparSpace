@@ -84,6 +84,7 @@ namespace OpenOfficeLayout
 
 
             var defaultAisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
+            var defaultBackToBackWidth = double.IsNaN(input.BackToBackWidth) ? 1 : input.BackToBackWidth;
             var totalDeskCount = 0;
             foreach (var lvl in levels)
             {
@@ -100,12 +101,14 @@ namespace OpenOfficeLayout
                         rotation,
                         collabDensity,
                         aisleWidth,
+                        backToBackWidth,
                         deskTypeName) = LayoutStrategies.GetSpaceSettings<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
                             ob,
                             defaultConfig,
                             input.GridRotation,
                             input.IntegratedCollaborationSpaceDensity,
                             defaultAisleWidth,
+                            defaultBackToBackWidth,
                             defaultDeskTypeName,
                             overridesBySpaceBoundaryId,
                             configs,
@@ -144,6 +147,7 @@ namespace OpenOfficeLayout
                                 ob,
                                 selectedConfig,
                                 aisleWidth,
+                                backToBackWidth,
                                 _doubleDeskTypes,
                                 _desksPerConfig,
                                 deskTypeName,

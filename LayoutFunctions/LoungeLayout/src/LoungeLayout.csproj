@@ -5,12 +5,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.0.1-alpha*" />
-    <PackageReference Include="Hypar.Elements.Components" Version="1.0.0" />
-    <PackageReference Include="Hypar.Functions" Version="1.0.1-alpha*" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\LoungeConfigurations.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

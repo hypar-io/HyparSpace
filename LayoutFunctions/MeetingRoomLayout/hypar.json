@@ -12,6 +12,10 @@
     {
       "name": "Levels",
       "optional": true
+    },
+    {
+      "name": "Conceptual Mass",
+      "optional": true
     }
   ],
   "input_schema": {

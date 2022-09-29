@@ -29,9 +29,8 @@ namespace MeetingRoomLayout
         public static MeetingRoomLayoutOutputs Execute(Dictionary<string, Model> inputModels, MeetingRoomLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var configJson = File.ReadAllText("./ConferenceRoomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 

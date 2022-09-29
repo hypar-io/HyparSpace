@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace SpacePlanningZones
 {
-    public class SpacePlanningZonesOutputs: ResultsBase
+    public class SpacePlanningZonesOutputs: SystemResults
     {
 
 

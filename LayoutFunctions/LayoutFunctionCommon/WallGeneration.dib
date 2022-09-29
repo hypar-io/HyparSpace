@@ -1,0 +1,26 @@
+#!csharp
+
+#r "nuget: Hypar.Elements, 1.2.0-alpha.30"
+#r "bin/Debug/netcoreapp3.1/LayoutFunctionCommon.dll"
+
+#!csharp
+
+using LayoutFunctionCommon;
+
+#!csharp
+
+var model = new Model();
+var wallCandidates = new List<(Line line, string type)> {
+ (new Line((0,0,0), (5,0,0)), "Glass"),
+ (new Line((5,0,0), (5,5,0)), "Partition"),
+ (new Line((5,5,0), (0,5,0)), "Solid"),
+ (new Line((0,5,0), (0,0,0)), "Partition")
+};
+WallGeneration.GenerateWalls(model, wallCandidates,4, new Transform());
+return model;
+
+#!csharp
+
+using System.IO;
+model.ToGlTF("walls_sample.glb");
+File.WriteAllText("walls_sample.json",model.ToJson());

@@ -76,12 +76,26 @@ namespace LayoutFunctionCommon
             return null;
         }
 
+        public static List<TLevelVolume> GetLevelVolumes<TLevelVolume>(Dictionary<string, Model> inputModels) where TLevelVolume : Element
+        {
+            var levelVolumes = new List<TLevelVolume>();
+            if (inputModels.TryGetValue("Levels", out var levelsModel))
+            {
+                levelVolumes.AddRange(levelsModel.AllElementsAssignableFromType<TLevelVolume>());
+            }
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
+            }
+            return levelVolumes;
+        }
+
         public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json") where TLevelElements : Element, ILevelElements where TSpaceBoundary : ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume
         {
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
-            var levelVolumes = inputModels["Levels"].AllElementsAssignableFromType<TLevelVolume>();
+            var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = File.ReadAllText(configurationsPath);
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
             foreach (var lvl in levels)
@@ -226,6 +240,7 @@ namespace LayoutFunctionCommon
             double rotation,
             double collabDensity,
             double aisleWidth,
+            double backToBackWidth,
             string deskTypeName
         ) GetSpaceSettings<TSpaceBoundary, TSpaceSettingsOverride, TSpaceSettingsOverrideValueType>(
             TSpaceBoundary ob,
@@ -233,6 +248,7 @@ namespace LayoutFunctionCommon
             double rotation,
             double collabDensity,
             double aisleWidth,
+            double backToBackWidth,
             string deskType,
             Dictionary<Guid, TSpaceSettingsOverride> overridesById,
             SpaceConfiguration configs,
@@ -257,9 +273,10 @@ namespace LayoutFunctionCommon
                 rotation = spaceOverride.Value.GridRotation;
                 collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
                 aisleWidth = double.IsNaN(spaceOverride.Value.AisleWidth) ? aisleWidth : spaceOverride.Value.AisleWidth;
+                backToBackWidth = double.IsNaN(spaceOverride.Value.BackToBackWidth) ? backToBackWidth : spaceOverride.Value.BackToBackWidth;
                 deskTypeName = spaceOverride.Value.GetDeskType;
             }
-            return (selectedConfig, rotation, collabDensity, aisleWidth, deskTypeName);
+            return (selectedConfig, rotation, collabDensity, aisleWidth, backToBackWidth, deskTypeName);
         }
 
         public static Transform GetOrientationTransform(Profile spaceBoundary, IEnumerable<Line> corridorSegments, double rotation)
@@ -333,6 +350,7 @@ namespace LayoutFunctionCommon
             GeometricElement spaceBoundary,
             ContentConfiguration selectedConfig,
             double aisleWidth,
+            double backToBackWidth,
             IEnumerable<string> doubleDeskTypes,
             Dictionary<string, int> desksPerConfig,
             string deskTypeName,
@@ -344,28 +362,54 @@ namespace LayoutFunctionCommon
         {
             List<Element> desks = new List<Element>();
             int deskCount = 0;
-            // Divide by pattern
-            grid.V.DivideByPattern(
+
+            // divide a fake grid to see how many desks we can fit — we'll use the count to rejigger the aisle locations.
+            var vDim = grid.V.Domain.Length;
+            var tempGrid = new Grid1d(vDim);
+            tempGrid.DivideByPattern(
                 new[] {
                                 ("Desk", selectedConfig.Width),
                                 ("Desk", selectedConfig.Width),
                                 ("Desk", selectedConfig.Width),
                                 ("Desk", selectedConfig.Width),
                                 ("Aisle", aisleWidth)
-            },
-
-            PatternMode.Cycle,
+            }, PatternMode.Cycle,
             FixedDivisionMode.RemainderAtBothEnds);
+            var numDesks = tempGrid.Cells.Count(c => c.Type == "Desk");
+
+            var pattern = new[] {
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Aisle", aisleWidth)
+            };
+            // don't leave a stray column of few desks at the end. 5 desks = 3/2, 6 desks = 3/3, 7 desks = 4/3
+            if (numDesks > 4 && numDesks < 7)
+            {
+                pattern = new[] {
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Desk", selectedConfig.Width),
+                                ("Aisle", aisleWidth)
+                };
+            }
+
+            // Divide by pattern
+            grid.V.DivideByPattern(
+                pattern,
+                PatternMode.Cycle,
+                FixedDivisionMode.RemainderAtBothEnds);
 
             var mainVPattern = new[] {
-                                ("Aisle", aisleWidth),
+                                ("Aisle", backToBackWidth),
                                 ("Forward", selectedConfig.Depth),
                                 ("Backward", selectedConfig.Depth)
                             };
 
             var nonMirroredVPattern = new[] {
                                 ("Forward", selectedConfig.Depth),
-                                ("Aisle", aisleWidth)
+                                ("Aisle", backToBackWidth)
                             };
 
             var chosenDeskAislePattern = doubleDeskTypes.Contains(deskTypeName) ? nonMirroredVPattern : mainVPattern;

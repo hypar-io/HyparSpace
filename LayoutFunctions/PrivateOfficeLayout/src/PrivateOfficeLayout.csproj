@@ -5,14 +5,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.0.0" />
-    <PackageReference Include="Hypar.Functions" Version="0.9.10" />
-    <PackageReference Include="Hypar.Elements.Components" Version="1.0.0" />
-    <!-- <ProjectReference Include="../../../../elements/Elements.Components/src/Elements.Components.csproj" />
-    <ProjectReference Include="../../../../hypar/Hypar.Functions/src/Hypar.Functions.csproj" /> -->
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\PrivateOfficeConfigurations.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\catalog.json" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

@@ -11,6 +11,10 @@
             "optional": false
         },
         {
+            "name": "Conceptual Mass",
+            "optional": true
+        },
+        {
             "autohide": false,
             "name": "Core",
             "optional": true

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace PhoneBoothLayout
 {
-    public class PhoneBoothLayoutOutputs: ResultsBase
+    public class PhoneBoothLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// Total number of Phone booths

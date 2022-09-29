@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace PhoneBoothLayout
         
             this.CreateWalls = @createWalls;
             this.MinimumSize = @minimumSize;
-            this.Overrides = @overrides;
+            this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
             {
@@ -55,9 +56,8 @@ namespace PhoneBoothLayout
         [System.ComponentModel.DataAnnotations.Range(1.7D, 3.5D)]
         public double MinimumSize { get; set; } = 2D;
     
-        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Overrides Overrides { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Overrides Overrides { get; set; } = new Overrides();
     
     }
     
@@ -66,6 +66,8 @@ namespace PhoneBoothLayout
     public partial class Overrides 
     
     {
+        public Overrides() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations)
         {
@@ -75,7 +77,7 @@ namespace PhoneBoothLayout
                 validator.PreConstruct(new object[]{ @furnitureLocations});
             }
         
-            this.FurnitureLocations = @furnitureLocations;
+            this.FurnitureLocations = @furnitureLocations ?? this.FurnitureLocations;
         
             if(validator != null)
             {
@@ -83,9 +85,8 @@ namespace PhoneBoothLayout
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; } = new List<FurnitureLocationsOverride>();
     
     }
     
@@ -122,7 +123,6 @@ namespace PhoneBoothLayout
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -154,7 +154,6 @@ namespace PhoneBoothLayout
         [Newtonsoft.Json.JsonProperty("gltfLocation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string GltfLocation { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -179,9 +178,8 @@ namespace PhoneBoothLayout
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-    
     
     }
 }

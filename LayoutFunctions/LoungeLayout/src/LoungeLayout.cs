@@ -22,7 +22,7 @@ namespace LoungeLayout
         public static LoungeLayoutOutputs Execute(Dictionary<string, Model> inputModels, LoungeLayoutInputs input)
         {
             var output = new LoungeLayoutOutputs();
-            LayoutStrategies.StandardLayoutOnAllLevels("Lounge", inputModels, input.Overrides, output.Model, "./LoungeConfigurations.json");
+            LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary>("Lounge", inputModels, input.Overrides, output.Model, false, "./LoungeConfigurations.json");
 
             return output;
         }

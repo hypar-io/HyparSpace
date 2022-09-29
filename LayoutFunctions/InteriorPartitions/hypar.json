@@ -5,6 +5,22 @@
   "description": "Produce all interior partition elements.",
   "language": "C#",
   "model_output": "Interior Partitions",
+  "names": [
+    "Private Office Layout",
+    "Phone Booth Layout",
+    "Classroom Layout",
+    "Meeting Room Layout",
+    "Space Planning Zones",
+    "Bedroom Layout",
+    "Living Room Layout",
+    "Kitchen Layout",
+    "Workshop Layout",
+    "Home Office Layout",
+    "Bathroom Layout",
+    "Restroom Layout",
+    "Laundry Room Layout",
+    "Entertainment Room Layout"
+  ],
   "model_dependencies": [
     {
       "autohide": false,
@@ -24,6 +40,56 @@
     {
       "autohide": false,
       "name": "Meeting Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bedroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Living Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Kitchen Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Workshop Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Home Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bathroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Restroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Laundry Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Entertainment Room Layout",
       "optional": true
     }
   ],

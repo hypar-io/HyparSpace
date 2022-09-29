@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace PrivateOfficeLayout
 {
-    public class PrivateOfficeLayoutOutputs: ResultsBase
+    public class PrivateOfficeLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// The number of private offices.

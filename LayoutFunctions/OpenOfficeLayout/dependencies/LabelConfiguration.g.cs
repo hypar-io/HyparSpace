@@ -42,7 +42,7 @@ namespace Elements
         }
     
         /// <summary>The label background color</summary>
-        [JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
     
         /// <summary>A screen-space offset, in pixels, for the label from the object's bounding box center.</summary>

@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace CustomSpaceType
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("polyline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("polyline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polyline Polyline { get; set; }
     
         [Newtonsoft.Json.JsonProperty("width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -65,7 +66,6 @@ namespace CustomSpaceType
         /// <summary>The amount to thicken the polyline on its "right" side, imagining that the polyline is extending away from you. That is, if the polyline starts at (0,0,0) and follows the +Z axis, the right side extends into the +X quadrant.</summary>
         [Newtonsoft.Json.JsonProperty("rightWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double RightWidth { get; set; }
-    
     
     }
     
@@ -86,7 +86,7 @@ namespace CustomSpaceType
             }
         
             this.Layouts = @layouts;
-            this.Overrides = @overrides;
+            this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
             {
@@ -97,9 +97,8 @@ namespace CustomSpaceType
         [Newtonsoft.Json.JsonProperty("Layouts", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Layouts> Layouts { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Overrides Overrides { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Overrides Overrides { get; set; } = new Overrides();
     
     }
     
@@ -153,8 +152,6 @@ namespace CustomSpaceType
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -162,6 +159,8 @@ namespace CustomSpaceType
     public partial class Overrides 
     
     {
+        public Overrides() { }
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(IList<TransformOverride> @transform)
         {
@@ -171,7 +170,7 @@ namespace CustomSpaceType
                 validator.PreConstruct(new object[]{ @transform});
             }
         
-            this.Transform = @transform;
+            this.Transform = @transform ?? this.Transform;
         
             if(validator != null)
             {
@@ -179,9 +178,8 @@ namespace CustomSpaceType
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<TransformOverride> Transform { get; set; }
-    
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<TransformOverride> Transform { get; set; } = new List<TransformOverride>();
     
     }
     
@@ -218,7 +216,6 @@ namespace CustomSpaceType
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public TransformValue Value { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -250,7 +247,6 @@ namespace CustomSpaceType
         [Newtonsoft.Json.JsonProperty("BaseDefinition", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public TransformIdentityBaseDefinition BaseDefinition { get; set; }
     
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -275,9 +271,8 @@ namespace CustomSpaceType
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-    
     
     }
     
@@ -314,8 +309,6 @@ namespace CustomSpaceType
             get { return _additionalProperties; }
             set { _additionalProperties = value; }
         }
-    
-    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]

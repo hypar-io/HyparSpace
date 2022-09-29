@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -18,28 +19,22 @@ namespace MeetingRoomLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/model.json")) },
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/e6ed45b0-1285-43c8-a0fe-bfb5d6190f61.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/f57860ae-adaa-4b3e-a7e5-2d333b200ff1.json")) }, 
             };
 
             var result = MeetingRoomLayout.Execute(modelDependencies, input);
+            result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.glb");
             File.WriteAllText("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.json", result.Model.ToJson());
+
         }
 
         public MeetingRoomLayoutInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""model_input_keys"": {
-    ""Levels"": ""fd07f65c-b8b0-4aeb-bfb6-77c6e5301060_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Space Planning Zones"": ""b727b082-ed31-4270-b485-027ecb767a6a_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
-  },
-  ""Create Walls"": true
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<MeetingRoomLayoutInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/MeetingRoomLayoutTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<MeetingRoomLayoutInputs>(json);
         }
     }
 }

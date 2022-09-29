@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace DataHallLayout
 {
-    public class DataHallLayoutOutputs: ResultsBase
+    public class DataHallLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// The number of server cabinets.

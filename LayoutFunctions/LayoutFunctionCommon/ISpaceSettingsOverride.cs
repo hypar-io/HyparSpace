@@ -13,5 +13,7 @@ namespace Elements
         public double IntegratedCollaborationSpaceDensity { get; set; }
 
         public double AisleWidth { get; set; }
+
+        public double BackToBackWidth { get; set; }
     }
 }

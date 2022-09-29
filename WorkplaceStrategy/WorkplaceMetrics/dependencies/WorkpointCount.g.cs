@@ -10,6 +10,7 @@ using Elements.Geometry.Solids;
 using Elements.Spatial;
 using Elements.Validators;
 using Elements.Serialization.JSON;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,11 @@ namespace Elements
     #pragma warning disable // Disable all warnings
 
     /// <summary>A number of desks or other workpoints</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class WorkpointCount : Element
     {
-        [Newtonsoft.Json.JsonConstructor]
+        [JsonConstructor]
         public WorkpointCount(int @count, string @type, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
@@ -40,11 +41,11 @@ namespace Elements
         }
     
         /// <summary>The number of workpoints</summary>
-        [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Count { get; set; }
     
         /// <summary>Type of the workpoint</summary>
-        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Type { get; set; }
     
     

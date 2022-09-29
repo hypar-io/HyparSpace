@@ -1,6 +1,7 @@
 using Elements;
 using Elements.Geometry;
 using System.Collections.Generic;
+using LayoutFunctionCommon;
 
 namespace InteriorPartitions
 {
@@ -15,21 +16,29 @@ namespace InteriorPartitions
         public static InteriorPartitionsOutputs Execute(Dictionary<string, Model> inputModels, InteriorPartitionsInputs input)
         {
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
-            if (inputModels.TryGetValue("Private Office Layout", out var privateOfficeLayoutModel))
+            var modelDependences = new[] {
+                "Private Office Layout",
+                "Phone Booth Layout",
+                "Classroom Layout",
+                "Meeting Room Layout",
+                "Space Planning Zones",
+                "Bedroom Layout",
+                "Living Room Layout",
+                "Kitchen Layout",
+                "Workshop Layout",
+                "Home Office Layout",
+                "Bathroom Layout",
+                "Restroom Layout",
+                "Laundry Room Layout",
+                "Entertainment Room Layout"
+                 };
+            foreach (var md in modelDependences)
             {
-                interiorPartitionCandidates.AddRange(privateOfficeLayoutModel?.AllElementsOfType<InteriorPartitionCandidate>());
-            }
-            if (inputModels.TryGetValue("Phone Booth Layout", out var phoneBoothLayoutModel))
-            {
-                interiorPartitionCandidates.AddRange(phoneBoothLayoutModel?.AllElementsOfType<InteriorPartitionCandidate>());
-            }
-            if (inputModels.TryGetValue("Classroom Layout", out var classroomLayoutModel))
-            {
-                interiorPartitionCandidates.AddRange(classroomLayoutModel?.AllElementsOfType<InteriorPartitionCandidate>());
-            }
-            if (inputModels.TryGetValue("Meeting Room Layout", out var meetingRoomLayoutModel))
-            {
-                interiorPartitionCandidates.AddRange(meetingRoomLayoutModel?.AllElementsOfType<InteriorPartitionCandidate>());
+                if (inputModels.TryGetValue(md, out var mdModel))
+                {
+                    interiorPartitionCandidates.AddRange(mdModel?.AllElementsOfType<InteriorPartitionCandidate>());
+                }
+
             }
 
             var output = new InteriorPartitionsOutputs();

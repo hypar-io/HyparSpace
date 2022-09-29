@@ -26,7 +26,13 @@ namespace SpacePlanningZones
 
             // Get Levels
             var levelsModel = inputModels["Levels"];
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>().ToList();
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                var cmLevelVolumes = massModel.AllElementsOfType<LevelVolume>();
+                levelsModel = massModel;
+                levelVolumes.AddRange(cmLevelVolumes);
+            }
             // Validate that level volumes are present in Levels dependency
             if (levelVolumes.Count() == 0)
             {
@@ -356,6 +362,10 @@ namespace SpacePlanningZones
             // for every level volume
             foreach (var lvl in levelVolumes)
             {
+                if (lvl.PrimaryUseCategory == "Residential")
+                {
+                    continue;
+                }
                 AdjustLevelVolumesToFloors(floorsModel, lvl);
 
                 var levelBoundary = new Profile(lvl.Profile.Perimeter, lvl.Profile.Voids, Guid.NewGuid(), null);

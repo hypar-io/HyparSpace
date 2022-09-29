@@ -26,12 +26,12 @@ namespace WorkplaceMetrics
                 totalFloorArea += difference.Sum(d => d.Area());
             }
 
-            var totalDeskCount        = CountWorkplaceTyped(inputModels, "Open Office Layout",        "Desk");
-            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout",       "Meeting Room Seat");
-            var totalClassroomSeats   = CountWorkplaceTyped(inputModels, "Classroom Layout",          "Classroom Seat");
-            var totalPhoneBooths      = CountWorkplaceTyped(inputModels, "Phone Booth Layout",        "Phone Booth");
-            var totalOpenCollabSeats  = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
-            var totalPrivateOffices   = CountWorkplaceTyped(inputModels, "Private Office Layout",     "Private Office");
+            var totalDeskCount = CountWorkplaceTyped(inputModels, "Open Office Layout", "Desk");
+            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout", "Meeting Room Seat");
+            var totalClassroomSeats = CountWorkplaceTyped(inputModels, "Classroom Layout", "Classroom Seat");
+            var totalPhoneBooths = CountWorkplaceTyped(inputModels, "Phone Booth Layout", "Phone Booth");
+            var totalOpenCollabSeats = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
+            var totalPrivateOffices = CountWorkplaceTyped(inputModels, "Private Office Layout", "Private Office");
 
             var meetingRoomCount = zonesModel.AllElementsOfType<SpaceBoundary>().Count(sb => sb.Name == "Meeting Room");
 
@@ -52,20 +52,52 @@ namespace WorkplaceMetrics
             var areaPerPerson = totalFloorArea / headcount;
             var areaPerDesk = totalFloorArea / totalDeskCount;
             var meetingRoomRatio = meetingRoomCount == 0 ? 0 : (int)Math.Round(headcount / (double)meetingRoomCount);
+
+            var areaTallies = zonesModel.AllElementsOfType<AreaTally>();
+            foreach (var at in areaTallies)
+            {
+                at.Id = Guid.NewGuid();
+                if (at.Name == "Private Office")
+                {
+                    at.AchievedCount = totalPrivateOffices;
+                }
+                else if (at.Name == "Phone Booth")
+                {
+                    at.AchievedCount = totalPhoneBooths;
+                }
+                else if (at.Name == "Open Collaboration")
+                {
+                    at.SeatCount = totalOpenCollabSeats;
+                }
+                else if (at.Name == "Classroom")
+                {
+                    at.SeatCount = totalClassroomSeats;
+                }
+                else if (at.Name == "Meeting Room")
+                {
+                    at.SeatCount = totalMeetingRoomSeats;
+                }
+                else if (at.Name == "Open Office")
+                {
+                    at.SeatCount = totalDeskCount;
+                }
+            }
+
             var output = new WorkplaceMetricsOutputs(
-                                                    totalFloorArea, 
-                                                    areaPerPerson, 
-                                                    totalDeskCount, 
+                                                    totalFloorArea,
+                                                    areaPerPerson,
+                                                    totalDeskCount,
                                                     totalMeetingRoomSeats,
                                                     totalClassroomSeats,
                                                     totalPhoneBooths,
                                                     totalOpenCollabSeats,
-                                                    headcount, 
-                                                    areaPerDesk, 
-                                                    deskSharingRatio, 
+                                                    headcount,
+                                                    areaPerDesk,
+                                                    deskSharingRatio,
                                                     meetingRoomRatio,
                                                     totalPrivateOffices
                                                     );
+            output.Model.AddElements(areaTallies);
             return output;
         }
 

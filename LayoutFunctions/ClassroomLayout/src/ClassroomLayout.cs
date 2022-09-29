@@ -22,27 +22,23 @@ namespace ClassroomLayout
         public static ClassroomLayoutOutputs Execute(Dictionary<string, Model> inputModels, ClassroomLayoutInputs input)
         {
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            inputModels.TryGetValue("Levels", out var levelsModel);
+
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
-            var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
-            var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
-            var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
-            
             int totalCountableSeats = 0;
             int seatsAtDesk = 0;
             var deskConfig = configs["Desk"];
             string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
                                               "Steelcase Turnstone - Shortcut - Stool - Chair" };
-            foreach ( var item in deskConfig.ContentItems )
+            foreach (var item in deskConfig.ContentItems)
             {
-                foreach ( var countableSeat in countableSeats )
+                foreach (var countableSeat in countableSeats)
                 {
-                    if ( item.ContentElement.Name.Contains(countableSeat) )
+                    if (item.ContentElement.Name.Contains(countableSeat))
                     {
                         seatsAtDesk++;
                     }

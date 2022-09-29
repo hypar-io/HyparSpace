@@ -9,5 +9,8 @@ namespace Elements
         // with the level — but it will be added separately the model.
         [JsonIgnore]
         public ElementProxy<LevelVolume> Proxy { get; set; }
+
+        [JsonProperty("Primary Use Category")]
+        public string PrimaryUseCategory { get; set; }
     }
 }

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Circulation
 {
-    public class CirculationOutputs: ResultsBase
+    public class CirculationOutputs: SystemResults
     {
 
 

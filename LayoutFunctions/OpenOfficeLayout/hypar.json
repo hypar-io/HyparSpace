@@ -42,11 +42,30 @@
         "minimum": 0
       },
       "Aisle Width": {
+        "description": "The width of the aisle between desks, measured from side to side.",
         "maximum": 2,
-        "default": 1,
+        "default": 1.0,
         "type": "number",
         "minimum": 0.5,
-        "$hyparUnitType": "length"
+        "$hyparUnitType": "length",
+        "$hyparPreferredUnits": {
+          "metric": "mm",
+          "imperial": "in"
+        },
+        "multipleOf": 0.05
+      },
+      "Back-to-Back Width": {
+        "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
+        "maximum": 2.0,
+        "default": 1.0,
+        "type": "number",
+        "minimum": 0.5,
+        "$hyparUnitType": "length",
+        "$hyparPreferredUnits": {
+          "metric": "mm",
+          "imperial": "in"
+        },
+        "multipleOf": 0.05
       },
       "Desk Type": {
         "default": "Simple Desk - 29x70",
@@ -128,11 +147,30 @@
           "minimum": 0
         },
         "Aisle Width": {
+          "description": "The width of the aisle between desks, measured from side to side.",
           "maximum": 2,
-          "default": 1,
+          "default": 1.0,
           "type": "number",
           "minimum": 0.5,
-          "$hyparUnitType": "length"
+          "$hyparUnitType": "length",
+          "$hyparPreferredUnits": {
+            "metric": "mm",
+            "imperial": "in"
+          },
+          "multipleOf": 0.05
+        },
+        "Back-to-Back Width": {
+          "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
+          "maximum": 2.0,
+          "default": 1.0,
+          "type": "number",
+          "minimum": 0.5,
+          "$hyparUnitType": "length",
+          "$hyparPreferredUnits": {
+            "metric": "mm",
+            "imperial": "in"
+          },
+          "multipleOf": 0.05
         },
         "Desk Type": {
           "$hyparOrder": 0,

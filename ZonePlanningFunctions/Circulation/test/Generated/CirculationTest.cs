@@ -20,11 +20,9 @@ namespace Circulation
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/2f590a14-d4ea-4a6b-846e-23ef37dae39d.json")) }, 
-                {"Columns", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Columns/e48faf7a-6300-4adc-9ae0-7da7a3fddfb4.json")) }, 
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Program Requirements/d1d2db5e-00f0-4a0e-b893-cdc71cc90714.json")) }, 
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Floors/e48faf7a-6300-4adc-9ae0-7da7a3fddfb4.json")) }, 
-                {"Walls", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Walls/e48faf7a-6300-4adc-9ae0-7da7a3fddfb4.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/82ce9804-26cf-42eb-91b2-209223b54be4.json")) }, 
+                {"Conceptual Mass", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Conceptual Mass/be4c3034-6005-4d1e-8144-615c49c4488c.json")) }, 
+                {"Vertical Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Vertical Circulation/dfd9ab0a-6856-4955-b3ee-9d8ef1f3cbc2.json")) }, 
             };
 
             var result = Circulation.Execute(modelDependencies, input);
