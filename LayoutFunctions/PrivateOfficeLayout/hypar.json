@@ -17,6 +17,10 @@
             "optional": true
         },
         {
+            "name": "Circulation",
+            "optional": true
+        },
+        {
             "autohide": false,
             "name": "Conceptual Mass",
             "optional": true
