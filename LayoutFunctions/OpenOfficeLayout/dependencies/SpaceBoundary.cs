@@ -25,8 +25,6 @@ namespace Elements
 
         public int SpaceCount { get; set; } = 1;
 
-        public Guid Level { get; set; }
-
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
 

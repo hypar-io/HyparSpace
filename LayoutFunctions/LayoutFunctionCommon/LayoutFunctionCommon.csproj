@@ -3,12 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.2.0" />
-    <PackageReference Include="Hypar.Functions" Version="1.1.1" />
-    <PackageReference Include="Hypar.Elements.Components" Version="1.2.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <Title>Hypar Space Layout Utilities</Title>
     <PackageDescription>A set of convenience utilities for creating space layout functions for use with Hypar's Space Planning capabilities.</PackageDescription>
@@ -18,4 +12,10 @@
     <Authors>Andrew Heumann</Authors>
     <Company>Hypar</Company>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="1.2.0"/>
+    <PackageReference Include="Hypar.Functions" Version="1.1.1"/>
+    <PackageReference Include="Hypar.Elements.Components" Version="1.2.0"/>
+    <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1"/>
+  </ItemGroup>
 </Project>

@@ -69,8 +69,55 @@ namespace LayoutFunctionCommon
             else if (trimmedGeo.Count() > 0)
             {
                 var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                var cinchedPoly = new Polygon(cinchedVertices);
+                try
+                {
+                    if (largestTrimmedShape.Vertices.Count < 8)
+                    {
+                        // LIR does a better job if there are more vertices to work with.
+                        var vertices = new List<Vector3>();
+                        foreach (var segment in largestTrimmedShape.Segments())
+                        {
+                            vertices.Add(segment.Start);
+                            vertices.Add(segment.PointAt(0.5));
+                        }
+                        largestTrimmedShape = new Polygon(vertices);
+                    }
+                    // TODO: don't use XY — find two (or more) best guess axes
+                    // from the convex hull or something. I get weird results
+                    // from LIR for trianglish shapes that aren't XY aligned on
+                    // any edge.
+
+                    // XY aligned
+                    Elements.LIR.LargestInteriorRectangle.CalculateLargestInteriorRectangle(largestTrimmedShape, out var bstBounds1);
+                    // Dominant-Axis aligned
+                    var longestEdge = largestTrimmedShape.Segments().OrderByDescending(s => s.Length()).First();
+                    var transformToEdge = new Transform(longestEdge.Start, longestEdge.Direction(), Vector3.ZAxis);
+                    var transformFromEdge = transformToEdge.Inverted();
+                    var largestTrimmedShapeAligned = largestTrimmedShape.TransformedPolygon(transformFromEdge);
+                    Elements.LIR.LargestInteriorRectangle.CalculateLargestInteriorRectangle(largestTrimmedShapeAligned, out var bstBounds2);
+                    var largestInteriorRect = bstBounds1.area > bstBounds2.area ? bstBounds1.Polygon : bstBounds2.Polygon.TransformedPolygon(transformToEdge);
+                    var widthSeg = largestInteriorRect.Segments().OrderBy(s => s.Direction().Dot(segs[0].Direction())).Last();
+                    var depthSeg = largestInteriorRect.Segments().OrderBy(s => s.Direction().Dot(segs[1].Direction())).Last();
+                    width = widthSeg.Length();
+                    depth = depthSeg.Length();
+                    var reconstructedRect = new Polygon(
+                        widthSeg.Start,
+                        widthSeg.End,
+                        widthSeg.End + depthSeg.Direction() * depth,
+                        widthSeg.Start + depthSeg.Direction() * depth
+                    );
+                    return InstantiateLayoutByFit(configs, width, depth, reconstructedRect, xform);
+                }
+                catch
+                {
+                    // largest interior rectangle failed. Just proceed.
+                }
+                var cinchedPoly = largestTrimmedShape;
+                if (largestTrimmedShape.Vertices.Count() > 4)
+                {
+                    var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
+                    cinchedPoly = new Polygon(cinchedVertices);
+                }
                 return InstantiateLayoutByFit(configs, width, depth, cinchedPoly, xform);
             }
             return null;

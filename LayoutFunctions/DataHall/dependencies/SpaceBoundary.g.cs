@@ -27,7 +27,7 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @level, System.Guid? @levelLayout, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.Boundary = @boundary;
@@ -38,6 +38,8 @@ namespace Elements
             this.Height = @height;
             this.ProgramGroup = @programGroup;
             this.ProgramType = @programType;
+            this.Level = @level;
+            this.LevelLayout = @levelLayout;
             }
         
         // Empty constructor
@@ -77,6 +79,13 @@ namespace Elements
         /// <summary>The name of the program type assigned to this space (like "Open Office" or "Meeting Room")</summary>
         [JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramType { get; set; }
+    
+        [JsonProperty("Level", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Level { get; set; }
+    
+        /// <summary>The layout, if any, which generated this space boundary.</summary>
+        [JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? LevelLayout { get; set; }
     
     
     }
