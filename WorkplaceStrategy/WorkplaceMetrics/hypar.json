@@ -9,7 +9,7 @@
     {
       "autohide": false,
       "name": "Floors",
-      "optional": false
+      "optional": true
     },
     {
       "autohide": false,
@@ -44,6 +44,14 @@
     {
       "autohide": false,
       "name": "Private Office Layout",
+      "optional": true
+    },
+    {
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
+      "name": "Program Requirements",
       "optional": true
     }
   ],
@@ -177,7 +185,9 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/WorkpointCount",
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/AreaTally"
+    "https://prod-api.hypar.io/schemas/AreaTally",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/ProgramRequirement"
   ],
   "repository_url": "https://github.com/hypar-io/HyparSpace",
   "thumbnail_id": "55549a8e-ae51-44a1-a4f8-3817eb5d5448",

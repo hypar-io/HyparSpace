@@ -20,10 +20,15 @@ namespace WorkplaceMetrics
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Floors/32cac9d7-70e5-4c82-9da0-a305d414ba2f.json")) }, 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Space Planning Zones/0578e06e-3c61-4b82-9a5e-f9a338bd4c36.json")) }, 
-                {"Open Office Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Open Office Layout/9b1af0e1-f2d3-49e5-b71c-0e630c0b5fd7.json")) }, 
-                {"Meeting Room Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Meeting Room Layout/2170af66-780d-4fd7-b930-9de7187fb7b9.json")) }, 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Space Planning Zones/e428c9aa-5b7c-40c9-ae84-be2c7ced19a1.json")) }, 
+                {"Open Office Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Open Office Layout/02f4fe20-b7c7-4401-8380-28a9fba06fa9.json")) }, 
+                {"Meeting Room Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Meeting Room Layout/e55b9a15-bdab-4896-b36d-2e8d268dadce.json")) }, 
+                {"Classroom Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Classroom Layout/5748e84c-4776-429a-99dd-d746d7fce9ef.json")) }, 
+                {"Phone Booth Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Phone Booth Layout/19b37786-8c1f-435f-98ba-c78af506932e.json")) }, 
+                {"Open Collaboration Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Open Collaboration Layout/6487f74c-eb62-4134-bcb5-bc7c1a2e5f6a.json")) }, 
+                {"Private Office Layout", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Private Office Layout/d320391f-1c3c-4cae-813b-d4a8211facf8.json")) }, 
+                {"Conceptual Mass", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Conceptual Mass/b79357ec-4662-45fb-bae9-29e008974de4.json")) }, 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/WorkplaceStrategy/WorkplaceMetrics/test/Generated/WorkplaceMetricsTest/model_dependencies/Program Requirements/57e77479-7731-4072-92b0-c85645d70659.json")) }, 
             };
 
             var result = WorkplaceMetrics.Execute(modelDependencies, input);
