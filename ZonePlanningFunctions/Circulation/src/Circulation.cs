@@ -61,10 +61,7 @@ namespace Circulation
                 foreach (var cc in corridorCandidates)
                 {
                     var lvlVolume = levelVolumes.FirstOrDefault(lv => lv.Level.Value == cc.Level);
-                    if (lvlVolume != null)
-                    {
-                        lvlVolume.CorridorCandidates.Add(cc);
-                    }
+                    lvlVolume?.CorridorCandidates.Add(cc);
                 }
             }
 
