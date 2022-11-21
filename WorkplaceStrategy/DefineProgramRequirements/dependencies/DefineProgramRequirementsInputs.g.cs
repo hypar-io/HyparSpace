@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,18 +52,6 @@ namespace DefineProgramRequirements
     
         [Newtonsoft.Json.JsonProperty("Program Requirements", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramRequirement> ProgramRequirements { get; set; }
-    
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ProgramRequirementCountType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Item")]
-        Item = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
-        Area_Total = 1,
     
     }
 }
