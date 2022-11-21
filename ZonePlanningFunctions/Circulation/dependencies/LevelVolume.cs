@@ -21,9 +21,6 @@ namespace Elements
         // function.
         public List<CorridorCandidate> CorridorCandidates { get; set; } = new List<CorridorCandidate>();
 
-        // the id of the Level element this volume is attached to
-        public Guid? Level { get; set; }
-
         [JsonProperty("Primary Use Category")]
         public string PrimaryUseCategory { get; set; }
     }

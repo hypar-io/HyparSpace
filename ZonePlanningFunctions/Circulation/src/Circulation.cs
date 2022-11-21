@@ -359,17 +359,35 @@ namespace Circulation
 
             if (lvl.Skeleton != null && lvl.Skeleton.Count > 0)
             {
-                foreach (Line skeletonSeg in lvl.Skeleton)
+                try
                 {
+                    var offset = lvl.Skeleton.Offset(corridorWidth);
+                    var profiles = Profile.CreateFromPolygons(offset);
+                    foreach (var p in profiles)
+                    {
+                        var verts = p.Perimeter.Vertices.ToList();
+                        verts.Add(verts.First());
+                        verts.Reverse();
+                        var pl = new Polyline(verts);
+                        segments.Add(CreateCirculationSegment(lvl, new ThickenedPolyline(pl.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth), p, pl));
+                    }
+                    corridorProfiles.AddRange(profiles);
+                }
+                catch
+                {
+                    // fall back to old multi-segment offset strategy
+                    foreach (Line skeletonSeg in lvl.Skeleton)
+                    {
 
-                    var offset = skeletonSeg.Offset(-corridorWidth / 2, false);
-                    offset = offset.Extend(corridorWidth / 2);
-                    var corridorPolyline = new ThickenedPolyline(offset.ToPolyline(1).TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
-                    var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
+                        var offset = skeletonSeg.Offset(-corridorWidth / 2, false);
+                        offset = offset.Extend(corridorWidth / 2);
+                        var corridorPolyline = new ThickenedPolyline(offset.ToPolyline(1).TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
+                        var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
 
-                    var newCirculationSegment = CreateCirculationSegment(lvl, corridorPolyline, profile, corridorPolyline.Polyline);
-                    segments.Add(newCirculationSegment);
-                    corridorProfiles.Add(newCirculationSegment.Profile);
+                        var newCirculationSegment = CreateCirculationSegment(lvl, corridorPolyline, profile, corridorPolyline.Polyline);
+                        segments.Add(newCirculationSegment);
+                        corridorProfiles.Add(newCirculationSegment.Profile);
+                    }
                 }
                 if (lvl.CorridorCandidates != null && lvl.CorridorCandidates.Count > 0)
                 {

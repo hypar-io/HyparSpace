@@ -13,9 +13,9 @@
     <Company>Hypar</Company>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.2.0"/>
-    <PackageReference Include="Hypar.Functions" Version="1.1.1"/>
-    <PackageReference Include="Hypar.Elements.Components" Version="1.2.0"/>
-    <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1"/>
+    <PackageReference Include="Hypar.Elements" Version="1.3.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.3.0" />
+    <PackageReference Include="Hypar.Elements.Components" Version="1.3.0" />
+    <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1" />
   </ItemGroup>
 </Project>
