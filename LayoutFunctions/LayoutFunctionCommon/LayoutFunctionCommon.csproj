@@ -1,9 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Title>Hypar Space Layout Utilities</Title>
+    <PackageDescription>A set of convenience utilities for creating space layout functions for use with Hypar's Space Planning capabilities.</PackageDescription>
+    <PackageId>Hypar.Space.LayoutFunctionCommon</PackageId>
+    <PackageProjectUrl>https://github.com/hypar-io/HyparSpace/tree/master/LayoutFunctions/LayoutFunctionCommon</PackageProjectUrl>
+    <Version>1.0.2</Version>
+    <Authors>Andrew Heumann</Authors>
+    <Company>Hypar</Company>
   </PropertyGroup>
   <ItemGroup>
-    <!-- <PackageReference Include="Hypar.Elements" Version="1.0.0-alpha.5" /> -->
-    <ProjectReference Include="../../../Elements/Elements/src/Elements.csproj" />
+    <PackageReference Include="Hypar.Elements" Version="1.3.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.3.0" />
+    <PackageReference Include="Hypar.Elements.Components" Version="1.3.0" />
+    <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1" />
   </ItemGroup>
 </Project>

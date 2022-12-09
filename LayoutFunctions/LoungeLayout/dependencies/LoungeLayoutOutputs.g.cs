@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace LoungeLayout
 {
-    public class LoungeLayoutOutputs: ResultsBase
+    public class LoungeLayoutOutputs: SystemResults
     {
 
 

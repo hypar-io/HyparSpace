@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace OpenCollaborationLayout
 {
-    public class OpenCollaborationLayoutOutputs: ResultsBase
+    public class OpenCollaborationLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// Total seats in open collaboration areas.

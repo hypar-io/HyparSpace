@@ -3383,6 +3383,238 @@
       "Height": 2.4275,
       "Up Down Opaque": 1,
       "4 Preset Opaque": 0
+    },
+    {
+      "discriminator": "Elements.ContentElement",
+      "gltfLocation": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+      "Bounding Box": {
+        "discriminator": "Elements.Geometry.BBox3",
+        "Min": {
+          "X": -0.91243551235198983,
+          "Y": -2.6196153923034671,
+          "Z": -5.52008438958751E-14
+        },
+        "Max": {
+          "X": 2.1124355941772461,
+          "Y": 0.00049725798368453983,
+          "Z": 0.72150036449432375
+        }
+      },
+      "Gltf Scale to Meters": 1.0,
+      "SourceDirection": {
+        "X": 0.0,
+        "Y": 1.0,
+        "Z": 0.0
+      },
+      "Transform": {
+        "Matrix": {
+          "Components": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "Material": {
+        "discriminator": "Elements.Material",
+        "Color": {
+          "Red": 1.0,
+          "Green": 1.0,
+          "Blue": 1.0,
+          "Alpha": 1.0
+        },
+        "SpecularFactor": 0.0,
+        "GlossinessFactor": 0.0,
+        "Unlit": false,
+        "DoubleSided": false,
+        "RepeatTexture": true,
+        "InterpolateTexture": true,
+        "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+        "Name": "default"
+      },
+      "Representation": {
+        "SolidOperations": [
+          {
+            "discriminator": "Elements.Geometry.Solids.Extrude",
+            "Profile": {
+              "discriminator": "Elements.Geometry.Profile",
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -0.91243551235198983,
+                    "Y": -2.6196153923034671,
+                    "Z": -5.52008438958751E-14
+                  },
+                  {
+                    "X": -0.91243551235198983,
+                    "Y": 0.00049725798368453983,
+                    "Z": -5.52008438958751E-14
+                  },
+                  {
+                    "X": 2.1124355941772461,
+                    "Y": 0.00049725798368453983,
+                    "Z": -5.52008438958751E-14
+                  },
+                  {
+                    "X": 2.1124355941772461,
+                    "Y": -2.6196153923034671,
+                    "Z": -5.52008438958751E-14
+                  }
+                ]
+              },
+              "Voids": [],
+              "Id": "19152198-04f4-4cd5-9397-64e0b9b97e84",
+              "Name": null
+            },
+            "Height": 0.72150036449437893,
+            "Direction": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            },
+            "LocalTransform": null,
+            "IsVoid": false
+          }
+        ]
+      },
+      "IsElementDefinition": true,
+      "Id": "09c8dd53-b589-4a29-8d29-6f9b24611e56",
+      "Name": "Steelcase AP - Lexicon - Y Bench - 600D x 1400W",
+      "Elevation from Level": 0.0,
+      "Host": "Level : Level 1",
+      "Offset from Host": 0.0,
+      "Moves With Nearby Elements": 0,
+      "Opaque": 1,
+      "Center Modesty Panel": 1,
+      "Flipper (Left)": 0,
+      "Flipper (Right)": 1,
+      "Side Modesty Panel": 1
+    },
+    {
+      "discriminator": "Elements.ContentElement",
+      "gltfLocation": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+      "Bounding Box": {
+        "discriminator": "Elements.Geometry.BBox3",
+        "Min": {
+          "X": -0.38064638786315919,
+          "Y": 0.000986874761246145,
+          "Z": 1.7292880460928472E-13
+        },
+        "Max": {
+          "X": 0.3806462425231934,
+          "Y": 0.7250902616500855,
+          "Z": 1.054439998626709
+        }
+      },
+      "Gltf Scale to Meters": 1.0,
+      "SourceDirection": {
+        "X": 0.0,
+        "Y": 1.0,
+        "Z": 0.0
+      },
+      "Transform": {
+        "Matrix": {
+          "Components": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ]
+        }
+      },
+      "Material": {
+        "discriminator": "Elements.Material",
+        "Color": {
+          "Red": 1.0,
+          "Green": 1.0,
+          "Blue": 1.0,
+          "Alpha": 1.0
+        },
+        "SpecularFactor": 0.0,
+        "GlossinessFactor": 0.0,
+        "Unlit": false,
+        "DoubleSided": false,
+        "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+        "Name": "default"
+      },
+      "Representation": {
+        "SolidOperations": [
+          {
+            "discriminator": "Elements.Geometry.Solids.Extrude",
+            "Profile": {
+              "discriminator": "Elements.Geometry.Profile",
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -0.38064638786315919,
+                    "Y": 0.000986874761246145,
+                    "Z": 1.7292880460928472E-13
+                  },
+                  {
+                    "X": -0.38064638786315919,
+                    "Y": 0.7250902616500855,
+                    "Z": 1.7292880460928472E-13
+                  },
+                  {
+                    "X": 0.3806462425231934,
+                    "Y": 0.7250902616500855,
+                    "Z": 1.7292880460928472E-13
+                  },
+                  {
+                    "X": 0.3806462425231934,
+                    "Y": 0.000986874761246145,
+                    "Z": 1.7292880460928472E-13
+                  }
+                ]
+              },
+              "Voids": [],
+              "Id": "8812b913-713a-49cd-9229-e5c84e620b11",
+              "Name": null
+            },
+            "Height": 1.054439998626536,
+            "Direction": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 1.0
+            },
+            "LocalTransform": null,
+            "IsVoid": false
+          }
+        ]
+      },
+      "IsElementDefinition": true,
+      "Id": "0f768554-7d5d-4f5d-93fd-2c29d61e8877",
+      "Name": "Steelcase - Seating - Amia 482 Series - Air Back - Chair - 3D Knit Back",
+      "Elevation from Level": 0.0,
+      "Host": "Level : Level 1",
+      "Offset from Host": 0.0,
+      "Moves With Nearby Elements": 0,
+      "Opaque": 1,
+      "Arm": 1,
+      "Caster": 1,
+      "Lumbar Support": 1,
+      "No Arm": 0,
+      "Glide": 0,
+      "Arm (Opaque)": 1
     }
   ],
   "ReferenceConfiguration": [

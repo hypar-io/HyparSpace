@@ -28,6 +28,19 @@ namespace OpenCollaborationLayout
             var hasOpenOffice = inputModels.TryGetValue("Open Office Layout", out var openOfficeModel);
 
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    if (matchingLevel != null)
+                    {
+                        matchingLevel.Elements.Add(cs);
+                    }
+                }
+            }
+
             var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
             var output = new OpenCollaborationLayoutOutputs();
             var configJson = File.ReadAllText("./OpenCollaborationConfigurations.json");
@@ -47,7 +60,7 @@ namespace OpenCollaborationLayout
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<Floor>();
+                var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Collaboration");
                 // var levelVolume = levelVolumes.FirstOrDefault(l =>
@@ -103,36 +116,6 @@ namespace OpenCollaborationLayout
             output.CollaborationSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
-        }
-
-        private static Line FindEdgeClosestToCore(Polygon perimeter, List<Line> coreSegments)
-        {
-            double dist = double.MaxValue;
-            Line bestLine = null;
-
-            foreach (var line in perimeter.Segments())
-            {
-                var lineMidPt = line.PointAt(0.5);
-                var linePerp = line.Direction().Cross(Vector3.ZAxis).Unitized();
-                foreach (var coreSegment in coreSegments)
-                {
-                    // don't consider perpendicular edges
-                    if (Math.Abs(coreSegment.Direction().Dot(line.Direction())) < 0.01)
-                    {
-                        continue;
-                    }
-                    var ptOnCoreSegment = lineMidPt.ClosestPointOn(coreSegment);
-                    var thisDist = ptOnCoreSegment.DistanceTo(lineMidPt);
-                    if (thisDist < dist)
-                    {
-                        dist = thisDist;
-                        bestLine = line;
-                    }
-                }
-
-            }
-
-            return bestLine;
         }
 
         private static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, out IEnumerable<Line> otherSegments, double maxDist = 0)
@@ -219,19 +202,19 @@ namespace OpenCollaborationLayout
             }
             var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
 
-            string[] countableOneSeaters = new[] { 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Mattiazzi-Branca-BarStool-BarStool-NaturalAsh.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Orangebox_Seating_Stool_Cubb_Bar-WireBase.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideRight-LeftTable.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideLeft-RightTable.glb", 
+            string[] countableOneSeaters = new[] {
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Mattiazzi-Branca-BarStool-BarStool-NaturalAsh.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Orangebox_Seating_Stool_Cubb_Bar-WireBase.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideRight-LeftTable.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Viccarbe-Brix-Armchair-WideLeft-RightTable.glb",
                 "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Steelcase-Seating-Series1-Stool-Stool.glb"
             };
-            string[] countableTwoSeaters = new[] { 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-LowBackScreen-LeftCornerCushion.glb", 
-                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-HighBackScreen-LeftCornerCushion.glb", 
+            string[] countableTwoSeaters = new[] {
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-LowBackScreen-LeftCornerCushion.glb",
+                "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/SteelcaseCoalesse-Lagunitas-Seating-Chaise-TwoSeat-HighBackScreen-LeftCornerCushion.glb",
             };
             countableSeatCount += CountConfigSeats(selectedConfig, countableOneSeaters, 1);
             countableSeatCount += CountConfigSeats(selectedConfig, countableTwoSeaters, 2);

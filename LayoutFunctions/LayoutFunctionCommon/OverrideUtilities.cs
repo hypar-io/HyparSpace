@@ -31,7 +31,13 @@ namespace LayoutFunctionCommon
                             .Where(el => el.BaseDefinition is ContentElement contentElement
                                          && contentElement.GltfLocation.Equals(positionOverride.Identity.GltfLocation));
                     }
-                    var matchingElement = elementInstances.OrderBy(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation)).FirstOrDefault();
+                    // we use a cutoff so this override doesn't accidentally
+                    // apply to some other random element from a different
+                    // space. It would be better / more reliable if we could use an "add id" of
+                    // the space boundary these were created from. 
+                    var matchingElement = elementInstances
+                        .Where(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation) < 2.0)
+                        .OrderBy(el => el.Transform.Origin.DistanceTo(positionOverride.Identity.OriginalLocation)).FirstOrDefault();
                     if (matchingElement == null)
                     {
                         continue;

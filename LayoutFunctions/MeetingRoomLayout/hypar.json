@@ -12,6 +12,14 @@
     {
       "name": "Levels",
       "optional": true
+    },
+    {
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
+      "name": "Circulation",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -56,6 +64,7 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/CirculationSegment",
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://prod-api.hypar.io/schemas/RoomTally",
     "https://prod-api.hypar.io/schemas/WorkpointCount"

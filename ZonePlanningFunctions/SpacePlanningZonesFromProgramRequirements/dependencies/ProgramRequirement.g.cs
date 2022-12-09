@@ -26,7 +26,7 @@ namespace Elements
     public partial class ProgramRequirement : Element
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, System.Guid @id = default, string @name = null)
+        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.ProgramGroup = @programGroup;
@@ -38,6 +38,7 @@ namespace Elements
             this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
+            this.TotalArea = @totalArea;
             }
         
         // Empty constructor
@@ -88,6 +89,10 @@ namespace Elements
         [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProgramRequirementCountType CountType { get; set; } = Elements.ProgramRequirementCountType.Item;
+    
+        /// <summary>The Area per Space times the Space Count</summary>
+        [Newtonsoft.Json.JsonProperty("Total Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double TotalArea { get; set; }
     
     
     }

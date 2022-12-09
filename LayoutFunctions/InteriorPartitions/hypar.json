@@ -25,6 +25,56 @@
       "autohide": false,
       "name": "Meeting Room Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bedroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Living Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Kitchen Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Workshop Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Home Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bathroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Restroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Laundry Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Entertainment Room Layout",
+      "optional": true
     }
   ],
   "outputs": [],

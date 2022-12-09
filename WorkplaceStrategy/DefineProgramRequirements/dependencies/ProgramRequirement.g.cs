@@ -10,6 +10,7 @@ using Elements.Geometry.Solids;
 using Elements.Spatial;
 using Elements.Validators;
 using Elements.Serialization.JSON;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,12 @@ namespace Elements
     #pragma warning disable // Disable all warnings
 
     /// <summary>Fill out your program requirements. Use "Hypar Space Type" to dictate which function should be used to lay out your space.</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ProgramRequirement : Element
     {
-        [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, System.Guid @id = default, string @name = null)
+        [JsonConstructor]
+        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.ProgramGroup = @programGroup;
@@ -38,6 +39,7 @@ namespace Elements
             this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
+            this.TotalArea = @totalArea;
             }
         
         // Empty constructor
@@ -47,36 +49,36 @@ namespace Elements
         }
     
         /// <summary>What group does this program belong to?</summary>
-        [Newtonsoft.Json.JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramGroup { get; set; }
     
         /// <summary>What display name should be used for this program type?</summary>
-        [Newtonsoft.Json.JsonProperty("Program Name", Required = Newtonsoft.Json.Required.Always)]
+        [JsonProperty("Program Name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string ProgramName { get; set; }
     
         /// <summary>What color should be used to display this space type?</summary>
-        [Newtonsoft.Json.JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
     
         /// <summary>How much area should be allocated for this space?</summary>
-        [Newtonsoft.Json.JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AreaPerSpace { get; set; }
     
         /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
-        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int SpaceCount { get; set; } = 1;
     
         /// <summary>The width of this space (typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
-        [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Width { get; set; }
     
         /// <summary>The depth of this space (typically the shorter dimension — perpendicular to the side from which the space is accessed, like a corridor.)</summary>
-        [Newtonsoft.Json.JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Depth { get; set; }
     
         /// <summary>What program type best matches this one?</summary>
-        [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
+        [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string HyparSpaceType { get; set; } = "unspecified";
     
@@ -85,9 +87,13 @@ namespace Elements
         /// Use "Item" for individual spaces (e.g. 3 conference rooms),
         /// "Area Total" for spaces where you only care about the total (e.g. 1000 SF of circulation), and 
         /// "Unit" where you want total area divided by a "unit" size (e.g. this space supports 400 people at 120 SF / person)</summary>
-        [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        [JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProgramRequirementCountType CountType { get; set; } = Elements.ProgramRequirementCountType.Item;
+    
+        /// <summary>The Area per Space times the Space Count</summary>
+        [JsonProperty("Total Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double TotalArea { get; set; }
     
     
     }

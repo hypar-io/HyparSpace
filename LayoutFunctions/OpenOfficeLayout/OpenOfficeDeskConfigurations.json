@@ -2026,5 +2026,469 @@
         }
       }
     ]
+  },
+  "120° Workstations - Pairs": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.7994322896572168,
+        "Y": 3.0215051770210266,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.78084532938093543,
+              0.624724396501352,
+              0.0,
+              2.4237420773663456,
+              -0.624724396501352,
+              0.78084532938093543,
+              0.0,
+              2.2882111739816646,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.93092803747946073,
+              0.36520266843855309,
+              0.0,
+              2.4641300720402524,
+              -0.36520266843855309,
+              -0.93092803747946073,
+              0.0,
+              0.75801666039826365,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.15060462173394268,
+              -0.9885940764097142,
+              0.0,
+              1.1176363832316967,
+              0.9885940764097142,
+              0.15060462173394268,
+              0.0,
+              1.4887406341086784,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.78084532938093543,
+              -0.624724396501352,
+              0.0,
+              4.3760564232283716,
+              0.624724396501352,
+              -0.78084532938093543,
+              0.0,
+              0.73466008189296694,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.93092803747946073,
+              -0.36520266843855309,
+              0.0,
+              4.3356684285544649,
+              0.36520266843855309,
+              0.93092803747946073,
+              0.0,
+              2.2648545954763679,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.15060462173394268,
+              0.9885940764097142,
+              0.0,
+              5.6821621173630188,
+              -0.9885940764097142,
+              -0.15060462173394268,
+              0.0,
+              1.5341306217659536,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -3.8857805861880479E-16,
+              1.0,
+              0.0,
+              3.4008992846873762,
+              -1.0,
+              -3.8857805861880479E-16,
+              0.0,
+              2.1104357242584215,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              3.8857805861880479E-16,
+              -1.0,
+              0.0,
+              3.3988992159073406,
+              1.0,
+              3.8857805861880479E-16,
+              0.0,
+              0.91243553161620961,
+              0.0,
+              0.0,
+              1.0,
+              0.03394632742001602
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3997161448286084,
+          "Y": 1.5107525885105122,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "120° Workstations - Continuous": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.84527857617449,
+        "Y": 4.1971498602159416,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.49966102171272558,
+              -0.86622102455493155,
+              0.0,
+              3.0207729818110347,
+              0.86622102455493155,
+              -0.49966102171272558,
+              0.0,
+              1.5791263375396669,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.49966102171272558,
+              0.86622102455493155,
+              0.0,
+              2.4239114831712079,
+              -0.86622102455493155,
+              0.49966102171272558,
+              0.0,
+              2.6178586482373372,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.36350503653694272,
+              0.93159223290679916,
+              0.0,
+              4.6879465077002314,
+              -0.93159223290679916,
+              0.36350503653694272,
+              0.0,
+              3.2585091696700554,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.62391189996814866,
+              -0.78149468397304855,
+              0.0,
+              3.1564710777296083,
+              0.78149468397304855,
+              0.62391189996814866,
+              0.0,
+              3.2186872265645223,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.9885350714800184,
+              -0.15099143172377411,
+              0.0,
+              3.9560345619320483,
+              0.15099143172377411,
+              -0.9885350714800184,
+              0.0,
+              1.9133808739236664,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.36350503653694272,
+              -0.93159223290679916,
+              0.0,
+              0.75673795728200954,
+              0.93159223290679916,
+              -0.36350503653694272,
+              0.0,
+              0.93847581610694852,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              -0.62391189996814866,
+              0.78149468397304855,
+              0.0,
+              2.2882133872526347,
+              -0.78149468397304855,
+              -0.62391189996814866,
+              0.0,
+              0.9782977592124823,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Transform": {
+          "discriminator": "Elements.Geometry.Transform",
+          "Matrix": {
+            "Components": [
+              0.9885350714800184,
+              0.15099143172377411,
+              0.0,
+              1.4886499030501941,
+              -0.15099143172377411,
+              0.9885350714800184,
+              0.0,
+              2.2836041118533381,
+              0.0,
+              0.0,
+              1.0,
+              0.033946327420016242
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.4226392880872449,
+          "Y": 2.0985749301079704,
+          "Z": 0.0
+        }
+      }
+    ]
   }
 }

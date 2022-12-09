@@ -2,7 +2,7 @@
 
 # Circulation
 
-Generate building circulation.
+Generate building circulation. Automatically generate or draw corridors. Note that when drawing, corridors will propagate to all levels, unless you are in a specific floor plan view.
 
 |Input Name|Type|Description|
 |---|---|---|

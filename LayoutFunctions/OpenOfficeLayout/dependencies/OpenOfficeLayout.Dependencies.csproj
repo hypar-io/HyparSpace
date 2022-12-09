@@ -4,18 +4,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirementCountType.g.cs" />
     <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
-  </ItemGroup>
+  </ItemGroup> -->
   <ItemGroup>
     <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.0.0-alpha.5" />
-    <PackageReference Include="Hypar.Functions" Version="0.9.10" />
+    <PackageReference Include="Hypar.Elements" Version="1.2.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.1.1" />
   </ItemGroup>
 
 </Project>

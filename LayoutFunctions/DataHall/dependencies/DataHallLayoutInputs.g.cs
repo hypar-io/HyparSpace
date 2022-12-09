@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,7 +71,6 @@ namespace DataHallLayout
         [Newtonsoft.Json.JsonProperty("Cold Aisle Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0D, 4D)]
         public double ColdAisleWidth { get; set; } = 1.2192D;
-    
     
     }
     

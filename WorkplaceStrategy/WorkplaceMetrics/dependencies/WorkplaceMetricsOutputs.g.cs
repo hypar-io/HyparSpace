@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace WorkplaceMetrics
 {
-    public class WorkplaceMetricsOutputs: ResultsBase
+    public class WorkplaceMetricsOutputs: SystemResults
     {
 		/// <summary>
 		/// The total usable floor area of the project.

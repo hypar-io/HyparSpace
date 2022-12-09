@@ -2,13 +2,17 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "d7702a20-66d8-4a6e-9199-553fa754e7ca",
   "name": "Circulation",
-  "description": "Generate building circulation.",
+  "description": "Generate building circulation. Automatically generate or draw corridors. Note that when drawing, corridors will propagate to all levels, unless you are in a specific floor plan view.",
   "language": "C#",
   "model_dependencies": [
     {
       "autohide": true,
       "name": "Levels",
       "optional": false
+    },
+    {
+      "name": "Conceptual Mass",
+      "optional": true
     },
     {
       "autohide": false,
@@ -23,6 +27,10 @@
     {
       "autohide": false,
       "name": "Program Requirements",
+      "optional": true
+    },
+    {
+      "name": "Vertical Circulation",
       "optional": true
     }
   ],
@@ -172,7 +180,8 @@
     "https://prod-api.hypar.io/schemas/ServiceCore",
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/AreaTally",
-    "https://prod-api.hypar.io/schemas/PolygonReference"
+    "https://prod-api.hypar.io/schemas/PolygonReference",
+    "https://prod-api.hypar.io/schemas/ConceptualMass"
   ],
   "default_camera": {
     "named_position": "top",

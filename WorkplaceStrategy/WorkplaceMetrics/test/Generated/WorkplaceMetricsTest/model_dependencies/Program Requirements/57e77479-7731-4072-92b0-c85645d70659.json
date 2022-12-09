@@ -1,0 +1,222 @@
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "fa788ce3-9dc6-44b9-ac1f-63a3168aba57": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Open Office",
+            "Program Name": "Open Office",
+            "Color": {
+                "Red": 0.8196078431372549,
+                "Green": 0.8196078431372549,
+                "Blue": 1.0,
+                "Alpha": 1.0
+            },
+            "Area per Space": 371.6125196257862,
+            "Space Count": 4,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Open Office",
+            "Count Type": "Item",
+            "Id": "fa788ce3-9dc6-44b9-ac1f-63a3168aba57",
+            "Name": null,
+            "Total Area": 0
+        },
+        "78da9657-4213-4588-857c-e7b544e571ee": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Private Office",
+            "Program Name": "Private Office",
+            "Color": {
+                "Red": 0.0,
+                "Green": 0.0,
+                "Blue": 0.5450980392156862,
+                "Alpha": 1.0
+            },
+            "Area per Space": 30.0,
+            "Space Count": 6,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Private Office",
+            "Count Type": "Item",
+            "Id": "78da9657-4213-4588-857c-e7b544e571ee",
+            "Name": null,
+            "Total Area": 0
+        },
+        "17b5c783-38b3-420e-8c0a-e801d909b506": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Circulation",
+            "Program Name": "Circulation",
+            "Color": {
+                "Red": 1.0,
+                "Green": 0.9803921568627451,
+                "Blue": 0.803921568627451,
+                "Alpha": 1.0
+            },
+            "Area per Space": 0.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Circulation",
+            "Count Type": "Item",
+            "Id": "17b5c783-38b3-420e-8c0a-e801d909b506",
+            "Name": null,
+            "Total Area": 0
+        },
+        "226bde95-d68e-4d8a-a017-9018d7b40344": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Meeting Room",
+            "Program Name": "Meeting Room",
+            "Color": {
+                "Red": 0.5647058823529412,
+                "Green": 0.9333333333333333,
+                "Blue": 0.5647058823529412,
+                "Alpha": 1.0
+            },
+            "Area per Space": 30.0,
+            "Space Count": 6,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Meeting Room",
+            "Count Type": "Item",
+            "Id": "226bde95-d68e-4d8a-a017-9018d7b40344",
+            "Name": null,
+            "Total Area": 0
+        },
+        "ca9433fd-79f4-4651-8774-7df7a00b2047": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Lounge",
+            "Program Name": "Lounge",
+            "Color": {
+                "Red": 1.0,
+                "Green": 0.7137254901960784,
+                "Blue": 0.7568627450980392,
+                "Alpha": 1.0
+            },
+            "Area per Space": 140.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Lounge",
+            "Count Type": "Item",
+            "Id": "ca9433fd-79f4-4651-8774-7df7a00b2047",
+            "Name": null,
+            "Total Area": 0
+        },
+        "fd9c337c-3b37-4d7b-981d-2f28fa8098a1": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Classroom",
+            "Program Name": "Classroom",
+            "Color": {
+                "Red": 1.0,
+                "Green": 0.6470588235294118,
+                "Blue": 0.0,
+                "Alpha": 1.0
+            },
+            "Area per Space": 100.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Classroom",
+            "Count Type": "Item",
+            "Id": "fd9c337c-3b37-4d7b-981d-2f28fa8098a1",
+            "Name": null,
+            "Total Area": 0
+        },
+        "b3492f2c-6b3a-4162-aa6c-21f8b375c407": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Pantry",
+            "Program Name": "Pantry",
+            "Color": {
+                "Red": 1.0,
+                "Green": 0.4980392156862745,
+                "Blue": 0.3137254901960784,
+                "Alpha": 1.0
+            },
+            "Area per Space": 140.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Pantry",
+            "Count Type": "Item",
+            "Id": "b3492f2c-6b3a-4162-aa6c-21f8b375c407",
+            "Name": null,
+            "Total Area": 0
+        },
+        "8b8c754a-a280-40be-b3d5-4c783d9f2abf": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Phone Booth",
+            "Program Name": "Phone Booth",
+            "Color": {
+                "Red": 1.0,
+                "Green": 0.8431372549019608,
+                "Blue": 0.0,
+                "Alpha": 1.0
+            },
+            "Area per Space": 30.0,
+            "Space Count": 2,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Phone Booth",
+            "Count Type": "Item",
+            "Id": "8b8c754a-a280-40be-b3d5-4c783d9f2abf",
+            "Name": null,
+            "Total Area": 0
+        },
+        "2c7af65f-dfdf-4784-aebc-74bc41ecfc5e": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Reception",
+            "Program Name": "Reception",
+            "Color": {
+                "Red": 0.9568627450980393,
+                "Green": 0.2627450980392157,
+                "Blue": 0.2627450980392157,
+                "Alpha": 1.0
+            },
+            "Area per Space": 50.0,
+            "Space Count": 1,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Reception",
+            "Count Type": "Item",
+            "Id": "2c7af65f-dfdf-4784-aebc-74bc41ecfc5e",
+            "Name": null,
+            "Total Area": 0
+        },
+        "17fd3c7e-7c8c-4925-9ad5-c55019db7a3b": {
+            "discriminator": "Elements.ProgramRequirement",
+            "Qualified Program Name": "Open Collaboration",
+            "Program Name": "Open Collaboration",
+            "Color": {
+                "Red": 0.3803921568627451,
+                "Green": 0.7019607843137254,
+                "Blue": 0.3568627450980392,
+                "Alpha": 1.0
+            },
+            "Area per Space": 40.0,
+            "Space Count": 6,
+            "Width": 0.0,
+            "Depth": 0.0,
+            "Hypar Space Type": "Open Collaboration",
+            "Count Type": "Item",
+            "Id": "17fd3c7e-7c8c-4925-9ad5-c55019db7a3b",
+            "Name": null,
+            "Total Area": 0
+        }
+    }
+}

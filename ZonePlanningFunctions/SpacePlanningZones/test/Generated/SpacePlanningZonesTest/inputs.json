@@ -1,9 +1,9 @@
 {
-  "Default Program Assignment": "unspecified",
   "Circulation Mode": "Manual",
   "Add Corridors": {
     "SplitLocations": []
   },
+  "Default Program Assignment": "unspecified",
   "Depth at Ends": 8,
   "Split Zones": {
     "SplitLocations": []

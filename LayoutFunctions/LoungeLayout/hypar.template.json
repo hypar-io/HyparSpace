@@ -1,0 +1,57 @@
+{
+    "packages": [
+        "Hypar.Space.LayoutFunctionCommon"
+    ],
+    "required_info": {
+        "spaceType": {
+            "prompt": "What is the name of the space type this function should populate?",
+            "type": "string"
+        },
+        "catalogPath": {
+            "type": "file-copy",
+            "extension": "json",
+            "prompt": "Specify the file path for your catalog json file."
+        },
+        "configurationsPath": {
+            "type": "file-copy",
+            "extension": "json",
+            "prompt": "Specify the file path for your space configurations json file."
+        }
+    },
+    "function": {
+        "model_dependencies": [
+            {
+                "autohide": false,
+                "name": "Space Planning Zones",
+                "optional": false
+            },
+            {
+                "autohide": false,
+                "name": "Levels",
+                "optional": true
+            }
+        ],
+        "model_output": "{{spaceType}} Layout",
+        "overrides": {
+            "Furniture Locations": {
+                "context": "[*discriminator=Elements.ElementInstance]",
+                "identity": {
+                    "OriginalLocation": {
+                        "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                    },
+                    "gltfLocation": {
+                        "type": "string"
+                    }
+                },
+                "schema": {
+                    "Transform": {
+                        "$ref": "https://prod-api.hypar.io/schemas/Transform"
+                    }
+                }
+            }
+        }
+    },
+    "templates": {
+        "Execute": "execute.liquid"
+    }
+}

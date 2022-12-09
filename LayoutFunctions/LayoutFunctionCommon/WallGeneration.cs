@@ -5,7 +5,7 @@ using Elements;
 using Elements.Geometry;
 using Elements.Spatial;
 
-namespace Elements
+namespace LayoutFunctionCommon
 {
     public static class WallGeneration
     {
@@ -174,8 +174,14 @@ namespace Elements
         private static GeometricElement CreateMullion(double height)
         {
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
-            var mullion = new StandardWall(new Line(new Vector3(-mullionSize / 2, 0, 0), new Vector3(mullionSize / 2, 0, 0)), mullionSize, totalStorefrontHeight, mullionMat);
-            mullion.IsElementDefinition = true;
+            var mullion = new Mullion
+            {
+                BaseLine = new Line(new Vector3(-mullionSize / 2, 0, 0), new Vector3(mullionSize / 2, 0, 0)),
+                Width = mullionSize,
+                Height = totalStorefrontHeight,
+                Material = mullionMat,
+                IsElementDefinition = true
+            };
             return mullion;
         }
 
@@ -205,21 +211,23 @@ namespace Elements
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
             var mullion = CreateMullion(height);
-            foreach (var wallCandidate in wallCandidateLines)
+            foreach (var (line, type) in wallCandidateLines)
             {
-                var lineProjected = wallCandidate.line.TransformedLine(new Transform(0, 0, -wallCandidate.line.End.Z));
+                var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
 
-                if (wallCandidate.type == "Solid")
+                if (type == "Solid")
                 {
                     model.AddElement(new StandardWall(wallCandidate.line, 0.2, height, wallMat, levelTransform));
                 }
-                else if (wallCandidate.type == "Partition")
+                else if (type == "Partition")
                 {
-                    model.AddElement(new StandardWall(wallCandidate.line, 0.1, height, wallMat, levelTransform));
+                    model.AddElement(new StandardWall(line, 0.1, height, wallMat, levelTransform));
                 }
-                else if (wallCandidate.type == "Glass")
+                else if (type == "Glass")
                 {
-                    var grid = new Grid1d(wallCandidate.line);
+                    var primaryWall = new StandardWall(lineProjected, 0.05, height, glassMat, levelTransform);
+                    model.AddElement(primaryWall);
+                    var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
                     grid.SplitAtOffsets(offsets);
                     if (grid.Cells != null && grid.Cells.Count >= 3)
@@ -227,22 +235,35 @@ namespace Elements
                         grid[2].DivideByApproximateLength(2);
                     }
                     var separators = grid.GetCellSeparators(true);
-                    var beam = new Beam(wallCandidate.line, Polygon.Rectangle(mullionSize, mullionSize), mullionMat, 0, 0, 0, isElementDefinition: true);
-                    model.AddElement(beam.CreateInstance(levelTransform, "Base Mullion"));
-                    model.AddElement(beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, doorHeight)), "Base Mullion"));
-                    model.AddElement(beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)), "Base Mullion"));
+                    var beam = new Beam(lineProjected, Polygon.Rectangle(mullionSize, mullionSize), null, mullionMat)
+                    {
+                        IsElementDefinition = true
+                    };
+                    var mullionInstances = new[] {
+                        beam.CreateInstance(levelTransform, "Base Mullion"),
+                        beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, doorHeight)), "Base Mullion"),
+                        beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)), "Base Mullion")
+                    };
+                    foreach (var mullionInstance in mullionInstances)
+                    {
+                        mullionInstance.AdditionalProperties["Wall"] = primaryWall.Id;
+                        model.AddElement(mullionInstance);
+                    }
                     foreach (var separator in separators)
                     {
                         // var line = new Line(separator, separator + new Vector3(0, 0, height));
                         // model.AddElement(new ModelCurve(line, BuiltInMaterials.XAxis, levelTransform));
-                        var instance = mullion.CreateInstance(new Transform(separator, wallCandidate.line.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
+                        var instance = mullion.CreateInstance(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
+                        instance.AdditionalProperties["Wall"] = primaryWall.Id;
                         model.AddElement(instance);
                     }
-                    model.AddElement(new StandardWall(wallCandidate.line, 0.05, totalStorefrontHeight, glassMat, levelTransform));
+
                     var headerHeight = height - totalStorefrontHeight;
                     if (headerHeight > 0.01)
                     {
-                        model.AddElement(new StandardWall(wallCandidate.line, 0.2, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight))));
+                        var header = new Header(lineProjected, 0.2, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)));
+                        header.AdditionalProperties["Wall"] = primaryWall.Id;
+                        model.AddElement(header);
                     }
                 }
             }

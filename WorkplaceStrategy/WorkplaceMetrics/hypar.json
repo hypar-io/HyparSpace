@@ -2,13 +2,14 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "5915b2f2-09c9-4273-a151-0876b602e9e5",
   "name": "Workplace Metrics",
+  "display_name": "Workplace Metrics",
   "description": "Calculate various workplace metrics from a layout.",
   "language": "C#",
   "model_dependencies": [
     {
       "autohide": false,
       "name": "Floors",
-      "optional": false
+      "optional": true
     },
     {
       "autohide": false,
@@ -43,6 +44,14 @@
     {
       "autohide": false,
       "name": "Private Office Layout",
+      "optional": true
+    },
+    {
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
+      "name": "Program Requirements",
       "optional": true
     }
   ],
@@ -175,9 +184,13 @@
   ],
   "element_types": [
     "https://prod-api.hypar.io/schemas/WorkpointCount",
-    "https://prod-api.hypar.io/schemas/SpaceBoundary"
+    "https://prod-api.hypar.io/schemas/SpaceBoundary",
+    "https://prod-api.hypar.io/schemas/AreaTally",
+    "https://prod-api.hypar.io/schemas/LevelVolume",
+    "https://prod-api.hypar.io/schemas/ProgramRequirement"
   ],
   "repository_url": "https://github.com/hypar-io/HyparSpace",
-  "last_updated": "2021-05-27T17:38:11.597789",
-  "cli_version": "0.9.6-alpha.2"
+  "thumbnail_id": "55549a8e-ae51-44a1-a4f8-3817eb5d5448",
+  "last_updated": "2022-06-11T12:34:31.394295",
+  "cli_version": "1.2.0-alpha.12"
 }

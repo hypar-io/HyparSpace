@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace InteriorPartitions
 {
-    public class InteriorPartitionsOutputs: ResultsBase
+    public class InteriorPartitionsOutputs: SystemResults
     {
 
 

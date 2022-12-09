@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,8 +65,7 @@ namespace WorkplaceMetrics
     
         /// <summary>Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.</summary>
         [Newtonsoft.Json.JsonProperty("USF Exclusions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<Polygon> USFExclusions { get; set; }
-    
+        public IList<Polygon> USFExclusions { get; set; } = new List<Polygon>();
     
     }
     

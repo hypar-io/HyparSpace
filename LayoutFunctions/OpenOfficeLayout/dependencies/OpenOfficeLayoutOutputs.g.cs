@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace OpenOfficeLayout
 {
-    public class OpenOfficeLayoutOutputs: ResultsBase
+    public class OpenOfficeLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// The number of desks.

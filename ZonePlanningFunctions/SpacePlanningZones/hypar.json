@@ -11,6 +11,10 @@
             "optional": false
         },
         {
+            "name": "Conceptual Mass",
+            "optional": true
+        },
+        {
             "autohide": false,
             "name": "Core",
             "optional": true
@@ -197,6 +201,10 @@
     },
     "overrides": {
         "Program Assignments": {
+            "verbs": {
+                "edit": "Assign Program Types",
+                "revert": "Reset Program Type"
+            },
             "context": "[*discriminator=Elements.SpaceBoundary]",
             "identity": {
                 "ParentCentroid": {

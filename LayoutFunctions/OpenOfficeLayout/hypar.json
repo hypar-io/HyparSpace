@@ -12,6 +12,11 @@
     },
     {
       "autohide": false,
+      "name": "Circulation",
+      "optional": true
+    },
+    {
+      "autohide": false,
       "name": "Structure",
       "optional": true
     },
@@ -42,11 +47,30 @@
         "minimum": 0
       },
       "Aisle Width": {
+        "description": "The width of the aisle between desks, measured from side to side.",
         "maximum": 2,
-        "default": 1,
+        "default": 1.0,
         "type": "number",
         "minimum": 0.5,
-        "$hyparUnitType": "length"
+        "$hyparUnitType": "length",
+        "$hyparPreferredUnits": {
+          "metric": "mm",
+          "imperial": "in"
+        },
+        "multipleOf": 0.05
+      },
+      "Back-to-Back Width": {
+        "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
+        "maximum": 2.0,
+        "default": 1.0,
+        "type": "number",
+        "minimum": 0.5,
+        "$hyparUnitType": "length",
+        "$hyparPreferredUnits": {
+          "metric": "mm",
+          "imperial": "in"
+        },
+        "multipleOf": 0.05
       },
       "Desk Type": {
         "default": "Simple Desk - 29x70",
@@ -60,6 +84,8 @@
           "L-Shaped",
           "Double Desk",
           "Enclosed Pair",
+          "120° Workstations - Pairs",
+          "120° Workstations - Continuous",
           "Custom"
         ]
       },
@@ -126,11 +152,30 @@
           "minimum": 0
         },
         "Aisle Width": {
+          "description": "The width of the aisle between desks, measured from side to side.",
           "maximum": 2,
-          "default": 1,
+          "default": 1.0,
           "type": "number",
           "minimum": 0.5,
-          "$hyparUnitType": "length"
+          "$hyparUnitType": "length",
+          "$hyparPreferredUnits": {
+            "metric": "mm",
+            "imperial": "in"
+          },
+          "multipleOf": 0.05
+        },
+        "Back-to-Back Width": {
+          "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
+          "maximum": 2.0,
+          "default": 1.0,
+          "type": "number",
+          "minimum": 0.5,
+          "$hyparUnitType": "length",
+          "$hyparPreferredUnits": {
+            "metric": "mm",
+            "imperial": "in"
+          },
+          "multipleOf": 0.05
         },
         "Desk Type": {
           "$hyparOrder": 0,
@@ -143,6 +188,8 @@
             "L-Shaped",
             "Double Desk",
             "Enclosed Pair",
+            "120° Workstations - Pairs",
+            "120° Workstations - Continuous",
             "Custom"
           ],
           "default": "Simple Desk - 29x70"
@@ -213,9 +260,11 @@
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelElements",
+    "https://prod-api.hypar.io/schemas/CirculationSegment",
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://prod-api.hypar.io/schemas/WorkpointCount",
-    "https://prod-api.hypar.io/schemas/LabelConfiguration"
+    "https://prod-api.hypar.io/schemas/LabelConfiguration",
+    "https://prod-api.hypar.io/schemas/ProgramRequirement"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "default_camera": {

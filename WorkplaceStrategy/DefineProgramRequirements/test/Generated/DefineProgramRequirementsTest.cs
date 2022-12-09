@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -25,54 +26,13 @@ namespace DefineProgramRequirements
             result.Model.ToGlTF("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.glb");
             File.WriteAllText("../../../Generated/DefineProgramRequirementsTest/results/DefineProgramRequirementsTest.json", result.Model.ToJson());
+
         }
 
         public DefineProgramRequirementsInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""Program Requirements"": [
-    {
-      ""Program Name"": ""fazeez"",
-      ""Area per Space"": 0,
-      ""Color"": {
-        ""Red"": 1,
-        ""Alpha"": 1,
-        ""Blue"": 0,
-        ""Green"": 0
-      },
-      ""Space Count"": 2,
-      ""Id"": ""b1d9407b-bafb-405a-96e6-2b1c1cccb986"",
-      ""Program Group"": null,
-      ""Width"": 10,
-      ""Depth"": 10,
-      ""Hypar Space Type"": ""unspecified"",
-      ""Name"": null,
-      ""discriminator"": ""Elements.ProgramRequirement""
-    },
-    {
-      ""Program Name"": ""mashoof"",
-      ""Area per Space"": 0,
-      ""Color"": {
-        ""Red"": 0,
-        ""Alpha"": 1,
-        ""Blue"": 1,
-        ""Green"": 0.3843137254901961
-      },
-      ""Space Count"": 1,
-      ""Id"": ""6a183472-e6be-4633-a320-5d6a9e148a44"",
-      ""Program Group"": null,
-      ""Width"": 10,
-      ""Depth"": 10,
-      ""Hypar Space Type"": ""unspecified"",
-      ""Name"": null,
-      ""discriminator"": ""Elements.ProgramRequirement""
-    }
-  ],
-  ""model_input_keys"": {}
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<DefineProgramRequirementsInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/DefineProgramRequirementsTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<DefineProgramRequirementsInputs>(json);
         }
     }
 }

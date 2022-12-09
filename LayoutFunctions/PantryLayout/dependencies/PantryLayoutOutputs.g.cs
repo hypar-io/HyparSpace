@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace PantryLayout
 {
-    public class PantryLayoutOutputs: ResultsBase
+    public class PantryLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// Total count of seats.

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace MeetingRoomLayout
 {
-    public class MeetingRoomLayoutOutputs: ResultsBase
+    public class MeetingRoomLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// Total Seat Count

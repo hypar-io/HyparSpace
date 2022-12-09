@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace ClassroomLayout
 {
-    public class ClassroomLayoutOutputs: ResultsBase
+    public class ClassroomLayoutOutputs: SystemResults
     {
 		/// <summary>
 		/// Total count of seats

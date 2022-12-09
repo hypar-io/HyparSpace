@@ -26,7 +26,13 @@ namespace SpacePlanningZones
 
             // Get Levels
             var levelsModel = inputModels["Levels"];
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>().ToList();
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                var cmLevelVolumes = massModel.AllElementsOfType<LevelVolume>();
+                levelsModel = massModel;
+                levelVolumes.AddRange(cmLevelVolumes);
+            }
             // Validate that level volumes are present in Levels dependency
             if (levelVolumes.Count() == 0)
             {
@@ -69,13 +75,13 @@ namespace SpacePlanningZones
 
             // create a collection of LevelElements (which contain other elements)
             // to add to the model
-            var levels = new List<LevelElements>();
+            var levelElements = new List<LevelElements>();
 
             // create a collection of all the final space boundaries we'll pass to the model
             var allSpaceBoundaries = new List<SpaceBoundary>();
 
             // For every level volume, create space boundaries with corridors and splits
-            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levels, walls, allSpaceBoundaries, circulationLevels);
+            CreateInitialSpaceBoundaries(input, output, levelVolumes, floorsModel, cores, levelElements, walls, allSpaceBoundaries, circulationLevels);
 
             // process merge overrides
             ProcessMergeOverrides(input, allSpaceBoundaries);
@@ -103,12 +109,12 @@ namespace SpacePlanningZones
             }
 
             // calculate area tallies
-            var areas = CalculateAreas(hasProgramRequirements, levels, allSpaceBoundaries);
+            var areas = CalculateAreas(hasProgramRequirements, levelElements, allSpaceBoundaries);
 
             output.Model.AddElements(areas.Select(kvp => kvp.Value).OrderByDescending(a => a.AchievedArea));
 
             // adding levels also adds the space boundaries, since they're in the levels' own elements collections
-            output.Model.AddElements(levels);
+            output.Model.AddElements(levelElements);
             foreach (var sb in output.Model.AllElementsOfType<SpaceBoundary>().ToList())
             {
                 var crvs = sb.Boundary.ToModelCurves(sb.Transform, BuiltInMaterials.Black);
@@ -356,6 +362,10 @@ namespace SpacePlanningZones
             // for every level volume
             foreach (var lvl in levelVolumes)
             {
+                if (lvl.PrimaryUseCategory == "Residential")
+                {
+                    continue;
+                }
                 AdjustLevelVolumesToFloors(floorsModel, lvl);
 
                 var levelBoundary = new Profile(lvl.Profile.Perimeter, lvl.Profile.Voids, Guid.NewGuid(), null);
@@ -510,16 +520,16 @@ namespace SpacePlanningZones
                 }
 
                 allSpaceBoundaries.AddRange(spaceBoundaries.OfType<SpaceBoundary>());
-                // create floors for corridors and add them to the associated level.
-                try
-                {
-                    var cpUnion = Profile.UnionAll(corridorProfiles);
-                    cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
-                }
-                catch
-                {
-                    corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
-                }
+                // // create floors for corridors and add them to the associated level.
+                // try
+                // {
+                //     var cpUnion = Profile.UnionAll(corridorProfiles);
+                //     cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                // }
+                // catch
+                // {
+                //     corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, corridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                // }
             }
         }
 

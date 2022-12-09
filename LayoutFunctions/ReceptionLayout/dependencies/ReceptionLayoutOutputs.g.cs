@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace ReceptionLayout
 {
-    public class ReceptionLayoutOutputs: ResultsBase
+    public class ReceptionLayoutOutputs: SystemResults
     {
 
 

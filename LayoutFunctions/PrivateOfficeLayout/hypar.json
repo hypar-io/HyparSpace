@@ -1,5 +1,5 @@
 {
-    "$schema": "https://hypar.io/Schemas/function_2.json",
+    "$schema": "https://hypar.io/Schemas/function.json",
     "id": "94dc146d-a523-412a-989f-dafdacd1ac68",
     "name": "Private Office Layout",
     "description": "Lay out private offices.",
@@ -14,6 +14,15 @@
         {
             "autohide": false,
             "name": "Levels",
+            "optional": true
+        },
+        {
+            "name": "Circulation",
+            "optional": true
+        },
+        {
+            "autohide": false,
+            "name": "Conceptual Mass",
             "optional": true
         }
     ],
@@ -117,6 +126,7 @@
     "element_types": [
         "https://prod-api.hypar.io/schemas/SpaceBoundary",
         "https://prod-api.hypar.io/schemas/LevelElements",
+        "https://prod-api.hypar.io/schemas/CirculationSegment",
         "https://prod-api.hypar.io/schemas/LevelVolume",
         "https://prod-api.hypar.io/schemas/WorkpointCount"
     ],

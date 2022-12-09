@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace CustomSpaceType
 {
-    public class CustomSpaceTypeOutputs: ResultsBase
+    public class CustomSpaceTypeOutputs: SystemResults
     {
 
 

@@ -24,7 +24,24 @@ namespace PhoneBoothLayout
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    if (matchingLevel != null)
+                    {
+                        matchingLevel.Elements.Add(cs);
+                    }
+                }
+            }
             var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                levelVolumes = massModel.AllElementsOfType<LevelVolume>();
+            }
             var output = new PhoneBoothLayoutOutputs();
             var configJson = File.ReadAllText("./PhoneBoothConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -36,7 +53,7 @@ namespace PhoneBoothLayout
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<Floor>();
+                var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Phone Booth");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>

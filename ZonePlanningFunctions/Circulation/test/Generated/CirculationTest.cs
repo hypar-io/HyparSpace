@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -19,16 +20,16 @@ namespace Circulation
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/bbcb2c96-8ad7-420c-b623-4767e053c707.json")) }, 
-                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Program Requirements/d4760f77-d0f9-4b8e-91b0-b8247d1a0273.json")) }, 
-                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Floors/6f0cbc73-46dc-4fc7-af00-49727a712a80.json")) }, 
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Core/6f0cbc73-46dc-4fc7-af00-49727a712a80.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/82ce9804-26cf-42eb-91b2-209223b54be4.json")) }, 
+                {"Conceptual Mass", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Conceptual Mass/be4c3034-6005-4d1e-8144-615c49c4488c.json")) }, 
+                {"Vertical Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Vertical Circulation/dfd9ab0a-6856-4955-b3ee-9d8ef1f3cbc2.json")) }, 
             };
 
             var result = Circulation.Execute(modelDependencies, input);
             result.Model.ToGlTF("../../../Generated/CirculationTest/results/CirculationTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/CirculationTest/results/CirculationTest.glb");
             File.WriteAllText("../../../Generated/CirculationTest/results/CirculationTest.json", result.Model.ToJson());
+
         }
 
         public CirculationInputs GetInput()

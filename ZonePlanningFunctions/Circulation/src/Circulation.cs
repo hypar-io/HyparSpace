@@ -27,7 +27,11 @@ namespace Circulation
             model = output.Model;
             // Get Levels
             var levelsModel = inputModels["Levels"];
-            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>().ToList();
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            {
+                levelVolumes.AddRange(massModel.AllElementsOfType<LevelVolume>());
+            }
             // Validate that level volumes are present in Levels dependency
             if (levelVolumes.Count() == 0)
             {
@@ -48,6 +52,18 @@ namespace Circulation
             // Get Columns
             var hasColumns = inputModels.TryGetValue("Columns", out var columnsModel);
             var columns = columnsModel?.AllElementsOfType<Column>() ?? new List<Column>();
+
+            // Get Vertical Circulation
+            inputModels.TryGetValue("Vertical Circulation", out var verticalCirculationModel);
+            if (verticalCirculationModel != null)
+            {
+                var corridorCandidates = verticalCirculationModel.AllElementsAssignableFromType<CorridorCandidate>();
+                foreach (var cc in corridorCandidates)
+                {
+                    var lvlVolume = levelVolumes.FirstOrDefault(lv => lv.Level.Value == cc.Level);
+                    lvlVolume?.CorridorCandidates.Add(cc);
+                }
+            }
 
             #endregion
 
@@ -99,18 +115,19 @@ namespace Circulation
                     return pt.HasValue && levelBoundary.Contains(pt.Value);
                 }).ToList();
                 var interiorZones = new List<Profile>();
-                if (wallsInBoundary.Count() > 0)
-                {
-                    var newLevelBoundary = AttemptToSplitWallsAndYieldLargestZone(levelBoundary, wallsInBoundary, out var centerlines, out interiorZones, output.Model);
-                    levelBoundary = newLevelBoundary;
-                }
+                // This was causing issues in plans with lots of complex walls.
+                // if (wallsInBoundary.Count() > 0)
+                // {
+                //     var newLevelBoundary = AttemptToSplitWallsAndYieldLargestZone(levelBoundary, wallsInBoundary, out var centerlines, out interiorZones, output.Model);
+                //     levelBoundary = newLevelBoundary;
+                // }
 
                 List<Profile> corridorProfiles = new List<Profile>();
                 List<Profile> thickerOffsetProfiles = new List<Profile>();
                 List<CirculationSegment> circulationSegments = new List<CirculationSegment>();
 
                 // Process circulation
-                if (input.CirculationMode == CirculationInputsCirculationMode.Automatic)
+                if (input.CirculationMode == CirculationInputsCirculationMode.Automatic && (lvl.PrimaryUseCategory == null || lvl.PrimaryUseCategory == "Office" || lvl.PrimaryUseCategory == "Residential"))
                 {
                     circulationSegments.AddRange(GenerateAutomaticCirculation(input, corridorWidth, lvl, levelBoundary, coresInBoundary, corridorProfiles, thickerOffsetProfiles));
                 }
@@ -239,11 +256,11 @@ namespace Circulation
                 try
                 {
                     var cpUnion = Profile.UnionAll(corridorProfiles);
-                    cpUnion.Select(p => new Floor(p, 0.1, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                    cpUnion.Select(p => new Floor(p, 0.005, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
                 }
                 catch
                 {
-                    corridorProfiles.Select(p => new Floor(p, 0.1, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
+                    corridorProfiles.Select(p => new Floor(p, 0.005, lvl.Transform, CorridorMat)).ToList().ForEach(f => level.Elements.Add(f));
                 }
             }
         }
@@ -251,7 +268,7 @@ namespace Circulation
         private static CirculationSegment CreateCirculationSegment(LevelVolume lvl, ThickenedPolyline corridorPolyline, Profile p, Polyline originalGeometry)
         {
             p.Name = "Corridor";
-            var segment = new CirculationSegment(p, 0.11)
+            var segment = new CirculationSegment(p, 0.01)
             {
                 Material = CorridorMat,
                 Transform = lvl.Transform,
@@ -273,7 +290,7 @@ namespace Circulation
                 foreach (var corridor in trimmedCorridors)
                 {
                     corridor.Name = "Corridor";
-                    var segment = new CirculationSegment(corridor, 0.11)
+                    var segment = new CirculationSegment(corridor, 0.01)
                     {
                         Material = circulationSegment.Material,
                         Transform = circulationSegment.Transform,
@@ -336,6 +353,52 @@ namespace Circulation
             var segments = new List<CirculationSegment>();
             var perimeter = levelBoundary.Perimeter;
             var perimeterSegments = perimeter.Segments();
+
+            if (lvl.Skeleton != null && lvl.Skeleton.Count > 0)
+            {
+                try
+                {
+                    var offset = lvl.Skeleton.Offset(corridorWidth);
+                    var profiles = Profile.CreateFromPolygons(offset);
+                    foreach (var p in profiles)
+                    {
+                        var verts = p.Perimeter.Vertices.ToList();
+                        verts.Add(verts.First());
+                        verts.Reverse();
+                        var pl = new Polyline(verts);
+                        segments.Add(CreateCirculationSegment(lvl, new ThickenedPolyline(pl.TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth), p, pl));
+                    }
+                    corridorProfiles.AddRange(profiles);
+                }
+                catch
+                {
+                    // fall back to old multi-segment offset strategy
+                    foreach (Line skeletonSeg in lvl.Skeleton)
+                    {
+
+                        var offset = skeletonSeg.Offset(-corridorWidth / 2, false);
+                        offset = offset.Extend(corridorWidth / 2);
+                        var corridorPolyline = new ThickenedPolyline(offset.ToPolyline(1).TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
+                        var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
+
+                        var newCirculationSegment = CreateCirculationSegment(lvl, corridorPolyline, profile, corridorPolyline.Polyline);
+                        segments.Add(newCirculationSegment);
+                        corridorProfiles.Add(newCirculationSegment.Profile);
+                    }
+                }
+                if (lvl.CorridorCandidates != null && lvl.CorridorCandidates.Count > 0)
+                {
+                    foreach (var candidate in lvl.CorridorCandidates)
+                    {
+                        var corridorPolyline = new ThickenedPolyline(candidate.Line.ToPolyline(1).TransformedPolyline(lvl.Transform), corridorWidth, false, 0, corridorWidth);
+                        var profile = OffsetOnSideAndUnionSafe(corridorPolyline);
+                        var newCirculationSegment = CreateCirculationSegment(lvl, corridorPolyline, profile, corridorPolyline.Polyline);
+                        segments.Add(newCirculationSegment);
+                        corridorProfiles.Add(newCirculationSegment.Profile);
+                    }
+                }
+                return segments;
+            }
 
             IdentifyShortEdges(perimeter, perimeterSegments, out var shortEdges, out var shortEdgeIndices);
 
