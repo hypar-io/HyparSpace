@@ -74,12 +74,17 @@ namespace PhoneBoothLayout
                                       }
                                       return w;
                                   });
-                    wallCandidateLines.AddRange(initialWallCandidates);
-                    var roomTransformProjected = room.Transform.Concatenated(new Transform(0, 0, -room.Transform.Origin.Z));
+                    var levelInvertedTransform = levelVolume.Transform.Inverted();
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
+
+                    var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                    orientationTransform.Concatenate(relativeRoomTransform);
+
                     var boundaryCurves = new List<Polygon>();
-                    boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(roomTransformProjected));
-                    boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(roomTransformProjected)) ?? new List<Polygon>());
+                    boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
+                    boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
+
                     var grid = new Grid2d(boundaryCurves, orientationTransform);
                     grid.U.DivideByApproximateLength(input.MinimumSize, EvenDivisionMode.RoundDown);
 
@@ -116,18 +121,14 @@ namespace PhoneBoothLayout
                     }
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
                 }
-                if (levelVolume == null)
-                {
-                    // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume() { Height = 3 };
-                }
+                var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
                 {
                     output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
                         WallCandidateLines = wallCandidateLines,
-                        Height = levelVolume.Height,
-                        LevelTransform = levelVolume.Transform
+                        Height = height,
+                        LevelTransform = levelVolume?.Transform ?? new Transform()
                     });
                 }
             }

@@ -69,6 +69,10 @@ namespace PrivateOfficeLayout
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 var wallCandidateLines = new List<(Line line, string type)>();
+                if (lvl.Name.Equals("Level 5"))
+                {
+
+                }
                 foreach (var room in privateOfficeBoundaries)
                 {
                     var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
@@ -76,13 +80,14 @@ namespace PrivateOfficeLayout
 
                     foreach (var roomBoundary in privateOfficeRoomBoundaries)
                     {
-                        var roomTransform = roomBoundary.Transform.Concatenated(new Transform(0, 0, -roomBoundary.Transform.Origin.Z));
-                        var spaceBoundary = new Profile(roomBoundary.Boundary.Perimeter.TransformedPolygon(roomTransform), roomBoundary.Boundary.Voids?.Select(v => v.TransformedPolygon(roomTransform)).ToList() ?? new List<Polygon>(), Guid.NewGuid(), null);
                         WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
+
+                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume.Transform.Inverted());
                         var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                        orientationTransform.Concatenate(relativeRoomTransform);
                         var boundaryCurves = new List<Polygon>();
-                        boundaryCurves.Add(spaceBoundary.Perimeter);
-                        boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+                        boundaryCurves.Add(roomBoundary.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
+                        boundaryCurves.AddRange(roomBoundary.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
 
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
@@ -128,17 +133,13 @@ namespace PrivateOfficeLayout
                         }
                     }
                 }
-                if (levelVolume == null)
-                {
-                    // if we didn't get a level volume, make a fake one.
-                    levelVolume = new LevelVolume() { Height = 4 };
-                }
 
+                var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
                 output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                 {
                     WallCandidateLines = wallCandidateLines,
-                    Height = levelVolume.Height,
-                    LevelTransform = levelVolume.Transform
+                    Height = height,
+                    LevelTransform = levelVolume?.Transform ?? new Transform()
                 });
             }
             output.Model.AddElement(new WorkpointCount() { Type = "Private Office", Count = totalPrivateOfficeCount });
@@ -150,6 +151,7 @@ namespace PrivateOfficeLayout
 
         private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<(Line line, string type)> wallCandidateLines, SpaceSettingsOverride config)
         {
+            var levelInvertedTransform = levelVolume.Transform.Inverted();
             if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
             {
                 var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
@@ -163,13 +165,15 @@ namespace PrivateOfficeLayout
                           });
                 if (config.Value.CreateWalls)
                 {
-                    wallCandidateLines.AddRange(initialWallCandidates);
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
                 }
-                var roomTransformProjected = room.Transform.Concatenated(new Transform(0, 0, -room.Transform.Origin.Z));
+                var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
+                var relativeRoomTransformProjected = new Transform(0, 0, -relativeRoomTransform.Origin.Z);
                 var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                orientationTransform.Concatenate(relativeRoomTransform);
                 var boundaryCurves = new List<Polygon>();
-                boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(roomTransformProjected));
-                boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(roomTransformProjected)) ?? new List<Polygon>());
+                boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
+                boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
                 var tempGrid = new Grid2d(boundaryCurves, orientationTransform);
                 try
                 {
@@ -192,7 +196,7 @@ namespace PrivateOfficeLayout
                             }
                             if (cell.Type != null && cell.Type.Contains("Office"))
                             {
-                                var profile = new Profile(cellBoundaries);
+                                var profile = new Profile(cellBoundaries).Transformed(relativeRoomTransformProjected);
                                 var spaceBoundary = new SpaceBoundary()
                                 {
                                     Boundary = profile,
@@ -224,7 +228,7 @@ namespace PrivateOfficeLayout
                         }
                         return tempGrid.GetCells().Select(c =>
                         {
-                            var profile = new Profile(c.GetTrimmedCellGeometry().OfType<Polygon>().ToList());
+                            var profile = new Profile(c.GetTrimmedCellGeometry().OfType<Polygon>().ToList()).Transformed(relativeRoomTransformProjected);
                             var spaceBoundary = new SpaceBoundary()
                             {
                                 Boundary = profile,
@@ -261,7 +265,7 @@ namespace PrivateOfficeLayout
                                                               }
                                                               return w;
                                                           });
-                    wallCandidateLines.AddRange(initialWallCandidates);
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
                 }
                 return new[] { room };
             }

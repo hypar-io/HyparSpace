@@ -19,7 +19,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     /// <summary>Fill out your program requirements. Use "Hypar Space Type" to dictate which function should be used to lay out your space.</summary>
     [JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -40,48 +40,48 @@ namespace Elements
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
             this.TotalArea = @totalArea;
-            }
-        
+        }
+
         // Empty constructor
         public ProgramRequirement()
             : base()
         {
         }
-    
+
         /// <summary>What group does this program belong to?</summary>
         [JsonProperty("Program Group", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramGroup { get; set; }
-    
+
         /// <summary>What display name should be used for this program type?</summary>
         [JsonProperty("Program Name", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string ProgramName { get; set; }
-    
+
         /// <summary>What color should be used to display this space type?</summary>
         [JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
-    
+
         /// <summary>How much area should be allocated for this space?</summary>
         [JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AreaPerSpace { get; set; }
-    
+
         /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
         [JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int SpaceCount { get; set; } = 1;
-    
+
         /// <summary>The width of this space (typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
         [JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Width { get; set; }
-    
+
         /// <summary>The depth of this space (typically the shorter dimension — perpendicular to the side from which the space is accessed, like a corridor.)</summary>
         [JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Depth { get; set; }
-    
+
         /// <summary>What program type best matches this one?</summary>
         [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string HyparSpaceType { get; set; } = "unspecified";
-    
+
         /// <summary>How should this requirement be counted? 
         /// 
         /// Use "Item" for individual spaces (e.g. 3 conference rooms),
@@ -90,11 +90,11 @@ namespace Elements
         [JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProgramRequirementCountType CountType { get; set; } = Elements.ProgramRequirementCountType.Item;
-    
+
         /// <summary>The Area per Space times the Space Count</summary>
         [JsonProperty("Total Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TotalArea { get; set; }
-    
-    
+
+
     }
 }

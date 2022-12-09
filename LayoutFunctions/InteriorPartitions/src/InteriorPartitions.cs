@@ -1,6 +1,7 @@
 using Elements;
 using Elements.Geometry;
 using System.Collections.Generic;
+using System.Linq;
 using LayoutFunctionCommon;
 
 namespace InteriorPartitions
@@ -42,9 +43,12 @@ namespace InteriorPartitions
             }
 
             var output = new InteriorPartitionsOutputs();
-            foreach (var interiorPartitionCandidate in interiorPartitionCandidates)
+            var levelGroups = interiorPartitionCandidates.GroupBy(c => c.LevelTransform);
+            foreach (var levelGroup in levelGroups)
             {
-                WallGeneration.GenerateWalls(output.Model, interiorPartitionCandidate.WallCandidateLines, interiorPartitionCandidate.Height, interiorPartitionCandidate.LevelTransform);
+                var canidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
+                var height = levelGroup.FirstOrDefault()?.Height ?? 3;
+                WallGeneration.GenerateWalls(output.Model, canidates, height, levelGroup.Key);
             }
 
             return output;

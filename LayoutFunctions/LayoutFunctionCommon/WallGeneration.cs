@@ -14,6 +14,13 @@ namespace LayoutFunctionCommon
         private static double doorHeight = 2.1;
         private static double sideLightWidth = 0.4;
 
+        private static Dictionary<string, int> interiorPartitionTypePriority = new Dictionary<string, int>()
+        {
+            {"Solid", 3},
+            {"Partition", 2},
+            {"Glass", 1}
+        };
+
         private static Material wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
         private static Material glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
         private static Material mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
@@ -38,6 +45,125 @@ namespace LayoutFunctionCommon
                 return wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList();
             }
             return wallCandidateLines;
+        }
+
+        public static List<(Line line, string type)> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
+        {
+            var resultCandidates = new List<(Line line, string type)>();
+            var typedLines = interiorPartitionCandidates.SelectMany(c => c.WallCandidateLines)
+                            .Where(l => interiorPartitionTypePriority.Keys.Contains(l.type));
+            var collinearLinesGroups = GroupCollinearLines(typedLines);
+
+            foreach (var collinearLinesGroup in collinearLinesGroups)
+            {
+                if (collinearLinesGroup.Value.Count == 1)
+                {
+                    resultCandidates.Add(collinearLinesGroup.Value.First());
+                    continue;
+                }
+                var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.line.Length());
+                var dominantLineForGroup = linesOrderedByLength.First().line;
+                var domLineDir = dominantLineForGroup.Direction();
+
+                var orderEnds = new List<(double pos, bool isEnd, string type)>();
+                foreach (var linePair in collinearLinesGroup.Value)
+                {
+                    var line = linePair.line;
+                    var start = (line.Start - dominantLineForGroup.Start).Dot(domLineDir);
+                    var end = (line.End - dominantLineForGroup.Start).Dot(domLineDir);
+                    if (start > end)
+                    {
+                        var oldStart = start;
+                        start = end;
+                        end = oldStart;
+                    }
+
+                    orderEnds.Add((start, false, linePair.type));
+                    orderEnds.Add((end, true, linePair.type));
+                }
+
+                var totalCount = 0;
+                (double pos, bool isEnd, string type) segmentStart = default;
+                var endsOrdered = orderEnds.OrderBy(e => e.pos).ThenBy(e => e.isEnd);
+                var typePointsCounts = new Dictionary<string, int>();
+                foreach (var point in endsOrdered)
+                {
+                    var prevCount = totalCount;
+                    typePointsCounts.TryGetValue(point.type, out var typeCount);
+                    var delta = point.isEnd ? -1 : 1;
+                    totalCount += delta;
+                    typeCount += delta;
+                    typePointsCounts[point.type] = typeCount;
+                    if (totalCount == 1 && prevCount == 0) // begin segment
+                    {
+                        segmentStart = point;
+                    }
+                    else if (totalCount == 0) // end segment
+                    {
+                        AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, point);
+                    }
+                    else if (segmentStart.type.Equals(point.type))
+                    {
+                        if (typePointsCounts[segmentStart.type] == 0) // end segment with current type
+                        {
+                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, point);
+                            var nextType = typePointsCounts
+                                .FirstOrDefault(t => interiorPartitionTypePriority[t.Key] < interiorPartitionTypePriority[point.type]
+                                            && t.Value > 0);
+                            if (nextType.Key != null) // start segment with lower priority if it exists
+                            {
+                                segmentStart = (point.pos, false, nextType.Key);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // new type with higher priority starts
+                        if (interiorPartitionTypePriority[point.type] > interiorPartitionTypePriority[segmentStart.type])
+                        {
+                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, (point.pos, point.isEnd, segmentStart.type));
+                            segmentStart = point;
+                        }
+                    }
+                }
+            }
+
+            return resultCandidates;
+        }
+
+        private static Dictionary<Line, List<(Line line, string type)>> GroupCollinearLines(IEnumerable<(Line line, string type)> typedLines)
+        {
+            var collinearLinesGroups = new Dictionary<Line, List<(Line line, string type)>>();
+            foreach (var typedLine in typedLines)
+            {
+                var isLineAdded = false;
+                foreach (var linesGroup in collinearLinesGroups)
+                {
+                    if (typedLine.line.IsCollinear(linesGroup.Key))
+                    {
+                        linesGroup.Value.Add(typedLine);
+                        isLineAdded = true;
+                        break;
+                    }
+                }
+                if (!isLineAdded)
+                {
+                    collinearLinesGroups.Add(typedLine.line, new List<(Line line, string type)>() { typedLine });
+                }
+            }
+
+            return collinearLinesGroups;
+        }
+
+        private static void AddWallCandidateLine(List<(Line line, string type)> resultCandidates, Line dominantLineForGroup, Vector3 domLineDir, (double pos, bool isEnd, string type) segmentStart, (double pos, bool isEnd, string type) point)
+        {
+            var startPt = segmentStart.pos * domLineDir + dominantLineForGroup.Start;
+            var endPt = point.pos * domLineDir + dominantLineForGroup.Start;
+            if (startPt.DistanceTo(endPt) > 0.01)
+            {
+                var newLine = new Line(startPt, endPt);
+                resultCandidates.Add((newLine, point.type));
+            }
         }
 
         private static double CalculateTotalStorefrontHeight(double volumeHeight)
@@ -95,11 +221,11 @@ namespace LayoutFunctionCommon
                 }
                 else if (type == "Partition")
                 {
-                    model.AddElement(new StandardWall(line, 0.1, height, wallMat, levelTransform));
+                    model.AddElement(new StandardWall(lineProjected, 0.1, height, wallMat, levelTransform));
                 }
                 else if (type == "Glass")
                 {
-                    var primaryWall = new StandardWall(lineProjected, 0.05, height, glassMat, levelTransform);
+                    var primaryWall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
                     model.AddElement(primaryWall);
                     var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
