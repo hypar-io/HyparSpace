@@ -217,15 +217,15 @@ namespace LayoutFunctionCommon
 
                 if (type == "Solid")
                 {
-                    model.AddElement(new StandardWall(wallCandidate.line, 0.2, height, wallMat, levelTransform));
+                    model.AddElement(new StandardWall(lineProjected, 0.2, height, wallMat, levelTransform));
                 }
                 else if (type == "Partition")
                 {
-                    model.AddElement(new StandardWall(line, 0.1, height, wallMat, levelTransform));
+                    model.AddElement(new StandardWall(lineProjected, 0.1, height, wallMat, levelTransform));
                 }
                 else if (type == "Glass")
                 {
-                    var primaryWall = new StandardWall(lineProjected, 0.05, height, glassMat, levelTransform);
+                    var primaryWall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
                     model.AddElement(primaryWall);
                     var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
