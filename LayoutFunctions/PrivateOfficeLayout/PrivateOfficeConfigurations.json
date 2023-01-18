@@ -7,25 +7,28 @@
         "Z": 0.0
       },
       "Max": {
-        "X": 6.0765380516124488,
-        "Y": 5.8120877404938431,
+        "X": 6.076538051612449,
+        "Y": 5.812087740493843,
         "Z": 0.0
-      }
+      },
+      "Width": 6.076538051612449,
+      "Depth": 5.812087740493843
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Benching+-+Credenza+-+End.glb",
+        "Url": "https://hypar.io/user-static/586e32fc-bf4a-4e37-a00b-c714856133b4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
               -5.7731597280508124E-15,
               0.0,
-              0.91366008007201316,
+              0.9136600800720132,
               5.7731597280508124E-15,
               1.0,
               0.0,
-              5.7508174836956121,
+              5.750817483695612,
               0.0,
               0.0,
               1.0,
@@ -34,25 +37,25 @@
           }
         },
         "Anchor": {
-          "X": 3.0382690258062262,
-          "Y": 5.8120877404938431,
+          "X": 3.038269025806226,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Benching+-+Credenza+-+End.glb",
+        "Url": "https://hypar.io/user-static/586e32fc-bf4a-4e37-a00b-c714856133b4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
               -5.7731597280508124E-15,
               0.0,
-              3.0028946056571719,
+              3.002894605657172,
               5.7731597280508124E-15,
               1.0,
               0.0,
-              5.7589440114180688,
+              5.758944011418069,
               0.0,
               0.0,
               1.0,
@@ -61,21 +64,21 @@
           }
         },
         "Anchor": {
-          "X": 3.0382690258062262,
-          "Y": 5.8120877404938431,
+          "X": 3.038269025806226,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Tower+with+Door+and+Drawer+-+Specials+-+Right+-+Two+Adjustable+Shelves,+One+Box_File+Drawer+-+75''+H+-+Specials.glb",
+        "Url": "https://hypar.io/user-static/52041fb4-b155-40a9-b707-093b99d37481.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              6.0765381468022888,
+              6.076538146802289,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
@@ -88,25 +91,25 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Tower+with+Door+and+Drawer+-+Specials+-+Right+-+Two+Adjustable+Shelves,+One+Box_File+Drawer+-+75''+H+-+Specials.glb",
+        "Url": "https://hypar.io/user-static/52041fb4-b155-40a9-b707-093b99d37481.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              6.0765381468022888,
+              6.076538146802289,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              2.5802390282610919,
+              2.580239028261092,
               0.0,
               0.0,
               1.0,
@@ -115,25 +118,25 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Bookcase+-+Open.glb",
+        "Url": "https://hypar.io/user-static/29551648-da3d-49cd-b767-528086c2fd08.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open",
         "Transform": {
           "Matrix": {
             "Components": [
               -4.1633363423443386E-15,
               1.0,
               0.0,
-              6.0294217351551076,
+              6.029421735155108,
               -1.0,
               -4.1633363423443386E-15,
               0.0,
-              0.96630545794094469,
+              0.9663054579409447,
               0.0,
               0.0,
               1.0,
@@ -142,14 +145,14 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+Gesture+-+Work+Chair1+-+Wrapp+Back+-+4D+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/2f91e4ca-a77b-4899-9373-cd4f4d465737.glb",
+        "Name": "Steelcase - Seating - Gesture - Work Chair1 - Wrapp Back - 4D Arm_Caster",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -169,23 +172,23 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Gesture - Work Chair1 - Wrapp Back - 4D Arm_Caster"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Details+-+Lighting+-+Dash+Mini+LED+Lights+-+Freestanding.glb",
+        "Url": "https://hypar.io/user-static/d7799f54-8928-4058-8ec8-a97885f922aa.glb",
+        "Name": "Steelcase Details - Lighting - Dash Mini LED Lights - Freestanding",
         "Transform": {
           "Matrix": {
             "Components": [
-              -0.86602540378451753,
+              -0.8660254037845175,
               0.49999999999986344,
               0.0,
               5.29817589701759,
               -0.49999999999986344,
-              -0.86602540378451753,
+              -0.8660254037845175,
               0.0,
               2.733053117608728,
               0.0,
@@ -196,14 +199,14 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase Details - Lighting - Dash Mini LED Lights - Freestanding"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Flush+Mount+Bracket+-+Bracket.glb",
+        "Url": "https://hypar.io/user-static/79c547df-0c66-41c8-9b9f-ffebe7a09c8e.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket - Bracket",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -218,30 +221,30 @@
               0.0,
               0.0,
               1.0,
-              0.0099059429167216717
+              0.009905942916721672
             ]
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket - Bracket"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Column+Rectangular+Leg1+-+Without+Base.glb",
+        "Url": "https://hypar.io/user-static/e7aa0634-32e7-4727-9523-ecd469c120ce.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg1 - Without Base",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
-              4.0391410756981152,
-              -2.2204460492503131E-16,
+              4.039141075698115,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
-              2.8543742566010959,
+              2.854374256601096,
               0.0,
               0.0,
               1.0,
@@ -250,22 +253,22 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg1 - Without Base"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Glass+Modesty+Panel+-+For+End+Panel+-+48''+W+x+12''+H.glb",
+        "Url": "https://hypar.io/user-static/775bb50b-ebfa-4495-a351-e49b2c0ffdf3.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Glass Modesty Panel - For End Panel - 48'' W x 12'' H",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
               5.211952086020279,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
               2.9843867781123077,
@@ -277,52 +280,52 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Glass Modesty Panel - For End Panel - 48'' W x 12'' H"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Desk+-+Straight1+-+30''+D+x+66''+W.glb",
+        "Url": "https://hypar.io/user-static/126ee7ed-7aa3-46c2-b4ec-64d211d2f510.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight1 - 30'' D x 66'' W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
-              5.4876137090409891,
-              -2.2204460492503131E-16,
+              5.487613709040989,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
               2.6087740444129057,
               0.0,
               0.0,
               1.0,
-              9.2585139555012579E-14
+              9.258513955501258E-14
             ]
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight1 - 30'' D x 66'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Credenza+-+27.5H+x+24D+x+96W+-+Kneewell+-+30''+W+Box_File,+36''+W+Box_File,+30''+W+Kneewell.glb",
+        "Url": "https://hypar.io/user-static/42b32718-1ac5-467a-8a55-7efa9e8f08d6.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 96W - Kneewell - 30'' W Box_File, 36'' W Box_File, 30'' W Kneewell",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              5.4876137090410033,
+              5.487613709041003,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              5.0500877050397319,
+              5.050087705039732,
               0.0,
               0.0,
               1.0,
@@ -331,25 +334,25 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 96W - Kneewell - 30'' W Box_File, 36'' W Box_File, 30'' W Kneewell"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Blade+Accessory+Shelf+-+For+Use+with+Two+Side+Support+-+94+1_2''+W.glb",
+        "Url": "https://hypar.io/user-static/adca16b3-cf88-4f79-a0c2-c2aadc1adeec.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Blade Accessory Shelf - For Use with Two Side Support - 94 1_2'' W",
         "Transform": {
           "Matrix": {
             "Components": [
-              -6.2172489379008766E-15,
+              -6.217248937900877E-15,
               1.0,
               0.0,
-              6.0294465413755169,
+              6.029446541375517,
               -1.0,
-              -6.2172489379008766E-15,
+              -6.217248937900877E-15,
               0.0,
-              5.0500877050397319,
+              5.050087705039732,
               0.0,
               0.0,
               1.0,
@@ -358,14 +361,14 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Blade Accessory Shelf - For Use with Two Side Support - 94 1_2'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Hutch+Kit+-+Double+High+-+Blade+Accessory+Shelf+-+Single+Support+-+96''+W+-+Right.glb",
+        "Url": "https://hypar.io/user-static/8176cd31-b589-4f40-b3da-b5b02d8e1e90.glb",
+        "Name": "Steelcase - Elective Elements - Hutch Kit - Double High - Blade Accessory Shelf - Single Support - 96'' W - Right",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -385,48 +388,48 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Hutch Kit - Double High - Blade Accessory Shelf - Single Support - 96'' W - Right"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Straight+-+24''+D+-+96''+W.glb",
+        "Url": "https://hypar.io/user-static/16fc161d-fea2-4eed-b005-0be99fc94ccc.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24'' D - 96'' W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              6.0972137090409966,
+              6.097213709040997,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              5.0500877050397319,
+              5.050087705039732,
               0.0,
               0.0,
               1.0,
-              9.2585139555012579E-14
+              9.258513955501258E-14
             ]
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24'' D - 96'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Tower+with+Door+and+Drawer+-+Specials+-+Right+-+Two+Adjustable+Shelves,+One+Box_File+Drawer+-+75''+H+-+Specials.glb",
+        "Url": "https://hypar.io/user-static/52041fb4-b155-40a9-b707-093b99d37481.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              6.0765381468022888,
+              6.076538146802289,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
@@ -439,21 +442,21 @@
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Overhead+Cabinet+-+Double+High+-+15+3_4_+D+x+96_+W+-+Right.glb",
+        "Url": "https://hypar.io/user-static/2979eb7f-11b6-4a58-bd4a-bffbde9d47d5.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Double High - 15 3_4_ D x 96_ W - Right",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              6.0563705576146667,
+              6.056370557614667,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
@@ -461,30 +464,30 @@
               0.0,
               0.0,
               1.0,
-              -0.0051487466861084583
+              -0.005148746686108458
             ]
           }
         },
         "Anchor": {
-          "X": 6.0765380516124488,
-          "Y": 5.8120877404938431,
+          "X": 6.076538051612449,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Double High - 15 3_4_ D x 96_ W - Right"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Arm+-+Single+-+Two+Arm.glb",
+        "Url": "https://hypar.io/user-static/f72a0bfc-f09a-4491-84e2-77b8081fb85b.glb",
+        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm",
         "Transform": {
           "Matrix": {
             "Components": [
               -0.864645293496962,
               -0.502382838514168,
               0.0,
-              3.6448708687667661,
+              3.644870868766766,
               0.502382838514168,
               -0.864645293496962,
               0.0,
-              0.81343651666889683,
+              0.8134365166688968,
               0.0,
               0.0,
               1.0,
@@ -496,22 +499,22 @@
           "X": 4.200697940055683,
           "Y": 1.3175122280084905,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/ec545e8b-8a2c-4b4b-aa25-e44cb8b3c671.glb",
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W",
         "Transform": {
           "Matrix": {
             "Components": [
-              -0.079294981458081171,
+              -0.07929498145808117,
               -0.9968511954728061,
               0.0,
-              4.1087850747450148,
+              4.108785074745015,
               0.9968511954728061,
-              -0.079294981458081171,
+              -0.07929498145808117,
               0.0,
-              0.85228314368692226,
+              0.8522831436869223,
               0.0,
               0.0,
               1.0,
@@ -523,22 +526,22 @@
           "X": 4.200697940055683,
           "Y": 1.3175122280084905,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Arm+-+Single+-+Two+Arm.glb",
+        "Url": "https://hypar.io/user-static/f72a0bfc-f09a-4491-84e2-77b8081fb85b.glb",
+        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm",
         "Transform": {
           "Matrix": {
             "Components": [
-              -0.96663486221784856,
+              -0.9666348622178486,
               0.2561582384876207,
               0.0,
               5.38747354527813,
               -0.2561582384876207,
-              -0.96663486221784856,
+              -0.9666348622178486,
               0.0,
-              0.98637799909726143,
+              0.9863779990972614,
               0.0,
               0.0,
               1.0,
@@ -550,20 +553,20 @@
           "X": 4.200697940055683,
           "Y": 1.3175122280084905,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Stak+Ceramics+-+Sprout+Planter+Dock+-+Beige.glb",
+        "Url": "https://hypar.io/user-static/2a358877-e2b4-4f1f-9f5d-673c9887409d.glb",
+        "Name": "Stak Ceramics - Sprout Planter Dock - Beige",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.14408332460429207,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               5.29790469596599,
               0.0,
@@ -575,22 +578,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Stak Ceramics - Sprout Planter Dock - Beige"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Benjamin+Maier+Ceramics+-+Footless+Bowl+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/fcfbab4d-2706-4121-9b3e-e92451412ac8.glb",
+        "Name": "Benjamin Maier Ceramics - Footless Bowl - Accessories",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.27670132148474735,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               5.4031880669755665,
               0.0,
@@ -602,24 +605,24 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Benjamin Maier Ceramics - Footless Bowl - Accessories"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Bookcase+-+Narrow.glb",
+        "Url": "https://hypar.io/user-static/ecfef0a8-a6b9-431f-867f-d04016d083a4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Narrow",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
-              0.019840837962231461,
+              0.01984083796223146,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
-              5.1522736000917071,
+              5.152273600091707,
               0.0,
               0.0,
               1.0,
@@ -629,22 +632,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Narrow"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Benching+-+Credenza+-+End.glb",
+        "Url": "https://hypar.io/user-static/586e32fc-bf4a-4e37-a00b-c714856133b4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.0020845533761075785,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               3.09651847637074,
               0.0,
@@ -656,22 +659,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Benching+-+Credenza+-+End.glb",
+        "Url": "https://hypar.io/user-static/586e32fc-bf4a-4e37-a00b-c714856133b4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.010211081098557173,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               1.0072839507855826,
               0.0,
@@ -683,22 +686,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Bookcase+-+Open.glb",
+        "Url": "https://hypar.io/user-static/29551648-da3d-49cd-b767-528086c2fd08.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.019840837962238567,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               0.05190548332115319,
               0.0,
@@ -710,24 +713,24 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Blu+Dot+-+2D3D+Medium+Bowl+-+12.46_+x+10.97_.glb",
+        "Url": "https://hypar.io/user-static/434bb278-83ef-48e3-91d6-f170610627a2.glb",
+        "Name": "Blu Dot - 2D3D Medium Bowl - 12.46_ x 10.97_",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
-              0.15480047743605141,
+              0.1548004774360514,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
-              0.72266685581476664,
+              0.7226668558147666,
               0.0,
               0.0,
               1.0,
@@ -737,40 +740,40 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Blu Dot - 2D3D Medium Bowl - 12.46_ x 10.97_"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Roger+Stevens+-+Gleewood+-+20.7_+x+10.51_.glb",
+        "Url": "https://hypar.io/user-static/1ed38ba8-2794-4b17-893a-f46edea9da75.glb",
+        "Name": "Roger Stevens - Gleewood - 20.7_ x 10.51_",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.23271098790558398,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               1.5903347337150906,
               0.0,
               0.0,
               1.0,
-              0.69083358477354428
+              0.6908335847735443
             ]
           }
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 5.8120877404938431,
+          "Y": 5.812087740493843,
           "Z": 0.0
-        },
-        "Name": "Roger Stevens - Gleewood - 20.7_ x 10.51_"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Potrero415+Light+-+Table+-+Standing+Height+-+Rectangular+-+36D+x+96W.glb",
+        "Url": "https://hypar.io/user-static/451cda9c-2cc6-4b4c-85f8-de25fc3a30ee.glb",
+        "Name": "Steelcase Coalesse - Potrero415 Light - Table - Standing Height - Rectangular - 36D x 96W",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -781,7 +784,7 @@
               1.0,
               1.1657341758564144E-15,
               0.0,
-              1.8635827639834239,
+              1.863582763983424,
               0.0,
               0.0,
               1.0,
@@ -790,25 +793,25 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Potrero415 Light - Table - Standing Height - Rectangular - 36D x 96W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
-              -4.3968233247215878E-15,
+              -4.396823324721588E-15,
               1.0,
               0.0,
               2.4692996678274604,
               -1.0,
-              -4.3968233247215878E-15,
+              -4.396823324721588E-15,
               0.0,
-              2.3717560212246029,
+              2.371756021224603,
               0.0,
               0.0,
               1.0,
@@ -817,25 +820,25 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
-              -4.3968233247215878E-15,
+              -4.396823324721588E-15,
               1.0,
               0.0,
               2.4692996678275314,
               -1.0,
-              -4.3968233247215878E-15,
+              -4.396823324721588E-15,
               0.0,
-              3.1230171292050111,
+              3.123017129205011,
               0.0,
               0.0,
               1.0,
@@ -844,25 +847,25 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
               -4.3853809472693675E-15,
               1.0,
               0.0,
-              2.4692996678275669,
+              2.469299667827567,
               -1.0,
               -4.3853809472693675E-15,
               0.0,
-              3.8578272640179678,
+              3.857827264017968,
               0.0,
               0.0,
               1.0,
@@ -871,14 +874,14 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -898,14 +901,14 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -925,14 +928,14 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Enea+Altzo943+-+Stool+-+Seat.glb",
+        "Url": "https://hypar.io/user-static/2e339f31-a33b-48b2-8b1e-df6ed20ca223.glb",
+        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -952,13 +955,14 @@
           }
         },
         "Anchor": {
-          "X": 1.9514754232187741,
+          "X": 1.951475423218774,
           "Y": 3.1675069906471105,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Enea Altzo943 - Stool - Seat"
+        }
       }
-    ]
+    ],
+    "Width": 6.076538051612449,
+    "Depth": 5.812087740493843
   },
   "Configuration B": {
     "CellBoundary": {
@@ -969,21 +973,24 @@
       },
       "Max": {
         "X": 4.0340651815651825,
-        "Y": 4.7614546592611111,
+        "Y": 4.761454659261111,
         "Z": 0.0
-      }
+      },
+      "Width": 4.0340651815651825,
+      "Depth": 4.761454659261111
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Coalesse+-+Bob+-+Seating+-+Lounge+Chair+-+Swivel+Base,+Adjustable+Headrest.glb",
+        "Url": "https://hypar.io/user-static/b5c8d765-3b60-4185-b8b6-fe6da9420ba4.glb",
+        "Name": "Steelcase Coalesse - Bob - Seating - Lounge Chair - Swivel Base, Adjustable Headrest",
         "Transform": {
           "Matrix": {
             "Components": [
               0.875697109517237,
-              -0.48286082092374849,
+              -0.4828608209237485,
               0.0,
               1.2805754368502704,
-              0.48286082092374849,
+              0.4828608209237485,
               0.875697109517237,
               0.0,
               3.6436413181996636,
@@ -996,48 +1003,48 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Bob - Seating - Lounge Chair - Swivel Base, Adjustable Headrest"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Coalesse+-+Await+-+Table+-+Freestanding+-+25''+H.glb",
+        "Url": "https://hypar.io/user-static/95a04ff8-3c70-40c7-8077-66c626e0a9f0.glb",
+        "Name": "Steelcase Coalesse - Await - Table - Freestanding - 25'' H",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
               1.7439881380011784,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
-              4.2729927468321494,
+              4.272992746832149,
               0.0,
               0.0,
               1.0,
-              -9.0926999263274414E-14
+              -9.092699926327441E-14
             ]
           }
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Await - Table - Freestanding - 25'' H"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Coalesse+-+Bindu+-+Seating+-+Guest+Chair+-+Low+Back.glb",
+        "Url": "https://hypar.io/user-static/9223c91f-4270-4f4d-8dea-ea1191523b6f.glb",
+        "Name": "Steelcase Coalesse - Bindu - Seating - Guest Chair - Low Back",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              2.9976021664879219E-15,
+              2.997602166487922E-15,
               0.0,
               3.014509246035761,
-              -2.9976021664879219E-15,
+              -2.997602166487922E-15,
               1.0,
               0.0,
               1.5081948999304768,
@@ -1050,21 +1057,21 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Bindu - Seating - Guest Chair - Low Back"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Coalesse+-+Bindu+-+Seating+-+Guest+Chair+-+Low+Back.glb",
+        "Url": "https://hypar.io/user-static/9223c91f-4270-4f4d-8dea-ea1191523b6f.glb",
+        "Name": "Steelcase Coalesse - Bindu - Seating - Guest Chair - Low Back",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              3.0090445439401422E-15,
+              3.009044543940142E-15,
               0.0,
-              2.2460570500041932,
-              -3.0090445439401422E-15,
+              2.246057050004193,
+              -3.009044543940142E-15,
               1.0,
               0.0,
               1.5189795174419705,
@@ -1077,13 +1084,13 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Bindu - Seating - Guest Chair - Low Back"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Overhead+Cabinet+-+Double+High+-+15+3_4_+D+x+96_+W+-+Right.glb",
+        "Url": "https://hypar.io/user-static/2979eb7f-11b6-4a58-bd4a-bffbde9d47d5.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Double High - 15 3_4_ D x 96_ W - Right",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1098,30 +1105,30 @@
               0.0,
               0.0,
               1.0,
-              -0.0051487466861084583
+              -0.005148746686108458
             ]
           }
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Double High - 15 3_4_ D x 96_ W - Right"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Tower+with+Door+and+Drawer+-+Specials+-+Right+-+Two+Adjustable+Shelves,+One+Box_File+Drawer+-+75''+H+-+Specials.glb",
+        "Url": "https://hypar.io/user-static/52041fb4-b155-40a9-b707-093b99d37481.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              4.0265609816820316,
+              4.026560981682032,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              4.7539503287339793,
+              4.753950328733979,
               0.0,
               0.0,
               1.0,
@@ -1131,51 +1138,51 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Tower with Door and Drawer - Specials - Right - Two Adjustable Shelves, One Box_File Drawer - 75'' H - Specials"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Straight+-+24''+D+-+96''+W.glb",
+        "Url": "https://hypar.io/user-static/16fc161d-fea2-4eed-b005-0be99fc94ccc.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24'' D - 96'' W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              4.0472365439207323,
+              4.047236543920732,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              3.9919503287340108,
+              3.991950328734011,
               0.0,
               0.0,
               1.0,
-              9.2585139555012579E-14
+              9.258513955501258E-14
             ]
           }
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24'' D - 96'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Hutch+Kit+-+Double+High+-+Blade+Accessory+Shelf+-+Single+Support+-+96''+W+-+Right.glb",
+        "Url": "https://hypar.io/user-static/8176cd31-b589-4f40-b3da-b5b02d8e1e90.glb",
+        "Name": "Steelcase - Elective Elements - Hutch Kit - Double High - Blade Accessory Shelf - Single Support - 96'' W - Right",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.3877787807814453E-15,
               1.0,
               0.0,
-              3.9817774050905328,
+              3.981777405090533,
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              4.0110003287339788,
+              4.011000328733979,
               0.0,
               0.0,
               1.0,
@@ -1185,24 +1192,24 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Hutch Kit - Double High - Blade Accessory Shelf - Single Support - 96'' W - Right"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Blade+Accessory+Shelf+-+For+Use+with+Two+Side+Support+-+94+1_2''+W.glb",
+        "Url": "https://hypar.io/user-static/adca16b3-cf88-4f79-a0c2-c2aadc1adeec.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Blade Accessory Shelf - For Use with Two Side Support - 94 1_2'' W",
         "Transform": {
           "Matrix": {
             "Components": [
-              -6.2172489379008766E-15,
+              -6.217248937900877E-15,
               1.0,
               0.0,
               3.9794693762552598,
               -1.0,
-              -6.2172489379008766E-15,
+              -6.217248937900877E-15,
               0.0,
-              3.9919503287340108,
+              3.991950328734011,
               0.0,
               0.0,
               1.0,
@@ -1212,13 +1219,13 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Blade Accessory Shelf - For Use with Two Side Support - 94 1_2'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Credenza+-+27.5H+x+24D+x+96W+-+Kneewell+-+30''+W+Box_File,+36''+W+Box_File,+30''+W+Kneewell.glb",
+        "Url": "https://hypar.io/user-static/42b32718-1ac5-467a-8a55-7efa9e8f08d6.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 96W - Kneewell - 30'' W Box_File, 36'' W Box_File, 30'' W Kneewell",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1229,7 +1236,7 @@
               -1.0,
               -1.3877787807814453E-15,
               0.0,
-              3.9919503287340108,
+              3.991950328734011,
               0.0,
               0.0,
               1.0,
@@ -1239,48 +1246,48 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 96W - Kneewell - 30'' W Box_File, 36'' W Box_File, 30'' W Kneewell"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Desk+-+Straight1+-+30''+D+x+66''+W.glb",
+        "Url": "https://hypar.io/user-static/126ee7ed-7aa3-46c2-b4ec-64d211d2f510.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight1 - 30'' D x 66'' W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
-              3.4376365439207248,
-              -2.2204460492503131E-16,
+              3.437636543920725,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
               1.550636668107185,
               0.0,
               0.0,
               1.0,
-              9.2585139555012579E-14
+              9.258513955501258E-14
             ]
           }
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight1 - 30'' D x 66'' W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Glass+Modesty+Panel+-+For+End+Panel+-+48''+W+x+12''+H.glb",
+        "Url": "https://hypar.io/user-static/775bb50b-ebfa-4495-a351-e49b2c0ffdf3.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Glass Modesty Panel - For End Panel - 48'' W x 12'' H",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
               3.1619749209000148,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
               1.926249401806587,
@@ -1293,21 +1300,21 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Glass Modesty Panel - For End Panel - 48'' W x 12'' H"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Column+Rectangular+Leg1+-+Without+Base.glb",
+        "Url": "https://hypar.io/user-static/e7aa0634-32e7-4727-9523-ecd469c120ce.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg1 - Without Base",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              2.2204460492503131E-16,
+              2.220446049250313E-16,
               0.0,
               1.9891639105778545,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               -1.0,
               0.0,
               1.7962368802953752,
@@ -1320,13 +1327,13 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg1 - Without Base"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Flush+Mount+Bracket+-+Bracket.glb",
+        "Url": "https://hypar.io/user-static/79c547df-0c66-41c8-9b9f-ffebe7a09c8e.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket - Bracket",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1341,28 +1348,28 @@
               0.0,
               0.0,
               1.0,
-              0.0099059429167216717
+              0.009905942916721672
             ]
           }
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket - Bracket"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Details+-+Lighting+-+Dash+Mini+LED+Lights+-+Freestanding.glb",
+        "Url": "https://hypar.io/user-static/d7799f54-8928-4058-8ec8-a97885f922aa.glb",
+        "Name": "Steelcase Details - Lighting - Dash Mini LED Lights - Freestanding",
         "Transform": {
           "Matrix": {
             "Components": [
-              -0.86602540378451753,
+              -0.8660254037845175,
               0.49999999999986344,
               0.0,
               3.2481987318973253,
               -0.49999999999986344,
-              -0.86602540378451753,
+              -0.8660254037845175,
               0.0,
               1.6749157413030074,
               0.0,
@@ -1374,20 +1381,20 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase Details - Lighting - Dash Mini LED Lights - Freestanding"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+Gesture+-+Work+Chair1+-+Wrapp+Back+-+4D+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/2f91e4ca-a77b-4899-9373-cd4f4d465737.glb",
+        "Name": "Steelcase - Seating - Gesture - Work Chair1 - Wrapp Back - 4D Arm_Caster",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
               -2.221031876961603E-15,
               0.0,
-              2.5565342671059028,
+              2.556534267105903,
               2.221031876961603E-15,
               1.0,
               0.0,
@@ -1401,12 +1408,13 @@
         },
         "Anchor": {
           "X": 4.0340651815651825,
-          "Y": 4.7614546592611111,
+          "Y": 4.761454659261111,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Gesture - Work Chair1 - Wrapp Back - 4D Arm_Caster"
+        }
       }
-    ]
+    ],
+    "Width": 4.0340651815651825,
+    "Depth": 4.761454659261111
   },
   "Configuration C": {
     "CellBoundary": {
@@ -1419,19 +1427,22 @@
         "X": 2.6642306660990878,
         "Y": 3.6610950020496427,
         "Z": 0.0
-      }
+      },
+      "Width": 2.6642306660990878,
+      "Depth": 3.6610950020496427
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Desk+-+Straight+-+30D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/aa14a5d0-1120-4d45-963a-b4f183dd789c.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight - 30D x 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -3.9412917374193057E-15,
+              -3.941291737419306E-15,
               0.0,
               1.8285459994918103,
-              3.9412917374193057E-15,
+              3.941291737419306E-15,
               -1.0,
               0.0,
               1.0505868302209072,
@@ -1443,22 +1454,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Desk - Straight - 30D x 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Bridge+-+24D+x+48W.glb",
+        "Url": "https://hypar.io/user-static/4ecec419-2ca8-4d3b-9725-93f4d4baebe1.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Bridge - 24D x 48W",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
               -1.7763568394002505E-15,
-              -6.7168492989821971E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
               3.031786830220919,
@@ -1470,22 +1481,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Bridge - 24D x 48W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Straight+-+24D+-+72W.glb",
+        "Url": "https://hypar.io/user-static/d9d8ec2a-eb54-4486-93c7-e86ec757b996.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24D - 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
               0.0,
-              -6.7168492989821971E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
               3.6413868307291137,
@@ -1497,22 +1508,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24D - 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Plinth+Base+-+Wardrobe+-+65+5_8H+x+24D+x+12W+-+Right.glb",
+        "Url": "https://hypar.io/user-static/65839f70-e09f-4c20-b49e-97b13de83ce1.glb",
+        "Name": "Steelcase - Elective Elements - Plinth Base - Wardrobe - 65 5_8H x 24D x 12W - Right",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
               1.8285459999999478,
-              -6.7168492989821971E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
               3.6610950020496587,
@@ -1524,21 +1535,21 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Plinth Base - Wardrobe - 65 5_8H x 24D x 12W - Right"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Plinth+Base+-+Pedestal+-+2+High+Lateral+File+-+23+1_4D+x+30W.glb",
+        "Url": "https://hypar.io/user-static/59b72fb4-93aa-4de9-936c-396496bee67e.glb",
+        "Name": "Steelcase - Elective Elements - Plinth Base - Pedestal - 2 High Lateral File - 23 1_4D x 30W",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
               1.0269562977782695E-13,
               0.0,
-              1.0667999999999971,
+              1.066799999999997,
               -1.0269562977782695E-13,
               1.0,
               0.0,
@@ -1546,54 +1557,54 @@
               0.0,
               0.0,
               1.0,
-              -4.0945913326595473E-14
+              -4.094591332659547E-14
             ]
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Plinth Base - Pedestal - 2 High Lateral File - 23 1_4D x 30W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Plinth+Base+-+Pedestal+-+Mobile+-+Wood+Top.glb",
+        "Url": "https://hypar.io/user-static/4fa22a85-4d3f-42c2-bc35-45283d969f45.glb",
+        "Name": "Steelcase - Elective Elements - Plinth Base - Pedestal - Mobile - Wood Top",
         "Transform": {
           "Matrix": {
             "Components": [
-              0.99619469809173433,
-              -0.087155742747786327,
+              0.9961946980917343,
+              -0.08715574274778633,
               0.0,
               0.47492750722288335,
-              0.087155742747786327,
-              0.99619469809173433,
+              0.08715574274778633,
+              0.9961946980917343,
               0.0,
               3.0317868302209154,
               0.0,
               0.0,
               1.0,
-              -4.0945913326595473E-14
+              -4.094591332659547E-14
             ]
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Plinth Base - Pedestal - Mobile - Wood Top"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+Gesture+-+Work+Chair+-+Wrapp+Back+-+4D+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/7ff773a3-ab62-4703-adc5-198f450be2eb.glb",
+        "Name": "Steelcase - Seating - Gesture - Work Chair - Wrapp Back - 4D Arm_Caster",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              7.4384942649885488E-15,
+              7.438494264988549E-15,
               0.0,
               1.16249816446944,
-              -7.4384942649885488E-15,
+              -7.438494264988549E-15,
               1.0,
               0.0,
               1.8125868302208614,
@@ -1605,22 +1616,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Gesture - Work Chair - Wrapp Back - 4D Arm_Caster"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Plinth+Base+-+Free+Support+End+Panel+-+30D.glb",
+        "Url": "https://hypar.io/user-static/1e9c64a9-36ca-4e98-9ff4-395eb301c9d8.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Plinth Base - Free Support End Panel - 30D",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
-              -5.3290705182007514E-15,
-              -6.7168492989821971E-15,
+              -5.329070518200751E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
               1.8328306309830138,
@@ -1632,22 +1643,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Plinth Base - Free Support End Panel - 30D"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Modesty+Panel+-+12H+For+Desk+-+54W.glb",
+        "Url": "https://hypar.io/user-static/e76e2c31-597c-434c-bc0d-18077ba42224.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Modesty Panel - 12H For Desk - 54W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -3.9412917374193057E-15,
+              -3.941291737419306E-15,
               0.0,
               1.4939696793370292,
-              3.9412917374193057E-15,
+              3.941291737419306E-15,
               -1.0,
               0.0,
               1.2868647853755837,
@@ -1659,22 +1670,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Modesty Panel - 12H For Desk - 54W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Plinth+Base+-+End+Panel+-+L+Shape++-+27+1_2H+-+Left+-+23+1_4D.glb",
+        "Url": "https://hypar.io/user-static/a97f5491-fb33-4931-8c4c-4619d32443ad.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Plinth Base - End Panel - L Shape  - 27 1_2H - Left - 23 1_4D",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
               0.0,
-              -6.7168492989821971E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
               3.6401168307291156,
@@ -1686,22 +1697,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Plinth Base - End Panel - L Shape  - 27 1_2H - Left - 23 1_4D"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Overhead+Cabinet+-+Single+High+15H+-+Sliding+Door+-+15+3_4D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/f4b48dcc-4e0d-46d4-bc19-4d2752f93d9b.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Single High 15H - Sliding Door - 15 3_4D x 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.8278716014447127E-15,
+              6.827871601444713E-15,
               0.0,
-              -0.00025400000005149082,
-              -6.8278716014447127E-15,
+              -0.0002540000000514908,
+              -6.827871601444713E-15,
               1.0,
               0.0,
               3.6610950020496693,
@@ -1713,25 +1724,25 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Overhead Cabinet - Single High 15H - Sliding Door - 15 3_4D x 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Storage+-+Wall+Mounted+-+Tackboard+-+21+1_2H+x+72W.glb",
+        "Url": "https://hypar.io/user-static/a0efc91e-3903-405a-a378-dbf414411b73.glb",
+        "Name": "Steelcase - Elective Elements - Storage - Wall Mounted - Tackboard - 21 1_2H x 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               1.0,
-              6.7168492989821971E-15,
+              6.716849298982197E-15,
               0.0,
               0.0,
-              -6.7168492989821971E-15,
+              -6.716849298982197E-15,
               1.0,
               0.0,
-              3.6610950020496409,
+              3.661095002049641,
               0.0,
               0.0,
               1.0,
@@ -1740,14 +1751,14 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Storage - Wall Mounted - Tackboard - 21 1_2H x 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Worktool+-+Lighting+-+Dash+Mini+LED+Light+-+Freestanding.glb",
+        "Url": "https://hypar.io/user-static/4fb95696-08fb-4c83-b518-100e6067612f.glb",
+        "Name": "Steelcase - Worktool - Lighting - Dash Mini LED Light - Freestanding",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1758,7 +1769,7 @@
               1.0,
               2.1649348980190553E-15,
               0.0,
-              1.5097807309380711,
+              1.509780730938071,
               0.0,
               0.0,
               1.0,
@@ -1767,22 +1778,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Worktool - Lighting - Dash Mini LED Light - Freestanding"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+Support+-+Column+Rectangular+Leg+-+Without+Base.glb",
+        "Url": "https://hypar.io/user-static/f569e165-5cbd-4de8-b3ee-c5848fc88ff4.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg - Without Base",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -3.9412917374193057E-15,
+              -3.941291737419306E-15,
               0.0,
               1.691655749513842,
-              3.9412917374193057E-15,
+              3.941291737419306E-15,
               -1.0,
               0.0,
               1.2868647853755837,
@@ -1794,22 +1805,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface Support - Column Rectangular Leg - Without Base"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+QiVi+428+Series+-+Sled-Base+Multi-Use+Chairs+-+Upholstered+Seat.glb",
+        "Url": "https://hypar.io/user-static/6cba217b-69cf-42b2-a5a4-a76c90b5f533.glb",
+        "Name": "Steelcase - Seating - QiVi 428 Series - Sled-Base Multi-Use Chairs - Upholstered Seat",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -3.9412917374193057E-15,
+              -3.941291737419306E-15,
               0.0,
               1.2864475022123862,
-              3.9412917374193057E-15,
+              3.941291737419306E-15,
               -1.0,
               0.0,
               1.0505868302209107,
@@ -1821,22 +1832,22 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - QiVi 428 Series - Sled-Base Multi-Use Chairs - Upholstered Seat"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+QiVi+428+Series+-+Sled-Base+Multi-Use+Chairs+-+Upholstered+Seat.glb",
+        "Url": "https://hypar.io/user-static/6cba217b-69cf-42b2-a5a4-a76c90b5f533.glb",
+        "Name": "Steelcase - Seating - QiVi 428 Series - Sled-Base Multi-Use Chairs - Upholstered Seat",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -3.9412917374193057E-15,
+              -3.941291737419306E-15,
               0.0,
               0.44593973096501927,
-              3.9412917374193057E-15,
+              3.941291737419306E-15,
               -1.0,
               0.0,
               1.0505868302209107,
@@ -1848,13 +1859,14 @@
           }
         },
         "Anchor": {
-          "X": -9.2370555648813024E-14,
+          "X": -9.237055564881302E-14,
           "Y": 3.6610950020496453,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - QiVi 428 Series - Sled-Base Multi-Use Chairs - Upholstered Seat"
+        }
       }
-    ]
+    ],
+    "Width": 2.6642306660990878,
+    "Depth": 3.6610950020496427
   },
   "Configuration D": {
     "CellBoundary": {
@@ -1865,20 +1877,23 @@
       },
       "Max": {
         "X": 3.8999936526700694,
-        "Y": 4.1530320738933888,
+        "Y": 4.153032073893389,
         "Z": 0.0
-      }
+      },
+      "Width": 3.8999936526700694,
+      "Depth": 4.153032073893389
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Leg+Base+-+Credenza+-+27.5H+x+24D+x+60W+-+Two+15W+Box_File,+30W+Box_File.glb",
+        "Url": "https://hypar.io/user-static/e31ce80b-9b51-463a-83f4-078a4a8b73af.glb",
+        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 60W - Two 15W Box_File, 30W Box_File",
         "Transform": {
           "Matrix": {
             "Components": [
               -8.326672684688676E-16,
               -1.0,
               0.0,
-              0.81053282858888664,
+              0.8105328285888866,
               1.0,
               -8.326672684688676E-16,
               0.0,
@@ -1886,19 +1901,19 @@
               0.0,
               0.0,
               1.0,
-              -4.0945913326595473E-14
+              -4.094591332659547E-14
             ]
           }
         },
         "Anchor": {
-          "X": 3.5527136788005009E-15,
-          "Y": 4.1530320738933888,
+          "X": 3.552713678800501E-15,
+          "Y": 4.153032073893389,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Leg Base - Credenza - 27.5H x 24D x 60W - Two 15W Box_File, 30W Box_File"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Worksurface+-+Straight+-+24D+-+60W.glb",
+        "Url": "https://hypar.io/user-static/1970e6eb-6287-4131-9828-09a343315f5f.glb",
+        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24D - 60W",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1918,22 +1933,22 @@
           }
         },
         "Anchor": {
-          "X": 3.5527136788005009E-15,
-          "Y": 4.1530320738933888,
+          "X": 3.552713678800501E-15,
+          "Y": 4.153032073893389,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Worksurface - Straight - 24D - 60W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Mackinac+-+Foundation+with+Tower+-+72W.glb",
+        "Url": "https://hypar.io/user-static/68a454a0-713a-47d1-974f-95b7f67aaa84.glb",
+        "Name": "Steelcase - Mackinac - Foundation with Tower - 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -9.4368957093138286E-16,
+              -9.436895709313829E-16,
               0.0,
-              3.8970749011725481,
-              9.4368957093138286E-16,
+              3.897074901172548,
+              9.436895709313829E-16,
               -1.0,
               0.0,
               0.1239496830689597,
@@ -1945,22 +1960,22 @@
           }
         },
         "Anchor": {
-          "X": 3.8999936526700658,
+          "X": 3.899993652670066,
           "Y": 0.0,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Mackinac - Foundation with Tower - 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Mackinac+-+Foundation+with+Tower+-+72W.glb",
+        "Url": "https://hypar.io/user-static/68a454a0-713a-47d1-974f-95b7f67aaa84.glb",
+        "Name": "Steelcase - Mackinac - Foundation with Tower - 72W",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -9.4368957093138286E-16,
+              -9.436895709313829E-16,
               0.0,
               3.9158751016542155,
-              9.4368957093138286E-16,
+              9.436895709313829E-16,
               -1.0,
               0.0,
               3.7930236254082956,
@@ -1975,11 +1990,11 @@
           "X": 3.8999936526700694,
           "Y": 4.153032073893387,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Mackinac - Foundation with Tower - 72W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Mackinac+-+Worksurface+-+Personal+-+Perpendicular+-+30D+-+66W.glb",
+        "Url": "https://hypar.io/user-static/b443ab1d-0cf8-4813-ab6c-5996831dd3cb.glb",
+        "Name": "Steelcase - Mackinac - Worksurface - Personal - Perpendicular - 30D - 66W",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2002,11 +2017,11 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Mackinac - Worksurface - Personal - Perpendicular - 30D - 66W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Mackinac+-+Worksurface+-+Personal+-+Perpendicular+-+30D+-+66W.glb",
+        "Url": "https://hypar.io/user-static/b443ab1d-0cf8-4813-ab6c-5996831dd3cb.glb",
+        "Name": "Steelcase - Mackinac - Worksurface - Personal - Perpendicular - 30D - 66W",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2029,11 +2044,11 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Mackinac - Worksurface - Personal - Perpendicular - 30D - 66W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered+-+Headrest.glb",
+        "Url": "https://hypar.io/user-static/0c545b1a-041d-4f7a-975d-c1930df69cd3.glb",
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered - Headrest",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2056,18 +2071,18 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered - Headrest"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered+-+Headrest.glb",
+        "Url": "https://hypar.io/user-static/0c545b1a-041d-4f7a-975d-c1930df69cd3.glb",
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered - Headrest",
         "Transform": {
           "Matrix": {
             "Components": [
               -8.326672684688676E-16,
               -1.0,
               0.0,
-              3.0944704138010621,
+              3.094470413801062,
               1.0,
               -8.326672684688676E-16,
               0.0,
@@ -2083,20 +2098,20 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered - Headrest"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Flex+-+Screen+-+Freestanding+-+47H.glb",
+        "Url": "https://hypar.io/user-static/77a303c6-041d-4bd5-81eb-c262b15ed5e3.glb",
+        "Name": "Steelcase - Flex - Screen - Freestanding - 47H",
         "Transform": {
           "Matrix": {
             "Components": [
-              -0.92717531817426158,
+              -0.9271753181742616,
               0.3746277210357728,
               0.0,
               3.0085814992849436,
               -0.3746277210357728,
-              -0.92717531817426158,
+              -0.9271753181742616,
               0.0,
               2.1114932076761623,
               0.0,
@@ -2110,19 +2125,19 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Flex - Screen - Freestanding - 47H"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Flex+-+Screen+-+Freestanding+-+47H.glb",
+        "Url": "https://hypar.io/user-static/77a303c6-041d-4bd5-81eb-c262b15ed5e3.glb",
+        "Name": "Steelcase - Flex - Screen - Freestanding - 47H",
         "Transform": {
           "Matrix": {
             "Components": [
               -1.0,
-              -9.4368957093138286E-16,
+              -9.436895709313829E-16,
               0.0,
               3.9073564579677154,
-              9.4368957093138286E-16,
+              9.436895709313829E-16,
               -1.0,
               0.0,
               2.1183512076761652,
@@ -2137,11 +2152,11 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Flex - Screen - Freestanding - 47H"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+-+Elective+Elements+-+Shelf+-+Floating+with+Back+Panel+-+12D+-+96W+x+7H.glb",
+        "Url": "https://hypar.io/user-static/7d04b9ac-5718-4003-8d5e-4457c349af78.glb",
+        "Name": "Steelcase - Elective Elements - Shelf - Floating with Back Panel - 12D - 96W x 7H",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2164,10 +2179,11 @@
           "X": 3.8999936526700676,
           "Y": 2.0765160369466944,
           "Z": 0.0
-        },
-        "Name": "Steelcase - Elective Elements - Shelf - Floating with Back Panel - 12D - 96W x 7H"
+        }
       }
-    ]
+    ],
+    "Width": 3.8999936526700694,
+    "Depth": 4.153032073893389
   },
   "Configuration E": {
     "CellBoundary": {
@@ -2177,23 +2193,26 @@
         "Z": 0.0
       },
       "Max": {
-        "X": 4.4234839829445747,
-        "Y": 3.5512289278079869,
+        "X": 4.423483982944575,
+        "Y": 3.551228927807987,
         "Z": 0.0
-      }
+      },
+      "Width": 4.423483982944575,
+      "Depth": 3.551228927807987
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Benching+-+Credenza+-+End.glb",
+        "Url": "https://hypar.io/user-static/586e32fc-bf4a-4e37-a00b-c714856133b4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.010211081098555397,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               1.007283950785629,
               0.0,
@@ -2205,22 +2224,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Benching - Credenza - End"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Bookcase+-+Open.glb",
+        "Url": "https://hypar.io/user-static/29551648-da3d-49cd-b767-528086c2fd08.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.019840837962238567,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               0.0519054833211996,
               0.0,
@@ -2232,24 +2251,24 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Open"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Bookcase+-+Narrow.glb",
+        "Url": "https://hypar.io/user-static/ecfef0a8-a6b9-431f-867f-d04016d083a4.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Narrow",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.019840837962229685,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
-              3.0524342691221218,
+              3.052434269122122,
               0.0,
               0.0,
               1.0,
@@ -2259,22 +2278,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Bookcase - Narrow"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Blu+Dot+-+2D3D+Medium+Bowl+-+12.46_+x+10.97_.glb",
+        "Url": "https://hypar.io/user-static/434bb278-83ef-48e3-91d6-f170610627a2.glb",
+        "Name": "Blu Dot - 2D3D Medium Bowl - 12.46_ x 10.97_",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.15480047743605319,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               0.722666855814813,
               0.0,
@@ -2286,22 +2305,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "Blu Dot - 2D3D Medium Bowl - 12.46_ x 10.97_"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Stak+Ceramics+-+Sprout+Planter+Dock+-+Beige.glb",
+        "Url": "https://hypar.io/user-static/2a358877-e2b4-4f1f-9f5d-673c9887409d.glb",
+        "Name": "Stak Ceramics - Sprout Planter Dock - Beige",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.14408332460429385,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               3.1980653649964044,
               0.0,
@@ -2313,22 +2332,22 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "Stak Ceramics - Sprout Planter Dock - Beige"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Benjamin+Maier+Ceramics+-+Footless+Bowl+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/fcfbab4d-2706-4121-9b3e-e92451412ac8.glb",
+        "Name": "Benjamin Maier Ceramics - Footless Bowl - Accessories",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
-              0.27670132148474558,
+              0.2767013214847456,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               3.3033487360059812,
               0.0,
@@ -2340,51 +2359,51 @@
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "Benjamin Maier Ceramics - Footless Bowl - Accessories"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Roger+Stevens+-+Gleewood+-+20.7_+x+10.51_.glb",
+        "Url": "https://hypar.io/user-static/1ed38ba8-2794-4b17-893a-f46edea9da75.glb",
+        "Name": "Roger Stevens - Gleewood - 20.7_ x 10.51_",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               -1.0,
               0.0,
               0.23271098790558398,
               1.0,
-              -2.9420910152566648E-15,
+              -2.942091015256665E-15,
               0.0,
               1.590334733715137,
               0.0,
               0.0,
               1.0,
-              0.69083358477354428
+              0.6908335847735443
             ]
           }
         },
         "Anchor": {
           "X": 0.0,
-          "Y": 4.6185277824406512E-14,
+          "Y": 4.618527782440651E-14,
           "Z": 0.0
-        },
-        "Name": "Roger Stevens - Gleewood - 20.7_ x 10.51_"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Desk+-+Return+-+18D+x+42W.glb",
+        "Url": "https://hypar.io/user-static/0b5a45c9-f965-45c0-9d72-b82de01b2453.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Desk - Return - 18D x 42W",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               1.0,
               0.0,
-              2.5217542447987569,
+              2.521754244798757,
               -1.0,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               0.0,
-              3.0380361695586569,
+              3.038036169558657,
               0.0,
               0.0,
               1.0,
@@ -2396,22 +2415,22 @@
           "X": 1.6886104130217099,
           "Y": 1.2857140132124458,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Desk - Return - 18D x 42W"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Greenpoint+-+Private+Office+-+Desk+-+30D+x+72W+-+Inset+Modesty+Panel.glb",
+        "Url": "https://hypar.io/user-static/b53a76f2-b641-4744-a9b4-3b5338b3e27c.glb",
+        "Name": "West Elm Work Collection - Greenpoint - Private Office - Desk - 30D x 72W - Inset Modesty Panel",
         "Transform": {
           "Matrix": {
             "Components": [
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               1.0,
               0.0,
               3.3066142447987694,
               -1.0,
-              -2.2204460492503131E-16,
+              -2.220446049250313E-16,
               0.0,
-              3.0380361695586569,
+              3.038036169558657,
               0.0,
               0.0,
               1.0,
@@ -2423,19 +2442,19 @@
           "X": 1.6886104130217099,
           "Y": 1.2857140132124458,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Greenpoint - Private Office - Desk - 30D x 72W - Inset Modesty Panel"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/Steelcase+Coalesse+-+Chord+-+Seating+-+Mid+Back+-+Standard+Tilt+-+Aluminium+Arm.glb",
+        "Url": "https://hypar.io/user-static/abd308b1-4899-4d24-b28b-613bb9ecb97b.glb",
+        "Name": "Steelcase Coalesse - Chord - Seating - Mid Back - Standard Tilt - Aluminium Arm",
         "Transform": {
           "Matrix": {
             "Components": [
               -0.49999999999999273,
-              -0.86602540378444282,
+              -0.8660254037844428,
               0.0,
               2.3702233543407445,
-              0.86602540378444282,
+              0.8660254037844428,
               -0.49999999999999273,
               0.0,
               2.1770947790924193,
@@ -2450,20 +2469,20 @@
           "X": 1.6886104130217099,
           "Y": 1.2857140132124458,
           "Z": 0.0
-        },
-        "Name": "Steelcase Coalesse - Chord - Seating - Mid Back - Standard Tilt - Aluminium Arm"
+        }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/West+Elm+Work+Collection+-+Sterling+-+Chair+-+Conference+-+Armless+-+Four+Legs.glb",
+        "Url": "https://hypar.io/user-static/ec55502e-3e6c-472a-ae26-cb8eead6b4f4.glb",
+        "Name": "West Elm Work Collection - Sterling - Chair - Conference - Armless - Four Legs",
         "Transform": {
           "Matrix": {
             "Components": [
-              0.85665942322909117,
+              0.8566594232290912,
               0.515882382518342,
               0.0,
               3.6372763290767445,
               -0.515882382518342,
-              0.85665942322909117,
+              0.8566594232290912,
               0.0,
               2.1570645790140386,
               0.0,
@@ -2477,10 +2496,11 @@
           "X": 1.6886104130217099,
           "Y": 1.2857140132124458,
           "Z": 0.0
-        },
-        "Name": "West Elm Work Collection - Sterling - Chair - Conference - Armless - Four Legs"
+        }
       }
-    ]
+    ],
+    "Width": 4.423483982944575,
+    "Depth": 3.551228927807987
   },
   "Configuration F": {
     "CellBoundary": {
@@ -2499,7 +2519,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/POTypical-POTypical.glb",
+        "Url": "https://hypar.io/user-static/528017a3-1bd0-44ff-b03c-2a2095424084.glb",
         "Name": "PO Typical - PO Typical",
         "Transform": {
           "Matrix": {
@@ -2526,7 +2546,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/SteelcaseCoalesse-Chord-Seating-MidBack-StandardTilt-AluminiumArm.glb",
+        "Url": "https://hypar.io/user-static/abd308b1-4899-4d24-b28b-613bb9ecb97b.glb",
         "Name": "Steelcase Coalesse - Chord - Seating - Mid Back - Standard Tilt - Aluminium Arm",
         "Transform": {
           "Matrix": {
@@ -2553,7 +2573,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/f3f745d0-1331-437b-a9f5-577d3b816213/WestElmWorkCollection-Sterling-Chair-Conference-Armless-FourLegs.glb",
+        "Url": "https://hypar.io/user-static/ec55502e-3e6c-472a-ae26-cb8eead6b4f4.glb",
         "Name": "West Elm Work Collection - Sterling - Chair - Conference - Armless - Four Legs",
         "Transform": {
           "Matrix": {

@@ -1,0 +1,1685 @@
+{
+  "extensionsUsed": [
+    "KHR_materials_specular",
+    "KHR_materials_ior",
+    "KHR_materials_unlit",
+    "HYPAR_info"
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.1741343,
+        -1.5133413E-07,
+        2.42
+      ],
+      "min": [
+        -0.0054327655,
+        -0.020577965,
+        0.001
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        1.1741343,
+        2.42
+      ],
+      "min": [
+        -1.1741343,
+        -0.020577965
+      ]
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        0.34231684,
+        0.59718055,
+        1.0656377
+      ],
+      "min": [
+        -0.34311044,
+        -0.067092754,
+        1.723916E-13
+      ]
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        0.59718055,
+        1.0656377
+      ],
+      "min": [
+        -0.59718055,
+        -0.067092754
+      ]
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        0.9143647,
+        4.374253E-05,
+        1.0668
+      ],
+      "min": [
+        3.5510013E-05,
+        -0.9144438,
+        5.911355E-15
+      ]
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        0.9144438,
+        1.0668
+      ],
+      "min": [
+        -0.9144438,
+        -0.9144438
+      ]
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        0.15316209,
+        2.0829995E-07,
+        0.74180734
+      ],
+      "min": [
+        -0.15163791,
+        -0.06234308,
+        0.70599324
+      ]
+    },
+    {
+      "bufferView": 13,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 14,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 15,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        0.15316209,
+        0.74180734
+      ],
+      "min": [
+        -0.15316209,
+        -0.06234308
+      ]
+    },
+    {
+      "bufferView": 16,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        0.3113587,
+        0.5648508,
+        0.829215
+      ],
+      "min": [
+        -0.30818373,
+        0.0006781124,
+        -3.6771144E-14
+      ]
+    },
+    {
+      "bufferView": 17,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 18,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 19,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        0.5648508,
+        0.829215
+      ],
+      "min": [
+        -0.5648508,
+        -3.6771144E-14
+      ]
+    },
+    {
+      "bufferView": 20,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.8287998,
+        4.3946784E-08,
+        0.7239
+      ],
+      "min": [
+        -7.834907E-08,
+        -0.7619999,
+        -8.793008E-15
+      ]
+    },
+    {
+      "bufferView": 21,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ]
+    },
+    {
+      "bufferView": 22,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "max": [
+        23.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 23,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC2",
+      "max": [
+        1.8287998,
+        0.7239
+      ],
+      "min": [
+        -1.8287998,
+        -0.7619999
+      ]
+    }
+  ],
+  "asset": {
+    "generator": "hypar-gltf",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "ClassroomLayoutTest_0.bin",
+      "byteLength": 5040
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 288,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 576,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 648,
+      "byteLength": 192
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 840,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1128,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1416,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1488,
+      "byteLength": 192
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1680,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1968,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2256,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2328,
+      "byteLength": 192
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2520,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2808,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3096,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3168,
+      "byteLength": 192
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3360,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3648,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 3936,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4008,
+      "byteLength": 192
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4200,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4488,
+      "byteLength": 288
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4776,
+      "byteLength": 72
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 4848,
+      "byteLength": 192
+    }
+  ],
+  "materials": [
+    {
+      "name": "85c70f54-a6c2-488c-ae20-71e27f9cd6d8",
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularFactor": 0.1,
+          "specularColorFactor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "KHR_materials_ior": {
+          "ior": 1000
+        }
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7874123,
+          0.7874123,
+          0.7874123,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.9
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 3
+          },
+          "indices": 2,
+          "material": 0
+        }
+      ],
+      "name": "d1d58d54-1307-446e-b885-8641b31f1ebd_mesh"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 7
+          },
+          "indices": 6,
+          "material": 0
+        }
+      ],
+      "name": "80b5ca4a-5ccc-443e-a568-18eccfac392b_mesh"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 11
+          },
+          "indices": 10,
+          "material": 0
+        }
+      ],
+      "name": "ac6f9150-5507-42a4-89c9-9a5bc9d15e8f_mesh"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 15
+          },
+          "indices": 14,
+          "material": 0
+        }
+      ],
+      "name": "6de8bc29-59db-4a63-99f6-698e2baeb6ef_mesh"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 17,
+            "POSITION": 16,
+            "TEXCOORD_0": 19
+          },
+          "indices": 18,
+          "material": 0
+        }
+      ],
+      "name": "f08b61a9-7a6f-4a12-a3e7-9cbebb3c0ec3_mesh"
+    },
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 21,
+            "POSITION": 20,
+            "TEXCOORD_0": 23
+          },
+          "indices": 22,
+          "material": 0
+        }
+      ],
+      "name": "28645aad-606d-463e-b2d3-484564023597_mesh"
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        6.123234E-17,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        6.123234E-17,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.737755,
+        49.227818,
+        0.0,
+        1.0
+      ],
+      "mesh": 0,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "d1a807c8-3c8d-489d-bce4-54b1b8fe6ea6"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.737755,
+        48.05368,
+        0.0,
+        1.0
+      ],
+      "mesh": 0,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "e1a2a87b-1a20-492a-99e9-70f977669be7"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.737755,
+        46.879547,
+        0.0,
+        1.0
+      ],
+      "mesh": 0,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "b5012882-96b7-4c34-969f-1d8f9ce89722"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.737755,
+        45.705414,
+        0.0,
+        1.0
+      ],
+      "mesh": 0,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "e1650772-24ee-4c06-8de7-7975c315f909"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.737755,
+        44.531277,
+        0.0,
+        1.0
+      ],
+      "mesh": 0,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "9ab7a4f0-93e6-4785-8ed5-0dc172e4be0e"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -0.34202015,
+        -0.9396926,
+        0.0,
+        0.0,
+        0.9396926,
+        -0.34202015,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        69.97908,
+        44.324673,
+        1.3535839E-16,
+        1.0
+      ],
+      "mesh": 1,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "3ec1b644-eaa9-4ed7-af87-eaf7a519254d"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/96a49510-4f22-4c17-bafb-d7f4c6b2a238.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -0.64278764,
+        -0.76604444,
+        0.0,
+        0.0,
+        0.76604444,
+        -0.64278764,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        69.80644,
+        44.8383,
+        0.0,
+        1.0
+      ],
+      "mesh": 2,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "460f9842-549d-42c8-b79f-c6bfaeecfe13"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/796bf77e-4e4f-4c75-9db8-fb42d8067b71.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -5.5070465E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -5.5070465E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        70.727875,
+        43.883038,
+        0.0762,
+        1.0
+      ],
+      "mesh": 3,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "43ba8edb-54f6-4332-812b-e1a6a972a70f"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/53008648-a7b9-43e1-8150-5eed55d22a3a.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        48.280087,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "6a65a463-a61e-406c-bbc4-90ddabcde81d"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        68.0794,
+        49.621765,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "6c077bdc-bb79-4fcb-ba1f-a8bf4bdb88a4"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        49.134483,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "ebb23518-62a8-4e4e-a9ce-2ff7a1b61e5e"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        46.450542,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "af0877d3-cec4-49a9-a2e9-3cdb55c9d696"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        68.0794,
+        47.79222,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "0fb4c1e3-2fa1-4569-8613-280b4776b096"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        47.30494,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "a554c297-2708-414e-a7a4-0ae9db44c6ca"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        44.621,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "6f3e815c-e27e-4354-96af-08de153c12aa"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        68.0794,
+        45.962673,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "1fb1cc8e-3cd4-47f5-bffd-4d992a709c19"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        67.3174,
+        45.475395,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "e0f327a6-6258-4fbe-ba16-0bdc282e5584"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        48.280087,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "ba597204-5f3d-40eb-ac85-ef61276e4a38"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        65.4936,
+        49.621765,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "cb929746-c8ae-423e-8252-a034ba3d4bdb"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        49.134483,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "b0daf7c3-9689-42b2-a8b0-6edbb3a415b7"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        46.450542,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "a58638a2-6b02-416a-b4ea-f7b8b774ca4e"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        65.4936,
+        47.79222,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "adef068e-2825-4021-8696-a701757c5a43"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        47.30494,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "b1f165fe-badd-4921-a9f1-055839b1386f"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        44.621,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "060b7e88-baec-490c-af6b-3dfa5df3bb22"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        65.4936,
+        45.962673,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "47763433-6897-4c5c-91fb-eb3284ce0709"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        64.7316,
+        45.475395,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "eea74b6c-493b-4d8a-8238-eaebb645aa52"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        48.280087,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "efc74114-931a-4108-ad6e-7a606e39b3db"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.907795,
+        49.621765,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "a8a330d9-2064-49e2-b1c5-e8ebcb262713"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        49.134483,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "fff89681-7ebc-43a5-9c13-c7cd94974c9d"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        46.450542,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "cbd0adad-2dcb-4cb8-b584-0e007e4555c6"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.907795,
+        47.79222,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "24abb12e-a5a4-4693-91ae-a3558baf7522"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        47.30494,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "6655786e-cf52-4f42-93a2-7db0263975f8"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        44.621,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "dbcb81d2-d547-4c72-8d3b-9fccf2f52caa"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        -1.9984014E-15,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        -1.9984014E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.907795,
+        45.962673,
+        0.0,
+        1.0
+      ],
+      "mesh": 5,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "5cd026df-77af-4b9c-bba1-4584782886e7"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb"
+        }
+      }
+    },
+    {
+      "matrix": [
+        3.4531337E-15,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        3.4531337E-15,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        62.145798,
+        45.475395,
+        0.0,
+        1.0
+      ],
+      "mesh": 4,
+      "extensions": {
+        "HYPAR_info": {
+          "id": "a39ce40e-4bf5-4295-ab35-341a30180712"
+        },
+        "HYPAR_referenced_content": {
+          "contentUrl": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb"
+        }
+      }
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

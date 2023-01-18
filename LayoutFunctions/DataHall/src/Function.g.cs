@@ -62,7 +62,7 @@ namespace DataHallLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<DataHallLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<DataHallLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<DataHallLayoutInputs,DataHallLayoutOutputs>(store, DataHallLayout.Execute);

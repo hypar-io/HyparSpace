@@ -14,7 +14,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Steelcase-Migration-Desk-Rectangular-29Dx70W.glb",
+        "Url": "https://hypar.io/user-static/042f4a8a-577b-4a4f-b8b7-762861e616d3.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -40,7 +40,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -82,7 +82,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Height20Adjustable20Desk_30x60-30x60.glb",
+        "Url": "https://hypar.io/user-static/0ae331af-81ed-4c1e-a561-0a64921cccf4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -108,7 +108,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -150,7 +150,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ede8c007-c57e-4b2f-bea1-92d4f9a400c0/Height20Adjustable20Desk_24x48-24x48.glb",
+        "Url": "https://hypar.io/user-static/c670743c-bd94-41f1-8b78-a58c649326e3.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -176,7 +176,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -218,7 +218,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Url": "https://hypar.io/user-static/34f54511-53a1-430b-8242-2c5585a7f175.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -244,7 +244,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Url": "https://hypar.io/user-static/34f54511-53a1-430b-8242-2c5585a7f175.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -270,7 +270,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+Pedestal+Table+-+Round+Stand+Up.glb",
+        "Url": "https://hypar.io/user-static/fb0e0b44-58b5-45ed-ae38-b9f85ec1b863.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -312,7 +312,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/ce6d20f3-f9e2-4263-9c17-ca16b304e841.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -338,7 +338,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/c121e674-faef-4531-8ccc-8bfa76ff755f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -364,7 +364,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/cbca626c-dff0-4fcc-be28-ddaeb7a23695.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -390,7 +390,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/cbca626c-dff0-4fcc-be28-ddaeb7a23695.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -416,7 +416,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/ce6d20f3-f9e2-4263-9c17-ca16b304e841.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -458,7 +458,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Groupwork+-+Flip+Top+Table+-+Rectangular+-+30D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/21562958-9548-4300-bef7-1e6538dfa4b9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -484,7 +484,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -510,7 +510,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Groupwork+-+Flip+Top+Table+-+Rectangular+-+30D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/21562958-9548-4300-bef7-1e6538dfa4b9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -536,7 +536,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -604,7 +604,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+Pedestal+Table+-+Round+Stand+Up.glb",
+        "Url": "https://hypar.io/user-static/fb0e0b44-58b5-45ed-ae38-b9f85ec1b863.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -630,7 +630,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Url": "https://hypar.io/user-static/34f54511-53a1-430b-8242-2c5585a7f175.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -656,7 +656,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Url": "https://hypar.io/user-static/34f54511-53a1-430b-8242-2c5585a7f175.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -698,7 +698,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+28.5H+Working+Height+-+Round+-+48Dia.glb",
+        "Url": "https://hypar.io/user-static/b3e950d3-f28d-4c27-a921-0ae94013ef02.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -724,7 +724,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Url": "https://hypar.io/user-static/eb19b871-0896-42c5-991c-a5b9732c38d7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -750,7 +750,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Url": "https://hypar.io/user-static/eb19b871-0896-42c5-991c-a5b9732c38d7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -776,7 +776,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Url": "https://hypar.io/user-static/eb19b871-0896-42c5-991c-a5b9732c38d7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -844,7 +844,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+2+-+Chair+-+Air.glb",
+        "Url": "https://hypar.io/user-static/421717dc-7d1a-42af-8576-5a708dda7a06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -870,7 +870,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+Turnstone+-+Bivi+-+Accessories+-+Screen+-+Tackable+-+Trough+Mount+-+60W+x+13H.glb",
+        "Url": "https://hypar.io/user-static/54a9f03f-b65c-449a-b16d-d5cdf094976c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -896,7 +896,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+2+-+Chair+-+Air.glb",
+        "Url": "https://hypar.io/user-static/421717dc-7d1a-42af-8576-5a708dda7a06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -922,7 +922,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+Turnstone+-+Bivi+-+Table+-+Two+-+For+Two+-+60W.glb",
+        "Url": "https://hypar.io/user-static/64b5d71a-1063-462b-b5d3-eaa4e67affb9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -964,7 +964,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Square+Edge+Top+-+Flush+Front+-+Laminate+-+Common+Top+-+15D+x+60W.glb",
+        "Url": "https://hypar.io/user-static/26c99edb-3183-4599-bc89-7e3797c13310.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -990,7 +990,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Migration+SE+-+Desk+-+Rectangular+-+C+Leg+-+29D+x+58W.glb",
+        "Url": "https://hypar.io/user-static/5b99e188-2edd-4165-83a8-21e2a41786ce.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1016,7 +1016,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Think+465+Series+-+Value+Package+Work+Chair+-+Upholstery+Back_Adjustable+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/c9410893-790a-4b56-af5e-389681f45284.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1042,7 +1042,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Height-Adjustable+Desk+-+Privacy+Modesty+Screen+-+Sarto+-+48W.glb",
+        "Url": "https://hypar.io/user-static/23d8aa7f-f401-441f-8628-e37a03fafd29.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1068,7 +1068,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Storage+-+Mobile+Pedestal+-+22+1_4D+x+22+3_4H+-+Box_File+-+Seat+Cushion.glb",
+        "Url": "https://hypar.io/user-static/867a94d2-e5ad-4dc7-95c3-b4207ed17598.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1094,7 +1094,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Bookcase+-+40H-54H+-+40H+x+30W.glb",
+        "Url": "https://hypar.io/user-static/7d47e991-ffc3-4fe1-ac38-79bbbfe75e44.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1120,7 +1120,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Bookcase+-+40H-54H+-+40H+x+30W.glb",
+        "Url": "https://hypar.io/user-static/7d47e991-ffc3-4fe1-ac38-79bbbfe75e44.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1146,7 +1146,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+-+Straight+(2)+-+24D+x+42W+-+LPL.glb",
+        "Url": "https://hypar.io/user-static/0cf4f1db-80b5-49d5-9970-63d303df313d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1172,7 +1172,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+Support+-+Side+Support+Bracket+-+Bracket.glb",
+        "Url": "https://hypar.io/user-static/63fbca42-91b4-449d-a983-274fe9238843.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1198,7 +1198,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+-+Straight+(2)+-+24D+x+42W+-+LPL.glb",
+        "Url": "https://hypar.io/user-static/0cf4f1db-80b5-49d5-9970-63d303df313d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1224,7 +1224,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1250,7 +1250,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1276,7 +1276,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1302,7 +1302,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1328,7 +1328,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1354,7 +1354,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1380,7 +1380,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+24W.glb",
+        "Url": "https://hypar.io/user-static/6fafa042-96b2-452f-bfb0-d5a33e337f18.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1406,7 +1406,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1432,7 +1432,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Kick+Solutions+-+Panel+-+Monolithic+-+Tackable+Acoustical+-+42H+x+42W.glb",
+        "Url": "https://hypar.io/user-static/f00061cf-65e8-4fa2-9626-428fbe689aa1.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1458,7 +1458,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Think+465+Series+-+Value+Package+Work+Chair+-+Upholstery+Back_Adjustable+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/c9410893-790a-4b56-af5e-389681f45284.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1484,7 +1484,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Height-Adjustable+Desk+-+Privacy+Modesty+Screen+-+Sarto+-+48W.glb",
+        "Url": "https://hypar.io/user-static/23d8aa7f-f401-441f-8628-e37a03fafd29.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1510,7 +1510,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Storage+-+Mobile+Pedestal+-+22+1_4D+x+22+3_4H+-+Box_File+-+Seat+Cushion.glb",
+        "Url": "https://hypar.io/user-static/867a94d2-e5ad-4dc7-95c3-b4207ed17598.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1536,7 +1536,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Square+Edge+Top+-+Flush+Front+-+Laminate+-+Common+Top+-+15D+x+60W.glb",
+        "Url": "https://hypar.io/user-static/26c99edb-3183-4599-bc89-7e3797c13310.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1562,7 +1562,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Bookcase+-+40H-54H+-+40H+x+30W.glb",
+        "Url": "https://hypar.io/user-static/7d47e991-ffc3-4fe1-ac38-79bbbfe75e44.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1588,7 +1588,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Storage+-+Bookcase+-+40H-54H+-+40H+x+30W.glb",
+        "Url": "https://hypar.io/user-static/7d47e991-ffc3-4fe1-ac38-79bbbfe75e44.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1614,7 +1614,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+-+Straight+(2)+-+24D+x+42W+-+LPL.glb",
+        "Url": "https://hypar.io/user-static/0cf4f1db-80b5-49d5-9970-63d303df313d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1640,7 +1640,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+Support+-+Side+Support+Bracket+-+Bracket.glb",
+        "Url": "https://hypar.io/user-static/63fbca42-91b4-449d-a983-274fe9238843.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1666,7 +1666,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+TS+Series+-+Worksurface+-+Straight+(2)+-+24D+x+42W+-+LPL.glb",
+        "Url": "https://hypar.io/user-static/0cf4f1db-80b5-49d5-9970-63d303df313d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1692,7 +1692,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Migration+SE+-+Desk+-+Rectangular+-+C+Leg+-+29D+x+58W.glb",
+        "Url": "https://hypar.io/user-static/5b99e188-2edd-4165-83a8-21e2a41786ce.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1734,7 +1734,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+Turnstone+-+Bivi+-+Table+-+Two+-+For+Two+-+60W.glb",
+        "Url": "https://hypar.io/user-static/64b5d71a-1063-462b-b5d3-eaa4e67affb9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1760,7 +1760,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+2+-+Chair+-+Air.glb",
+        "Url": "https://hypar.io/user-static/421717dc-7d1a-42af-8576-5a708dda7a06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1786,7 +1786,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+Turnstone+-+Bivi+-+Accessories+-+Screen+-+Tackable+-+Trough+Mount+-+60W+x+13H.glb",
+        "Url": "https://hypar.io/user-static/54a9f03f-b65c-449a-b16d-d5cdf094976c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1812,7 +1812,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+2+-+Chair+-+Air.glb",
+        "Url": "https://hypar.io/user-static/421717dc-7d1a-42af-8576-5a708dda7a06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1854,7 +1854,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Amia+482+Series+-+Air+Back+-+Chair+-+3D+Knit+Back.glb",
+        "Url": "https://hypar.io/user-static/ca730d0b-fefd-45ba-8b7f-2f59eb9ea8a6.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1880,7 +1880,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Laminate+Enhanced+Storage+-+Low+Storage+(5)+-+1+High+-+Open+-+18+7_8D+x+30W.glb",
+        "Url": "https://hypar.io/user-static/40619f6f-f969-4766-bed5-db147b78ca60.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1906,7 +1906,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Universal+Laminate+Enhanced+Storage+-+Low+Storage+(5)+-+1.5+High+-+Drawer_Drawer+-+18+7_8D+x+30W.glb",
+        "Url": "https://hypar.io/user-static/771545d4-5f98-421d-be02-376b3324bef7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1932,7 +1932,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Groupwork+-+Flip+Top+Table+-+Rectangular+-+30D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/21562958-9548-4300-bef7-1e6538dfa4b9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1974,7 +1974,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Seating+-+Series+1+-+Task+Chair+-+Task+Chair.glb",
+        "Url": "https://hypar.io/user-static/306f5daa-edd9-48bd-8a7a-635239b8fac5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2000,7 +2000,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase+-+Groupwork+-+Flip+Top+Table+-+Rectangular+-+30D+x+72W.glb",
+        "Url": "https://hypar.io/user-static/21562958-9548-4300-bef7-1e6538dfa4b9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2042,7 +2042,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2069,7 +2069,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2096,7 +2096,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2123,7 +2123,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2150,7 +2150,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2177,7 +2177,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2204,7 +2204,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Url": "https://hypar.io/user-static/0fa6abbc-e7d8-481c-b504-108f33f5535d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2231,7 +2231,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Url": "https://hypar.io/user-static/0fa6abbc-e7d8-481c-b504-108f33f5535d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2274,7 +2274,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Url": "https://hypar.io/user-static/0fa6abbc-e7d8-481c-b504-108f33f5535d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2301,7 +2301,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/SteelcaseAP-Lexicon-YBench-600Dx1400W.glb",
+        "Url": "https://hypar.io/user-static/0fa6abbc-e7d8-481c-b504-108f33f5535d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2328,7 +2328,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2355,7 +2355,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2382,7 +2382,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2409,7 +2409,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2436,7 +2436,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {
@@ -2463,7 +2463,7 @@
         }
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/ade0eff6-151c-473a-b41f-94dbbf1267ad/Steelcase-Seating-Amia482Series-AirBack-Chair-3DKnitBack.glb",
+        "Url": "https://hypar.io/user-static/305fa49e-dfc3-40c2-ad07-24ed0524601d.glb",
         "Transform": {
           "discriminator": "Elements.Geometry.Transform",
           "Matrix": {

@@ -21,6 +21,7 @@ namespace LoungeLayout
         /// <returns>A LoungeLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static LoungeLayoutOutputs Execute(Dictionary<string, Model> inputModels, LoungeLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var output = new LoungeLayoutOutputs();
             LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>("Lounge", inputModels, input.Overrides, output.Model, false, "./LoungeConfigurations.json");
 

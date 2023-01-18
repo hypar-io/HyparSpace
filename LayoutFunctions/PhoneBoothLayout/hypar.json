@@ -32,7 +32,7 @@
     "properties": {
       "Create Walls": {
         "type": "boolean",
-        "description": "Should partitions be added around meeting rooms?",
+        "description": "Should partitions be added around phone booths?",
         "default": true
       },
       "Minimum Size": {

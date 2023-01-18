@@ -20,3 +20,8 @@ Lay out a data hall in a space boundary.
 |Rack Count|Number|The number of server cabinets.|
 |Watts/sf|String|Watts per square foot|
 
+
+<br>
+
+## Additional Information
+

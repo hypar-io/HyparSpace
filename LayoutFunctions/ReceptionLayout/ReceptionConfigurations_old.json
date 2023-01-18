@@ -1,0 +1,946 @@
+{
+  "Configuration A": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 7.2460146273052111,
+        "Y": 2.4944344924578217,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Reception_Desk_18950+-+Reception_Desk_18950.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.5510480431222931,
+              0.0,
+              1.0,
+              0.0,
+              0.39353327806978111,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.6230073136526038,
+          "Y": 1.2472172462289108,
+          "Z": 0.0
+        },
+        "Name": "Reception_Desk_18950 - Reception_Desk_18950"
+      }
+    ]
+  },
+  "Configuration B": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.1733329786232005,
+        "Y": 2.1628955262550873,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999435850737994,
+              -0.0033590107790740786,
+              0.0,
+              1.3576930512258016,
+              0.0033590107790740786,
+              0.99999435850737994,
+              0.0,
+              1.0576869016594146,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Gallery+Tackboards+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              2.2298996310790002,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.26954989671238838,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Gallery Tackboards - 72W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Desk+-+Classic+-+Right+-+72W+-+Transaction+Top+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              2.2044996310790026,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.25895807248907676,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Desk - Classic - Right - 72W - Transaction Top - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Gallery+Tackboards+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              4.0402234407390765,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.26954989671238838,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Gallery Tackboards - 72W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.90630778703661607,
+              0.422618261740772,
+              0.0,
+              3.0089498862789128,
+              -0.422618261740772,
+              0.90630778703661607,
+              0.0,
+              1.1246385469418003,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Return+-+Classic+-+Left+-+42W+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              4.0148234407390433,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              1.0090200724891405,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Return - Classic - Left - 42W - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Desk+-+Classic+-+Right+-+72W+-+Transaction+Top+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              4.0148234407390788,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.25895807248907676,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0866664893116003,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Desk - Classic - Right - 72W - Transaction Top - Integral Pull"
+      }
+    ]
+  },
+  "Configuration C": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.2054423668983816,
+        "Y": 2.1628955262550873,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Gallery+Tackboards+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              2.0147431721822926,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.26954989671254892,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1027211834491908,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Gallery Tackboards - 72W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Desk+-+Classic+-+Right+-+72W+-+Transaction+Top+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              1.9893431721822949,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              0.2589580724892373,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1027211834491908,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Desk - Classic - Right - 72W - Transaction Top - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.90630778703661607,
+              0.422618261740772,
+              0.0,
+              0.98346961772212893,
+              -0.422618261740772,
+              0.90630778703661607,
+              0.0,
+              1.1246385469419609,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1027211834491908,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Return+-+Classic+-+Left+-+42W+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              1.9893431721822594,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              1.009020072489301,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1027211834491908,
+          "Y": 1.0814477631275436,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Return - Classic - Left - 42W - Integral Pull"
+      }
+    ]
+  },
+  "Configuration D": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 9.5549502156285371,
+        "Y": 2.4944344924578217,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Viccarbe+-+Shape+Table+Model+O+-+0.377+m+x+0.377+m.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.903180073207478,
+              -0.42926187270818117,
+              0.0,
+              8.9830480920601374,
+              0.42926187270818117,
+              0.903180073207478,
+              0.0,
+              1.2560116830016435,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.5549502156285371,
+          "Y": 1.2472172462289108,
+          "Z": 0.0
+        },
+        "Name": "Viccarbe - Shape Table Model O - 0.377 m x 0.377 m"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.0073429853351164595,
+              0.99997303991976116,
+              0.0,
+              9.028557031052614,
+              -0.99997303991976116,
+              0.0073429853351164595,
+              0.0,
+              1.8536265425863634,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.5549502156285371,
+          "Y": 1.2472172462289108,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.0073429853351164595,
+              0.99997303991976116,
+              0.0,
+              9.028557031052614,
+              -0.99997303991976116,
+              0.0073429853351164595,
+              0.0,
+              0.63298384543898689,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.5549502156285371,
+          "Y": 1.2472172462289108,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Reception_Desk_18950+-+Reception_Desk_18950.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.2709064639192613,
+              0.0,
+              1.0,
+              0.0,
+              0.39353327806978111,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 1.2472172462289108,
+          "Z": 0.0
+        },
+        "Name": "Reception_Desk_18950 - Reception_Desk_18950"
+      }
+    ]
+  },
+  "Configuration E": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 5.72839394031607,
+        "Y": 4.9711521141649735,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              6.6335842619911157E-15,
+              -1.0,
+              0.0,
+              5.031082173657679,
+              1.0,
+              6.6335842619911157E-15,
+              0.0,
+              2.4087406564975709,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.5021856567455867E-16,
+              0.0,
+              5.0311384406529909,
+              1.5021856567455867E-16,
+              1.0,
+              0.0,
+              0.73231927840271993,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.886579864025407E-15,
+              0.0,
+              4.4972477275804037,
+              -2.886579864025407E-15,
+              1.0,
+              0.0,
+              0.32704783303774576,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.4988010832439613E-15,
+              1.0,
+              0.0,
+              5.4885393448320476,
+              -1.0,
+              -1.4988010832439613E-15,
+              0.0,
+              1.2967417680815991,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+24D+x+24W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              2.7755575615628914E-16,
+              0.0,
+              4.65012798111115,
+              -2.7755575615628914E-16,
+              -1.0,
+              0.0,
+              1.265765239752735,
+              0.0,
+              0.0,
+              1.0,
+              0.012700000000000001
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.886579864025407E-15,
+              0.0,
+              3.9643009849420938,
+              -2.886579864025407E-15,
+              1.0,
+              0.0,
+              2.5422054815158428,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              1.0563772079308364E-13,
+              0.0,
+              3.9643009849421578,
+              -1.0563772079308364E-13,
+              1.0,
+              0.0,
+              3.0184769516790424,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              2.7755575615628914E-16,
+              0.0,
+              5.0311003871789763,
+              -2.7755575615628914E-16,
+              -1.0,
+              0.0,
+              0.12265436982551137,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.4988010832439613E-15,
+              1.0,
+              0.0,
+              5.640784458419307,
+              -1.0,
+              -1.4988010832439613E-15,
+              0.0,
+              2.4087656607522767,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.72839394031607,
+          "Y": 0.0,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999435850737994,
+              -0.0033590107790740786,
+              0.0,
+              1.0560315114564496,
+              0.0033590107790740786,
+              0.99999435850737994,
+              0.0,
+              3.935716400729357,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Gallery+Tackboards+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              1.9282380913096482,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              3.1475793957823308,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Gallery Tackboards - 72W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Desk+-+Classic+-+Right+-+72W+-+Transaction+Top+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              1.9028380913096505,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              3.1369875715590192,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Desk - Classic - Right - 72W - Transaction Top - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Gallery+Tackboards+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              3.7385619009697248,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              3.1475793957823308,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Gallery Tackboards - 72W"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Return+-+Classic+-+Left+-+42W+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              3.7131619009696917,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              3.8870495715590829,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Return - Classic - Left - 42W - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Payback+-+Reception+Desk+-+Classic+-+Right+-+72W+-+Transaction+Top+-+Integral+Pull.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              4.2132963784524691E-14,
+              0.0,
+              3.7131619009697272,
+              -4.2132963784524691E-14,
+              -1.0,
+              0.0,
+              3.1369875715590192,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Payback - Reception Desk - Classic - Right - 72W - Transaction Top - Integral Pull"
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/9c5774d0-afdf-417d-964d-f0aea92eba8b/Steelcase+-+Seating+-+Series+2+-+Chair+-+Upholstered.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.906307787036616,
+              0.42261826174077194,
+              0.0,
+              2.7072883465095607,
+              -0.42261826174077194,
+              0.906307787036616,
+              0.0,
+              4.0026680460117428,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.9711521141649735,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Series 2 - Chair - Upholstered"
+      }
+    ]
+  }
+}

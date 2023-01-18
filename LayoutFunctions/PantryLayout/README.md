@@ -14,3 +14,7 @@ Layout Pantry spaces
 |---|---|---|
 |Total cafe chairs count|Number|Total count of seats.|
 
+
+<br>
+
+## Additional Information

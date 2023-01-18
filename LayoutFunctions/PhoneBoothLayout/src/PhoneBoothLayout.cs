@@ -21,6 +21,7 @@ namespace PhoneBoothLayout
         /// <returns>A PhoneBoothLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static PhoneBoothLayoutOutputs Execute(Dictionary<string, Model> inputModels, PhoneBoothLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();

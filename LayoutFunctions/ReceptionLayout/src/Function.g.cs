@@ -62,7 +62,7 @@ namespace ReceptionLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<ReceptionLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<ReceptionLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<ReceptionLayoutInputs,ReceptionLayoutOutputs>(store, ReceptionLayout.Execute);

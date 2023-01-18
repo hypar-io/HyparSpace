@@ -62,7 +62,7 @@ namespace Circulation
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<CirculationInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<CirculationInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<CirculationInputs,CirculationOutputs>(store, Circulation.Execute);

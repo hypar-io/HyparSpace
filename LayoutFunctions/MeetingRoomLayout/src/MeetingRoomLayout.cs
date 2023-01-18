@@ -28,6 +28,7 @@ namespace MeetingRoomLayout
         /// <returns>A MeetingRoomLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static MeetingRoomLayoutOutputs Execute(Dictionary<string, Model> inputModels, MeetingRoomLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             if (inputModels.TryGetValue("Circulation", out var circModel))

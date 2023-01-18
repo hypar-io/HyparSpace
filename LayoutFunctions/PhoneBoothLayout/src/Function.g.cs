@@ -62,7 +62,7 @@ namespace PhoneBoothLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<PhoneBoothLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<PhoneBoothLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<PhoneBoothLayoutInputs,PhoneBoothLayoutOutputs>(store, PhoneBoothLayout.Execute);

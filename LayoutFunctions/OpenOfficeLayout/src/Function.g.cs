@@ -62,7 +62,7 @@ namespace OpenOfficeLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<OpenOfficeLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<OpenOfficeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs>(store, OpenOfficeLayout.Execute);

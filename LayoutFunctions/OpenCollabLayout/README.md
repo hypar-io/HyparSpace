@@ -14,3 +14,8 @@ Lay out Open collaboration spaces.
 |---|---|---|
 |Collaboration seats|Number|Total seats in open collaboration areas.|
 
+
+<br>
+
+## Additional Information
+

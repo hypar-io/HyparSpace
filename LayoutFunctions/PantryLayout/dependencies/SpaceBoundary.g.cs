@@ -27,7 +27,7 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @level, System.Guid? @levelLayout, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @level, System.Guid? @levelLayout, string @hyparSpaceType, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.Boundary = @boundary;
@@ -40,6 +40,7 @@ namespace Elements
             this.ProgramType = @programType;
             this.Level = @level;
             this.LevelLayout = @levelLayout;
+            this.HyparSpaceType = @hyparSpaceType;
             }
         
         // Empty constructor
@@ -86,6 +87,10 @@ namespace Elements
         /// <summary>The layout, if any, which generated this space boundary.</summary>
         [JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? LevelLayout { get; set; }
+    
+        /// <summary>The hypar-recognized space type name which will be used to determine which layout function to apply. In older space boundaries, this may not be set — fall back to the Name property for this purpose if not provided.</summary>
+        [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string HyparSpaceType { get; set; }
     
     
     }

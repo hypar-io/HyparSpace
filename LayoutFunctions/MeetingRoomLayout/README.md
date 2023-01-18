@@ -15,3 +15,8 @@ Lay out meeting rooms.
 |---|---|---|
 |Total Seat Count|Number|Total Seat Count|
 
+
+<br>
+
+## Additional Information
+

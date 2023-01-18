@@ -15,3 +15,11 @@ Generate an interior layout for classroom zones.
 |---|---|---|
 |Total count of desk seats|Number|Total count of seats|
 
+
+<br>
+
+## Additional Information
+
+
+
+

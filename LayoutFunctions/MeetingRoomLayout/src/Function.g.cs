@@ -62,7 +62,7 @@ namespace MeetingRoomLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<MeetingRoomLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<MeetingRoomLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<MeetingRoomLayoutInputs,MeetingRoomLayoutOutputs>(store, MeetingRoomLayout.Execute);

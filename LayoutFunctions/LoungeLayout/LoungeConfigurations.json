@@ -14,7 +14,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Right+On+Rug+-+1.829+m+x+2.743+m.glb",
+        "Url": "https://hypar.io/user-static/2ce4e505-143d-4b5c-8b0d-09885998da61.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -41,7 +41,7 @@
         "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Right+On+Rug+-+1.829+m+x+2.743+m+2.glb",
+        "Url": "https://hypar.io/user-static/f7ca9d12-290b-444d-900a-6a1d37af4a11.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -68,7 +68,7 @@
         "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m 2"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -95,7 +95,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -122,7 +122,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -149,7 +149,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+B-Free+-+Seating+-+Cube+-+Small+-+Glide.glb",
+        "Url": "https://hypar.io/user-static/c84d0092-962f-497e-ba1a-d5b25b61d1f4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -176,7 +176,7 @@
         "Name": "Steelcase - B-Free - Seating - Cube - Small - Glide"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Round+-+30dia.glb",
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -203,7 +203,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Round+-+30dia.glb",
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -230,7 +230,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -257,7 +257,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -284,7 +284,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Thread+-+Power+Hub+-+NEMA+-+30H.glb",
+        "Url": "https://hypar.io/user-static/242013db-7623-4cae-b39d-2c32d85ef15b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -311,7 +311,7 @@
         "Name": "Steelcase - Thread - Power Hub - NEMA - 30H"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Flos+-+Tatou+F+-+Lighting.glb",
+        "Url": "https://hypar.io/user-static/8e4191a7-a78e-470b-96f3-cb2b61b33b23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -338,7 +338,7 @@
         "Name": "Flos - Tatou F - Lighting"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -365,7 +365,7 @@
         "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -392,7 +392,7 @@
         "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Corner+Left+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/b1e7fd86-3124-4f9d-9e0d-650f453df774.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -419,7 +419,7 @@
         "Name": "Steelcase - Media Scape - Lounge - Corner Left - Same Upholstery"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Straight+Inverted+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/537d3aad-7cb1-4a4c-af8f-3889e9becce7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -446,7 +446,7 @@
         "Name": "Steelcase - Media Scape - Lounge - Straight Inverted - Same Upholstery"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Corner+Right+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/cdc18dac-396b-474d-a20b-2b1670a22a1a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -489,7 +489,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Seating+-+Lounge+-+One+Seat+-+High+Back_Left+and+Right+Screen_End+Arm+Cushion.glb",
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -516,7 +516,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -543,7 +543,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Seating+-+Lounge+-+One+Seat+-+High+Back_Left+and+Right+Screen_End+Arm+Cushion.glb",
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -570,7 +570,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -597,7 +597,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Davos+-+Seating+-+Bench+-+Medium.glb",
+        "Url": "https://hypar.io/user-static/7809959f-ae7f-4ea6-aa1b-4a2b609a2ae3.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -640,7 +640,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -667,7 +667,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -694,7 +694,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -721,7 +721,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -748,7 +748,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -775,7 +775,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -802,7 +802,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -829,7 +829,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -856,7 +856,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -883,7 +883,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -910,7 +910,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/LeadHead+Glass+-+Cottage+Terrarium+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -937,7 +937,7 @@
         "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -964,7 +964,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -991,7 +991,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+24D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1018,7 +1018,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1045,7 +1045,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1072,7 +1072,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Inline.glb",
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1099,7 +1099,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1126,7 +1126,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1153,7 +1153,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1180,7 +1180,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1207,7 +1207,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1234,7 +1234,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1261,7 +1261,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1288,7 +1288,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1315,7 +1315,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1342,7 +1342,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1369,7 +1369,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1396,7 +1396,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1423,7 +1423,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1450,7 +1450,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1477,7 +1477,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1504,7 +1504,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1531,7 +1531,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1558,7 +1558,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1585,7 +1585,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1612,7 +1612,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1639,7 +1639,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1666,7 +1666,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1693,7 +1693,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1720,7 +1720,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1747,7 +1747,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/LeadHead+Glass+-+Cottage+Terrarium+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1774,7 +1774,7 @@
         "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1801,7 +1801,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1828,7 +1828,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+24D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1855,7 +1855,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1882,7 +1882,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1909,7 +1909,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Inline.glb",
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1936,7 +1936,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1963,7 +1963,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1990,7 +1990,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2017,7 +2017,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2044,7 +2044,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2071,7 +2071,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2098,7 +2098,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2125,7 +2125,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2168,7 +2168,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Lowback+-+Glide.glb",
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2195,7 +2195,7 @@
         "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Lowback - Glide"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Ottoman+-+Ottoman.glb",
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2222,7 +2222,7 @@
         "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Ottoman - Ottoman"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Holy+Day+-+Table+-+Round+-+Wood+Top.glb",
+        "Url": "https://hypar.io/user-static/940c8185-9972-4f42-84cd-b002b9b318c3.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2249,7 +2249,7 @@
         "Name": "Steelcase Coalesse - Holy Day - Table - Round - Wood Top"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Exponents+-+Seating+-+Bench+-+Open+-+72W+-+Metal+Base.glb",
+        "Url": "https://hypar.io/user-static/4b4a1da6-2ceb-4a19-92d4-21209756fb5d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2276,7 +2276,7 @@
         "Name": "Steelcase Coalesse - Exponents - Seating - Bench - Open - 72W - Metal Base"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Exponents+-+Seating+-+Bench+-+Open+-+72W+-+Metal+Base.glb",
+        "Url": "https://hypar.io/user-static/4b4a1da6-2ceb-4a19-92d4-21209756fb5d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2303,7 +2303,7 @@
         "Name": "Steelcase Coalesse - Exponents - Seating - Bench - Open - 72W - Metal Base"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Ottoman+-+Ottoman.glb",
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2330,7 +2330,7 @@
         "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Ottoman - Ottoman"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Lowback+-+Glide.glb",
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2373,7 +2373,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Collet+8x+10+Rug+-+120_+x+96_.glb",
+        "Url": "https://hypar.io/user-static/6e53939d-6242-42ca-a879-835454f01cb7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2400,7 +2400,7 @@
         "Name": "Blu Dot - Collet 8x 10 Rug - 120_ x 96_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2427,7 +2427,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2454,7 +2454,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2481,7 +2481,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2508,7 +2508,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+End+Cap+-+Right+End+Cap.glb",
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2535,7 +2535,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2562,7 +2562,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Arm+-+Single+-+Two+Arm.glb",
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2589,7 +2589,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2616,7 +2616,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2643,7 +2643,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+30D.glb",
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2670,7 +2670,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2697,7 +2697,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+15''+D.glb",
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2724,7 +2724,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2751,7 +2751,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2778,7 +2778,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2805,7 +2805,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+15D.glb",
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2832,7 +2832,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+30D.glb",
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2875,7 +2875,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2902,7 +2902,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2929,7 +2929,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2956,7 +2956,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -2983,7 +2983,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+30D.glb",
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3010,7 +3010,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3037,7 +3037,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+15''+D.glb",
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3064,7 +3064,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3091,7 +3091,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3118,7 +3118,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3145,7 +3145,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+15D.glb",
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3172,7 +3172,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+30D.glb",
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3215,7 +3215,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Collet+8x+10+Rug+-+120_+x+96_.glb",
+        "Url": "https://hypar.io/user-static/6e53939d-6242-42ca-a879-835454f01cb7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3242,7 +3242,7 @@
         "Name": "Blu Dot - Collet 8x 10 Rug - 120_ x 96_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3269,7 +3269,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Straight+Lounge+-+Single+-+30D.glb",
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3296,7 +3296,7 @@
         "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3323,7 +3323,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3350,7 +3350,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3377,7 +3377,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3404,7 +3404,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+30D.glb",
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3431,7 +3431,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3458,7 +3458,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Double+-+15''+D.glb",
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3485,7 +3485,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3512,7 +3512,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3539,7 +3539,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Fabric+-+15D.glb",
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3566,7 +3566,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+15D.glb",
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3593,7 +3593,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Platform+-+Single+-+Laminate+and+Veneer+-+30D.glb",
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3620,7 +3620,7 @@
         "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+End+Cap+-+Right+End+Cap.glb",
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3647,7 +3647,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3674,7 +3674,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Arm+-+Single+-+Two+Arm.glb",
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3717,7 +3717,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Right+On+Rug+-+1.829+m+x+2.743+m+2.glb",
+        "Url": "https://hypar.io/user-static/f7ca9d12-290b-444d-900a-6a1d37af4a11.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3744,7 +3744,7 @@
         "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m 2"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Blu+Dot+-+Right+On+Rug+-+1.829+m+x+2.743+m.glb",
+        "Url": "https://hypar.io/user-static/2ce4e505-143d-4b5c-8b0d-09885998da61.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3771,7 +3771,7 @@
         "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3798,7 +3798,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3825,7 +3825,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Extremis+-+Sticks+-+Space+Divider+60x30+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3852,7 +3852,7 @@
         "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+B-Free+-+Seating+-+Cube+-+Small+-+Glide.glb",
+        "Url": "https://hypar.io/user-static/c84d0092-962f-497e-ba1a-d5b25b61d1f4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3879,7 +3879,7 @@
         "Name": "Steelcase - B-Free - Seating - Cube - Small - Glide"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Round+-+30dia.glb",
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3906,7 +3906,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Round+-+30dia.glb",
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3933,7 +3933,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3960,7 +3960,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -3987,7 +3987,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Thread+-+Power+Hub+-+NEMA+-+30H.glb",
+        "Url": "https://hypar.io/user-static/242013db-7623-4cae-b39d-2c32d85ef15b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4014,7 +4014,7 @@
         "Name": "Steelcase - Thread - Power Hub - NEMA - 30H"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Flos+-+Tatou+F+-+Lighting.glb",
+        "Url": "https://hypar.io/user-static/8e4191a7-a78e-470b-96f3-cb2b61b33b23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4041,7 +4041,7 @@
         "Name": "Flos - Tatou F - Lighting"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4068,7 +4068,7 @@
         "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/West+Elm+Work+Collection+-+Metal+Frame+Chair+-+Chair.glb",
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4095,7 +4095,7 @@
         "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Corner+Left+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/b1e7fd86-3124-4f9d-9e0d-650f453df774.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4122,7 +4122,7 @@
         "Name": "Steelcase - Media Scape - Lounge - Corner Left - Same Upholstery"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Straight+Inverted+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/537d3aad-7cb1-4a4c-af8f-3889e9becce7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4149,7 +4149,7 @@
         "Name": "Steelcase - Media Scape - Lounge - Straight Inverted - Same Upholstery"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Media+Scape+-+Lounge+-+Corner+Right+-+Same+Upholstery.glb",
+        "Url": "https://hypar.io/user-static/cdc18dac-396b-474d-a20b-2b1670a22a1a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4192,7 +4192,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Davos+-+Seating+-+Bench+-+Medium.glb",
+        "Url": "https://hypar.io/user-static/7809959f-ae7f-4ea6-aa1b-4a2b609a2ae3.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4219,7 +4219,7 @@
         "Name": "Steelcase Coalesse - Davos - Seating - Bench - Medium"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4246,7 +4246,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Seating+-+Lounge+-+One+Seat+-+High+Back_Left+and+Right+Screen_End+Arm+Cushion.glb",
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4273,7 +4273,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4300,7 +4300,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Seating+-+Lounge+-+One+Seat+-+High+Back_Left+and+Right+Screen_End+Arm+Cushion.glb",
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4343,7 +4343,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4370,7 +4370,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4397,7 +4397,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Mitchell+Gold+Bob+Williams+-+Lorenzo+Rug+-+144_+x+108_.glb",
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4424,7 +4424,7 @@
         "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4451,7 +4451,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4478,7 +4478,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4505,7 +4505,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4532,7 +4532,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4559,7 +4559,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4586,7 +4586,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4613,7 +4613,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4640,7 +4640,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Inline.glb",
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4667,7 +4667,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4694,7 +4694,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4721,7 +4721,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+24D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4748,7 +4748,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4775,7 +4775,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+36D+x+36W.glb",
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4802,7 +4802,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/LeadHead+Glass+-+Cottage+Terrarium+-+Accessories.glb",
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4829,7 +4829,7 @@
         "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4856,7 +4856,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4883,7 +4883,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4910,7 +4910,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4937,7 +4937,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4964,7 +4964,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -4991,7 +4991,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5018,7 +5018,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5045,7 +5045,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5072,7 +5072,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5115,7 +5115,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5142,7 +5142,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Ganging+-+Square+-+Corner.glb",
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5169,7 +5169,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5196,7 +5196,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Savannah+Hayes+-+Bruges+Pillow+14+x+24+-+Cotton+Canvas.glb",
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5223,7 +5223,7 @@
         "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Occasional+-+Square+-+24D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5250,7 +5250,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Table+-+Lolli-Top+-+20dia.glb",
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5277,7 +5277,7 @@
         "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5304,7 +5304,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+42W.glb",
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5331,7 +5331,7 @@
         "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Sylvi+-+Lounge+-+Rectangular+-+66W.glb",
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5374,7 +5374,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5401,7 +5401,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal1+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5428,7 +5428,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+End+Cap+-+Right+End+Cap.glb",
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5455,7 +5455,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Corner+-+30D.glb",
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5482,7 +5482,7 @@
         "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+-+Seating+-+Umami+-+Lounge+-+Arm+-+Single+-+Two+Arm.glb",
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5525,7 +5525,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Lowback+-+Glide.glb",
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -5552,7 +5552,7 @@
         "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Lowback - Glide"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/5e796702-15a4-47bb-bbfa-1dfa3f6db835/Steelcase+Coalesse+-+SW_1+-+Seating+-+Collaborative+Lounge+-+Ottoman+-+Ottoman.glb",
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
         "Transform": {
           "Matrix": {
             "Components": [

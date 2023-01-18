@@ -21,6 +21,7 @@ namespace OpenCollaborationLayout
         /// <returns>A OpenCollaborationLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static OpenCollaborationLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenCollaborationLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             varietyCounter = 0;
             int totalCountableSeats = 0;
             var spacePlanningZones = inputModels["Space Planning Zones"];

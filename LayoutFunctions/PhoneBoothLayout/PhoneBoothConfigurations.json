@@ -14,7 +14,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+B-Free+-+Table+-+Rectangle+-+32D+x+60W.glb",
+        "Url": "https://hypar.io/user-static/066f3860-6c4f-439f-8d32-8767b5dfd43d.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -41,7 +41,7 @@
         "Name": "Steelcase - B-Free - Table - Rectangle - 32D x 60W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Seating+-+SILQ+-+Stool+-+Stool.glb",
+        "Url": "https://hypar.io/user-static/bf02443f-6276-4d67-a3b5-7ad14206b0e4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -68,7 +68,7 @@
         "Name": "Steelcase - Seating - SILQ - Stool - Stool"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/AllInOneComputer+-+0.743+m+x+0.481+m.glb",
+        "Url": "https://hypar.io/user-static/8ad5d4b5-0921-4400-b3cf-9d819d0d6519.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -95,7 +95,7 @@
         "Name": "AllInOneComputer - 0.743 m x 0.481 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Laptop1+-+0.37+m+x+0.35+m.glb",
+        "Url": "https://hypar.io/user-static/c3385cd1-6f90-4da1-871d-8514b0d71022.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -138,7 +138,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/SAH21+-+0.605+m+x+0.23+m.glb",
+        "Url": "https://hypar.io/user-static/eac95ba1-1507-47fc-9d23-f57d36968ea8.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -165,7 +165,7 @@
         "Name": "SAH21 - 0.605 m x 0.23 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+Grab+-+Pouf+-+Small.glb",
+        "Url": "https://hypar.io/user-static/502a56b8-6482-46a6-aa12-8e84081e53c7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -192,7 +192,7 @@
         "Name": "Bolia - Grab - Pouf - Small"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+Coalesse+-+Lagunitas+-+Table+-+Personal+-+13D+x+24W.glb",
+        "Url": "https://hypar.io/user-static/61e91884-17ce-4409-998f-a940b585883e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -219,7 +219,7 @@
         "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+Coalesse+-+Lagunitas+-+Seating+-+Chaise+-+Two+Seat+-+Low+Back+Screen+-+Left+Corner+Cushion.glb",
+        "Url": "https://hypar.io/user-static/0379bfc9-187c-4760-8fc1-921c54899c5f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -262,7 +262,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Mouse+-+0.053+m+x+0.095+m.glb",
+        "Url": "https://hypar.io/user-static/1958892e-ee36-4035-9063-e4e01e36d725.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -289,7 +289,7 @@
         "Name": "Mouse - 0.053 m x 0.095 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Keyboard+-+0.421+m+x+0.125+m.glb",
+        "Url": "https://hypar.io/user-static/98f87c85-e1c2-43da-9628-4d2e9b2c8e47.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -316,7 +316,7 @@
         "Name": "Keyboard - 0.421 m x 0.125 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Laptop+-+0.37+m+x+0.35+m.glb",
+        "Url": "https://hypar.io/user-static/30935fe4-1921-4f46-a94f-47351e4da771.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -343,7 +343,7 @@
         "Name": "Laptop - 0.37 m x 0.35 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/USB+Powerstrip+-+0.14+m+x+0.084+m.glb",
+        "Url": "https://hypar.io/user-static/dd864c69-7aa8-4533-8fd5-80e2c72937ef.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -370,7 +370,7 @@
         "Name": "USB Powerstrip - 0.14 m x 0.084 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Worktool+-+Computer+Support+-+CF+Series+-+Evolution+Single+Arm+-+Single+Arm.glb",
+        "Url": "https://hypar.io/user-static/902fae3e-821d-4724-b74a-c2f9f5cf6f80.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -397,7 +397,7 @@
         "Name": "Steelcase - Worktool - Computer Support - CF Series - Evolution Single Arm - Single Arm"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+Trapeze+Hook+-+Hook.glb",
+        "Url": "https://hypar.io/user-static/388c2e15-9c16-44b3-9aed-22ddcdcc7084.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -424,7 +424,7 @@
         "Name": "Bolia - Trapeze Hook - Hook"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+Trapeze+Hook+-+Hook.glb",
+        "Url": "https://hypar.io/user-static/388c2e15-9c16-44b3-9aed-22ddcdcc7084.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -451,7 +451,7 @@
         "Name": "Bolia - Trapeze Hook - Hook"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Blu+Dot+-+Welf+-+Wall+Shelf+-+Small.glb",
+        "Url": "https://hypar.io/user-static/b608f512-a675-4468-a166-c9e3a08b0ac4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -478,7 +478,7 @@
         "Name": "Blu Dot - Welf - Wall Shelf - Small"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Blu+Dot+-+Welf+-+Wall+Shelf+-+Small.glb",
+        "Url": "https://hypar.io/user-static/b608f512-a675-4468-a166-c9e3a08b0ac4.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -505,7 +505,7 @@
         "Name": "Blu Dot - Welf - Wall Shelf - Small"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Worktool+-+SOTO+II+-+Mobile+Caddy+-+Mobile+Caddy.glb",
+        "Url": "https://hypar.io/user-static/0c5348ca-84e1-4681-8776-8645917776cc.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -532,7 +532,7 @@
         "Name": "Steelcase - Worktool - SOTO II - Mobile Caddy - Mobile Caddy"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Migration+SE+-+Desk+-+Rectangular+-+T+Leg+-+29D+x+58W.glb",
+        "Url": "https://hypar.io/user-static/07a87d37-929d-4e0e-a779-cd4cfc3920cd.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -559,7 +559,7 @@
         "Name": "Steelcase - Migration SE - Desk - Rectangular - T Leg - 29D x 58W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Seating+-+Think+465+Series+-+Chair+(1)+-+Upholstery+Back_Adjustable+Arm_Caster.glb",
+        "Url": "https://hypar.io/user-static/f76b5de4-3eef-411d-b077-82664b2a844e.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -602,7 +602,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Thread+-+Power+Hub+-+NEMA+-+30H.glb",
+        "Url": "https://hypar.io/user-static/32426675-a709-44f6-b3e4-ed7092474928.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -629,7 +629,7 @@
         "Name": "Steelcase - Thread - Power Hub - NEMA - 30H"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Viccarbe+-+Burin+-+Table+-+Low+with+Handle.glb",
+        "Url": "https://hypar.io/user-static/e5e140f2-a810-4460-9b0b-ffa83c671a9a.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -656,7 +656,7 @@
         "Name": "Viccarbe - Burin - Table - Low with Handle"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+Philippa+-+Footstool+-+Footstool.glb",
+        "Url": "https://hypar.io/user-static/6ad050e0-17e2-4838-aaed-7d69562ce473.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -683,7 +683,7 @@
         "Name": "Bolia - Philippa - Footstool - Footstool"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+Philippa+-+Armchair+-+Armchair.glb",
+        "Url": "https://hypar.io/user-static/5b2a4c01-3650-4326-a97a-887d67f853da.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -710,7 +710,7 @@
         "Name": "Bolia - Philippa - Armchair - Armchair"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -737,7 +737,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -764,7 +764,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -791,7 +791,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -818,7 +818,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -845,7 +845,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -872,7 +872,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -899,7 +899,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -926,7 +926,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -953,7 +953,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+-+Wall+Tiles+-+Dome.glb",
+        "Url": "https://hypar.io/user-static/88a62c2c-92aa-4588-86b7-4d2453e31e27.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -980,7 +980,7 @@
         "Name": "Steelcase AMQ - 3F - Wall Tiles - Dome"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Bolia+-+X-Stool+-+X-Stool.glb",
+        "Url": "https://hypar.io/user-static/0dbbe3c7-d2eb-4c94-b8cc-5f350ecbf437.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1007,7 +1007,7 @@
         "Name": "Bolia - X-Stool - X-Stool"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+AMQ+-+3F+Hanging+Panel+-+Shimmer+-+28W.glb",
+        "Url": "https://hypar.io/user-static/9120758a-801d-4360-a74b-fef213363ac7.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1050,7 +1050,7 @@
     },
     "ContentItems": [
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Zanzibar+Gem+2+-+0.532+m+x+0.473+m.glb",
+        "Url": "https://hypar.io/user-static/3cbcbc3b-854e-4852-b847-bb78715d408f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1077,7 +1077,7 @@
         "Name": "Zanzibar Gem 2 - 0.532 m x 0.473 m"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+Health+-+Regard+-+Planter+-+11D+x+22W.glb",
+        "Url": "https://hypar.io/user-static/5a7766dc-2aa4-40fd-8e20-6060657b753f.glb",
         "Transform": {
           "Matrix": {
             "Components": [
@@ -1104,7 +1104,7 @@
         "Name": "Steelcase Health - Regard - Planter - 11D x 22W"
       },
       {
-        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/a2f43d35-f698-40f4-95b2-a748a2232637/Steelcase+-+Seating+-+Brody+488+Series+-+WorkLounge+-+Right+Side+Surface+-+With+Power_Lighting_Footrest.glb",
+        "Url": "https://hypar.io/user-static/6fb2bf4f-4fdd-402c-b41e-cddb54125c64.glb",
         "Transform": {
           "Matrix": {
             "Components": [

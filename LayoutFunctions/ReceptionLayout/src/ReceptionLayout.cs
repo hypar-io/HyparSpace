@@ -21,6 +21,7 @@ namespace ReceptionLayout
         /// <returns>A ReceptionLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ReceptionLayoutOutputs Execute(Dictionary<string, Model> inputModels, ReceptionLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();

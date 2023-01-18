@@ -16,3 +16,9 @@ Lay out private offices.
 |---|---|---|
 |Private office count|Number|The number of private offices.|
 
+
+<br>
+
+## Additional Information
+
+

@@ -62,7 +62,7 @@ namespace PantryLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<PantryLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<PantryLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<PantryLayoutInputs,PantryLayoutOutputs>(store, PantryLayout.Execute);

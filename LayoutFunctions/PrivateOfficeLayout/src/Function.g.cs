@@ -62,7 +62,7 @@ namespace PrivateOfficeLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<PrivateOfficeLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<PrivateOfficeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<PrivateOfficeLayoutInputs,PrivateOfficeLayoutOutputs>(store, PrivateOfficeLayout.Execute);

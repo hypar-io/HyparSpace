@@ -62,7 +62,7 @@ namespace SpacePlanningZones
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<SpacePlanningZonesInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<SpacePlanningZonesInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<SpacePlanningZonesInputs,SpacePlanningZonesOutputs>(store, SpacePlanningZones.Execute);

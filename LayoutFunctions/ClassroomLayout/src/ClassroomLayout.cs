@@ -21,6 +21,7 @@ namespace ClassroomLayout
         /// <returns>A ClassroomLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ClassroomLayoutOutputs Execute(Dictionary<string, Model> inputModels, ClassroomLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
 
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();

@@ -25,6 +25,8 @@ namespace PrivateOfficeLayout
         /// <returns>A PrivateOfficeLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static PrivateOfficeLayoutOutputs Execute(Dictionary<string, Model> inputModels, PrivateOfficeLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
+
             proxies.Clear();
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);

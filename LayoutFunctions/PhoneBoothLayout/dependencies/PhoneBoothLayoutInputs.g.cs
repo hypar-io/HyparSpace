@@ -48,7 +48,7 @@ namespace PhoneBoothLayout
             }
         }
     
-        /// <summary>Should partitions be added around meeting rooms?</summary>
+        /// <summary>Should partitions be added around phone booths?</summary>
         [Newtonsoft.Json.JsonProperty("Create Walls", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool CreateWalls { get; set; } = true;
     

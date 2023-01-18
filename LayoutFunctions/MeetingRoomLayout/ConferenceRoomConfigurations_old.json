@@ -1,0 +1,5502 @@
+{
+  "22P": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 9.7835271845941385,
+        "Y": 7.8692671354465471,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3304923425587774,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.1296517437310847,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.7763568394002505E-15,
+              0.0,
+              4.9304349075230789,
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              5.729593593439648,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.7763568394002505E-15,
+              0.0,
+              8.530376846638589,
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              5.729593593439648,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.3304924319657445,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              2.1296518831892812,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.9304343710812688,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              2.1296518831892812,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.7515709447065078,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.9246446447064898,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.1339132447064877,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.6033956982777973,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.4533156982777982,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3083556982777971,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.158275698277798,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.5971541481194187,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              6.2997639572152409,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              4.3975383944618756,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310337,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              3.5476183944618782,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              2.6925783944618757,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              1.8426583944618784,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              1.8379633067906127,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594505991,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              2.68788330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450608,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              3.5429233067906125,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594506133,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              4.39284330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450624,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              7.9495457461620305,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450624,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              7.0996257461620331,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594506133,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              6.2445857461620307,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450608,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              5.3946657461620333,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594505991,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              5.399360833833299,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              6.2492808338333035,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              7.1043208338332988,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              7.9542408338333033,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310337,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.953999232457079,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414156,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.1270729324570681,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414191,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3363415324570553,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414191,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.5539411715726033,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414227,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              6.7270148715725853,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414262,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              7.93628347157258,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414262,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              1.9387603027582685,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807397,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              3.1480289027582558,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807455,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              4.3211026027582307,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807548,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              5.5387022418737786,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807642,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              6.74797084187378,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.54512622658077,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              7.9210445418737585,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807792,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.4467139876435553,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              9.779979371441069,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              3.8733912316737231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              9.779979371441069,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              6.3575640744232285,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              9.60572718488024,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              0.60960000753402721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Benjamin+Maier+Ceramics+-+Nouveau+Casserole+-+Accessories.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.7001027927304506E-08,
+              0.99999999999999933,
+              0.0,
+              9.5943098066503012,
+              -0.99999999999999933,
+              -3.7001027927304506E-08,
+              0.0,
+              7.0166859727954165,
+              0.0,
+              0.0,
+              1.0,
+              1.8505311444854733
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Large.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.8360831914747982E-07,
+              -0.99999999999998312,
+              0.0,
+              9.5769673124635979,
+              0.99999999999998312,
+              -1.8360831914747982E-07,
+              0.0,
+              7.2596671071392045,
+              0.0,
+              0.0,
+              1.0,
+              -0.13158813079830256
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              9.6057271848802337,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              7.2596671279125182,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 9.7835271845941385,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "20P": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.6576337586205483,
+        "Y": 7.8692671354465471,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              5.9396931817445875E-15,
+              0.0,
+              1.3304924319657161,
+              -5.9396931817445875E-15,
+              1.0,
+              0.0,
+              2.129651121449025,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.4948046940571658E-15,
+              1.0,
+              0.0,
+              4.9304349969300461,
+              -1.0,
+              -6.4948046940571658E-15,
+              0.0,
+              5.7295939439387293,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.4948046940571658E-15,
+              1.0,
+              0.0,
+              2.5303887604387576,
+              -1.0,
+              -6.4948046940571658E-15,
+              0.0,
+              5.7295934575481642,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -5.9396931817445875E-15,
+              0.0,
+              4.9304346321733767,
+              5.9396931817445875E-15,
+              -1.0,
+              0.0,
+              5.7295935934396489,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              4.9321238388180433,
+              -1.0,
+              1.7763568394002505E-15,
+              0.0,
+              6.2605042153841985,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              4.9321238388180433,
+              -1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.5578944062883764,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -8.1601392309949E-15,
+              1.0,
+              0.0,
+              4.3305374393021232,
+              -1.0,
+              -8.1601392309949E-15,
+              0.0,
+              2.7237451187971047,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -8.1601392309949E-15,
+              1.0,
+              0.0,
+              4.3305374393021374,
+              -1.0,
+              -8.1601392309949E-15,
+              0.0,
+              3.933013718797099,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -8.1601392309949E-15,
+              1.0,
+              0.0,
+              4.3305374393021445,
+              -1.0,
+              -8.1601392309949E-15,
+              0.0,
+              5.1060874187970811,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.4400928206632663E-15,
+              1.0,
+              0.0,
+              4.8807563190917307,
+              -1.0,
+              -5.4400928206632663E-15,
+              0.0,
+              2.7057877565363775,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.4400928206632663E-15,
+              1.0,
+              0.0,
+              4.8807563190917378,
+              -1.0,
+              -5.4400928206632663E-15,
+              0.0,
+              3.5557077565363819,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.4400928206632663E-15,
+              1.0,
+              0.0,
+              4.8807563190917449,
+              -1.0,
+              -5.4400928206632663E-15,
+              0.0,
+              4.4107477565363773,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.4400928206632663E-15,
+              1.0,
+              0.0,
+              4.8807563190917485,
+              -1.0,
+              -5.4400928206632663E-15,
+              0.0,
+              5.2606677565363817,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.7515709447065078,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.9246446447064898,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.1339132447064877,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.6033956982777973,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.4533156982777982,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3083556982777971,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.158275698277798,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.5971541481194187,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              6.2997639572152409,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              4.3975383944618756,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310337,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              3.5476183944618782,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              2.6925783944618757,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              1.8426583944618784,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              1.8379633067906127,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594505991,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              2.68788330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450608,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              3.5429233067906125,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594506133,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              4.39284330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450624,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.953999232457079,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414156,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.1270729324570681,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414191,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3363415324570553,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414191,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              1.9387603027582685,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807397,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              3.1480289027582558,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807455,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              4.3211026027582307,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807548,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.9724281584310681,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              6.6540859454674788,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              6.3575640744232285,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              6.6540859454674788,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              3.8733912316737231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              6.4798337589066506,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              0.60960000753402721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Benjamin+Maier+Ceramics+-+Nouveau+Casserole+-+Accessories.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.7001027927304506E-08,
+              0.99999999999999933,
+              0.0,
+              6.469826192219827,
+              -0.99999999999999933,
+              -3.7001027927304506E-08,
+              0.0,
+              7.01674104355882,
+              0.0,
+              0.0,
+              1.0,
+              1.8505311444854733
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              6.4798337589066435,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              7.2596671279125182,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Large.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.8360831914747982E-07,
+              -0.99999999999998312,
+              0.0,
+              6.4510738864900077,
+              0.99999999999998312,
+              -1.8360831914747982E-07,
+              0.0,
+              7.2596671071392045,
+              0.0,
+              0.0,
+              1.0,
+              -0.13158813079830256
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.6576337586205483,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "14P": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.5524058757989252,
+        "Y": 7.8692671354465471,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.7763568394002505E-15,
+              0.0,
+              4.9304346393021738,
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              5.7295939510675176,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3304923425587845,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.1296517437310847,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.3304924319657516,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              2.1296518831892812,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.930389900186686,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.7515709447065078,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.9246446447064898,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.9303899001866824,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.1339132447064877,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              2.6033956982777973,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.4533156982777982,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3083556982777971,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001866986,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              5.158275698277798,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001867021,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.5971541481194187,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3303911001866986,
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              6.2997639572152409,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              4.3975383944618827,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310337,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              3.5476183944618782,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              2.6925783944618829,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.87981160883103,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.4964032497318848E-15,
+              0.0,
+              1.8426583944618784,
+              4.4964032497318848E-15,
+              1.0,
+              0.0,
+              6.8798116088310231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              1.8379633067906127,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594505991,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              2.68788330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450608,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              3.5429233067906125,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.0130561594506133,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              9.936496070395151E-15,
+              0.0,
+              4.39284330679061,
+              -9.936496070395151E-15,
+              -1.0,
+              0.0,
+              1.013056159450624,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              1.9539992324570861,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414227,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              3.1270729324570681,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414262,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7763568394002505E-15,
+              0.0,
+              4.3363415324570624,
+              1.7763568394002505E-15,
+              1.0,
+              0.0,
+              6.3295927290414262,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              1.9387603027582649,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807642,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              3.1480289027582593,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.54512622658077,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              6.5503158452884236E-15,
+              0.0,
+              4.3211026027582413,
+              -6.5503158452884236E-15,
+              -1.0,
+              0.0,
+              1.5451262265807792,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.8623686818349032,
+          "Y": 3.9381535437547353,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              6.5488580626458557,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              6.3575640744232285,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.2188474935755949E-15,
+              1.0,
+              0.0,
+              6.5488580626458557,
+              -1.0,
+              -4.2188474935755949E-15,
+              0.0,
+              3.8733912316737231,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 3.9346335677232736,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              6.3746058760850275,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              0.60960000753402721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Benjamin+Maier+Ceramics+-+Nouveau+Casserole+-+Accessories.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.7001027927304506E-08,
+              0.99999999999999933,
+              0.0,
+              6.36333804290153,
+              -0.99999999999999933,
+              -3.7001027927304506E-08,
+              0.0,
+              7.0223287052432726,
+              0.0,
+              0.0,
+              1.0,
+              1.8505311444854733
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              6.37460587608502,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              7.2596671279125209,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Large.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.8360831914747982E-07,
+              -0.99999999999998312,
+              0.0,
+              6.3458460036683846,
+              0.99999999999998312,
+              -1.8360831914747982E-07,
+              0.0,
+              7.2596671071392072,
+              0.0,
+              0.0,
+              1.0,
+              -0.13158813079830256
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.5524058757989252,
+          "Y": 7.8692671354465471,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "6P-B": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.6138069609294412,
+        "Y": 3.7614112552492056,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Top+-+Rectangular+-+Flat+Profile+-+48D+x+108W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              2.5292799214557071,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.7424146576095358,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Panel+-+U+Panel+-+24W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              3.2150795096591374,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.7424146576095367,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Panel+-+U+Panel+-+24W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              1.8434803332522769,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.7424146576095425,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              3.3125840571950782,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.1015642814600142,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              2.536296557195076,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.0856892814600192,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              1.6865019143379278,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.1015642814600159,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              4.5633567784153613E-15,
+              0.0,
+              1.7298821674221045,
+              -4.5633567784153613E-15,
+              1.0,
+              0.0,
+              2.3939851426483458,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              4.5633567784153613E-15,
+              0.0,
+              2.564525913154867,
+              -4.5633567784153613E-15,
+              1.0,
+              0.0,
+              2.3952488009811694,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.6427876096865367,
+              0.76604444311898023,
+              0.0,
+              3.2622433664925339,
+              -0.76604444311898023,
+              0.6427876096865367,
+              0.0,
+              2.632269140551474,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.5279652577827534,
+          "Y": 1.8563033877797981,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Small+Square.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              4.60897985624452,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              0.70840782963176174,
+              0.0,
+              0.0,
+              1.0,
+              1.3075995944976782
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.6138069609294448,
+          "Y": 5.3290705182007514E-15,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Small+Square.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              4.60897985624452,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              -0.00208962851095984,
+              0.0,
+              0.0,
+              1.0,
+              0.88136598777771413
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.6138069609294448,
+          "Y": 5.3290705182007514E-15,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Large+Rectangular.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              4.6129799905449751,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              1.4174694947705215,
+              0.0,
+              0.0,
+              1.0,
+              0.72959999122619379
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.6138069609294412,
+          "Y": 2.5676307829760163,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Dang+-+2+Door+2+Drawer+Console+-+2+Door+_+2+Drawer.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              6.4392935428259079E-15,
+              -1.0,
+              0.0,
+              0.11794846300852058,
+              1.0,
+              6.4392935428259079E-15,
+              0.0,
+              0.808578816390451,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5527136788005009E-15,
+          "Y": 1.8807056276246001,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Viccarbe+-+Window+-+Freestanding+CoatHanger+-+Freestanding.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -8.88178419700125E-16,
+              0.0,
+              0.44010982611666805,
+              8.88178419700125E-16,
+              -1.0,
+              0.0,
+              3.300046199301367,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 3.7614112552492003,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "8P": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 5.6170627266646349,
+        "Y": 3.6208515120402538,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Top+-+Conference+-+Rectangular+-+Classic+-+48D+x+144W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              0.86460467659548712,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              2.4340496206322073,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.0432694959416792E-15,
+              0.0,
+              1.338348631142221,
+              -1.0432694959416792E-15,
+              -1.0,
+              0.0,
+              1.2341537493948986,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.0432694959416792E-15,
+              0.0,
+              2.1882686311422219,
+              -1.0432694959416792E-15,
+              -1.0,
+              0.0,
+              1.2341537493949026,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.0432694959416792E-15,
+              0.0,
+              3.0433086311422244,
+              -1.0432694959416792E-15,
+              -1.0,
+              0.0,
+              1.2341537493949049,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              1.1102230246251565E-15,
+              0.0,
+              3.8932286311422253,
+              -1.1102230246251565E-15,
+              -1.0,
+              0.0,
+              1.2341537493949102,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              3.8932286311422004,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              2.4341513493948783,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              3.0433086311421995,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              2.4341513493948739,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              2.1882686311422006,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              2.4341513493948721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+Cobi+434+Series+-+Chair+-+Fix+Arm.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              1.3383486311421997,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              2.4341513493948681,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              3.8688661775708919,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              1.834152549394894,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              2.659597577570894,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              1.8341525493948891,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Payback+-+Table+Base+-+Laminate+-+Rectangular+-+23+5_8W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -4.2743586448068527E-15,
+              0.0,
+              1.486523877570912,
+              4.2743586448068527E-15,
+              1.0,
+              0.0,
+              1.8341525493948847,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.654822923624554,
+          "Y": 1.8110737764750215,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+96W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -2.7755575615628914E-16,
+              1.0,
+              0.0,
+              5.6274514819041741,
+              -1.0,
+              -2.7755575615628914E-16,
+              0.0,
+              2.9966151262210796,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 5.617062726664626,
+          "Y": 1.8104257560201331,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "6P-A": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.0185057921995337,
+        "Y": 3.7614112552492118,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Dang+-+2+Door+2+Drawer+Console+-+2+Door+_+2+Drawer.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              5.6621374255882984E-15,
+              -1.0,
+              0.0,
+              0.11794846300852413,
+              1.0,
+              5.6621374255882984E-15,
+              0.0,
+              0.80857881639045148,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5527136788005009E-15,
+          "Y": 1.8807056276246001,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Viccarbe+-+Window+-+Freestanding+CoatHanger+-+Freestanding.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              0.44010982611666805,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              3.3000461993013674,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 3.7614112552492003,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.64278760968653736,
+              0.76604444311897979,
+              0.0,
+              3.6865078890766441,
+              -0.76604444311897979,
+              0.64278760968653736,
+              0.0,
+              2.6322691405514771,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              3.7862006611777517E-15,
+              0.0,
+              2.9887904357389807,
+              -3.7862006611777517E-15,
+              1.0,
+              0.0,
+              2.3952488009811721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              3.7862006611777517E-15,
+              0.0,
+              2.1541466900062147,
+              -3.7862006611777517E-15,
+              1.0,
+              0.0,
+              2.3939851426483476,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              2.110766436922038,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.1015642814600182,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              2.9605610797791861,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.0856892814600223,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Marien152+-+Seating+-+Conference+Chair+-+5+Star.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              3.7368485797791884,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.1015642814600177,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Panel+-+U+Panel+-+24W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              2.2677448558363835,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.7424146576095447,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Panel+-+U+Panel+-+24W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              3.639344032243244,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.7424146576095403,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Top+-+Rectangular+-+Flat+Profile+-+48D+x+108W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              2.9535444440398138,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.742414657609539,
+              0.0,
+              0.0,
+              1.0,
+              1.7927566927725118E-27
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0028888489342549,
+          "Y": 1.8136649680465773,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Large+Rectangular.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              6.0174494785878281,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.4174694947705282,
+              0.0,
+              0.0,
+              1.0,
+              0.72959999122619379
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.01850579219953,
+          "Y": 2.5676307829760225,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.970295726275996,
+              0.24192189559967006,
+              0.0,
+              5.6112414638825072,
+              -0.24192189559967006,
+              0.970295726275996,
+              0.0,
+              1.4180300518687723,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.0185057921995337,
+          "Y": 1.1546319456101628E-14,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+-+Stool+-+Seat+with+Cushion.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.78801075360672157,
+              -0.61566147532565885,
+              0.0,
+              5.2743393471705993,
+              0.61566147532565885,
+              -0.78801075360672157,
+              0.0,
+              0.7358513078126232,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.0185057921995337,
+          "Y": 1.1546319456101628E-14,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+Pedestal+Table+-+Round+Stand+Up.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              5.5091961558318872,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              1.0428508239554652,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.0185057921995337,
+          "Y": 1.1546319456101628E-14,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Small+Square.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              6.013764560624594,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              0.708407829631768,
+              0.0,
+              0.0,
+              1.0,
+              1.3075995944976782
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.0185057921995337,
+          "Y": 1.1546319456101628E-14,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+PolyVision+-+Motif+Panel+-+Small+Square.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.1102230246251605E-16,
+              0.0,
+              6.01376456062459,
+              1.1102230246251605E-16,
+              -1.0,
+              0.0,
+              -0.0026234437739770522,
+              0.0,
+              0.0,
+              1.0,
+              0.88136598777771413
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 6.0185057921995337,
+          "Y": 1.1546319456101628E-14,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "4P-A": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 3.4430551255076267,
+        "Y": 3.6455956363801625,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.60876144345812488,
+              0.79335332920381718,
+              0.0,
+              2.22485670204329,
+              -0.79335332920381718,
+              -0.60876144345812488,
+              0.0,
+              1.2940073672861843,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8238093604970373,
+          "Y": 1.7145862920093684,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.60876137410097664,
+              0.793353382423426,
+              0.0,
+              2.1764183410692866,
+              -0.793353382423426,
+              0.60876137410097664,
+              0.0,
+              2.0929857882968896,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8238093604970373,
+          "Y": 1.7145862920093684,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.688024467947835,
+              -0.72568748887182744,
+              0.0,
+              1.3105989535460552,
+              0.72568748887182744,
+              -0.688024467947835,
+              0.0,
+              1.2648336450858948,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8238093604970373,
+          "Y": 1.7145862920093684,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.71307174090805736,
+              -0.70109107277040161,
+              0.0,
+              1.2946813385974778,
+              0.70109107277040161,
+              0.71307174090805736,
+              0.0,
+              2.1263652273854792,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8238093604970373,
+          "Y": 1.7145862920093684,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+28.5H+Working+Height+-+Round+-+48Dia.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              1.6653345369377348E-15,
+              0.0,
+              1.7945531189951325,
+              -1.6653345369377348E-15,
+              1.0,
+              0.0,
+              1.5993982295654949,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8238093604970373,
+          "Y": 1.7145862920093684,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+72W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.3282712403633931E-15,
+              1.0,
+              0.0,
+              3.4308630154047535,
+              -1.0,
+              -6.3282712403633931E-15,
+              0.0,
+              2.7076557317365384,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.4430551255076196,
+          "Y": 1.8227978181900788,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+72W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9984014443252818E-15,
+              -1.0,
+              0.0,
+              -0.00044320245327611474,
+              1.0,
+              1.9984014443252818E-15,
+              0.0,
+              0.87885573173652887,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 1.8227978181900832,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Universal+Laminate+Enhanced+Storage+-+Overhead+-+Open+-+72W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -2.5535129566378593E-15,
+              -1.0,
+              0.0,
+              0.036070264911444383,
+              1.0,
+              -2.5535129566378593E-15,
+              0.0,
+              0.88285767009239979,
+              0.0,
+              0.0,
+              1.0,
+              -0.63499999999999979
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 1.8227978181900832,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Buoy+-+Seating+-+Black.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.2172489379008766E-15,
+              1.0,
+              0.0,
+              0.23970017251293996,
+              -1.0,
+              -6.2172489379008766E-15,
+              0.0,
+              0.24767492391655566,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.0,
+          "Y": 4.4408920985006262E-15,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "4P-B": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 3.2112433205801239,
+        "Y": 2.5950894288843602,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Turnstone+-+Simple+Tables+-+28.5H+Working+Height+-+Round+-+48Dia.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              1.4988010832439615E-15,
+              0.0,
+              1.5627413140676296,
+              -1.4988010832439615E-15,
+              1.0,
+              0.0,
+              1.1833257591827988,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5198663979142992,
+          "Y": 1.3070371759209318,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.71307174090805714,
+              -0.70109107277040172,
+              0.0,
+              1.0628695336699749,
+              0.70109107277040172,
+              0.71307174090805714,
+              0.0,
+              1.7102927570027826,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5198663979142992,
+          "Y": 1.3070371759209318,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.68802446794783512,
+              -0.72568748887182732,
+              0.0,
+              1.0787871486185594,
+              0.72568748887182732,
+              -0.68802446794783512,
+              0.0,
+              0.84876117470319867,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5198663979142992,
+          "Y": 1.3070371759209318,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.60876137410097686,
+              0.7933533824234259,
+              0.0,
+              1.9446065361417837,
+              -0.7933533824234259,
+              0.60876137410097686,
+              0.0,
+              1.6769133179141935,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5198663979142992,
+          "Y": 1.3070371759209318,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Seating+-+QiVi+428+Series+-+Collaborative+Chairs+-+With+Arm+-+Upholstered+Seat.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.60876144345812466,
+              0.79335332920381729,
+              0.0,
+              1.9930448971157873,
+              -0.79335332920381729,
+              -0.60876144345812466,
+              0.0,
+              0.87793489690348814,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5198663979142992,
+          "Y": 1.3070371759209318,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+72W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.3282712403633931E-15,
+              1.0,
+              0.0,
+              3.1990512104772577,
+              -1.0,
+              -6.3282712403633931E-15,
+              0.0,
+              2.1824026279886377,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.2112433205801239,
+          "Y": 1.2975447144421781,
+          "Z": 0.0
+        }
+      }
+    ]
+  },
+  "13P": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 8.40267824883557,
+        "Y": 4.6217047722458542,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881924277568774,
+              -0.96592577332268126,
+              0.0,
+              1.2401396292303652,
+              0.96592577332268126,
+              0.25881924277568774,
+              0.0,
+              2.334758570636092,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464843727731114E-07,
+              0.0,
+              1.6971429604882224,
+              2.0464843727731114E-07,
+              -0.99999999999997913,
+              0.0,
+              1.6732928188945175,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464722171435887E-07,
+              0.0,
+              2.5797028531682189,
+              2.0464722171435887E-07,
+              -0.99999999999997913,
+              0.0,
+              1.6490761491232746,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464821358554083E-07,
+              0.0,
+              3.5736895676851406,
+              2.0464821358554083E-07,
+              -0.99999999999997913,
+              0.0,
+              1.5984585909544879,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464722171435887E-07,
+              0.0,
+              4.5513040567377852,
+              2.0464722171435887E-07,
+              -0.99999999999997913,
+              0.0,
+              1.5902374834325075,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464821358554083E-07,
+              0.0,
+              5.4807650252030173,
+              2.0464821358554083E-07,
+              -0.99999999999997913,
+              0.0,
+              1.6222667307331289,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99999999999997913,
+              -2.0464821358554083E-07,
+              0.0,
+              6.4147281542623569,
+              2.0464821358554083E-07,
+              -0.99999999999997913,
+              0.0,
+              1.6792937942571227,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              6.4108453997733816,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.00724692015262,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              5.4768829198469,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.0493491798462369,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              4.5482157047231437,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.0936163836254567,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              3.5706005946054331,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.0764371321509909,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              2.5766145076277729,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.03489144138897,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+Coalesse+-+Massaud+-+Conference+Chair+-+Low+Back+-+Duvet+Upholstery_Caster.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999997913,
+              -2.0464711325358409E-07,
+              0.0,
+              1.6940552539634648,
+              2.0464711325358409E-07,
+              0.99999999999997913,
+              0.0,
+              3.0064301349128426,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Small.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999977174,
+              6.75876076932025E-07,
+              0.0,
+              4.59950106530402,
+              -6.75876076932025E-07,
+              0.99999999999977174,
+              0.0,
+              2.2893753028018429,
+              0.0,
+              0.0,
+              1.0,
+              -0.40639999999990889
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Medium.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999998312,
+              -1.8360832092383666E-07,
+              0.0,
+              4.1019650308545419,
+              1.8360832092383666E-07,
+              0.99999999999998312,
+              0.0,
+              2.2893752957294486,
+              0.0,
+              0.0,
+              1.0,
+              -0.40639999999990895
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Elliptical+Drum+-+Recessed+Toe+Kick+-+18D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.8360834025966565E-07,
+              0.99999999999998312,
+              0.0,
+              5.9149408627915054,
+              -0.99999999999998312,
+              1.8360834025966565E-07,
+              0.0,
+              2.2893751667987132,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Elliptical+Drum+-+Recessed+Toe+Kick+-+18D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.8360834025966565E-07,
+              0.99999999999998312,
+              0.0,
+              4.7719408627915048,
+              -0.99999999999998312,
+              1.8360834025966565E-07,
+              0.0,
+              2.2893751667987132,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Elliptical+Drum+-+Recessed+Toe+Kick+-+18D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.8360834025966565E-07,
+              0.99999999999998312,
+              0.0,
+              2.2573408627915068,
+              -0.99999999999998312,
+              1.8360834025966565E-07,
+              0.0,
+              2.2893751667987194,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Base+-+Elliptical+Drum+-+Recessed+Toe+Kick+-+18D+x+36W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.8360834025966565E-07,
+              0.99999999999998312,
+              0.0,
+              3.39975976047055,
+              -0.99999999999998312,
+              1.8360834025966565E-07,
+              0.0,
+              2.2893751667987186,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Convene+-+Conference+Table+Top+-+Boat+Shape+-+Flat+Profile+-+72D+x+216W.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99999999999998324,
+              -1.8360834036468342E-07,
+              0.0,
+              4.1019650308546094,
+              1.8360834036468342E-07,
+              0.99999999999998324,
+              0.0,
+              2.2893752957294522,
+              0.0,
+              0.0,
+              1.0,
+              1.962696671853337E-14
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.815613263519865,
+          "Y": 2.2450481885374622,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Steelcase+-+Premium+Whiteboard+and+Tackboard+-+Edge+Series+-+Markerboard+-+72W+x+48H.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.6629367034256583E-15,
+              1.0,
+              0.0,
+              8.4100950927378939,
+              -1.0,
+              -4.6629367034256583E-15,
+              0.0,
+              3.2415535770581676,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 8.40267824883557,
+          "Y": 2.3108523861229271,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Benjamin+Maier+Ceramics+-+Nouveau+Casserole+-+Accessories.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.7001027927304506E-08,
+              0.99999999999999933,
+              0.0,
+              8.2130301591429156,
+              -0.99999999999999933,
+              -3.7001027927304506E-08,
+              0.0,
+              3.7711246376591836,
+              0.0,
+              0.0,
+              1.0,
+              1.8505311444854733
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 8.40267824883557,
+          "Y": 4.6217047722458542,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Blu+Dot+-+Delicious+-+Tray+-+Large.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.8360831914747982E-07,
+              -0.99999999999998312,
+              0.0,
+              8.19611837670503,
+              0.99999999999998312,
+              -1.8360831914747982E-07,
+              0.0,
+              4.0121047439385134,
+              0.0,
+              0.0,
+              1.0,
+              -0.13158813079830256
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 8.40267824883557,
+          "Y": 4.6217047722458542,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              8.2248782491216659,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              4.0121047647118271,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 8.40267824883557,
+          "Y": 4.6217047722458542,
+          "Z": 0.0
+        }
+      },
+      {
+        "Url": "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/2290ea5e-98aa-429d-8fab-1f260458bf57/Mitchell+Gold+Bob+Williams+-+Filmore+-+Bookcase+-+Bookcase.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.2164496600635175E-16,
+              1.0,
+              0.0,
+              8.224878249121673,
+              -1.0,
+              -7.2164496600635175E-16,
+              0.0,
+              0.60960000753402721,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 8.40267824883557,
+          "Y": 0.0,
+          "Z": 0.0
+        }
+      }
+    ]
+  }
+}

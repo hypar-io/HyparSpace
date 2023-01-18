@@ -35,6 +35,7 @@ namespace OpenOfficeLayout
         /// <returns>A OpenOfficeLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static OpenOfficeLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenOfficeLayoutInputs input)
         {
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             // var catalog = JsonConvert.DeserializeObject<ContentCatalog>(File.ReadAllText("./catalog.json"));
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "OpenOfficeDeskConfigurations.json");
             var spacePlanningZones = inputModels["Space Planning Zones"];

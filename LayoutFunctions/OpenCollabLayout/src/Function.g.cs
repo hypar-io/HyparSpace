@@ -62,7 +62,7 @@ namespace OpenCollaborationLayout
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<OpenCollaborationLayoutInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<OpenCollaborationLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<OpenCollaborationLayoutInputs,OpenCollaborationLayoutOutputs>(store, OpenCollaborationLayout.Execute);

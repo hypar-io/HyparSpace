@@ -21,3 +21,9 @@ Lay out desks with optional open collaboration areas distributed throughout.
 |---|---|---|
 |Total Desk Count|Number|The number of desks.|
 
+
+<br>
+
+## Additional Information
+
+
