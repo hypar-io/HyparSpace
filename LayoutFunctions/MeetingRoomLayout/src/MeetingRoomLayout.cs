@@ -64,7 +64,7 @@ namespace MeetingRoomLayout
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;
-                    var levelInvertedTransform = levelVolume.Transform.Inverted();
+                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
                         .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
                     wallCandidateLines.AddRange(roomWallCandidatesLines);
