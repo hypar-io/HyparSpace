@@ -187,10 +187,10 @@
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/AreaTally",
     "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/ProgramRequirement"
+    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://prod-api.hypar.io/schemas/CoreArea"
   ],
   "repository_url": "https://github.com/hypar-io/HyparSpace",
-  "thumbnail_id": "55549a8e-ae51-44a1-a4f8-3817eb5d5448",
   "last_updated": "2022-06-11T12:34:31.394295",
   "cli_version": "1.2.0-alpha.12"
 }

@@ -56,7 +56,7 @@ namespace WorkplaceMetrics
                 warnings.Add("This function expects either floors or conceptual mass. If not provided, some calculations may be incorrect.");
             }
 
-            var allSpaceBoundaries = zonesModel.AllElementsOfType<SpaceBoundary>();
+            var allSpaceBoundaries = zonesModel.AllElementsAssignableFromType<SpaceBoundary>();
 
             var totalDeskCount = CountWorkplaceTyped(inputModels, "Open Office Layout", "Desk");
             var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout", "Meeting Room Seat");

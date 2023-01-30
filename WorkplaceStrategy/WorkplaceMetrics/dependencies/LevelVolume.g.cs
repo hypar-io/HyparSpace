@@ -27,7 +27,7 @@ namespace Elements
     public partial class LevelVolume : GeometricElement
     {
         [JsonConstructor]
-        public LevelVolume(Profile @profile, double @height, double @area, string @buildingName, System.Guid? @level, System.Guid? @mass, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public LevelVolume(Profile @profile, double @height, double @area, string @buildingName, System.Guid? @level, System.Guid? @mass, System.Guid? @planView, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.Profile = @profile;
@@ -36,6 +36,7 @@ namespace Elements
             this.BuildingName = @buildingName;
             this.Level = @level;
             this.Mass = @mass;
+            this.PlanView = @planView;
             }
         
         // Empty constructor
@@ -67,6 +68,10 @@ namespace Elements
         /// <summary>The Conceptual Mass this volume was created from.</summary>
         [JsonProperty("Mass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Mass { get; set; }
+    
+        /// <summary>The default plan view for this level</summary>
+        [JsonProperty("Plan View", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? PlanView { get; set; }
     
     
     }

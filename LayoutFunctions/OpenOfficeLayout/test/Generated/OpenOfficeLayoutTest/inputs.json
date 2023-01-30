@@ -1,57 +1,12 @@
 {
-  "Grid Rotation": 0,
   "Integrated Collaboration Space Density": 0.2,
-  "Custom Workstation Properties": {
-    "Length": 2,
-    "Width": 2
-  },
   "Desk Type": "Simple Desk - 29x70",
   "Aisle Width": 1,
-  "Column Avoidance Strategy": "Adaptive Grid",
-  "overrides": {
-    "Space Settings": [
-      {
-        "value": {
-          "Grid Rotation": 50,
-          "Integrated Collaboration Space Density": 0.2,
-          "Custom Workstation Properties": {
-            "Width": 2,
-            "Length": 2
-          },
-          "Id": "2dc60d76-93fc-42f4-a124-cf70e5f15520",
-          "Aisle Width": 1,
-          "Desk Type": "L-Shaped"
-        },
-        "identity": {
-          "ParentCentroid": {
-            "X": 38.78589,
-            "Y": 46.88119,
-            "Z": 0
-          }
-        },
-        "id": "9ed8bdea-5f62-4657-8072-35e97e5aff90"
-      },
-      {
-        "value": {
-          "Grid Rotation": 0,
-          "Integrated Collaboration Space Density": 0.2,
-          "Custom Workstation Properties": {
-            "Width": 2,
-            "Length": 2
-          },
-          "Id": "2f424c01-d813-49cb-ae2d-7575bd59d998",
-          "Aisle Width": 1,
-          "Desk Type": "Double Desk"
-        },
-        "identity": {
-          "ParentCentroid": {
-            "X": 12.947699999999998,
-            "Y": 32.33691,
-            "Z": 0
-          }
-        },
-        "id": "da316d90-d482-494c-a5f9-38460449fff7"
-      }
-    ]
-  }
+  "Back-to-Back Width": 1,
+  "Grid Rotation": 0,
+  "Custom Workstation Properties": {
+    "Width": 2,
+    "Length": 2
+  },
+  "Column Avoidance Strategy": "Adaptive Grid"
 }

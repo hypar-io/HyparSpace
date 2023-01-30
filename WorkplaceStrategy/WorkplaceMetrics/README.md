@@ -29,3 +29,8 @@ Calculate various workplace metrics from a layout.
 |Meeting room ratio|Number|On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.|
 |Private Office Count|Number|Total number of private offices.|
 
+
+<br>
+
+## Additional Information
+

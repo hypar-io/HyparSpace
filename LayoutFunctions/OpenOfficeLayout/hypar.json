@@ -264,7 +264,8 @@
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://prod-api.hypar.io/schemas/WorkpointCount",
     "https://prod-api.hypar.io/schemas/LabelConfiguration",
-    "https://prod-api.hypar.io/schemas/ProgramRequirement"
+    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://prod-api.hypar.io/schemas/CollaborationSpaceBoundary"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "default_camera": {

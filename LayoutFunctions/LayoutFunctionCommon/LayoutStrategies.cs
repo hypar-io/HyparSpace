@@ -148,10 +148,7 @@ namespace LayoutFunctionCommon
                 foreach (var cs in circSegments)
                 {
                     var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
-                    if (matchingLevel != null)
-                    {
-                        matchingLevel.Elements.Add(cs);
-                    }
+                    matchingLevel?.Elements.Add(cs);
                 }
             }
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);

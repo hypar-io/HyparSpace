@@ -14,16 +14,20 @@
     <Authors>Andrew Heumann</Authors>
     <Company>Hypar</Company>
   </PropertyGroup>
+  <!-- <ItemGroup>
+    <ProjectReference Include="..\..\..\elements\Elements\src\Elements.csproj" />
+  <ProjectReference Include="..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" />
+  <ProjectReference
+      Include="..\..\..\elements\Elements.Components\src\Elements.Components.csproj"
+  />
+  </ItemGroup> -->
+
   <ItemGroup>
     <PackageReference Include="Hypar.Elements" Version="1.4.0" />
     <PackageReference
       Include="Hypar.Functions" Version="1.3.0" />
-    <!-- <ProjectReference Include="..\..\..\elements\Elements\src\Elements.csproj" />
-    <ProjectReference Include="..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" /> -->
-    <PackageReference Include="Hypar.Elements.Components" Version="1.4.0" />
-    <!-- <ProjectReference
-    Include="..\..\..\elements\Elements.Components\src\Elements.Components.csproj" /> -->
-
+    <PackageReference
+      Include="Hypar.Elements.Components" Version="1.4.0" />
     <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1" />
   </ItemGroup>
 </Project>
