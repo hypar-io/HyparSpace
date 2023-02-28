@@ -47,6 +47,31 @@ namespace LayoutFunctionCommon
             return wallCandidateLines;
         }
 
+        public static List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)> FindWallCandidateOptions(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, IEnumerable<string> wallTypeFilter = null)
+        {
+            var wallCandidateOption = new List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)>();
+            var allSegments = room.Boundary.Perimeter.Segments().Select(s => s.TransformedLine(room.Transform)).ToList();
+            var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile);
+            foreach (var orientationGuideEdge in orientationGuideEdges)
+            {
+                var wallCandidateLines = new List<(Line line, string type)>();
+                wallCandidateLines.Add((orientationGuideEdge.Line, "Glass"));
+                if (levelProfile != null)
+                {
+                    var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
+                    wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s => (s, "Solid")));
+                }
+                else
+                {
+                    // if no level or floor is present, everything that's not glass is solid.
+                    wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s => (s, "Solid")));
+                }
+                wallCandidateOption.Add((orientationGuideEdge.Line, (wallTypeFilter != null ? wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList() : wallCandidateLines)));
+            }
+
+            return wallCandidateOption;
+        }
+
         public static List<(Line line, string type)> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
             var resultCandidates = new List<(Line line, string type)>();
@@ -321,7 +346,7 @@ namespace LayoutFunctionCommon
                     start.Z = 0;
                     end.Z = 0;
                     var comparisonSegmentProjected = new Line(start, end);
-                    var dist = midpt.DistanceTo(comparisonSegment);
+                    var dist = midpt.DistanceTo(comparisonSegmentProjected);
                     if (dist < 0.3)
                     {
                         adjacentToAny = true;
@@ -368,23 +393,81 @@ namespace LayoutFunctionCommon
                     }
                 }
             }
-            if (maxDist != 0)
+            if (maxDist != 0 && minDist >= maxDist)
             {
-                if (minDist < maxDist)
-                {
-
-                    otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
-                    return minSeg;
-                }
-                else
-                {
-                    Console.WriteLine($"no matches: {minDist}");
-                    otherSegments = allEdges;
-                    return null;
-                }
+                Console.WriteLine($"no matches: {minDist}");
+                otherSegments = allEdges;
+                return null;
             }
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
+        }
+
+        public static List<(Line Line, IEnumerable<Line> OtherSegments)> SortEdgesByPrimaryAccess(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, double maxDist = 0)
+        {
+            if (corridorSegments != null && corridorSegments.Count() != 0)
+            {
+                // if we have corridors, find the best edge along a corridor
+                return FindEdgesAdjacentToSegments(edgesToClassify, corridorSegments, maxDist);
+            }
+
+            if (floorBoundary != null)
+            {
+                // if we have no corridors, find the best edge not along the floor boundary
+                var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
+                return (edgesNotAlongFloorBoundary.Count() == 0 ? edgesAlongFloorBoundary : edgesNotAlongFloorBoundary).OrderByDescending(e => e.Length()).Select(e =>
+                {
+                    var otherSegments = edgesToClassify.Except(new[] { e });
+                    return (e, otherSegments);
+                }).ToList();
+            }
+
+            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length());
+            return edgesByLength.Select(e =>
+            {
+                var otherSegments = edgesToClassify.Except(new[] { e });
+                return (e, otherSegments);
+            }).ToList();
+        }
+        public static List<(Line Line, IEnumerable<Line> OtherSegments)> FindEdgesAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, double maxDist = 0)
+        {
+            if (segmentsToTestAgainst.Count() > 0)
+            {
+                var edgesByDist = edgesToClassify.Select(e =>
+                {
+                    var midpt = e.PointAt(0.5);
+                    (Line line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
+                    return edge;
+                });
+
+                if (maxDist != 0)
+                {
+                    edgesByDist = edgesByDist.Where(e => e.dist < maxDist);
+                }
+
+                var comparer = new EdgesComparer();
+                edgesByDist = edgesByDist.OrderBy(e => e, comparer);
+
+                return edgesByDist.Select(e =>
+                {
+                    var otherSegments = edgesToClassify.Except(new[] { e.line });
+                    return (e.line, otherSegments);
+                }).ToList();
+            }
+
+            if (maxDist != 0)
+            {
+                Console.WriteLine($"no matches: {maxDist}");
+                return new List<(Line Line, IEnumerable<Line> OtherSegments)>() { (null, edgesToClassify) };
+            }
+
+            // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
+            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length());
+            return edgesByLength.Select(e =>
+            {
+                var otherSegments = edgesToClassify.Except(new[] { e });
+                return (e, otherSegments);
+            }).ToList();
         }
 
         public static List<(Line line, string type)> PartitionsAndGlazingCandidatesFromGrid(List<(Line line, string type)> wallCandidateLines, Grid2d grid, Profile levelBoundary)
@@ -417,6 +500,18 @@ namespace LayoutFunctionCommon
             }
 
             return wallCandidatesOut;
+        }
+    }
+
+    public class EdgesComparer : IComparer<(Line line, double dist)>
+    {
+        public int Compare((Line line, double dist) edge1, (Line line, double dist) edge2)
+        {
+            if (Math.Abs(edge1.dist - edge2.dist) < 0.1)
+            {
+                return edge2.line.Length().CompareTo(edge1.line.Length());
+            }
+            return edge1.dist.CompareTo(edge2.dist);
         }
     }
 }

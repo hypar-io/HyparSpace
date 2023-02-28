@@ -166,21 +166,32 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
+                    var success = false;
                     var spaceBoundary = room.Boundary;
-                    wallCandidateLines.AddRange(WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge));
+                    var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
 
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                    var boundaryCurves = new List<Polygon>();
-                    boundaryCurves.Add(spaceBoundary.Perimeter);
-                    boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
-                    var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    foreach (var cell in grid.GetCells())
+                    foreach (var wallCandidateOption in wallCandidateOptions)
                     {
-                        var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
-                        if (layout != null)
+                        var orientationTransform = new Transform(Vector3.Origin, wallCandidateOption.OrientationGuideEdge.Direction(), Vector3.ZAxis);
+                        var boundaryCurves = new List<Polygon>();
+                        boundaryCurves.Add(spaceBoundary.Perimeter);
+                        boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+
+                        var grid = new Grid2d(boundaryCurves, orientationTransform);
+                        foreach (var cell in grid.GetCells())
                         {
-                            outputModel.AddElement(layout);
+                            var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
+                            if (layout != null)
+                            {
+                                success = true;
+                                wallCandidateLines.AddRange(wallCandidateOption.WallCandidates);
+                                outputModel.AddElement(layout);
+                            }
+                        }
+
+                        if (success)
+                        {
+                            break;
                         }
                     }
                 }
