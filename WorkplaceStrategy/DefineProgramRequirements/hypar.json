@@ -34,6 +34,7 @@
   "source_file_key": null,
   "preview_image": null,
   "element_types": [
-    "https://prod-api.hypar.io/schemas/ProgramRequirement"
+    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://schemas.hypar.io/ColorScheme.json"
   ]
 }

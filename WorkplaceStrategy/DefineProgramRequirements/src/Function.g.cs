@@ -62,7 +62,7 @@ namespace DefineProgramRequirements
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<DefineProgramRequirementsInputs,DefineProgramRequirementsOutputs>(store, DefineProgramRequirements.Execute);

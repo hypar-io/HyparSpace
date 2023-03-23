@@ -26,6 +26,12 @@ namespace DefineProgramRequirements
             }
             var sum = input.ProgramRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
             output.Model.AddElements(input.ProgramRequirements);
+            var colorScheme = ColorScheme.ProgramColors;
+            foreach (var req in input.ProgramRequirements)
+            {
+                colorScheme.Mapping[req.QualifiedProgramName] = req.Color;
+            }
+            output.Model.AddElement(colorScheme);
             output.TotalProgramArea = sum;
             return output;
         }
