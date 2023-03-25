@@ -112,7 +112,9 @@ namespace PrivateOfficeLayout
                             var trimmedGeo = cell.GetTrimmedCellGeometry();
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
-                                output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform()));
+                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
+                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                                output.Model.AddElement(layout);
                                 totalPrivateOfficeCount++;
                             }
                             else if (trimmedGeo.Count() > 0)
@@ -123,7 +125,9 @@ namespace PrivateOfficeLayout
                                 var areaRatio = cinchedPoly.Area() / rect.Area();
                                 if (areaRatio > 0.7)
                                 {
-                                    output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform()));
+                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
+                                    LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                                    output.Model.AddElement(layout);
                                     totalPrivateOfficeCount++;
                                 }
                             }

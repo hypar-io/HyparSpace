@@ -101,6 +101,7 @@ namespace PhoneBoothLayout
                             var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
+                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 totalBoothCount++;
                             }
@@ -114,6 +115,7 @@ namespace PhoneBoothLayout
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
+                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 totalBoothCount++;
                             }

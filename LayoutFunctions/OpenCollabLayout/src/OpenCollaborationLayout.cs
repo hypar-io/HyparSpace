@@ -64,10 +64,10 @@ namespace OpenCollaborationLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Collaboration");
-                // var levelVolume = levelVolumes.FirstOrDefault(l =>
-                // (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                //     levelVolumeId as string == l.Id.ToString()) ||
-                // l.Name == lvl.Name);
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 foreach (var room in meetingRmBoundaries)
                 {
@@ -89,6 +89,7 @@ namespace OpenCollaborationLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             output.Model.AddElement(layout.instance);
                             totalCountableSeats += layout.count;
                         }
@@ -101,6 +102,7 @@ namespace OpenCollaborationLayout
                             try
                             {
                                 var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                                LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                                 output.Model.AddElement(layout.instance);
                                 totalCountableSeats += layout.count;
                             }

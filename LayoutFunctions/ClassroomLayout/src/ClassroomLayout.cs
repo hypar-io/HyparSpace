@@ -94,14 +94,19 @@ namespace ClassroomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var componentInstance = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            output.Model.AddElement(componentInstance);
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+
+                            var componentInstance = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            output.Model.AddElement(componentInstance);
                         }
                         try
                         {
@@ -132,6 +137,8 @@ namespace ClassroomLayout
                                                 .Concatenated(new Transform(cellRect.Vertices[0]))
                                                 .Concatenated(room.Transform),
                                                 "Desk");
+                                                
+                                            LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
                                             output.Model.AddElement(instance);
                                         }
                                     }

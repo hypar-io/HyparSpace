@@ -184,6 +184,8 @@ namespace LayoutFunctionCommon
                             if (layout != null)
                             {
                                 success = true;
+                                SetLevelVolume(layout, levelVolume?.Id);
+
                                 wallCandidateLines.AddRange(wallCandidateOption.WallCandidates);
                                 outputModel.AddElement(layout);
                             }
@@ -656,5 +658,26 @@ namespace LayoutFunctionCommon
             return true;
         }
 
+        public static void SetLevelVolume(ElementInstance elementInstance, Guid? levelVolumeId)
+        {
+            if (elementInstance != null)
+            {
+                elementInstance.AdditionalProperties["Level"] = levelVolumeId;
+            }
+        }
+
+        public static void SetLevelVolume(ComponentInstance componentInstance, Guid? levelVolumeId)
+        {
+            if (componentInstance != null)
+            {
+                foreach (var instance in componentInstance.Instances)
+                {
+                    if (instance != null)
+                    {
+                        instance.AdditionalProperties["Level"] = levelVolumeId;
+                    }
+                }
+            }
+        }
     }
 }

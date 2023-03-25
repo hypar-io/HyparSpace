@@ -39,7 +39,7 @@ namespace PantryLayout
                     }
                 }
             }
-            // var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
             var outputModel = new Model();
             var configJson = File.ReadAllText("./PantryConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -50,7 +50,11 @@ namespace PantryLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Pantry");
-                // var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;
@@ -72,6 +76,7 @@ namespace PantryLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
                             totalCountableSeats += layout.count;
                         }
@@ -81,8 +86,11 @@ namespace PantryLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
+
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
+
                             totalCountableSeats += layout.count;
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }

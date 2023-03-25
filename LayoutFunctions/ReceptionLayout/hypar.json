@@ -28,6 +28,7 @@
   ],
   "overrides": {
     "Furniture Locations": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {

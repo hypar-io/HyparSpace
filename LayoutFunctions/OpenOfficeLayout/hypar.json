@@ -24,6 +24,11 @@
       "autohide": false,
       "name": "Columns",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Levels",
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",
@@ -228,6 +233,7 @@
       "default": {}
     },
     "Furniture Locations": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {
