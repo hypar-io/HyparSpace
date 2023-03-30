@@ -43,11 +43,7 @@ namespace PrivateOfficeLayout
                     }
                 }
             }
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
-            {
-                levelVolumes = massModel.AllElementsOfType<LevelVolume>();
-            }
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var output = new PrivateOfficeLayoutOutputs();
             var assmLoc = System.Reflection.Assembly.GetExecutingAssembly().Location;
             var dir = Path.GetDirectoryName(assmLoc);

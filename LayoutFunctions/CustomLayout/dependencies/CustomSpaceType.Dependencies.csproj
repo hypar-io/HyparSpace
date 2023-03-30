@@ -10,10 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.2.0" />
-    <PackageReference Include="Hypar.Functions" Version="1.1.1" />
-    <PackageReference Include="Hypar.Elements.Components" Version="1.2.0" />
-
+    <PackageReference Include="Hypar.Elements" Version="1.5.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.6.0" />
+    <PackageReference Include="Hypar.Elements.Components" Version="1.5.0" />
   </ItemGroup>
 
 </Project>

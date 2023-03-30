@@ -29,6 +29,11 @@
       "autohide": false,
       "name": "Levels",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
     }
   ],
   "model_output": "Open Office Layout",

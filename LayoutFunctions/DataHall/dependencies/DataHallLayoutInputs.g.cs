@@ -22,7 +22,7 @@ namespace DataHallLayout
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class DataHallLayoutInputs : S3Args
     
@@ -74,7 +74,7 @@ namespace DataHallLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DataHallLayoutInputsCabinetDepth
     {
         [System.Runtime.Serialization.EnumMember(Value = @"1000mm")]
@@ -85,7 +85,7 @@ namespace DataHallLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DataHallLayoutInputsCabinetHeight
     {
         [System.Runtime.Serialization.EnumMember(Value = @"42U (2013mm)")]

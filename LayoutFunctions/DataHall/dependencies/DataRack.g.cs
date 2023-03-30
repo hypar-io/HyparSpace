@@ -116,42 +116,42 @@ public static class DataRack {
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V82A-Data_Center - V82A-42U"),
+                                                                                  @"Cabinet-Siemon-V800-V82A-Data_Center - V82A-42U"),
                                                         
                                                             DataRack.CabinetSiemonV800V82ADataCenterV82A45U.CreateInstance(
                                                                                   new Transform(new Vector3(-5.649229923761882,1.5336106620072716,-1.870707339001416E-15),
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V82A-Data_Center - V82A-45U"),
+                                                                                  @"Cabinet-Siemon-V800-V82A-Data_Center - V82A-45U"),
                                                         
                                                             DataRack.CabinetSiemonV800V82ADataCenterV82A48U.CreateInstance(
                                                                                   new Transform(new Vector3(-4.031368914988081,1.5336106620072716,-1.870707339001416E-15),
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V82A-Data_Center - V82A-48U"),
+                                                                                  @"Cabinet-Siemon-V800-V82A-Data_Center - V82A-48U"),
                                                         
                                                             DataRack.CabinetSiemonV800V81ADataCenterV81A42U.CreateInstance(
                                                                                   new Transform(new Vector3(-6.905582606234307,3.556576815156172,-1.870707339001416E-15),
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V81A-Data_Center - V81A-42U"),
+                                                                                  @"Cabinet-Siemon-V800-V81A-Data_Center - V81A-42U"),
                                                         
                                                             DataRack.CabinetSiemonV800V81ADataCenterV81A45U.CreateInstance(
                                                                                   new Transform(new Vector3(-5.830970409399585,3.556576815156172,-1.870707339001416E-15),
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V81A-Data_Center - V81A-45U"),
+                                                                                  @"Cabinet-Siemon-V800-V81A-Data_Center - V81A-45U"),
                                                         
                                                             DataRack.CabinetSiemonV800V81ADataCenterV81A48U.CreateInstance(
                                                                                   new Transform(new Vector3(-4.250658355230877,3.556576815156172,-1.870707339001416E-15),
 																					new Vector3(1,0,0),
 																					new Vector3(0,1,0),
 																					new Vector3(0,0,1)),
-                                                                                  "Cabinet-Siemon-V800-V81A-Data_Center - V81A-48U"),
+                                                                                  @"Cabinet-Siemon-V800-V81A-Data_Center - V81A-48U"),
                                                         
 
     };

@@ -25,7 +25,7 @@ namespace OpenCollaborationLayout
             varietyCounter = 0;
             int totalCountableSeats = 0;
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            inputModels.TryGetValue("Levels", out var levelsModel);
+
             var hasOpenOffice = inputModels.TryGetValue("Open Office Layout", out var openOfficeModel);
 
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
@@ -42,7 +42,7 @@ namespace OpenCollaborationLayout
                 }
             }
 
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var output = new OpenCollaborationLayoutOutputs();
             var configJson = File.ReadAllText("./OpenCollaborationConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -135,7 +135,7 @@ namespace OpenCollaborationLayout
                 {
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
+                    // prefer the longer one.
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;

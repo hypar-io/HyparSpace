@@ -25,7 +25,6 @@ namespace PantryLayout
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
@@ -39,7 +38,7 @@ namespace PantryLayout
                     }
                 }
             }
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var outputModel = new Model();
             var configJson = File.ReadAllText("./PantryConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -120,7 +119,7 @@ namespace PantryLayout
                 {
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
+                    // prefer the longer one.
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;

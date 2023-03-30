@@ -41,7 +41,7 @@ namespace OpenOfficeLayout
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             inputModels.TryGetValue("Levels", out var levelsModel);
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
                 var circSegments = circModel.AllElementsOfType<CirculationSegment>();

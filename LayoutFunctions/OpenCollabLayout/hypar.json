@@ -23,6 +23,11 @@
     },
     {
       "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
+      "autohide": false,
       "name": "Open Office Layout",
       "optional": true
     }

@@ -19,6 +19,11 @@
       "autohide": false,
       "name": "Levels",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
     }
   ],
   "input_schema": {
