@@ -85,7 +85,7 @@ namespace MeetingRoomLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable);
+                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -93,7 +93,7 @@ namespace MeetingRoomLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable);
+                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
                         }
                     }
 
@@ -120,14 +120,16 @@ namespace MeetingRoomLayout
             return output;
         }
 
-        private static int AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable)
+        private static int AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable, LevelVolume levelVolume)
         {
             if (layout == null)
             {
                 return 0;
             }
 
+            LayoutStrategies.SetLevelVolume(layout.Instance, levelVolume?.Id);
             model.AddElement(layout.Instance);
+
             int seatsCount = 0;
             if (layout.Tally != null)
             {

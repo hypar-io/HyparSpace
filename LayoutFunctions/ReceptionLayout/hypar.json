@@ -22,12 +22,18 @@
       "optional": true
     },
     {
+      "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
       "name": "Core",
       "optional": true
     }
   ],
   "overrides": {
     "Furniture Locations": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {

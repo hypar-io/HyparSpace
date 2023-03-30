@@ -37,12 +37,7 @@ namespace PhoneBoothLayout
                     }
                 }
             }
-            var levelVolumes = levelsModel?.AllElementsOfType<LevelVolume>() ?? new List<LevelVolume>();
-
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
-            {
-                levelVolumes = massModel.AllElementsOfType<LevelVolume>();
-            }
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var output = new PhoneBoothLayoutOutputs();
             var configJson = File.ReadAllText("./PhoneBoothConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -101,6 +96,7 @@ namespace PhoneBoothLayout
                             var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
+                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 totalBoothCount++;
                             }
@@ -114,6 +110,7 @@ namespace PhoneBoothLayout
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
+                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 totalBoothCount++;
                             }
@@ -153,7 +150,7 @@ namespace PhoneBoothLayout
                 {
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
+                    // prefer the longer one.
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;

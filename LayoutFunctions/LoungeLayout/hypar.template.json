@@ -29,11 +29,17 @@
                 "autohide": false,
                 "name": "Levels",
                 "optional": true
+            },
+            {
+                "autohide": false,
+                "name": "Conceptual Mass",
+                "optional": true
             }
         ],
         "model_output": "{{spaceType}} Layout",
         "overrides": {
             "Furniture Locations": {
+                "perParent": "Level",
                 "context": "[*discriminator=Elements.ElementInstance]",
                 "identity": {
                     "OriginalLocation": {

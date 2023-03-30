@@ -25,7 +25,6 @@ namespace PantryLayout
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
@@ -39,7 +38,7 @@ namespace PantryLayout
                     }
                 }
             }
-            // var levelVolumes = levelsModel.AllElementsOfType<LevelVolume>();
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var outputModel = new Model();
             var configJson = File.ReadAllText("./PantryConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -50,7 +49,11 @@ namespace PantryLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Pantry");
-                // var levelVolume = levelVolumes.First(l => l.Name == lvl.Name);
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+
                 foreach (var room in meetingRmBoundaries)
                 {
                     var spaceBoundary = room.Boundary;
@@ -72,6 +75,7 @@ namespace PantryLayout
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
                             totalCountableSeats += layout.count;
                         }
@@ -81,8 +85,11 @@ namespace PantryLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
+
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
+
                             totalCountableSeats += layout.count;
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
@@ -112,7 +119,7 @@ namespace PantryLayout
                 {
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
+                    // prefer the longer one.
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;

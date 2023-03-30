@@ -7,7 +7,7 @@ namespace Elements
 {
     public interface ICirculationSegment
     {
-        Guid Level { get; set; }
+        Guid? Level { get; set; }
     }
 
 }

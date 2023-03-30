@@ -22,7 +22,7 @@ namespace OpenOfficeLayout
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class OpenOfficeLayoutInputs : S3Args
     
@@ -88,7 +88,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum OpenOfficeLayoutInputsDeskType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
@@ -123,7 +123,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum OpenOfficeLayoutInputsColumnAvoidanceStrategy
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Adaptive Grid")]
@@ -137,7 +137,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class CustomWorkstationProperties 
     
@@ -178,7 +178,7 @@ namespace OpenOfficeLayout
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class Overrides 
     
@@ -211,7 +211,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class SpaceSettingsOverride 
     
@@ -246,7 +246,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class FurnitureLocationsOverride 
     
@@ -281,7 +281,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class SpaceSettingsIdentity 
     
@@ -308,7 +308,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class SpaceSettingsValue 
     
@@ -363,7 +363,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class FurnitureLocationsIdentity 
     
@@ -394,7 +394,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class FurnitureLocationsValue 
     
@@ -421,7 +421,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum SpaceSettingsValueDeskType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Simple Desk - 24x48")]
@@ -456,7 +456,7 @@ namespace OpenOfficeLayout
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class SpaceSettingsValueCustomWorkstationProperties 
     

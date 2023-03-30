@@ -23,12 +23,18 @@
     },
     {
       "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
+    },
+    {
+      "autohide": false,
       "name": "Open Office Layout",
       "optional": true
     }
   ],
   "overrides": {
     "Furniture Locations": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {

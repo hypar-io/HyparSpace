@@ -38,10 +38,6 @@ namespace ClassroomLayout
                 }
             }
             var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
-            {
-                levelVolumes = massModel.AllElementsOfType<LevelVolume>().ToList();
-            }
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
@@ -55,7 +51,7 @@ namespace ClassroomLayout
             {
                 foreach (var countableSeat in countableSeats)
                 {
-                    if (item.ContentElement.Name.Contains(countableSeat))
+                    if (item.ContentElement.Name != null && item.ContentElement.Name.Contains(countableSeat))
                     {
                         seatsAtDesk++;
                     }
@@ -94,14 +90,19 @@ namespace ClassroomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, rect, room.Transform));
+                            var componentInstance = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            output.Model.AddElement(componentInstance);
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            output.Model.AddElement(InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform));
+
+                            var componentInstance = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            output.Model.AddElement(componentInstance);
                         }
                         try
                         {
@@ -132,6 +133,8 @@ namespace ClassroomLayout
                                                 .Concatenated(new Transform(cellRect.Vertices[0]))
                                                 .Concatenated(room.Transform),
                                                 "Desk");
+
+                                            LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
                                             output.Model.AddElement(instance);
                                         }
                                     }

@@ -20,10 +20,16 @@
       "autohide": false,
       "name": "Levels",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Conceptual Mass",
+      "optional": true
     }
   ],
   "overrides": {
     "Furniture Locations": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {

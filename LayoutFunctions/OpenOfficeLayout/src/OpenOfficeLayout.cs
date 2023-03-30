@@ -40,6 +40,8 @@ namespace OpenOfficeLayout
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "OpenOfficeDeskConfigurations.json");
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
+            inputModels.TryGetValue("Levels", out var levelsModel);
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
                 var circSegments = circModel.AllElementsOfType<CirculationSegment>();
@@ -104,6 +106,11 @@ namespace OpenOfficeLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+
                 foreach (var ob in officeBoundaries)
                 {
                     var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, Utilities.GetStringValueFromEnum(input.DeskType));
@@ -169,7 +176,13 @@ namespace OpenOfficeLayout
                                 columnSearchTree,
                                 orientationTransform,
                                 isCustom ? customDesk : null);
+
+                            foreach (var desk in desks)
+                            {
+                                LayoutStrategies.SetLevelVolume(desk as ElementInstance, levelVolume?.Id);
+                            }
                             output.Model.AddElements(desks);
+
                             totalDeskCount += deskCount;
                             foreach (var profile in collabProfiles)
                             {

@@ -15,8 +15,8 @@ projects=(
 task() {
 echo $project
 cd ./$project/
-hypar publish --stage --disable-pull-check
-cd ../ 
+hypar publish --disable-pull-check
+cd ../
 }
 
 for project in ${projects[@]};
