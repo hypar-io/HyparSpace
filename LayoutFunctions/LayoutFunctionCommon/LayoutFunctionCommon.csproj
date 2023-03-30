@@ -10,7 +10,7 @@
     <PackageId>Hypar.Space.LayoutFunctionCommon</PackageId>
     <PackageProjectUrl>
       https://github.com/hypar-io/HyparSpace/tree/master/LayoutFunctions/LayoutFunctionCommon</PackageProjectUrl>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Authors>Andrew Heumann</Authors>
     <Company>Hypar</Company>
   </PropertyGroup>

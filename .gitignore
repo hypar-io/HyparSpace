@@ -1,3 +1,5 @@
 bin/
 obj/
 nupkg/
+.DS_Store
+*/test/Generated/*
