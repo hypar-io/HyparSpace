@@ -115,6 +115,7 @@
   },
   "overrides": {
     "Corridors": {
+      "perParent": "Level",
       "context": "[*discriminator=Elements.CirculationSegment]",
       "identity": {
         "Original Geometry": {
@@ -128,6 +129,7 @@
               "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
               "$hyparAllowIntersection": true,
               "$hyparConstrainToGround": true,
+              "$hyparRelativeToTransform": true,
               "default": {
                 "rightWidth": 1.5
               }
@@ -158,6 +160,7 @@
           "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
           "$hyparAllowIntersection": true,
           "$hyparConstrainToGround": true,
+          "$hyparRelativeToTransform": true,
           "default": {
             "rightWidth": 1.5
           }

@@ -20,9 +20,10 @@ namespace Circulation
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/82ce9804-26cf-42eb-91b2-209223b54be4.json")) }, 
-                {"Conceptual Mass", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Conceptual Mass/be4c3034-6005-4d1e-8144-615c49c4488c.json")) }, 
-                {"Vertical Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Vertical Circulation/dfd9ab0a-6856-4955-b3ee-9d8ef1f3cbc2.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Levels/c963231b-3c22-4168-8edb-d72a3e535b84.json")) }, 
+                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Core/3823672c-4bcf-4409-927d-9312aae5dd89.json")) }, 
+                {"Floors", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Floors/86901216-4c13-49d9-b3f6-14165f166d2d.json")) }, 
+                {"Program Requirements", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/ZonePlanningFunctions/Circulation/test/Generated/CirculationTest/model_dependencies/Program Requirements/9bb78627-5e0f-43e4-86e6-bf3d3e4c966f.json")) }, 
             };
 
             var result = Circulation.Execute(modelDependencies, input);
