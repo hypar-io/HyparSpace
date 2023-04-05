@@ -1,5 +1,5 @@
 {
-  "$schema": "https://hypar.io/Schemas/function_2.json",
+  "$schema": "https://hypar.io/Schemas/function.json",
   "id": "9448d3bc-c7a0-4cee-9757-4752b8ba9958",
   "name": "Define Program Requirements",
   "description": "Define a set of program requirements for Hypar Space.",
