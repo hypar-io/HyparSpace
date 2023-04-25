@@ -325,7 +325,7 @@ namespace Circulation
                 }
                 else if (corridorPolyline.Width > 0)
                 {
-                    corrPgons.AddRange(corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width, corridorPolyline.Flip));
+                    corrPgons.AddRange(corridorPolyline.Polyline.OffsetOnSide(corridorPolyline.Width.Value, corridorPolyline.Flip.Value));
                 }
                 else
                 {
@@ -896,8 +896,8 @@ namespace Circulation
             var firstSegment = allPolylineSegments.First().Reversed();
             var lastSegment = allPolylineSegments.Last();
             var circulationSegmentsProfilesLines = circulationSegmentsProfiles.SelectMany(s => s.Segments());
-            var resultProfile = TryAdjustSegmentPolygon(profile, firstSegment, circulationSegmentsProfilesLines, corridorPolyline, !corridorPolyline.Flip);
-            resultProfile = TryAdjustSegmentPolygon(resultProfile, lastSegment, circulationSegmentsProfilesLines, corridorPolyline, corridorPolyline.Flip);
+            var resultProfile = TryAdjustSegmentPolygon(profile, firstSegment, circulationSegmentsProfilesLines, corridorPolyline, !corridorPolyline.Flip.Value);
+            resultProfile = TryAdjustSegmentPolygon(resultProfile, lastSegment, circulationSegmentsProfilesLines, corridorPolyline, corridorPolyline.Flip.Value);
 
             return resultProfile;
         }
@@ -905,11 +905,11 @@ namespace Circulation
         private static Profile TryAdjustSegmentPolygon(Profile profile, Line segment, IEnumerable<Line> allBoundariesLines, ThickenedPolyline corridorPolyline, bool flip)
         {
             var resultProfile = new Profile(profile.Perimeter, profile.Voids, profile.Id, profile.Name);
-            var maxDistance = Math.Min(1.2 * corridorPolyline.Width, corridorPolyline.Polyline.Length() / 3);
+            var maxDistance = Math.Min(1.2 * corridorPolyline.Width.Value, corridorPolyline.Polyline.Length() / 3);
             var transform = new Transform(new Vector3(0, 0, corridorPolyline.Polyline.Start.Z));
             var profileSegments = resultProfile.Segments().Select(s => s.TransformedLine(transform));
             allBoundariesLines = allBoundariesLines.Select(s => s.TransformedLine(transform));
-            var draftOffsettedSegment = segment.Offset(corridorPolyline.Width, flip);
+            var draftOffsettedSegment = segment.Offset(corridorPolyline.Width.Value, flip);
             var offsettedSegment = profileSegments
                 .Where(s => SegmentsOverlap(s, draftOffsettedSegment) && s.PointOnLine(draftOffsettedSegment.End, true))
                 .FirstOrDefault();

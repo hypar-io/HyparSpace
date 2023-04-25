@@ -1,0 +1,296 @@
+{
+  "Corridor Width": 1.5,
+  "Outer Band Depth": 6,
+  "Add Corridors": [],
+  "Circulation Mode": "Automatic",
+  "Depth at Ends": 8,
+  "overrides": {
+    "Corridors": [
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 39.282,
+                  "Y": 17.33026,
+                  "Z": 0
+                },
+                {
+                  "X": 17.677465746115914,
+                  "Y": 17.33026,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 39.282,
+                "Y": 17.33026,
+                "Z": 0
+              },
+              {
+                "X": 7.98406,
+                "Y": 17.33026,
+                "Z": 0
+              },
+              {
+                "X": 7.98406,
+                "Y": 1.79291,
+                "Z": 0
+              },
+              {
+                "X": 39.282,
+                "Y": 1.79291,
+                "Z": 0
+              },
+              {
+                "X": 39.282,
+                "Y": 17.33026,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "4180afc5-4e2e-476e-ba6c-597e2c0b64f9"
+      }
+    ],
+    "additions": {
+      "Corridors": [
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 7.98406,
+                    "Y": 17.33026,
+                    "Z": 0
+                  },
+                  {
+                    "X": 7.98406,
+                    "Y": 1.79291,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "cc32be76-2c10-49c3-ab38-170cd09aec0c"
+          },
+          "id": "23a0bf7f-3409-4847-a361-d4e4eca00929"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 7.98406,
+                    "Y": 1.79291,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 1.79291,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "3a637539-8e37-4bb3-a93a-72a33e7c1bec"
+          },
+          "id": "9df6e071-7a81-4a17-be7e-097b0647adeb"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 39.282,
+                    "Y": 1.79291,
+                    "Z": 0
+                  },
+                  {
+                    "X": 39.282,
+                    "Y": 13.423564433041694,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "64596e24-4ebf-49da-abd1-c7cfb21e3520"
+          },
+          "id": "3087caff-344a-4109-9d1b-f4ed864ebaaf"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 17.33026,
+                    "Z": 0
+                  },
+                  {
+                    "X": 7.98406,
+                    "Y": 17.33026,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "8aab8443-81e8-4b46-a6c1-bbd399964691"
+          },
+          "id": "d0cf65b8-4a4d-437d-b90a-75e3facbf365"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 1.79291,
+                    "Z": 0
+                  },
+                  {
+                    "X": 39.282,
+                    "Y": 1.79291,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "baee463c-3229-4c66-8085-80f7e3052f2f"
+          },
+          "id": "ef398b7e-9e7b-4a41-8a30-fee722fcc0fe"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 17.33026,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 9.561585,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "6f4bc7fa-e20d-47a6-a0aa-5acf626c6972"
+          },
+          "id": "ef184b57-b5de-4ec8-83bf-d8cacc61746b"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 9.561585,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 1.79291,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "dad458aa-2699-46e9-8927-9d9ed7a424c1"
+          },
+          "id": "da0b13b6-c324-4538-8936-59edf4e2a911"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 39.282,
+                    "Y": 13.423564433041694,
+                    "Z": 0
+                  },
+                  {
+                    "X": 39.282,
+                    "Y": 17.33026,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "e2735092-9d05-47d8-8827-fcc48c5fa718"
+          },
+          "id": "efb43b26-3c18-4ce5-8551-148fb0e65bb7"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 17.677465746115914,
+                    "Y": 9.561585,
+                    "Z": 0
+                  },
+                  {
+                    "X": 39.282,
+                    "Y": 13.423564433041694,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "cedaa8b0-7a67-4cc8-86cb-2b0d6a866c2b"
+          },
+          "id": "52b79d5b-fd65-4a43-a566-d17f0d6fca8f"
+        }
+      ]
+    }
+  }
+}

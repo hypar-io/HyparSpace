@@ -1,0 +1,517 @@
+{
+  "Corridor Width": 1.5,
+  "Outer Band Depth": 6,
+  "Add Corridors": [],
+  "Circulation Mode": "Automatic",
+  "Depth at Ends": 8,
+  "overrides": {
+    "Corridors": [
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 16.52325,
+                  "Y": 13.67675,
+                  "Z": 0
+                },
+                {
+                  "X": 10.53345,
+                  "Y": 19.66655,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 3"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 3"
+        },
+        "id": "b7170fc0-544e-401d-8bc3-70880f589ca8"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 16.52325,
+                  "Y": 13.67675,
+                  "Z": 0
+                },
+                {
+                  "X": 10.53345,
+                  "Y": 19.66655,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 2"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 2"
+        },
+        "id": "99cb0574-8b9e-4aa7-8668-56be245af123"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 10.53345,
+                  "Y": 19.66655,
+                  "Z": 0
+                },
+                {
+                  "X": 1.1551899999999993,
+                  "Y": 15.88301,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 2"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 2"
+        },
+        "id": "dadeb2a0-7f7a-467f-8b2a-d3d7a05640bc"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 1.1551899999999993,
+                  "Y": 15.88301,
+                  "Z": 0
+                },
+                {
+                  "X": 2.037588863643635,
+                  "Y": -1.1129575349158571,
+                  "Z": 2.6645352591003757E-15
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 2"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 2"
+        },
+        "id": "5cb0f470-c434-4cd9-b879-c4ae27b3812d"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 2.037588863643635,
+                  "Y": -1.1129575349158571,
+                  "Z": 2.6645352591003757E-15
+                },
+                {
+                  "X": 16.618588863643634,
+                  "Y": -1.1129575349158563,
+                  "Z": 2.6645352591003757E-15
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 2"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 2"
+        },
+        "id": "6e7f46c4-4d32-4b8c-a8b4-507c4b32e751"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 16.618588863643634,
+                  "Y": -1.1129575349158563,
+                  "Z": 2.6645352591003757E-15
+                },
+                {
+                  "X": 16.52325,
+                  "Y": 13.67675,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          },
+          "Level": {
+            "Name": "Level 2"
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              },
+              {
+                "X": 10.53345,
+                "Y": 19.66655,
+                "Z": 0
+              },
+              {
+                "X": 1.15519,
+                "Y": 15.88301,
+                "Z": 0
+              },
+              {
+                "X": 1.94225,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 2.1109,
+                "Z": 0
+              },
+              {
+                "X": 16.52325,
+                "Y": 13.67675,
+                "Z": 0
+              }
+            ]
+          },
+          "Level Add Id": "Level 2"
+        },
+        "id": "3e1c8524-31e7-4660-ac97-ae5e112a2cac"
+      }
+    ],
+    "additions": {
+      "Corridors": [
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 10.53345,
+                    "Y": 19.66655,
+                    "Z": 0
+                  },
+                  {
+                    "X": 1.15519,
+                    "Y": 15.88301,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Level": {
+              "Name": "Level 3"
+            },
+            "Id": "0801cd15-10ad-4332-84ab-0b312f8f53c1"
+          },
+          "id": "0cbb122e-5378-4dba-badf-2ad958b7163e"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 1.15519,
+                    "Y": 15.88301,
+                    "Z": 0
+                  },
+                  {
+                    "X": -0.3343266202231483,
+                    "Y": 2.1109000000000036,
+                    "Z": 1.7763568394002505E-15
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Level": {
+              "Name": "Level 3"
+            },
+            "Id": "9f7277dc-ab56-452d-b349-3dfa9b436df7"
+          },
+          "id": "f77d774c-0f9a-4d47-82ba-5491c092a426"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": -0.3343266202231483,
+                    "Y": 2.1109000000000036,
+                    "Z": 1.7763568394002505E-15
+                  },
+                  {
+                    "X": 16.52325,
+                    "Y": 2.1109,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Level": {
+              "Name": "Level 3"
+            },
+            "Id": "603dde2d-5378-42f9-b0ff-17755fda6898"
+          },
+          "id": "ccb4dac7-d31a-4b19-8a1f-eaee124b1a4c"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 16.52325,
+                    "Y": 2.1109,
+                    "Z": 0
+                  },
+                  {
+                    "X": 16.52325,
+                    "Y": 13.67675,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Level": {
+              "Name": "Level 3"
+            },
+            "Id": "cefa53cf-de01-4498-b7ba-c508947ae7ab"
+          },
+          "id": "64a59794-00eb-4ac1-85be-ceaa21b6c04b"
+        }
+      ]
+    }
+  }
+}

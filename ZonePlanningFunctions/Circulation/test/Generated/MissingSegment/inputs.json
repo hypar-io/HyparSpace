@@ -449,7 +449,7 @@
                     "Z": 0
                   },
                   {
-                    "X": 46.84637000000001,
+                    "X": 72.24908347492892,
                     "Y": 51.64348169976818,
                     "Z": 0
                   }
@@ -457,9 +457,9 @@
               },
               "rightWidth": 1.5
             },
-            "Id": "a81ec9d9-473e-405d-8167-70a6da8ca799"
+            "Id": "e7b9d2d6-1416-49ed-a84d-850f988168a9"
           },
-          "id": "cb957be9-0af4-46a9-9b10-f2d4ce95199e"
+          "id": "515ac30a-0f1d-4d5f-a7ba-527a769d54c4"
         },
         {
           "value": {
@@ -482,9 +482,9 @@
               },
               "rightWidth": 1.5
             },
-            "Id": "ef947342-8bf3-4663-9d11-5129a91eee2e"
+            "Id": "10ce9455-a09d-469f-a10e-333bf4a4b08d"
           },
-          "id": "2e9e445e-34b2-494c-b28a-00dccf73c6b4"
+          "id": "ed5ed933-9c18-40c5-a37b-9611aca131ce"
         },
         {
           "value": {
@@ -507,9 +507,9 @@
               },
               "rightWidth": 0
             },
-            "Id": "61bf0526-b45e-4dff-87b6-85d4efeeaeb6"
+            "Id": "551a072b-9b0f-4e45-9e77-69a9c11a6b43"
           },
-          "id": "de1302e2-3957-4341-991b-ed47b5d08d3c"
+          "id": "475ab7b8-2b1f-44f9-accd-fe239afd7339"
         },
         {
           "value": {
@@ -532,9 +532,9 @@
               },
               "rightWidth": 0
             },
-            "Id": "88a75b74-3f68-456c-8a0e-62373755cfb7"
+            "Id": "9d125e62-5430-4a62-b999-35a6b7bcbf28"
           },
-          "id": "7e8e40d6-e640-4b4d-abc5-5dcf07618ae3"
+          "id": "13780856-a640-4734-9d0b-a5a65cc2946f"
         },
         {
           "value": {
@@ -549,7 +549,7 @@
                     "Z": 0
                   },
                   {
-                    "X": 42.45546,
+                    "X": 75.36540946509226,
                     "Y": 30.6189,
                     "Z": 0
                   }
@@ -557,9 +557,9 @@
               },
               "rightWidth": 0
             },
-            "Id": "315b8d26-2c56-44f3-8d87-a24cefeba018"
+            "Id": "8d327c99-d15d-4916-86f3-c616117ddf16"
           },
-          "id": "60203014-0bb0-421f-93d3-7588afa57f24"
+          "id": "4a1d4c37-38e4-44fa-960b-eaeab882d976"
         },
         {
           "value": {
@@ -582,134 +582,9 @@
               },
               "rightWidth": 0
             },
-            "Id": "97d73747-fafb-4a0f-955e-fb66a0a56496"
+            "Id": "5f9fad15-ecde-4b9e-9d86-bad830837d88"
           },
-          "id": "b0ce1491-75cb-4553-85b4-b8ee6e58dafd"
-        },
-        {
-          "value": {
-            "Geometry": {
-              "leftWidth": 0,
-              "polyline": {
-                "discriminator": "Elements.Geometry.Polyline",
-                "Vertices": [
-                  {
-                    "X": 46.84637000000001,
-                    "Y": 51.64348169976818,
-                    "Z": 0
-                  },
-                  {
-                    "X": 72.24908347492892,
-                    "Y": 51.64348169976818,
-                    "Z": 0
-                  }
-                ]
-              },
-              "rightWidth": 1.5
-            },
-            "Id": "ab8cd4b7-afc7-466d-9b85-58eb55a5016c"
-          },
-          "id": "cd923323-7278-4ea6-afbc-91bc5988a7c0"
-        },
-        {
-          "value": {
-            "Geometry": {
-              "leftWidth": 0,
-              "polyline": {
-                "discriminator": "Elements.Geometry.Polyline",
-                "Vertices": [
-                  {
-                    "X": 46.84637000000001,
-                    "Y": 51.64348169976818,
-                    "Z": 0
-                  },
-                  {
-                    "X": 46.84637000000001,
-                    "Y": 42.1189,
-                    "Z": 0
-                  }
-                ]
-              },
-              "rightWidth": 1.5
-            },
-            "Id": "c38b3037-7acb-4896-a23b-c38a6ea58a01"
-          },
-          "id": "f3b6dc04-18a9-4a7b-b677-6898a91cb15d"
-        },
-        {
-          "value": {
-            "Geometry": {
-              "leftWidth": 1.5,
-              "polyline": {
-                "discriminator": "Elements.Geometry.Polyline",
-                "Vertices": [
-                  {
-                    "X": 42.45546,
-                    "Y": 30.6189,
-                    "Z": 0
-                  },
-                  {
-                    "X": 75.36540946509226,
-                    "Y": 30.6189,
-                    "Z": 0
-                  }
-                ]
-              },
-              "rightWidth": 0
-            },
-            "Id": "76711b62-66c6-4b2c-ad7f-4a542950ed20"
-          },
-          "id": "0cf4c6bd-f38f-4ff3-8072-2a03021f4f96"
-        },
-        {
-          "value": {
-            "Geometry": {
-              "leftWidth": 1.5,
-              "polyline": {
-                "discriminator": "Elements.Geometry.Polyline",
-                "Vertices": [
-                  {
-                    "X": 42.45546,
-                    "Y": 22.59074,
-                    "Z": 0
-                  },
-                  {
-                    "X": 70.74908,
-                    "Y": 22.59074,
-                    "Z": 0
-                  }
-                ]
-              },
-              "rightWidth": 0
-            },
-            "Id": "783cf83d-967a-43e1-afd9-9d2d2fc720b8"
-          },
-          "id": "756bffce-6f6f-410b-b90c-040b2dba4ec8"
-        },
-        {
-          "value": {
-            "Geometry": {
-              "leftWidth": 0,
-              "polyline": {
-                "discriminator": "Elements.Geometry.Polyline",
-                "Vertices": [
-                  {
-                    "X": 42.45546,
-                    "Y": 30.6189,
-                    "Z": 0
-                  },
-                  {
-                    "X": 42.45546,
-                    "Y": 22.59074,
-                    "Z": 0
-                  }
-                ]
-              },
-              "rightWidth": 1.5
-            },
-            "Id": "5fa0ab88-5fed-4eb8-b931-82696344231c"
-          },
-          "id": "accb0828-1fa3-4a87-b9a5-049265970dd7"
+          "id": "c85fd38d-c9ec-4ba1-bb78-95e7daf4b601"
         }
       ]
     },
@@ -763,7 +638,7 @@
             ]
           }
         },
-        "id": "4a90f750-4a90-4ba6-9888-4232024a6d26"
+        "id": "c775a964-48c4-48c0-b6e5-46fa4c9a7c73"
       },
       {
         "value": {
@@ -804,7 +679,7 @@
             ]
           }
         },
-        "id": "f2106d8f-841e-4f19-b8b0-2adf6e85c1ad"
+        "id": "495aa9e3-bddb-4d62-8cc7-d55c2b46a812"
       },
       {
         "value": {
@@ -819,7 +694,7 @@
                   "Z": 0
                 },
                 {
-                  "X": 42.45546,
+                  "X": 70.74908,
                   "Y": 22.59074,
                   "Z": 0
                 }
@@ -845,7 +720,7 @@
             ]
           }
         },
-        "id": "8e585a13-eded-41e2-b294-77be183661a4"
+        "id": "eced2ef1-cb5b-4afc-a136-43c4debb5a88"
       },
       {
         "value": {
@@ -886,7 +761,7 @@
             ]
           }
         },
-        "id": "3a0a5921-2682-42c9-a1c1-e140b1f42442"
+        "id": "5b06e65f-6de2-41df-8581-0cfec2ca344f"
       },
       {
         "value": {
@@ -927,7 +802,7 @@
             ]
           }
         },
-        "id": "c60df67f-680c-4888-bff7-ac763a02227b"
+        "id": "c98ecac8-e527-4b96-abc2-d4c19ad9d5c3"
       },
       {
         "value": {
@@ -968,7 +843,7 @@
             ]
           }
         },
-        "id": "b9689cdb-21b3-4613-9289-9d18287a5279"
+        "id": "12b45357-d7da-4e3c-9e4d-2ad149cf55a8"
       },
       {
         "value": {
@@ -1009,12 +884,12 @@
             ]
           }
         },
-        "id": "1e3d7d14-43b9-42d5-9bd2-60c81eea14e5"
+        "id": "7cfbce59-96c1-401b-a6c7-889cb31e272e"
       },
       {
         "value": {
           "Geometry": {
-            "leftWidth": 2.133599931724802,
+            "leftWidth": 2.1336304117238267,
             "polyline": {
               "discriminator": "Elements.Geometry.Polyline",
               "Vertices": [
@@ -1050,7 +925,7 @@
             ]
           }
         },
-        "id": "ac7bb826-dd10-4e0f-8fd4-9dc0ced3eb9c"
+        "id": "d060210f-3a67-4500-b64c-e8ad80d4a486"
       },
       {
         "value": {
@@ -1096,7 +971,7 @@
             ]
           }
         },
-        "id": "52ce0ce4-e1ab-45ec-ab9d-d707b11477c0"
+        "id": "fab83554-752f-450e-8440-4b97ec1728cc"
       },
       {
         "value": {
@@ -1182,7 +1057,7 @@
             ]
           }
         },
-        "id": "35d684aa-2095-43df-bb18-dd0d2e143584"
+        "id": "cc900736-f1d8-4f9a-a4b1-cb8dbd26be1e"
       }
     ],
     "removals": {

@@ -1,0 +1,93 @@
+{
+  "Corridor Width": 1.5,
+  "Outer Band Depth": 6,
+  "Add Corridors": [],
+  "Circulation Mode": "Automatic",
+  "Depth at Ends": 8,
+  "overrides": {
+    "additions": {
+      "Corridors": [
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 75.950355,
+                    "Y": 48.75992,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.31865729856229,
+                    "Y": 38.03736175886841,
+                    "Z": 0
+                  },
+                  {
+                    "X": 76.30876458620112,
+                    "Y": 34.89124003264118,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.59444434184724,
+                    "Y": 9.41417,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.5
+            }
+          },
+          "id": "8db11213-37c7-40bc-829e-c6e05567e184"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "width": 1.5,
+              "flip": false,
+              "polyline": {
+                "Vertices": [
+                  {
+                    "X": 31.032638870145178,
+                    "Y": 43.01094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.867314810211095,
+                    "Y": 36.8903247244615,
+                    "Z": 0
+                  },
+                  {
+                    "X": 29.760089661137265,
+                    "Y": 31.96181,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.89973344345934,
+                    "Y": 26.14395104606205,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.498622665372736,
+                    "Y": 21.9633,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.59451708762905,
+                    "Y": 9.41417,
+                    "Z": 0
+                  }
+                ],
+                "discriminator": "Elements.Geometry.Polyline"
+              },
+              "rightWidth": 1.5
+            }
+          },
+          "id": "eda5fd9e-eb9f-40c6-b3f5-5562fa800195"
+        }
+      ]
+    }
+  }
+}

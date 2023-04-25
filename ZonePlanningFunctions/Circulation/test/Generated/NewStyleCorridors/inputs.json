@@ -1,0 +1,1367 @@
+{
+  "Corridor Width": 1.5,
+  "Outer Band Depth": 6,
+  "Add Corridors": [],
+  "Circulation Mode": "Automatic",
+  "Depth at Ends": 8,
+  "overrides": {
+    "Corridors": [
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 64.36513,
+                  "Y": 50.25992,
+                  "Z": 0
+                },
+                {
+                  "X": 64.36513,
+                  "Y": 43.01094,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 64.36513,
+                "Y": 50.25992,
+                "Z": 0
+              },
+              {
+                "X": 64.36513,
+                "Y": 43.01094,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "dd7f0071-bec8-41be-b3f5-aeccde7b8b5b"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 64.36513,
+                  "Y": 43.01094,
+                  "Z": 0
+                },
+                {
+                  "X": 48.281055009378285,
+                  "Y": 43.01094,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 64.36513,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 48.281055009378285,
+                "Y": 43.01094,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "89d617da-a1c7-4c85-8dcb-845738a6f8ab"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 12.69671,
+                  "Y": 43.01094,
+                  "Z": 0
+                },
+                {
+                  "X": 21.778480203216333,
+                  "Y": 7.91417,
+                  "Z": -1.602051824534101E-13
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 12.69671,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 12.69671,
+                "Y": 7.91417,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "5f05e054-98d6-4004-9f34-47be670d4ac3"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 21.778480203216333,
+                  "Y": 7.91417,
+                  "Z": -1.602051824534101E-13
+                },
+                {
+                  "X": 87.53558,
+                  "Y": 7.91417,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 12.69671,
+                "Y": 7.91417,
+                "Z": 0
+              },
+              {
+                "X": 87.53558,
+                "Y": 7.91417,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "735c2975-d883-4bc0-84a2-30b769e80fe2"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 87.53558,
+                  "Y": 7.91417,
+                  "Z": 0
+                },
+                {
+                  "X": 92.11774213733968,
+                  "Y": 27.420056664051508,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 87.53558,
+                "Y": 7.91417,
+                "Z": 0
+              },
+              {
+                "X": 92.11774213733968,
+                "Y": 27.420056664051508,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "0c0b94f0-4fc0-4162-80d9-a916d729160d"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 74.58407940405367,
+                  "Y": 50.25992,
+                  "Z": 0
+                },
+                {
+                  "X": 64.36513,
+                  "Y": 50.25992,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 74.58407940405367,
+                "Y": 50.25992,
+                "Z": 0
+              },
+              {
+                "X": 64.36513,
+                "Y": 50.25992,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "5794b8ca-9025-4dbd-abe2-2ceb49adaf5e"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 74.58407940405367,
+                  "Y": 50.25992,
+                  "Z": 0
+                },
+                {
+                  "X": 70.49910239069979,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 74.58407940405367,
+                "Y": 50.25992,
+                "Z": 0
+              },
+              {
+                "X": 70.49910239069979,
+                "Y": 35.649606009418065,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "e25b7d13-7826-4e71-9cb9-9b0326bd96ab"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 70.49910239069979,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                },
+                {
+                  "X": 74.48033365480141,
+                  "Y": 28.578072129089126,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 70.49910239069979,
+                "Y": 35.649606009418065,
+                "Z": 0
+              },
+              {
+                "X": 74.48033365480141,
+                "Y": 28.578072129089126,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "c6d76ca0-5082-46f8-8cd1-aa456715a87b"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 90.190706919693,
+                  "Y": 47.60479308030694,
+                  "Z": 0
+                },
+                {
+                  "X": 87.53558,
+                  "Y": 50.25992,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 90.190706919693,
+                "Y": 47.60479308030694,
+                "Z": 0
+              },
+              {
+                "X": 87.53558,
+                "Y": 50.25992,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "2fe37a7c-a7b3-4e22-8323-bc272f7647cb"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 90.190706919693,
+                  "Y": 47.60479308030694,
+                  "Z": 0
+                },
+                {
+                  "X": 74.48033365480141,
+                  "Y": 28.578072129089126,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 90.190706919693,
+                "Y": 47.60479308030694,
+                "Z": 0
+              },
+              {
+                "X": 74.48033365480141,
+                "Y": 28.578072129089126,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "ceb7217a-d829-4408-80af-4f55a811f420"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 48.281055009378285,
+                  "Y": 43.01094,
+                  "Z": 0
+                },
+                {
+                  "X": 12.69671,
+                  "Y": 43.01094,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 48.281055009378285,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 12.69671,
+                "Y": 43.01094,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "9ebcfa01-cfa7-43bc-a6e7-8d143e51b319"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 48.28105500937829,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                },
+                {
+                  "X": 14.601556049696043,
+                  "Y": 35.64960600941804,
+                  "Z": 1.2934098236883074E-14
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 48.28105500937829,
+                "Y": 35.649606009418065,
+                "Z": 0
+              },
+              {
+                "X": 12.696710000000014,
+                "Y": 35.649606009418065,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "dd0b4dfc-deaf-4143-aca8-efd4914d4054"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 48.281055009378285,
+                  "Y": 43.01094,
+                  "Z": 0
+                },
+                {
+                  "X": 48.28105500937829,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 48.281055009378285,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 48.28105500937829,
+                "Y": 35.649606009418065,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "688da06d-49fc-4ffa-acff-f1a7121ff403"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 92.11774213733968,
+                  "Y": 27.420056664051508,
+                  "Z": 0
+                },
+                {
+                  "X": 90.190706919693,
+                  "Y": 47.60479308030694,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 92.11774213733968,
+                "Y": 27.420056664051508,
+                "Z": 0
+              },
+              {
+                "X": 90.190706919693,
+                "Y": 47.60479308030694,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "ed8284f6-9f43-403e-8eac-ffa8a32e03c4"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 74.48033365480141,
+                  "Y": 28.578072129089126,
+                  "Z": 0
+                },
+                {
+                  "X": 83.83603531478306,
+                  "Y": 29.36552697711361,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 74.48033365480141,
+                "Y": 28.578072129089126,
+                "Z": 0
+              },
+              {
+                "X": 83.83603531478306,
+                "Y": 29.36552697711361,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "1ae5901a-45d1-47e6-b34e-c28c05009f6d"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 83.83603531478306,
+                  "Y": 29.36552697711361,
+                  "Z": 0
+                },
+                {
+                  "X": 92.11774213733968,
+                  "Y": 27.420056664051508,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 83.83603531478306,
+                "Y": 29.36552697711361,
+                "Z": 0
+              },
+              {
+                "X": 92.11774213733968,
+                "Y": 27.420056664051508,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "0515be86-8a41-4198-8285-5b1e019bf309"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 81.74479752102974,
+                  "Y": 20.4633,
+                  "Z": 0
+                },
+                {
+                  "X": 83.83603531478306,
+                  "Y": 29.36552697711361,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 81.74479752102974,
+                "Y": 20.4633,
+                "Z": 0
+              },
+              {
+                "X": 83.83603531478306,
+                "Y": 29.36552697711361,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "048d403a-6cbc-4691-b16a-da67857fd0e0"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 1.5,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 87.53558,
+                  "Y": 50.25992,
+                  "Z": 0
+                },
+                {
+                  "X": 74.58407940405367,
+                  "Y": 50.25992,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 0
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 87.53558,
+                "Y": 50.25992,
+                "Z": 0
+              },
+              {
+                "X": 64.36513,
+                "Y": 50.25992,
+                "Z": 0
+              },
+              {
+                "X": 64.36513,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 12.69671,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 12.69671,
+                "Y": 7.91417,
+                "Z": 0
+              },
+              {
+                "X": 87.53558,
+                "Y": 7.91417,
+                "Z": 0
+              },
+              {
+                "X": 87.53558,
+                "Y": 50.25992,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "ed47e1a3-1fc2-498a-9812-57be0c44afa8"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 70.49910239069979,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                },
+                {
+                  "X": 48.28105500937829,
+                  "Y": 35.649606009418065,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 87.53558,
+                "Y": 30.46181,
+                "Z": 0
+              },
+              {
+                "X": 12.69671000000001,
+                "Y": 30.46181,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "35444a27-67a7-4ab4-b627-c0f7f23aba83"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 40.11689,
+                  "Y": 43.01094,
+                  "Z": 0
+                },
+                {
+                  "X": 40.11689,
+                  "Y": 7.914170000000006,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 40.11689,
+                "Y": 43.01094,
+                "Z": 0
+              },
+              {
+                "X": 40.11689,
+                "Y": 7.914170000000006,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "729933d7-1ac9-45ab-be44-59a17205374c"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 18.531220842588898,
+                  "Y": 20.4633,
+                  "Z": 3.5127456499139953E-13
+                },
+                {
+                  "X": 81.74479752102974,
+                  "Y": 20.4633,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 12.696709999999996,
+                "Y": 20.4633,
+                "Z": 0
+              },
+              {
+                "X": 87.53558,
+                "Y": 20.4633,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "f25f6e7c-25aa-4f00-9fe8-2f96965582e8"
+      },
+      {
+        "value": {
+          "Geometry": {
+            "leftWidth": 0,
+            "polyline": {
+              "discriminator": "Elements.Geometry.Polyline",
+              "Vertices": [
+                {
+                  "X": 58.11538999999999,
+                  "Y": 7.91417,
+                  "Z": 0
+                },
+                {
+                  "X": 58.11538999999999,
+                  "Y": 43.01093999999999,
+                  "Z": 0
+                }
+              ]
+            },
+            "rightWidth": 1.5
+          }
+        },
+        "identity": {
+          "Original Geometry": {
+            "discriminator": "Elements.Geometry.Polyline",
+            "Vertices": [
+              {
+                "X": 58.11539,
+                "Y": 7.914170000000002,
+                "Z": 0
+              },
+              {
+                "X": 58.11539,
+                "Y": 43.01093999999999,
+                "Z": 0
+              }
+            ]
+          }
+        },
+        "id": "7aec1c37-bc21-42fa-84c8-dc9c6dd5d562"
+      }
+    ],
+    "additions": {
+      "Corridors": [
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 64.36513,
+                    "Y": 50.25992,
+                    "Z": 0
+                  },
+                  {
+                    "X": 64.36513,
+                    "Y": 43.01094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "390a11b1-6f1c-42eb-99ac-0ee0acb9a2cc"
+          },
+          "id": "32541ba9-c71d-4d7a-81c5-02b199dcfcbe"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 64.36513,
+                    "Y": 43.01094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 48.281055009378285,
+                    "Y": 43.01094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "b3474cf6-1b1d-4996-be54-5432943b5334"
+          },
+          "id": "f19ab4d4-abeb-4315-8cab-0c0c8f327742"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 12.69671,
+                    "Y": 43.01094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 12.69671,
+                    "Y": 7.91417,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "93938633-91fa-44aa-b57c-bc4923b6b1b4"
+          },
+          "id": "801608b6-ee3e-42c8-ac4e-3d4e426e1402"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 12.69671,
+                    "Y": 7.91417,
+                    "Z": 0
+                  },
+                  {
+                    "X": 87.53558,
+                    "Y": 7.91417,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "34bd0030-21da-42a2-9adb-140988b2e0dd"
+          },
+          "id": "39f9ea76-4b19-4b17-9832-385c9b58351e"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 87.53558,
+                    "Y": 7.91417,
+                    "Z": 0
+                  },
+                  {
+                    "X": 92.11774213733968,
+                    "Y": 27.420056664051508,
+                    "Z": 1.5365409247765866E-13
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "1711cdad-4bd1-4ec9-9437-7defa2118b3f"
+          },
+          "id": "d41ec0d1-5143-426e-a998-5f0710aa0bec"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 74.58407940405367,
+                    "Y": 50.25992,
+                    "Z": 0
+                  },
+                  {
+                    "X": 64.36513,
+                    "Y": 50.25992,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "569cb5d9-fc72-4969-b7cc-56d32af79617"
+          },
+          "id": "f25460ae-f401-4f95-b249-ff09af19f38c"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 74.58407940405367,
+                    "Y": 50.25992,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.49910239069979,
+                    "Y": 35.649606009418065,
+                    "Z": 1.305622276959184E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "39cef668-3fef-4d9f-8d6a-3586c7eaa3ee"
+          },
+          "id": "67891fd3-7982-4ab2-9ebf-899819112c6e"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 70.49910239069979,
+                    "Y": 35.649606009418065,
+                    "Z": 1.305622276959184E-13
+                  },
+                  {
+                    "X": 74.48033365480141,
+                    "Y": 28.578072129089126,
+                    "Z": 4.709566070459914E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "c05814fe-7e31-4cc5-b94a-945273141c98"
+          },
+          "id": "6d6641c8-0e49-4581-ba43-c778361f8c59"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 90.190706919693,
+                    "Y": 47.60479308030694,
+                    "Z": 1.4810375148499588E-13
+                  },
+                  {
+                    "X": 87.53558,
+                    "Y": 50.25992,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "a8384e24-4ccf-43ef-868f-e76aea452fb2"
+          },
+          "id": "39a930f8-a524-4253-9653-83c0dc6d87db"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 90.190706919693,
+                    "Y": 47.60479308030694,
+                    "Z": 1.4810375148499588E-13
+                  },
+                  {
+                    "X": 74.48033365480141,
+                    "Y": 28.578072129089126,
+                    "Z": 4.709566070459914E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "839e2acc-6042-4696-90d6-06d8f4054464"
+          },
+          "id": "3c01eb95-f8e7-4f1f-8ed6-cb17d36ea373"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 48.281055009378285,
+                    "Y": 43.01094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 12.69671,
+                    "Y": 43.01094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "633247da-f094-4966-b0d9-7b6d99975cd9"
+          },
+          "id": "76a5ffcf-9831-4c4c-9984-2a42de43d258"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 48.28105500937829,
+                    "Y": 35.649606009418065,
+                    "Z": 0
+                  },
+                  {
+                    "X": 12.696710000000014,
+                    "Y": 35.649606009418065,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "ff5a26af-f42f-4c44-95ea-134207b1d84a"
+          },
+          "id": "df4b019c-876b-4902-901c-316cde3a0cdd"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 48.281055009378285,
+                    "Y": 43.01094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 48.28105500937829,
+                    "Y": 35.649606009418065,
+                    "Z": 0
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "29f5a421-85d2-44af-9595-0580059bde1c"
+          },
+          "id": "ec9e9c00-e4b1-48b7-bd81-93fc92d76118"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 1.5,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 92.11774213733968,
+                    "Y": 27.420056664051508,
+                    "Z": 1.5365409247765866E-13
+                  },
+                  {
+                    "X": 90.190706919693,
+                    "Y": 47.60479308030694,
+                    "Z": 1.4810375148499588E-13
+                  }
+                ]
+              },
+              "rightWidth": 0
+            },
+            "Id": "835ec75e-0102-4f37-8b0c-67f89531f651"
+          },
+          "id": "a3d232fc-5b07-4eb1-93c5-6f3ca4ae2ee2"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 74.48033365480141,
+                    "Y": 28.578072129089126,
+                    "Z": 4.709566070459914E-13
+                  },
+                  {
+                    "X": 83.83603531478306,
+                    "Y": 29.36552697711361,
+                    "Z": 1.6269018840418974E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "5bf8d275-b5b4-4413-9fb0-8d94bbb24814"
+          },
+          "id": "2548f893-7d55-40a5-acc3-5d86e153cabc"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 83.83603531478306,
+                    "Y": 29.36552697711361,
+                    "Z": 1.6269018840418974E-13
+                  },
+                  {
+                    "X": 92.11774213733968,
+                    "Y": 27.420056664051508,
+                    "Z": 1.5365409247765866E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "b61c1b9a-fbc2-4a74-b652-896287a02927"
+          },
+          "id": "fdd204fe-fa0a-46d3-81a1-520e2e184eb1"
+        },
+        {
+          "value": {
+            "Geometry": {
+              "leftWidth": 0,
+              "polyline": {
+                "discriminator": "Elements.Geometry.Polyline",
+                "Vertices": [
+                  {
+                    "X": 81.74479752102974,
+                    "Y": 20.4633,
+                    "Z": 0
+                  },
+                  {
+                    "X": 83.83603531478306,
+                    "Y": 29.36552697711361,
+                    "Z": 1.6269018840418974E-13
+                  }
+                ]
+              },
+              "rightWidth": 1.5
+            },
+            "Id": "5b130cf8-55a5-432e-a4e1-fe3399b90d20"
+          },
+          "id": "258b9f26-c7d6-4dd9-9ce2-52442b7b9362"
+        }
+      ]
+    }
+  }
+}
