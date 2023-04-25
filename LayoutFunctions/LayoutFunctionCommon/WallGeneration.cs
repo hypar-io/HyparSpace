@@ -49,13 +49,15 @@ namespace LayoutFunctionCommon
 
         public static List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)> FindWallCandidateOptions(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, IEnumerable<string> wallTypeFilter = null)
         {
-            var wallCandidateOption = new List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)>();
+            var wallCandidateOptions = new List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)>();
             var allSegments = room.Boundary.Perimeter.Segments().Select(s => s.TransformedLine(room.Transform)).ToList();
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
-                var wallCandidateLines = new List<(Line line, string type)>();
-                wallCandidateLines.Add((orientationGuideEdge.Line, "Glass"));
+                var wallCandidateLines = new List<(Line line, string type)>
+                {
+                    (orientationGuideEdge.Line, "Glass")
+                };
                 if (levelProfile != null)
                 {
                     var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
@@ -66,10 +68,10 @@ namespace LayoutFunctionCommon
                     // if no level or floor is present, everything that's not glass is solid.
                     wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s => (s, "Solid")));
                 }
-                wallCandidateOption.Add((orientationGuideEdge.Line, (wallTypeFilter != null ? wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList() : wallCandidateLines)));
+                wallCandidateOptions.Add((orientationGuideEdge.Line, (wallTypeFilter != null ? wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList() : wallCandidateLines)));
             }
 
-            return wallCandidateOption;
+            return wallCandidateOptions;
         }
 
         public static List<(Line line, string type)> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
@@ -375,7 +377,7 @@ namespace LayoutFunctionCommon
                 {
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one. 
+                    // prefer the longer one.
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 namespace LayoutFunctionCommon
 {
     public static class LayoutStrategies
@@ -152,7 +151,7 @@ namespace LayoutFunctionCommon
                 }
             }
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
-            var configJson = File.ReadAllText(configurationsPath);
+            var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
             foreach (var lvl in levels)
             {
@@ -170,11 +169,13 @@ namespace LayoutFunctionCommon
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
 
-                    foreach (var wallCandidateOption in wallCandidateOptions)
+                    foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
                     {
-                        var orientationTransform = new Transform(Vector3.Origin, wallCandidateOption.OrientationGuideEdge.Direction(), Vector3.ZAxis);
-                        var boundaryCurves = new List<Polygon>();
-                        boundaryCurves.Add(spaceBoundary.Perimeter);
+                        var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction(), Vector3.ZAxis);
+                        var boundaryCurves = new List<Polygon>
+                        {
+                            spaceBoundary.Perimeter
+                        };
                         boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
@@ -186,8 +187,13 @@ namespace LayoutFunctionCommon
                                 success = true;
                                 SetLevelVolume(layout, levelVolume?.Id);
 
-                                wallCandidateLines.AddRange(wallCandidateOption.WallCandidates);
+                                wallCandidateLines.AddRange(WallCandidates);
                                 outputModel.AddElement(layout);
+                            }
+                            else if (configs.Count == 0)
+                            {
+                                success = true;
+                                wallCandidateLines.AddRange(WallCandidates);
                             }
                         }
 

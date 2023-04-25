@@ -17,7 +17,7 @@ namespace InteriorPartitions
         public static InteriorPartitionsOutputs Execute(Dictionary<string, Model> inputModels, InteriorPartitionsInputs input)
         {
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
-            var modelDependences = new[] {
+            var modelDependencies = new[] {
                 "Private Office Layout",
                 "Phone Booth Layout",
                 "Classroom Layout",
@@ -31,9 +31,10 @@ namespace InteriorPartitions
                 "Bathroom Layout",
                 "Restroom Layout",
                 "Laundry Room Layout",
-                "Entertainment Room Layout"
+                "Entertainment Room Layout",
+                "Room Layout"
                  };
-            foreach (var md in modelDependences)
+            foreach (var md in modelDependencies)
             {
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {

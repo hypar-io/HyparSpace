@@ -75,6 +75,11 @@
       "autohide": false,
       "name": "Entertainment Room Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Room Layout",
+      "optional": true
     }
   ],
   "outputs": [],
