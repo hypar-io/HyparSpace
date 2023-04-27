@@ -377,7 +377,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 4
   },
   "Configuration B": {
     "CellBoundary": {
@@ -731,7 +732,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration C": {
     "CellBoundary": {
@@ -799,7 +801,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 1
   },
   "Configuration D": {
     "CellBoundary": {
@@ -893,7 +896,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 2
   },
   "Configuration E": {
     "CellBoundary": {
@@ -1039,7 +1043,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 4
   },
   "Configuration F": {
     "CellBoundary": {
@@ -1913,7 +1918,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 6
   },
   "Configuration G": {
     "CellBoundary": {
@@ -2059,7 +2065,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration H": {
     "CellBoundary": {
@@ -2205,7 +2212,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration I": {
     "CellBoundary": {
@@ -2325,7 +2333,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration J": {
     "CellBoundary": {
@@ -2419,7 +2428,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 2
   },
   "Configuration K": {
     "CellBoundary": {
@@ -4359,7 +4369,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 6
   },
   "Configuration L": {
     "CellBoundary": {
@@ -5025,7 +5036,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration M": {
     "CellBoundary": {
@@ -5665,7 +5677,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 4
   },
   "Configuration N": {
     "CellBoundary": {
@@ -6539,7 +6552,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 6
   },
   "Configuration O": {
     "CellBoundary": {
@@ -6685,7 +6699,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 4
   },
   "Configuration P": {
     "CellBoundary": {
@@ -6805,7 +6820,8 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 3
   },
   "Configuration Q": {
     "CellBoundary": {
@@ -7185,6 +7201,7 @@
           "Z": 0.0
         }
       }
-    ]
+    ],
+    "SeatCount": 4
   }
 }
