@@ -44,11 +44,12 @@ namespace InteriorPartitions
             }
 
             var output = new InteriorPartitionsOutputs();
-            var levelGroups = interiorPartitionCandidates.GroupBy(c => c.LevelTransform);
+            // TODO: don't assume one height for all walls on a level — pass height through deduplication.
+            var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             foreach (var levelGroup in levelGroups)
             {
                 var canidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
-                var height = levelGroup.FirstOrDefault()?.Height ?? 3;
+                var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? 3;
                 WallGeneration.GenerateWalls(output.Model, canidates, height, levelGroup.Key);
             }
 
