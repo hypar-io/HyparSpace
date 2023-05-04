@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -18,30 +19,24 @@ namespace ReceptionLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Levels/model.json")) },
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Core/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Space Planning Zones/66f9d818-1f2b-48da-ae1b-7d1cf1ef922f.json")) }, 
+                {"Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Circulation/125428d9-5154-4def-a5bd-0f3e5c96d9ec.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Levels/e926a841-2613-471b-8ccd-80c942f75e7e.json")) }, 
+                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Core/073bcf41-696d-4716-b117-783c1074680c.json")) }, 
             };
 
             var result = ReceptionLayout.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/ReceptionLayoutTest/results/ReceptionLayoutTest.gltf", false);
+            result.Model.ToGlTF("../../../Generated/ReceptionLayoutTest/results/ReceptionLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/ReceptionLayoutTest/results/ReceptionLayoutTest.glb");
             File.WriteAllText("../../../Generated/ReceptionLayoutTest/results/ReceptionLayoutTest.json", result.Model.ToJson());
+
         }
 
         public ReceptionLayoutInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""model_input_keys"": {
-    ""Levels"": ""22b0650e-944f-47d1-9f05-07e4cdbc4f0b_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Space Planning Zones"": ""260b02f8-9396-430b-93c5-cd08e8783878_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip"",
-    ""Core"": ""21ac635d-1935-4f40-ac4d-980eaff1e50c_a9cac5a1-f68d-4d2e-bfdd-0d204359bbe4_elements.zip""
-  }
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ReceptionLayoutInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/ReceptionLayoutTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ReceptionLayoutInputs>(json);
         }
     }
 }

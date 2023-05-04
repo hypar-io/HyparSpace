@@ -57,6 +57,7 @@
         "minimum": 0
       },
       "Aisle Width": {
+        "$hyparStyle": "number",
         "description": "The width of the aisle between desks, measured from side to side.",
         "maximum": 2,
         "default": 1.0,
@@ -70,6 +71,7 @@
         "multipleOf": 0.05
       },
       "Back-to-Back Width": {
+        "$hyparStyle": "number",
         "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
         "maximum": 2.0,
         "default": 1.0,
@@ -122,12 +124,14 @@
         "properties": {
           "Width": {
             "type": "number",
+            "$hyparStyle": "number",
             "$hyparUnitType": "length",
             "minimum": 0.1,
             "default": 2.0
           },
           "Length": {
             "type": "number",
+            "$hyparStyle": "number",
             "$hyparUnitType": "length",
             "minimum": 0.1,
             "default": 2.0
@@ -162,6 +166,7 @@
           "minimum": 0
         },
         "Aisle Width": {
+          "$hyparStyle": "number",
           "description": "The width of the aisle between desks, measured from side to side.",
           "maximum": 2,
           "default": 1.0,
@@ -175,6 +180,7 @@
           "multipleOf": 0.05
         },
         "Back-to-Back Width": {
+          "$hyparStyle": "number",
           "description": "The width of the space between rows of desks, measured from back of seat to back of seat.",
           "maximum": 2.0,
           "default": 1.0,
@@ -217,12 +223,14 @@
           },
           "properties": {
             "Width": {
+              "$hyparStyle": "number",
               "type": "number",
               "$hyparUnitType": "length",
               "minimum": 0.1,
               "default": 2.0
             },
             "Length": {
+              "$hyparStyle": "number",
               "type": "number",
               "$hyparUnitType": "length",
               "minimum": 0.1,

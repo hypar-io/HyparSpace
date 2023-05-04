@@ -41,8 +41,8 @@ namespace ReceptionLayout
             var output = new ReceptionLayoutOutputs();
             var configJson = File.ReadAllText("./ReceptionConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            var hasCore = inputModels.TryGetValue("Core", out var coresModel);
-            List<Line> coreSegments = new List<Line>();
+            var hasCore = inputModels.TryGetValue("Core", out var coresModel) && coresModel.AllElementsOfType<ServiceCore>().Any();
+            List<Line> coreSegments = new();
             if (coresModel != null)
             {
                 coreSegments.AddRange(coresModel.AllElementsOfType<ServiceCore>().SelectMany(c => c.Profile.Perimeter.Segments()));
@@ -61,9 +61,12 @@ namespace ReceptionLayout
                 {
                     var spaceBoundary = room.Boundary;
                     Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
+
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                    var boundaryCurves = new List<Polygon>();
-                    boundaryCurves.Add(spaceBoundary.Perimeter);
+                    var boundaryCurves = new List<Polygon>
+                    {
+                        spaceBoundary.Perimeter
+                    };
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
                     var grid = new Grid2d(boundaryCurves, orientationTransform);
@@ -74,13 +77,13 @@ namespace ReceptionLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+                        if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                         }
-                        else if (trimmedGeo.Count() > 0)
+                        else if (trimmedGeo.Length > 0)
                         {
                             var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();

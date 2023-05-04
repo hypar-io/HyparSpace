@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup>
@@ -10,16 +10,18 @@
     <PackageId>Hypar.Space.LayoutFunctionCommon</PackageId>
     <PackageProjectUrl>
       https://github.com/hypar-io/HyparSpace/tree/master/LayoutFunctions/LayoutFunctionCommon</PackageProjectUrl>
-    <Version>1.4.1</Version>
+    <Version>2.0.0</Version>
     <Authors>Andrew Heumann</Authors>
     <Company>Hypar</Company>
   </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="1.6.0" />
+    <PackageReference Include="Hypar.Elements" Version="2.0.0-alpha.12" />
     <PackageReference Include="Hypar.Functions" Version="1.6.0" />
-    <PackageReference Include="Hypar.Elements.Components" Version="1.5.0" />
+    <PackageReference Include="Hypar.Elements.Components" Version="2.0.0-alpha.12" />
     <PackageReference Include="Elements.LargestInteriorRectangle" Version="1.0.1" />
+    <!-- <ProjectReference Include="../../../Elements/Elements/src/Elements.csproj" />
+    <ProjectReference Include="../../../Elements/Elements.Components/src/Elements.Components.csproj" /> -->
   </ItemGroup>
 </Project>

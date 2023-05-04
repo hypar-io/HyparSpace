@@ -77,7 +77,7 @@ namespace LayoutFunctionCommon
                         foreach (var segment in largestTrimmedShape.Segments())
                         {
                             vertices.Add(segment.Start);
-                            vertices.Add(segment.PointAt(0.5));
+                            vertices.Add(segment.Mid());
                         }
                         largestTrimmedShape = new Polygon(vertices);
                     }

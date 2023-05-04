@@ -338,7 +338,7 @@ namespace LayoutFunctionCommon
 
             foreach (var edge in edgesToClassify)
             {
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 midpt.Z = 0;
                 var adjacentToAny = false;
                 foreach (var comparisonSegment in comparisonSegments)
@@ -372,7 +372,7 @@ namespace LayoutFunctionCommon
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in segmentsToTestAgainst)
                 {
                     var dist = midpt.DistanceTo(seg);
@@ -437,7 +437,7 @@ namespace LayoutFunctionCommon
             {
                 var edgesByDist = edgesToClassify.Select(e =>
                 {
-                    var midpt = e.PointAt(0.5);
+                    var midpt = e.Mid();
                     (Line line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
                     return edge;
                 });
