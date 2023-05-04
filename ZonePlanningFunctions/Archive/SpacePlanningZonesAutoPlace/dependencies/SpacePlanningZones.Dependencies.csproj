@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-    <ProjectReference Include="..\..\..\..\Hypar.Optimization\Hypar.Optimization.csproj" />
+    <ProjectReference
+      Include="..\..\..\..\LayoutFunctions\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Hypar.Optimization\Hypar.Optimization.csproj" />
     <!-- <ProjectReference Include="..\..\..\..\elements\Elements\src\Elements.csproj" /> -->
   </ItemGroup>
 

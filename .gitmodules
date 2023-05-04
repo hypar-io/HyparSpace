@@ -1,0 +1,6 @@
+[submodule "ZonePlanningFunctions/Function-SpacePlanning"]
+	path = ZonePlanningFunctions/Function-SpacePlanning
+	url = https://github.com/hypar-io/Function-SpacePlanning
+[submodule "ZonePlanningFunctions/Function-Circulation"]
+	path = ZonePlanningFunctions/Function-Circulation
+	url = https://github.com/hypar-io/Function-Circulation

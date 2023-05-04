@@ -5,7 +5,12 @@ This repository contains the source code to a range of functions for doing spati
 
 
 * ### Zone Planning Functions
-  * Office Planning Zones
+  * Space Planning (`Function-SpacePlanning`) (note: this is a submodule)
+  * Circulation (`Function-Circulation`)  (note: this is a submodule)
+  * Archive /
+    * Circulation (an older version of the circulation function)
+    * Space Planning Zones (an older version of Space Planning)
+    * Space Planning Zones Auto-Place
 * ### Layout Functions
   * Open Office Layout
   * Private Office Layout
