@@ -22,26 +22,27 @@ namespace WorkplaceMetrics
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class WorkplaceMetricsInputs : S3Args
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public WorkplaceMetricsInputs(WorkplaceMetricsInputsCalculationMode @calculationMode, int @totalHeadcount, double @deskSharingRatio, IList<Polygon> @uSFExclusions, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public WorkplaceMetricsInputs(WorkplaceMetricsInputsCalculationMode @calculationMode, int @totalHeadcount, double @deskSharingRatio, IList<Polygon> @uSFExclusions, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<WorkplaceMetricsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @calculationMode, @totalHeadcount, @deskSharingRatio, @uSFExclusions});
+                validator.PreConstruct(new object[]{ @calculationMode, @totalHeadcount, @deskSharingRatio, @uSFExclusions, @overrides});
             }
         
             this.CalculationMode = @calculationMode;
             this.TotalHeadcount = @totalHeadcount;
             this.DeskSharingRatio = @deskSharingRatio;
             this.USFExclusions = @uSFExclusions;
+            this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
             {
@@ -67,9 +68,12 @@ namespace WorkplaceMetrics
         [Newtonsoft.Json.JsonProperty("USF Exclusions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> USFExclusions { get; set; } = new List<Polygon>();
     
+        [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Overrides Overrides { get; set; } = new Overrides();
+    
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum WorkplaceMetricsInputsCalculationMode
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Fixed Headcount")]
@@ -77,6 +81,130 @@ namespace WorkplaceMetrics
     
         [System.Runtime.Serialization.EnumMember(Value = @"Fixed Sharing Ratio")]
         Fixed_Sharing_Ratio = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class Overrides 
+    
+    {
+        public Overrides() { }
+        
+        [Newtonsoft.Json.JsonConstructor]
+        public Overrides(IList<SettingsOverride> @settings)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @settings});
+            }
+        
+            this.Settings = @settings ?? this.Settings;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Settings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SettingsOverride> Settings { get; set; } = new List<SettingsOverride>();
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SettingsOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SettingsOverride(string @id, SettingsIdentity @identity, SettingsValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SettingsOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SettingsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SettingsValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SettingsIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SettingsIdentity(string @name)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SettingsIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @name});
+            }
+        
+            this.Name = @name;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SettingsValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SettingsValue(double @rentableArea, double @usableArea)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SettingsValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @rentableArea, @usableArea});
+            }
+        
+            this.RentableArea = @rentableArea;
+            this.UsableArea = @usableArea;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.</summary>
+        [Newtonsoft.Json.JsonProperty("Rentable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double RentableArea { get; set; }
+    
+        /// <summary>Adjust the Usable Area for calculations + display.</summary>
+        [Newtonsoft.Json.JsonProperty("Usable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double UsableArea { get; set; }
     
     }
 }

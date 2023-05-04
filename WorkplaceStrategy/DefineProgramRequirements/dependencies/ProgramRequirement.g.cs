@@ -69,15 +69,15 @@ namespace Elements
         [JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int SpaceCount { get; set; } = 1;
     
-        /// <summary>The width of this space (typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
+        /// <summary>Optional. (Typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
         [JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Width { get; set; }
     
-        /// <summary>The depth of this space (typically the shorter dimension — perpendicular to the side from which the space is accessed, like a corridor.)</summary>
+        /// <summary>Optional. (Typically the shorter dimension — perpendicular to the side from which the space is accessed, like a corridor.)</summary>
         [JsonProperty("Depth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Depth { get; set; }
     
-        /// <summary>What program type best matches this one?</summary>
+        /// <summary>Which furniture layout function should be used to lay out this space?</summary>
         [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         public string HyparSpaceType { get; set; } = "unspecified";

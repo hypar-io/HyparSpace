@@ -17,6 +17,7 @@ namespace WorkplaceMetrics
         public static WorkplaceMetricsOutputs Execute(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs input)
         {
             var warnings = new List<string>();
+            var outputModel = new Model();
             var zonesModel = inputModels["Space Planning Zones"];
             var hasFloors = inputModels.TryGetValue("Floors", out var floorsModel);
             var hasMass = inputModels.TryGetValue("Conceptual Mass", out var massModel);
@@ -26,7 +27,7 @@ namespace WorkplaceMetrics
             var programReqs = programReqsModel?.AllElementsOfType<ProgramRequirement>();
 
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
-            if (programReqs != null && programReqs.Count() > 0)
+            if (programReqs != null && programReqs.Any())
             {
                 SpaceBoundary.SetRequirements(programReqs);
             }
@@ -56,6 +57,21 @@ namespace WorkplaceMetrics
                 warnings.Add("This function expects either floors or conceptual mass. If not provided, some calculations may be incorrect.");
             }
 
+            var settings = new MetricsSettings
+            {
+                UsableArea = totalFloorArea,
+                RentableArea = totalFloorArea * 1.2,
+                Name = "Metrics Settings"
+            };
+
+            if (input.Overrides.Settings?.Any() == true)
+            {
+                var first = input.Overrides.Settings.First();
+                settings.UsableArea = first.Value.UsableArea;
+                settings.RentableArea = first.Value.RentableArea;
+            }
+            outputModel.AddElement(settings);
+
             var allSpaceBoundaries = zonesModel.AllElementsAssignableFromType<SpaceBoundary>();
 
             var totalDeskCount = CountWorkplaceTyped(inputModels, "Open Office Layout", "Desk");
@@ -81,12 +97,14 @@ namespace WorkplaceMetrics
                 headcount = (int)Math.Round(totalDeskCount * deskSharingRatio);
 
             }
-            var areaPerPerson = totalFloorArea / headcount;
-            var areaPerDesk = totalFloorArea / totalDeskCount;
+            var areaPerPerson = settings.UsableArea / headcount;
+            var rentableAreaPerPerson = settings.RentableArea / headcount;
+            var areaPerDesk = settings.UsableArea / totalDeskCount;
+            var rentableAreaPerDesk = settings.RentableArea / totalDeskCount;
             var meetingRoomRatio = meetingRoomCount == 0 ? 0 : (int)Math.Round(headcount / (double)meetingRoomCount);
 
             var areaTallies = zonesModel.AllElementsOfType<AreaTally>();
-            if (areaTallies.Count() == 0)
+            if (!areaTallies.Any())
             {
                 var areas = CalculateAreas(hasProgramRequirements, allSpaceBoundaries);
                 areaTallies = areas.Values;
@@ -120,20 +138,26 @@ namespace WorkplaceMetrics
                 }
             }
 
-            var output = new WorkplaceMetricsOutputs(
-                                                    totalFloorArea,
-                                                    areaPerPerson,
-                                                    totalDeskCount,
-                                                    totalMeetingRoomSeats,
-                                                    totalClassroomSeats,
-                                                    totalPhoneBooths,
-                                                    totalOpenCollabSeats,
-                                                    headcount,
-                                                    areaPerDesk,
-                                                    deskSharingRatio,
-                                                    meetingRoomRatio,
-                                                    totalPrivateOffices
-                                                    );
+            var output = new WorkplaceMetricsOutputs
+            {
+                TotalUsableFloorArea = settings.UsableArea,
+                TotalRentableFloorArea = settings.RentableArea,
+                AreaPerPerson = areaPerPerson,
+                RentableAreaPerPerson = rentableAreaPerPerson,
+                AreaPerDesk = areaPerDesk,
+                RentableAreaPerDesk = rentableAreaPerDesk,
+                TotalDeskCount = totalDeskCount,
+                MeetingRoomSeats = totalMeetingRoomSeats,
+                ClassroomSeats = totalClassroomSeats,
+                PhoneBooths = totalPhoneBooths,
+                CollaborationSeats = totalOpenCollabSeats,
+                TotalHeadcount = headcount,
+                DeskSharingRatio = deskSharingRatio,
+                MeetingRoomRatio = meetingRoomRatio,
+                PrivateOfficeCount = totalPrivateOffices,
+                Model = outputModel
+            };
+
             output.Model.AddElements(areaTallies);
 
             if (warnings.Count > 0)

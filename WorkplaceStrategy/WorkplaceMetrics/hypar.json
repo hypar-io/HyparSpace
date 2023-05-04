@@ -108,6 +108,28 @@
       }
     }
   },
+  "overrides": {
+    "Settings": {
+      "context": "[*discriminator=Elements.MetricsSettings]",
+      "identity": {
+        "Name": {
+          "type": "string"
+        }
+      },
+      "schema": {
+        "Rentable Area": {
+          "description": "Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.",
+          "type": "number",
+          "$hyparUnitType": "area"
+        },
+        "Usable Area": {
+          "description": "Adjust the Usable Area for calculations + display.",
+          "type": "number",
+          "$hyparUnitType": "area"
+        }
+      }
+    }
+  },
   "outputs": [
     {
       "unit_type": "area",
@@ -117,8 +139,20 @@
     },
     {
       "unit_type": "area",
+      "name": "Total Rentable Floor Area",
+      "description": "The total rentable floor area of the project.",
+      "type": "number"
+    },
+    {
+      "unit_type": "area",
       "name": "Area per Person",
       "description": "The usable floor area per person.",
+      "type": "number"
+    },
+    {
+      "unit_type": "area",
+      "name": "Rentable Area per Person",
+      "description": "The rentable floor area per person.",
       "type": "number"
     },
     {
@@ -161,6 +195,12 @@
       "unit_type": "area",
       "name": "Area per Desk",
       "description": "The usable floor area per desk.",
+      "type": "number"
+    },
+    {
+      "unit_type": "area",
+      "name": "Rentable Area per Desk",
+      "description": "The rentable floor area per desk.",
       "type": "number"
     },
     {
