@@ -13,6 +13,91 @@ namespace OpenCollaborationLayout
 {
     public static class OpenCollaborationLayout
     {
+        private class OpenCollaborationLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
+        {
+            private int varietyCounter = 0;
+
+            protected override int CountSeats(LayoutInstantiated layout)
+            {
+                if (layout.Config is ConfigurationWithCounts configWithCounts)
+                {
+                    return configWithCounts.SeatCount;
+                }
+
+                return 0;
+            }
+
+            protected override SpaceConfiguration DeserializeConfigJson(string configJson)
+            {
+                var spaceConfiguration = new SpaceConfiguration();
+                var dictWithCounts = JsonConvert.DeserializeObject<Dictionary<string, ConfigurationWithCounts>>(configJson);
+                foreach (var pair in dictWithCounts)
+                {
+                    spaceConfiguration.Add(pair.Key, pair.Value);
+                }
+                return spaceConfiguration;
+            }
+
+            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
+            {
+                varietyCounter = 0;
+                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
+                result.OutputModel.AddElement(new WorkpointCount() { Count = result.SeatsCount, Type = "Collaboration seat" });
+                return result;
+            }
+
+            protected override KeyValuePair<string, ContentConfiguration>? FindConfig(double width, double length, SpaceConfiguration configs)
+            {
+                var orderedConfigPairs = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width);
+                var configsThatFitWell = new List<KeyValuePair<string, ContentConfiguration>>();
+                foreach (var configPair in orderedConfigPairs)
+                {
+                    var config = configPair.Value;
+                    // if it fits
+                    if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
+                    {
+                        if (configsThatFitWell.Count == 0)
+                        {
+                            configsThatFitWell.Add(configPair);
+                        }
+                        else
+                        {
+                            var firstFittingConfig = configsThatFitWell.First().Value;
+                            // check if there's another config that's roughly the same size
+                            if (config.CellBoundary.Width.ApproximatelyEquals(firstFittingConfig.CellBoundary.Width, 1.0) && config.CellBoundary.Depth.ApproximatelyEquals(firstFittingConfig.CellBoundary.Depth, 1.0))
+                            {
+                                configsThatFitWell.Add(configPair);
+                            }
+                        }
+                    }
+                }
+                if (configsThatFitWell.Count == 0)
+                {
+                    return null;
+                }
+                var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
+                varietyCounter++;
+                return selectedConfig;
+            }
+
+            protected override IEnumerable<LevelElements> GetLevels(Dictionary<string, Model> inputModels, Model spacePlanningZones)
+            {
+                var levels = base.GetLevels(inputModels, spacePlanningZones);
+                if (inputModels.TryGetValue("Open Office Layout", out var openOfficeModel))
+                {
+                    foreach (var sb in openOfficeModel.AllElementsOfType<SpaceBoundary>())
+                    {
+                        if (sb.AdditionalProperties.TryGetValue("Parent Level Id", out var lvlId))
+                        {
+                            var matchingLevel = levels.FirstOrDefault(l => l.Id.ToString() == lvlId as string);
+                            matchingLevel?.Elements.Add(sb);
+                        }
+                    }
+                }
+                return levels;
+            }
+        }
+
         /// <summary>
         /// The OpenCollaborationLayout function.
         /// </summary>
@@ -22,216 +107,14 @@ namespace OpenCollaborationLayout
         public static OpenCollaborationLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenCollaborationLayoutInputs input)
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
-            varietyCounter = 0;
-            int totalCountableSeats = 0;
-            var spacePlanningZones = inputModels["Space Planning Zones"];
-
-            var hasOpenOffice = inputModels.TryGetValue("Open Office Layout", out var openOfficeModel);
-
-            var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            if (inputModels.TryGetValue("Circulation", out var circModel))
+            var layoutGeneration = new OpenCollaborationLayoutGeneration();
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Open Collaboration", inputModels, input.Overrides, false, "./OpenCollaborationConfigurations.json");
+            var output = new OpenCollaborationLayoutOutputs
             {
-                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
-                foreach (var cs in circSegments)
-                {
-                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
-                    if (matchingLevel != null)
-                    {
-                        matchingLevel.Elements.Add(cs);
-                    }
-                }
-            }
-
-            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
-            var output = new OpenCollaborationLayoutOutputs();
-            var configJson = File.ReadAllText("./OpenCollaborationConfigurations.json");
-            var configs = JsonConvert.DeserializeObject<Dictionary<string, ConfigurationWithCounts>>(configJson);
-
-            if (hasOpenOffice)
-            {
-                foreach (var sb in openOfficeModel.AllElementsOfType<SpaceBoundary>())
-                {
-                    if (sb.AdditionalProperties.TryGetValue("Parent Level Id", out var lvlId))
-                    {
-                        var matchingLevel = levels.FirstOrDefault(l => l.Id.ToString() == lvlId as string);
-                        matchingLevel?.Elements.Add(sb);
-                    }
-                }
-            }
-
-            foreach (var lvl in levels)
-            {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Collaboration");
-                var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
-                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-
-                foreach (var room in meetingRmBoundaries)
-                {
-                    var spaceBoundary = room.Boundary;
-                    Line orientationGuideEdge = FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                    var boundaryCurves = new List<Polygon>();
-                    boundaryCurves.Add(spaceBoundary.Perimeter);
-                    boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
-                    var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    foreach (var cell in grid.GetCells())
-                    {
-                        var rect = cell.GetCellGeometry() as Polygon;
-                        var segs = rect.Segments();
-                        var width = segs[0].Length();
-                        var depth = segs[1].Length();
-                        var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
-                        {
-                            var (instance, count) = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                            LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
-                            output.Model.AddElement(instance);
-                            totalCountableSeats += count;
-                        }
-                        else if (trimmedGeo.Length > 0)
-                        {
-                            var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                            var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                            var cinchedPoly = new Polygon(cinchedVertices);
-                            // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            try
-                            {
-                                var (instance, count) = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                                LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
-                                output.Model.AddElement(instance);
-                                totalCountableSeats += count;
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine("Failed to instantiate config\n" + e.ToString());
-                            }
-                            Console.WriteLine("🤷‍♂️ funny shape!!!");
-                        }
-                    }
-                }
-            }
-            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Collaboration seat" });
-            output.CollaborationSeats = totalCountableSeats;
-            OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
+                Model = result.OutputModel,
+                CollaborationSeats = result.SeatsCount
+            };
             return output;
-        }
-
-        private static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, out IEnumerable<Line> otherSegments, double maxDist = 0)
-        {
-            var minDist = double.MaxValue;
-            var minSeg = edgesToClassify.First();
-            var allEdges = edgesToClassify.ToList();
-            var selectedIndex = 0;
-            for (int i = 0; i < allEdges.Count; i++)
-            {
-                var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
-                foreach (var seg in corridorSegments)
-                {
-                    var dist = midpt.DistanceTo(seg);
-                    // if two segments are basically the same distance to the corridor segment,
-                    // prefer the longer one.
-                    if (Math.Abs(dist - minDist) < 0.1)
-                    {
-                        minDist = dist;
-                        if (minSeg.Length() < edge.Length())
-                        {
-                            minSeg = edge;
-                            selectedIndex = i;
-                        }
-                    }
-                    else if (dist < minDist)
-                    {
-                        minDist = dist;
-                        minSeg = edge;
-                        selectedIndex = i;
-                    }
-                }
-            }
-            if (maxDist != 0)
-            {
-                if (minDist < maxDist)
-                {
-
-                    otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
-                    return minSeg;
-                }
-                else
-                {
-                    Console.WriteLine($"no matches: {minDist}");
-                    otherSegments = allEdges;
-                    return null;
-                }
-            }
-            otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
-            return minSeg;
-        }
-
-        private static int varietyCounter = 0;
-        private static (ComponentInstance instance, int count) InstantiateLayout(Dictionary<string, ConfigurationWithCounts> configs, double width, double length, Polygon rectangle, Transform xform)
-        {
-            var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
-            var configsThatFitWell = new List<ConfigurationWithCounts>();
-            int countableSeatCount = 0;
-            foreach (var key in orderedKeys)
-            {
-                var config = configs[key];
-                // if it fits
-                if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
-                {
-                    if (configsThatFitWell.Count == 0)
-                    {
-                        configsThatFitWell.Add(config);
-                    }
-                    else
-                    {
-                        var firstFittingConfig = configsThatFitWell.First();
-                        // check if there's another config that's roughly the same size
-                        if (config.CellBoundary.Width.ApproximatelyEquals(firstFittingConfig.CellBoundary.Width, 1.0) && config.CellBoundary.Depth.ApproximatelyEquals(firstFittingConfig.CellBoundary.Depth, 1.0))
-                        {
-                            configsThatFitWell.Add(config);
-                        }
-                    }
-                }
-            }
-            if (configsThatFitWell.Count == 0)
-            {
-                return (null, 0);
-            }
-            var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
-
-            countableSeatCount = selectedConfig.SeatCount;
-
-            var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
-
-            var rules = selectedConfig.Rules();
-            varietyCounter++;
-            var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            var allPlacedInstances = instance.Instances;
-            return (instance, countableSeatCount);
-        }
-
-        private static int CountConfigSeats(ContentConfiguration config, string[] countableSeaters, int seatsPerSeater)
-        {
-            int countableSeatCount = 0;
-            foreach (var item in config.ContentItems)
-            {
-                foreach (var countableSeat in countableSeaters)
-                {
-                    if (item.ContentElement.GltfLocation.Contains(countableSeat))
-                    {
-                        countableSeatCount += seatsPerSeater;
-                        break;
-                    }
-                }
-            }
-            return countableSeatCount;
         }
     }
 }
