@@ -83,6 +83,9 @@
     }
   ],
   "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/WallCandidate.json"
+  ],
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",
   "cli_version": "0.9.11-alpha.2"
