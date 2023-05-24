@@ -31,6 +31,8 @@ Calculate various workplace metrics from a layout.
 |Desk Sharing Ratio|Number|How many people are there for each desk?|
 |Meeting room ratio|Number|On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.|
 |Private Office Count|Number|Total number of private offices.|
+|Circulation / USF Ratio|Number|The ratio of circulation area to usable floor area.|
+|Circulation / RSF Ratio|Number|The ratio of circulation area to rentable floor area.|
 
 
 <br>

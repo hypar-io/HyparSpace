@@ -21,6 +21,7 @@ namespace WorkplaceMetrics
             var zonesModel = inputModels["Space Planning Zones"];
             var hasFloors = inputModels.TryGetValue("Floors", out var floorsModel);
             var hasMass = inputModels.TryGetValue("Conceptual Mass", out var massModel);
+            var hasCirculation = inputModels.TryGetValue("Circulation", out var circulationModel);
 
             // Get program requirements
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
@@ -30,6 +31,14 @@ namespace WorkplaceMetrics
             if (programReqs != null && programReqs.Any())
             {
                 SpaceBoundary.SetRequirements(programReqs);
+            }
+
+            // figure out the special key containing circulation
+            var circulationKey = "Circulation";
+            var circReq = SpaceBoundary.Requirements.Values.ToList().FirstOrDefault(k => k.ProgramName == "Circulation" || k.Name == "Circulation" || k.HyparSpaceType == "Circulation");
+            if (circReq != null)
+            {
+                circulationKey = circReq.QualifiedProgramName;
             }
 
             // calc total floor area
@@ -72,7 +81,43 @@ namespace WorkplaceMetrics
             }
             outputModel.AddElement(settings);
 
-            var allSpaceBoundaries = zonesModel.AllElementsAssignableFromType<SpaceBoundary>();
+            var allSpaceBoundaries = zonesModel.AllElementsAssignableFromType<SpaceBoundary>().ToList();
+
+            // convert circulation to space boundaries
+            if (hasCirculation)
+            {
+                var allCirculation = circulationModel.AllElementsOfType<CirculationSegment>();
+                var circByLevel = allCirculation.GroupBy(c => c.Level);
+
+                foreach (var grp in circByLevel)
+                {
+                    var profiles = grp.Select(g => g.Profile);
+                    try
+                    {
+                        profiles = Profile.UnionAll(profiles);
+                    }
+                    catch
+                    {
+                        // swallow
+                    }
+                    foreach (var profile in profiles)
+                    {
+                        var color = circReq?.Color ?? new Color(0.5, 0.5, 0.5, 1.0);
+                        var mat = new Material("Circulation", color);
+                        var sb = new SpaceBoundary()
+                        {
+                            Boundary = profile,
+                            Area = profile.Area(),
+                            ProgramGroup = circReq?.ProgramGroup ?? "Circulation",
+                            Name = circReq?.ProgramName ?? "Circulation",
+                            ProgramType = circulationKey,
+                            Material = mat,
+                        };
+                        allSpaceBoundaries.Add(sb);
+                    }
+                }
+
+            }
 
             var totalDeskCount = CountWorkplaceTyped(inputModels, "Open Office Layout", "Desk");
             var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout", "Meeting Room Seat");
@@ -138,6 +183,8 @@ namespace WorkplaceMetrics
                 }
             }
 
+            var totalCirculationArea = allSpaceBoundaries.Where(sb => sb.ProgramType == circulationKey).Sum(sb => sb.Area);
+
             var output = new WorkplaceMetricsOutputs
             {
                 TotalUsableFloorArea = settings.UsableArea,
@@ -155,6 +202,8 @@ namespace WorkplaceMetrics
                 DeskSharingRatio = deskSharingRatio,
                 MeetingRoomRatio = meetingRoomRatio,
                 PrivateOfficeCount = totalPrivateOffices,
+                CirculationUSFRatio = totalCirculationArea / settings.UsableArea,
+                CirculationRSFRatio = totalCirculationArea / settings.RentableArea,
                 Model = outputModel
             };
 
@@ -199,7 +248,7 @@ namespace WorkplaceMetrics
                     areas[programName] = new AreaTally()
                     {
                         ProgramType = programName,
-                        ProgramColor = sb.Material.Color,
+                        ProgramColor = req?.Color ?? sb.Material.Color,
                         AreaTarget = areaTarget,
                         AchievedArea = area,
                         DistinctAreaCount = 1,
@@ -243,14 +292,6 @@ namespace WorkplaceMetrics
                     }
                 }
 
-            }
-
-            // count corridors in area
-            var circulationKey = "Circulation";
-            var circReq = SpaceBoundary.Requirements.ToList().FirstOrDefault(k => k.Value.Name == "Circulation");
-            if (circReq.Key != null)
-            {
-                circulationKey = circReq.Value.ProgramName;
             }
 
             // // calculate circulation areas (stored as floors, not space boundaries)

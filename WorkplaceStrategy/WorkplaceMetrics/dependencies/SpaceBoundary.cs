@@ -26,7 +26,6 @@ namespace Elements
         }
         public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
         public int SpaceCount { get; set; } = 1;
-
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
             Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);

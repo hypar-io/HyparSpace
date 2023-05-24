@@ -53,6 +53,10 @@
     {
       "name": "Program Requirements",
       "optional": true
+    },
+    {
+      "name": "Circulation",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -220,6 +224,18 @@
       "name": "Private Office Count",
       "description": "Total number of private offices.",
       "type": "number"
+    },
+    {
+      "name": "Circulation / USF Ratio",
+      "description": "The ratio of circulation area to usable floor area.",
+      "type": "number",
+      "unit_type": "ratio"
+    },
+    {
+      "name": "Circulation / RSF Ratio",
+      "description": "The ratio of circulation area to rentable floor area.",
+      "type": "number",
+      "unit_type": "ratio"
     }
   ],
   "element_types": [
@@ -228,7 +244,8 @@
     "https://prod-api.hypar.io/schemas/AreaTally",
     "https://prod-api.hypar.io/schemas/LevelVolume",
     "https://prod-api.hypar.io/schemas/ProgramRequirement",
-    "https://prod-api.hypar.io/schemas/CoreArea"
+    "https://prod-api.hypar.io/schemas/CoreArea",
+    "https://schemas.hypar.io/CirculationSegment.json"
   ],
   "repository_url": "https://github.com/hypar-io/HyparSpace",
   "last_updated": "2022-06-11T12:34:31.394295",
