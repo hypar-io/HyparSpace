@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -18,28 +19,23 @@ namespace PhoneBoothLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Space Planning Zones/5849601d-73e1-4b0a-b1eb-5ccf225b7b8a.json")) }, 
+                {"Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Circulation/aba61113-5851-4000-8ddc-7ca10e78bd4d.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PhoneBoothLayout/test/Generated/PhoneBoothLayoutTest/model_dependencies/Levels/670bc04a-d379-431e-bfb6-b6d43a42285f.json")) }, 
             };
 
             var result = PhoneBoothLayout.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.gltf", false);
+            result.Model.ToGlTF("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.glb");
             File.WriteAllText("../../../Generated/PhoneBoothLayoutTest/results/PhoneBoothLayoutTest.json", result.Model.ToJson());
+
         }
 
         public PhoneBoothLayoutInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""Minimum Size"": 2,
-  ""model_input_keys"": {
-    ""Space Planning Zones"": ""9e935104-a1bc-4dd0-8080-dc086f46de1f_221c8fd0-aca1-4165-aae6-3b332bc65025_elements.zip""
-  },
-  ""Create Walls"": true
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PhoneBoothLayoutInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/PhoneBoothLayoutTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<PhoneBoothLayoutInputs>(json);
         }
     }
 }

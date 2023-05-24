@@ -149,6 +149,8 @@ namespace OpenOfficeLayout
                                     ContentItems = new List<ContentConfiguration.ContentItem>()
                                 };
                                 customDesk = new CustomWorkstation(spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length);
+                                // this is a hack for if the space already has overrides on it.
+                                ob.AdditionalProperties.Remove("associatedIdentities");
                                 Identity.AddOverrideIdentity(ob, spaceOverride);
                                 return selectedConfig;
                             });
