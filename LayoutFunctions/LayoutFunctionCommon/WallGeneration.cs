@@ -213,15 +213,15 @@ namespace LayoutFunctionCommon
             return mullion;
         }
 
-        public static void GenerateWalls(Model model, IEnumerable<(Line Line, string Type, Guid ElementId)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
+        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
         {
             if (debugMode)
             {
                 foreach (var wallCandidate in wallCandidateLines)
                 {
-                    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(wallCandidate.Line));
-                    var lineProjected = wallCandidate.Line.TransformedLine(new Transform(0, 0, -wallCandidate.Line.End.Z));
-                    switch (wallCandidate.Type)
+                    Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(wallCandidate.line));
+                    var lineProjected = wallCandidate.line.TransformedLine(new Transform(0, 0, -wallCandidate.line.End.Z));
+                    switch (wallCandidate.type)
                     {
                         case "Solid":
                             model.AddElement(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.ZAxis, levelTransform));
