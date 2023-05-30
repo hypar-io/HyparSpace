@@ -1,0 +1,119 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "417a69f3-805e-4975-9a72-7c3effa46b29",
+  "name": "Doors",
+  "display_name": "Doors",
+  "description": "Create doors for space boundary rooms.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Circulation",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Interior Partitions",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Private Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Phone Booth Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Classroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Meeting Room Layout",
+      "optional": true
+    }
+  ],
+  "model_output": "Doors",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "DoorWidth": {
+        "multipleOf": 0.01,
+        "default": 1,
+        "maximum": 1.2192,
+        "description": "Width of a door",
+        "type": "number",
+        "$hyparOrder": 0,
+        "$hyparUnitType": "length",
+        "minimum": 0.8128
+      }
+    }
+  },
+  "overrides": {
+    "DoorPositions": {
+      "context": "[*discriminator=Elements.Door]",
+      "identity": {
+        "OriginalPosition": {
+          "$ref": "https://prod-api.hypar.io/schemas/Vector3"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Position": {
+			  "$hyparQueryString": "Transform",
+            "$ref": "https://prod-api.hypar.io/schemas/Transform",
+            "$hyparConstraints": {
+				      "enableRotation": false
+        	  }
+		    },
+        "Clear Width": {
+          "type": "number"
+        }
+      },
+      "verbs": {
+        "add": null,
+        "remove": null,
+        "edit": null,
+        "revert": null
+      },
+      "dependency": null,
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Position": {
+            "$hyparQueryString": "Transform",
+                "$ref": "https://prod-api.hypar.io/schemas/Transform",
+                "$hyparConstraints": {
+                  "enableRotation": false
+                }
+            },
+            "Clear Width": {
+              "type": "number"
+            }
+          }
+        },
+        "remove": true
+      }
+    }
+  },
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/Door.json",
+    "https://schemas.hypar.io/WallCandidate.json"
+  ],
+  "repository_url": "",
+  "filters": {},
+  "last_updated": "2023-05-17T10:11:51.557529",
+  "cli_version": "1.6.0"
+}
