@@ -35,7 +35,7 @@ namespace Doors
                         continue;
                     }
 
-                    var doorPosition = wall.Line.PointAt(0.5);
+                    var doorPosition = wall.Line.Mid();
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
 
