@@ -3,6 +3,7 @@ using Elements.Geometry;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using LayoutFunctionCommon;
 
 namespace Doors
 {
@@ -147,7 +148,7 @@ namespace Doors
         {
             foreach (var addition in additions)
             {
-                var position = addition.Value.Position.Origin;                        
+                var position = addition.Value.Position.Origin;
                 var wall = GetClosestWall(position, wallCandidates, out var closest);
 
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
@@ -190,7 +191,7 @@ namespace Doors
             else
             {
                 var roomSegments = room.Boundary.Segments();
-                corridorEdges = FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _);
+                corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _);
             }
             return corridorEdges;
         }
@@ -287,39 +288,6 @@ namespace Doors
             }
 
             return closestWall;
-        }
-
-        public static List<Line> FindAllEdgesAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<Line> otherSegments)
-        {
-            otherSegments = new List<Line>();
-            var adjacentSegments = new List<Line>();
-
-            foreach (var edge in edgesToClassify)
-            {
-                var midPt = edge.PointAt(0.5);
-                midPt.Z = 0;
-                var adjacentToAny = false;
-                foreach (var comparisonSegment in comparisonSegments)
-                {
-                    var start = comparisonSegment.Start;
-                    var end = comparisonSegment.End;
-                    start.Z = 0;
-                    end.Z = 0;
-                    var comparisonSegmentProjected = new Line(start, end);
-                    var dist = midPt.DistanceTo(comparisonSegmentProjected);
-                    if (dist < 0.35)
-                    {
-                        adjacentToAny = true;
-                        adjacentSegments.Add(edge);
-                        break;
-                    }
-                }
-                if (!adjacentToAny)
-                {
-                    otherSegments.Add(edge);
-                }
-            }
-            return adjacentSegments;
         }
     }
 }
