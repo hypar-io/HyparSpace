@@ -6,7 +6,7 @@ Create doors for space boundary rooms.
 
 |Input Name|Type|Description|
 |---|---|---|
-|DoorWidth|number|Width of a door|
+|Width|number|Width of a door|
 
 
 <br>

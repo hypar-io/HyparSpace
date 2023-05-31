@@ -45,7 +45,7 @@ namespace Doors
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
-                    double width = doorOverride?.Value.ClearWidth ?? input.DoorWidth;
+                    double width = doorOverride?.Value.Width ?? input.Width;
                     var door = CreateDoor(wall, doorPosition, width, doorOverride);
                     if (door != null)
                     {
@@ -109,7 +109,8 @@ namespace Doors
                 throw new ArgumentException("Interior Partitions is missing");
             }
 
-            var wallCandidates = interiorPartitions.AllElementsOfType<WallCandidate>().ToList();
+            var wallCandidates = new List<WallCandidate>();
+            //var wallCandidates = interiorPartitions.AllElementsOfType<WallCandidate>().ToList();
             var c = meetingRooms.AllElementsOfType<InteriorPartitionCandidate>();
             wallCandidates.AddRange(c.SelectMany(wc => wc.WallCandidateLines.Select(wcl => new WallCandidate(wcl.line.TransformedLine(wc.LevelTransform), wcl.type, new List<SpaceBoundary>()))));
             c = privateOffices.AllElementsOfType<InteriorPartitionCandidate>();
@@ -150,13 +151,19 @@ namespace Doors
             {
                 var position = addition.Value.Position.Origin;
                 var wall = GetClosestWall(position, wallCandidates, out var closest);
+                if (wall == null)
+                {
+                    continue;
+                }
 
+                position = closest;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
                     o => closest.IsAlmostEqualTo(o.Identity.OriginalPosition));
-                double width = doorOverride?.Value.ClearWidth ?? addition.Value.ClearWidth;
+                double width = addition.Value.Width;
                 if (doorOverride != null && doorOverride.Value.Position != null)
                 {
                     position = doorOverride.Value.Position.Origin;
+                    width = doorOverride.Value.Width;
                 }
 
                 var door = CreateDoor(wall, position, width, doorOverride);

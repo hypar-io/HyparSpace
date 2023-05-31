@@ -46,9 +46,8 @@ namespace Elements
         {
             var fullWidth = Door.FullWidth(width);
             double wallWidth = wallLine.Length();
-            double halfDoorToWallWidthRatio = 0.5 * fullWidth / wallWidth;
-            Vector3 p1 = wallLine.PointAt(halfDoorToWallWidthRatio);
-            Vector3 p2 = wallLine.PointAt(1.0 - halfDoorToWallWidthRatio);
+            Vector3 p1 = wallLine.PointAt(0.5 * fullWidth);
+            Vector3 p2 = wallLine.PointAt(wallWidth - 0.5 * fullWidth);
             var reducedWallLine = new Line(p1, p2);
             return pos.ClosestPointOn(reducedWallLine);
         }

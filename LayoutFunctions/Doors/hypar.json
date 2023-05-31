@@ -46,7 +46,7 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "DoorWidth": {
+      "Width": {
         "multipleOf": 0.01,
         "default": 1,
         "maximum": 1.2192,
@@ -75,8 +75,13 @@
 				      "enableRotation": false
         	  }
 		    },
-        "Clear Width": {
-          "type": "number"
+        "Width": {
+          "type": "number",
+          "default": 1,
+          "maximum": 1.2192,
+          "description": "Width of a door",
+          "$hyparUnitType": "length",
+          "minimum": 0.8128
         }
       },
       "verbs": {
@@ -96,8 +101,13 @@
                   "enableRotation": false
                 }
             },
-            "Clear Width": {
-              "type": "number"
+            "Width": {
+              "type": "number",
+              "default": 1,
+              "maximum": 1.2192,
+              "description": "Width of a door",
+              "$hyparUnitType": "length",
+              "minimum": 0.8128
             }
           }
         },
