@@ -26,11 +26,11 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "Width": {
+      "Clear Width": {
         "multipleOf": 0.01,
         "default": 1,
         "maximum": 1.2192,
-        "description": "Width of a door",
+        "description": "Width of a door without a frame.",
         "type": "number",
         "$hyparOrder": 0,
         "$hyparUnitType": "length",
@@ -55,11 +55,11 @@
 				      "enableRotation": false
         	  }
 		    },
-        "Width": {
+        "Clear Width": {
           "type": "number",
           "default": 1,
           "maximum": 1.2192,
-          "description": "Width of a door",
+          "description": "Width of a door without a frame.",
           "$hyparUnitType": "length",
           "minimum": 0.8128
         }
@@ -81,11 +81,11 @@
                   "enableRotation": false
                 }
             },
-            "Width": {
+            "Clear Width": {
               "type": "number",
               "default": 1,
               "maximum": 1.2192,
-              "description": "Width of a door",
+              "description": "Width of a door without a frame.",
               "$hyparUnitType": "length",
               "minimum": 0.8128
             }

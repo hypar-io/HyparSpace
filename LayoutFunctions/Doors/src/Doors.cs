@@ -46,7 +46,7 @@ namespace Doors
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
-                    double width = doorOverride?.Value.Width ?? input.Width;
+                    double width = doorOverride?.Value.ClearWidth ?? input.ClearWidth;
                     var door = CreateDoor(wall, doorPosition, width, doorOverride);
                     if (door != null)
                     {
@@ -133,11 +133,11 @@ namespace Doors
                 position = closest;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
                     o => closest.IsAlmostEqualTo(o.Identity.OriginalPosition));
-                double width = addition.Value.Width;
+                double width = addition.Value.ClearWidth;
                 if (doorOverride != null && doorOverride.Value.Position != null)
                 {
                     position = doorOverride.Value.Position.Origin;
-                    width = doorOverride.Value.Width;
+                    width = doorOverride.Value.ClearWidth;
                 }
 
                 var door = CreateDoor(wall, position, width, doorOverride);
