@@ -36,6 +36,7 @@ namespace Doors
                     }
 
                     var wall = pair.Value.Wall;
+                    var type = (DoorType)input.Type;
                     var doorPosition = pair.Value.Segment.Mid();
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
@@ -43,11 +44,13 @@ namespace Doors
                     if (doorOverride != null && doorOverride.Value.Position != null)
                     {
                         doorPosition = doorOverride.Value.Position.Origin;
+                        type = (DoorType)doorOverride.Value.Type;
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
                     double width = doorOverride?.Value.ClearWidth ?? input.ClearWidth;
-                    var door = CreateDoor(wall, doorPosition, width, doorOverride);
+
+                    var door = CreateDoor(wall, doorPosition, type, width, doorOverride);
                     if (door != null)
                     {
                         doors.Add(door);
@@ -124,6 +127,7 @@ namespace Doors
             foreach (var addition in additions)
             {
                 var position = addition.Value.Position.Origin;
+                var type = (DoorType)addition.Value.Type;
                 var wall = GetClosestWall(position, wallCandidates, out var closest);
                 if (wall == null)
                 {
@@ -138,9 +142,10 @@ namespace Doors
                 {
                     position = doorOverride.Value.Position.Origin;
                     width = doorOverride.Value.ClearWidth;
+                    type = (DoorType)doorOverride.Value.Type;
                 }
 
-                var door = CreateDoor(wall, position, width, doorOverride);
+                var door = CreateDoor(wall, position, type, width, doorOverride);
                 if (door != null)
                 {
                     doors.Add(door);
@@ -212,15 +217,16 @@ namespace Doors
 
         private static Door? CreateDoor(WallCandidate? wall,
                                         Vector3 position,
+                                        DoorType type,
                                         double width,
                                         DoorPositionsOverride? doorOverride = null)
         {
-            if (wall == null || !Door.CanFit(wall.Line, width))
+            if (wall == null || !Door.CanFit(wall.Line, type, width))
             {
                 return null;
             }
 
-            var door = new Door(wall.Line, position, width);
+            var door = new Door(wall.Line, position, type, width);
 
             if (doorOverride != null)
             {

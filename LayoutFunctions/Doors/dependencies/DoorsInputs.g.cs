@@ -29,16 +29,17 @@ namespace Doors
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DoorsInputs(double @clearWidth, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public DoorsInputs(double @clearWidth, DoorsInputsType @type, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @clearWidth, @overrides});
+                validator.PreConstruct(new object[]{ @clearWidth, @type, @overrides});
             }
         
             this.ClearWidth = @clearWidth;
+            this.Type = @type;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -52,8 +53,24 @@ namespace Doors
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double ClearWidth { get; set; } = 1D;
     
+        /// <summary>The type of door.</summary>
+        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorsInputsType Type { get; set; } = DoorsInputsType.Single;
+    
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorsInputsType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
+        Single = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
+        Double = 1,
     
     }
     
@@ -286,16 +303,17 @@ namespace Doors
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public DoorPositionsValue(Transform @position, double @clearWidth)
+        public DoorPositionsValue(Transform @position, double @clearWidth, DoorPositionsValueType @type)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorPositionsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @position, @clearWidth});
+                validator.PreConstruct(new object[]{ @position, @clearWidth, @type});
             }
         
             this.Position = @position;
             this.ClearWidth = @clearWidth;
+            this.Type = @type;
         
             if(validator != null)
             {
@@ -310,6 +328,11 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Clear Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double ClearWidth { get; set; } = 1D;
+    
+        /// <summary>The type of door.</summary>
+        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsValueType Type { get; set; } = DoorPositionsValueType.Single;
     
     }
     
@@ -319,16 +342,17 @@ namespace Doors
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public DoorPositionsOverrideAdditionValue(Transform @position, double @clearWidth)
+        public DoorPositionsOverrideAdditionValue(Transform @position, double @clearWidth, DoorPositionsOverrideAdditionValueType @type)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorPositionsOverrideAdditionValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @position, @clearWidth});
+                validator.PreConstruct(new object[]{ @position, @clearWidth, @type});
             }
         
             this.Position = @position;
             this.ClearWidth = @clearWidth;
+            this.Type = @type;
         
             if(validator != null)
             {
@@ -343,6 +367,33 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Clear Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double ClearWidth { get; set; } = 1D;
+    
+        /// <summary>The type of door.</summary>
+        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsOverrideAdditionValueType Type { get; set; } = DoorPositionsOverrideAdditionValueType.Single;
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsValueType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
+        Single = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
+        Double = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsOverrideAdditionValueType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
+        Single = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
+        Double = 1,
     
     }
 }

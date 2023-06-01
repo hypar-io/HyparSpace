@@ -35,6 +35,16 @@
         "$hyparOrder": 0,
         "$hyparUnitType": "length",
         "minimum": 0.8128
+      },
+      "Type" : {
+        "default": "Single",
+        "description": "The type of door.",
+        "type": "string",
+        "$hyparOrder": 1,
+        "enum": [
+          "Single",
+          "Double"
+        ]
       }
     }
   },
@@ -62,6 +72,16 @@
           "description": "Width of a door without a frame.",
           "$hyparUnitType": "length",
           "minimum": 0.8128
+        },
+        "Type" : {
+          "default": "Single",
+          "description": "The type of door.",
+          "type": "string",
+          "$hyparOrder": 1,
+          "enum": [
+            "Single",
+            "Double"
+          ]
         }
       },
       "verbs": {
@@ -88,6 +108,16 @@
               "description": "Width of a door without a frame.",
               "$hyparUnitType": "length",
               "minimum": 0.8128
+            },
+            "Type" : {
+              "default": "Single",
+              "description": "The type of door.",
+              "type": "string",
+              "$hyparOrder": 1,
+              "enum": [
+                "Single",
+                "Double"
+              ]
             }
           }
         },
