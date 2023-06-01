@@ -29,13 +29,14 @@ namespace Doors
                     c => c.Profile.Transformed(c.Transform).Segments()).ToList();
                 foreach (var room in rooms)
                 {
-                    var wall = RoomDefaultDoorWall(room, levelCorridorsSegments, wallCandidates);
-                    if (wall == null)
+                    var pair = RoomDefaultDoorWall(room, levelCorridorsSegments, wallCandidates);
+                    if (pair == null)
                     {
                         continue;
                     }
 
-                    var doorPosition = wall.Line.Mid();
+                    var wall = pair.Value.Wall;
+                    var doorPosition = pair.Value.Segment.Mid();
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
 
@@ -88,43 +89,14 @@ namespace Doors
             {
                 throw new ArgumentException("Interior Partitions is missing");
             }
-
-            if (!inputModels.TryGetValue("Meeting Room Layout", out Model? meetingRooms))
-            {
-                throw new ArgumentException("Interior Partitions is missing");
-            }
-
-            if (!inputModels.TryGetValue("Private Office Layout", out Model? privateOffices))
-            {
-                throw new ArgumentException("Interior Partitions is missing");
-            }
-
-            if (!inputModels.TryGetValue("Classroom Layout", out Model? classrooms))
-            {
-                throw new ArgumentException("Interior Partitions is missing");
-            }
-
-            if (!inputModels.TryGetValue("Phone Booth Layout", out Model? phoneBooths))
-            {
-                throw new ArgumentException("Interior Partitions is missing");
-            }
-
-            var wallCandidates = new List<WallCandidate>();
-            //var wallCandidates = interiorPartitions.AllElementsOfType<WallCandidate>().ToList();
-            var c = meetingRooms.AllElementsOfType<InteriorPartitionCandidate>();
-            wallCandidates.AddRange(c.SelectMany(wc => wc.WallCandidateLines.Select(wcl => new WallCandidate(wcl.line.TransformedLine(wc.LevelTransform), wcl.type, new List<SpaceBoundary>()))));
-            c = privateOffices.AllElementsOfType<InteriorPartitionCandidate>();
-            wallCandidates.AddRange(c.SelectMany(wc => wc.WallCandidateLines.Select(wcl => new WallCandidate(wcl.line.TransformedLine(wc.LevelTransform), wcl.type, new List<SpaceBoundary>()))));
-            c = classrooms.AllElementsOfType<InteriorPartitionCandidate>();
-            wallCandidates.AddRange(c.SelectMany(wc => wc.WallCandidateLines.Select(wcl => new WallCandidate(wcl.line.TransformedLine(wc.LevelTransform), wcl.type, new List<SpaceBoundary>()))));
-            c = phoneBooths.AllElementsOfType<InteriorPartitionCandidate>();
-            wallCandidates.AddRange(c.SelectMany(wc => wc.WallCandidateLines.Select(wcl => new WallCandidate(wcl.line.TransformedLine(wc.LevelTransform), wcl.type, new List<SpaceBoundary>()))));
+            var wallCandidates = interiorPartitions.AllElementsOfType<WallCandidate>().ToList();
             return wallCandidates;
         }
 
-        private static WallCandidate? RoomDefaultDoorWall(SpaceBoundary room,
-                                                          IEnumerable<Line> corridorsSegments,
-                                                          IEnumerable<WallCandidate> wallCandidates)
+        private static (Line Segment, WallCandidate Wall)? RoomDefaultDoorWall(
+            SpaceBoundary room,
+            IEnumerable<Line> corridorsSegments,
+            IEnumerable<WallCandidate> wallCandidates)
         {
             List<Line>? corridorEdges = RoomCorridorEdges(room, corridorsSegments);
             if (corridorEdges == null || !corridorEdges.Any())
@@ -132,13 +104,15 @@ namespace Doors
                 return null;
             }
 
-            List<WallCandidate> roomWallCandidates = RoomWallCandidates(room, wallCandidates);
-            if (roomWallCandidates == null || !roomWallCandidates.Any())
+            var roomWallCandidates = RoomWallCandidates(corridorEdges, wallCandidates);
+            // Where are no walls or not all corridor edges are covered by walls.
+            // There is open passage so no default door required.
+            if (!roomWallCandidates.Any() || roomWallCandidates.Count < corridorEdges.Count)
             {
                 return null;
             }
             
-            var wall = RoomLongestWall(room, corridorEdges, roomWallCandidates);
+            var wall = RoomLongestWall(room, roomWallCandidates);
             return wall;
         }
 
@@ -190,63 +164,50 @@ namespace Doors
 
         private static List<Line>? RoomCorridorEdges(SpaceBoundary room, IEnumerable<Line> corridorSegments)
         {
-            List<Line>? corridorEdges = null;
-            if (room.AdditionalProperties.TryGetValue("AdjacentCorridorEdges", out var jCorridorEdges) && jCorridorEdges != null)
-            {
-                corridorEdges = ((JArray)jCorridorEdges).ToObject<List<Line>>();
-            }
-            else
-            {
-                var roomSegments = room.Boundary.Segments();
-                corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _);
-            }
+            var roomSegments = room.Boundary.Perimeter.CollinearPointsRemoved().Segments().Select(
+                s => s.TransformedLine(room.Transform));
+            var corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _);
             return corridorEdges;
         }
 
-        private static List<WallCandidate> RoomWallCandidates(SpaceBoundary room,
-                                                              IEnumerable<WallCandidate> wallCandidates)
+        private static List<(Line, WallCandidate)> RoomWallCandidates(List<Line> corridorEdges,
+                                                                      IEnumerable<WallCandidate> wallCandidates)
         {
-            List<WallCandidate> roomWalls = new List<WallCandidate>();
-            var roomSegments = room.Boundary.Segments().Select(s => s.TransformedLine(room.Transform));
-            foreach (var rs in roomSegments)
+            List<(Line, WallCandidate)> roomWalls = new List<(Line, WallCandidate)>();
+            foreach (var rs in corridorEdges)
             {
-                var wall = wallCandidates.FirstOrDefault(wc => wc.Line.Start.IsAlmostEqualTo(rs.Start) && wc.Line.End.IsAlmostEqualTo(rs.End) ||
-                                                               wc.Line.Start.IsAlmostEqualTo(rs.End) && wc.Line.End.IsAlmostEqualTo(rs.Start));
+                var wall = wallCandidates.FirstOrDefault(wc => IsWallCoverRoomSegment(rs, wc));
                 if (wall != null)
                 {
-                    roomWalls.Add(wall);
+                    roomWalls.Add((rs, wall));
                 }
             }
             return roomWalls;
         }
 
-        private static WallCandidate? RoomLongestWall(SpaceBoundary room,
-                                                      IEnumerable<Line> corridorEdges,
-                                                      IEnumerable<WallCandidate> roomWallCandidates)
+        private static (Line, WallCandidate)? RoomLongestWall(
+            SpaceBoundary room,
+            IEnumerable<(Line CorridorEdge, WallCandidate Wall)> roomWallCandidates)
         {
             double maxLength = 0;
-            WallCandidate? longestWall = null;
+            (Line, WallCandidate)? longestWall = null;
 
-            foreach (var edge in corridorEdges)
+            foreach (var (edge, wall) in roomWallCandidates)
             {
-                var matchingWall = roomWallCandidates.FirstOrDefault(wc => wc.Line.Start.IsAlmostEqualTo(edge.Start) && wc.Line.End.IsAlmostEqualTo(edge.End) ||
-                                                                           wc.Line.Start.IsAlmostEqualTo(edge.End) && wc.Line.End.IsAlmostEqualTo(edge.Start));
-                if (matchingWall != null)
+                var wallLength = edge.Length();
+                if (wallLength > maxLength)
                 {
-                    var wallLength = matchingWall.Line.Length();
-                    if (wallLength > maxLength)
-                    {
-                        maxLength = wallLength;
-                        longestWall = matchingWall;
-                    }
-                }
-                else
-                {
-                    //There is open corridor - no default door required.
-                    return null;
+                    maxLength = wallLength;
+                    longestWall = (edge, wall);
                 }
             }
             return longestWall;
+        }
+
+        private static bool IsWallCoverRoomSegment(Line segment, WallCandidate wall)
+        {
+            return wall.Line.PointOnLine(segment.Start, true, 1e-3) &&
+                   wall.Line.PointOnLine(segment.End, true, 1e-3);
         }
 
         private static Door? CreateDoor(WallCandidate? wall,

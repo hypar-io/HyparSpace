@@ -20,26 +20,6 @@
       "autohide": false,
       "name": "Interior Partitions",
       "optional": false
-    },
-    {
-      "autohide": false,
-      "name": "Private Office Layout",
-      "optional": true
-    },
-    {
-      "autohide": false,
-      "name": "Phone Booth Layout",
-      "optional": true
-    },
-    {
-      "autohide": false,
-      "name": "Classroom Layout",
-      "optional": true
-    },
-    {
-      "autohide": false,
-      "name": "Meeting Room Layout",
-      "optional": true
     }
   ],
   "model_output": "Doors",
