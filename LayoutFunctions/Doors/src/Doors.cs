@@ -49,8 +49,9 @@ namespace Doors
                     }
 
                     double width = doorOverride?.Value.ClearWidth ?? input.ClearWidth;
+                    double height = doorOverride?.Value.ClearHeight ?? input.ClearHeight;
 
-                    var door = CreateDoor(wall, doorPosition, type, width, doorOverride);
+                    var door = CreateDoor(wall, doorPosition, type, width, height, doorOverride);
                     if (door != null)
                     {
                         doors.Add(door);
@@ -138,14 +139,16 @@ namespace Doors
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
                     o => closest.IsAlmostEqualTo(o.Identity.OriginalPosition));
                 double width = addition.Value.ClearWidth;
+                double height = addition.Value.ClearHeight;
                 if (doorOverride != null && doorOverride.Value.Position != null)
                 {
                     position = doorOverride.Value.Position.Origin;
                     width = doorOverride.Value.ClearWidth;
+                    height = doorOverride.Value.ClearHeight;
                     type = (DoorType)doorOverride.Value.Type;
                 }
 
-                var door = CreateDoor(wall, position, type, width, doorOverride);
+                var door = CreateDoor(wall, position, type, width, height, doorOverride);
                 if (door != null)
                 {
                     doors.Add(door);
@@ -211,14 +214,16 @@ namespace Doors
 
         private static bool IsWallCoverRoomSegment(Line segment, WallCandidate wall)
         {
-            return wall.Line.PointOnLine(segment.Start, true, 1e-3) &&
-                   wall.Line.PointOnLine(segment.End, true, 1e-3);
+            const double wallToRoomMatchTolerance = 1e-3;
+            return wall.Line.PointOnLine(segment.Start, true, wallToRoomMatchTolerance) &&
+                   wall.Line.PointOnLine(segment.End, true, wallToRoomMatchTolerance);
         }
 
         private static Door? CreateDoor(WallCandidate? wall,
                                         Vector3 position,
                                         DoorType type,
                                         double width,
+                                        double height,
                                         DoorPositionsOverride? doorOverride = null)
         {
             if (wall == null || !Door.CanFit(wall.Line, type, width))
@@ -226,7 +231,7 @@ namespace Doors
                 return null;
             }
 
-            var door = new Door(wall.Line, position, type, width);
+            var door = new Door(wall, position, type, width, height);
 
             if (doorOverride != null)
             {

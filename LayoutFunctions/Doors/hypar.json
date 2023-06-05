@@ -36,11 +36,21 @@
         "$hyparUnitType": "length",
         "minimum": 0.8128
       },
+      "Clear Height" : {
+        "multipleOf": 0.01,
+        "type": "number",
+        "default": 2.10,
+        "maximum": 2.54,
+        "description": "Height of a door without a frame.",
+        "$hyparUnitType": "length",
+        "minimum": 203.2,
+        "$hyparOrder": 1
+      },
       "Type" : {
         "default": "Single",
         "description": "The type of door.",
         "type": "string",
-        "$hyparOrder": 1,
+        "$hyparOrder": 2,
         "enum": [
           "Single",
           "Double"
@@ -73,11 +83,18 @@
           "$hyparUnitType": "length",
           "minimum": 0.8128
         },
+        "Clear Height" : {
+          "type": "number",
+          "default": 2.10,
+          "maximum": 2.54,
+          "description": "Height of a door without a frame.",
+          "$hyparUnitType": "length",
+          "minimum": 203.2
+        },
         "Type" : {
           "default": "Single",
           "description": "The type of door.",
           "type": "string",
-          "$hyparOrder": 1,
           "enum": [
             "Single",
             "Double"
@@ -109,16 +126,23 @@
               "$hyparUnitType": "length",
               "minimum": 0.8128
             },
+            "Clear Height" : {
+              "type": "number",
+              "default": 2.10,
+              "maximum": 2.54,
+              "description": "Height of a door without a frame.",
+              "$hyparUnitType": "length",
+              "minimum": 203.2
+            },
             "Type" : {
               "default": "Single",
               "description": "The type of door.",
               "type": "string",
-              "$hyparOrder": 1,
               "enum": [
                 "Single",
                 "Double"
               ]
-            }
+            },
           }
         },
         "remove": true

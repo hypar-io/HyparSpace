@@ -7,15 +7,14 @@ namespace Elements
     public partial class Door
     {
         public const double DOOR_THICKNESS = 0.125;
-        public const double DOOR_HEIGHT = 2;
         public const double DOOR_OFFSET = 2 * 0.0254; //2 inches
 
-        public Door(Line wallLine, Vector3 position, DoorType type, double width) :
-            this(width, type, material: new Material("Door material", new Color(1.0, 0, 0, 1)))
+        public Door(WallCandidate wall, Vector3 position, DoorType type, double width, double height) :
+            this(width, type, wall, height, material: new Material("Door material", new Color(1.0, 0, 0, 1)))
         {
             OriginalPosition = position;
-            var adjustedPosition = GetClosestValidDoorPos(wallLine);
-            Transform = new Transform(adjustedPosition, wallLine.Direction(), Vector3.ZAxis);
+            var adjustedPosition = GetClosestValidDoorPos(wall.Line);
+            Transform = new Transform(adjustedPosition, wall.Line.Direction(), Vector3.ZAxis);
         }
 
         public Vector3 OriginalPosition
@@ -38,7 +37,8 @@ namespace Elements
                 right,
                 right - Vector3.YAxis * DOOR_THICKNESS });
 
-            var extrude = new Extrude(new Profile(doorPolygon), DOOR_HEIGHT, Vector3.ZAxis);
+            var fullHeight = ClearHeight + DOOR_OFFSET;
+            var extrude = new Extrude(new Profile(doorPolygon), fullHeight, Vector3.ZAxis);
             Representation = extrude;
         }
 

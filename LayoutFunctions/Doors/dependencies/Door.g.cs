@@ -27,11 +27,13 @@ namespace Elements
     public partial class Door : GeometricElement
     {
         [JsonConstructor]
-        public Door(double @clearWidth, DoorType @type, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public Door(double @clearWidth, DoorType @type, WallCandidate @wall, double @clearHeight, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.ClearWidth = @clearWidth;
             this.Type = @type;
+            this.Wall = @wall;
+            this.ClearHeight = @clearHeight;
             }
         
         // Empty constructor
@@ -48,6 +50,14 @@ namespace Elements
         [JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public DoorType Type { get; set; }
+    
+        /// <summary>The wall on which door is placed.</summary>
+        [JsonProperty("Wall", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public WallCandidate Wall { get; set; }
+    
+        /// <summary>Height of a door without a frame.</summary>
+        [JsonProperty("Clear Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double ClearHeight { get; set; }
     
     
     }
