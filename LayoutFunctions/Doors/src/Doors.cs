@@ -36,7 +36,7 @@ namespace Doors
                     }
 
                     var wall = pair.Value.Wall;
-                    var type = (DoorType)input.Type;
+                    var type = (DoorType)input.DefaultType;
                     var doorPosition = pair.Value.Segment.Mid();
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
@@ -44,7 +44,7 @@ namespace Doors
                     if (doorOverride != null && doorOverride.Value.Position != null)
                     {
                         doorPosition = doorOverride.Value.Position.Origin;
-                        type = (DoorType)doorOverride.Value.Type;
+                        type = (DoorType)doorOverride.Value.DefaultType;
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
@@ -145,7 +145,7 @@ namespace Doors
                     position = doorOverride.Value.Position.Origin;
                     width = doorOverride.Value.ClearWidth;
                     height = doorOverride.Value.ClearHeight;
-                    type = (DoorType)doorOverride.Value.Type;
+                    type = (DoorType)doorOverride.Value.DefaultType;
                 }
 
                 var door = CreateDoor(wall, position, type, width, height, doorOverride);

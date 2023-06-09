@@ -29,18 +29,18 @@ namespace Doors
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DoorsInputs(double @clearWidth, double @clearHeight, DoorsInputsType @type, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public DoorsInputs(double @clearWidth, double @clearHeight, DoorsInputsDefaultType @defaultType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @clearWidth, @clearHeight, @type, @overrides});
+                validator.PreConstruct(new object[]{ @clearWidth, @clearHeight, @defaultType, @overrides});
             }
         
             this.ClearWidth = @clearWidth;
             this.ClearHeight = @clearHeight;
-            this.Type = @type;
+            this.DefaultType = @defaultType;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -52,17 +52,17 @@ namespace Doors
         /// <summary>Width of a door without a frame.</summary>
         [Newtonsoft.Json.JsonProperty("Clear Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
-        public double ClearWidth { get; set; } = 1D;
+        public double ClearWidth { get; set; } = 0.9144D;
     
-        /// <summary>Height of a door without a frame.</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
         [Newtonsoft.Json.JsonProperty("Clear Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(203.2D, 2.54D)]
         public double ClearHeight { get; set; } = 2.1D;
     
         /// <summary>The type of door.</summary>
-        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Default Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorsInputsType Type { get; set; } = DoorsInputsType.Single;
+        public DoorsInputsDefaultType DefaultType { get; set; } = DoorsInputsDefaultType.Single;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
@@ -70,7 +70,7 @@ namespace Doors
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    public enum DoorsInputsType
+    public enum DoorsInputsDefaultType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Single")]
         Single = 0,
@@ -112,7 +112,7 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Removals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OverrideRemovals Removals { get; set; } = new OverrideRemovals();
     
-        [Newtonsoft.Json.JsonProperty("DoorPositions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Door Positions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<DoorPositionsOverride> DoorPositions { get; set; } = new List<DoorPositionsOverride>();
     
     }
@@ -141,7 +141,7 @@ namespace Doors
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("DoorPositions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Door Positions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<DoorPositionsOverrideAddition> DoorPositions { get; set; } = new List<DoorPositionsOverrideAddition>();
     
     }
@@ -170,7 +170,7 @@ namespace Doors
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("DoorPositions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Door Positions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<DoorPositionsOverrideRemoval> DoorPositions { get; set; } = new List<DoorPositionsOverrideRemoval>();
     
     }
@@ -309,18 +309,18 @@ namespace Doors
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public DoorPositionsValue(Transform @position, double @clearWidth, double @clearHeight, DoorPositionsValueType @type)
+        public DoorPositionsValue(Transform @position, double @clearWidth, double @clearHeight, DoorPositionsValueDefaultType @defaultType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorPositionsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @position, @clearWidth, @clearHeight, @type});
+                validator.PreConstruct(new object[]{ @position, @clearWidth, @clearHeight, @defaultType});
             }
         
             this.Position = @position;
             this.ClearWidth = @clearWidth;
             this.ClearHeight = @clearHeight;
-            this.Type = @type;
+            this.DefaultType = @defaultType;
         
             if(validator != null)
             {
@@ -334,17 +334,17 @@ namespace Doors
         /// <summary>Width of a door without a frame.</summary>
         [Newtonsoft.Json.JsonProperty("Clear Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
-        public double ClearWidth { get; set; } = 1D;
+        public double ClearWidth { get; set; } = 0.9144D;
     
-        /// <summary>Height of a door without a frame.</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
         [Newtonsoft.Json.JsonProperty("Clear Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(203.2D, 2.54D)]
         public double ClearHeight { get; set; } = 2.1D;
     
         /// <summary>The type of door.</summary>
-        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Default Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsValueType Type { get; set; } = DoorPositionsValueType.Single;
+        public DoorPositionsValueDefaultType DefaultType { get; set; } = DoorPositionsValueDefaultType.Single;
     
     }
     
@@ -376,10 +376,10 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Position { get; set; }
     
-        /// <summary>Width of a door without a frame.</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
         [Newtonsoft.Json.JsonProperty("Clear Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
-        public double ClearWidth { get; set; } = 1D;
+        public double ClearWidth { get; set; } = 0.9144D;
     
         /// <summary>Height of a door without a frame.</summary>
         [Newtonsoft.Json.JsonProperty("Clear Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -394,7 +394,7 @@ namespace Doors
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    public enum DoorPositionsValueType
+    public enum DoorPositionsValueDefaultType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Single")]
         Single = 0,

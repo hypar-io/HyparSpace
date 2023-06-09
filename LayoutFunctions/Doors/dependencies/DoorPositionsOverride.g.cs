@@ -10,7 +10,7 @@ namespace Doors
 	/// </summary>
 	public partial class DoorPositionsOverride : IOverride
 	{
-        public static string Name = "DoorPositions";
+        public static string Name = "Door Positions";
         public static string Dependency = null;
         public static string Context = "[*discriminator=Elements.Door]";
 		public static string Paradigm = "Edit";
@@ -31,9 +31,9 @@ namespace Doors
 	public static class DoorPositionsOverrideExtensions
     {
 		/// <summary>
-        /// Apply DoorPositions edit overrides to a collection of existing elements
+        /// Apply Door Positions edit overrides to a collection of existing elements
         /// </summary>
-        /// <param name="overrideData">The DoorPositions Overrides to apply</param>
+        /// <param name="overrideData">The Door Positions Overrides to apply</param>
         /// <param name="existingElements">A collection of existing elements to which to apply the overrides.</param>
         /// <param name="identityMatch">A function returning a boolean which indicates whether an element is a match for an override's identity.</param>
         /// <param name="modifyElement">A function to modify a matched element, returning the modified element.</param>
@@ -70,10 +70,10 @@ namespace Doors
         }
 
 		/// <summary>
-        /// Apply DoorPositions edit overrides to a collection of existing elements
+        /// Apply Door Positions edit overrides to a collection of existing elements
         /// </summary>
         /// <param name="existingElements">A collection of existing elements to which to apply the overrides.</param>
-        /// <param name="overrideData">The DoorPositions Overrides to apply — typically `input.Overrides.DoorPositions`</param>
+        /// <param name="overrideData">The Door Positions Overrides to apply — typically `input.Overrides.DoorPositions`</param>
         /// <param name="identityMatch">A function returning a boolean which indicates whether an element is a match for an override's identity.</param>
         /// <param name="modifyElement">A function to modify a matched element, returning the modified element.</param>
         /// <typeparam name="T">The element type this override applies to. Should match the type(s) in the override's context.</typeparam>

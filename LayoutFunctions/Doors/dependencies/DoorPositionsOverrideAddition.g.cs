@@ -10,7 +10,7 @@ namespace Doors
 	/// </summary>
 	public partial class DoorPositionsOverrideAddition : IOverride
 	{
-        public static string Name = "DoorPositions Addition";
+        public static string Name = "Door Positions Addition";
         public static string Dependency = null;
         public static string Context = "[*discriminator=Elements.Door]";
 		public static string Paradigm = "Edit";
