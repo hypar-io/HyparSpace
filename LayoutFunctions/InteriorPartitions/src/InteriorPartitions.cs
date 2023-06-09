@@ -48,9 +48,11 @@ namespace InteriorPartitions
             var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             foreach (var levelGroup in levelGroups)
             {
-                var canidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
+                var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? 3;
-                WallGeneration.GenerateWalls(output.Model, canidates, height, levelGroup.Key);
+                var wallCandidates = candidates.Select(c => new WallCandidate(c.line.TransformedLine(levelGroup.Key), c.type, new List<SpaceBoundary>()));
+                output.Model.AddElements(wallCandidates);
+                WallGeneration.GenerateWalls(output.Model, wallCandidates.Select(w => (w.Line, w.Type, w.Id)), height, levelGroup.Key);
             }
 
             return output;
