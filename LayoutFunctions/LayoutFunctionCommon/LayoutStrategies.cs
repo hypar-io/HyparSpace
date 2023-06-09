@@ -2,7 +2,6 @@ using Elements;
 using Elements.Components;
 using Elements.Geometry;
 using Elements.Spatial;
-using Hypar.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

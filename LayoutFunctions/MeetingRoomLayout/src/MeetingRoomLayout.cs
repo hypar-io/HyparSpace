@@ -74,27 +74,34 @@ namespace MeetingRoomLayout
                     boundaryCurves.Add(spaceBoundary.Perimeter);
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
-                    var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    foreach (var cell in grid.GetCells())
+                    try
                     {
-                        var rect = cell.GetCellGeometry() as Polygon;
-                        var segs = rect.Segments();
-                        var width = segs[0].Length();
-                        var depth = segs[1].Length();
-                        var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+                        var grid = new Grid2d(boundaryCurves, orientationTransform);
+                        foreach (var cell in grid.GetCells())
                         {
-                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
+                            var rect = cell.GetCellGeometry() as Polygon;
+                            var segs = rect.Segments();
+                            var width = segs[0].Length();
+                            var depth = segs[1].Length();
+                            var trimmedGeo = cell.GetTrimmedCellGeometry();
+                            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+                            {
+                                var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
+                            }
+                            else if (trimmedGeo.Count() > 0)
+                            {
+                                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                                var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
+                                var cinchedPoly = new Polygon(cinchedVertices);
+                                var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
+                            }
                         }
-                        else if (trimmedGeo.Count() > 0)
-                        {
-                            var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                            var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                            var cinchedPoly = new Polygon(cinchedVertices);
-                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                            totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
-                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Error generating layout for room " + room.Id);
                     }
 
                 }
