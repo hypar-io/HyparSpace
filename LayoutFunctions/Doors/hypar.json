@@ -26,7 +26,7 @@
   "input_schema": {
     "type": "object",
     "properties": {
-      "Clear Width": {
+      "Default Door Width": {
         "multipleOf": 0.01,
         "default": 0.9144,
         "maximum": 1.2192,
@@ -36,14 +36,14 @@
         "$hyparUnitType": "length",
         "minimum": 0.8128
       },
-      "Clear Height" : {
+      "Default Door Height" : {
         "multipleOf": 0.01,
         "type": "number",
         "default": 2.10,
         "maximum": 2.54,
         "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width",
         "$hyparUnitType": "length",
-        "minimum": 203.2,
+        "minimum": 2.032,
         "$hyparOrder": 1
       },
       "Default Type" : {
@@ -68,13 +68,14 @@
       },
       "paradigm": "edit",
       "schema": {
-        "Position": {
+        "Transform": {
             "$ref": "https://prod-api.hypar.io/schemas/Transform",
             "$hyparConstraints": {
-				      "enableRotation": false
+				      "enableRotation": false,
+              "enableTranslation": ["x","y"]
         	  }
 		    },
-        "Clear Width": {
+        "Door Width": {
           "type": "number",
           "default": 0.9144,
           "maximum": 1.2192,
@@ -82,13 +83,13 @@
           "$hyparUnitType": "length",
           "minimum": 0.8128
         },
-        "Clear Height" : {
+        "Door Height" : {
           "type": "number",
           "default": 2.10,
           "maximum": 2.54,
           "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width",
           "$hyparUnitType": "length",
-          "minimum": 203.2
+          "minimum": 2.032
         },
         "Default Type" : {
           "default": "Single",
@@ -110,13 +111,14 @@
       "behaviors": {
         "add": {
           "schema": {
-            "Position": {
-                "$ref": "https://prod-api.hypar.io/schemas/Transform",
-                "$hyparConstraints": {
-                  "enableRotation": false
-                }
+            "Transform": {
+              "$ref": "https://prod-api.hypar.io/schemas/Transform",
+              "$hyparConstraints": {
+                "enableRotation": false,
+                "enableTranslation": ["x","y"]
+              }
             },
-            "Clear Width": {
+            "Door Width": {
               "type": "number",
               "default": 0.9144,
               "maximum": 1.2192,
@@ -124,13 +126,13 @@
               "$hyparUnitType": "length",
               "minimum": 0.8128
             },
-            "Clear Height" : {
+            "Door Height" : {
               "type": "number",
               "default": 2.10,
               "maximum": 2.54,
               "description": "Height of a door without a frame.",
               "$hyparUnitType": "length",
-              "minimum": 203.2
+              "minimum": 2.032
             },
             "Type" : {
               "default": "Single",
@@ -140,7 +142,7 @@
                 "Single",
                 "Double"
               ]
-            },
+            }
           }
         },
         "remove": true

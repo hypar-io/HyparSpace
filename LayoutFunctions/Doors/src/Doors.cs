@@ -41,15 +41,15 @@ namespace Doors
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
 
-                    if (doorOverride != null && doorOverride.Value.Position != null)
+                    if (doorOverride != null && doorOverride.Value.Transform != null)
                     {
-                        doorPosition = doorOverride.Value.Position.Origin;
+                        doorPosition = doorOverride.Value.Transform.Origin;
                         type = (DoorType)doorOverride.Value.DefaultType;
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
-                    double width = doorOverride?.Value.ClearWidth ?? input.ClearWidth;
-                    double height = doorOverride?.Value.ClearHeight ?? input.ClearHeight;
+                    double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
+                    double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
 
                     var door = CreateDoor(wall, doorPosition, type, width, height, doorOverride);
                     if (door != null)
@@ -127,7 +127,7 @@ namespace Doors
         {
             foreach (var addition in additions)
             {
-                var position = addition.Value.Position.Origin;
+                var position = addition.Value.Transform.Origin;
                 var type = (DoorType)addition.Value.Type;
                 var wall = GetClosestWall(position, wallCandidates, out var closest);
                 if (wall == null)
@@ -138,13 +138,13 @@ namespace Doors
                 position = closest;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
                     o => closest.IsAlmostEqualTo(o.Identity.OriginalPosition));
-                double width = addition.Value.ClearWidth;
-                double height = addition.Value.ClearHeight;
-                if (doorOverride != null && doorOverride.Value.Position != null)
+                double width = addition.Value.DoorWidth;
+                double height = addition.Value.DoorHeight;
+                if (doorOverride != null && doorOverride.Value.Transform != null)
                 {
-                    position = doorOverride.Value.Position.Origin;
-                    width = doorOverride.Value.ClearWidth;
-                    height = doorOverride.Value.ClearHeight;
+                    position = doorOverride.Value.Transform.Origin;
+                    width = doorOverride.Value.DoorWidth;
+                    height = doorOverride.Value.DoorHeight;
                     type = (DoorType)doorOverride.Value.DefaultType;
                 }
 
