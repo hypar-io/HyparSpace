@@ -1,0 +1,22 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "eac0a540-d5a5-40db-8951-2d59708e5914",
+  "name": "Plant Entourage",
+  "description": "Puts a plant into each meeting room.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    }
+  ],
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/SpaceBoundary.json"
+  ],
+  "repository_url": "",
+  "filters": {},
+  "last_updated": "2023-06-12T17:48:56.262711",
+  "cli_version": "1.6.0"
+}
