@@ -131,13 +131,28 @@ namespace WorkplaceMetrics
             var totalOpenCollabSeats = CountWorkplaceTyped(inputModels, input, "Open Collaboration Layout", "Collaboration seat", allSpaceBoundaries);
             var totalPrivateOffices = CountWorkplaceTyped(inputModels, input, "Private Office Layout", "Private Office", allSpaceBoundaries);
             var totalLoungeSeats = CountWorkplaceTyped(inputModels, input, "Lounge Layout", "Lounge seat", allSpaceBoundaries);
+            var otherHeadCount = allSpaceBoundaries.Sum(sb => sb.IsCounted || sb.Name == "Circulation" ? 0 : (int)GetWorkpointCountConfig(input, allSpaceBoundaries, sb).Value.Count);
 
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
 
             var headcount = -1;
             var deskSharingRatio = 1.0;
 
-            if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Fixed_Headcount)
+            if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Calculated_Headcount)
+            {
+                headcount = 
+                    totalDeskCount + 
+                    totalMeetingRoomSeats + 
+                    totalClassroomSeats +
+                    totalPhoneBooths +
+                    totalOpenCollabSeats +
+                    totalPrivateOffices +
+                    totalLoungeSeats +
+                    otherHeadCount;
+
+                deskSharingRatio = headcount / (double)totalDeskCount;
+            }
+            else if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Fixed_Headcount)
             {
                 headcount = input.TotalHeadcount;
                 deskSharingRatio = headcount / (double)totalDeskCount;
@@ -146,8 +161,8 @@ namespace WorkplaceMetrics
             {
                 deskSharingRatio = input.DeskSharingRatio;
                 headcount = (int)Math.Round(totalDeskCount * deskSharingRatio);
-
             }
+
             var areaPerPerson = settings.UsableArea / headcount;
             var rentableAreaPerPerson = settings.RentableArea / headcount;
             var areaPerDesk = settings.UsableArea / totalDeskCount;
@@ -207,7 +222,7 @@ namespace WorkplaceMetrics
                 MeetingRoomSeats = totalMeetingRoomSeats,
                 ClassroomSeats = totalClassroomSeats,
                 PhoneBooths = totalPhoneBooths,
-                CollaborationSeats = totalOpenCollabSeats,
+                CollaborationSeats = input.IncludeLoungeSeatingInOpenCollaborationSeats ? totalOpenCollabSeats + totalLoungeSeats : totalOpenCollabSeats,
                 TotalHeadcount = headcount,
                 DeskSharingRatio = deskSharingRatio,
                 MeetingRoomRatio = meetingRoomRatio,
@@ -228,28 +243,33 @@ namespace WorkplaceMetrics
             return output;
         }
 
-        private static int CountWorkplaceTyped(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs inputs, string layoutName, string seatType, List<SpaceBoundary> boundaries)
+        private static int CountWorkplaceTyped(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs input, string layoutName, string seatType, List<SpaceBoundary> boundaries)
         {
             var count = 0;
             if (inputModels.TryGetValue(layoutName, out var layoutModel))
             {
                 foreach (var wc in layoutModel.AllElementsOfType<WorkpointCount>())
                 {
-                    if (!wc.AdditionalProperties.TryGetValue("ElementId", out var elementId) || elementId == null || wc.Type == null || !wc.Type.Contains(seatType))
+                    if (wc.AdditionalProperties.TryGetValue("ElementId", out var elementId) && elementId != null && wc.Type != null && wc.Type.Contains(seatType))
                     {
-                        continue;
+                        var room = boundaries.FirstOrDefault(b => b.Id.ToString() == elementId.ToString());
+                        if (room != null)
+                        {
+                            room.IsCounted = true;
+                            var config = GetWorkpointCountConfig(input, boundaries, room, wc.Count);
+                            count += input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Calculated_Headcount ? (int)config.Value.Count : wc.Count;
+                        }
                     }
-
-                    var room = boundaries.FirstOrDefault(b => b.Id.ToString() == elementId.ToString());
-                    var proxy = GetElementProxy(room, boundaries.Proxies(WorkpointCountDependencyName));
-                    var config = MatchApplicableOverride(inputs.Overrides.WorkpointCount.ToList(), proxy, wc.Count);
-
-                    count += wc.Count;
                 }
             }
             return count;
         }
 
+        private static WorkpointCountOverride GetWorkpointCountConfig(WorkplaceMetricsInputs input, List<SpaceBoundary> boundaries, SpaceBoundary room, int defaultCount = 0)
+        {
+            var proxy = GetElementProxy(room, boundaries.Proxies(WorkpointCountDependencyName));
+            return MatchApplicableOverride(input.Overrides.WorkpointCount.ToList(), proxy, defaultCount);
+        }
 
         private static Dictionary<string, AreaTally> CalculateAreas(bool hasProgramRequirements, IEnumerable<SpaceBoundary> allSpaceBoundaries)
         {
