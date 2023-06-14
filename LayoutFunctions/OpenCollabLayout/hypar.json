@@ -64,8 +64,7 @@
     "https://prod-api.hypar.io/schemas/LevelElements",
     "https://prod-api.hypar.io/schemas/CirculationSegment",
     "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/ServiceCore",
-    "https://prod-api.hypar.io/schemas/WorkpointCount"
+    "https://prod-api.hypar.io/schemas/ServiceCore"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,

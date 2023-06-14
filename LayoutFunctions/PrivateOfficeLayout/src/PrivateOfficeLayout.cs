@@ -108,7 +108,6 @@ namespace PrivateOfficeLayout
                                 var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalPrivateOfficeCount++;
                                 privateOfficeCount++;
                             }
                             else if (trimmedGeo.Count() > 0)
@@ -122,7 +121,6 @@ namespace PrivateOfficeLayout
                                     var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
-                                    totalPrivateOfficeCount++;
                                     privateOfficeCount++;
                                 }
                             }
@@ -134,6 +132,7 @@ namespace PrivateOfficeLayout
                         }
                     }
 
+                    totalPrivateOfficeCount += privateOfficeCount;
                     output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Private Office", privateOfficeCount, room.Id));
                 }
 

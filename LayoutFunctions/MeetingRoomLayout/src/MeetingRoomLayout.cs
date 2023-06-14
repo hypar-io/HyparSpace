@@ -63,6 +63,7 @@ namespace MeetingRoomLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
                     var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
@@ -87,7 +88,7 @@ namespace MeetingRoomLayout
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
                                 var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
+                                seatsCount += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
                             }
                             else if (trimmedGeo.Count() > 0)
                             {
@@ -95,7 +96,7 @@ namespace MeetingRoomLayout
                                 var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                                 var cinchedPoly = new Polygon(cinchedVertices);
                                 var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
+                                seatsCount += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
                             }
                         }
                     }
@@ -104,6 +105,8 @@ namespace MeetingRoomLayout
                         Console.WriteLine("Error generating layout for room " + room.Id);
                     }
 
+                    totalSeats += seatsCount;
+                    outputModel.AddElement(LayoutStrategies.GetWorkpointCount("Meeting Room Seat", seatsCount, room.Id));
                 }
 
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
@@ -119,7 +122,6 @@ namespace MeetingRoomLayout
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
 
-            outputModel.AddElement(new WorkpointCount(totalSeats, "Meeting Room Seat"));
             outputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
 
             var output = new MeetingRoomLayoutOutputs(totalSeats);
