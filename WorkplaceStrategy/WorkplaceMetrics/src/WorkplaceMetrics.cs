@@ -8,6 +8,10 @@ namespace WorkplaceMetrics
 {
     public static class WorkplaceMetrics
     {
+        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
+
+        private static readonly string WorkpointCountDependencyName = WorkpointCountOverride.Dependency;
+
         /// <summary>
         /// The WorkplaceMetrics function.
         /// </summary>
@@ -16,6 +20,7 @@ namespace WorkplaceMetrics
         /// <returns>A WorkplaceMetricsOutputs instance containing computed results and the model with any new elements.</returns>
         public static WorkplaceMetricsOutputs Execute(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs input)
         {
+            proxies.Clear();
             var warnings = new List<string>();
             var outputModel = new Model();
             var zonesModel = inputModels["Space Planning Zones"];
@@ -119,12 +124,13 @@ namespace WorkplaceMetrics
 
             }
 
-            var totalDeskCount = CountWorkplaceTyped(inputModels, "Open Office Layout", "Desk");
-            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, "Meeting Room Layout", "Meeting Room Seat");
-            var totalClassroomSeats = CountWorkplaceTyped(inputModels, "Classroom Layout", "Classroom Seat");
-            var totalPhoneBooths = CountWorkplaceTyped(inputModels, "Phone Booth Layout", "Phone Booth");
-            var totalOpenCollabSeats = CountWorkplaceTyped(inputModels, "Open Collaboration Layout", "Collaboration seat");
-            var totalPrivateOffices = CountWorkplaceTyped(inputModels, "Private Office Layout", "Private Office");
+            var totalDeskCount = CountWorkplaceTyped(inputModels, input, "Open Office Layout", "Desk", allSpaceBoundaries);
+            var totalMeetingRoomSeats = CountWorkplaceTyped(inputModels, input, "Meeting Room Layout", "Meeting Room Seat", allSpaceBoundaries);
+            var totalClassroomSeats = CountWorkplaceTyped(inputModels, input, "Classroom Layout", "Classroom Seat", allSpaceBoundaries);
+            var totalPhoneBooths = CountWorkplaceTyped(inputModels, input, "Phone Booth Layout", "Phone Booth", allSpaceBoundaries);
+            var totalOpenCollabSeats = CountWorkplaceTyped(inputModels, input, "Open Collaboration Layout", "Collaboration seat", allSpaceBoundaries);
+            var totalPrivateOffices = CountWorkplaceTyped(inputModels, input, "Private Office Layout", "Private Office", allSpaceBoundaries);
+            var totalLoungeSeats = CountWorkplaceTyped(inputModels, input, "Lounge Layout", "Lounge seat", allSpaceBoundaries);
 
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
 
@@ -181,6 +187,10 @@ namespace WorkplaceMetrics
                 {
                     at.SeatCount = totalDeskCount;
                 }
+                else if (at.Name == "Lounge")
+                {
+                    at.SeatCount = totalLoungeSeats;
+                }
             }
 
             var totalCirculationArea = allSpaceBoundaries.Where(sb => sb.ProgramType == circulationKey).Sum(sb => sb.Area);
@@ -213,16 +223,29 @@ namespace WorkplaceMetrics
             {
                 output.Warnings = warnings;
             }
+
+            output.Model.AddElements(proxies);
             return output;
         }
 
-        private static int CountWorkplaceTyped(Dictionary<string, Model> inputModels, string layoutName, string seatType)
+        private static int CountWorkplaceTyped(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs inputs, string layoutName, string seatType, List<SpaceBoundary> boundaries)
         {
             var count = 0;
             if (inputModels.TryGetValue(layoutName, out var layoutModel))
             {
-                count += layoutModel.AllElementsOfType<WorkpointCount>()
-                                                .Sum((wc => (wc.Type != null && wc.Type.Contains(seatType)) ? wc.Count : 0));
+                foreach (var wc in layoutModel.AllElementsOfType<WorkpointCount>())
+                {
+                    if (!wc.AdditionalProperties.TryGetValue("ElementId", out var elementId) || elementId == null || wc.Type == null || !wc.Type.Contains(seatType))
+                    {
+                        continue;
+                    }
+
+                    var room = boundaries.FirstOrDefault(b => b.Id.ToString() == elementId.ToString());
+                    var proxy = GetElementProxy(room, boundaries.Proxies(WorkpointCountDependencyName));
+                    var config = MatchApplicableOverride(inputs.Overrides.WorkpointCount.ToList(), proxy, wc.Count);
+
+                    count += wc.Count;
+                }
             }
             return count;
         }
@@ -343,6 +366,57 @@ namespace WorkplaceMetrics
             }
 
             return areas;
+        }
+
+        private static WorkpointCountOverride MatchApplicableOverride(
+            List<WorkpointCountOverride> overridesById,
+            ElementProxy<SpaceBoundary> boundaryProxy,
+            double count)
+        {
+            var overrideName = WorkpointCountOverride.Name;
+            WorkpointCountOverride config = null;
+
+            // See if we already have matching override attached
+            var existingOverrideId = boundaryProxy.OverrideIds<WorkpointCountOverride>(overrideName).FirstOrDefault();
+            if (existingOverrideId != null)
+            {
+                config = overridesById.Find(o => o.Id == existingOverrideId);
+                if (config != null)
+                {
+                    return config;
+                }
+            }
+
+            // Try to match from identity in configs
+            config ??= overridesById.Find(o => o.Identity.ParentCentroid.IsAlmostEqualTo(boundaryProxy.Element.ParentCentroid.Value));
+
+            // Use a default in case none found
+            if (config == null)
+            {
+                config = new WorkpointCountOverride(
+                    Guid.NewGuid().ToString(),
+                    new WorkpointCountIdentity(boundaryProxy.Element.ParentCentroid.Value),
+                    new WorkpointCountValue(count)
+                );
+                overridesById.Add(config);
+            }
+
+            // Attach the identity and values data to the proxy
+            boundaryProxy.AddOverrideIdentity(overrideName, config.Id, config.Identity);
+            boundaryProxy.AddOverrideValue(overrideName, config.Value);
+
+            // Make sure proxies list has the proxy so that it will serialize in the model.
+            if (!proxies.Contains(boundaryProxy))
+            {
+                proxies.Add(boundaryProxy);
+            }
+
+            return config;
+        }
+
+        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary spaceBoundary, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
+        {
+            return allSpaceBoundaries.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(WorkpointCountDependencyName);
         }
 
     }

@@ -69,6 +69,7 @@ namespace PrivateOfficeLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in privateOfficeBoundaries)
                 {
+                    var privateOfficeCount = 0;
                     var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
                     var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
 
@@ -108,6 +109,7 @@ namespace PrivateOfficeLayout
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 totalPrivateOfficeCount++;
+                                privateOfficeCount++;
                             }
                             else if (trimmedGeo.Count() > 0)
                             {
@@ -121,6 +123,7 @@ namespace PrivateOfficeLayout
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
                                     totalPrivateOfficeCount++;
+                                    privateOfficeCount++;
                                 }
                             }
                         }
@@ -130,6 +133,8 @@ namespace PrivateOfficeLayout
                             wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
                         }
                     }
+
+                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Private Office", privateOfficeCount, room.Id));
                 }
 
                 var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
@@ -140,7 +145,6 @@ namespace PrivateOfficeLayout
                     LevelTransform = levelVolume?.Transform ?? new Transform()
                 });
             }
-            output.Model.AddElement(new WorkpointCount() { Type = "Private Office", Count = totalPrivateOfficeCount });
             output.PrivateOfficeCount = totalPrivateOfficeCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             output.Model.AddElements(proxies);
