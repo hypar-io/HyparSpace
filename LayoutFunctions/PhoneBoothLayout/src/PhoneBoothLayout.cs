@@ -61,6 +61,7 @@ namespace PhoneBoothLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                   .Select(w =>
                                   {
@@ -98,7 +99,7 @@ namespace PhoneBoothLayout
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalBoothCount++;
+                                seatsCount++;
                             }
                         }
                         else if (trimmedGeo.Count() > 0)
@@ -112,12 +113,15 @@ namespace PhoneBoothLayout
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalBoothCount++;
+                                seatsCount++;
                             }
                         }
 
                     }
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                    
+                    totalBoothCount += seatsCount;
+                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Phone Booth", seatsCount, room.Id));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
@@ -130,7 +134,6 @@ namespace PhoneBoothLayout
                     });
                 }
             }
-            output.Model.AddElement(new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount });
             output.PhoneBooths = totalBoothCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;

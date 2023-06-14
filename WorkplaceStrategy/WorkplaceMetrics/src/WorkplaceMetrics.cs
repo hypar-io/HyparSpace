@@ -257,7 +257,7 @@ namespace WorkplaceMetrics
                         {
                             room.IsCounted = true;
                             var config = GetWorkpointCountConfig(input, boundaries, room, wc.Count);
-                            count += input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Calculated_Headcount ? (int)config.Value.Count : wc.Count;
+                            count += (int)config.Value.Count;
                         }
                     }
                 }
