@@ -10,6 +10,7 @@ Calculate various workplace metrics from a layout.
 |Total Headcount|integer|How many people will occupy this workspace?|
 |Desk Sharing Ratio|number|What is the assumed sharing ratio: How many people for every desk? A value of 1 means one desk for every person; A value of 2 means there's only one desk for every two people.|
 |USF Exclusions|array|Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.|
+|Include lounge seating in open collaboration seats|boolean|If true, the algorithm will add lounge seating to the final collaboration number.|
 
 
 <br>

@@ -684,5 +684,15 @@ namespace LayoutFunctionCommon
                 }
             }
         }
+
+        public static WorkpointCount GetWorkpointCount(string type, int count, Guid? elementId = null)
+        {
+            var wc = new WorkpointCount() { Type = type, Count = count };
+            if (elementId != null)
+            {
+                wc.AdditionalProperties["ElementId"] = elementId;
+            }
+            return wc;
+        }
     }
 }
