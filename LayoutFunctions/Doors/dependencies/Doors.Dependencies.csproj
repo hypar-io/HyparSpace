@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="2.0.0-alpha.12" />
+    <PackageReference Include="Hypar.Functions" Version="1.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+  </ItemGroup>
+
+</Project>
