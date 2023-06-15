@@ -30,7 +30,7 @@
         "multipleOf": 0.01,
         "default": 0.9144,
         "maximum": 1.2192,
-        "description": "Width of a door without a frame.",
+        "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
         "type": "number",
         "$hyparOrder": 0,
         "$hyparUnitType": "length",
@@ -41,7 +41,7 @@
         "type": "number",
         "default": 2.10,
         "maximum": 2.54,
-        "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width",
+        "description": "Height of a door without a frame.",
         "$hyparUnitType": "length",
         "minimum": 2.032,
         "$hyparOrder": 1
@@ -79,7 +79,7 @@
           "type": "number",
           "default": 0.9144,
           "maximum": 1.2192,
-          "description": "Width of a door without a frame.",
+          "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
           "$hyparUnitType": "length",
           "minimum": 0.8128
         },
@@ -87,7 +87,7 @@
           "type": "number",
           "default": 2.10,
           "maximum": 2.54,
-          "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width",
+          "description": "Height of a door without a frame.",
           "$hyparUnitType": "length",
           "minimum": 2.032
         },
@@ -122,7 +122,7 @@
               "type": "number",
               "default": 0.9144,
               "maximum": 1.2192,
-              "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width",
+              "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
               "$hyparUnitType": "length",
               "minimum": 0.8128
             },

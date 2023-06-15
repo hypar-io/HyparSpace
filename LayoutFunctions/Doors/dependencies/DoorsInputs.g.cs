@@ -49,12 +49,12 @@ namespace Doors
             }
         }
     
-        /// <summary>Width of a door without a frame.</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double DefaultDoorWidth { get; set; } = 0.9144D;
     
-        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
+        /// <summary>Height of a door without a frame.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(2.032D, 2.54D)]
         public double DefaultDoorHeight { get; set; } = 2.1D;
@@ -331,12 +331,12 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
     
-        /// <summary>Width of a door without a frame.</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width.</summary>
         [Newtonsoft.Json.JsonProperty("Door Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double DoorWidth { get; set; } = 0.9144D;
     
-        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
+        /// <summary>Height of a door without a frame.</summary>
         [Newtonsoft.Json.JsonProperty("Door Height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(2.032D, 2.54D)]
         public double DoorHeight { get; set; } = 2.1D;
@@ -376,7 +376,7 @@ namespace Doors
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
     
-        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width</summary>
+        /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width.</summary>
         [Newtonsoft.Json.JsonProperty("Door Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.8128D, 1.2192D)]
         public double DoorWidth { get; set; } = 0.9144D;
