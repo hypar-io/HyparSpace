@@ -2,21 +2,68 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "eac0a540-d5a5-40db-8951-2d59708e5914",
   "name": "Plant Entourage",
-  "description": "Puts a plant into each meeting room.",
+  "display_name": "Plant Entourage",
+  "description": "Puts plants along the perimeter of Space Boundaries of selected Program Types.",
   "language": "C#",
-  "model_dependencies": [
-    {
-      "autohide": false,
-      "name": "Space Planning Zones",
-      "optional": false
+    "model_dependencies": [
+        {
+            "autohide": false,
+            "name": "Space Planning Zones",
+            "optional": false
+        },
+        {
+            "autohide": false,
+            "name": "Meeting Room Layout",
+            "optional": true
+        },
+        {
+            "autohide": false,
+            "name": "Open Office Layout",
+            "optional": true
+        },
+        {
+            "autohide": false,
+            "name": "Reception Layout",
+            "optional": true
+        }
+    ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Plant Density": {
+        "multipleOf": 0.5,
+        "default": 10,
+        "maximum": 20,
+        "description": "Area per plant.",
+        "type": "number",
+        "$hyparOrder": 0,
+        "$hyparUnitType": "area",
+        "minimum": 1
+      },
+      "Program Types": {
+        "description": "Plants will be added to Space Boundaries with these Program Types only.",
+        "default": [],
+        "type": "array",
+        "$hyparOrder": 1,
+        "items": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "$hyparEnumQuery": {
+                "query": "[*discriminator=Elements.SpaceBoundary].Program Type",
+                "dependency": "Space Planning Zones"
+            }
+        }
+      }
     }
-  ],
+  },
   "outputs": [],
   "element_types": [
     "https://schemas.hypar.io/SpaceBoundary.json"
   ],
   "repository_url": "",
   "filters": {},
-  "last_updated": "2023-06-12T17:48:56.262711",
+  "last_updated": "2023-06-13T12:51:42.952294",
   "cli_version": "1.6.0"
 }
