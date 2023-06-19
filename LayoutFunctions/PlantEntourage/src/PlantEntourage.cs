@@ -42,7 +42,6 @@ namespace PlantEntourage
 
             var programTypes = input.ProgramTypes.ToHashSet();
             var spaceBoundaries = siteModel.AllElementsOfType<SpaceBoundary>().Where(sp => programTypes.Contains(sp.ProgramType));
-            var plantMaterial = new Material("Plant material", Colors.Green);
 
             foreach (var spaceBoundary in spaceBoundaries)
             {
@@ -64,8 +63,8 @@ namespace PlantEntourage
 
                 foreach (var placement in placementSites)
                 {
-                    var plant = CreatePlantAtPlacementSite(placement, plantMaterial);
-                    output.Model.AddElement(plant);
+                    var plantElements = CreatePlantElementsAtPlacementSite(placement);
+                    output.Model.AddElements(plantElements);
                 }
             }
 
@@ -316,9 +315,17 @@ namespace PlantEntourage
             return polygon;
         }
 
-        private static Element CreatePlantAtPlacementSite(Polygon placementSite, Material plantMaterial)
+        private static Element[] CreatePlantElementsAtPlacementSite(Polygon plantSite)
         {
-            return new Mass(placementSite, plantHeight, material: plantMaterial, name: "Plant");
+            ContentElement plantCE = Plants.DFlowersAndVase3DFlowersAndVase;
+            BBox3 plantCEBBox = plantCE.BoundingBox;
+            Vector3 bboxCenter = plantCEBBox.Center();
+            var segments = plantSite.Segments();
+            var dummyTransform = new Transform(plantSite.Center(), segments[0].Direction(), segments[1].Direction(), Vector3.ZAxis);
+            var plantTransform = new Transform(-bboxCenter.X, -bboxCenter.Y, 0).Concatenated(dummyTransform);
+            var plant = plantCE.CreateInstance(plantTransform, "Plant");
+            var plantDummy = new Plant(plantLength, plantWidth, plantHeight, dummyTransform);
+            return new Element[] { plant, plantDummy };
         }
 
         // lengthDir should be unitized first

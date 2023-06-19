@@ -49,8 +49,8 @@ namespace PlantEntourage
     
         /// <summary>Area per plant.</summary>
         [Newtonsoft.Json.JsonProperty("Plant Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1D, 20D)]
-        public double PlantDensity { get; set; } = 10D;
+        [System.ComponentModel.DataAnnotations.Range(15D, 30D)]
+        public double PlantDensity { get; set; } = 20D;
     
         /// <summary>Plants will be added to Space Boundaries with these Program Types only.</summary>
         [Newtonsoft.Json.JsonProperty("Program Types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
