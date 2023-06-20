@@ -29,21 +29,32 @@ namespace PlantEntourage
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public PlantEntourageInputs(string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public PlantEntourageInputs(double @plantDensity, IList<string> @programTypes, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<PlantEntourageInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ });
+                validator.PreConstruct(new object[]{ @plantDensity, @programTypes});
             }
         
+            this.PlantDensity = @plantDensity;
+            this.ProgramTypes = @programTypes;
         
             if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
+    
+        /// <summary>Area per plant.</summary>
+        [Newtonsoft.Json.JsonProperty("Plant Density", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(15D, 30D)]
+        public double PlantDensity { get; set; } = 20D;
+    
+        /// <summary>Plants will be added to Space Boundaries with these Program Types only.</summary>
+        [Newtonsoft.Json.JsonProperty("Program Types", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<string> ProgramTypes { get; set; } = new List<string>();
     
     }
 }
