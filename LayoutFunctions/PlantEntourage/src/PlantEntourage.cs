@@ -321,11 +321,11 @@ namespace PlantEntourage
             BBox3 plantCEBBox = plantCE.BoundingBox;
             Vector3 bboxCenter = plantCEBBox.Center();
             var segments = plantSite.Segments();
-            var dummyTransform = new Transform(plantSite.Center(), segments[0].Direction(), segments[1].Direction(), Vector3.ZAxis);
-            var plantTransform = new Transform(-bboxCenter.X, -bboxCenter.Y, 0).Concatenated(dummyTransform);
+            var plantSettingsTransform = new Transform(plantSite.Center(), segments[0].Direction(), segments[1].Direction(), Vector3.ZAxis);
+            var plantTransform = new Transform(-bboxCenter.X, -bboxCenter.Y, 0).Concatenated(plantSettingsTransform);
             var plant = plantCE.CreateInstance(plantTransform, "Plant");
-            var plantDummy = new Plant(plantLength, plantWidth, plantHeight, dummyTransform);
-            return new Element[] { plant, plantDummy };
+            var plantSettings = new Plant(plantLength, plantWidth, plantHeight, plantSettingsTransform);
+            return new Element[] { plant, plantSettings };
         }
 
         // lengthDir should be unitized first

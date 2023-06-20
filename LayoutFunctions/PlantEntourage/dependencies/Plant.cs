@@ -11,7 +11,7 @@ namespace Elements
     public partial class Plant
     {
         public Plant(double @baseLength, double @baseWidth, double @height, Transform transform)
-            : this(@baseWidth, @baseLength, @height, transform, material: new Material("Plant material", Colors.Green), name: "Plant")
+            : this(@baseWidth, @baseLength, @height, transform, material: new Material("Plant settings material", Colors.Green), name: "Plant settings")
         {
         }
 

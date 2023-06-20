@@ -66,9 +66,13 @@
   ],
   "repository_url": "",
   "filters": {
-      "Hide Elements.Plant elements": {
+      "Hide plant settings": {
           "context": "[*discriminator!=Elements.Plant]",
           "default": true
+      },
+      "Hide plants": {
+          "context": "[*discriminator!=Elements.ContentElement]",
+          "default": false
       }
   },
   "last_updated": "2023-06-16T12:25:19.340812",
