@@ -9,12 +9,14 @@ namespace PlantEntourage
         private const string NotAllPlantsPlacedWarningName = "Some plants cannot be placed";
         private const string NotAllPlantsPlacedWarningText = "Some plants cannot be placed in a room because of obstacles or low density.";
         
-        private const double plantWidth = 0.5;
-        private const double plantHeight = 1.8;
-        private const double plantLength = 0.5;
+        private const double plantWidth = Plant.DefaultPlantBaseWidth;
+        private const double plantLength = Plant.DefaultPlantBaseLength;
 
         private const double gapBetweenPlantAndWall = 0.3;
         private const double minGapBetweenPlants = plantLength;
+
+        private const double originalPositionTolerance = 0.1;
+        private const string originalPositionKey = "OriginalPosition";
 
         /// <summary>
         /// Puts a plant into each meeting room.
@@ -43,6 +45,9 @@ namespace PlantEntourage
             var programTypes = input.ProgramTypes.ToHashSet();
             var spaceBoundaries = siteModel.AllElementsOfType<SpaceBoundary>().Where(sp => programTypes.Contains(sp.ProgramType));
 
+            var allPlantElementInstances = new List<ElementInstance>();
+            var allPlantSettings = new List<Plant>();
+
             foreach (var spaceBoundary in spaceBoundaries)
             {
                 Polygon roomPolygon = spaceBoundary.Boundary.Perimeter;
@@ -61,12 +66,13 @@ namespace PlantEntourage
                     output.Model.AddElement(warning);
                 }
 
-                foreach (var placement in placementSites)
-                {
-                    var plantElements = CreatePlantElementsAtPlacementSite(placement);
-                    output.Model.AddElements(plantElements);
-                }
+                var plantSettings = placementSites
+                    .Select(placement => CreatePlantSettingsAtPlacementSite(placement))
+                    .ToList();
+                allPlantSettings.AddRange(plantSettings);
             }
+
+            AddPlantsWithOverrides(input, output, allPlantSettings);
 
             return output;
         }
@@ -315,17 +321,13 @@ namespace PlantEntourage
             return polygon;
         }
 
-        private static Element[] CreatePlantElementsAtPlacementSite(Polygon plantSite)
+        private static Plant CreatePlantSettingsAtPlacementSite(Polygon plantSite)
         {
-            ContentElement plantCE = Plants.DFlowersAndVase3DFlowersAndVase;
-            BBox3 plantCEBBox = plantCE.BoundingBox;
-            Vector3 bboxCenter = plantCEBBox.Center();
             var segments = plantSite.Segments();
             var plantSettingsTransform = new Transform(plantSite.Center(), segments[0].Direction(), segments[1].Direction(), Vector3.ZAxis);
-            var plantTransform = new Transform(-bboxCenter.X, -bboxCenter.Y, 0).Concatenated(plantSettingsTransform);
-            var plant = plantCE.CreateInstance(plantTransform, "Plant");
-            var plantSettings = new Plant(plantLength, plantWidth, plantHeight, plantSettingsTransform);
-            return new Element[] { plant, plantSettings };
+            var plant = new Plant(plantSettingsTransform);
+            plant.AdditionalProperties[originalPositionKey] = plantSettingsTransform.Origin;
+            return plant;
         }
 
         // lengthDir should be unitized first
@@ -356,6 +358,62 @@ namespace PlantEntourage
             var baseDefinition = (ContentElement)obstacleInstance.BaseDefinition;
             var transform = obstacleInstance.Transform;
             return new BBox3(baseDefinition.BoundingBox.Corners().Select(c => transform.OfPoint(c)));
+        }
+
+        private static Plant UpdatePlantTransform(Plant plant, PlantsOverride edit)
+        {
+            plant.Transform = edit.Value.Transform;
+            return plant;
+        }
+
+        private static bool IsMatchingOriginalPosition(Plant plantSettings, Vector3 identityOriginalPosition)
+        {
+            if (!plantSettings.AdditionalProperties.TryGetValue(originalPositionKey, out var pos))
+            {
+                return false;
+            }
+
+            return identityOriginalPosition.IsAlmostEqualTo((Vector3)pos, originalPositionTolerance);
+        }
+
+        private static ElementInstance CreatePlantElementInstance(Transform transform)
+        {
+            ContentElement plantCE = Plants.DFlowersAndVase3DFlowersAndVase;
+            Vector3 offsetFromOrigin = OffsetFromOriginByContentElement(plantCE);
+            var plantTransform = new Transform(offsetFromOrigin.Negate()).Concatenated(transform);
+            return plantCE.CreateInstance(plantTransform, "Plant");
+        }
+
+        private static Vector3 OffsetFromOriginByContentElement(ContentElement contentElement)
+        {
+            BBox3 contentElementBBox = contentElement.BoundingBox;
+            Vector3 bboxCenter = contentElementBBox.Center();
+            return new Vector3(bboxCenter.X, bboxCenter.Y);
+        }
+
+        private static Element CreatePlantInstanceFromPlantSettings(Plant plantSettings)
+        {
+            var transform = plantSettings.Transform;
+            var instance = CreatePlantElementInstance(transform);
+            instance.AdditionalProperties[originalPositionKey] = plantSettings.AdditionalProperties[originalPositionKey];
+            return instance;
+        }
+
+        private static void AddPlantsWithOverrides(PlantEntourageInputs input, PlantEntourageOutputs output, List<Plant> plantSettings)
+        {
+            var overridenPlantSettings = input.Overrides.Plants.CreateElements(
+                input.Overrides.Additions.Plants,
+                input.Overrides.Removals.Plants,
+                (addition) => CreatePlantSettingsFromTransform(addition.Value.Transform),
+                (plant, identity) => IsMatchingOriginalPosition(plant, identity.OriginalPosition),
+                (plant, edit) => UpdatePlantTransform(plant, edit),
+                plantSettings
+            );
+
+            output.Model.AddElements(overridenPlantSettings);
+
+            var instances = overridenPlantSettings.Select(plant => CreatePlantInstanceFromPlantSettings(plant));
+            output.Model.AddElements(instances);
         }
     }
 }

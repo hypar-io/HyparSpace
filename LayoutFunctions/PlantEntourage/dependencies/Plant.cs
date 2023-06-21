@@ -10,9 +10,18 @@ namespace Elements
 {
     public partial class Plant
     {
+        public const double DefaultPlantBaseWidth = 0.5;
+        public const double DefaultPlantHeight = 1.8;
+        public const double DefaultPlantBaseLength = 0.5;
+
         public Plant(double @baseLength, double @baseWidth, double @height, Transform transform)
             : this(@baseWidth, @baseLength, @height, transform, material: new Material("Plant settings material", Colors.Green), name: "Plant settings")
         {
+        }
+
+        public Plant(Transform transform)
+            : this(DefaultPlantBaseLength, DefaultPlantBaseWidth, DefaultPlantHeight, transform) 
+        { 
         }
 
         public override void UpdateRepresentations()
