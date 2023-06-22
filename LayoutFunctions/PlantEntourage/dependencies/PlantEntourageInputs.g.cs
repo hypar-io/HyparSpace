@@ -70,18 +70,17 @@ namespace PlantEntourage
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<PlantsOverride> @plants, IList<PlantTypesOverride> @plantTypes)
+        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<PlantsOverride> @plants)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @additions, @removals, @plants, @plantTypes});
+                validator.PreConstruct(new object[]{ @additions, @removals, @plants});
             }
         
             this.Additions = @additions ?? this.Additions;
             this.Removals = @removals ?? this.Removals;
             this.Plants = @plants ?? this.Plants;
-            this.PlantTypes = @plantTypes ?? this.PlantTypes;
         
             if(validator != null)
             {
@@ -97,9 +96,6 @@ namespace PlantEntourage
     
         [Newtonsoft.Json.JsonProperty("Plants", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<PlantsOverride> Plants { get; set; } = new List<PlantsOverride>();
-    
-        [Newtonsoft.Json.JsonProperty("PlantTypes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<PlantTypesOverride> PlantTypes { get; set; } = new List<PlantTypesOverride>();
     
     }
     
@@ -193,41 +189,6 @@ namespace PlantEntourage
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PlantsValue Value { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class PlantTypesOverride 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public PlantTypesOverride(string @id, PlantTypesIdentity @identity, PlantTypesValue @value)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<PlantTypesOverride>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @id, @identity, @value});
-            }
-        
-            this.Id = @id;
-            this.Identity = @identity;
-            this.Value = @value;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PlantTypesIdentity Identity { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PlantTypesValue Value { get; set; }
     
     }
     
@@ -330,15 +291,16 @@ namespace PlantEntourage
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public PlantsValue(Transform @transform)
+        public PlantsValue(Transform @transform, string @plantType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<PlantsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @transform});
+                validator.PreConstruct(new object[]{ @transform, @plantType});
             }
         
             this.Transform = @transform;
+            this.PlantType = @plantType;
         
             if(validator != null)
             {
@@ -348,57 +310,6 @@ namespace PlantEntourage
     
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class PlantTypesIdentity 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public PlantTypesIdentity(Vector3 @originalPosition)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<PlantTypesIdentity>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @originalPosition});
-            }
-        
-            this.OriginalPosition = @originalPosition;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("OriginalPosition", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 OriginalPosition { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class PlantTypesValue 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public PlantTypesValue(string @plantType)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<PlantTypesValue>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @plantType});
-            }
-        
-            this.PlantType = @plantType;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
     
         [Newtonsoft.Json.JsonProperty("PlantType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PlantType { get; set; } = "3D_Flowers_and_vase - 3D_Flowers_and_vase";

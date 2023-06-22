@@ -335,7 +335,9 @@ namespace PlantEntourage
             var plant = new Plant(transform);
             plant.AdditionalProperties[originalPositionKey] = transform.Origin;
             plant.AdditionalProperties[availablePlantTypesKey] = Plants.All.Select(ce => ce.Name).ToList();
-            plant.AdditionalProperties[plantTypeKey] = Plants.DFlowersAndVase3DFlowersAndVase.Name;
+            // Put null here instead of the default plant type name because otherwise
+            // an edit override appears for each Plant Settings after any override.
+            plant.AdditionalProperties[plantTypeKey] = null;
             return plant;
         }
 
@@ -369,9 +371,10 @@ namespace PlantEntourage
             return new BBox3(baseDefinition.BoundingBox.Corners().Select(c => transform.OfPoint(c)));
         }
 
-        private static Plant UpdatePlantTransform(Plant plant, PlantsOverride edit)
+        private static Plant UpdatePlant(Plant plant, PlantsOverride edit)
         {
-            plant.Transform = edit.Value.Transform;
+            plant.Transform = edit.Value.Transform ?? plant.Transform;
+            plant.AdditionalProperties[plantTypeKey] = edit.Value.PlantType ?? plant.AdditionalProperties[plantTypeKey];
             return plant;
         }
 
@@ -410,7 +413,7 @@ namespace PlantEntourage
 
         private static ContentElement GetPlantContentElementByName(string name)
         {
-            return Plants.All.Where(ce => ce.Name.Equals(name)).FirstOrDefault(Plants.DFlowersAndVase3DFlowersAndVase);
+            return Plants.All.Where(ce => ce.Name == name).FirstOrDefault(Plants.DFlowersAndVase3DFlowersAndVase);
         }
 
         private static void AddPlantsWithOverrides(PlantEntourageInputs input, PlantEntourageOutputs output, List<Plant> plantSettings)
@@ -420,26 +423,14 @@ namespace PlantEntourage
                 input.Overrides.Removals.Plants,
                 (addition) => CreatePlantSettingsFromTransform(addition.Value.Transform),
                 (plant, identity) => IsMatchingOriginalPosition(plant, identity.OriginalPosition),
-                (plant, edit) => UpdatePlantTransform(plant, edit),
+                (plant, edit) => UpdatePlant(plant, edit),
                 plantSettings
             );
 
-            var plantSettingsWithOverridenTypes = input.Overrides.PlantTypes.Apply(
-                overridenPlantSettings,
-                (plant, identity) => IsMatchingOriginalPosition(plant, identity.OriginalPosition),
-                (plant, edit) => UpdatePlantType(plant, edit)
-            );
+            output.Model.AddElements(overridenPlantSettings);
 
-            output.Model.AddElements(plantSettingsWithOverridenTypes);
-
-            var instances = plantSettingsWithOverridenTypes.Select(plant => CreatePlantInstanceFromPlantSettings(plant));
+            var instances = overridenPlantSettings.Select(plant => CreatePlantInstanceFromPlantSettings(plant));
             output.Model.AddElements(instances);
-        }
-
-        private static Plant UpdatePlantType(Plant plant, PlantTypesOverride edit)
-        {
-            plant.AdditionalProperties[plantTypeKey] = edit.Value.PlantType;
-            return plant;
         }
     }
 }
