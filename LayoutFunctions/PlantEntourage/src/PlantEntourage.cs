@@ -17,6 +17,8 @@ namespace PlantEntourage
 
         private const double originalPositionTolerance = 0.1;
         private const string originalPositionKey = "OriginalPosition";
+        private const string availablePlantTypesKey = "AvailablePlantTypes";
+        private const string plantTypeKey = "PlantType";
 
         /// <summary>
         /// Puts a plant into each meeting room.
@@ -325,8 +327,15 @@ namespace PlantEntourage
         {
             var segments = plantSite.Segments();
             var plantSettingsTransform = new Transform(plantSite.Center(), segments[0].Direction(), segments[1].Direction(), Vector3.ZAxis);
-            var plant = new Plant(plantSettingsTransform);
-            plant.AdditionalProperties[originalPositionKey] = plantSettingsTransform.Origin;
+            return CreatePlantSettingsFromTransform(plantSettingsTransform);
+        }
+
+        private static Plant CreatePlantSettingsFromTransform(Transform transform)
+        {
+            var plant = new Plant(transform);
+            plant.AdditionalProperties[originalPositionKey] = transform.Origin;
+            plant.AdditionalProperties[availablePlantTypesKey] = Plants.All.Select(ce => ce.Name).ToList();
+            plant.AdditionalProperties[plantTypeKey] = Plants.DFlowersAndVase3DFlowersAndVase.Name;
             return plant;
         }
 
@@ -376,9 +385,8 @@ namespace PlantEntourage
             return identityOriginalPosition.IsAlmostEqualTo((Vector3)pos, originalPositionTolerance);
         }
 
-        private static ElementInstance CreatePlantElementInstance(Transform transform)
+        private static ElementInstance CreatePlantElementInstance(Transform transform, ContentElement plantCE)
         {
-            ContentElement plantCE = Plants.DFlowersAndVase3DFlowersAndVase;
             Vector3 offsetFromOrigin = OffsetFromOriginByContentElement(plantCE);
             var plantTransform = new Transform(offsetFromOrigin.Negate()).Concatenated(transform);
             return plantCE.CreateInstance(plantTransform, "Plant");
@@ -391,12 +399,18 @@ namespace PlantEntourage
             return new Vector3(bboxCenter.X, bboxCenter.Y);
         }
 
-        private static Element CreatePlantInstanceFromPlantSettings(Plant plantSettings)
+        private static ElementInstance CreatePlantInstanceFromPlantSettings(Plant plantSettings)
         {
-            var transform = plantSettings.Transform;
-            var instance = CreatePlantElementInstance(transform);
+            var plantTypeName = (string) plantSettings.AdditionalProperties[plantTypeKey];
+            var plantCE = GetPlantContentElementByName(plantTypeName);
+            var instance = CreatePlantElementInstance(plantSettings.Transform, plantCE);
             instance.AdditionalProperties[originalPositionKey] = plantSettings.AdditionalProperties[originalPositionKey];
             return instance;
+        }
+
+        private static ContentElement GetPlantContentElementByName(string name)
+        {
+            return Plants.All.Where(ce => ce.Name.Equals(name)).FirstOrDefault(Plants.DFlowersAndVase3DFlowersAndVase);
         }
 
         private static void AddPlantsWithOverrides(PlantEntourageInputs input, PlantEntourageOutputs output, List<Plant> plantSettings)
@@ -410,10 +424,22 @@ namespace PlantEntourage
                 plantSettings
             );
 
-            output.Model.AddElements(overridenPlantSettings);
+            var plantSettingsWithOverridenTypes = input.Overrides.PlantTypes.Apply(
+                overridenPlantSettings,
+                (plant, identity) => IsMatchingOriginalPosition(plant, identity.OriginalPosition),
+                (plant, edit) => UpdatePlantType(plant, edit)
+            );
 
-            var instances = overridenPlantSettings.Select(plant => CreatePlantInstanceFromPlantSettings(plant));
+            output.Model.AddElements(plantSettingsWithOverridenTypes);
+
+            var instances = plantSettingsWithOverridenTypes.Select(plant => CreatePlantInstanceFromPlantSettings(plant));
             output.Model.AddElements(instances);
+        }
+
+        private static Plant UpdatePlantType(Plant plant, PlantTypesOverride edit)
+        {
+            plant.AdditionalProperties[plantTypeKey] = edit.Value.PlantType;
+            return plant;
         }
     }
 }

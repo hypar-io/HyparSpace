@@ -89,8 +89,26 @@
         "edit": "Edit plant",
         "revert": null
       }
-    }
-  },
+    },
+    "PlantTypes": {
+        "context": "[*discriminator=Elements.Plant]",
+        "identity": {
+          "OriginalPosition": {
+            "$ref": "https://schemas.hypar.io/Vector3.json"
+          }
+        },
+        "schema": {
+          "PlantType": {
+            "type": "string",
+            "default": "3D_Flowers_and_vase - 3D_Flowers_and_vase",
+            "$hyparEnumQuery": {
+              "query": "[*discriminator=Elements.Plant].AvailablePlantTypes",
+              "selfDependency": true
+            }
+          }
+        }
+      }
+    },
   "outputs": [],
   "element_types": [
     "https://schemas.hypar.io/SpaceBoundary.json",
