@@ -6,6 +6,7 @@ using Elements.Serialization.glTF;
 using Newtonsoft.Json;
 using Elements.Components;
 using System.Linq;
+using Elements.Geometry;
 
 namespace MeetingRoomLayout.Tests
 {
@@ -28,15 +29,18 @@ namespace MeetingRoomLayout.Tests
             foreach (var boundary in boundaries)
             {
                 var depth = boundary.Bounds.XSize;
-                var config = configs.FirstOrDefault(c => c.Value.Depth.ApproximatelyEquals(depth, 0.3) && c.Value.Depth < depth).Value;
+                var width = boundary.Bounds.YSize;
+                var configName = MeetingRoomLayout.OrderedKeys.FirstOrDefault(c => configs[c].Width < width && configs[c].Depth < depth);
+                var config = configs[MeetingRoomLayout.OrderedKeys.FirstOrDefault(c => configs[c].Width < width && configs[c].Depth < depth)];
                 Assert.NotNull(config);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.1);
-                var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
+                var offsetedBox = boundary.Bounds.Offset(0.1);
+                offsetedBox.Extend(new Vector3(offsetedBox.Min.X, offsetedBox.Min.Y, offsetedBox.Min.Z - 1));
+                var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
                 
                 foreach (var contentItem in config.ContentItems)
                 {
-                    var boundaryElement = boundaryElements.FirstOrDefault(be => be.Name == contentItem.Name);
+                    var boundaryElement = boundaryElements.FirstOrDefault(be => be.Name == contentItem.Url);
                     Assert.NotNull(boundaryElement);
                     boundaryElements.Remove(boundaryElement);
                 }
@@ -72,7 +76,7 @@ namespace MeetingRoomLayout.Tests
         private SpaceConfiguration GetConfigurations(string configsName)
         {
             var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var configJson = File.ReadAllText(Path.Combine(dir, "MeetingRoomConfigurations.json"));
+            var configJson = File.ReadAllText(Path.Combine(dir, "ConferenceRoomConfigurations.json"));
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
             return configs;
         }
