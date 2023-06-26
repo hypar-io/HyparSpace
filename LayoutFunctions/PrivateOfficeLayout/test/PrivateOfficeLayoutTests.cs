@@ -63,6 +63,7 @@ namespace PrivateOfficeLayout.Tests
             output.Model.AddElements(levelsModel.Elements.Values);
             output.Model.AddElements(circulationModel.Elements.Values);
             output.Model.ToGlTF($"{OUTPUT}/{testName}/PrivateOfficeLayout.glb");
+            output.Model.ToGlTF($"{OUTPUT}/{testName}/PrivateOfficeLayout.gltf", false);
 
             return (output, spacePlanningModel);
         }

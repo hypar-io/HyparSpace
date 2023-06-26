@@ -64,6 +64,7 @@ namespace PantryLayout.Tests
             output.Model.AddElements(spacePlanningModel.Elements.Values);
             output.Model.AddElements(levelsModel.Elements.Values);
             output.Model.ToGlTF($"{OUTPUT}/{testName}/PantryLayout.glb");
+            output.Model.ToGlTF($"{OUTPUT}/{testName}/PantryLayout.gltf", false);
 
             return (output, spacePlanningModel);
         }
