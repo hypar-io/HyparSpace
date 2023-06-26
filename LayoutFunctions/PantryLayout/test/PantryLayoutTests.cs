@@ -13,6 +13,11 @@ namespace PantryLayout.Tests
     {
         private const string INPUT = "../../../_input/";
         private const string OUTPUT = "../../../_output/";
+        private string[] orderedKeys = new[] 
+        { 
+            "Configuration A", "Configuration B", "Configuration C", "Configuration D", "Configuration E", "Configuration F", "Configuration G", 
+            "Configuration H", "Configuration I", "Configuration J", "Configuration K", "Configuration L", "Configuration M"
+        };
 
         [Fact]
         public void PantryConfigurations()
@@ -23,15 +28,15 @@ namespace PantryLayout.Tests
 
             var (output, spacePlanningModel) = PantryLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
-            var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(z => z.Name == "Pantry");
+            var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(z => z.Name == "Pantry").OrderBy(b => b.Boundary.Perimeter.Center().Y).ToList();
 
-            foreach (var boundary in boundaries)
+            for (int i = 0; i < orderedKeys.Count(); i++)
             {
-                var depth = boundary.Bounds.XSize;
-                var config = configs.FirstOrDefault(c => c.Value.Depth.ApproximatelyEquals(depth, 0.3) && c.Value.Depth < depth).Value;
-                Assert.NotNull(config);
+                var boundary = boundaries[i];
+                var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
+                Assert.True(config.Width < boundary.Bounds.XSize);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.1);
+                var OffsetedBox = boundary.Bounds.Offset(0.02);
                 var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
                 
                 foreach (var contentItem in config.ContentItems)
