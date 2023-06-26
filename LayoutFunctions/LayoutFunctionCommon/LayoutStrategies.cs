@@ -722,5 +722,13 @@ namespace LayoutFunctionCommon
                 }
             }
         }
+
+        public static SpaceConfiguration GetConfigurations(string configsName)
+        {
+            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var configJson = File.ReadAllText(Path.Combine(dir, configsName));
+            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            return configs;
+        }
     }
 }

@@ -6,6 +6,7 @@ using Elements.Serialization.glTF;
 using Newtonsoft.Json;
 using Elements.Components;
 using System.Linq;
+using LayoutFunctionCommon;
 
 namespace PantryLayout.Tests
 {
@@ -24,7 +25,7 @@ namespace PantryLayout.Tests
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("PantryConfigurations.json");
+            var configs = LayoutStrategies.GetConfigurations("PantryConfigurations.json");
 
             var (output, spacePlanningModel) = PantryLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
@@ -36,8 +37,8 @@ namespace PantryLayout.Tests
                 var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
                 Assert.True(config.Width < boundary.Bounds.XSize);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.02);
-                var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
+                var offsetedBox = boundary.Bounds.Offset(0.02);
+                var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
                 
                 foreach (var contentItem in config.ContentItems)
                 {
@@ -73,14 +74,6 @@ namespace PantryLayout.Tests
         {
             var json = File.ReadAllText($"{INPUT}/{testName}/inputs.json");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PantryLayoutInputs>(json);
-        }
-
-        private SpaceConfiguration GetConfigurations(string configsName)
-        {
-            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var configJson = File.ReadAllText(Path.Combine(dir, "PantryConfigurations.json"));
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            return configs;
         }
     }
 }
