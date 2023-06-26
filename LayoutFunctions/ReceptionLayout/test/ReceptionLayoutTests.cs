@@ -13,26 +13,28 @@ namespace ReceptionLayout.Tests
     {
         private const string INPUT = "../../../_input/";
         private const string OUTPUT = "../../../_output/";
+        private string[] orderedKeys = new[] { "Configuration A", "Configuration B", "Configuration C", "Configuration D", "Configuration E" };
 
         [Fact]
         public void ReceptionConfigurations()
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("ReceptionConfigurations.json").OrderByDescending(c => c.Value.CellBoundary.Depth * c.Value.CellBoundary.Width);
+            var configs = GetConfigurations("ReceptionConfigurations.json");
 
             var (output, spacePlanningModel) = ReceptionLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
-            var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(z => z.Name == "Reception");
+            var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(z => z.Name == "Reception").OrderBy(b => b.Boundary.Perimeter.Center().Y).ToList();
 
-            foreach (var boundary in boundaries)
+            for (int i = 0; i < orderedKeys.Count(); i++)
             {
-                var config = configs.FirstOrDefault(c => c.Value.Depth < boundary.Bounds.XSize && c.Value.Width < boundary.Bounds.YSize).Value;
-                Assert.NotNull(config);
+                var boundary = boundaries[i];
+                var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
+                Assert.True(config.Width < boundary.Bounds.XSize);
 
                 var OffsetedBox = boundary.Bounds.Offset(0.1);
                 var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
-
+                
                 foreach (var contentItem in config.ContentItems)
                 {
                     var boundaryElement = boundaryElements.FirstOrDefault(be => be.Name == contentItem.Name);
@@ -58,6 +60,7 @@ namespace ReceptionLayout.Tests
             output.Model.AddElements(spacePlanningModel.Elements.Values);
             output.Model.AddElements(levelsModel.Elements.Values);
             output.Model.ToGlTF($"{OUTPUT}/{testName}/ReceptionLayout.glb");
+            output.Model.ToGlTF($"{OUTPUT}/{testName}/ReceptionLayout.gltf", false);
 
             return (output, spacePlanningModel);
         }
