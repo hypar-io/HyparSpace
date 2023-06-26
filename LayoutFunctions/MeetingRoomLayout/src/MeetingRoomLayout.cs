@@ -180,8 +180,8 @@ namespace MeetingRoomLayout
             return result;
         }
 
-        private static string[] orderedKeys = new[] { "22P", "20P", "14P", "13P", "8P", "6P-A", "6P-B", "4P-A", "4P-B" };
-        private static int[] orderedKeysCapacity = new[] { 22, 20, 14, 13, 8, 6, 6, 4, 4 };
+        private static string[] orderedKeys = new[] { "22P", "20P", "14P", "13P", "6P-A", "8P", "6P-B", "4P-A", "4P-B" };
+        private static int[] orderedKeysCapacity = new[] { 22, 20, 14, 13, 6, 8, 6, 4, 4 };
     }
 
 }

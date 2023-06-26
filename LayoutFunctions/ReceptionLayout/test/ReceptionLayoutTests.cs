@@ -6,6 +6,7 @@ using Elements.Serialization.glTF;
 using Newtonsoft.Json;
 using Elements.Components;
 using System.Linq;
+using LayoutFunctionCommon;
 
 namespace ReceptionLayout.Tests
 {
@@ -20,7 +21,7 @@ namespace ReceptionLayout.Tests
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("ReceptionConfigurations.json");
+            var configs = LayoutStrategies.GetConfigurations("ReceptionConfigurations.json");
 
             var (output, spacePlanningModel) = ReceptionLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
@@ -32,8 +33,8 @@ namespace ReceptionLayout.Tests
                 var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
                 Assert.True(config.Width < boundary.Bounds.XSize);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.1);
-                var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
+                var offsetedBox = boundary.Bounds.Offset(0.1);
+                var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
                 
                 foreach (var contentItem in config.ContentItems)
                 {
@@ -69,14 +70,6 @@ namespace ReceptionLayout.Tests
         {
             var json = File.ReadAllText($"{INPUT}/{testName}/inputs.json");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ReceptionLayoutInputs>(json);
-        }
-
-        private SpaceConfiguration GetConfigurations(string configsName)
-        {
-            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var configJson = File.ReadAllText(Path.Combine(dir, "ReceptionConfigurations.json"));
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            return configs;
         }
     }
 }

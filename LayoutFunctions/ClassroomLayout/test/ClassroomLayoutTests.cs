@@ -6,6 +6,7 @@ using Elements.Serialization.glTF;
 using Newtonsoft.Json;
 using Elements.Components;
 using System.Linq;
+using LayoutFunctionCommon;
 
 namespace ClassroomLayout.Tests
 {
@@ -20,7 +21,7 @@ namespace ClassroomLayout.Tests
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("ClassroomConfigurations.json");
+            var configs = LayoutStrategies.GetConfigurations("ClassroomConfigurations.json");
 
             var (output, spacePlanningModel) = ClassroomLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
@@ -32,8 +33,8 @@ namespace ClassroomLayout.Tests
                 var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
                 Assert.True(config.Depth < boundary.Bounds.XSize);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.1);
-                var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
+                var offsetedBox = boundary.Bounds.Offset(0.1);
+                var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
 
                 foreach (var contentItem in config.ContentItems)
                 {
@@ -45,8 +46,8 @@ namespace ClassroomLayout.Tests
 
             // room with 3 desks
             var roomWithDesks = boundaries.Last();
-            var OffsetedBoxWithDesks = roomWithDesks.Bounds.Offset(0.1);
-            var boundaryElementsWithDesks = elements.Where(e => OffsetedBoxWithDesks.Contains(e.Transform.Origin)).ToList();
+            var offsetedBoxWithDesks = roomWithDesks.Bounds.Offset(0.1);
+            var boundaryElementsWithDesks = elements.Where(e => offsetedBoxWithDesks.Contains(e.Transform.Origin)).ToList();
             Assert.Equal(9, boundaryElementsWithDesks.Where(be => be.Name == "Desk").Count());
         }
 
@@ -78,14 +79,6 @@ namespace ClassroomLayout.Tests
         {
             var json = File.ReadAllText($"{INPUT}/{testName}/inputs.json");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ClassroomLayoutInputs>(json);
-        }
-
-        private SpaceConfiguration GetConfigurations(string configsName)
-        {
-            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var configJson = File.ReadAllText(Path.Combine(dir, "ClassroomConfigurations.json"));
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            return configs;
         }
     }
 }

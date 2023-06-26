@@ -6,6 +6,7 @@ using Elements.Serialization.glTF;
 using Newtonsoft.Json;
 using Elements.Components;
 using System.Linq;
+using LayoutFunctionCommon;
 
 namespace OpenCollaborationLayout.Tests
 {
@@ -19,7 +20,7 @@ namespace OpenCollaborationLayout.Tests
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("OpenCollaborationConfigurations.json");
+            var configs = LayoutStrategies.GetConfigurations("OpenCollaborationConfigurations.json");
 
             var (output, spacePlanningModel) = OpenCollaborationLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
@@ -31,8 +32,8 @@ namespace OpenCollaborationLayout.Tests
                 var config = configs.FirstOrDefault(c => c.Value.Depth.ApproximatelyEquals(depth, 0.3) && c.Value.Depth < depth).Value;
                 Assert.NotNull(config);
 
-                var OffsetedBox = boundary.Bounds.Offset(0.1);
-                var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
+                var offsetedBox = boundary.Bounds.Offset(0.1);
+                var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
                 
                 foreach (var contentItem in config.ContentItems)
                 {
@@ -59,6 +60,7 @@ namespace OpenCollaborationLayout.Tests
             output.Model.AddElements(spacePlanningModel.Elements.Values);
             output.Model.AddElements(levelsModel.Elements.Values);
             output.Model.ToGlTF($"{OUTPUT}/{testName}/OpenCollaborationLayout.glb");
+            output.Model.ToGlTF($"{OUTPUT}/{testName}/OpenCollaborationLayout.gltf", false);
 
             return (output, spacePlanningModel);
         }
@@ -67,14 +69,6 @@ namespace OpenCollaborationLayout.Tests
         {
             var json = File.ReadAllText($"{INPUT}/{testName}/inputs.json");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OpenCollaborationLayoutInputs>(json);
-        }
-
-        private SpaceConfiguration GetConfigurations(string configsName)
-        {
-            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            var configJson = File.ReadAllText(Path.Combine(dir, "OpenCollaborationConfigurations.json"));
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            return configs;
         }
     }
 }
