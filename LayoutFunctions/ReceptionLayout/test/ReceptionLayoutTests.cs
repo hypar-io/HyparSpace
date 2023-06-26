@@ -19,7 +19,7 @@ namespace ReceptionLayout.Tests
         {
             // test with one room for each configuration
             var testName = "Configurations";
-            var configs = GetConfigurations("ReceptionConfigurations.json");
+            var configs = GetConfigurations("ReceptionConfigurations.json").OrderByDescending(c => c.Value.CellBoundary.Depth * c.Value.CellBoundary.Width);
 
             var (output, spacePlanningModel) = ReceptionLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
@@ -27,13 +27,12 @@ namespace ReceptionLayout.Tests
 
             foreach (var boundary in boundaries)
             {
-                var depth = boundary.Bounds.XSize;
-                var config = configs.FirstOrDefault(c => c.Value.Depth.ApproximatelyEquals(depth, 0.3) && c.Value.Depth < depth).Value;
+                var config = configs.FirstOrDefault(c => c.Value.Depth < boundary.Bounds.XSize && c.Value.Width < boundary.Bounds.YSize).Value;
                 Assert.NotNull(config);
 
                 var OffsetedBox = boundary.Bounds.Offset(0.1);
                 var boundaryElements = elements.Where(e => OffsetedBox.Contains(e.Transform.Origin)).ToList();
-                
+
                 foreach (var contentItem in config.ContentItems)
                 {
                     var boundaryElement = boundaryElements.FirstOrDefault(be => be.Name == contentItem.Name);
