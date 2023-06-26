@@ -1,0 +1,86 @@
+{
+  "overrides": {
+    "additions": {
+      "Interior Partition Types": [
+        {
+          "value": {
+            "Line": {
+              "Start": {
+                "X": 10,
+                "Y": 0,
+                "Z": 0
+              },
+              "End": {
+                "X": 30,
+                "Y": 0,
+                "Z": 0
+              },
+              "discriminator": "Elements.Geometry.Line"
+            },
+            "Type": "Glass",
+            "Id": "dd48b824-2575-4daf-92e7-232bc951307c"
+          },
+          "id": "06f46edc-dec9-42af-bf58-92b9df0bc427"
+        },
+        {
+          "value": {
+            "Line": {
+              "Start": {
+                "X": -10,
+                "Y": 0,
+                "Z": 0
+              },
+              "End": {
+                "X": 10,
+                "Y": 0,
+                "Z": 0
+              },
+              "discriminator": "Elements.Geometry.Line"
+            },
+            "Type": "Solid",
+            "Id": "15961c39-55dd-4ec0-a983-e52b69a9ed28"
+          },
+          "id": "df7e2169-0147-4997-9607-f35ed355d05b"
+        }
+      ]
+    },
+    "removals": {},
+    "Interior Partition Types": [
+      {
+        "value": {
+          "Line": {
+            "Start": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
+            "End": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "Type": "Glass"
+        },
+        "identity": {
+          "Line": {
+            "IsClosedForRendering": false,
+            "End": {
+              "X": 30,
+              "Y": 0,
+              "Z": 0
+            },
+            "Start": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          }
+        },
+        "id": "b1a7e987-f753-47d5-bdf3-c633ba58b63b"
+      }
+    ]
+  }
+}

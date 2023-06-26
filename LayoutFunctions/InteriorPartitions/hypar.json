@@ -82,6 +82,53 @@
       "optional": true
     }
   ],
+  "overrides": {
+    "Interior Partition Types": {
+      "context": "[*discriminator=Elements.WallCandidate]",
+      "identity": {
+        "Line": {
+          "$ref": "https://schemas.hypar.io/Line.json"
+        },
+        "AddId": {
+          "type": "string"
+        }
+      },
+      "paradigm": "edit",
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Type": {
+              "type": "string",
+              "default": "Solid",
+              "enum": [
+                "Solid",
+                "Partition",
+                "Glass"
+              ]
+            },
+            "Line": {
+              "$ref": "https://schemas.hypar.io/Line.json"
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "Type": {
+          "type": "string",
+          "default": "Solid",
+          "enum": [
+            "Solid",
+            "Partition",
+            "Glass"
+          ]
+        },
+        "Line": {
+          "$ref": "https://schemas.hypar.io/Line.json",
+        }
+      }
+    }
+  },
   "outputs": [],
   "element_types": [
     "https://schemas.hypar.io/WallCandidate.json"
