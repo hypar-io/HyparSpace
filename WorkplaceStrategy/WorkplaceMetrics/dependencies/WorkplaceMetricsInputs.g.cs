@@ -29,20 +29,19 @@ namespace WorkplaceMetrics
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public WorkplaceMetricsInputs(WorkplaceMetricsInputsCalculationMode @calculationMode, int @totalHeadcount, double @deskSharingRatio, IList<Polygon> @uSFExclusions, bool @includeLoungeSeatingInOpenCollaborationSeats, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public WorkplaceMetricsInputs(WorkplaceMetricsInputsCalculationMode @calculationMode, int @totalHeadcount, double @deskSharingRatio, IList<Polygon> @uSFExclusions, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<WorkplaceMetricsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @calculationMode, @totalHeadcount, @deskSharingRatio, @uSFExclusions, @includeLoungeSeatingInOpenCollaborationSeats, @overrides});
+                validator.PreConstruct(new object[]{ @calculationMode, @totalHeadcount, @deskSharingRatio, @uSFExclusions, @overrides});
             }
         
             this.CalculationMode = @calculationMode;
             this.TotalHeadcount = @totalHeadcount;
             this.DeskSharingRatio = @deskSharingRatio;
             this.USFExclusions = @uSFExclusions;
-            this.IncludeLoungeSeatingInOpenCollaborationSeats = @includeLoungeSeatingInOpenCollaborationSeats;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -51,6 +50,9 @@ namespace WorkplaceMetrics
             }
         }
     
+        /// <summary>“Headcount” is a sum of the headcount of each space.
+        /// “Fixed sharing ratio” will multiply a ratio value by the sum of the number of desks in the spaces.
+        /// “Fixed headcount” will allow you to manually type in a number to use as your overall headcount and ignore headcount on individual spaces.</summary>
         [Newtonsoft.Json.JsonProperty("Calculation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public WorkplaceMetricsInputsCalculationMode CalculationMode { get; set; } = WorkplaceMetricsInputsCalculationMode.Fixed_Headcount;
@@ -65,13 +67,9 @@ namespace WorkplaceMetrics
         [System.ComponentModel.DataAnnotations.Range(1D, double.MaxValue)]
         public double DeskSharingRatio { get; set; } = 1D;
     
-        /// <summary>Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.</summary>
+        /// <summary>Exclude regions from floor area calculations such as elevator shafts and stairwells.</summary>
         [Newtonsoft.Json.JsonProperty("USF Exclusions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> USFExclusions { get; set; } = new List<Polygon>();
-    
-        /// <summary>If true, the algorithm will add lounge seating to the final collaboration number.</summary>
-        [Newtonsoft.Json.JsonProperty("Include lounge seating in open collaboration seats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool IncludeLoungeSeatingInOpenCollaborationSeats { get; set; } = false;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
@@ -81,8 +79,8 @@ namespace WorkplaceMetrics
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum WorkplaceMetricsInputsCalculationMode
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"Calculated Headcount")]
-        Calculated_Headcount = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Headcount")]
+        Headcount = 0,
     
         [System.Runtime.Serialization.EnumMember(Value = @"Fixed Headcount")]
         Fixed_Headcount = 1,
@@ -100,16 +98,16 @@ namespace WorkplaceMetrics
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<SettingsOverride> @settings, IList<WorkpointCountOverride> @workpointCount)
+        public Overrides(IList<SettingsOverride> @settings, IList<SpaceMetricOverride> @spaceMetric)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @settings, @workpointCount});
+                validator.PreConstruct(new object[]{ @settings, @spaceMetric});
             }
         
             this.Settings = @settings ?? this.Settings;
-            this.WorkpointCount = @workpointCount ?? this.WorkpointCount;
+            this.SpaceMetric = @spaceMetric ?? this.SpaceMetric;
         
             if(validator != null)
             {
@@ -120,8 +118,8 @@ namespace WorkplaceMetrics
         [Newtonsoft.Json.JsonProperty("Settings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SettingsOverride> Settings { get; set; } = new List<SettingsOverride>();
     
-        [Newtonsoft.Json.JsonProperty("WorkpointCount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<WorkpointCountOverride> WorkpointCount { get; set; } = new List<WorkpointCountOverride>();
+        [Newtonsoft.Json.JsonProperty("SpaceMetric", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpaceMetricOverride> SpaceMetric { get; set; } = new List<SpaceMetricOverride>();
     
     }
     
@@ -162,13 +160,13 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class WorkpointCountOverride 
+    public partial class SpaceMetricOverride 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCountOverride(string @id, WorkpointCountIdentity @identity, WorkpointCountValue @value)
+        public SpaceMetricOverride(string @id, SpaceMetricIdentity @identity, SpaceMetricValue @value)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCountOverride>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricOverride>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @id, @identity, @value});
@@ -188,10 +186,10 @@ namespace WorkplaceMetrics
         public string Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public WorkpointCountIdentity Identity { get; set; }
+        public SpaceMetricIdentity Identity { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public WorkpointCountValue Value { get; set; }
+        public SpaceMetricValue Value { get; set; }
     
     }
     
@@ -257,13 +255,13 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class WorkpointCountIdentity 
+    public partial class SpaceMetricIdentity 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCountIdentity(Vector3 @parentCentroid)
+        public SpaceMetricIdentity(Vector3 @parentCentroid)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCountIdentity>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricIdentity>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @parentCentroid});
@@ -284,19 +282,22 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class WorkpointCountValue 
+    public partial class SpaceMetricValue 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public WorkpointCountValue(double @count)
+        public SpaceMetricValue(double @seats, double @headcount, double @desks, double @collaborationSeats)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<WorkpointCountValue>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @count});
+                validator.PreConstruct(new object[]{ @seats, @headcount, @desks, @collaborationSeats});
             }
         
-            this.Count = @count;
+            this.Seats = @seats;
+            this.Headcount = @headcount;
+            this.Desks = @desks;
+            this.CollaborationSeats = @collaborationSeats;
         
             if(validator != null)
             {
@@ -304,8 +305,17 @@ namespace WorkplaceMetrics
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Count { get; set; }
+        [Newtonsoft.Json.JsonProperty("Seats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Seats { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Headcount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Headcount { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Desks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Desks { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("CollaborationSeats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double CollaborationSeats { get; set; }
     
     }
 }

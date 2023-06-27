@@ -202,7 +202,7 @@ namespace OpenOfficeLayout
                     }
 
                     totalDeskCount += seatsCount;
-                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Desk", seatsCount, ob.Id));
+                    output.Model.AddElement(new SpaceMetric(ob.Id, seatsCount, seatsCount, seatsCount, 0));
                 }
             }
 

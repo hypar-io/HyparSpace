@@ -116,7 +116,7 @@ namespace OpenCollaborationLayout
                     }
                     
                     totalCountableSeats += seatsCount;
-                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Collaboration seat", seatsCount, room.Id));
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, seatsCount));
                 }
             }
             output.CollaborationSeats = totalCountableSeats;

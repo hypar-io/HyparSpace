@@ -6,11 +6,11 @@ using System.Linq;
 namespace WorkplaceMetrics
 {
 	/// <summary>
-	/// Override metadata for WorkpointCountOverride
+	/// Override metadata for SpaceMetricOverride
 	/// </summary>
-	public partial class WorkpointCountOverride : IOverride
+	public partial class SpaceMetricOverride : IOverride
 	{
-        public static string Name = "WorkpointCount";
+        public static string Name = "SpaceMetric";
         public static string Dependency = "Space Planning Zones";
         public static string Context = "[*discriminator=Elements.SpaceBoundary]";
 		public static string Paradigm = "Edit";
@@ -36,22 +36,22 @@ namespace WorkplaceMetrics
 			return models.AllElementsOfType<Elements.SpaceBoundary>(Dependency).Proxies(Dependency);
 		}
 	}
-	public static class WorkpointCountOverrideExtensions
+	public static class SpaceMetricOverrideExtensions
     {
 		/// <summary>
-        /// Apply WorkpointCount edit overrides to a collection of existing elements
+        /// Apply SpaceMetric edit overrides to a collection of existing elements
         /// </summary>
-        /// <param name="overrideData">The WorkpointCount Overrides to apply</param>
+        /// <param name="overrideData">The SpaceMetric Overrides to apply</param>
         /// <param name="existingElements">A collection of existing elements to which to apply the overrides.</param>
         /// <param name="identityMatch">A function returning a boolean which indicates whether an element is a match for an override's identity.</param>
         /// <param name="modifyElement">A function to modify a matched element, returning the modified element.</param>
         /// <typeparam name="T">The element type this override applies to. Should match the type(s) in the override's context.</typeparam>
         /// <returns>A collection of elements, including unmodified and modified elements from the supplied collection.</returns>
         public static List<T> Apply<T>(
-            this IList<WorkpointCountOverride> overrideData,
+            this IList<SpaceMetricOverride> overrideData,
             IEnumerable<T> existingElements,
-            Func<T, WorkpointCountIdentity, bool> identityMatch,
-            Func<T, WorkpointCountOverride, T> modifyElement) where T : Element
+            Func<T, SpaceMetricIdentity, bool> identityMatch,
+            Func<T, SpaceMetricOverride, T> modifyElement) where T : Element
         {
             var resultElements = new List<T>(existingElements);
             if (overrideData != null)
@@ -78,19 +78,19 @@ namespace WorkplaceMetrics
         }
 
 		/// <summary>
-        /// Apply WorkpointCount edit overrides to a collection of existing elements
+        /// Apply SpaceMetric edit overrides to a collection of existing elements
         /// </summary>
         /// <param name="existingElements">A collection of existing elements to which to apply the overrides.</param>
-        /// <param name="overrideData">The WorkpointCount Overrides to apply — typically `input.Overrides.WorkpointCount`</param>
+        /// <param name="overrideData">The SpaceMetric Overrides to apply — typically `input.Overrides.SpaceMetric`</param>
         /// <param name="identityMatch">A function returning a boolean which indicates whether an element is a match for an override's identity.</param>
         /// <param name="modifyElement">A function to modify a matched element, returning the modified element.</param>
         /// <typeparam name="T">The element type this override applies to. Should match the type(s) in the override's context.</typeparam>
         /// <returns>A collection of elements, including unmodified and modified elements from the supplied collection.</returns>
         public static void ApplyOverrides<T>(
             this List<T> existingElements,
-            IList<WorkpointCountOverride> overrideData,
-            Func<T, WorkpointCountIdentity, bool> identityMatch,
-            Func<T, WorkpointCountOverride, T> modifyElement
+            IList<SpaceMetricOverride> overrideData,
+            Func<T, SpaceMetricIdentity, bool> identityMatch,
+            Func<T, SpaceMetricOverride, T> modifyElement
             ) where T : Element
         {
             var updatedElements = overrideData.Apply(existingElements, identityMatch, modifyElement);

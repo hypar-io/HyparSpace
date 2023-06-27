@@ -121,7 +121,7 @@ namespace PhoneBoothLayout
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
                     
                     totalBoothCount += seatsCount;
-                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Phone Booth", seatsCount, room.Id));
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)

@@ -217,7 +217,7 @@ namespace LayoutFunctionCommon
                     
                     if (countSeats != null)
                     {
-                        outputModel.AddElement(LayoutStrategies.GetWorkpointCount(programTypeName + " seat", seatsCount, room.Id));
+                        outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                     }
                 }
 
@@ -701,16 +701,6 @@ namespace LayoutFunctionCommon
                     }
                 }
             }
-        }
-
-        public static WorkpointCount GetWorkpointCount(string type, int count, Guid? elementId = null)
-        {
-            var wc = new WorkpointCount() { Type = type, Count = count };
-            if (elementId != null)
-            {
-                wc.AdditionalProperties["ElementId"] = elementId;
-            }
-            return wc;
         }
     }
 }

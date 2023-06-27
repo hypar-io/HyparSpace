@@ -3,7 +3,7 @@ rm -r "$DIR/Generated"
 source ~/.bash_profile
 
 types=(
-"https://prod-api.hypar.io/schemas/WorkpointCount"
+"https://schemas.hypar.io/SpaceMetric.json"
 )
 for t in ${types[@]}; do
     hypar generate-types -u $t -o $DIR/Generated

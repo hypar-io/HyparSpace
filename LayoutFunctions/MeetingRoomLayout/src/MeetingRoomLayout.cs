@@ -106,7 +106,7 @@ namespace MeetingRoomLayout
                     }
 
                     totalSeats += seatsCount;
-                    outputModel.AddElement(LayoutStrategies.GetWorkpointCount("Meeting Room Seat", seatsCount, room.Id));
+                    outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
 
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
