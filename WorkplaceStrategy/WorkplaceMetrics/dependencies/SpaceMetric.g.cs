@@ -44,7 +44,7 @@ namespace Elements
         }
     
         /// <summary>The space we are attaching metrics to</summary>
-        [JsonProperty("Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Space", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? Space { get; set; }
     
         /// <summary>Seat count for this space.</summary>
