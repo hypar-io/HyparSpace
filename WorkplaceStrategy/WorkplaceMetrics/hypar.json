@@ -68,11 +68,12 @@
     "type": "object",
     "properties": {
       "Calculation Mode": {
+        "description": "“Headcount” is a sum of the headcount of each space.\n“Fixed sharing ratio” will multiply a ratio value by the sum of the number of desks in the spaces.\n“Fixed headcount” will allow you to manually type in a number to use as your overall headcount and ignore headcount on individual spaces.",
         "default": "Fixed Headcount",
         "type": "string",
         "$hyparOrder": 0,
         "enum": [
-          "Calculated Headcount",
+          "Headcount",
           "Fixed Headcount",
           "Fixed Sharing Ratio"
         ]
@@ -107,7 +108,7 @@
         "minimum": 1
       },
       "USF Exclusions": {
-        "description": "Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.",
+        "description": "Exclude regions from floor area calculations such as elevator shafts and stairwells.",
         "default": [],
         "type": "array",
         "$hyparOrder": 3,
@@ -115,17 +116,26 @@
           "description": "A boundary around an area to be excluded from USF Calculation. This area will be excluded from each floor.",
           "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
         }
-      },
-      "Include lounge seating in open collaboration seats": {
-        "$hyparOrder": 4,
-        "type": "boolean",
-        "default": false,
-        "description": "If true, the algorithm will add lounge seating to the final collaboration number."
+      }
+    }
+  },
+  "messages": {
+    "en": {
+      "input_schema": {
+        "properties": {
+          "Total Headcount": {
+            "name": "Headcount"
+          },
+          "USF Exclusions": {
+            "name": "Define Area Exclusions"
+          }
+        }
       }
     }
   },
   "overrides": {
     "Settings": {
+      "$hyparOrder": 0,
       "context": "[*discriminator=Elements.MetricsSettings]",
       "identity": {
         "Name": {
@@ -145,7 +155,8 @@
         }
       }
     },
-    "WorkpointCount": {
+    "SpaceMetric": {
+      "$hyparOrder": 1,
       "dependency": "Space Planning Zones",
       "context": "[*discriminator=Elements.SpaceBoundary]",
       "identity": {
@@ -155,7 +166,16 @@
       },
       "paradigm": "edit",
       "schema": {
-        "Count": {
+        "Seats": {
+          "type": "number"
+        },
+        "Headcount": {
+          "type": "number"
+        },
+        "Desks": {
+          "type": "number"
+        },
+        "CollaborationSeats": {
           "type": "number"
         }
       }
@@ -164,26 +184,14 @@
   "outputs": [
     {
       "unit_type": "area",
-      "name": "Total Usable Floor Area",
-      "description": "The total usable floor area of the project.",
+      "name": "Floor Area",
+      "description": "The total floor area of the project.",
       "type": "number"
     },
     {
       "unit_type": "area",
-      "name": "Total Rentable Floor Area",
-      "description": "The total rentable floor area of the project.",
-      "type": "number"
-    },
-    {
-      "unit_type": "area",
-      "name": "Area per Person",
+      "name": "Area per Headcount",
       "description": "The usable floor area per person.",
-      "type": "number"
-    },
-    {
-      "unit_type": "area",
-      "name": "Rentable Area per Person",
-      "description": "The rentable floor area per person.",
       "type": "number"
     },
     {
@@ -229,12 +237,6 @@
       "type": "number"
     },
     {
-      "unit_type": "area",
-      "name": "Rentable Area per Desk",
-      "description": "The rentable floor area per desk.",
-      "type": "number"
-    },
-    {
       "unit_type": "none",
       "name": "Desk Sharing Ratio",
       "description": "How many people are there for each desk?",
@@ -266,7 +268,6 @@
     }
   ],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/WorkpointCount",
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/AreaTally",
     "https://prod-api.hypar.io/schemas/LevelVolume",

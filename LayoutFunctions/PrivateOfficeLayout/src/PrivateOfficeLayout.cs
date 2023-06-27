@@ -55,7 +55,7 @@ namespace PrivateOfficeLayout
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
             var overridesById = GetOverridesByBoundaryId(input, levels);
-            var totalPrivateOfficeCount = 0;
+            var totalSeatsCount = 0;
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
@@ -69,7 +69,7 @@ namespace PrivateOfficeLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in privateOfficeBoundaries)
                 {
-                    var privateOfficeCount = 0;
+                    var seatsCount = 0;
                     var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
                     var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
 
@@ -108,7 +108,7 @@ namespace PrivateOfficeLayout
                                 var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                privateOfficeCount++;
+                                seatsCount++;
                             }
                             else if (trimmedGeo.Count() > 0)
                             {
@@ -121,7 +121,7 @@ namespace PrivateOfficeLayout
                                     var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
-                                    privateOfficeCount++;
+                                    seatsCount++;
                                 }
                             }
                         }
@@ -132,8 +132,8 @@ namespace PrivateOfficeLayout
                         }
                     }
 
-                    totalPrivateOfficeCount += privateOfficeCount;
-                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Private Office", privateOfficeCount, room.Id));
+                    totalSeatsCount += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, seatsCount, 0, 0));
                 }
 
                 var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
@@ -144,7 +144,7 @@ namespace PrivateOfficeLayout
                     LevelTransform = levelVolume?.Transform ?? new Transform()
                 });
             }
-            output.PrivateOfficeCount = totalPrivateOfficeCount;
+            output.PrivateOfficeCount = totalSeatsCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             output.Model.AddElements(proxies);
             return output;

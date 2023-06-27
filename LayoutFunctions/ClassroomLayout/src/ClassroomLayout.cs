@@ -148,7 +148,7 @@ namespace ClassroomLayout
                     }
 
                     totalCountableSeats += seatsCount;
-                    output.Model.AddElement(LayoutStrategies.GetWorkpointCount("Classroom Seat", seatsCount, room.Id));
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
