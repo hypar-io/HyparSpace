@@ -59,6 +59,46 @@
       }
     }
   },
+  "overrides": {
+    "Plants": {
+      "context": "[*discriminator=Elements.Plant]",
+      "identity": {
+        "OriginalPosition": {
+          "$ref": "https://schemas.hypar.io/Vector3.json"
+        }
+      },
+      "schema": {
+        "Transform": {
+          "$ref": "https://schemas.hypar.io/Transform.json"
+        },
+        "PlantType": {
+          "type": "string",
+          "default": "3D_Flowers_and_vase - 3D_Flowers_and_vase",
+          "$hyparEnumQuery": {
+            "query": "[*discriminator=Elements.Plant].AvailablePlantTypes",
+            "selfDependency": true
+          }
+        }
+      },
+      "paradigm": "edit",
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Transform": {
+              "$ref": "https://schemas.hypar.io/Transform.json"
+            }
+          }
+        },
+        "remove": true
+      },
+      "verbs": {
+        "add": "Add plant",
+        "remove": "Delete plant",
+        "edit": "Edit plant",
+        "revert": null
+      }
+    }
+   },
   "outputs": [],
   "element_types": [
     "https://schemas.hypar.io/SpaceBoundary.json",
