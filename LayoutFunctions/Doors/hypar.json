@@ -1,0 +1,163 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "417a69f3-805e-4975-9a72-7c3effa46b29",
+  "name": "Doors",
+  "display_name": "Doors",
+  "description": "Create doors for space boundary rooms.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Circulation",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Interior Partitions",
+      "optional": false
+    }
+  ],
+  "model_output": "Doors",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Default Door Width": {
+        "multipleOf": 0.01,
+        "default": 0.9144,
+        "maximum": 1.2192,
+        "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
+        "type": "number",
+        "$hyparOrder": 0,
+        "$hyparUnitType": "length",
+        "minimum": 0.8128
+      },
+      "Default Door Height" : {
+        "multipleOf": 0.01,
+        "type": "number",
+        "default": 2.10,
+        "maximum": 2.54,
+        "description": "Height of a door without a frame.",
+        "$hyparUnitType": "length",
+        "minimum": 2.032,
+        "$hyparOrder": 1
+      },
+      "Default Type" : {
+        "default": "Single",
+        "description": "The type of door.",
+        "type": "string",
+        "$hyparOrder": 2,
+        "enum": [
+          "Single",
+          "Double"
+        ]
+      }
+    }
+  },
+  "overrides": {
+    "Door Positions": {
+      "context": "[*discriminator=Elements.Door]",
+      "identity": {
+        "OriginalPosition": {
+          "$ref": "https://prod-api.hypar.io/schemas/Vector3"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Transform": {
+            "$ref": "https://prod-api.hypar.io/schemas/Transform",
+            "$hyparConstraints": {
+				      "enableRotation": false,
+              "enableTranslation": ["x","y"]
+        	  }
+		    },
+        "Door Width": {
+          "type": "number",
+          "default": 0.9144,
+          "maximum": 1.2192,
+          "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
+          "$hyparUnitType": "length",
+          "minimum": 0.8128
+        },
+        "Door Height" : {
+          "type": "number",
+          "default": 2.10,
+          "maximum": 2.54,
+          "description": "Height of a door without a frame.",
+          "$hyparUnitType": "length",
+          "minimum": 2.032
+        },
+        "Default Type" : {
+          "default": "Single",
+          "description": "The type of door.",
+          "type": "string",
+          "enum": [
+            "Single",
+            "Double"
+          ]
+        }
+      },
+      "verbs": {
+        "add": null,
+        "remove": null,
+        "edit": null,
+        "revert": null
+      },
+      "dependency": null,
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Transform": {
+              "$ref": "https://prod-api.hypar.io/schemas/Transform",
+              "$hyparConstraints": {
+                "enableRotation": false,
+                "enableTranslation": ["x","y"]
+              }
+            },
+            "Door Width": {
+              "type": "number",
+              "default": 0.9144,
+              "maximum": 1.2192,
+              "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
+              "$hyparUnitType": "length",
+              "minimum": 0.8128
+            },
+            "Door Height" : {
+              "type": "number",
+              "default": 2.10,
+              "maximum": 2.54,
+              "description": "Height of a door without a frame.",
+              "$hyparUnitType": "length",
+              "minimum": 2.032
+            },
+            "Type" : {
+              "default": "Single",
+              "description": "The type of door.",
+              "type": "string",
+              "enum": [
+                "Single",
+                "Double"
+              ]
+            }
+          }
+        },
+        "remove": true
+      }
+    }
+  },
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/Door.json",
+    "https://schemas.hypar.io/WallCandidate.json"
+  ],
+  "repository_url": "",
+  "filters": {},
+  "last_updated": "2023-05-17T10:11:51.557529",
+  "cli_version": "1.6.0"
+}

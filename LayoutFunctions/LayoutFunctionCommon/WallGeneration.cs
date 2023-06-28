@@ -356,7 +356,7 @@ namespace LayoutFunctionCommon
                     end.Z = 0;
                     var comparisonSegmentProjected = new Line(start, end);
                     var dist = midpt.DistanceTo(comparisonSegmentProjected);
-                    if (dist < 0.3)
+                    if (dist < 0.3 + 1e-3)
                     {
                         adjacentToAny = true;
                         adjacentSegments.Add(edge);

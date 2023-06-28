@@ -1,0 +1,120 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "eac0a540-d5a5-40db-8951-2d59708e5914",
+  "name": "Plant Entourage",
+  "display_name": "Plant Entourage",
+  "description": "Puts plants along the perimeter of Space Boundaries of selected Program Types.",
+  "language": "C#",
+  "content_catalogs": [ "https://hypar.io/user-static/308b6d78-2079-425a-bb4f-a99759cabedd.json?Name=Plants" ],
+  "model_dependencies": [
+        {
+            "autohide": false,
+            "name": "Space Planning Zones",
+            "optional": false
+        },
+        {
+            "autohide": false,
+            "name": "Meeting Room Layout",
+            "optional": true
+        },
+        {
+            "autohide": false,
+            "name": "Open Office Layout",
+            "optional": true
+        },
+        {
+            "autohide": false,
+            "name": "Reception Layout",
+            "optional": true
+        }
+    ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Plant Density": {
+        "multipleOf": 0.5,
+        "default": 20,
+        "maximum": 30,
+        "description": "Area per plant.",
+        "type": "number",
+        "$hyparOrder": 0,
+        "$hyparUnitType": "area",
+        "minimum": 15
+      },
+      "Program Types": {
+        "description": "Plants will be added to Space Boundaries with these Program Types only.",
+        "default": [],
+        "type": "array",
+        "$hyparOrder": 1,
+        "items": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "$hyparEnumQuery": {
+                "query": "[*discriminator=Elements.SpaceBoundary].Program Type",
+                "dependency": "Space Planning Zones"
+            }
+        }
+      }
+    }
+  },
+  "overrides": {
+    "Plants": {
+      "context": "[*discriminator=Elements.Plant]",
+      "identity": {
+        "OriginalPosition": {
+          "$ref": "https://schemas.hypar.io/Vector3.json"
+        }
+      },
+      "schema": {
+        "Transform": {
+          "$ref": "https://schemas.hypar.io/Transform.json"
+        },
+        "PlantType": {
+          "type": "string",
+          "default": "3D_Flowers_and_vase - 3D_Flowers_and_vase",
+          "$hyparEnumQuery": {
+            "query": "[*discriminator=Elements.Plant].AvailablePlantTypes",
+            "selfDependency": true
+          }
+        }
+      },
+      "paradigm": "edit",
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Transform": {
+              "$ref": "https://schemas.hypar.io/Transform.json"
+            }
+          }
+        },
+        "remove": true
+      },
+      "verbs": {
+        "add": "Add plant",
+        "remove": "Delete plant",
+        "edit": "Edit plant",
+        "revert": null
+      }
+    }
+   },
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/Plant.json"
+  ],
+  "repository_url": "",
+  "filters": {
+      "Hide plant settings": {
+          "context": "[*discriminator!=Elements.Plant]",
+          "default": true
+      },
+      "Hide plants": {
+          "context": "[*discriminator!=Elements.ContentElement]",
+          "default": false
+      }
+  },
+  "last_updated": "2023-06-16T12:25:19.340812",
+  "cli_version": "1.6.0"
+}
