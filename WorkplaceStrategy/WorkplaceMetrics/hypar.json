@@ -52,6 +52,16 @@
       "optional": true
     },
     {
+      "autohide": false,
+      "name": "Pantry Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Reception Layout",
+      "optional": true
+    },
+    {
       "name": "Conceptual Mass",
       "optional": true
     },

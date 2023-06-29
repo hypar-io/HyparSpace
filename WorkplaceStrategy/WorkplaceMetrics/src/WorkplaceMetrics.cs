@@ -19,6 +19,8 @@ namespace WorkplaceMetrics
         private const string _openCollab = "Open Collaboration";
         private const string _privateOffice = "Private Office";
         private const string _lounge = "Lounge";
+        private const string _pantry = "Pantry";
+        private const string _reception = "Reception";
 
         /// <summary>
         /// The WorkplaceMetrics function.
@@ -134,17 +136,18 @@ namespace WorkplaceMetrics
 
             }
 
-            var layoutNames = new string[] { _openOffice, _meetingRoom, _classroom, _phoneBooth, _openCollab, _privateOffice, _lounge };
+            var layoutNames = new string[] { _openOffice, _meetingRoom, _classroom, _phoneBooth, _openCollab, _privateOffice, _lounge, _reception, _pantry };
             var metricByLayouts = new Dictionary<string, SpaceMetric>();
             foreach (var layoutName in layoutNames)
             {
                 metricByLayouts[layoutName] = CountWorkplaceTyped(inputModels, input, layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics);
             }
 
-            var desksMetric = metricByLayouts.Sum(m => m.Value.Desks);
-            var collaborationSeatsMetric = metricByLayouts.Sum(m => m.Value.CollaborationSeats);
             var otherSpacesMetric = allSpaceBoundaries.Where(sb => !sb.IsCounted && sb.Name != "Circulation").Select(sb => GetSpaceMetricConfig(input, allSpaceBoundaries, sb).Value);
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
+            
+            var desksMetric = metricByLayouts.Sum(m => m.Value.Desks) + otherSpacesMetric.Sum(m => m.Desks);
+            var collaborationSeatsMetric = metricByLayouts.Sum(m => m.Value.CollaborationSeats) + otherSpacesMetric.Sum(m => m.CollaborationSeats);
 
             var headcount = -1;
             var deskSharingRatio = 1.0;
@@ -178,13 +181,10 @@ namespace WorkplaceMetrics
             foreach (var at in areaTallies)
             {
                 at.Id = Guid.NewGuid();
-                at.AchievedCount = at.Name == _privateOffice || at.Name == _phoneBooth ? metricByLayouts[at.Name].Seats : at.AchievedCount;
-                at.SeatCount =
-                    at.Name == _openCollab ||
-                    at.Name == _classroom ||
-                    at.Name == _meetingRoom ||
-                    at.Name == _openOffice ||
-                    at.Name == _lounge ? metricByLayouts[at.Name].Seats : at.SeatCount;
+                at.AchievedCount = 
+                    at.Name == _privateOffice ? metricByLayouts[at.Name].Headcount : 
+                    at.Name == _phoneBooth ? metricByLayouts[at.Name].Seats : at.AchievedCount;
+                at.SeatCount = layoutNames.Contains(at.Name) ? metricByLayouts[at.Name].Seats : at.SeatCount;
             }
 
             var totalCirculationArea = allSpaceBoundaries.Where(sb => sb.ProgramType == circulationKey).Sum(sb => sb.Area);
@@ -200,7 +200,7 @@ namespace WorkplaceMetrics
                 MeetingRoomSeats = metricByLayouts[_meetingRoom].Seats,
                 ClassroomSeats = metricByLayouts[_classroom].Seats,
                 PhoneBooths = metricByLayouts[_phoneBooth].Seats,
-                PrivateOfficeCount = metricByLayouts[_privateOffice].Seats,
+                PrivateOfficeCount = metricByLayouts[_privateOffice].Headcount,
                 DeskSharingRatio = deskSharingRatio,
                 MeetingRoomRatio = meetingRoomRatio,
                 CirculationUSFRatio = totalCirculationArea / settings.UsableArea,

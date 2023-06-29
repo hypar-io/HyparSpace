@@ -56,6 +56,7 @@ namespace PantryLayout
 
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
                     Line orientationGuideEdge = FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
 
@@ -77,7 +78,7 @@ namespace PantryLayout
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
-                            totalCountableSeats += layout.count;
+                            seatsCount += layout.count;
                         }
                         else if (trimmedGeo.Count() > 0)
                         {
@@ -90,11 +91,13 @@ namespace PantryLayout
                             LayoutStrategies.SetLevelVolume(layout.instance, levelVolume?.Id);
                             outputModel.AddElement(layout.instance);
 
-                            totalCountableSeats += layout.count;
+                            seatsCount += layout.count;
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
                     }
 
+                    totalCountableSeats += seatsCount;
+                    outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
@@ -158,7 +161,9 @@ namespace PantryLayout
         private static (ComponentInstance instance, int count) InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
             string[] countableSeats = new[] { "Steelcase - Seating - Nooi - Cafeteria Chair - Chair",
-                                              "Steelcase - Seating - Nooi - Stool - Bar Height" };
+                                              "Steelcase - Seating - Nooi - Stool - Bar Height",
+                                              "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                                              "Steelcase Turnstone - Shortcut X Base - Stool - Chair" };
 
             int countableSeatCount = 0;
             ContentConfiguration selectedConfig = null;
