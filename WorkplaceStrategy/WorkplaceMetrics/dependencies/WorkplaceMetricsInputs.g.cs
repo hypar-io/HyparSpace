@@ -98,16 +98,16 @@ namespace WorkplaceMetrics
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<SettingsOverride> @settings, IList<SpaceMetricOverride> @spaceMetric)
+        public Overrides(IList<SettingsOverride> @settings, IList<SpaceMetricsOverride> @spaceMetrics)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @settings, @spaceMetric});
+                validator.PreConstruct(new object[]{ @settings, @spaceMetrics});
             }
         
             this.Settings = @settings ?? this.Settings;
-            this.SpaceMetric = @spaceMetric ?? this.SpaceMetric;
+            this.SpaceMetrics = @spaceMetrics ?? this.SpaceMetrics;
         
             if(validator != null)
             {
@@ -118,8 +118,8 @@ namespace WorkplaceMetrics
         [Newtonsoft.Json.JsonProperty("Settings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SettingsOverride> Settings { get; set; } = new List<SettingsOverride>();
     
-        [Newtonsoft.Json.JsonProperty("SpaceMetric", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<SpaceMetricOverride> SpaceMetric { get; set; } = new List<SpaceMetricOverride>();
+        [Newtonsoft.Json.JsonProperty("Space Metrics", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpaceMetricsOverride> SpaceMetrics { get; set; } = new List<SpaceMetricsOverride>();
     
     }
     
@@ -160,13 +160,13 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class SpaceMetricOverride 
+    public partial class SpaceMetricsOverride 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricOverride(string @id, SpaceMetricIdentity @identity, SpaceMetricValue @value)
+        public SpaceMetricsOverride(string @id, SpaceMetricsIdentity @identity, SpaceMetricsValue @value)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricOverride>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsOverride>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @id, @identity, @value});
@@ -186,10 +186,10 @@ namespace WorkplaceMetrics
         public string Id { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpaceMetricIdentity Identity { get; set; }
+        public SpaceMetricsIdentity Identity { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpaceMetricValue Value { get; set; }
+        public SpaceMetricsValue Value { get; set; }
     
     }
     
@@ -226,15 +226,14 @@ namespace WorkplaceMetrics
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SettingsValue(double @rentableArea, double @usableArea)
+        public SettingsValue(double @usableArea)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @rentableArea, @usableArea});
+                validator.PreConstruct(new object[]{ @usableArea});
             }
         
-            this.RentableArea = @rentableArea;
             this.UsableArea = @usableArea;
         
             if(validator != null)
@@ -242,10 +241,6 @@ namespace WorkplaceMetrics
                 validator.PostConstruct(this);
             }
         }
-    
-        /// <summary>Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.</summary>
-        [Newtonsoft.Json.JsonProperty("Rentable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double RentableArea { get; set; }
     
         /// <summary>Adjust the Usable Area for calculations + display.</summary>
         [Newtonsoft.Json.JsonProperty("Usable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -255,13 +250,13 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class SpaceMetricIdentity 
+    public partial class SpaceMetricsIdentity 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricIdentity(Vector3 @parentCentroid)
+        public SpaceMetricsIdentity(Vector3 @parentCentroid)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricIdentity>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsIdentity>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @parentCentroid});
@@ -282,13 +277,13 @@ namespace WorkplaceMetrics
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class SpaceMetricValue 
+    public partial class SpaceMetricsValue 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricValue(double @seats, double @headcount, double @desks, double @collaborationSeats)
+        public SpaceMetricsValue(double @seats, double @headcount, double @desks, double @collaborationSeats)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricValue>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsValue>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @seats, @headcount, @desks, @collaborationSeats});
@@ -314,7 +309,7 @@ namespace WorkplaceMetrics
         [Newtonsoft.Json.JsonProperty("Desks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double Desks { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("CollaborationSeats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Collaboration Seats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double CollaborationSeats { get; set; }
     
     }

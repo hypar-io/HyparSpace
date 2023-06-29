@@ -130,7 +130,63 @@
             "name": "Define Area Exclusions"
           }
         }
-      }
+      },
+      "overrides": {
+        "Settings": {
+          "schema": {
+            "Usable Area": {
+              "name": "Floor Area"
+            }
+          }
+        }
+      },
+      "outputs": [
+        {
+          "name": "Floor Area",
+          "description": "The total floor area of the project."
+        },
+        {
+          "name": "Area per Headcount",
+          "description": "Floor area per headcount."
+        },
+        {
+          "name": "Desk Count"
+        },
+        {
+          "name": "Meeting Room Seats",
+          "description": "Total amount of seats in meeting rooms."
+        },
+        {
+          "name": "Classroom Seats"
+        },
+        {
+          "name": "Phone Booths"
+        },
+        {
+          "name": "Collaboration Seats"
+        },
+        {
+          "name": "Headcount",
+          "description": "Total number of people accommodated."
+        },
+        {
+          "name": "Area per Desk",
+          "description": "Floor area per open office desk."
+        },
+        {
+          "name": "Desk Sharing Ratio"
+        },
+        {
+          "name": "Meeting Room Ratio",
+          "description": "Headcount per meeting room"
+        },
+        {
+          "name": "Private Office Count"
+        },
+        {
+          "name": "Circulation / USF Ratio"
+        }
+      ]
     }
   },
   "overrides": {
@@ -143,11 +199,6 @@
         }
       },
       "schema": {
-        "Rentable Area": {
-          "description": "Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.",
-          "type": "number",
-          "$hyparUnitType": "area"
-        },
         "Usable Area": {
           "description": "Adjust the Usable Area for calculations + display.",
           "type": "number",
@@ -155,7 +206,7 @@
         }
       }
     },
-    "SpaceMetric": {
+    "Space Metrics": {
       "$hyparOrder": 1,
       "dependency": "Space Planning Zones",
       "context": "[*discriminator=Elements.SpaceBoundary]",
@@ -175,7 +226,7 @@
         "Desks": {
           "type": "number"
         },
-        "CollaborationSeats": {
+        "Collaboration Seats": {
           "type": "number"
         }
       }
@@ -184,13 +235,13 @@
   "outputs": [
     {
       "unit_type": "area",
-      "name": "Floor Area",
-      "description": "The total floor area of the project.",
+      "name": "Total Usable Floor Area",
+      "description": "The total usable floor area of the project.",
       "type": "number"
     },
     {
       "unit_type": "area",
-      "name": "Area per Headcount",
+      "name": "Area per Person",
       "description": "The usable floor area per person.",
       "type": "number"
     },
@@ -257,12 +308,6 @@
     {
       "name": "Circulation / USF Ratio",
       "description": "The ratio of circulation area to usable floor area.",
-      "type": "number",
-      "unit_type": "ratio"
-    },
-    {
-      "name": "Circulation / RSF Ratio",
-      "description": "The ratio of circulation area to rentable floor area.",
       "type": "number",
       "unit_type": "ratio"
     }

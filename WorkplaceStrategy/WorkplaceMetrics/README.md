@@ -18,8 +18,8 @@ Calculate various workplace metrics from a layout.
 
 |Output Name|Type|Description|
 |---|---|---|
-|Floor Area|Number|The total floor area of the project.|
-|Area per Headcount|Number|The usable floor area per person.|
+|Total Usable Floor Area|Number|The total usable floor area of the project.|
+|Area per Person|Number|The usable floor area per person.|
 |Total Desk Count|Number|The total number of desks.|
 |Meeting room seats|Number|The total number of seats in the meeting rooms.|
 |Classroom seats|Number|The total number of classroom seats.|
@@ -31,7 +31,6 @@ Calculate various workplace metrics from a layout.
 |Meeting room ratio|Number|On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.|
 |Private Office Count|Number|Total number of private offices.|
 |Circulation / USF Ratio|Number|The ratio of circulation area to usable floor area.|
-|Circulation / RSF Ratio|Number|The ratio of circulation area to rentable floor area.|
 
 
 <br>
