@@ -153,48 +153,55 @@
       "outputs": [
         {
           "name": "Floor Area",
-          "description": "The total floor area of the project."
+          "description": "Floor area of the project."
         },
         {
           "name": "Area per Headcount",
           "description": "Floor area per headcount."
         },
         {
-          "name": "Desk Count"
+          "name": "Desk Count",
+          "description": "Number of open office desks."
         },
         {
           "name": "Meeting Room Seats",
-          "description": "Total amount of seats in meeting rooms."
+          "description": "Number of seats in meeting rooms."
         },
         {
-          "name": "Classroom Seats"
+          "name": "Classroom Seats",
+          "description": "Number of classroom seats."
         },
         {
-          "name": "Phone Booths"
+          "name": "Phone Booths",
+          "description": "Number of phone booths."
         },
         {
-          "name": "Collaboration Seats"
+          "name": "Collaboration Seats",
+          "description": "Seats in open collaboration areas."
         },
         {
           "name": "Headcount",
-          "description": "Total number of people accommodated."
+          "description": "Number of people accommodated."
         },
         {
           "name": "Area per Desk",
-          "description": "Floor area per open office desk."
+          "description": "Floor area per desk."
         },
         {
-          "name": "Desk Sharing Ratio"
+          "name": "Desk Sharing Ratio",
+          "description": "Headcount per desk."
         },
         {
           "name": "Meeting Room Ratio",
-          "description": "Headcount per meeting room"
+          "description": "Headcount per meeting room."
         },
         {
-          "name": "Private Office Count"
+          "name": "Private Office Count",
+          "description": "Number of private offices."
         },
         {
-          "name": "Circulation / USF Ratio"
+          "name": "Circulation / USF Ratio",
+          "description": "Ratio of circulation area to floor area."
         }
       ]
     }
