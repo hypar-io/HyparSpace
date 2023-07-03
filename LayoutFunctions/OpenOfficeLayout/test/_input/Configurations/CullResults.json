@@ -1,0 +1,182 @@
+{
+    "Results": [
+        {
+            "DeskType": "Simple Desk - 24x48",
+            "Count": 24,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Simple Desk - 24x48",
+            "Count": 13,
+            "CollabCount": 2,
+            "CollabArea": 20.8
+        },
+        {
+            "DeskType": "Simple Desk - 24x48",
+            "Count": 33,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "Simple Desk - 30x60",
+            "Count": 17,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Simple Desk - 30x60",
+            "Count": 8,
+            "CollabCount": 2,
+            "CollabArea": 22.3
+        },
+        {
+            "DeskType": "Simple Desk - 30x60",
+            "Count": 19,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "Simple Desk - 29x70",
+            "Count": 17,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Simple Desk - 29x70",
+            "Count": 6,
+            "CollabCount": 2,
+            "CollabArea": 21
+        },
+        {
+            "DeskType": "Simple Desk - 29x70",
+            "Count": 19,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "Simple Desk - 30x72",
+            "Count": 13,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Simple Desk - 30x72",
+            "Count": 5,
+            "CollabCount": 2,
+            "CollabArea": 22.4
+        },
+        {
+            "DeskType": "Simple Desk - 30x72",
+            "Count": 15,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "L-Shaped",
+            "Count": 9,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "L-Shaped",
+            "Count": 3,
+            "CollabCount": 2,
+            "CollabArea": 25
+        },
+        {
+            "DeskType": "L-Shaped",
+            "Count": 15,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "Double Desk",
+            "Count": 6,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Double Desk",
+            "Count": 4,
+            "CollabCount": 2,
+            "CollabArea": 13
+        },
+        {
+            "DeskType": "Double Desk",
+            "Count": 6,
+            "CollabCount": 2,
+            "CollabArea": 8.6
+        },
+
+
+        {
+            "DeskType": "Enclosed Pair",
+            "Count": 2,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "Enclosed Pair",
+            "Count": 1,
+            "CollabCount": 1,
+            "CollabArea": 11.5
+        },
+        {
+            "DeskType": "Enclosed Pair",
+            "Count": 4,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+
+
+        {
+            "DeskType": "120° Workstations - Pairs",
+            "Count": 2,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "120° Workstations - Pairs",
+            "Count": 2,
+            "CollabCount": 1,
+            "CollabArea": 41.1
+        },
+        {
+            "DeskType": "120° Workstations - Pairs",
+            "Count": 1,
+            "CollabCount": 1,
+            "CollabArea": 20.5
+        },
+
+
+        {
+            "DeskType": "120° Workstations - Continuous",
+            "Count": 2,
+            "CollabCount": 0,
+            "CollabArea": 0
+        },
+        {
+            "DeskType": "120° Workstations - Continuous",
+            "Count": 3,
+            "CollabCount": 1,
+            "CollabArea": 61
+        },
+        {
+            "DeskType": "120° Workstations - Continuous",
+            "Count": 4,
+            "CollabCount": 1,
+            "CollabArea": 20.3
+        }
+    ]
+}
