@@ -1,0 +1,632 @@
+{
+  "Integrated Collaboration Space Density": 0.6000000000000001,
+  "Aisle Width": 1,
+  "Desk Type": "Simple Desk - 24x48",
+  "Back-to-Back Width": 1,
+  "Grid Rotation": 70,
+  "Custom Workstation Properties": {
+    "Width": 1,
+    "Length": 2
+  },
+  "Column Avoidance Strategy": "Adaptive Grid",
+  "overrides": {
+    "Space Settings": [
+      {
+        "id": "8623f655-3381-4efe-9193-60d1b09319ef",
+        "identity": {
+          "ParentCentroid": {
+            "X": 20,
+            "Y": 50,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "83b3cb81-9e57-4e7e-ba20-9b1e24c0def3",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Simple Desk - 24x48",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "cf797194-9fc1-43f6-a985-884cb877b392",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333334,
+            "Y": 5,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "c7d9d7af-32c4-4d88-a21b-3cdef5033d14",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Simple Desk - 24x48",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "e6e338d3-e6af-4f28-af4d-636a1e2f0681",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15,
+            "Y": 5,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "89972a71-2fa2-4552-a205-5fa83837599d",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Simple Desk - 24x48",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "5c0e6b7e-a225-4ced-bd14-b4470704f48a",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.91583328780345,
+            "Y": 5.000226848057695,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "271f93d0-57db-4ff5-9c88-598658cb34e1",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Simple Desk - 24x48",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "9aa6370b-dbe0-4751-b470-ee7cdb19f47e",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333331,
+            "Y": 92.5,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "e1006f3f-667a-4f11-bf5b-93c53bf4ad24",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "120° Workstations - Continuous",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "ca4ce433-fc14-478e-91f5-d8efac598b3c",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15,
+            "Y": 92.50000000000003,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "6c25184e-b0c6-42a5-8231-ee99a427e324",
+          "Grid Rotation": 90,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "120° Workstations - Continuous",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "3762dcfb-f22b-4786-b227-6123ff7fbf9b",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.916666666666657,
+            "Y": 92.49999999999999,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "515f1ca2-7e0b-4c2d-a36a-7563b3648db2",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "120° Workstations - Continuous",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "fbce683e-82c6-474e-8f21-0154d341b732",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.916666666666668,
+            "Y": 14.999999999999996,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "3305d96a-3c3e-4e19-b9a8-0c60d0d910ea",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Simple Desk - 30x60",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "69525032-e1c7-4d2c-b907-739dce5182b8",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.91666666666667,
+            "Y": 25.000000000000004,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "2314e24d-ab8b-42ca-80d4-dc3b189570e0",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Simple Desk - 29x70",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "0cd215ce-d5ea-4c5f-b1c2-8e7316be9590",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.91666666666667,
+            "Y": 45.000000000000014,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "a290585a-265e-40be-8ba0-6788273d4c50",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "L-Shaped",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "1f21b9dd-6940-422e-84d8-5034e3b87732",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.916666666666657,
+            "Y": 35,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "1b55cb7c-ffa6-4848-a43a-ca1bd3884226",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Simple Desk - 30x72",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "03b38c02-da88-4ca1-bf26-c6e838cf4d5a",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.91666666666667,
+            "Y": 55.00000000000001,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "4ab4f8d8-f33b-4767-a0a1-e24175567edd",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Double Desk",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "3220d7fc-048f-431c-9065-54e661456c7f",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.916666666666654,
+            "Y": 77.5,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "5362b3f5-0580-48ec-bc7f-236fc3698718",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "120° Workstations - Pairs",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "ff616d85-497e-44ba-935b-3c63fc1a58d4",
+        "identity": {
+          "ParentCentroid": {
+            "X": 24.91666666666666,
+            "Y": 64.99999999999997,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "34ed7084-1be9-47ee-b484-45aa529925f3",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0.2,
+          "Desk Type": "Enclosed Pair",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "753a2bc8-aa9f-4e07-9d3a-f7352f0f542c",
+        "identity": {
+          "ParentCentroid": {
+            "X": 14.999999999999993,
+            "Y": 77.5,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "858b98b0-e3b3-48b6-898a-72ba77013a21",
+          "Grid Rotation": 90,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "120° Workstations - Pairs",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "d482a45f-de92-4faf-8561-cdce28c5a082",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15,
+            "Y": 44.999999999999986,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "5a6cdfbd-2cc8-4be5-b751-08ddbd5f509b",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "L-Shaped",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "e8dadd4d-f654-404a-8d33-0eaa757e0ac5",
+        "identity": {
+          "ParentCentroid": {
+            "X": 14.999999999999996,
+            "Y": 55,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "5ed83b13-e220-4c5b-8c0d-66454350d7dc",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Double Desk",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "a96a0226-e7d8-42ba-8ed7-8e0cee71ee18",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15.000000000000004,
+            "Y": 35.00000000000001,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "f3d07897-a799-41a3-8a8c-949ac1a11533",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Simple Desk - 30x72",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "c6f4d00e-a069-45ca-a2d7-c9135c266ebb",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15,
+            "Y": 65.00000000000003,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "d9f8e184-b586-455e-80ac-68e2a50b6e81",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Enclosed Pair",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "2c3b3226-dabd-4235-8645-adc75e9a791d",
+        "identity": {
+          "ParentCentroid": {
+            "X": 15,
+            "Y": 15,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "f312f4ca-d04e-4028-9a4f-25c5e4d0ed3d",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Simple Desk - 30x60",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "7f6b954b-2fa4-42bf-9fd7-a88a8a5ad749",
+        "identity": {
+          "ParentCentroid": {
+            "X": 14.999999999999996,
+            "Y": 24.999999999999996,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "045f8d25-0a6d-4322-bb41-50d3a15f7944",
+          "Grid Rotation": 160,
+          "Integrated Collaboration Space Density": 1,
+          "Desk Type": "Simple Desk - 29x70",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "9bfff97d-71ed-44ec-8b70-eb5c8301602f",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333332,
+            "Y": 77.50000000000001,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "1b7492ee-a721-4247-82d6-190ea6165967",
+          "Grid Rotation": 0,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "120° Workstations - Pairs",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "5a3472f6-fa58-4649-bdec-b9750842a4f5",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333332,
+            "Y": 64.99999999999999,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "c382ac59-c8e0-42ee-9552-f081d14e5587",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Enclosed Pair",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "af21350e-7b8c-4289-9b1a-38f593638667",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.08333333333334,
+            "Y": 24.999999999999996,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "84226ab1-3412-4495-8770-1dba5c8b6680",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Simple Desk - 29x70",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "71abd114-25a4-45d1-b9ad-94718598abb5",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333338,
+            "Y": 35.00000000000001,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "76aee03f-127c-4e65-8032-0c5034336f44",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Simple Desk - 30x72",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "4e0dff91-2bd0-4526-9249-443a6497eaab",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.0833333333333375,
+            "Y": 45.00000000000001,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "47cf35a7-6954-4d0a-83a2-b4370a12edae",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "L-Shaped",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "8fd62fb9-6b0b-43cd-9ec4-ceb691c91fbe",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333337,
+            "Y": 54.99999999999999,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "422ff219-0225-4f27-b4c0-c76dfda53645",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Double Desk",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      },
+      {
+        "id": "6e4958cc-9969-419e-82d1-89447f934001",
+        "identity": {
+          "ParentCentroid": {
+            "X": 5.083333333333338,
+            "Y": 15,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "fe653e07-8db8-4322-8d02-983541a4fa59",
+          "Grid Rotation": 30,
+          "Integrated Collaboration Space Density": 0,
+          "Desk Type": "Simple Desk - 30x60",
+          "Custom Workstation Properties": {
+            "Width": 2,
+            "Length": 2
+          },
+          "Aisle Width": 1,
+          "Back-to-Back Width": 1
+        }
+      }
+    ]
+  }
+}
