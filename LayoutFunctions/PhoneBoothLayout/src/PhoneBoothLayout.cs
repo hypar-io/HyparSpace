@@ -136,6 +136,56 @@ namespace PhoneBoothLayout
             return output;
         }
 
+        private static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, out IEnumerable<Line> otherSegments, double maxDist = 0)
+        {
+            var minDist = double.MaxValue;
+            var minSeg = edgesToClassify.First();
+            var allEdges = edgesToClassify.ToList();
+            var selectedIndex = 0;
+            for (int i = 0; i < allEdges.Count; i++)
+            {
+                var edge = allEdges[i];
+                var midpt = edge.PointAt(0.5);
+                foreach (var seg in corridorSegments)
+                {
+                    var dist = midpt.DistanceTo(seg);
+                    // if two segments are basically the same distance to the corridor segment,
+                    // prefer the longer one.
+                    if (Math.Abs(dist - minDist) < 0.1)
+                    {
+                        minDist = dist;
+                        if (minSeg.Length() < edge.Length())
+                        {
+                            minSeg = edge;
+                            selectedIndex = i;
+                        }
+                    }
+                    else if (dist < minDist)
+                    {
+                        minDist = dist;
+                        minSeg = edge;
+                        selectedIndex = i;
+                    }
+                }
+            }
+            if (maxDist != 0)
+            {
+                if (minDist < maxDist)
+                {
+
+                    otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
+                    return minSeg;
+                }
+                else
+                {
+                    Console.WriteLine($"no matches: {minDist}");
+                    otherSegments = allEdges;
+                    return null;
+                }
+            }
+            otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
+            return minSeg;
+        }
         private static Random rand = new Random(4);
         private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
