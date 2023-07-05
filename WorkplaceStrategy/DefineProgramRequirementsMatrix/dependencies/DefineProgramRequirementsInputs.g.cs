@@ -11,6 +11,7 @@ using Elements.Serialization.JSON;
 using Hypar.Functions;
 using Hypar.Functions.Execution;
 using Hypar.Functions.Execution.AWS;
+using Hypar.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,45 +22,7 @@ namespace DefineProgramRequirements
 {
     #pragma warning disable // Disable all warnings
 
-    /// <summary>Represents an edge in an adjacency graph.</summary>
-    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    
-    public partial class Adjacency 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public Adjacency(int @from, int @to, double @weight)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<Adjacency>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @from, @to, @weight});
-            }
-        
-            this.From = @from;
-            this.To = @to;
-            this.Weight = @weight;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("From", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int From { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("To", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int To { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Weight", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Weight { get; set; }
-    
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class DefineProgramRequirementsInputs : S3Args
     
@@ -86,32 +49,5 @@ namespace DefineProgramRequirements
         [Newtonsoft.Json.JsonProperty("Program", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ProgramAdjacencyMatrix Program { get; set; }
     
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ProgramRequirementCountType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"Item")]
-        Item = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
-        Area_Total = 1,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
-    [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true)]
-    internal class JsonInheritanceAttribute : System.Attribute
-    {
-        public JsonInheritanceAttribute(string key, System.Type type)
-        {
-            Key = key;
-            Type = type;
-        }
-    
-        public string Key { get; }
-    
-        public System.Type Type { get; }
     }
 }

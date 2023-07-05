@@ -22,7 +22,7 @@ namespace CustomSpaceType
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class CustomSpaceTypeInputs : S3Args
     
@@ -55,7 +55,7 @@ namespace CustomSpaceType
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class Layouts 
     
@@ -107,7 +107,7 @@ namespace CustomSpaceType
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class Overrides 
     
@@ -136,7 +136,7 @@ namespace CustomSpaceType
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class TransformOverride 
     
@@ -171,7 +171,7 @@ namespace CustomSpaceType
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class TransformIdentity 
     
@@ -202,7 +202,7 @@ namespace CustomSpaceType
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class TransformValue 
     
@@ -229,7 +229,7 @@ namespace CustomSpaceType
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class TransformIdentityBaseDefinition 
     

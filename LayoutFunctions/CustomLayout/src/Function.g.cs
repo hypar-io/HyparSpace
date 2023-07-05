@@ -62,7 +62,7 @@ namespace CustomSpaceType
 
             if(this.store == null)
             {
-                this.store = new S3ModelStore<CustomSpaceTypeInputs>(RegionEndpoint.USWest1);
+                this.store = new S3ModelStore<CustomSpaceTypeInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<CustomSpaceTypeInputs,CustomSpaceTypeOutputs>(store, CustomSpaceType.Execute);

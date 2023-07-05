@@ -1,7 +1,7 @@
 #!csharp
 
 #r "nuget: Hypar.Elements, 1.2.0-alpha.30"
-#r "bin/Debug/netcoreapp3.1/LayoutFunctionCommon.dll"
+#r "bin/Debug/net6.0/LayoutFunctionCommon.dll"
 
 #!csharp
 
