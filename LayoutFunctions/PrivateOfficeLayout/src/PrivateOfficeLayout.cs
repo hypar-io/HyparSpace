@@ -67,10 +67,6 @@ namespace PrivateOfficeLayout
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 var wallCandidateLines = new List<(Line line, string type)>();
-                if (lvl.Name.Equals("Level 5"))
-                {
-
-                }
                 foreach (var room in privateOfficeBoundaries)
                 {
                     var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
@@ -80,7 +76,7 @@ namespace PrivateOfficeLayout
                     {
                         WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
 
-                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume.Transform.Inverted());
+                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume?.Transform.Inverted() ?? new Transform());
                         var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
                         orientationTransform.Concatenate(relativeRoomTransform);
                         var boundaryCurves = new List<Polygon>();
@@ -153,7 +149,7 @@ namespace PrivateOfficeLayout
 
         private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<(Line line, string type)> wallCandidateLines, SpaceSettingsOverride config)
         {
-            var levelInvertedTransform = levelVolume.Transform.Inverted();
+            var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
             if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
             {
                 var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
