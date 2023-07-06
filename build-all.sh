@@ -32,4 +32,5 @@ else
   for failed_directory in "${failed_directories[@]}"; do
     echo "$failed_directory"
   done
+  exit 1
 fi
