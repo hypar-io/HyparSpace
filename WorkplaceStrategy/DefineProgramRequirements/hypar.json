@@ -17,7 +17,7 @@
         "type": "array",
         "$hyparGroupBy": "Program Group",
         "items": {
-          "$ref": "https://prod-api.hypar.io/schemas/ProgramRequirement"
+          "$ref": "https://schemas.hypar.io/ProgramRequirement.json"
         }
       }
     }
@@ -34,7 +34,7 @@
   "source_file_key": null,
   "preview_image": null,
   "element_types": [
-    "https://prod-api.hypar.io/schemas/ProgramRequirement",
+    "https://schemas.hypar.io/ProgramRequirement.json",
     "https://schemas.hypar.io/ColorScheme.json"
   ]
 }

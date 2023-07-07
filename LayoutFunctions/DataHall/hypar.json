@@ -91,8 +91,8 @@
     }
   ],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/LevelElements"
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/LevelElements.json"
   ],
   "content_catalogs": [
     "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/56433155-6494-428c-b800-53d18234e5cf/data-rack-56433155-6494-428c-b800-53d18234e5cf-model.json"

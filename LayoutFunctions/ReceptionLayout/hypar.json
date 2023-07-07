@@ -37,7 +37,7 @@
       "context": "[*discriminator=Elements.ElementInstance]",
       "identity": {
         "OriginalLocation": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+          "$ref": "https://schemas.hypar.io/Vector3.json"
         },
         "gltfLocation": {
           "type": "string"
@@ -45,17 +45,17 @@
       },
       "schema": {
         "Transform": {
-          "$ref": "https://prod-api.hypar.io/schemas/Transform"
+          "$ref": "https://schemas.hypar.io/Transform.json"
         }
       }
     }
   },
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/LevelElements",
-    "https://prod-api.hypar.io/schemas/CirculationSegment",
-    "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/ServiceCore"
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/LevelElements.json",
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/LevelVolume.json",
+    "https://schemas.hypar.io/ServiceCore.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
