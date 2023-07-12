@@ -76,7 +76,7 @@ namespace CustomSpaceType
                 {
                     Func<Polyline, IEnumerable<Element>> postProcess = (Polyline p) =>
                          {
-                             var offsets = p.OffsetOnSide(wall.Width, wall.Flip);
+                             var offsets = OffsetThickenedPolyline(wall, p);
                              return offsets.Select((w) =>
                              {
                                  return new Wall(w, 3, BuiltInMaterials.Default);
@@ -95,7 +95,6 @@ namespace CustomSpaceType
                 {
                     spaceTypeDefinitions.Add(layout.SpaceType, new ComponentDefinition(rules, anchors));
                 }
-
             }
 
             // instantiate all component definitions
@@ -128,6 +127,25 @@ namespace CustomSpaceType
             }
 
             return output;
+        }
+
+        public static Polygon[] OffsetThickenedPolyline(ThickenedPolyline wall, Polyline p)
+        {
+            Polygon[] offsets = null;
+            if (wall.Width.HasValue && wall.Flip.HasValue)
+            {
+                offsets = p.OffsetOnSide(wall.Width.Value, wall.Flip.Value);
+            }
+            else
+            {
+                if (wall.LeftWidth > Vector3.EPSILON)
+                {
+                    p = p.OffsetOpen(-wall.LeftWidth);
+                }
+
+                offsets = p.OffsetOnSide(wall.LeftWidth + wall.RightWidth, false);
+            }
+            return offsets;
         }
 
         private static void LayOutAllRoomsOfSpaceType(Model model, IEnumerable<LevelVolume> levelVolumes, LevelElements lvl, IEnumerable<Line> corridorSegments, string spaceTypeName, ComponentDefinition component)

@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace DefineProgramRequirements
 {
-    public class DefineProgramRequirementsOutputs: ResultsBase
+    public class DefineProgramRequirementsOutputs: SystemResults
     {
 		/// <summary>
 		/// The total area of all program requirements.
