@@ -1,10 +1,13 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
-  "name": "Interior Partitions",
+  "cli_version": "0.9.11-alpha.2",
   "description": "Produce all interior partition elements.",
+  "element_types": [
+    "https://schemas.hypar.io/WallCandidate.json"
+  ],
+  "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
   "language": "C#",
-  "model_output": "Interior Partitions",
+  "last_updated": "0001-01-01T00:00:00",
   "model_dependencies": [
     {
       "autohide": false,
@@ -82,58 +85,55 @@
       "optional": true
     }
   ],
+  "model_output": "Interior Partitions",
+  "name": "Interior Partitions",
+  "outputs": [],
   "overrides": {
     "Interior Partition Types": {
-      "context": "[*discriminator=Elements.WallCandidate]",
-      "identity": {
-        "Line": {
-          "$ref": "https://schemas.hypar.io/Line.json"
-        },
-        "AddId": {
-          "type": "string"
-        }
-      },
-      "paradigm": "edit",
       "behaviors": {
         "add": {
           "schema": {
+            "Line": {
+              "$ref": "https://schemas.hypar.io/Line.json"
+            },
             "Type": {
-              "type": "string",
               "default": "Solid",
               "enum": [
                 "Solid",
                 "Partition",
                 "Glass"
-              ]
-            },
-            "Line": {
-              "$ref": "https://schemas.hypar.io/Line.json"
+              ],
+              "type": "string"
             }
           }
         },
         "remove": true
       },
+      "context": "[*discriminator=Elements.WallCandidate]",
+      "identity": {
+        "AddId": {
+          "type": "string"
+        },
+        "Line": {
+          "$ref": "https://schemas.hypar.io/Line.json"
+        }
+      },
+      "paradigm": "edit",
       "schema": {
+        "Line": {
+          "$ref": "https://schemas.hypar.io/Line.json"
+        },
         "Type": {
-          "type": "string",
           "default": "Solid",
           "enum": [
             "Solid",
             "Partition",
             "Glass"
-          ]
-        },
-        "Line": {
-          "$ref": "https://schemas.hypar.io/Line.json",
+          ],
+          "type": "string"
         }
       }
     }
   },
-  "outputs": [],
-  "element_types": [
-    "https://schemas.hypar.io/WallCandidate.json"
-  ],
-  "repository_url": "https://github.com/hypar-io/function",
-  "last_updated": "0001-01-01T00:00:00",
-  "cli_version": "0.9.11-alpha.2"
+  "repository_url": "https://github.com/hypar-io/function"
 }
