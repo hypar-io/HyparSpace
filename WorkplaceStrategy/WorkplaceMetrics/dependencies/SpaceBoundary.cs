@@ -7,7 +7,6 @@ namespace Elements
 {
     public partial class SpaceBoundary
     {
-        public bool IsCounted { get; set; }
         public Vector3? ParentCentroid { get; set; }
 
         public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)

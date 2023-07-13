@@ -143,7 +143,7 @@ namespace WorkplaceMetrics
                 metricByLayouts[layoutName] = CountWorkplaceTyped(inputModels, input, layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics);
             }
 
-            var otherSpacesMetric = allSpaceBoundaries.Where(sb => !sb.IsCounted && sb.Name != "Circulation").Select(sb => GetSpaceMetricConfig(input, allSpaceBoundaries, sb).Value);
+            var otherSpacesMetric = allSpaceBoundaries.Where(sb => !layoutNames.Contains(sb.ProgramType) && sb.Name != "Circulation").Select(sb => GetSpaceMetricConfig(input, allSpaceBoundaries, sb).Value);
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
             
             var desksMetric = metricByLayouts.Sum(m => m.Value.Desks) + otherSpacesMetric.Sum(m => m.Desks);
@@ -247,7 +247,6 @@ namespace WorkplaceMetrics
                             }
                         }
 
-                        room.IsCounted = true;
                         var config = GetSpaceMetricConfig(input, boundaries, room, sm);
                         metric.Seats += (int)config.Value.Seats;
                         metric.Headcount += (int)config.Value.Headcount;
