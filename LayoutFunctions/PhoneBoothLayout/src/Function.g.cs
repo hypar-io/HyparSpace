@@ -61,11 +61,11 @@ namespace PhoneBoothLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<PhoneBoothLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<PhoneBoothLayoutInputs,PhoneBoothLayoutOutputs>(store, PhoneBoothLayout.Execute);
+            var l = new InvocationWrapper<PhoneBoothLayoutInputs,PhoneBoothLayoutOutputs> (store, PhoneBoothLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

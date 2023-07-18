@@ -56,31 +56,52 @@ namespace DataHallLayout
             }
             var width = dataRack.BoundingBox.Max.X - dataRack.BoundingBox.Min.X;
             var depth = dataRack.BoundingBox.Max.Y - dataRack.BoundingBox.Min.Y;
+
             var totalArea = 0.0;
             foreach (var room in roomBoundaries)
             {
                 var profile = room.Boundary;
                 totalArea += profile.Area();
                 //inset from walls
-                var inset = profile.Perimeter.Offset(-1.2);
-                Line longestEdge = null;
+                var inset = profile.Perimeter.Offset(-input.Clearance);
+                Line alignmentEdge = null;
                 try
                 {
-                    longestEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                    if (input.FlipDirection)
+                    {
+                        alignmentEdge = inset.SelectMany(s => s.Segments()).OrderByDescending(l => l.Length()).Last();
+                    }
+                    else
+                    {
+                        alignmentEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                    }
                 }
                 catch
                 {
                     warnings.Add("One space was too small for a data hall.");
                     continue;
                 }
-                var alignment = new Transform(Vector3.Origin, longestEdge.Direction(), Vector3.ZAxis);
+                var alignment = new Transform(Vector3.Origin, alignmentEdge.Direction(), Vector3.ZAxis);
                 var grid = new Grid2d(inset, alignment);
-                grid.U.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
-                grid.V.DivideByFixedLength(width);
+
+                grid.U.DivideByFixedLength(width);
+
+                if (input.SwapColdHotPattern)
+                {
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Cold Aisle", input.ColdAisleWidth), ("Backward Rack", depth), ("Hot Aisle", input.HotAisleWidth) });
+                }
+                else
+                {
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
+                }
+
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
                 model.AddElements(floorGrid.ToModelCurves(room.Transform));
+
+                double rackAngle = 0;
+                if (input.SwapColdHotPattern) rackAngle = 180;
 
                 foreach (var cell in grid.GetCells())
                 {
@@ -100,13 +121,13 @@ namespace DataHallLayout
                     else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
                     {
                         var centroid = cellRect.Centroid();
-                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), -90)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle - 180)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
                     else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
                     {
                         var centroid = cellRect.Centroid();
-                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), 90)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
                 }

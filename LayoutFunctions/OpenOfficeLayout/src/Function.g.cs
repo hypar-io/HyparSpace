@@ -61,11 +61,11 @@ namespace OpenOfficeLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<OpenOfficeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs>(store, OpenOfficeLayout.Execute);
+            var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs> (store, OpenOfficeLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
