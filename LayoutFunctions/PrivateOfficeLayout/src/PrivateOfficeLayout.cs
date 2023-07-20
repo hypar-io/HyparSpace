@@ -17,7 +17,9 @@ namespace PrivateOfficeLayout
 
         private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
 
-        // Map between the layout and the number of seats it lays out
+        /// <summary>
+        /// Map between the layout and the number of seats it lays out
+        /// </summary>
         private static Dictionary<string, int> _configSeats = new Dictionary<string, int>()
         {
             ["Configuration A"] = 9,
