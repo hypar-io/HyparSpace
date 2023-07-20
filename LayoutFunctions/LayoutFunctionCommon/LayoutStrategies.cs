@@ -9,6 +9,13 @@ using System.IO;
 using System.Linq;
 namespace LayoutFunctionCommon
 {
+    public class LayoutInstantiated
+    {
+        public ComponentInstance Instance { get; set; }
+        public ContentConfiguration Config { get; set; }
+        public string ConfigName { get; internal set; }
+    }
+
     public static class LayoutStrategies
     {
         /// <summary>
@@ -20,30 +27,30 @@ namespace LayoutFunctionCommon
         /// <param name="rectangle">The more-or-less rectangular polygon to fill</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public static ComponentInstance InstantiateLayoutByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        public static LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
-            ContentConfiguration selectedConfig = null;
+            LayoutInstantiated layoutInstantiated = new LayoutInstantiated();
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             foreach (var key in orderedKeys)
             {
                 var config = configs[key];
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
-                    selectedConfig = config;
+                    layoutInstantiated.Config = config;
+                    layoutInstantiated.ConfigName = key;
                     break;
                 }
             }
-            if (selectedConfig == null)
+            if (layoutInstantiated.Config == null)
             {
                 return null;
             }
-            var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
-            var rules = selectedConfig.Rules();
+            var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
+            var rules = layoutInstantiated.Config.Rules();
 
-            var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            var allPlacedInstances = instance.Instances;
-            return instance;
+            var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
+            layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+            return layoutInstantiated;
         }
 
         /// <summary>
@@ -53,7 +60,7 @@ namespace LayoutFunctionCommon
         /// <param name="width">The 2d grid cell to fill.</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public static ComponentInstance InstantiateLayoutByFit(SpaceConfiguration configs, Grid2d cell, Transform xform)
+        public static LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, Grid2d cell, Transform xform)
         {
             var rect = cell.GetCellGeometry() as Polygon;
             var segs = rect.Segments();
@@ -135,7 +142,7 @@ namespace LayoutFunctionCommon
             return levelVolumes;
         }
 
-        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json") where TLevelElements : Element, ILevelElements where TSpaceBoundary : ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json", Func<LayoutInstantiated, int> countSeats = null) where TLevelElements : Element, ILevelElements where TSpaceBoundary : ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
         {
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
@@ -164,6 +171,7 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
+                    var seatsCount = 0;
                     var success = false;
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
@@ -184,10 +192,15 @@ namespace LayoutFunctionCommon
                             if (layout != null)
                             {
                                 success = true;
-                                SetLevelVolume(layout, levelVolume?.Id);
+                                SetLevelVolume(layout.Instance, levelVolume?.Id);
 
                                 wallCandidateLines.AddRange(WallCandidates);
-                                outputModel.AddElement(layout);
+                                outputModel.AddElement(layout.Instance);
+
+                                if (countSeats != null)
+                                {
+                                    seatsCount += countSeats(layout);
+                                }
                             }
                             else if (configs.Count == 0)
                             {
@@ -200,6 +213,11 @@ namespace LayoutFunctionCommon
                         {
                             break;
                         }
+                    }
+                    
+                    if (countSeats != null)
+                    {
+                        outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                     }
                 }
 

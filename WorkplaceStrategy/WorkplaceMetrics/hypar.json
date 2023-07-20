@@ -47,6 +47,21 @@
       "optional": true
     },
     {
+      "autohide": false,
+      "name": "Lounge Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Pantry Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Reception Layout",
+      "optional": true
+    },
+    {
       "name": "Conceptual Mass",
       "optional": true
     },
@@ -63,10 +78,12 @@
     "type": "object",
     "properties": {
       "Calculation Mode": {
+        "description": "“Headcount” is a sum of the headcount of each space.\n“Fixed sharing ratio” will multiply a ratio value by the sum of the number of desks in the spaces.\n“Fixed headcount” will allow you to manually type in a number to use as your overall headcount and ignore headcount on individual spaces.",
         "default": "Fixed Headcount",
         "type": "string",
         "$hyparOrder": 0,
         "enum": [
+          "Headcount",
           "Fixed Headcount",
           "Fixed Sharing Ratio"
         ]
@@ -101,7 +118,7 @@
         "minimum": 1
       },
       "USF Exclusions": {
-        "description": "Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.",
+        "description": "Exclude regions from floor area calculations such as elevator shafts and stairwells.",
         "default": [],
         "type": "array",
         "$hyparOrder": 3,
@@ -112,8 +129,86 @@
       }
     }
   },
+  "messages": {
+    "en": {
+      "input_schema": {
+        "properties": {
+          "Total Headcount": {
+            "name": "Headcount"
+          },
+          "USF Exclusions": {
+            "name": "Define Area Exclusions"
+          }
+        }
+      },
+      "overrides": {
+        "Settings": {
+          "schema": {
+            "Usable Area": {
+              "name": "Floor Area"
+            }
+          }
+        }
+      },
+      "outputs": [
+        {
+          "name": "Floor Area",
+          "description": "Floor area of the project."
+        },
+        {
+          "name": "Area per Headcount",
+          "description": "Floor area per headcount."
+        },
+        {
+          "name": "Desk Count",
+          "description": "Number of open office desks."
+        },
+        {
+          "name": "Meeting Room Seats",
+          "description": "Number of seats in meeting rooms."
+        },
+        {
+          "name": "Classroom Seats",
+          "description": "Number of classroom seats."
+        },
+        {
+          "name": "Phone Booths",
+          "description": "Number of phone booths."
+        },
+        {
+          "name": "Collaboration Seats",
+          "description": "Seats in open collaboration areas."
+        },
+        {
+          "name": "Headcount",
+          "description": "Number of people accommodated."
+        },
+        {
+          "name": "Area per Desk",
+          "description": "Floor area per desk."
+        },
+        {
+          "name": "Desk Sharing Ratio",
+          "description": "Headcount per desk."
+        },
+        {
+          "name": "Meeting Room Ratio",
+          "description": "Headcount per meeting room."
+        },
+        {
+          "name": "Private Office Count",
+          "description": "Number of private offices."
+        },
+        {
+          "name": "Circulation / USF Ratio",
+          "description": "Ratio of circulation area to floor area."
+        }
+      ]
+    }
+  },
   "overrides": {
     "Settings": {
+      "$hyparOrder": 0,
       "context": "[*discriminator=Elements.MetricsSettings]",
       "identity": {
         "Name": {
@@ -121,15 +216,35 @@
         }
       },
       "schema": {
-        "Rentable Area": {
-          "description": "Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.",
-          "type": "number",
-          "$hyparUnitType": "area"
-        },
         "Usable Area": {
           "description": "Adjust the Usable Area for calculations + display.",
           "type": "number",
           "$hyparUnitType": "area"
+        }
+      }
+    },
+    "Space Metrics": {
+      "$hyparOrder": 1,
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Seats": {
+          "type": "number"
+        },
+        "Headcount": {
+          "type": "number"
+        },
+        "Desks": {
+          "type": "number"
+        },
+        "Collaboration Seats": {
+          "type": "number"
         }
       }
     }
@@ -143,20 +258,8 @@
     },
     {
       "unit_type": "area",
-      "name": "Total Rentable Floor Area",
-      "description": "The total rentable floor area of the project.",
-      "type": "number"
-    },
-    {
-      "unit_type": "area",
       "name": "Area per Person",
       "description": "The usable floor area per person.",
-      "type": "number"
-    },
-    {
-      "unit_type": "area",
-      "name": "Rentable Area per Person",
-      "description": "The rentable floor area per person.",
       "type": "number"
     },
     {
@@ -202,12 +305,6 @@
       "type": "number"
     },
     {
-      "unit_type": "area",
-      "name": "Rentable Area per Desk",
-      "description": "The rentable floor area per desk.",
-      "type": "number"
-    },
-    {
       "unit_type": "none",
       "name": "Desk Sharing Ratio",
       "description": "How many people are there for each desk?",
@@ -230,16 +327,10 @@
       "description": "The ratio of circulation area to usable floor area.",
       "type": "number",
       "unit_type": "ratio"
-    },
-    {
-      "name": "Circulation / RSF Ratio",
-      "description": "The ratio of circulation area to rentable floor area.",
-      "type": "number",
-      "unit_type": "ratio"
     }
   ],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/WorkpointCount",
+    "https://prod-api.hypar.io/schemas/SpaceMetric.json",
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/AreaTally",
     "https://prod-api.hypar.io/schemas/LevelVolume",

@@ -71,6 +71,7 @@ namespace OpenCollaborationLayout
 
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
                     Line orientationGuideEdge = FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
@@ -91,7 +92,7 @@ namespace OpenCollaborationLayout
                             var (instance, count) = InstantiateLayout(configs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
                             output.Model.AddElement(instance);
-                            totalCountableSeats += count;
+                            seatsCount += count;
                         }
                         else if (trimmedGeo.Length > 0)
                         {
@@ -104,7 +105,7 @@ namespace OpenCollaborationLayout
                                 var (instance, count) = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
                                 LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
                                 output.Model.AddElement(instance);
-                                totalCountableSeats += count;
+                                seatsCount += count;
                             }
                             catch (Exception e)
                             {
@@ -113,9 +114,11 @@ namespace OpenCollaborationLayout
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                         }
                     }
+                    
+                    totalCountableSeats += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, seatsCount));
                 }
             }
-            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Collaboration seat" });
             output.CollaborationSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;

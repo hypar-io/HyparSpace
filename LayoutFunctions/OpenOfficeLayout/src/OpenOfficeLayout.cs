@@ -113,6 +113,7 @@ namespace OpenOfficeLayout
 
                 foreach (var ob in officeBoundaries)
                 {
+                    var seatsCount = 0;
                     var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, Utilities.GetStringValueFromEnum(input.DeskType));
                     output.Model.AddElement(proxy);
                     var isCustom = defaultDeskTypeName == "Custom";
@@ -185,7 +186,7 @@ namespace OpenOfficeLayout
                             }
                             output.Model.AddElements(desks);
 
-                            totalDeskCount += deskCount;
+                            seatsCount += deskCount;
                             foreach (var profile in collabProfiles)
                             {
                                 var sb = SpaceBoundary.Make(profile, "Open Collaboration", ob.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
@@ -199,13 +200,14 @@ namespace OpenOfficeLayout
                             output.Warnings.Add($"Area skipped: Caught exception in desk layout: \"{e.Message}.");
                         }
                     }
+
+                    totalDeskCount += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(ob.Id, seatsCount, seatsCount, seatsCount, 0));
                 }
             }
 
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
 
-
-            output.Model.AddElement(new WorkpointCount() { Count = totalDeskCount, Type = "Desk" });
             output.TotalDeskCount = totalDeskCount;
             return output;
         }

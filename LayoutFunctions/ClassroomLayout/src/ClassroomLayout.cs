@@ -70,6 +70,7 @@ namespace ClassroomLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
                     var levelInvertedTransform = levelVolume.Transform.Inverted();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
@@ -124,7 +125,7 @@ namespace ClassroomLayout
                                     }
                                     if (trimmedShape.Area().ApproximatelyEquals(deskConfig.Width * deskConfig.Depth, 0.1))
                                     {
-                                        totalCountableSeats += seatsAtDesk;
+                                        seatsCount += seatsAtDesk;
                                         foreach (var contentItem in deskConfig.ContentItems)
                                         {
                                             var instance = contentItem.ContentElement.CreateInstance(
@@ -145,6 +146,9 @@ namespace ClassroomLayout
                         {
                         }
                     }
+
+                    totalCountableSeats += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
@@ -157,7 +161,6 @@ namespace ClassroomLayout
                     });
                 }
             }
-            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });
             output.TotalCountOfDeskSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
