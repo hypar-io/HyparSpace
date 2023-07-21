@@ -67,7 +67,6 @@
     "https://schemas.hypar.io/LevelElements.json",
     "https://schemas.hypar.io/CirculationSegment.json",
     "https://schemas.hypar.io/LevelVolume.json",
-    "https://schemas.hypar.io/RoomTally.json",
-    "https://schemas.hypar.io/WorkpointCount.json"
+    "https://schemas.hypar.io/RoomTally.json"
   ]
 }

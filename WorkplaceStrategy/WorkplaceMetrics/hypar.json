@@ -384,7 +384,6 @@
     }
   ],
   "element_types": [
-    "https://schemas.hypar.io/WorkpointCount.json",
     "https://schemas.hypar.io/SpaceBoundary.json",
     "https://schemas.hypar.io/AreaTally.json",
     "https://schemas.hypar.io/LevelVolume.json",
