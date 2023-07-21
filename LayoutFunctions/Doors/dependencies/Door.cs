@@ -32,10 +32,10 @@ namespace Elements
         public override bool TryToGraphicsBuffers(out List<GraphicsBuffers> graphicsBuffers, out string id, out glTFLoader.Schema.MeshPrimitive.ModeEnum? mode)
         {
             List<Vector3> points = new List<Vector3>();
-            points.AddRange(DoorSchema(true, false, 90));
+            points.AddRange(CollectSchematicVisualizationLines(true, false, 90));
             if( Type == DoorType.Double)
             {
-                points.AddRange(DoorSchema(false, false, 90));
+                points.AddRange(CollectSchematicVisualizationLines(false, false, 90));
             }
 
             GraphicsBuffers buffer = new GraphicsBuffers();
@@ -54,7 +54,7 @@ namespace Elements
             return true;
         }
 
-        private List<Vector3> DoorSchema(bool leftSide, bool inside, double angle)
+        private List<Vector3> CollectSchematicVisualizationLines(bool leftSide, bool inside, double angle)
         {
             var doorWidth = Type == DoorType.Double ? ClearWidth / 2 : ClearWidth;
 
@@ -74,7 +74,6 @@ namespace Elements
             // Rotate silhouette is it's need to be drawn as partially open.
             if (!angle.ApproximatelyEquals(90))
             {
-                Transform t = new Transform();
                 double rotation = 90 - angle;
                 if (!leftSide)
                 {
@@ -86,6 +85,7 @@ namespace Elements
                     rotation = -rotation;
                 }
 
+                Transform t = new Transform();
                 t.RotateAboutPoint(c0, Vector3.ZAxis, rotation);
                 c1 = t.OfPoint(c1);
                 c2 = t.OfPoint(c2);
