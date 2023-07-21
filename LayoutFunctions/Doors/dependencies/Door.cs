@@ -31,9 +31,8 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var doorWidth = WidthWithoutFrame(ClearWidth, Type);
-            Vector3 left = Vector3.XAxis * doorWidth / 2;
-            Vector3 right = Vector3.XAxis.Negate() * doorWidth / 2;
+            Vector3 left = Vector3.XAxis * ClearWidth / 2;
+            Vector3 right = Vector3.XAxis.Negate() * ClearWidth / 2;
 
             var doorPolygon = new Polygon(new List<Vector3>() {
                 left + Vector3.YAxis * DOOR_THICKNESS, 
@@ -74,9 +73,9 @@ namespace Elements
             switch (type)
             {
                 case DoorType.Single:
-                    return internalWidth + DOOR_FRAME_WIDTH * 2;
+                    return internalWidth;
                 case DoorType.Double:
-                    return internalWidth * 2 + DOOR_FRAME_WIDTH * 2;
+                    return internalWidth * 2;
             }
             return 0;
         }
