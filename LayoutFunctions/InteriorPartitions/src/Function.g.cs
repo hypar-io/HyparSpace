@@ -61,11 +61,11 @@ namespace InteriorPartitions
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<InteriorPartitionsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<InteriorPartitionsInputs,InteriorPartitionsOutputs>(store, InteriorPartitions.Execute);
+            var l = new InvocationWrapper<InteriorPartitionsInputs,InteriorPartitionsOutputs> (store, InteriorPartitions.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

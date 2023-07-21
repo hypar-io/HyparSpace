@@ -55,6 +55,25 @@
         "multipleOf": 0.01,
         "default": 1.2192,
         "$hyparUnitType": "length"
+      },
+      "Clearance": {
+        "type": "number",
+        "description": "The clearance around the perimeter of the Data Hall.",
+        "minimum": 0.0,
+        "maximum": 4,
+        "multipleOf": 0.01,
+        "default": 1.2192,
+        "$hyparUnitType": "length"
+      },
+      "Flip Direction": {
+        "type": "boolean",
+        "description": "Flip the direction of the layout.",
+        "default": false
+      },
+      "Swap Cold/Hot Pattern": {
+        "type": "boolean",
+        "description": "Swap the cold/hot aisle pattern.",
+        "default": false
       }
     }
   },
