@@ -120,6 +120,14 @@
                     "type": "boolean",
                     "description": "Should partitions be added around offices?",
                     "default": true
+                },
+                "H Flip Layout": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "V Flip Layout": {
+                    "type": "boolean",
+                    "default": false
                 }
             }
         }
