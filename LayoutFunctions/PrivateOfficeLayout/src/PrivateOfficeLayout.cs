@@ -119,7 +119,7 @@ namespace PrivateOfficeLayout
                             var trimmedGeo = cell.GetTrimmedCellGeometry();
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
-                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
+                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), config.Value.HFlipLayout, config.Value.VFlipLayout, out var seats);
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 privateOfficeCount++;
@@ -133,7 +133,7 @@ namespace PrivateOfficeLayout
                                 var areaRatio = cinchedPoly.Area() / rect.Area();
                                 if (areaRatio > 0.7)
                                 {
-                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
+                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), config.Value.HFlipLayout, config.Value.VFlipLayout, out var seats);
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
                                     privateOfficeCount++;
@@ -288,7 +288,7 @@ namespace PrivateOfficeLayout
             }
         }
 
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, out int seatsCount)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, bool hFlip, bool vFlip, out int seatsCount)
         {
             seatsCount = 0;
             ContentConfiguration selectedConfig = null;
@@ -307,12 +307,51 @@ namespace PrivateOfficeLayout
             {
                 return null;
             }
+
+            if (hFlip)
+            {
+                ApplyFlip(selectedConfig, true);
+            }
+            if (vFlip)
+            {
+                ApplyFlip(selectedConfig, false);
+            }
+
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             return instance;
+        }
+
+        private static void ApplyFlip(ContentConfiguration config, bool isHorizontalFlip)
+        {
+            var min = config.CellBoundary.Min;
+            var max = config.CellBoundary.Max;
+            foreach (var item in config.ContentItems)
+            {
+                // Mirror origin
+                var newOrigin = item.Transform.Origin;
+                newOrigin.Y = max.Y - (item.Transform.Origin.Y - min.Y);
+
+                // Mirror directional
+                var mirroredY = item.Transform.YAxis;
+                mirroredY.Y = -mirroredY.Y;
+                item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(mirroredY));
+
+                // Move origin relative to the width of the object
+                newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
+                item.Transform.Matrix.SetTranslation(newOrigin);
+
+                if (!isHorizontalFlip)
+                {
+                    item.Transform.RotateAboutPoint(
+                        (config.CellBoundary.Min + config.CellBoundary.Max) / 2,
+                        Vector3.ZAxis,
+                        180);
+                }
+            }
         }
 
         private static Dictionary<Guid, SpaceSettingsOverride> GetOverridesByBoundaryId(PrivateOfficeLayoutInputs input, IEnumerable<LevelElements> levels)
@@ -372,7 +411,9 @@ namespace PrivateOfficeLayout
                                 new SpaceSettingsValueOfficeSizing(
                                     input.OfficeSizing.AutomateOfficeSubdivisions,
                                     input.OfficeSizing.OfficeSize),
-                                    input.CreateWalls
+                                    input.CreateWalls,
+                                    false,
+                                    false
                             )
                     );
                 overridesById.Add(boundaryProxy.ElementId, config);

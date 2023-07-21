@@ -5,6 +5,7 @@
 
 using Elements;
 using Xunit;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using Elements.Serialization.glTF;
@@ -16,36 +17,25 @@ namespace PrivateOfficeLayout
         [Fact]
         public void TestExecute()
         {
-            // GltfExtensions.GltfCachePath = "/Users/andrewheumann/Desktop/Test-disk-cache";
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Levels/09fa5ad7-f5e4-43a0-9e48-31319a4f59ec.json")) },
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PrivateOfficeLayout/test/Generated/PrivateOfficeLayoutTest/model_dependencies/Space Planning Zones/2475065a-1007-4aea-bf59-5e3807f92e1c.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"D:\Hypar\Forks\HyparSpace\LayoutFunctions\PrivateOfficeLayout\test\Generated\PrivateOfficeLayoutTest\model_dependencies\Space Planning Zones\923ef414-aa7e-4e66-896a-648fe116fcc2.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"D:\Hypar\Forks\HyparSpace\LayoutFunctions\PrivateOfficeLayout\test\Generated\PrivateOfficeLayoutTest\model_dependencies\Levels\65713094-e8bd-459b-a63d-3783f553c751.json")) }, 
+                {"Circulation", Model.FromJson(File.ReadAllText(@"D:\Hypar\Forks\HyparSpace\LayoutFunctions\PrivateOfficeLayout\test\Generated\PrivateOfficeLayoutTest\model_dependencies\Circulation\0372f950-053e-4c53-ad8a-aa1a941667eb.json")) }, 
             };
 
             var result = PrivateOfficeLayout.Execute(modelDependencies, input);
-            // result.Model.ToGlTF("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.gltf", false);
+            result.Model.ToGlTF("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.glb");
             File.WriteAllText("../../../Generated/PrivateOfficeLayoutTest/results/PrivateOfficeLayoutTest.json", result.Model.ToJson());
+
         }
 
         public PrivateOfficeLayoutInputs GetInput()
         {
-            var inputText = @"
-            {
-  ""model_input_keys"": {
-    ""Levels"": ""09fa5ad7-f5e4-43a0-9e48-31319a4f59ec_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
-    ""Space Planning Zones"": ""2475065a-1007-4aea-bf59-5e3807f92e1c_09b8407f-6c93-4741-ad6c-31288213f4f7_elements.zip""
-  },
-  ""Create Walls"": true,
-  ""Office Sizing"": {
-    ""Automate Office Subdivisions"": false,
-    ""Office Size"": 3.047999902464003
-  }
-}
-            ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PrivateOfficeLayoutInputs>(inputText);
+            var json = File.ReadAllText("../../../Generated/PrivateOfficeLayoutTest/inputs.json");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<PrivateOfficeLayoutInputs>(json);
         }
     }
 }
