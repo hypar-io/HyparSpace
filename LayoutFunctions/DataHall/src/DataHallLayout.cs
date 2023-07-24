@@ -98,7 +98,7 @@ namespace DataHallLayout
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
-                model.AddElements(floorGrid.ToModelCurves(room.Transform));
+                // model.AddElements(floorGrid.ToModelCurves(room.Transform));
 
                 double rackAngle = 0;
                 if (input.SwapColdHotPattern) rackAngle = 180;

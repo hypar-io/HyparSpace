@@ -1,0 +1,91 @@
+/{
+    "$schema": "https://hypar.io/Schemas/Function.json",
+    "id": "c8ec00d7-49da-48d1-a1ec-22db5d92ae8b",
+    "name": "Eric's Parking Lot",
+    "description": "The EricsParkingLot function.",
+    "language": "C#",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "ParkingLotWidth": {
+                "type": "number",
+                "description": "The Width of the parking Lot.",
+                "minimum": 0.0,
+                "maximum": 100.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 100
+            },
+            "ParkingLotLength": {
+                "type": "number",
+                "description": "The Length of the parking lot.",
+                "minimum": 0.0,
+                "maximum": 200.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 200
+            },
+            "StallWidth": {
+                "type": "number",
+                "description": "The Width of each parking stall.",
+                "minimum": 0.0,
+                "maximum": 200.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 200
+            },
+            "StallLength": {
+                "type": "number",
+                "description": "The Length of each parking stall.",
+                "minimum": 0.0,
+                "maximum": 200.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 200
+            },
+            "Rows": {
+                "type": "number",
+                "description": "Number of rows of parking stalls.",
+                "minimum": 0.0,
+                "maximum": 200.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 200
+            },
+            "Columns": {
+                "type": "number",
+                "description": "Number of columns of parking stalls.",
+                "minimum": 0.0,
+                "maximum": 200.0,
+                "multipleOf": 1.0,
+                "$hyparUnitType": "length",
+                "default": 200
+            }
+        }
+    },
+    "outputs": [
+        {
+            "name": "ParkingStalls",
+            "description": "List of parking stall positions.",
+            "type": "string",
+            "itemType": "object",
+            "properties": {
+                "X": {
+                    "type": "number"
+                },
+                "Y": {
+                    "type": "number"
+                },
+                "Width": {
+                    "type": "number"
+                },
+                "Length": {
+                    "type": "number"
+                }
+            }
+        }
+    ],
+    "repository_url": "https://github.com/hypar-io/function",
+    "last_updated": "0001-01-01T00:00:00",
+    "cli_version": "1.6.0"
+} //
