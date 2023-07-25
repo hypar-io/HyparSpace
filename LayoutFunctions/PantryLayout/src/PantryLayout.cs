@@ -19,7 +19,9 @@ namespace PantryLayout
             private static readonly string[] countableSeats = new[]
             {
                 "Steelcase - Seating - Nooi - Cafeteria Chair - Chair",
-                "Steelcase - Seating - Nooi - Stool - Bar Height"
+                "Steelcase - Seating - Nooi - Stool - Bar Height",
+                "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                "Steelcase Turnstone - Shortcut X Base - Stool - Chair"
             };
 
             protected override int CountSeats(LayoutInstantiated layout)

@@ -9,6 +9,7 @@ namespace LayoutFunctionCommon
 {
     public static class WallGeneration
     {
+        private const string wallCandidatePropertyName = "Wall Candidate";
         private static double mullionSize = 0.07;
         private static double doorWidth = 0.9;
         private static double doorHeight = 2.1;
@@ -212,7 +213,7 @@ namespace LayoutFunctionCommon
             return mullion;
         }
 
-        public static void GenerateWalls(Model model, List<(Line line, string type)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
+        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
         {
             if (debugMode)
             {
@@ -238,21 +239,26 @@ namespace LayoutFunctionCommon
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
             var mullion = CreateMullion(height);
-            foreach (var (line, type) in wallCandidateLines)
+            foreach (var (line, type, wallCandidateId) in wallCandidateLines)
             {
                 var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
 
                 if (type == "Solid")
                 {
-                    model.AddElement(new StandardWall(lineProjected, 0.2, height, wallMat, levelTransform));
+                    var wall = new StandardWall(lineProjected, 0.2, height, wallMat, levelTransform);
+                    wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
+                    model.AddElement(wall);
                 }
                 else if (type == "Partition")
                 {
-                    model.AddElement(new StandardWall(lineProjected, 0.1, height, wallMat, levelTransform));
+                    var wall = new StandardWall(lineProjected, 0.1, height, wallMat, levelTransform);
+                    wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
+                    model.AddElement(wall);
                 }
                 else if (type == "Glass")
                 {
                     var primaryWall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
+                    primaryWall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     model.AddElement(primaryWall);
                     var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
@@ -291,6 +297,7 @@ namespace LayoutFunctionCommon
                         var header = new Header(lineProjected, 0.2, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)));
                         header.AdditionalProperties["Wall"] = primaryWall.Id;
                         model.AddElement(header);
+                        header.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     }
                 }
             }
@@ -349,7 +356,7 @@ namespace LayoutFunctionCommon
                     end.Z = 0;
                     var comparisonSegmentProjected = new Line(start, end);
                     var dist = midpt.DistanceTo(comparisonSegmentProjected);
-                    if (dist < 0.3)
+                    if (dist < 0.3 + 1e-3)
                     {
                         adjacentToAny = true;
                         adjacentSegments.Add(edge);

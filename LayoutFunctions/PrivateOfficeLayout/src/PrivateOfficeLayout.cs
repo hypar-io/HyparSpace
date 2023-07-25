@@ -18,6 +18,19 @@ namespace PrivateOfficeLayout
         private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
 
         /// <summary>
+        /// Map between the layout and the number of seats it lays out
+        /// </summary>
+        private static Dictionary<string, int> _configSeats = new Dictionary<string, int>()
+        {
+            ["Configuration A"] = 9,
+            ["Configuration B"] = 4,
+            ["Configuration C"] = 3,
+            ["Configuration D"] = 2,
+            ["Configuration E"] = 2,
+            ["Configuration F"] = 2,
+        };
+
+        /// <summary>
         /// The PrivateOfficeLayout function.
         /// </summary>
         /// <param name="model">The input model.</param>
@@ -67,12 +80,10 @@ namespace PrivateOfficeLayout
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 var wallCandidateLines = new List<(Line line, string type)>();
-                if (lvl.Name.Equals("Level 5"))
-                {
-
-                }
                 foreach (var room in privateOfficeBoundaries)
                 {
+                    var seatsCount = 0;
+                    var privateOfficeCount = 0;
                     var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
                     var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
 
@@ -80,7 +91,7 @@ namespace PrivateOfficeLayout
                     {
                         WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
 
-                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume.Transform.Inverted());
+                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume?.Transform.Inverted() ?? new Transform());
                         var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
                         orientationTransform.Concatenate(relativeRoomTransform);
                         var boundaryCurves = new List<Polygon>();
@@ -108,10 +119,11 @@ namespace PrivateOfficeLayout
                             var trimmedGeo = cell.GetTrimmedCellGeometry();
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
-                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
+                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalPrivateOfficeCount++;
+                                privateOfficeCount++;
+                                seatsCount += seats;
                             }
                             else if (trimmedGeo.Count() > 0)
                             {
@@ -121,10 +133,11 @@ namespace PrivateOfficeLayout
                                 var areaRatio = cinchedPoly.Area() / rect.Area();
                                 if (areaRatio > 0.7)
                                 {
-                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
+                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
-                                    totalPrivateOfficeCount++;
+                                    privateOfficeCount++;
+                                    seatsCount += seats;
                                 }
                             }
                         }
@@ -134,6 +147,9 @@ namespace PrivateOfficeLayout
                             wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
                         }
                     }
+
+                    totalPrivateOfficeCount += privateOfficeCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, privateOfficeCount, 0, 0));
                 }
 
                 var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
@@ -144,7 +160,6 @@ namespace PrivateOfficeLayout
                     LevelTransform = levelVolume?.Transform ?? new Transform()
                 });
             }
-            output.Model.AddElement(new WorkpointCount() { Type = "Private Office", Count = totalPrivateOfficeCount });
             output.PrivateOfficeCount = totalPrivateOfficeCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             output.Model.AddElements(proxies);
@@ -153,7 +168,7 @@ namespace PrivateOfficeLayout
 
         private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<(Line line, string type)> wallCandidateLines, SpaceSettingsOverride config)
         {
-            var levelInvertedTransform = levelVolume.Transform.Inverted();
+            var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
             if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
             {
                 var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
@@ -273,8 +288,9 @@ namespace PrivateOfficeLayout
             }
         }
 
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, out int seatsCount)
         {
+            seatsCount = 0;
             ContentConfiguration selectedConfig = null;
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             foreach (var key in orderedKeys)
@@ -283,6 +299,7 @@ namespace PrivateOfficeLayout
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
                     selectedConfig = config;
+                    seatsCount += _configSeats[key];
                     break;
                 }
             }

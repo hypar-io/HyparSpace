@@ -42,7 +42,6 @@ namespace OpenCollaborationLayout
             {
                 varietyCounter = 0;
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
-                result.OutputModel.AddElement(new WorkpointCount() { Count = result.SeatsCount, Type = "Collaboration seat" });
                 return result;
             }
 

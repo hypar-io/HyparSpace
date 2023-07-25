@@ -14,3 +14,7 @@ Create custom space types.
 |Output Name|Type|Description|
 |---|---|---|
 
+
+<br>
+
+## Additional Information

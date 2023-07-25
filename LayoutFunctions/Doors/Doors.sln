@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doors", "src\Doors.csproj", "{826B76C0-5AAC-40EE-A0C8-D5F42BF23140}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doors.Dependencies", "dependencies\Doors.Dependencies.csproj", "{A8FCBFE7-A65C-4247-A611-8DDCCECEDDCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doors.Tests", "test\Doors.Tests.csproj", "{6095D084-E39A-48B3-A00F-3B8E7E96B2F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{826B76C0-5AAC-40EE-A0C8-D5F42BF23140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826B76C0-5AAC-40EE-A0C8-D5F42BF23140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826B76C0-5AAC-40EE-A0C8-D5F42BF23140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826B76C0-5AAC-40EE-A0C8-D5F42BF23140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FCBFE7-A65C-4247-A611-8DDCCECEDDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FCBFE7-A65C-4247-A611-8DDCCECEDDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FCBFE7-A65C-4247-A611-8DDCCECEDDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FCBFE7-A65C-4247-A611-8DDCCECEDDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6095D084-E39A-48B3-A00F-3B8E7E96B2F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6095D084-E39A-48B3-A00F-3B8E7E96B2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6095D084-E39A-48B3-A00F-3B8E7E96B2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6095D084-E39A-48B3-A00F-3B8E7E96B2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -10,13 +10,6 @@ using System.Linq;
 
 namespace LayoutFunctionCommon
 {
-    public class LayoutInstantiated
-    {
-        public ComponentInstance Instance { get; set; }
-        public ContentConfiguration Config { get; set; }
-        public string ConfigName { get; internal set; }
-    }
-
     public class LayoutGenerationResult
     {
         public Model OutputModel { get; set; }
@@ -38,7 +31,7 @@ namespace LayoutFunctionCommon
         {
 
             var outputModel = new Model();
-            var seatsCount = 0;
+            var totalSeats = 0;
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = GetLevels(inputModels, spacePlanningZones);
@@ -57,6 +50,7 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
+                    var seatsCount = 0;
                     var success = false;
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
@@ -95,6 +89,9 @@ namespace LayoutFunctionCommon
                             break;
                         }
                     }
+
+                    totalSeats += seatsCount;
+                    outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
 
                 double height = levelVolume?.Height ?? 3;
@@ -114,7 +111,7 @@ namespace LayoutFunctionCommon
 
             return new LayoutGenerationResult
             {
-                SeatsCount = seatsCount,
+                SeatsCount = totalSeats,
                 OutputModel = outputModel
             };
         }
@@ -174,7 +171,7 @@ namespace LayoutFunctionCommon
                         foreach (var segment in largestTrimmedShape.Segments())
                         {
                             vertices.Add(segment.Start);
-                            vertices.Add(segment.PointAt(0.5));
+                            vertices.Add(segment.Mid());
                         }
                         largestTrimmedShape = new Polygon(vertices);
                     }

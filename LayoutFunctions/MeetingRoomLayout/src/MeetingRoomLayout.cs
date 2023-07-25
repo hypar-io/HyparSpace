@@ -41,7 +41,6 @@ namespace MeetingRoomLayout
                 seatsTable = new Dictionary<string, RoomTally>();
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
                 result.OutputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
-                result.OutputModel.AddElement(new WorkpointCount(result.SeatsCount, "Meeting Room Seat"));
                 return result;
             }
         }

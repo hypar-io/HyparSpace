@@ -1,0 +1,22 @@
+name: Build on PR
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: repos/HyparSpace
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: |
+            6.0.x
+      - run: dotnet tool install -g hypar.cli --version 1.6.0
+      - run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
+      - run:
+          cd repos/HyparSpace;
+          bash build-all.sh;

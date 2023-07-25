@@ -23,22 +23,10 @@ namespace WorkplaceMetrics
 		public double TotalUsableFloorArea {get; set;}
 
 		/// <summary>
-		/// The total rentable floor area of the project.
-		/// </summary>
-		[JsonProperty("Total Rentable Floor Area")]
-		public double TotalRentableFloorArea {get; set;}
-
-		/// <summary>
 		/// The usable floor area per person.
 		/// </summary>
 		[JsonProperty("Area per Person")]
 		public double AreaPerPerson {get; set;}
-
-		/// <summary>
-		/// The rentable floor area per person.
-		/// </summary>
-		[JsonProperty("Rentable Area per Person")]
-		public double RentableAreaPerPerson {get; set;}
 
 		/// <summary>
 		/// The total number of desks.
@@ -83,12 +71,6 @@ namespace WorkplaceMetrics
 		public double AreaPerDesk {get; set;}
 
 		/// <summary>
-		/// The rentable floor area per desk.
-		/// </summary>
-		[JsonProperty("Rentable Area per Desk")]
-		public double RentableAreaPerDesk {get; set;}
-
-		/// <summary>
 		/// How many people are there for each desk?
 		/// </summary>
 		[JsonProperty("Desk Sharing Ratio")]
@@ -105,6 +87,12 @@ namespace WorkplaceMetrics
 		/// </summary>
 		[JsonProperty("Private Office Count")]
 		public double PrivateOfficeCount {get; set;}
+
+		/// <summary>
+		/// The ratio of circulation area to usable floor area.
+		/// </summary>
+		[JsonProperty("Circulation / USF Ratio")]
+		public double CirculationUSFRatio {get; set;}
 
 
 
@@ -123,12 +111,10 @@ namespace WorkplaceMetrics
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double totalRentableFloorArea, double areaPerPerson, double rentableAreaPerPerson, double totalDeskCount, double meetingRoomSeats, double classroomSeats, double phoneBooths, double collaborationSeats, double totalHeadcount, double areaPerDesk, double rentableAreaPerDesk, double deskSharingRatio, double meetingRoomRatio, double privateOfficeCount): base()
+        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double areaPerPerson, double totalDeskCount, double meetingRoomSeats, double classroomSeats, double phoneBooths, double collaborationSeats, double totalHeadcount, double areaPerDesk, double deskSharingRatio, double meetingRoomRatio, double privateOfficeCount, double circulationUSFRatio): base()
         {
 			this.TotalUsableFloorArea = totalUsableFloorArea;
-			this.TotalRentableFloorArea = totalRentableFloorArea;
 			this.AreaPerPerson = areaPerPerson;
-			this.RentableAreaPerPerson = rentableAreaPerPerson;
 			this.TotalDeskCount = totalDeskCount;
 			this.MeetingRoomSeats = meetingRoomSeats;
 			this.ClassroomSeats = classroomSeats;
@@ -136,10 +122,10 @@ namespace WorkplaceMetrics
 			this.CollaborationSeats = collaborationSeats;
 			this.TotalHeadcount = totalHeadcount;
 			this.AreaPerDesk = areaPerDesk;
-			this.RentableAreaPerDesk = rentableAreaPerDesk;
 			this.DeskSharingRatio = deskSharingRatio;
 			this.MeetingRoomRatio = meetingRoomRatio;
 			this.PrivateOfficeCount = privateOfficeCount;
+			this.CirculationUSFRatio = circulationUSFRatio;
 
 		}
 

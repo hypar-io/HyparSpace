@@ -61,11 +61,11 @@ namespace LoungeLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<LoungeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<LoungeLayoutInputs,LoungeLayoutOutputs>(store, LoungeLayout.Execute);
+            var l = new InvocationWrapper<LoungeLayoutInputs,LoungeLayoutOutputs> (store, LoungeLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
