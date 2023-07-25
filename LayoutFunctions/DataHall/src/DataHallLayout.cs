@@ -159,6 +159,7 @@ namespace DataHallLayout
                     ml.Lines.Add(new Line(points[i], points[i + 1]));
                 }
             }
+            ml.SetSelectable(false);
             return ml;
         }
     }
