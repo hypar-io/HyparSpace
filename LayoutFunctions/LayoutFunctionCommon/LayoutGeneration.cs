@@ -35,12 +35,12 @@ namespace LayoutFunctionCommon
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = GetLevels(inputModels, spacePlanningZones);
-            var levelVolumes = GetLevelVolumes(inputModels);
+            var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = DeserializeConfigJson(configJson);
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
+                var corridors = lvl.Elements.OfType<TCirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
@@ -237,6 +237,12 @@ namespace LayoutFunctionCommon
             return selectedConfigPair;
         }
 
+        /// <summary>
+        /// Gets levels. It also assigns the relevant circulation segments to those levels.
+        /// </summary>
+        /// <param name="inputModels"></param>
+        /// <param name="spacePlanningZones"></param>
+        /// <returns></returns>
         protected virtual IEnumerable<TLevelElements> GetLevels(Dictionary<string, Model> inputModels, Model spacePlanningZones)
         {
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
@@ -256,20 +262,6 @@ namespace LayoutFunctionCommon
         protected virtual int CountSeats(LayoutInstantiated layoutInstantiated)
         {
             return 0;
-        }
-
-        private static List<TLevelVolume> GetLevelVolumes(Dictionary<string, Model> inputModels)
-        {
-            var levelVolumes = new List<TLevelVolume>();
-            if (inputModels.TryGetValue("Levels", out var levelsModel))
-            {
-                levelVolumes.AddRange(levelsModel.AllElementsAssignableFromType<TLevelVolume>());
-            }
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
-            {
-                levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
-            }
-            return levelVolumes;
         }
 
         private static void SetLevelVolume(ComponentInstance componentInstance, Guid? levelVolumeId)

@@ -61,11 +61,11 @@ namespace PantryLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            { 
+            {
                 this.store = new S3ModelStore<PantryLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<PantryLayoutInputs,PantryLayoutOutputs> (store, PantryLayout.Execute);
+            var l = new InvocationWrapper<PantryLayoutInputs,PantryLayoutOutputs>(store, PantryLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
