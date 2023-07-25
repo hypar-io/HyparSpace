@@ -98,7 +98,7 @@ namespace DataHallLayout
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
-                model.AddElements(floorGrid.ToModelCurves(room.Transform));
+                model.AddElement(ToModelLines(floorGrid, room.Transform));
 
                 double rackAngle = 0;
                 if (input.SwapColdHotPattern) rackAngle = 180;
@@ -140,6 +140,26 @@ namespace DataHallLayout
             output.Model = model;
             output.Warnings.AddRange(warnings);
             return output;
+        }
+
+        private static ModelLines ToModelLines(Grid2d grid, Transform transform)
+        {
+            var boundary = grid.GetTrimmedCellGeometry();
+            var uLines = grid.GetCellSeparators(GridDirection.U, true);
+            var vLines = grid.GetCellSeparators(GridDirection.V, true);
+            var curves = boundary.Concat(uLines).Concat(vLines).OfType<BoundedCurve>();
+
+            ModelLines ml = new ModelLines(transform: transform);
+            foreach (var b in boundary.Concat(curves))
+            {
+                var parameters = b.GetSubdivisionParameters();
+                var points = parameters.Select(p => b.PointAt(p)).ToList();
+                for (int i = 0; i < points.Count - 1; i++)
+                {
+                    ml.Lines.Add(new Line(points[i], points[i + 1]));
+                }
+            }
+            return ml;
         }
     }
 }
