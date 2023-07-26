@@ -23,7 +23,11 @@ namespace MeetingRoomLayout
                 int seatsCount = 0;
                 if (layout != null)
                 {
-                    configCapacity.TryGetValue(layout.ConfigName, out seatsCount);
+                    if (configInfos.TryGetValue(layout.ConfigName, out var configInfo))
+                    {
+                        seatsCount = configInfo.capacity;
+                    }
+
                     if (seatsTable.ContainsKey(layout.ConfigName))
                     {
                         seatsTable[layout.ConfigName].SeatsCount += seatsCount;
@@ -42,6 +46,18 @@ namespace MeetingRoomLayout
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
                 result.OutputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
                 return result;
+            }
+
+            protected override IEnumerable<KeyValuePair<string, ContentConfiguration>> OrderConfigs(Dictionary<string, ContentConfiguration> configs)
+            {
+                return configs.OrderBy(i =>
+                {
+                    if (!configInfos.ContainsKey(i.Key))
+                    {
+                        return int.MaxValue;
+                    }
+                    return configInfos[i.Key].orderIndex;
+                });
             }
         }
 
@@ -64,17 +80,17 @@ namespace MeetingRoomLayout
             return output;
         }
 
-        private static readonly Dictionary<string, int> configCapacity = new()
+        private static readonly Dictionary<string, (int capacity, int orderIndex)> configInfos = new()
         {
-            {"22P", 22},
-            {"20P", 20},
-            {"14P", 14},
-            {"13P", 13},
-            {"8P", 8},
-            {"6P-A", 6},
-            {"6P-B", 6},
-            {"4P-A", 4},
-            {"4P-B", 4}
+            {"22P", (22, 1)},
+            {"20P", (20, 2)},
+            {"14P", (14, 3)},
+            {"13P", (13, 4)},
+            {"8P", (8, 5)},
+            {"6P-A", (6, 6)},
+            {"6P-B", (6, 7)},
+            {"4P-A", (4, 8)},
+            {"4P-B", (4, 9)}
         };
     }
 

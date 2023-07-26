@@ -16,6 +16,8 @@ namespace LayoutFunctionCommon
         public int SeatsCount { get; set; }
     }
 
+    public record struct ConfigInfo(string ConfigName, ContentConfiguration Config, Polygon Rectangle);
+
     public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>
         where TLevelElements : Element, ILevelElements
         where TSpaceBoundary : ISpaceBoundary
@@ -51,43 +53,41 @@ namespace LayoutFunctionCommon
                 foreach (var room in roomBoundaries)
                 {
                     var seatsCount = 0;
-                    var success = false;
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+                    var boundaryCurves = new List<Polygon>
+                    {
+                        spaceBoundary.Perimeter
+                    };
+                    boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
+                    var possibleConfigs = new List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)>();
                     foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
                     {
                         var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction(), Vector3.ZAxis);
-                        var boundaryCurves = new List<Polygon>
-                        {
-                            spaceBoundary.Perimeter
-                        };
-                        boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         foreach (var cell in grid.GetCells())
                         {
-                            var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
-                            if (layout != null)
+                            var config = FindConfigByFit(configs, cell);
+                            if (config != null)
                             {
-                                success = true;
-                                SetLevelVolume(layout.Instance, levelVolume?.Id);
-
-                                wallCandidateLines.AddRange(WallCandidates);
-                                outputModel.AddElement(layout.Instance);
-                                seatsCount += CountSeats(layout);
-                            }
-                            else if (configs.Count == 0)
-                            {
-                                success = true;
-                                wallCandidateLines.AddRange(WallCandidates);
+                                possibleConfigs.Add((config.Value, WallCandidates));
                             }
                         }
+                    }
+                    if (possibleConfigs.Any())
+                    {
+                        var (configInfo, wallCandidates) = SelectTheBestOfPossibleConfigs(possibleConfigs);
 
-                        if (success)
-                        {
-                            break;
-                        }
+                        var layout = InstantiateLayoutByFit(configInfo, room.Transform);
+                        SetLevelVolume(layout.Instance, levelVolume?.Id);
+                        wallCandidateLines.AddRange(wallCandidates);
+                        outputModel.AddElement(layout.Instance);
+                        seatsCount += CountSeats(layout);
+                    }
+                    else if (configs.Count == 0)
+                    {
+                        wallCandidateLines.AddRange(wallCandidateOptions.First().WallCandidates);
                     }
 
                     totalSeats += seatsCount;
@@ -125,19 +125,28 @@ namespace LayoutFunctionCommon
         /// <param name="rectangle">The more-or-less rectangular polygon to fill</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        public ConfigInfo? FindConfigByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle)
         {
             var selectedConfigPair = FindConfig(width, length, configs);
-            if (!selectedConfigPair.HasValue)
+            if (selectedConfigPair.HasValue)
+            {
+                return new ConfigInfo(selectedConfigPair?.Key, selectedConfigPair?.Value, rectangle);
+            }
+            return null;
+        }
+
+        public LayoutInstantiated InstantiateLayoutByFit(ConfigInfo? selectedConfigInfo, Transform xform)
+        {
+            if (!selectedConfigInfo.HasValue)
             {
                 return null;
             }
-            var selectedConfig = selectedConfigPair.Value.Value;
-            var selectedConfigName = selectedConfigPair.Value.Key;
+            var selectedConfig = selectedConfigInfo.Value.Config;
+            var selectedConfigName = selectedConfigInfo.Value.ConfigName;
             var rules = selectedConfig.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(selectedConfigInfo.Value.Rectangle.TransformedPolygon(xform)));
             return new LayoutInstantiated() { Instance = instance, Config = selectedConfig, ConfigName = selectedConfigName };
         }
 
@@ -148,7 +157,7 @@ namespace LayoutFunctionCommon
         /// <param name="width">The 2d grid cell to fill.</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, Grid2d cell, Transform xform)
+        public ConfigInfo? FindConfigByFit(SpaceConfiguration configs, Grid2d cell)
         {
             var rect = cell.GetCellGeometry() as Polygon;
             var segs = rect.Segments();
@@ -157,7 +166,7 @@ namespace LayoutFunctionCommon
             var trimmedGeo = cell.GetTrimmedCellGeometry();
             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
             {
-                return InstantiateLayoutByFit(configs, width, depth, rect, xform);
+                return FindConfigByFit(configs, width, depth, rect);
             }
             else if (trimmedGeo.Count() > 0)
             {
@@ -199,7 +208,7 @@ namespace LayoutFunctionCommon
                         widthSeg.End + depthSeg.Direction() * depth,
                         widthSeg.Start + depthSeg.Direction() * depth
                     );
-                    return InstantiateLayoutByFit(configs, width, depth, reconstructedRect, xform);
+                    return FindConfigByFit(configs, width, depth, reconstructedRect);
                 }
                 catch
                 {
@@ -211,7 +220,7 @@ namespace LayoutFunctionCommon
                     var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                     cinchedPoly = new Polygon(cinchedVertices);
                 }
-                return InstantiateLayoutByFit(configs, width, depth, cinchedPoly, xform);
+                return FindConfigByFit(configs, width, depth, cinchedPoly);
             }
             return null;
         }
@@ -223,7 +232,7 @@ namespace LayoutFunctionCommon
 
         protected virtual KeyValuePair<string, ContentConfiguration>? FindConfig(double width, double length, SpaceConfiguration configs)
         {
-            var orderedConfigs = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width);
+            var orderedConfigs = OrderConfigs(configs);
             KeyValuePair<string, ContentConfiguration>? selectedConfigPair = null;
             foreach (var configPair in orderedConfigs)
             {
@@ -235,6 +244,11 @@ namespace LayoutFunctionCommon
             }
 
             return selectedConfigPair;
+        }
+
+        protected virtual IEnumerable<KeyValuePair<string, ContentConfiguration>> OrderConfigs(Dictionary<string, ContentConfiguration> configs)
+        {
+            return configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width);
         }
 
         /// <summary>
@@ -257,6 +271,15 @@ namespace LayoutFunctionCommon
             }
 
             return levels;
+        }
+
+        protected virtual (ConfigInfo? configInfo, List<(Line Line, string Type)> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)> possibleConfigs)
+        {
+            var distinctPossibleConfigs = possibleConfigs.DistinctBy(pc => pc.configInfo.ConfigName);
+            var orderedConfigs = OrderConfigs(distinctPossibleConfigs.Select(pc => pc.configInfo).ToDictionary(ci => ci.ConfigName, ci => ci.Config));
+            var bestConfig = orderedConfigs.First();
+            var bestConfiginfo = distinctPossibleConfigs.First(pc => pc.configInfo.ConfigName.Equals(bestConfig.Key));
+            return bestConfiginfo;
         }
 
         protected virtual int CountSeats(LayoutInstantiated layoutInstantiated)

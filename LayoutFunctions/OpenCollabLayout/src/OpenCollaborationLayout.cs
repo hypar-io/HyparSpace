@@ -15,7 +15,7 @@ namespace OpenCollaborationLayout
     {
         private class OpenCollaborationLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
         {
-            private int varietyCounter = 0;
+            private Dictionary<string, (ContentConfiguration config, int usedCount)> configsWithUsedCount = new();
 
             protected override int CountSeats(LayoutInstantiated layout)
             {
@@ -27,6 +27,53 @@ namespace OpenCollaborationLayout
                 return 0;
             }
 
+            protected override (ConfigInfo? configInfo, List<(Line Line, string Type)> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)> possibleConfigs)
+            {
+                var configsThatFitWell = new List<(ConfigInfo configInfo, int usedCount, List<(Line Line, string Type)> wallCandidates)>();
+                var orderedConfigPairs = configsWithUsedCount.OrderByDescending(kvp => kvp.Value.config.CellBoundary.Depth * kvp.Value.config.CellBoundary.Width);
+                possibleConfigs = possibleConfigs.DistinctBy(pc => pc.configInfo.ConfigName).ToList();
+                foreach (var (configInfo, wallCandidates) in possibleConfigs)
+                {
+                    var width = configInfo.Config.Width;
+                    var length = configInfo.Config.Depth;
+                    foreach (var configPair in orderedConfigPairs)
+                    {
+                        var configName = configPair.Key;
+                        var config = configPair.Value.config;
+                        // if it fits
+                        if (config.CellBoundary.Width <= width && config.CellBoundary.Depth <= length)
+                        {
+                            if (configsThatFitWell.Count == 0)
+                            {
+                                configsThatFitWell.Add((new ConfigInfo(configName, config, configInfo.Rectangle), configPair.Value.usedCount, wallCandidates));
+                            }
+                            else
+                            {
+                                // check if there's another config that's roughly the same size
+                                if (config.CellBoundary.Width.ApproximatelyEquals(configInfo.Config.CellBoundary.Width, 1.0)
+                                    && config.CellBoundary.Depth.ApproximatelyEquals(configInfo.Config.CellBoundary.Depth, 1.0))
+                                {
+                                    configsThatFitWell.Add((new ConfigInfo(configName, config, configInfo.Rectangle), configPair.Value.usedCount, wallCandidates));
+                                }
+
+                            }
+                        }
+                    }
+                }
+                // shouldn't happen
+                if (configsThatFitWell.Count == 0)
+                {
+                    return possibleConfigs.First();
+                }
+
+                var selectedConfig = configsThatFitWell
+                    .OrderBy(c => c.usedCount)
+                    .ThenByDescending(kvp => kvp.configInfo.Config.CellBoundary.Depth * kvp.configInfo.Config.CellBoundary.Width)
+                    .First();
+                configsWithUsedCount[selectedConfig.configInfo.ConfigName] = (selectedConfig.configInfo.Config, selectedConfig.usedCount + 1);
+                return (selectedConfig.configInfo, selectedConfig.wallCandidates);
+            }
+
             protected override SpaceConfiguration DeserializeConfigJson(string configJson)
             {
                 var spaceConfiguration = new SpaceConfiguration();
@@ -35,48 +82,15 @@ namespace OpenCollaborationLayout
                 {
                     spaceConfiguration.Add(pair.Key, pair.Value);
                 }
+
+                configsWithUsedCount = spaceConfiguration.ToDictionary(kvp => kvp.Key, kvp => (kvp.Value, 0));
                 return spaceConfiguration;
             }
 
             public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
             {
-                varietyCounter = 0;
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
                 return result;
-            }
-
-            protected override KeyValuePair<string, ContentConfiguration>? FindConfig(double width, double length, SpaceConfiguration configs)
-            {
-                var orderedConfigPairs = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width);
-                var configsThatFitWell = new List<KeyValuePair<string, ContentConfiguration>>();
-                foreach (var configPair in orderedConfigPairs)
-                {
-                    var config = configPair.Value;
-                    // if it fits
-                    if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
-                    {
-                        if (configsThatFitWell.Count == 0)
-                        {
-                            configsThatFitWell.Add(configPair);
-                        }
-                        else
-                        {
-                            var firstFittingConfig = configsThatFitWell.First().Value;
-                            // check if there's another config that's roughly the same size
-                            if (config.CellBoundary.Width.ApproximatelyEquals(firstFittingConfig.CellBoundary.Width, 1.0) && config.CellBoundary.Depth.ApproximatelyEquals(firstFittingConfig.CellBoundary.Depth, 1.0))
-                            {
-                                configsThatFitWell.Add(configPair);
-                            }
-                        }
-                    }
-                }
-                if (configsThatFitWell.Count == 0)
-                {
-                    return null;
-                }
-                var selectedConfig = configsThatFitWell[varietyCounter % configsThatFitWell.Count];
-                varietyCounter++;
-                return selectedConfig;
             }
 
             protected override IEnumerable<LevelElements> GetLevels(Dictionary<string, Model> inputModels, Model spacePlanningZones)
