@@ -36,8 +36,7 @@
             "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
             "Name": "default",
             "discriminator": "Elements.Material",
-            "EdgeDisplaySettings": null,
-            "AdditionalProperties": null
+            "EdgeDisplaySettings": null
         },
         "81134aad-6518-43fb-b896-ad2be2171a41": {
             "discriminator": "Elements.Geometry.Profile",
@@ -7046,8 +7045,7 @@
             },
             "Id": "a6d24e86-f52d-4de2-bd75-35a5e8ff01df",
             "Name": "Steelcase - Roam - Mobile Stand",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9401d8a1-9039-4730-81c0-ea47f9d4b460": {
             "BaseDefinition": "75ad609e-4547-4f7a-850a-05f5bed560c0",
@@ -7071,8 +7069,7 @@
             },
             "Id": "9401d8a1-9039-4730-81c0-ea47f9d4b460",
             "Name": "Steelcase - Flex - Table - Transition - 16Dia x 38H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "94055279-3732-4b27-913b-fb8f1d775680": {
             "BaseDefinition": "865879fe-0342-42ae-aac3-64c185282c07",
@@ -7096,8 +7093,7 @@
             },
             "Id": "94055279-3732-4b27-913b-fb8f1d775680",
             "Name": "Steelcase - Flex - Markerboard - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "26012ef4-2d94-4d07-b0d9-3045ad348cb3": {
             "BaseDefinition": "6b4ba11f-3afb-4b4a-8bb6-c4b1eb74be8d",
@@ -7121,8 +7117,7 @@
             },
             "Id": "26012ef4-2d94-4d07-b0d9-3045ad348cb3",
             "Name": "Steelcase - Flex - Mobile Battery Package - Board Cart",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "20a95517-1ef0-4d27-8968-5de79980b9e1": {
             "BaseDefinition": "0763de4d-fd7d-4545-ab40-6735812d3975",
@@ -7146,8 +7141,7 @@
             },
             "Id": "20a95517-1ef0-4d27-8968-5de79980b9e1",
             "Name": "Steelcase Coalesse - Montara650 - Table - Cafe Height - Round - Bar Height - 30Dia",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "12e654b8-e18e-4836-8b13-50c8c3b04f1f": {
             "discriminator": "Elements.Geometry.Profile",
@@ -7271,8 +7265,7 @@
             },
             "Id": "84b968d0-9312-4597-99ee-8b44414e0904",
             "Name": "Steelcase Coalesse - Montara650 - Table - Cafe Height - Round - Bar Height - 30Dia",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "f60418a1-4805-46ec-ac61-5f8cc6de9fb4": {
             "BaseDefinition": "ebdb6806-cb1b-464a-b21e-1599703476e0",
@@ -7296,8 +7289,7 @@
             },
             "Id": "f60418a1-4805-46ec-ac61-5f8cc6de9fb4",
             "Name": "Orangebox_Seating_Stool_Cubb_Bar - Wire Base",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "96fb825b-1123-48f3-924c-f6d446032ee2": {
             "discriminator": "Elements.Geometry.Profile",
@@ -7417,8 +7409,7 @@
             },
             "Id": "1e31aa43-2b58-44b2-b1b9-20b7504e0f23",
             "Name": "Orangebox_Seating_Stool_Cubb_Bar - Wire Base",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e3d7a8ab-2611-4cfe-93ce-94f4bdbf9c0d": {
             "BaseDefinition": "3ccd6658-6185-48f0-a172-3f5168f63fc8",
@@ -7442,8 +7433,7 @@
             },
             "Id": "e3d7a8ab-2611-4cfe-93ce-94f4bdbf9c0d",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "754f0760-1256-4739-be15-1c3d999c3019": {
             "discriminator": "Elements.Geometry.Profile",
@@ -7565,8 +7555,7 @@
             },
             "Id": "b8973195-47c8-4f96-bf61-23ccacb003cb",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "37e56793-dde8-445f-a243-80bce8917e22": {
             "BaseDefinition": "30135be7-23cd-4d4b-bb27-fc0b2e918017",
@@ -7590,8 +7579,7 @@
             },
             "Id": "37e56793-dde8-445f-a243-80bce8917e22",
             "Name": "Flos - IC Lights F - F2",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b02c4c49-c1cb-44a3-a59f-a9016afdd776": {
             "BaseDefinition": "5ce4cfa2-66f6-4469-8df4-f19f77577240",
@@ -7615,8 +7603,7 @@
             },
             "Id": "b02c4c49-c1cb-44a3-a59f-a9016afdd776",
             "Name": "Flos - IC Lights F - F1",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "3d6c35b3-f215-4e3d-bbfc-7f4be90725c2": {
             "BaseDefinition": "a57a5bc3-75c2-453b-8604-39273062b3d5",
@@ -7640,8 +7627,7 @@
             },
             "Id": "3d6c35b3-f215-4e3d-bbfc-7f4be90725c2",
             "Name": "Steelcase Coalesse - Lagunitas - Seating - Chaise - Two Seat - Low Back Screen - Left Corner Cushion",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "795640f4-8a5d-46c0-b118-3005a027616f": {
             "BaseDefinition": "51f77e0a-7897-49cf-b985-aa5e5cf6fd3a",
@@ -7665,8 +7651,7 @@
             },
             "Id": "795640f4-8a5d-46c0-b118-3005a027616f",
             "Name": "Steelcase Coalesse - Lagunitas - Seating - Chaise - Two Seat - High Back Screen - Left Corner Cushion",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a4d4789b-2c65-432f-a8d5-3bf9ef21db9e": {
             "BaseDefinition": "4511e756-c298-432b-8ccc-5a339f21f57a",
@@ -7690,8 +7675,7 @@
             },
             "Id": "a4d4789b-2c65-432f-a8d5-3bf9ef21db9e",
             "Name": "LeadHead Glass - Ellias Trap Terrarium - Accessories",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "17de7a56-22e4-4ca7-8edb-34766f4d4a61": {
             "BaseDefinition": "c5fcbe55-0b1f-4028-b932-ef7fdd051bde",
@@ -7715,8 +7699,7 @@
             },
             "Id": "17de7a56-22e4-4ca7-8edb-34766f4d4a61",
             "Name": "Blu Dot - Delicious - Tray - Large",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "f736fd7f-615d-4667-9211-a545ed4ff32b": {
             "BaseDefinition": "91ac7663-9da9-4a90-8782-accdcfc41384",
@@ -7740,8 +7723,7 @@
             },
             "Id": "f736fd7f-615d-4667-9211-a545ed4ff32b",
             "Name": "Benjamin Maier Ceramics - Down Rim Bowl - Accessories",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "1511f614-b5e1-414b-a5bd-d0e861d3a65e": {
             "BaseDefinition": "876d90eb-d061-435a-a6c9-2a7426641715",
@@ -7765,8 +7747,7 @@
             },
             "Id": "1511f614-b5e1-414b-a5bd-d0e861d3a65e",
             "Name": "Steelcase - Worktool - Freestanding - Soto Utility Box1 - 9W x 1 1_4H x 3 7\u20448D 2",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "43610cde-6b80-49aa-8472-45b09fee318f": {
             "BaseDefinition": "f3ea0ce6-d0a5-46a2-b1ae-925c8d43d7ef",
@@ -7790,8 +7771,7 @@
             },
             "Id": "43610cde-6b80-49aa-8472-45b09fee318f",
             "Name": "Steelcase - Flex Active Frames - Extension - 1 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "290d6ae2-be54-49d8-872f-d744906d6fbf": {
             "BaseDefinition": "39a40d15-25a5-4bdc-a083-f81e0fb3ce1f",
@@ -7815,8 +7795,7 @@
             },
             "Id": "290d6ae2-be54-49d8-872f-d744906d6fbf",
             "Name": "Steelcase - Flex Active Frames - Extension - 2 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "1ac4c3f5-50f6-48be-a6df-6f76d550c00e": {
             "discriminator": "Elements.Geometry.Profile",
@@ -7936,8 +7915,7 @@
             },
             "Id": "e0188d3f-f038-4cf1-8955-8ed60f3865b8",
             "Name": "Steelcase - Flex Active Frames - Extension - 2 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "dd0a0094-3b0b-4742-a8ae-c1b0e47cfb8b": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8057,8 +8035,7 @@
             },
             "Id": "25a80b9c-4881-4b36-992f-0b5525aa71d6",
             "Name": "Steelcase - Flex Active Frames - Extension - 2 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "80372fcd-77b5-4b43-9b85-0b16a4ffe66d": {
             "BaseDefinition": "8aefb44d-f40d-47b4-bee0-efcd86ecf5ee",
@@ -8082,8 +8059,7 @@
             },
             "Id": "80372fcd-77b5-4b43-9b85-0b16a4ffe66d",
             "Name": "Steelcase - Flex Active Frames - Extension - 1 Wide - 4 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9de1f59a-41ea-4f49-b6c0-755b65d207cb": {
             "BaseDefinition": "1d4aee43-e4c9-4ef3-9a40-78c4ab75f34b",
@@ -8107,8 +8083,7 @@
             },
             "Id": "9de1f59a-41ea-4f49-b6c0-755b65d207cb",
             "Name": "Steelcase - Flex Active Frames - Extension - 2 Wide - 4 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "310228cc-103f-4ad9-808a-e2b256614a65": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8228,8 +8203,7 @@
             },
             "Id": "1cc3322a-85f8-447c-ba8d-06a004371b5e",
             "Name": "Steelcase - Flex Active Frames - Extension - 2 Wide - 4 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0009e6ae-09be-47b1-b4f2-dfb2c6cabeae": {
             "BaseDefinition": "26900cd0-573f-4f3b-8025-799aa1aea449",
@@ -8253,8 +8227,7 @@
             },
             "Id": "0009e6ae-09be-47b1-b4f2-dfb2c6cabeae",
             "Name": "Steelcase - Flex Active Frames - Extension - 1 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "52c4de5d-ed84-45e0-8b10-f294dc024cde": {
             "BaseDefinition": "a6d40638-ab3d-4986-b397-ac2dc62f79f0",
@@ -8278,8 +8251,7 @@
             },
             "Id": "52c4de5d-ed84-45e0-8b10-f294dc024cde",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c6d58361-c462-4cd8-8f96-6933a5152068": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8399,8 +8371,7 @@
             },
             "Id": "baac3df7-15de-4484-aed0-bdcdeac73dc6",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "4fb4e6aa-8322-4276-ae04-c5d190eb8121": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8520,8 +8491,7 @@
             },
             "Id": "27e59e23-45e2-4862-b0d3-fd48da75778b",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "55d676a4-04dc-4b94-b01a-b61090587b13": {
             "BaseDefinition": "80851e8f-eebe-4849-94fd-cf40816594f5",
@@ -8545,8 +8515,7 @@
             },
             "Id": "55d676a4-04dc-4b94-b01a-b61090587b13",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 1 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "18fa6ee4-4d16-4425-bbb9-05836e3f49fb": {
             "BaseDefinition": "8cd025fb-3fe3-46f9-ba33-1c75348818ed",
@@ -8570,8 +8539,7 @@
             },
             "Id": "18fa6ee4-4d16-4425-bbb9-05836e3f49fb",
             "Name": "Steelcase - Flex Active Frames - Frame - 1 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "3f873a12-9aa4-454e-b3c0-9cf8e977ee58": {
             "BaseDefinition": "1020c004-c6e4-46c3-8843-72c25b6e34e1",
@@ -8595,8 +8563,7 @@
             },
             "Id": "3f873a12-9aa4-454e-b3c0-9cf8e977ee58",
             "Name": "rug2 - 3.483 m x 3.483 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0991ac60-a32e-4557-ac88-f2b44110944b": {
             "BaseDefinition": "88c95542-4e95-4b16-b9fc-dafdc85d8b07",
@@ -8620,8 +8587,7 @@
             },
             "Id": "0991ac60-a32e-4557-ac88-f2b44110944b",
             "Name": "SAH43 - 0.503 m x 0.128 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "12bf700e-f0d3-4944-abe7-c5c103869783": {
             "BaseDefinition": "a9b6f3b1-eb0e-4605-adf0-52c97aa183c9",
@@ -8645,8 +8611,7 @@
             },
             "Id": "12bf700e-f0d3-4944-abe7-c5c103869783",
             "Name": "SAHSHSC017 - 0.446 m x 0.204 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e3737d17-d13f-440e-bc47-7d2c98bd2f58": {
             "BaseDefinition": "519f59dd-e283-4439-a95f-17dfaa7ccac8",
@@ -8670,8 +8635,7 @@
             },
             "Id": "e3737d17-d13f-440e-bc47-7d2c98bd2f58",
             "Name": "16 - 0.312 m x 0.191 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c0471117-5c73-40c1-85dc-16ed5fa545b2": {
             "BaseDefinition": "d6daaab3-8297-48aa-94eb-7ffb96bf312e",
@@ -8695,8 +8659,7 @@
             },
             "Id": "c0471117-5c73-40c1-85dc-16ed5fa545b2",
             "Name": "Block Mobile Battery Package @ 125541 PM - 0.127 m x 0.102 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "19c238b6-1f77-483e-91d8-37afdaa2f9b0": {
             "BaseDefinition": "3bb15a60-679c-4976-90cb-94fde8b6b5e2",
@@ -8720,8 +8683,7 @@
             },
             "Id": "19c238b6-1f77-483e-91d8-37afdaa2f9b0",
             "Name": "Gasteria Flow - 0.178 m x 0.171 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a109b80a-4495-4018-8199-7d44ac7ae8b6": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8841,8 +8803,7 @@
             },
             "Id": "44fb3d84-79a0-4f10-9ac8-5ceab918e459",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "f5fbbd8f-6c56-47ad-8dd0-5efd8cd53d21": {
             "discriminator": "Elements.Geometry.Profile",
@@ -8962,8 +8923,7 @@
             },
             "Id": "ab2c7a15-9298-4c12-b8e8-e1c1a9318b82",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "8370377a-37dd-4ab5-a73f-a50b5a8f3146": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9083,8 +9043,7 @@
             },
             "Id": "af4d77db-0f49-4c9f-b01b-8f2024cd1a29",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "dfa18369-2a4d-4084-a18c-c807f0db459c": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9204,8 +9163,7 @@
             },
             "Id": "e4915900-f82d-4f2c-94dd-357ef76426f5",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "ab2215e9-30fd-4159-82ea-4f3fe2573dc8": {
             "BaseDefinition": "b9443dfe-4c93-4a78-906f-8c2cd6701f5a",
@@ -9229,8 +9187,7 @@
             },
             "Id": "ab2215e9-30fd-4159-82ea-4f3fe2573dc8",
             "Name": "Height%20Adjustable%20Desk_24x48 - 24 x 48",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d80a4250-6db3-4512-88af-0d121d491a62": {
             "BaseDefinition": "fb5795e9-3e8f-4137-94a5-b55a95a05c42",
@@ -9254,8 +9211,7 @@
             },
             "Id": "d80a4250-6db3-4512-88af-0d121d491a62",
             "Name": "Height%20Adjustable%20Desk_30x60 - 30x60",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "553ce380-5984-4e9f-b87d-59fa687444d6": {
             "BaseDefinition": "249bd15c-a1d6-4ee1-bc23-8bf811276b91",
@@ -9279,8 +9235,7 @@
             },
             "Id": "553ce380-5984-4e9f-b87d-59fa687444d6",
             "Name": "Steelcase - Migration - Desk - Rectangular - 29D x 70W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "39dbb486-c298-43fa-9a93-3dedea012818": {
             "BaseDefinition": "1484d095-3467-4cbc-aa19-a96968112f75",
@@ -9304,8 +9259,7 @@
             },
             "Id": "39dbb486-c298-43fa-9a93-3dedea012818",
             "Name": "Steelcase - Flex - Accessory - Power Hanger",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "22baf3a7-c6d8-460c-90f9-cacb0e54c843": {
             "BaseDefinition": "216001cc-ebae-4673-a68b-90ce98fe5f05",
@@ -9329,8 +9283,7 @@
             },
             "Id": "22baf3a7-c6d8-460c-90f9-cacb0e54c843",
             "Name": "Steelcase - Flex - Accessory - Cup",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "2a9ed946-a3d0-4555-a17b-ce82a6ef6d4d": {
             "BaseDefinition": "559385c6-9d8a-4d92-8e1c-5c8a3b93f09d",
@@ -9354,8 +9307,7 @@
             },
             "Id": "2a9ed946-a3d0-4555-a17b-ce82a6ef6d4d",
             "Name": "Steelcase - Seating - Series 1 - Stool - Stool",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e96803b7-889b-418d-b16e-e7c891a850cb": {
             "BaseDefinition": "779c11a8-e34c-44ae-8084-859b001e4663",
@@ -9379,8 +9331,7 @@
             },
             "Id": "e96803b7-889b-418d-b16e-e7c891a850cb",
             "Name": "Steelcase - Flex - Table - Transition1 - 16Dia x 38H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "636a0533-57cf-48c2-87d9-744ebc1d5e46": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9503,8 +9454,7 @@
             },
             "Id": "d7debfc8-9746-4393-abbb-1114a4043f90",
             "Name": "Steelcase - Flex - Accessory - Cup",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9b5e544b-09ba-4f40-a1e1-94e26f171c1f": {
             "BaseDefinition": "e45e0ffa-e942-4027-916b-cfe97e6ea9c3",
@@ -9528,8 +9478,7 @@
             },
             "Id": "9b5e544b-09ba-4f40-a1e1-94e26f171c1f",
             "Name": "Steelcase - Flex - Cart - Board Cart",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "6841af09-6056-4c32-a7a7-a0f82d8f09b4": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9652,8 +9601,7 @@
             },
             "Id": "be8bb3fc-6f59-4ca6-ba31-a58bb0be291d",
             "Name": "Steelcase - Flex - Accessory - Cup",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "5555f0d2-d100-4697-9483-9b7e08898881": {
             "BaseDefinition": "7bc8c43a-a05f-4195-92e7-510e268f1ec2",
@@ -9677,8 +9625,7 @@
             },
             "Id": "5555f0d2-d100-4697-9483-9b7e08898881",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "adeee5f7-d610-4090-8001-4dbf15dbcfbd": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9799,8 +9746,7 @@
             },
             "Id": "d613b225-c57c-49bb-b553-316cabed4da1",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "2bbce3cf-ecee-47f9-abdc-81f09840d61e": {
             "discriminator": "Elements.Geometry.Profile",
@@ -9921,8 +9867,7 @@
             },
             "Id": "a4bb4ea7-d0d6-4417-8cb9-1776e1dda265",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "55c3fc92-01f6-4c67-b7b1-5dab93e70a3d": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10043,8 +9988,7 @@
             },
             "Id": "dee70bd3-0324-41ce-a3b6-9ed4b9f8313a",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9493a9d9-5dff-4201-8604-7ea28e7f1164": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10165,8 +10109,7 @@
             },
             "Id": "c6e5f130-3468-45a5-806b-b0ab71bd529c",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "1730f78b-d279-4dda-9e9c-92fd7d3dbbe6": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10287,8 +10230,7 @@
             },
             "Id": "e0f22190-1257-437c-bd67-b4b10390f97b",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "455e265d-05ad-4599-86b1-1610ac4ad6a7": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10409,8 +10351,7 @@
             },
             "Id": "f9ba4b12-f548-4023-a65a-9f2617a8e6e3",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c1c3cff9-b89c-4012-84fd-681b09fb602b": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10531,8 +10472,7 @@
             },
             "Id": "7508b599-1829-4246-b4b3-6596c64ee171",
             "Name": "Steelcase - Flex - Markerboard1 - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "531f276c-b6f9-460b-9885-af6c7665ca93": {
             "BaseDefinition": "5f192068-a30c-45b5-879e-946c91ca28da",
@@ -10556,8 +10496,7 @@
             },
             "Id": "531f276c-b6f9-460b-9885-af6c7665ca93",
             "Name": "Steelcase - Flex - Markerboard1 - 71H - Landscape",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b71fe1d0-af51-4602-955c-44b4a86c7ec0": {
             "BaseDefinition": "e6f3508e-f68e-490d-b6c4-8db735507944",
@@ -10581,8 +10520,7 @@
             },
             "Id": "b71fe1d0-af51-4602-955c-44b4a86c7ec0",
             "Name": "Steelcase - Flex - Screen - Freestanding - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "efe8030c-819c-4139-b63c-de3e1d9fab82": {
             "BaseDefinition": "d58420fe-ffa6-4a70-b29b-5db5ffb8f088",
@@ -10606,8 +10544,7 @@
             },
             "Id": "efe8030c-819c-4139-b63c-de3e1d9fab82",
             "Name": "Steelcase - Flex - Screen - Freestanding - Angled",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "fc2f80bf-7923-4d6a-a9af-e552c6b29b22": {
             "BaseDefinition": "af2e51ad-67d6-4f39-a6c6-b61056f65fdd",
@@ -10631,8 +10568,7 @@
             },
             "Id": "fc2f80bf-7923-4d6a-a9af-e552c6b29b22",
             "Name": "Mattiazzi - Branca - Bar Stool - Bar Stool - Natural Ash",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "05f55f80-7935-4ace-bafd-f9178663f994": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10755,8 +10691,7 @@
             },
             "Id": "69d5000f-0934-49cc-88a8-dceb58e416d3",
             "Name": "Mattiazzi - Branca - Bar Stool - Bar Stool - Natural Ash",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "be920e82-081c-425a-a18b-e853d45c3a4a": {
             "discriminator": "Elements.Geometry.Profile",
@@ -10879,8 +10814,7 @@
             },
             "Id": "8f6be8a7-a483-46e3-9804-44fbbcf01889",
             "Name": "Steelcase - Flex - Screen - Freestanding - 71H",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "4ce7772e-5640-4585-88bd-aeb66b62b1d3": {
             "BaseDefinition": "2819112b-aa47-4b08-bf16-d1df1f951930",
@@ -10904,8 +10838,7 @@
             },
             "Id": "4ce7772e-5640-4585-88bd-aeb66b62b1d3",
             "Name": "MI2190068 - 137.8_ x 137.8_",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c0998ad8-ece7-4ddd-ba95-dc6b3c66a9bd": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11025,8 +10958,7 @@
             },
             "Id": "18bde0ff-2e23-4274-bc5e-77baefe1d46f",
             "Name": "Steelcase - Flex - Mobile Battery Package - Board Cart",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9cdade7d-2b48-48b5-8c03-9f11ef185fa5": {
             "BaseDefinition": "c6fe5b01-1ce9-4bf6-bba3-088aa674b8dc",
@@ -11050,8 +10982,7 @@
             },
             "Id": "9cdade7d-2b48-48b5-8c03-9f11ef185fa5",
             "Name": "Steelcase - Flex - Accessory Basket - Basket",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "4dde192a-db85-41d0-8031-c70ea7426717": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11173,8 +11104,7 @@
             },
             "Id": "ef91f5fb-86b0-41f4-805e-2aea5b9259d9",
             "Name": "Steelcase - Flex - Accessory Basket - Basket",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a4007e11-b716-4ccc-9710-3910cf68f9fe": {
             "BaseDefinition": "9969695c-83fe-4aae-85d9-23109df32189",
@@ -11198,8 +11128,7 @@
             },
             "Id": "a4007e11-b716-4ccc-9710-3910cf68f9fe",
             "Name": "Steelcase - Flex - Mobile Power - Mobile Battery",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "f796adfe-380f-4209-8070-861cc2373d00": {
             "BaseDefinition": "433b1ad1-3a6b-4386-bb7e-cf306c86f09d",
@@ -11223,8 +11152,7 @@
             },
             "Id": "f796adfe-380f-4209-8070-861cc2373d00",
             "Name": "TabletWithKeyboard - 11.5_ x 10.3_",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "6cbe4152-85b1-434a-acdf-a41da3f623e9": {
             "BaseDefinition": "df24fb5a-96c0-4244-837c-42140fc9bcae",
@@ -11248,8 +11176,7 @@
             },
             "Id": "6cbe4152-85b1-434a-acdf-a41da3f623e9",
             "Name": "Minecraft Toolbox - 6.29_ x 13.38_",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "dd9d7b79-6367-464d-a375-a2b6d13b26e0": {
             "BaseDefinition": "7e411050-c3a3-4f5b-9c3c-120b5a985eb2",
@@ -11273,8 +11200,7 @@
             },
             "Id": "dd9d7b79-6367-464d-a375-a2b6d13b26e0",
             "Name": "Small 3d copper shade - 9.84_ x 9.84_",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0a1d94fb-a7ea-44e2-beac-71b693784c6e": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11394,8 +11320,7 @@
             },
             "Id": "fd104565-0593-4720-a6c7-3b5706a7ad7f",
             "Name": "Small 3d copper shade - 9.84_ x 9.84_",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "2c4a07b5-0b31-4def-a6e4-40f3d95dde9b": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11518,8 +11443,7 @@
             },
             "Id": "3fd7ffa9-4472-4e1f-a0b5-569f2a6f1d86",
             "Name": "Steelcase - Flex - Accessory - Power Hanger",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "80a8155a-9c1a-4fd6-afdd-cab42d8dc39d": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11642,8 +11566,7 @@
             },
             "Id": "414a1f88-a41e-4933-9da0-b809971d32a9",
             "Name": "Steelcase - Flex - Accessory - Cup",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "fb7d666d-3d89-4708-8f0d-bc01a8deaf2f": {
             "BaseDefinition": "9adfc39d-a603-4b44-a959-ce32a5471dd7",
@@ -11667,8 +11590,7 @@
             },
             "Id": "fb7d666d-3d89-4708-8f0d-bc01a8deaf2f",
             "Name": "Steelcase - Flex Active Frames - Frame - 2 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "5fc96470-3ee1-466b-8986-eaa3a6c24fcc": {
             "discriminator": "Elements.Geometry.Profile",
@@ -11788,8 +11710,7 @@
             },
             "Id": "71da4427-d154-44d9-be76-49bff22c71b6",
             "Name": "Steelcase - Flex Active Frames - Frame - 2 Wide - 5 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "dedc26f7-b00e-48ab-9927-27e994c87568": {
             "BaseDefinition": "69143768-1bc3-46e7-9e27-cd9ea923be46",
@@ -11813,8 +11734,7 @@
             },
             "Id": "dedc26f7-b00e-48ab-9927-27e994c87568",
             "Name": "Steelcase - Flex Active Frames - Frame - 2 Wide - 4 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c981c8bc-c02a-4c04-a2f9-bfb246f7dd38": {
             "BaseDefinition": "943f6fe1-49b6-4b41-9813-b0eabd25989b",
@@ -11838,8 +11758,7 @@
             },
             "Id": "c981c8bc-c02a-4c04-a2f9-bfb246f7dd38",
             "Name": "Steelcase - Flex Active Frames - Frame - 1 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "6bb8da00-82a5-43d4-a46a-5ae1e1cb66f2": {
             "BaseDefinition": "91d11555-e4af-42d8-9793-dab3a3f61819",
@@ -11863,8 +11782,7 @@
             },
             "Id": "6bb8da00-82a5-43d4-a46a-5ae1e1cb66f2",
             "Name": "Steelcase - Flex Active Frames - Frame - 2 Wide - 3 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a31756ed-fe14-4f9e-bf7d-cfc50d798338": {
             "BaseDefinition": "09b2328a-5608-433e-88a9-e007923e388f",
@@ -11888,8 +11806,7 @@
             },
             "Id": "a31756ed-fe14-4f9e-bf7d-cfc50d798338",
             "Name": "Steelcase - Flex Active Frames - Frame - 2 Wide - 2 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d6365a9b-3854-48f5-8a0b-86ba2aaa9534": {
             "BaseDefinition": "a2601cca-1565-4d64-ad18-3c987cd49a9b",
@@ -11913,8 +11830,7 @@
             },
             "Id": "d6365a9b-3854-48f5-8a0b-86ba2aaa9534",
             "Name": "Steelcase - Flex Active Frames - Door - 2 Wide - W_Lock",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "026858dd-55d6-4385-83f1-0b46b7f1c046": {
             "BaseDefinition": "2b92f6d3-4abe-4d48-925f-6a4f02ea891a",
@@ -11938,8 +11854,7 @@
             },
             "Id": "026858dd-55d6-4385-83f1-0b46b7f1c046",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "87ef9e97-f405-4c8c-baf5-ffa9f1e1642f": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12059,8 +11974,7 @@
             },
             "Id": "41f620c7-7bc3-443f-84ab-1c78516d2c45",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "bcc19cd6-4c64-4bf7-9df7-ab3c5623183e": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12180,8 +12094,7 @@
             },
             "Id": "0f62ec0c-06f7-4ac6-a7cf-2b1d9db5cbdd",
             "Name": "Steelcase - Flex Active Frames - Door - 2 Wide - W_Lock",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "6809262f-5729-4456-bdce-9dc6ab8d5837": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12301,8 +12214,7 @@
             },
             "Id": "1644b879-3b43-483c-b0b8-bd93f05b5bb3",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "ec3e9d97-5066-4e2b-bc38-b9fc465312e1": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12422,8 +12334,7 @@
             },
             "Id": "fffa817b-ada5-4388-be8a-a7f4a1a8498d",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "19ac7408-fe5e-41de-b066-d63529368a11": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12543,8 +12454,7 @@
             },
             "Id": "d55cb421-2f0a-4cb6-9390-6f49a40dfb52",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "2ec91615-62eb-46be-96af-050ef318e039": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12664,8 +12574,7 @@
             },
             "Id": "cd7cd664-1cf8-484d-91d2-86ce8d285d9b",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "00ffaa1a-d072-4044-aea2-c5b8de49bb41": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12785,8 +12694,7 @@
             },
             "Id": "e54711ba-208b-4937-9be6-db41c53823ba",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d1d2e212-d147-4a2f-ae4d-416ba02fafcf": {
             "discriminator": "Elements.Geometry.Profile",
@@ -12906,8 +12814,7 @@
             },
             "Id": "6021d172-921a-4f8b-b527-637be9ee447f",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "183a1e8c-7c4b-4849-bb6d-79c1668ce27e": {
             "BaseDefinition": "d4d64682-b8cc-4c3b-b948-973a0e96ed6f",
@@ -12931,8 +12838,7 @@
             },
             "Id": "183a1e8c-7c4b-4849-bb6d-79c1668ce27e",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0bde2e55-de26-45e8-adc7-b242a3027189": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13052,8 +12958,7 @@
             },
             "Id": "39e617fa-bea3-4088-abd6-d3de11ceef6c",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "3e56e26f-3621-48b5-8901-04878605a8b1": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13173,8 +13078,7 @@
             },
             "Id": "fb60666a-94fc-4730-b8f9-f8ee72e02836",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e334d2fc-2f55-4703-ad22-3b3fdad135b5": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13294,8 +13198,7 @@
             },
             "Id": "bd616e50-e1eb-4fd7-b272-03a473b258e3",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "9914bf43-21a6-4e1b-8652-91d3109f65bf": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13415,8 +13318,7 @@
             },
             "Id": "89786335-ddd5-413e-add5-341db761f536",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "aac06a3d-151e-499f-b4a9-06c9ba8f46be": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13536,8 +13438,7 @@
             },
             "Id": "95f6653b-c68a-4789-86b7-788acca94f76",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "1ef77ba7-869d-4f4b-9df8-7200e74d5e75": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13657,8 +13558,7 @@
             },
             "Id": "8da0b169-4c8b-458d-92f0-1f10ad60b1b2",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "4fff64d8-542f-4bbb-8b97-b0be5050580c": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13778,8 +13678,7 @@
             },
             "Id": "7ae46ce1-d27d-489c-a8cd-e4f7f84afac8",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 2 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "ebdaa30a-9fa0-4f12-9156-2b1acc31eef0": {
             "discriminator": "Elements.Geometry.Profile",
@@ -13899,8 +13798,7 @@
             },
             "Id": "a84084b8-6e5a-4662-bf07-b8c41547011a",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "96fab8c5-b0cd-4064-9425-b16bcb602c41": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14021,8 +13919,7 @@
             },
             "Id": "d76533e7-3044-47c0-9ea2-66f027413b21",
             "Name": "Steelcase - Flex - Markerboard1 - 71H - Landscape",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "caf952f2-7655-463e-a9f1-24894b7c9f74": {
             "BaseDefinition": "c63826dc-fef0-4a31-bfd1-00858bff132c",
@@ -14046,8 +13943,7 @@
             },
             "Id": "caf952f2-7655-463e-a9f1-24894b7c9f74",
             "Name": "Steelcase - Flex Active Frames - Fixed Board - 2 Wide - 4 High",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "5ebde639-166d-4517-8c1e-ef9730a334f8": {
             "BaseDefinition": "f6b47f96-4be2-41b6-9555-79f6ace589f4",
@@ -14071,8 +13967,7 @@
             },
             "Id": "5ebde639-166d-4517-8c1e-ef9730a334f8",
             "Name": "Steelcase - Flex Active Frames - Work Island Worksurface - 5 Wide - 2 Deep",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "67d4b68c-0008-4838-b5ff-7e3cd725c83c": {
             "BaseDefinition": "b1179807-c81f-4d27-b0cc-882f00bc83e0",
@@ -14096,8 +13991,7 @@
             },
             "Id": "67d4b68c-0008-4838-b5ff-7e3cd725c83c",
             "Name": "Steelcase - Flex Active Frames - Work Island Frame - 1 Wide - 2 Deep 2",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "443855a5-3d2c-43cf-94b2-898cb1fd26d2": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14217,8 +14111,7 @@
             },
             "Id": "34346d47-c40a-4bef-acfa-edd8d95eb447",
             "Name": "Steelcase - Flex Active Frames - Door - 2 Wide - W_Lock",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d33ced81-6d1c-482d-9cb0-6b108bfa2cee": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14338,8 +14231,7 @@
             },
             "Id": "c900a254-0bec-4b4e-967c-f190c246ddaf",
             "Name": "Steelcase - Flex Active Frames - Door - 2 Wide - W_Lock",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "06359498-1db1-479c-9114-c201793c85ee": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14459,8 +14351,7 @@
             },
             "Id": "b953e75d-c7d8-49bb-8811-b84b443aed78",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b09df7de-1027-4df9-916c-326845a3b9ba": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14580,8 +14471,7 @@
             },
             "Id": "2ba0ae5f-f134-423f-a9e6-63d87244d61d",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "925c966f-99c9-4c67-80f4-b927fa853fdb": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14701,8 +14591,7 @@
             },
             "Id": "14b8cd73-efe3-43a2-84e4-cae75c5794df",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "03f1f209-c364-4211-8de2-1eaa6ec9fdb1": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14822,8 +14711,7 @@
             },
             "Id": "8c99a6eb-245e-4c9b-9a1d-68a77cc99a23",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b6ff007d-cea1-483e-a4ab-9886e1b21fd7": {
             "BaseDefinition": "e7aafd70-75b3-46be-b194-f5f34acade9a",
@@ -14847,8 +14735,7 @@
             },
             "Id": "b6ff007d-cea1-483e-a4ab-9886e1b21fd7",
             "Name": "Steelcase - Roam - Mobile Stand - 85in - Mobile Stand",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0a961aeb-9b1f-4300-b12b-5770fd6ccf7e": {
             "discriminator": "Elements.Geometry.Profile",
@@ -14968,8 +14855,7 @@
             },
             "Id": "ea7ba7e3-c601-48cd-90ad-b7fbb834b88e",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e1d14588-b554-4575-aacd-2a2e6b76b121": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15089,8 +14975,7 @@
             },
             "Id": "c37bdb1e-e16e-43ea-9cd2-80934cd48e05",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "c074403f-0ee9-47d0-9e35-e5c6ad1a5c1b": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15210,8 +15095,7 @@
             },
             "Id": "e58023c7-f080-4e22-9f73-bdb0b0208bd3",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b4af6be8-c25d-4e07-a3f2-3c33b42c84f7": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15331,8 +15215,7 @@
             },
             "Id": "151674c4-5b0f-4ce0-acd2-1de5ab881f61",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a53338db-a742-472a-bb65-026c8877e470": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15452,8 +15335,7 @@
             },
             "Id": "ed36c893-0989-4614-ae89-1caffa44bc1e",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "56f5ec21-23a1-4069-906d-8223a0adac72": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15573,8 +15455,7 @@
             },
             "Id": "d13d3a71-2ccb-4cfd-af3b-052a6d6dde9d",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "e50c3cd8-d024-4ca5-b0e4-16260a212459": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15694,8 +15575,7 @@
             },
             "Id": "f50f1132-47e3-475b-99af-a23dd7b0a49c",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "797c6f15-7256-4771-b525-259a6981ba75": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15815,8 +15695,7 @@
             },
             "Id": "34ef7863-5bf7-43d1-b093-c077dc0a2684",
             "Name": "Steelcase - Flex Active Frames - Infill Single Panel - 1 Wide",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "51e0d462-18b0-4f77-be61-c57f8c50975c": {
             "BaseDefinition": "fadb3861-ca8d-4570-8032-ed96c93a56f2",
@@ -15840,8 +15719,7 @@
             },
             "Id": "51e0d462-18b0-4f77-be61-c57f8c50975c",
             "Name": "Steelcase - Flex - Work Table - Standing Height - 23D x 46W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b307384f-d03c-4bdb-a21a-6b218baa7fc7": {
             "discriminator": "Elements.Geometry.Profile",
@@ -15963,8 +15841,7 @@
             },
             "Id": "64986058-c4a4-4171-ac30-cf3658af45cf",
             "Name": "Steelcase - Flex - Work Table - Standing Height - 23D x 46W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "4f17b09d-ae26-4f32-8506-33af81dddc72": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16089,8 +15966,7 @@
             },
             "Id": "2c7f37d0-b470-47ad-9122-3d29264accfb",
             "Name": "Steelcase - Seating - Series 1 - Stool - Stool",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "ff504172-65db-44f4-b511-f6e906b5308a": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16213,8 +16089,7 @@
             },
             "Id": "a9ae9492-448e-43de-a16b-cfd1dfb8a4a6",
             "Name": "Mattiazzi - Branca - Bar Stool - Bar Stool - Natural Ash",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "dfd164bf-3d60-4046-93ef-0fed00f82066": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16334,8 +16209,7 @@
             },
             "Id": "28de6a21-569a-4b9e-b2d1-ee6624c27c81",
             "Name": "Steelcase - Flex Active Frames - Work Island Frame - 1 Wide - 2 Deep 2",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "acbc288b-b3fb-4f66-b626-c3b7ac95785d": {
             "BaseDefinition": "2bd1d522-9ca6-4d00-86bb-2a81beb49cad",
@@ -16359,8 +16233,7 @@
             },
             "Id": "acbc288b-b3fb-4f66-b626-c3b7ac95785d",
             "Name": "Viccarbe - Brix - Armchair - Wide Right - Left Table",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "1df659f7-bb3f-4252-a17b-d7bdb87e3857": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16482,8 +16355,7 @@
             },
             "Id": "21604cb6-011e-4d24-a389-36cb4c17f30f",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "05744df8-3f43-4983-aaf2-e8b987439745": {
             "BaseDefinition": "a2531be0-3375-4dac-9842-a9cfd4c09cfe",
@@ -16507,8 +16379,7 @@
             },
             "Id": "05744df8-3f43-4983-aaf2-e8b987439745",
             "Name": "Steelcase Turnstone - Bassline - Table - Racetrack - 28 7_8D x 60W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "87750454-767e-49f2-a889-2600336bda71": {
             "BaseDefinition": "bcd3f67e-5f8d-4ca5-ab9c-fcc2417b7fb8",
@@ -16532,8 +16403,7 @@
             },
             "Id": "87750454-767e-49f2-a889-2600336bda71",
             "Name": "Steelcase PolyVision - Mobile - 66H x 48W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "b679d913-01ae-476d-9956-cd4fa1714bcc": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16653,8 +16523,7 @@
             },
             "Id": "54e554f6-ab8b-4f2f-a04b-73b429e2fbe4",
             "Name": "Viccarbe - Brix - Armchair - Wide Right - Left Table",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0aed54bb-093c-4874-ad21-ac1b3dd4190f": {
             "BaseDefinition": "ea368bf7-6cdf-47f9-a6bd-d6c0b8c83760",
@@ -16678,8 +16547,7 @@
             },
             "Id": "0aed54bb-093c-4874-ad21-ac1b3dd4190f",
             "Name": "Viccarbe - Brix - Armchair - Wide Left - Right Table",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "20455bfe-24bc-4724-8652-1a295f3ff753": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16799,8 +16667,7 @@
             },
             "Id": "2c639e1a-581d-4db7-968f-fcdce43f570c",
             "Name": "Viccarbe - Brix - Armchair - Wide Left - Right Table",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d32cf9ae-6918-4285-8cfc-de7ae65d06dc": {
             "discriminator": "Elements.Geometry.Profile",
@@ -16922,8 +16789,7 @@
             },
             "Id": "93456431-ce1c-4c07-923b-255dcd3fc73a",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d5327887-5a68-4bce-b12a-cb336db5f751": {
             "discriminator": "Elements.Geometry.Profile",
@@ -17045,8 +16911,7 @@
             },
             "Id": "594ce5ec-90eb-4071-a544-944a2d5a21c4",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "0ca466c8-ed88-4953-89bb-80279c807cbe": {
             "discriminator": "Elements.Geometry.Profile",
@@ -17168,8 +17033,7 @@
             },
             "Id": "c2bf8a6a-dd33-47d0-a8a6-98cdf4305f46",
             "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "a313cfa2-ad80-4167-a103-325182c77c0b": {
             "BaseDefinition": "50425481-7177-4fa0-9f48-46ad7e1337b4",
@@ -17193,8 +17057,7 @@
             },
             "Id": "a313cfa2-ad80-4167-a103-325182c77c0b",
             "Name": "MI110 - 1.862 m x 0.381 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "97971ea8-a319-4780-88f1-3e91d22dafd4": {
             "discriminator": "Elements.Geometry.Profile",
@@ -17315,8 +17178,7 @@
             },
             "Id": "44b89102-f816-433c-ae8e-2433b4f777ad",
             "Name": "MI110 - 1.862 m x 0.381 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "5651e185-884f-4c95-afa9-f500522dba71": {
             "BaseDefinition": "72e84277-c04b-4d76-8f48-ee6b5a245f34",
@@ -17340,8 +17202,7 @@
             },
             "Id": "5651e185-884f-4c95-afa9-f500522dba71",
             "Name": "TabletWithKeyboard 3 - 0.292 m x 0.262 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "68bc7ca2-7bf6-4f79-b628-61b8219c6bd9": {
             "BaseDefinition": "57ed0ba2-d113-4faa-b23b-7c182ed253f1",
@@ -17365,8 +17226,7 @@
             },
             "Id": "68bc7ca2-7bf6-4f79-b628-61b8219c6bd9",
             "Name": "Tablet - 0.267 m x 0.184 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "eca863cb-b395-49c1-a109-22e24df6ca9a": {
             "BaseDefinition": "9bd55aba-53f5-4ea1-8e68-4a10ba4f33fa",
@@ -17390,8 +17250,7 @@
             },
             "Id": "eca863cb-b395-49c1-a109-22e24df6ca9a",
             "Name": "MI2190100 - 3.5 m x 3.8 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "ec8fb32f-1058-4e95-8ecd-c0200b6f5971": {
             "BaseDefinition": "30cc6904-0ac3-49a9-982b-2a262a5deade",
@@ -17415,8 +17274,7 @@
             },
             "Id": "ec8fb32f-1058-4e95-8ecd-c0200b6f5971",
             "Name": "Block 4 Components @ 111334 AM - 0.223 m x 0.239 m",
-            "discriminator": "Elements.ElementInstance",
-            "AdditionalProperties": null
+            "discriminator": "Elements.ElementInstance"
         },
         "d8ea1908-0620-4862-b0ba-c335fd85ef67": {
             "discriminator": "Elements.ContentCatalog",
