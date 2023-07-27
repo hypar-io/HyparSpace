@@ -5,9 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
 
-    <PackageReference Include="Hypar.Elements" Version="2.0.0-alpha.23" />
+    <PackageReference Include="Hypar.Elements" Version="2.0.0-alpha.29" />
     <PackageReference Include="Hypar.Functions" Version="1.6.0" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.0.0-alpha.23" />
+    <PackageReference Include="Hypar.Elements.Components" Version="2.0.0-alpha.29" />
   </ItemGroup>
   <ItemGroup>
     <!-- <ProjectReference Include="..\..\..\Elements\Elements\src\Elements.csproj" /> -->
