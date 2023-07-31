@@ -296,18 +296,18 @@ namespace PrivateOfficeLayout
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpaceSettingsValue(SpaceSettingsValueOfficeSizing @officeSizing, bool @createWalls, bool @hFlipLayout, bool @vFlipLayout)
+        public SpaceSettingsValue(SpaceSettingsValueOfficeSizing @officeSizing, bool @createWalls, bool @primaryAxisFlipLayout, bool @secondaryAxisFlipLayout)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @officeSizing, @createWalls, @hFlipLayout, @vFlipLayout});
+                validator.PreConstruct(new object[]{ @officeSizing, @createWalls, @primaryAxisFlipLayout, @secondaryAxisFlipLayout});
             }
         
             this.OfficeSizing = @officeSizing;
             this.CreateWalls = @createWalls;
-            this.HFlipLayout = @hFlipLayout;
-            this.VFlipLayout = @vFlipLayout;
+            this.PrimaryAxisFlipLayout = @primaryAxisFlipLayout;
+            this.SecondaryAxisFlipLayout = @secondaryAxisFlipLayout;
         
             if(validator != null)
             {
@@ -322,11 +322,11 @@ namespace PrivateOfficeLayout
         [Newtonsoft.Json.JsonProperty("Create Walls", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool CreateWalls { get; set; } = true;
     
-        [Newtonsoft.Json.JsonProperty("H Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HFlipLayout { get; set; } = false;
+        [Newtonsoft.Json.JsonProperty("Primary Axis Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool PrimaryAxisFlipLayout { get; set; } = false;
     
-        [Newtonsoft.Json.JsonProperty("V Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool VFlipLayout { get; set; } = false;
+        [Newtonsoft.Json.JsonProperty("Secondary Axis Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool SecondaryAxisFlipLayout { get; set; } = false;
     
     }
     

@@ -69,15 +69,16 @@ namespace PhoneBoothLayout
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations)
+        public Overrides(IList<FurnitureLocationsOverride> @furnitureLocations, IList<SpaceSettingsOverride> @spaceSettings)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @furnitureLocations});
+                validator.PreConstruct(new object[]{ @furnitureLocations, @spaceSettings});
             }
         
             this.FurnitureLocations = @furnitureLocations ?? this.FurnitureLocations;
+            this.SpaceSettings = @spaceSettings ?? this.SpaceSettings;
         
             if(validator != null)
             {
@@ -87,6 +88,9 @@ namespace PhoneBoothLayout
     
         [Newtonsoft.Json.JsonProperty("Furniture Locations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<FurnitureLocationsOverride> FurnitureLocations { get; set; } = new List<FurnitureLocationsOverride>();
+    
+        [Newtonsoft.Json.JsonProperty("Space Settings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpaceSettingsOverride> SpaceSettings { get; set; } = new List<SpaceSettingsOverride>();
     
     }
     
@@ -122,6 +126,41 @@ namespace PhoneBoothLayout
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public FurnitureLocationsValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpaceSettingsOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsOverride(string @id, SpaceSettingsIdentity @identity, SpaceSettingsValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpaceSettingsValue Value { get; set; }
     
     }
     
@@ -180,6 +219,64 @@ namespace PhoneBoothLayout
     
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpaceSettingsIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsIdentity(Vector3 @parentCentroid)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @parentCentroid});
+            }
+        
+            this.ParentCentroid = @parentCentroid;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 ParentCentroid { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpaceSettingsValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpaceSettingsValue(bool @primaryAxisFlipLayout, bool @secondaryAxisFlipLayout)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpaceSettingsValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @primaryAxisFlipLayout, @secondaryAxisFlipLayout});
+            }
+        
+            this.PrimaryAxisFlipLayout = @primaryAxisFlipLayout;
+            this.SecondaryAxisFlipLayout = @secondaryAxisFlipLayout;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Primary Axis Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool PrimaryAxisFlipLayout { get; set; } = false;
+    
+        [Newtonsoft.Json.JsonProperty("Secondary Axis Flip Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool SecondaryAxisFlipLayout { get; set; } = false;
     
     }
 }
