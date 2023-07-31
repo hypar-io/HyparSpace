@@ -114,14 +114,14 @@ namespace PrivateOfficeLayout
                         foreach (var cell in grid.GetCells())
                         {
                             var rect = cell.GetCellGeometry() as Polygon;
+                            var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                             var segs = rect.Segments();
                             var width = segs[0].Length();
                             var depth = segs[1].Length();
                             var trimmedGeo = cell.GetTrimmedCellGeometry();
-                            var selectedConfigs = Configurations.GetConfigs(config.Value.HFlipLayout, config.Value.VFlipLayout);
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
-                                var layout = InstantiateLayout(selectedConfigs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
+                                var layout = InstantiateLayout(selectedConfigs, width, depth, rect, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform), out var seats);
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 privateOfficeCount++;
@@ -135,7 +135,7 @@ namespace PrivateOfficeLayout
                                 var areaRatio = cinchedPoly.Area() / rect.Area();
                                 if (areaRatio > 0.7)
                                 {
-                                    var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
+                                    var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform), out var seats);
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
                                     privateOfficeCount++;
