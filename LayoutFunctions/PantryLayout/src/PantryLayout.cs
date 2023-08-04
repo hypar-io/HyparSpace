@@ -24,7 +24,7 @@ namespace PantryLayout
                 "Steelcase Turnstone - Shortcut X Base - Stool - Chair"
             };
 
-            protected override int CountSeats(LayoutInstantiated layout)
+            protected override SeatsCount CountSeats(LayoutInstantiated layout)
             {
                 int countableSeatCount = 0;
                 foreach (var item in layout.Config.ContentItems)
@@ -38,7 +38,7 @@ namespace PantryLayout
                     }
                 }
 
-                return countableSeatCount;
+                return new SeatsCount(countableSeatCount, 0, 0, 0);
             }
         }
 

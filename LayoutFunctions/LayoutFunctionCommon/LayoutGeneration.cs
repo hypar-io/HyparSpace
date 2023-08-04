@@ -18,6 +18,8 @@ namespace LayoutFunctionCommon
 
     public record struct ConfigInfo(string ConfigName, ContentConfiguration Config, Polygon Rectangle);
 
+    public record struct SeatsCount(int Seats, int Headcount, int Desks, int CollaborationSeats);
+
     public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>
         where TLevelElements : Element, ILevelElements
         where TSpaceBoundary : ISpaceBoundary
@@ -52,7 +54,7 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
-                    var seatsCount = 0;
+                    SeatsCount seatsCount = default;
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
                     var boundaryCurves = new List<Polygon>
@@ -83,15 +85,15 @@ namespace LayoutFunctionCommon
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
                         wallCandidateLines.AddRange(wallCandidates);
                         outputModel.AddElement(layout.Instance);
-                        seatsCount += CountSeats(layout);
+                        seatsCount = CountSeats(layout);
                     }
                     else if (configs.Count == 0)
                     {
                         wallCandidateLines.AddRange(wallCandidateOptions.First().WallCandidates);
                     }
 
-                    totalSeats += seatsCount;
-                    outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
+                    totalSeats += seatsCount.Seats;
+                    outputModel.AddElement(new SpaceMetric(room.Id, seatsCount.Seats, seatsCount.Headcount, seatsCount.Desks, seatsCount.CollaborationSeats));
                 }
 
                 double height = levelVolume?.Height ?? 3;
@@ -282,9 +284,9 @@ namespace LayoutFunctionCommon
             return bestConfiginfo;
         }
 
-        protected virtual int CountSeats(LayoutInstantiated layoutInstantiated)
+        protected virtual SeatsCount CountSeats(LayoutInstantiated layoutInstantiated)
         {
-            return 0;
+            return new SeatsCount(0, 0, 0, 0);
         }
 
         private static void SetLevelVolume(ComponentInstance componentInstance, Guid? levelVolumeId)

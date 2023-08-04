@@ -17,14 +17,14 @@ namespace OpenCollaborationLayout
         {
             private Dictionary<string, (ContentConfiguration config, int usedCount)> configsWithUsedCount = new();
 
-            protected override int CountSeats(LayoutInstantiated layout)
+            protected override SeatsCount CountSeats(LayoutInstantiated layout)
             {
                 if (layout.Config is ConfigurationWithCounts configWithCounts)
                 {
-                    return configWithCounts.SeatCount;
+                    return new SeatsCount(configWithCounts.SeatCount, 0, 0, configWithCounts.SeatCount);
                 }
 
-                return 0;
+                return default;
             }
 
             protected override (ConfigInfo? configInfo, List<(Line Line, string Type)> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)> possibleConfigs)

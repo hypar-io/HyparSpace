@@ -18,7 +18,7 @@ namespace MeetingRoomLayout
         {
             private Dictionary<string, RoomTally> seatsTable = new();
 
-            protected override int CountSeats(LayoutInstantiated layout)
+            protected override SeatsCount CountSeats(LayoutInstantiated layout)
             {
                 int seatsCount = 0;
                 if (layout != null)
@@ -37,7 +37,7 @@ namespace MeetingRoomLayout
                         seatsTable[layout.ConfigName] = new RoomTally(layout.ConfigName, seatsCount);
                     }
                 }
-                return seatsCount;
+                return new SeatsCount(seatsCount, 0, 0, 0);
             }
 
             public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
