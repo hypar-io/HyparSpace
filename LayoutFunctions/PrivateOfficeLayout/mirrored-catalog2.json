@@ -1,0 +1,176 @@
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "9babb829-9b96-4e73-97f4-9658d4d6c31c": {
+            "discriminator": "Elements.Material",
+            "Color": {
+                "Red": 1.0,
+                "Green": 1.0,
+                "Blue": 1.0,
+                "Alpha": 1.0
+            },
+            "SpecularFactor": 0.0,
+            "GlossinessFactor": 0.0,
+            "Unlit": false,
+            "DoubleSided": false,
+            "RepeatTexture": true,
+            "InterpolateTexture": true,
+            "EmissiveFactor": 0.0,
+            "Draw In Front": false,
+            "EdgeDisplaySettings": null,
+            "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Name": "default"
+        },
+        "da1a29bf-d5d9-48af-ba1e-12343b01360b": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.21488395857810974,
+                        "Y": -0.11345195038318634,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": -0.21488395857810974,
+                        "Y": 1.3410420579020865e-07,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": 1.1598202155482796e-08,
+                        "Y": 1.3410420579020865e-07,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": 1.1598202155482796e-08,
+                        "Y": -0.11345195038318634,
+                        "Z": -5.805739730928208e-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "da1a29bf-d5d9-48af-ba1e-12343b01360b",
+            "Name": null
+        },
+        "396f5fa4-3051-4da2-bb51-3b3e47a6926d": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/ff440d54-7af4-481c-936d-3001ad10e9c0.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.21488395857810974,
+                    "Y": -0.11345195038318634,
+                    "Z": -5.805739730928208e-15
+                },
+                "Max": {
+                    "X": 1.1598202155482796e-08,
+                    "Y": 1.3410420579020865e-07,
+                    "Z": 0.11117201142311096
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "da1a29bf-d5d9-48af-ba1e-12343b01360b",
+                        "Height": 0.11117201142311676,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "396f5fa4-3051-4da2-bb51-3b3e47a6926d",
+            "Name": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111",
+            "Opaque": 1
+        },
+        "79352190-46e4-4ad3-ad97-0779bce96275": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "396f5fa4-3051-4da2-bb51-3b3e47a6926d",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        2.0948349127182047,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.58072867830424,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "79352190-46e4-4ad3-ad97-0779bce96275",
+            "Name": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111"
+        },
+        "2abb07e4-989f-4340-8a4f-2369a3cb39ef": {
+            "discriminator": "Elements.ContentCatalog",
+            "Content": [
+                "396f5fa4-3051-4da2-bb51-3b3e47a6926d"
+            ],
+            "ReferenceConfiguration": [
+                "79352190-46e4-4ad3-ad97-0779bce96275"
+            ],
+            "Id": "2abb07e4-989f-4340-8a4f-2369a3cb39ef",
+            "Name": "mirrored_catalog"
+        }
+    }
+}

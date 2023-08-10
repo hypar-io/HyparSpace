@@ -139,7 +139,6 @@
         "https://schemas.hypar.io/LevelVolume.json"
     ],
     "content_catalogs": [
-        "https://hypar.io/user-static/6c29a67e-15ae-4e80-80ad-b63fcbc3d7ab.json?Name=catalog-mirrored-test1"
     ],
     "outputs": [
         {

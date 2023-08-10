@@ -1,0 +1,2821 @@
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "9babb829-9b96-4e73-97f4-9658d4d6c31c": {
+            "discriminator": "Elements.Material",
+            "Color": {
+                "Red": 1.0,
+                "Green": 1.0,
+                "Blue": 1.0,
+                "Alpha": 1.0
+            },
+            "SpecularFactor": 0.0,
+            "GlossinessFactor": 0.0,
+            "Unlit": false,
+            "DoubleSided": false,
+            "RepeatTexture": true,
+            "InterpolateTexture": true,
+            "EmissiveFactor": 0.0,
+            "Draw In Front": false,
+            "EdgeDisplaySettings": null,
+            "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Name": "default"
+        },
+        "b33fb233-1988-4fca-be23-092fc30cfee3": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.04335022004842758,
+                        "Y": -0.025875239735841753,
+                        "Z": 0.0003292584314011038
+                    },
+                    {
+                        "X": -0.04335022004842758,
+                        "Y": 0.05233858855962754,
+                        "Z": 0.0003292584314011038
+                    },
+                    {
+                        "X": 0.08364973604679109,
+                        "Y": 0.05233858855962754,
+                        "Z": 0.0003292584314011038
+                    },
+                    {
+                        "X": 0.08364973604679109,
+                        "Y": -0.025875239735841753,
+                        "Z": 0.0003292584314011038
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "b33fb233-1988-4fca-be23-092fc30cfee3",
+            "Name": null
+        },
+        "5938375c-1d7c-4e61-b783-720d417b5a3e": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/55bfe3d2-2a8d-4f93-aa51-e892c153d494.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.04335022004842758,
+                    "Y": -0.025875239735841753,
+                    "Z": 0.0003292584314011038
+                },
+                "Max": {
+                    "X": 0.08364973604679109,
+                    "Y": 0.05233858855962754,
+                    "Z": 0.25468292827606204
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "b33fb233-1988-4fca-be23-092fc30cfee3",
+                        "Height": 0.25435366984466096,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "5938375c-1d7c-4e61-b783-720d417b5a3e",
+            "Name": "Block 2 x Company Steelcase-mirrored - 0.167 m x 0.105 m",
+            "Part List": "1 x RS2RS003, 1 x RS2RS005",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Block 2 x Company Steelcase-mirrored - 0.167 m x 0.105 m"
+        },
+        "35fd97f8-e134-4d8a-b750-398b4a309d8d": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3256991967201233,
+                        "Y": -0.20110852761268616,
+                        "Z": 0.00032736546350643043
+                    },
+                    {
+                        "X": -0.3256991967201233,
+                        "Y": 0.14097727789878847,
+                        "Z": 0.00032736546350643043
+                    },
+                    {
+                        "X": 0.12735687017440797,
+                        "Y": 0.14097727789878847,
+                        "Z": 0.00032736546350643043
+                    },
+                    {
+                        "X": 0.12735687017440797,
+                        "Y": -0.20110852761268616,
+                        "Z": 0.00032736546350643043
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "35fd97f8-e134-4d8a-b750-398b4a309d8d",
+            "Name": null
+        },
+        "93851363-0cda-42ff-af22-5aaa1ea6f382": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/f515d52e-68f8-4f51-be11-a626cde4ae9c.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.3256991967201233,
+                    "Y": -0.20110852761268616,
+                    "Z": 0.00032736546350643043
+                },
+                "Max": {
+                    "X": 0.12735687017440797,
+                    "Y": 0.14097727789878847,
+                    "Z": 0.0877241512298584
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "35fd97f8-e134-4d8a-b750-398b4a309d8d",
+                        "Height": 0.08739678576635197,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "93851363-0cda-42ff-af22-5aaa1ea6f382",
+            "Name": "Blu Dot - Nesting Bowl - Set of 3-mirrored - 17.84_ x 13.47_",
+            "Part List": "1 x BJMMC006",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Blu Dot - Nesting Bowl - Set of 3-mirrored - 17.84_ x 13.47_"
+        },
+        "47318be2-b500-4725-baa8-b4679daecbfa": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.012648234370350838,
+                        "Y": -0.01788332884311676,
+                        "Z": 0.1819514120578766
+                    },
+                    {
+                        "X": -0.012648234370350838,
+                        "Y": 0.021051794600486756,
+                        "Z": 0.1819514120578766
+                    },
+                    {
+                        "X": 0.018242321965098382,
+                        "Y": 0.021051794600486756,
+                        "Z": 0.1819514120578766
+                    },
+                    {
+                        "X": 0.018242321965098382,
+                        "Y": -0.01788332884311676,
+                        "Z": 0.1819514120578766
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "47318be2-b500-4725-baa8-b4679daecbfa",
+            "Name": null
+        },
+        "c2005519-257f-4134-a571-513d497e303f": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/2953204d-0add-4ecc-b823-5b7473cb271c.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.012648234370350838,
+                    "Y": -0.01788332884311676,
+                    "Z": 0.1819514120578766
+                },
+                "Max": {
+                    "X": 0.018242321965098382,
+                    "Y": 0.021051794600486756,
+                    "Z": 0.24098576288223267
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "47318be2-b500-4725-baa8-b4679daecbfa",
+                        "Height": 0.05903435082435607,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "c2005519-257f-4134-a571-513d497e303f",
+            "Name": "Lysol 2-mirrored - 0.088 m x 0.088 m",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Lysol 2-mirrored - 0.088 m x 0.088 m"
+        },
+        "be52b869-50c8-424a-ae37-e4ea790efcd2": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.019549964940547945,
+                        "Y": -0.038099965935945515,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": -0.019549964940547945,
+                        "Y": 0.78105,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.543549969482422,
+                        "Y": 0.78105,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.543549969482422,
+                        "Y": -0.038099965935945515,
+                        "Z": -2.6758586714867235e-18
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "be52b869-50c8-424a-ae37-e4ea790efcd2",
+            "Name": null
+        },
+        "9ebe6693-20c7-41a6-ab5d-31353498949d": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/e476f708-d71e-4dc3-a3be-86d13d83d00d.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.019549964940547945,
+                    "Y": -0.038099965935945515,
+                    "Z": -2.6758586714867235e-18
+                },
+                "Max": {
+                    "X": 1.543549969482422,
+                    "Y": 0.78105,
+                    "Z": 0.762
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "be52b869-50c8-424a-ae37-e4ea790efcd2",
+                        "Height": 0.762,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "9ebe6693-20c7-41a6-ab5d-31353498949d",
+            "Name": "M_Desk-mirrored - 1525 x 762mm",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "M_Desk-mirrored - 1525 x 762mm"
+        },
+        "52425d57-3cba-4c22-9b9c-673e85574a44": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.019549735575914384,
+                        "Y": -0.038100004541873934,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": -0.019549735575914384,
+                        "Y": 0.78105,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.5435502601623536,
+                        "Y": 0.78105,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.5435502601623536,
+                        "Y": -0.038100004541873934,
+                        "Z": -2.6758586714867235e-18
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "52425d57-3cba-4c22-9b9c-673e85574a44",
+            "Name": null
+        },
+        "f23e442e-3637-46de-ac00-b8f5855f67c3": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/ad0893c9-4700-4c51-b4fb-96f7870c66e0.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.019549735575914384,
+                    "Y": -0.038100004541873934,
+                    "Z": -2.6758586714867235e-18
+                },
+                "Max": {
+                    "X": 1.5435502601623536,
+                    "Y": 0.78105,
+                    "Z": 0.762
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "52425d57-3cba-4c22-9b9c-673e85574a44",
+                        "Height": 0.762,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "f23e442e-3637-46de-ac00-b8f5855f67c3",
+            "Name": "M_Desk-mirrored - 1525 x 762mm Student",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "M_Desk-mirrored - 1525 x 762mm Student"
+        },
+        "f2dfac5b-fae3-48f8-9151-eb5b11f9d44f": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.019549790078401567,
+                        "Y": -0.03809992278814316,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": -0.019549790078401567,
+                        "Y": 0.7810500726699829,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.5435501148223878,
+                        "Y": 0.7810500726699829,
+                        "Z": -2.6758586714867235e-18
+                    },
+                    {
+                        "X": 1.5435501148223878,
+                        "Y": -0.03809992278814316,
+                        "Z": -2.6758586714867235e-18
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f2dfac5b-fae3-48f8-9151-eb5b11f9d44f",
+            "Name": null
+        },
+        "cb79dd2a-062b-46e3-b53e-e998526b1b13": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/df06e85d-c6cd-47b9-9eed-af7be7bde662.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.019549790078401567,
+                    "Y": -0.03809992278814316,
+                    "Z": -2.6758586714867235e-18
+                },
+                "Max": {
+                    "X": 1.5435501148223878,
+                    "Y": 0.7810500726699829,
+                    "Z": 0.762
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f2dfac5b-fae3-48f8-9151-eb5b11f9d44f",
+                        "Height": 0.762,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "cb79dd2a-062b-46e3-b53e-e998526b1b13",
+            "Name": "M_Desk-mirrored - 1830 x 915mm",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "M_Desk-mirrored - 1830 x 915mm"
+        },
+        "7f5a95ef-fecb-4601-85df-413bbec83579": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -1.8288001453399658,
+                        "Y": -1.371600145339966,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": -1.8288001453399658,
+                        "Y": 1.371600145339966,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": 1.8288000000000002,
+                        "Y": 1.371600145339966,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": 1.8288000000000002,
+                        "Y": -1.371600145339966,
+                        "Z": -5.755614929971176e-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "7f5a95ef-fecb-4601-85df-413bbec83579",
+            "Name": null
+        },
+        "8205c102-5c63-4f0f-910f-23734d7d6ef1": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/835af57d-a6ce-4678-a0ed-e5261b2f0486.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -1.8288001453399658,
+                    "Y": -1.371600145339966,
+                    "Z": -5.755614929971176e-15
+                },
+                "Max": {
+                    "X": 1.8288000000000002,
+                    "Y": 1.371600145339966,
+                    "Z": 0.012700000378489494
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "7f5a95ef-fecb-4601-85df-413bbec83579",
+                        "Height": 0.01270000037849525,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "8205c102-5c63-4f0f-910f-23734d7d6ef1",
+            "Name": "Mitchell Gold Bob Williams - Lorenzo Rug-mirrored - 144_ x 108_",
+            "Part List": "1 x MGB388RUG",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Mitchell Gold Bob Williams - Lorenzo Rug-mirrored - 144_ x 108_"
+        },
+        "f547b322-6800-4b1c-9678-b153be0f363f": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.17556722688674928,
+                        "Y": -0.1334232331752777,
+                        "Z": -0.00018187613035552204
+                    },
+                    {
+                        "X": -0.17556722688674928,
+                        "Y": 0.13342326951026917,
+                        "Z": -0.00018187613035552204
+                    },
+                    {
+                        "X": 0.23960219907760621,
+                        "Y": 0.13342326951026917,
+                        "Z": -0.00018187613035552204
+                    },
+                    {
+                        "X": 0.23960219907760621,
+                        "Y": -0.1334232331752777,
+                        "Z": -0.00018187613035552204
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f547b322-6800-4b1c-9678-b153be0f363f",
+            "Name": null
+        },
+        "f5a77214-db9a-4d84-9b97-83ec99932e84": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/06e368c4-6d91-4cc6-a5a0-5a86e9bb81b8.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.17556722688674928,
+                    "Y": -0.1334232331752777,
+                    "Z": -0.00018187613035552204
+                },
+                "Max": {
+                    "X": 0.23960219907760621,
+                    "Y": 0.13342326951026917,
+                    "Z": 0.3255151963233948
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f547b322-6800-4b1c-9678-b153be0f363f",
+                        "Height": 0.32569707245375035,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "f5a77214-db9a-4d84-9b97-83ec99932e84",
+            "Name": "Roger Stevens - Gleewood-mirrored - 20.7_ x 10.51_",
+            "Part List": "1 x RS2RS006",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Roger Stevens - Gleewood-mirrored - 20.7_ x 10.51_"
+        },
+        "120a2a1d-1f63-427e-9319-cd62ac65527c": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.4953001090049744,
+                        "Y": 1.3364317294417562e-08,
+                        "Z": 8.940695918226993e-08
+                    },
+                    {
+                        "X": -0.4953001090049744,
+                        "Y": 0.1397010749101639,
+                        "Z": 8.940695918226993e-08
+                    },
+                    {
+                        "X": -9.972830289370904e-08,
+                        "Y": 0.1397010749101639,
+                        "Z": 8.940695918226993e-08
+                    },
+                    {
+                        "X": -9.972830289370904e-08,
+                        "Y": 1.3364317294417562e-08,
+                        "Z": 8.940695918226993e-08
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "120a2a1d-1f63-427e-9319-cd62ac65527c",
+            "Name": null
+        },
+        "5adcdb97-e7d8-441a-ac33-b66b2f8d877b": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/7aa27406-be52-48ce-b04e-40bd3f4f59eb.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.4953001090049744,
+                    "Y": 1.3364317294417562e-08,
+                    "Z": 8.940695918226993e-08
+                },
+                "Max": {
+                    "X": -9.972830289370904e-08,
+                    "Y": 0.1397010749101639,
+                    "Z": 0.5206339914321899
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "120a2a1d-1f63-427e-9319-cd62ac65527c",
+                        "Height": 0.5206339020252307,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "5adcdb97-e7d8-441a-ac33-b66b2f8d877b",
+            "Name": "RS2RS009-mirrored - 0.495 m x 0.14 m",
+            "Part List": "1 x RS2RS009",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "RS2RS009-mirrored - 0.495 m x 0.14 m"
+        },
+        "6a3db4df-a23f-460d-8c49-7e7ba1632c63": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.19969680418968203,
+                        "Y": 1.5870427878326155e-07,
+                        "Z": 1.4901161307534494e-07
+                    },
+                    {
+                        "X": -0.19969680418968203,
+                        "Y": 0.26670016350746156,
+                        "Z": 1.4901161307534494e-07
+                    },
+                    {
+                        "X": -2.694733909720526e-07,
+                        "Y": 0.26670016350746156,
+                        "Z": 1.4901161307534494e-07
+                    },
+                    {
+                        "X": -2.694733909720526e-07,
+                        "Y": 1.5870427878326155e-07,
+                        "Z": 1.4901161307534494e-07
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "6a3db4df-a23f-460d-8c49-7e7ba1632c63",
+            "Name": null
+        },
+        "dcd7a969-e2b2-4172-a204-b3c22b00b37f": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/74d8187b-aac5-48b5-9913-c89cac90c822.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.19969680418968203,
+                    "Y": 1.5870427878326155e-07,
+                    "Z": 1.4901161307534494e-07
+                },
+                "Max": {
+                    "X": -2.694733909720526e-07,
+                    "Y": 0.26670016350746156,
+                    "Z": 0.5378177899360657
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "6a3db4df-a23f-460d-8c49-7e7ba1632c63",
+                        "Height": 0.5378176409244526,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "dcd7a969-e2b2-4172-a204-b3c22b00b37f",
+            "Name": "RS2RS011-mirrored - 0.2 m x 0.267 m",
+            "Part List": "1 x RS2RS011",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "RS2RS011-mirrored - 0.2 m x 0.267 m"
+        },
+        "db287b02-83aa-4775-9570-25fd7fe59563": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3026119976520538,
+                        "Y": -0.11513511435985566,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": -0.3026119976520538,
+                        "Y": 0.11513513252735139,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": 0.3026121066570282,
+                        "Y": 0.11513513252735139,
+                        "Z": -5.755614929971176e-15
+                    },
+                    {
+                        "X": 0.3026121066570282,
+                        "Y": -0.11513511435985566,
+                        "Z": -5.755614929971176e-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "db287b02-83aa-4775-9570-25fd7fe59563",
+            "Name": null
+        },
+        "4ccdd290-ef95-41a2-a6a1-f9d9221ca436": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/73897121-0ab8-458c-9aad-27224fb424ca.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.3026119976520538,
+                    "Y": -0.11513511435985566,
+                    "Z": -5.755614929971176e-15
+                },
+                "Max": {
+                    "X": 0.3026121066570282,
+                    "Y": 0.11513513252735139,
+                    "Z": 0.3386107995986939
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "db287b02-83aa-4775-9570-25fd7fe59563",
+                        "Height": 0.33861079959869966,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "4ccdd290-ef95-41a2-a6a1-f9d9221ca436",
+            "Name": "SAH21-mirrored - 0.605 m x 0.23 m",
+            "Part List": "1 x SAH21",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "SAH21-mirrored - 0.605 m x 0.23 m"
+        },
+        "fea113c0-8199-4766-9f7f-95c2f2b79789": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -2.9071125682094136e-07,
+                        "Y": -0.4318000605583191,
+                        "Z": -1.1511242252373184e-14
+                    },
+                    {
+                        "X": -2.9071125682094136e-07,
+                        "Y": 5.367593037135521e-08,
+                        "Z": -1.1511242252373184e-14
+                    },
+                    {
+                        "X": 0.43173847274780275,
+                        "Y": 5.367593037135521e-08,
+                        "Z": -1.1511242252373184e-14
+                    },
+                    {
+                        "X": 0.43173847274780275,
+                        "Y": -0.4318000605583191,
+                        "Z": -1.1511242252373184e-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "fea113c0-8199-4766-9f7f-95c2f2b79789",
+            "Name": null
+        },
+        "36574d3d-f9d4-479d-b7df-2d861656c5b2": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/857da128-20b4-49cc-ab88-44219bf49872.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -2.9071125682094136e-07,
+                    "Y": -0.4318000605583191,
+                    "Z": -1.1511242252373184e-14
+                },
+                "Max": {
+                    "X": 0.43173847274780275,
+                    "Y": 5.367593037135521e-08,
+                    "Z": 0.43491426000595096
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "fea113c0-8199-4766-9f7f-95c2f2b79789",
+                        "Height": 0.43491426000596245,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "36574d3d-f9d4-479d-b7df-2d861656c5b2",
+            "Name": "Steelcase - B-Free - Seating - Cube-mirrored - Small - Glide",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Steelcase - B-Free - Seating - Cube-mirrored - Small - Glide"
+        },
+        "ada322f2-17fb-4c38-a3d2-6020910625fa": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.5244459680557251,
+                        "Y": -0.11430000000000001,
+                        "Z": 0.6849109554290772
+                    },
+                    {
+                        "X": -0.5244459680557251,
+                        "Y": 1.698396960136961e-09,
+                        "Z": 0.6849109554290772
+                    },
+                    {
+                        "X": -0.01644614594578743,
+                        "Y": 1.698396960136961e-09,
+                        "Z": 0.6849109554290772
+                    },
+                    {
+                        "X": -0.01644614594578743,
+                        "Y": -0.11430000000000001,
+                        "Z": 0.6849109554290772
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "ada322f2-17fb-4c38-a3d2-6020910625fa",
+            "Name": null
+        },
+        "25cb775d-c587-4a7b-ac8f-6fa1ee85d459": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/107d95c7-02b4-4ba4-973e-4cc8ebaa21e6.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.5244459680557251,
+                    "Y": -0.11430000000000001,
+                    "Z": 0.6849109554290772
+                },
+                "Max": {
+                    "X": -0.01644614594578743,
+                    "Y": 1.698396960136961e-09,
+                    "Z": 0.6880859796524048
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "ada322f2-17fb-4c38-a3d2-6020910625fa",
+                        "Height": 0.003175024223327605,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "25cb775d-c587-4a7b-ac8f-6fa1ee85d459",
+            "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket-mirrored - Bracket",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Draw in Foreground": 1,
+            "Height": 2.2575000000000003,
+            "HyFamilyTypeName": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket-mirrored - Bracket"
+        },
+        "c40ed948-1757-4cd9-935d-ee3ffa214789": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -1.8455786270141603,
+                        "Y": 7.725048938300461e-05,
+                        "Z": -1.6919798895287387e-17
+                    },
+                    {
+                        "X": -1.8455786270141603,
+                        "Y": 0.8338278104782105,
+                        "Z": -1.6919798895287387e-17
+                    },
+                    {
+                        "X": 0.4870563898086548,
+                        "Y": 0.8338278104782105,
+                        "Z": -1.6919798895287387e-17
+                    },
+                    {
+                        "X": 0.4870563898086548,
+                        "Y": 7.725048938300461e-05,
+                        "Z": -1.6919798895287387e-17
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "c40ed948-1757-4cd9-935d-ee3ffa214789",
+            "Name": null
+        },
+        "e2989dd6-b132-48c5-97cc-54b60baea759": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/e740cd44-5dd3-4089-9d3e-9df38034f617.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -1.8455786270141603,
+                    "Y": 7.725048938300461e-05,
+                    "Z": -1.6919798895287387e-17
+                },
+                "Max": {
+                    "X": 0.4870563898086548,
+                    "Y": 0.8338278104782105,
+                    "Z": 0.735117120552063
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "c40ed948-1757-4cd9-935d-ee3ffa214789",
+                        "Height": 0.735117120552063,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "e2989dd6-b132-48c5-97cc-54b60baea759",
+            "Name": "Steelcase - Media Scape - Lounge - Corner Left-mirrored - Same Upholstery",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Canopy (Opaque)": 0,
+            "HyFamilyTypeName": "Steelcase - Media Scape - Lounge - Corner Left-mirrored - Same Upholstery"
+        },
+        "406c981a-702e-4483-b517-d9ffd7132986": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.4870571891784668,
+                        "Y": 7.725048938300461e-05,
+                        "Z": -6.852518552591391e-16
+                    },
+                    {
+                        "X": -0.4870571891784668,
+                        "Y": 0.8338278104782105,
+                        "Z": -6.852518552591391e-16
+                    },
+                    {
+                        "X": 1.8441307502746582,
+                        "Y": 0.8338278104782105,
+                        "Z": -6.852518552591391e-16
+                    },
+                    {
+                        "X": 1.8441307502746582,
+                        "Y": 7.725048938300461e-05,
+                        "Z": -6.852518552591391e-16
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "406c981a-702e-4483-b517-d9ffd7132986",
+            "Name": null
+        },
+        "7ce779ce-0769-4cd8-a5aa-43cbc4fe0e28": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/0446c9e8-d9c8-48ca-9b07-4d307172081b.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.4870571891784668,
+                    "Y": 7.725048938300461e-05,
+                    "Z": -6.852518552591391e-16
+                },
+                "Max": {
+                    "X": 1.8441307502746582,
+                    "Y": 0.8338278104782105,
+                    "Z": 0.735117120552063
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "406c981a-702e-4483-b517-d9ffd7132986",
+                        "Height": 0.7351171205520637,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "7ce779ce-0769-4cd8-a5aa-43cbc4fe0e28",
+            "Name": "Steelcase - Media Scape - Lounge - Corner Right-mirrored - Same Upholstery",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Canopy (Opaque)": 0,
+            "HyFamilyTypeName": "Steelcase - Media Scape - Lounge - Corner Right-mirrored - Same Upholstery"
+        },
+        "98078495-6a07-4dd1-8c6f-0933b9ce57a3": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.34305624046325683,
+                        "Y": -0.656045711517334,
+                        "Z": 1.7116491557445101e-13
+                    },
+                    {
+                        "X": -0.34305624046325683,
+                        "Y": 0.03642128705978394,
+                        "Z": 1.7116491557445101e-13
+                    },
+                    {
+                        "X": 0.3775125675201416,
+                        "Y": 0.03642128705978394,
+                        "Z": 1.7116491557445101e-13
+                    },
+                    {
+                        "X": 0.3775125675201416,
+                        "Y": -0.656045711517334,
+                        "Z": 1.7116491557445101e-13
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "98078495-6a07-4dd1-8c6f-0933b9ce57a3",
+            "Name": null
+        },
+        "d83d343a-e97c-4e41-be12-e20387e231c8": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/ca01853e-d98c-4d8d-b65f-52d2af59a30f.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.34305624046325683,
+                    "Y": -0.656045711517334,
+                    "Z": 1.7116491557445101e-13
+                },
+                "Max": {
+                    "X": 0.3775125675201416,
+                    "Y": 0.03642128705978394,
+                    "Z": 1.0258332418441773
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "98078495-6a07-4dd1-8c6f-0933b9ce57a3",
+                        "Height": 1.0258332418440061,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "d83d343a-e97c-4e41-be12-e20387e231c8",
+            "Name": "Steelcase - Seating - Think 465 Series - Value Package Work Chair-mirrored - Upholstery Back_Adjustable Arm_Caster",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Adjustable Arm(Opaque)": 1,
+            "HyFamilyTypeName": "Steelcase - Seating - Think 465 Series - Value Package Work Chair-mirrored - Upholstery Back_Adjustable Arm_Caster"
+        },
+        "035831d9-387f-45fc-813f-8e374b7f32b5": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.12684261195659638,
+                        "Y": -0.09977721276283265,
+                        "Z": -0.0011984165847301483
+                    },
+                    {
+                        "X": -0.12684261195659638,
+                        "Y": 0.13915413336753846,
+                        "Z": -0.0011984165847301483
+                    },
+                    {
+                        "X": 0.09827853062152864,
+                        "Y": 0.13915413336753846,
+                        "Z": -0.0011984165847301483
+                    },
+                    {
+                        "X": 0.09827853062152864,
+                        "Y": -0.09977721276283265,
+                        "Z": -0.0011984165847301483
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "035831d9-387f-45fc-813f-8e374b7f32b5",
+            "Name": null
+        },
+        "e2017dcf-96ba-4c40-8ca0-79479a5ff22c": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/6fd23918-a8f9-4a24-b54e-714536e9da94.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.12684261195659638,
+                    "Y": -0.09977721276283265,
+                    "Z": -0.0011984165847301483
+                },
+                "Max": {
+                    "X": 0.09827853062152864,
+                    "Y": 0.13915413336753846,
+                    "Z": 0.7644065391540528
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "035831d9-387f-45fc-813f-8e374b7f32b5",
+                        "Height": 0.765604955738783,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "e2017dcf-96ba-4c40-8ca0-79479a5ff22c",
+            "Name": "Steelcase - Thread - Power Hub-mirrored - NEMA - 30H",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cable Length": 0.04166666666666667,
+            "Actual Cable Length": 0.04166666666666667,
+            "HyFamilyTypeName": "Steelcase - Thread - Power Hub-mirrored - NEMA - 30H"
+        },
+        "7dbdd2ad-d9b0-453c-a639-8f8fdf7eb997": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.7112005571365356,
+                        "Y": -0.008815271450579167,
+                        "Z": 0.02540000075697899
+                    },
+                    {
+                        "X": -0.7112005571365356,
+                        "Y": 0.00881504776328802,
+                        "Z": 0.02540000075697899
+                    },
+                    {
+                        "X": 0.6220459699630737,
+                        "Y": 0.00881504776328802,
+                        "Z": 0.02540000075697899
+                    },
+                    {
+                        "X": 0.6220459699630737,
+                        "Y": -0.008815271450579167,
+                        "Z": 0.02540000075697899
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "7dbdd2ad-d9b0-453c-a639-8f8fdf7eb997",
+            "Name": null
+        },
+        "7b2d59e0-95b6-43e9-b01b-294c900bc397": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/e7c4dd66-9a19-4ac7-a53f-13cdd8f80d37.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.7112005571365356,
+                    "Y": -0.008815271450579167,
+                    "Z": 0.02540000075697899
+                },
+                "Max": {
+                    "X": 0.6220459699630737,
+                    "Y": 0.00881504776328802,
+                    "Z": 2.439434529876709
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "7dbdd2ad-d9b0-453c-a639-8f8fdf7eb997",
+                        "Height": 2.4140345291197303,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "7b2d59e0-95b6-43e9-b01b-294c900bc397",
+            "Name": "Steelcase AMQ - 3F Hanging Panel - Shimmer-mirrored - 28W",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Elevation Height": 7.916666666666669,
+            "HyFamilyTypeName": "Steelcase AMQ - 3F Hanging Panel - Shimmer-mirrored - 28W"
+        },
+        "5182f254-cf34-44f7-996c-65d8688c3777": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.15316241712570192,
+                        "Y": -0.06116064727306366,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": -0.15316241712570192,
+                        "Y": 0.001183220680989325,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1516375828742981,
+                        "Y": 0.001183220680989325,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1516375828742981,
+                        "Y": -0.06116064727306366,
+                        "Z": 0.7059932441711426
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "5182f254-cf34-44f7-996c-65d8688c3777",
+            "Name": null
+        },
+        "7b8acfab-79d1-4782-a3d4-e023fd7a4680": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/8aa399a1-b1fb-427a-ac2e-f088d256b739.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.15316241712570192,
+                    "Y": -0.06116064727306366,
+                    "Z": 0.7059932441711426
+                },
+                "Max": {
+                    "X": 0.1516375828742981,
+                    "Y": 0.001183220680989325,
+                    "Z": 0.7418073371887207
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "5182f254-cf34-44f7-996c-65d8688c3777",
+                        "Height": 0.0358140930175781,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "7b8acfab-79d1-4782-a3d4-e023fd7a4680",
+            "Name": "Steelcase PolyVision - Sans - Accessories-mirrored - Magnetic Marker Tray",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Magnetic Marker Tray(Opaque)": 1,
+            "HyFamilyTypeName": "Steelcase PolyVision - Sans - Accessories-mirrored - Magnetic Marker Tray"
+        },
+        "89911ee8-9aca-44fd-9218-fdd69285fe26": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.7722175449371338,
+                        "Y": -0.21012180376052858,
+                        "Z": 0.04248445712327957
+                    },
+                    {
+                        "X": -0.7722175449371338,
+                        "Y": 0.19849889402389528,
+                        "Z": 0.04248445712327957
+                    },
+                    {
+                        "X": 0.9014314601898193,
+                        "Y": 0.19849889402389528,
+                        "Z": 0.04248445712327957
+                    },
+                    {
+                        "X": 0.9014314601898193,
+                        "Y": -0.21012180376052858,
+                        "Z": 0.04248445712327957
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "89911ee8-9aca-44fd-9218-fdd69285fe26",
+            "Name": null
+        },
+        "49bef7db-f963-422d-bb65-d3c30d369fd1": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/57fe7c58-337e-4aac-bee7-6552111eb748.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.7722175449371338,
+                    "Y": -0.21012180376052858,
+                    "Z": 0.04248445712327957
+                },
+                "Max": {
+                    "X": 0.9014314601898193,
+                    "Y": 0.19849889402389528,
+                    "Z": 0.06590545213222504
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "89911ee8-9aca-44fd-9218-fdd69285fe26",
+                        "Height": 0.02342099500894547,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "49bef7db-f963-422d-bb65-d3c30d369fd1",
+            "Name": "Viccarbe - Levitt Sofa - Large-mirrored - 2.289 m x 0.98 m",
+            "Part List": "1 x VCBSOFA244",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Viccarbe - Levitt Sofa - Large-mirrored - 2.289 m x 0.98 m"
+        },
+        "5617d67f-f6cc-4e27-aa26-4d95870d69af": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.11575543441772461,
+                        "Y": -0.112911004114151,
+                        "Z": -0.06632235528230668
+                    },
+                    {
+                        "X": -0.11575543441772461,
+                        "Y": 0.07467580161094665,
+                        "Z": -0.06632235528230668
+                    },
+                    {
+                        "X": 0.09301089248657227,
+                        "Y": 0.07467580161094665,
+                        "Z": -0.06632235528230668
+                    },
+                    {
+                        "X": 0.09301089248657227,
+                        "Y": -0.112911004114151,
+                        "Z": -0.06632235528230668
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "5617d67f-f6cc-4e27-aa26-4d95870d69af",
+            "Name": null
+        },
+        "c3fcc889-f65c-43bb-ab4d-a04e216fb904": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/1b51f1c8-36d1-4578-9988-e63b5c5bae36.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.11575543441772461,
+                    "Y": -0.112911004114151,
+                    "Z": -0.06632235528230668
+                },
+                "Max": {
+                    "X": 0.09301089248657227,
+                    "Y": 0.07467580161094665,
+                    "Z": 0.167084041929245
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "5617d67f-f6cc-4e27-aa26-4d95870d69af",
+                        "Height": 0.23340639721155168,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "c3fcc889-f65c-43bb-ab4d-a04e216fb904",
+            "Name": "Zanzibar Gem 2-mirrored - 0.532 m x 0.473 m",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Zanzibar Gem 2-mirrored - 0.532 m x 0.473 m"
+        },
+        "7aa115fa-ee78-4d24-a8df-a84caf1b70b5": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "5938375c-1d7c-4e61-b783-720d417b5a3e",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        1.9866650304620581,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.8505246297103013,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "7aa115fa-ee78-4d24-a8df-a84caf1b70b5",
+            "Name": "Block 2 x Company Steelcase-mirrored - 0.167 m x 0.105 m"
+        },
+        "411e9236-170a-45c4-aaec-a55cc3d0b87b": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "93851363-0cda-42ff-af22-5aaa1ea6f382",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        2.6326208856472997,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.8462467763647044,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "411e9236-170a-45c4-aaec-a55cc3d0b87b",
+            "Name": "Blu Dot - Nesting Bowl - Set of 3-mirrored - 17.84_ x 13.47_"
+        },
+        "9452696f-286a-48ae-b47d-d49e00fbcb23": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "c2005519-257f-4134-a571-513d497e303f",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        2.9919605666775,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.8334132163279113,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "9452696f-286a-48ae-b47d-d49e00fbcb23",
+            "Name": "Lysol 2-mirrored - 0.088 m x 0.088 m"
+        },
+        "45f5b98e-85d1-4555-bf8a-95ec939945c0": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "9ebe6693-20c7-41a6-ab5d-31353498949d",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        3.1801861138837966,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.482629241988906,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "45f5b98e-85d1-4555-bf8a-95ec939945c0",
+            "Name": "M_Desk-mirrored - 1525 x 762mm"
+        },
+        "385f2165-b213-4d42-972f-04405a9c1c94": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "f23e442e-3637-46de-ac00-b8f5855f67c3",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        4.925550278887628,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.4954628020256986,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "385f2165-b213-4d42-972f-04405a9c1c94",
+            "Name": "M_Desk-mirrored - 1525 x 762mm Student"
+        },
+        "b0152b77-cec2-411f-b9fa-d1a277405afb": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "cb79dd2a-062b-46e3-b53e-e998526b1b13",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        6.820639310987382,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.499740655371296,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "b0152b77-cec2-411f-b9fa-d1a277405afb",
+            "Name": "M_Desk-mirrored - 1830 x 915mm"
+        },
+        "ff5597ce-58ef-48de-85b8-6d1279476171": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "8205c102-5c63-4f0f-910f-23734d7d6ef1",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        3.306395789919113,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.7217030361934617,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "ff5597ce-58ef-48de-85b8-6d1279476171",
+            "Name": "Mitchell Gold Bob Williams - Lorenzo Rug-mirrored - 144_ x 108_"
+        },
+        "bd532ee1-e3a1-4941-aad0-d81b51943776": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "f5a77214-db9a-4d84-9b97-83ec99932e84",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        5.953394787043873,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.756619937324946,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "bd532ee1-e3a1-4941-aad0-d81b51943776",
+            "Name": "Roger Stevens - Gleewood-mirrored - 20.7_ x 10.51_"
+        },
+        "34cd038a-5420-4726-9364-d476b9e40a4e": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "5adcdb97-e7d8-441a-ac33-b66b2f8d877b",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        7.266943161556912,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.6372064487328508,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "34cd038a-5420-4726-9364-d476b9e40a4e",
+            "Name": "RS2RS009-mirrored - 0.495 m x 0.14 m"
+        },
+        "6a56ec93-ed43-49fc-9cf9-54b88ad57311": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "dcd7a969-e2b2-4172-a204-b3c22b00b37f",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        8.043130837405526,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.6372064487328508,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "6a56ec93-ed43-49fc-9cf9-54b88ad57311",
+            "Name": "RS2RS011-mirrored - 0.2 m x 0.267 m"
+        },
+        "66a0bccd-370f-42a3-9845-b358ad9e91db": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "4ccdd290-ef95-41a2-a6a1-f9d9221ca436",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        8.978536498043598,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.6372064487328508,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "66a0bccd-370f-42a3-9845-b358ad9e91db",
+            "Name": "SAH21-mirrored - 0.605 m x 0.23 m"
+        },
+        "b3688fab-ab60-43d2-8797-cbab0bf21a70": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "36574d3d-f9d4-479d-b7df-2d861656c5b2",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        11.207588285096028,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.8959356740157223,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "b3688fab-ab60-43d2-8797-cbab0bf21a70",
+            "Name": "Steelcase - B-Free - Seating - Cube-mirrored - Small - Glide"
+        },
+        "9a1226f2-d9ea-4429-af76-6229e35b3980": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "25cb775d-c587-4a7b-ac8f-6fa1ee85d459",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        6.391244245214886,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.060041253871061,
+                        0.0,
+                        0.0,
+                        1.0,
+                        -5.989608808931734e-14
+                    ]
+                }
+            },
+            "Id": "9a1226f2-d9ea-4429-af76-6229e35b3980",
+            "Name": "Steelcase - Elective Elements - Worksurface Support - Flush Mount Bracket-mirrored - Bracket"
+        },
+        "7f370808-b809-4c34-b308-3c769fc7c661": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "e2989dd6-b132-48c5-97cc-54b60baea759",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        8.57558462926981,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.1445378413316707,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "7f370808-b809-4c34-b308-3c769fc7c661",
+            "Name": "Steelcase - Media Scape - Lounge - Corner Left-mirrored - Same Upholstery"
+        },
+        "7bde7991-2359-4f6f-b021-27677e707fcf": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "7ce779ce-0769-4cd8-a5aa-43cbc4fe0e28",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        10.749836578826333,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.1445378413316707,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "7bde7991-2359-4f6f-b021-27677e707fcf",
+            "Name": "Steelcase - Media Scape - Lounge - Corner Right-mirrored - Same Upholstery"
+        },
+        "c702148c-207f-404f-bb0f-70bd4d84f0f5": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "d83d343a-e97c-4e41-be12-e20387e231c8",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        9.277070219523836,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.1895818004300778,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "c702148c-207f-404f-bb0f-70bd4d84f0f5",
+            "Name": "Steelcase - Seating - Think 465 Series - Value Package Work Chair-mirrored - Upholstery Back_Adjustable Arm_Caster"
+        },
+        "bb4c0071-7d65-48fa-9106-cc355ec2e54e": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "e2017dcf-96ba-4c40-8ca0-79479a5ff22c",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        10.252280376359273,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.0900705599366662,
+                        0.0,
+                        0.0,
+                        1.0,
+                        -8.890570000747924e-05
+                    ]
+                }
+            },
+            "Id": "bb4c0071-7d65-48fa-9106-cc355ec2e54e",
+            "Name": "Steelcase - Thread - Power Hub-mirrored - NEMA - 30H"
+        },
+        "77e066f5-9033-4026-9e76-fa4349683b68": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "7b2d59e0-95b6-43e9-b01b-294c900bc397",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        11.625535495168357,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.129875056134031,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "77e066f5-9033-4026-9e76-fa4349683b68",
+            "Name": "Steelcase AMQ - 3F Hanging Panel - Shimmer-mirrored - 28W"
+        },
+        "67f884a0-1ac4-4acd-8204-f3e60354f985": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "7b8acfab-79d1-4782-a3d4-e023fd7a4680",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        12.600745652003797,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.1099728080353484,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "67f884a0-1ac4-4acd-8204-f3e60354f985",
+            "Name": "Steelcase PolyVision - Sans - Accessories-mirrored - Magnetic Marker Tray"
+        },
+        "6ff360b9-f398-4cd8-8793-c1a0783cc1e8": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "49bef7db-f963-422d-bb65-d3c30d369fd1",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        14.491459221378625,
+                        0.0,
+                        1.0,
+                        0.0,
+                        2.7318300941603835,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "6ff360b9-f398-4cd8-8793-c1a0783cc1e8",
+            "Name": "Viccarbe - Levitt Sofa - Large-mirrored - 2.289 m x 0.98 m"
+        },
+        "77d20f50-f7ac-44f1-ae46-ba6c942b346d": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "c3fcc889-f65c-43bb-ab4d-a04e216fb904",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        13.476444568345823,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.4978907120420752,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "77d20f50-f7ac-44f1-ae46-ba6c942b346d",
+            "Name": "Zanzibar Gem 2-mirrored - 0.532 m x 0.473 m"
+        },
+        "f63fa205-7806-4821-90d8-d5bf5837bc89": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": 0.005189775654673576,
+                        "Y": -0.11876449856758119,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": 0.005189775654673576,
+                        "Y": -0.005312414199113846,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": 0.22007375807762147,
+                        "Y": -0.005312414199113846,
+                        "Z": -5.805739730928208e-15
+                    },
+                    {
+                        "X": 0.22007375807762147,
+                        "Y": -0.11876449856758119,
+                        "Z": -5.805739730928208e-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f63fa205-7806-4821-90d8-d5bf5837bc89",
+            "Name": null
+        },
+        "5df8163b-21d3-41e1-84ba-7be47321fa83": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/45069635-6c05-4603-8d7c-0c20345b4805.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": 0.005189775654673576,
+                    "Y": -0.11876449856758119,
+                    "Z": -5.805739730928208e-15
+                },
+                "Max": {
+                    "X": 0.22007375807762147,
+                    "Y": -0.005312414199113846,
+                    "Z": 0.11117201142311096
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f63fa205-7806-4821-90d8-d5bf5837bc89",
+                        "Height": 0.11117201142311676,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "5df8163b-21d3-41e1-84ba-7be47321fa83",
+            "Name": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111"
+        },
+        "58e80d8a-c79e-4236-913b-a49b06ac9367": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "5df8163b-21d3-41e1-84ba-7be47321fa83",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        1.2420029925187037,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.0259571072319207,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "58e80d8a-c79e-4236-913b-a49b06ac9367",
+            "Name": "Stak Ceramics - Sprout Planter Dock-mirrored111 - Stak Ceramics - Sprout Planter Dock-mirrored111"
+        },
+        "8ac03dfc-b92a-4438-ab3b-907e955cf971": {
+            "discriminator": "Elements.ContentCatalog",
+            "Content": [
+                "5938375c-1d7c-4e61-b783-720d417b5a3e",
+                "93851363-0cda-42ff-af22-5aaa1ea6f382",
+                "c2005519-257f-4134-a571-513d497e303f",
+                "9ebe6693-20c7-41a6-ab5d-31353498949d",
+                "f23e442e-3637-46de-ac00-b8f5855f67c3",
+                "cb79dd2a-062b-46e3-b53e-e998526b1b13",
+                "8205c102-5c63-4f0f-910f-23734d7d6ef1",
+                "f5a77214-db9a-4d84-9b97-83ec99932e84",
+                "5adcdb97-e7d8-441a-ac33-b66b2f8d877b",
+                "dcd7a969-e2b2-4172-a204-b3c22b00b37f",
+                "4ccdd290-ef95-41a2-a6a1-f9d9221ca436",
+                "36574d3d-f9d4-479d-b7df-2d861656c5b2",
+                "25cb775d-c587-4a7b-ac8f-6fa1ee85d459",
+                "e2989dd6-b132-48c5-97cc-54b60baea759",
+                "7ce779ce-0769-4cd8-a5aa-43cbc4fe0e28",
+                "d83d343a-e97c-4e41-be12-e20387e231c8",
+                "e2017dcf-96ba-4c40-8ca0-79479a5ff22c",
+                "7b2d59e0-95b6-43e9-b01b-294c900bc397",
+                "7b8acfab-79d1-4782-a3d4-e023fd7a4680",
+                "49bef7db-f963-422d-bb65-d3c30d369fd1",
+                "c3fcc889-f65c-43bb-ab4d-a04e216fb904",
+                "5df8163b-21d3-41e1-84ba-7be47321fa83"
+            ],
+            "ReferenceConfiguration": [
+                "7aa115fa-ee78-4d24-a8df-a84caf1b70b5",
+                "411e9236-170a-45c4-aaec-a55cc3d0b87b",
+                "9452696f-286a-48ae-b47d-d49e00fbcb23",
+                "45f5b98e-85d1-4555-bf8a-95ec939945c0",
+                "385f2165-b213-4d42-972f-04405a9c1c94",
+                "b0152b77-cec2-411f-b9fa-d1a277405afb",
+                "ff5597ce-58ef-48de-85b8-6d1279476171",
+                "bd532ee1-e3a1-4941-aad0-d81b51943776",
+                "34cd038a-5420-4726-9364-d476b9e40a4e",
+                "6a56ec93-ed43-49fc-9cf9-54b88ad57311",
+                "66a0bccd-370f-42a3-9845-b358ad9e91db",
+                "b3688fab-ab60-43d2-8797-cbab0bf21a70",
+                "9a1226f2-d9ea-4429-af76-6229e35b3980",
+                "7f370808-b809-4c34-b308-3c769fc7c661",
+                "7bde7991-2359-4f6f-b021-27677e707fcf",
+                "c702148c-207f-404f-bb0f-70bd4d84f0f5",
+                "bb4c0071-7d65-48fa-9106-cc355ec2e54e",
+                "77e066f5-9033-4026-9e76-fa4349683b68",
+                "67f884a0-1ac4-4acd-8204-f3e60354f985",
+                "6ff360b9-f398-4cd8-8793-c1a0783cc1e8",
+                "77d20f50-f7ac-44f1-ae46-ba6c942b346d",
+                "58e80d8a-c79e-4236-913b-a49b06ac9367"
+            ],
+            "Id": "8ac03dfc-b92a-4438-ab3b-907e955cf971",
+            "Name": "catalog"
+        }
+    }
+}
