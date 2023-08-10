@@ -1,0 +1,3337 @@
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "9babb829-9b96-4e73-97f4-9658d4d6c31c": {
+            "Color": {
+                "Red": 1.0,
+                "Green": 1.0,
+                "Blue": 1.0,
+                "Alpha": 1.0
+            },
+            "SpecularFactor": 0.0,
+            "GlossinessFactor": 0.0,
+            "Unlit": false,
+            "DoubleSided": false,
+            "RepeatTexture": false,
+            "InterpolateTexture": false,
+            "EmissiveFactor": 0.0,
+            "Draw In Front": false,
+            "EdgeDisplaySettings": null,
+            "Id": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Name": "default",
+            "discriminator": "Elements.Material"
+        },
+        "cdb3eb69-ddaa-461b-8770-1cc4318c9731": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081837324142456,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081837324142456,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135868396759037,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135868396759037,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "cdb3eb69-ddaa-461b-8770-1cc4318c9731",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "23c944c2-4dec-47d8-87b8-4435b34a6c69": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081837324142456,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081837324142456,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135868396759037,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135868396759037,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "23c944c2-4dec-47d8-87b8-4435b34a6c69",
+            "Name": null
+        },
+        "517c8336-7b47-4371-82fd-7672435d444b": {
+            "gltfLocation": "https://hypar.io/user-static/35876710-a388-4c5a-92ca-59807f201366.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.3081837324142456,
+                    "Y": 0.0006781123520806432,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.31135868396759037,
+                    "Y": 0.564850805568695,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "23c944c2-4dec-47d8-87b8-4435b34a6c69",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "517c8336-7b47-4371-82fd-7672435d444b",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "d62948f3-6e25-4ae5-a1e6-1a763fd401ca": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.34311045227050785,
+                        "Y": -0.0670927524805069,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": -0.34311045227050785,
+                        "Y": 0.5971805182456971,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": 0.34231682338714603,
+                        "Y": 0.5971805182456971,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": 0.34231682338714603,
+                        "Y": -0.0670927524805069,
+                        "Z": 1.7239160099435935E-13
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "d62948f3-6e25-4ae5-a1e6-1a763fd401ca",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "dc079f04-3599-4512-9b07-aa509bb104ba": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.34311045227050785,
+                        "Y": -0.0670927524805069,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": -0.34311045227050785,
+                        "Y": 0.5971805182456971,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": 0.34231682338714603,
+                        "Y": 0.5971805182456971,
+                        "Z": 1.7239160099435935E-13
+                    },
+                    {
+                        "X": 0.34231682338714603,
+                        "Y": -0.0670927524805069,
+                        "Z": 1.7239160099435935E-13
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "dc079f04-3599-4512-9b07-aa509bb104ba",
+            "Name": null
+        },
+        "e612a30e-b626-4c2e-875a-f3dedb375017": {
+            "gltfLocation": "https://hypar.io/user-static/96a49510-4f22-4c17-bafb-d7f4c6b2a238.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.34311045227050785,
+                    "Y": -0.0670927524805069,
+                    "Z": 1.7239160099435935E-13
+                },
+                "Max": {
+                    "X": 0.34231682338714603,
+                    "Y": 0.5971805182456971,
+                    "Z": 1.065637716293335
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "dc079f04-3599-4512-9b07-aa509bb104ba",
+                        "Height": 1.0656377162931627,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "e612a30e-b626-4c2e-875a-f3dedb375017",
+            "Name": "Steelcase Turnstone - Shortcut - Stool - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Glide": 0,
+            "Cushion": 1,
+            "Caster": 1
+        },
+        "2675443d-fed1-4af4-9e3c-f0d2237beb25": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": 3.551001150626689E-05,
+                        "Y": -0.9144438199996948,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 3.551001150626689E-05,
+                        "Y": 4.3742530583404004E-05,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 0.9143646823883057,
+                        "Y": 4.3742530583404004E-05,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 0.9143646823883057,
+                        "Y": -0.9144438199996948,
+                        "Z": 5.911354739041031E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "2675443d-fed1-4af4-9e3c-f0d2237beb25",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "9f4248c6-c928-480a-9d41-119bb5c60d8e": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": 3.551001150626689E-05,
+                        "Y": -0.9144438199996948,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 3.551001150626689E-05,
+                        "Y": 4.3742530583404004E-05,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 0.9143646823883057,
+                        "Y": 4.3742530583404004E-05,
+                        "Z": 5.911354739041031E-15
+                    },
+                    {
+                        "X": 0.9143646823883057,
+                        "Y": -0.9144438199996948,
+                        "Z": 5.911354739041031E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "9f4248c6-c928-480a-9d41-119bb5c60d8e",
+            "Name": null
+        },
+        "752736b5-bb9b-46b8-acdc-4abc84ef1953": {
+            "gltfLocation": "https://hypar.io/user-static/796bf77e-4e4f-4c75-9db8-fb42d8067b71.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": 3.551001150626689E-05,
+                    "Y": -0.9144438199996948,
+                    "Z": 5.911354739041031E-15
+                },
+                "Max": {
+                    "X": 0.9143646823883057,
+                    "Y": 4.3742530583404004E-05,
+                    "Z": 1.0668
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "9f4248c6-c928-480a-9d41-119bb5c60d8e",
+                        "Height": 1.066799999999994,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "752736b5-bb9b-46b8-acdc-4abc84ef1953",
+            "Name": "Steelcase Coalesse - Montara650 - Table - Cafe Height - Square - Bar Height - 36D x 36W",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "With Grommet(Control)": 0,
+            "With Grommet": 0,
+            "Grommet Void Height": 3.083333333333334
+        },
+        "2d6549b5-d0e0-4e41-87cd-469fe18a4911": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "2d6549b5-d0e0-4e41-87cd-469fe18a4911",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "f9b92c56-1399-4626-a48d-444742b8640d": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f9b92c56-1399-4626-a48d-444742b8640d",
+            "Name": null
+        },
+        "24ad129f-beec-4a71-80f0-20b9fc2eeb49": {
+            "gltfLocation": "https://hypar.io/user-static/dd15140a-632a-4068-87f3-3b3200a72fb7.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -7.834906657535613E-08,
+                    "Y": -0.7619999273300171,
+                    "Z": -8.793007988394664E-15
+                },
+                "Max": {
+                    "X": 1.8287998546600344,
+                    "Y": 4.39467850355868E-08,
+                    "Z": 0.7239
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f9b92c56-1399-4626-a48d-444742b8640d",
+                        "Height": 0.7239000000000088,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "24ad129f-beec-4a71-80f0-20b9fc2eeb49",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1
+        },
+        "02df053e-4369-439c-b8d9-b9670cad39bb": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.0054327653422951705,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.0054327653422951705,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.174134218788147,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.174134218788147,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "02df053e-4369-439c-b8d9-b9670cad39bb",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "a5da0bc5-3818-4fa9-96bf-2c5d8bd276f3": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.0054327653422951705,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.0054327653422951705,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.174134218788147,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.174134218788147,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "a5da0bc5-3818-4fa9-96bf-2c5d8bd276f3",
+            "Name": null
+        },
+        "8218c090-49b3-468e-b5ef-33be87fee4ac": {
+            "gltfLocation": "https://hypar.io/user-static/f490fb63-c107-4068-9c98-20b8458338ef.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.0054327653422951705,
+                    "Y": -0.020577965873479844,
+                    "Z": 0.0009999999962747098
+                },
+                "Max": {
+                    "X": 1.174134218788147,
+                    "Y": -1.5133412916839006E-07,
+                    "Z": 2.4199999603271487
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "a5da0bc5-3818-4fa9-96bf-2c5d8bd276f3",
+                        "Height": 2.418999960330874,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "8218c090-49b3-468e-b5ef-33be87fee4ac",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "End Trim": 0,
+            "Start Trim": 1,
+            "Center Trim": 0,
+            "Center Joint": 0
+        },
+        "336d4a97-44d4-4150-96e6-55b6fa762d34": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.1516379098892212,
+                        "Y": -0.062343078732490544,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": -0.1516379098892212,
+                        "Y": 2.0829995714848338E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1531620901107788,
+                        "Y": 2.0829995714848338E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1531620901107788,
+                        "Y": -0.062343078732490544,
+                        "Z": 0.7059932441711426
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "336d4a97-44d4-4150-96e6-55b6fa762d34",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "357739d9-2cb0-4bd2-afb8-29d1839047fd": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.1516379098892212,
+                        "Y": -0.062343078732490544,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": -0.1516379098892212,
+                        "Y": 2.0829995714848338E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1531620901107788,
+                        "Y": 2.0829995714848338E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1531620901107788,
+                        "Y": -0.062343078732490544,
+                        "Z": 0.7059932441711426
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "357739d9-2cb0-4bd2-afb8-29d1839047fd",
+            "Name": null
+        },
+        "3a70bb14-f627-4d0f-a99c-f2ebedef5ccd": {
+            "gltfLocation": "https://hypar.io/user-static/53008648-a7b9-43e1-8150-5eed55d22a3a.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.1516379098892212,
+                    "Y": -0.062343078732490544,
+                    "Z": 0.7059932441711426
+                },
+                "Max": {
+                    "X": 0.1531620901107788,
+                    "Y": 2.0829995714848338E-07,
+                    "Z": 0.7418073371887207
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "357739d9-2cb0-4bd2-afb8-29d1839047fd",
+                        "Height": 0.0358140930175781,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "3a70bb14-f627-4d0f-a99c-f2ebedef5ccd",
+            "Name": "Steelcase PolyVision - Sans - Accessories - Magnetic Marker Tray",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.25,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.25,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Magnetic Marker Tray(Opaque)": 1
+        },
+        "c64b7221-f968-44a6-bcfa-18f9750c3131": {
+            "BaseDefinition": "517c8336-7b47-4371-82fd-7672435d444b",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -5.860480280434001,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        2.8588199336227778,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "c64b7221-f968-44a6-bcfa-18f9750c3131",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "31fa03d4-eeee-4710-b7ff-44ee97a542ca": {
+            "BaseDefinition": "e612a30e-b626-4c2e-875a-f3dedb375017",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        0.9396926207859058,
+                        0.34202014332567615,
+                        0.0,
+                        -4.799772098319811,
+                        -0.34202014332567615,
+                        0.9396926207859058,
+                        0.0,
+                        5.772319311246771,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "31fa03d4-eeee-4710-b7ff-44ee97a542ca",
+            "Name": "Steelcase Turnstone - Shortcut - Stool - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "7cacc2ad-d551-47eb-a5c7-674d62554587": {
+            "BaseDefinition": "752736b5-bb9b-46b8-acdc-4abc84ef1953",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        0.7660444431189719,
+                        0.6427876096865467,
+                        0.0,
+                        -5.369749571423498,
+                        -0.6427876096865467,
+                        0.7660444431189719,
+                        0.0,
+                        6.2438006735640075,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "7cacc2ad-d551-47eb-a5c7-674d62554587",
+            "Name": "Steelcase Coalesse - Montara650 - Table - Cafe Height - Square - Bar Height - 36D x 36W",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "8ef723dd-196c-4571-ac06-79d44f6b7e70": {
+            "BaseDefinition": "24ad129f-beec-4a71-80f0-20b9fc2eeb49",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -7.2021579843950745,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.620819933622795,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "8ef723dd-196c-4571-ac06-79d44f6b7e70",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "d3e387ac-8f27-4ed9-8c1a-f869145216d0": {
+            "BaseDefinition": "8218c090-49b3-468e-b5ef-33be87fee4ac",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -9.989759464727335,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.542902524075829,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "d3e387ac-8f27-4ed9-8c1a-f869145216d0",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "cfcc2e34-ee9e-4ffe-9092-070587dce041": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.031910465919971466,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.031910465919971466,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345094680786,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345094680786,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "cfcc2e34-ee9e-4ffe-9092-070587dce041",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "c9db10ab-07d5-4335-9f06-d01484a250f2": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.031910465919971466,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.031910465919971466,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345094680786,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345094680786,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "c9db10ab-07d5-4335-9f06-d01484a250f2",
+            "Name": null
+        },
+        "3bd545e7-1d6f-4dc1-885c-183db437760a": {
+            "gltfLocation": "https://hypar.io/user-static/7ca1eded-df35-46e6-9f44-42b3e3a6ab7c.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.031910465919971466,
+                    "Y": -0.020577965873479844,
+                    "Z": 0.0009999999962747098
+                },
+                "Max": {
+                    "X": 1.1741345094680786,
+                    "Y": -1.5133412916839006E-07,
+                    "Z": 2.4199999603271487
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "c9db10ab-07d5-4335-9f06-d01484a250f2",
+                        "Height": 2.418999960330874,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "3bd545e7-1d6f-4dc1-885c-183db437760a",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "End Trim": 0,
+            "Start Trim": 0,
+            "Center Trim": 1,
+            "Center Joint": 1
+        },
+        "f3d788e5-0777-4812-bfbe-81bb4312fe90": {
+            "BaseDefinition": "3bd545e7-1d6f-4dc1-885c-183db437760a",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -8.815625071854436,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.542902524075829,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "f3d788e5-0777-4812-bfbe-81bb4312fe90",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "d688e205-ea35-467a-867a-1c61c3de9ff9": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.03191071345210075,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.03191071345210075,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741342914581299,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741342914581299,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "d688e205-ea35-467a-867a-1c61c3de9ff9",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "b44095a5-9dbe-4314-859f-8a6908994a2e": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.03191071345210075,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.03191071345210075,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741342914581299,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741342914581299,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "b44095a5-9dbe-4314-859f-8a6908994a2e",
+            "Name": null
+        },
+        "41604851-9276-4182-8f14-4c900fd669d8": {
+            "gltfLocation": "https://hypar.io/user-static/f22dfabe-2638-42b8-82dc-144a59d65405.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.03191071345210075,
+                    "Y": -0.020577965873479844,
+                    "Z": 0.0009999999962747098
+                },
+                "Max": {
+                    "X": 1.1741342914581299,
+                    "Y": -1.5133412916839006E-07,
+                    "Z": 2.4199999603271487
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "b44095a5-9dbe-4314-859f-8a6908994a2e",
+                        "Height": 2.418999960330874,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "41604851-9276-4182-8f14-4c900fd669d8",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "End Trim": 0,
+            "Start Trim": 0,
+            "Center Trim": 1,
+            "Center Joint": 1
+        },
+        "06ba5f60-e02e-4f2e-a086-2acc9f1a85b3": {
+            "BaseDefinition": "41604851-9276-4182-8f14-4c900fd669d8",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -7.64149067898149,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.542902524075829,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "06ba5f60-e02e-4f2e-a086-2acc9f1a85b3",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "54d7a197-9658-4b36-a657-79568e3f986c": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.031910377353429796,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.031910377353429796,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345821380615,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345821380615,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "54d7a197-9658-4b36-a657-79568e3f986c",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "46a44c13-412d-477d-bfc4-ae285ee93e14": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.031910377353429796,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.031910377353429796,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345821380615,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1741345821380615,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "46a44c13-412d-477d-bfc4-ae285ee93e14",
+            "Name": null
+        },
+        "24e31d31-83e3-493d-afd0-881232d5bd94": {
+            "gltfLocation": "https://hypar.io/user-static/7ad8f73a-4c82-439e-8ab5-e923f64b4843.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.031910377353429796,
+                    "Y": -0.020577965873479844,
+                    "Z": 0.0009999999962747098
+                },
+                "Max": {
+                    "X": 1.1741345821380615,
+                    "Y": -1.5133412916839006E-07,
+                    "Z": 2.4199999603271487
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "46a44c13-412d-477d-bfc4-ae285ee93e14",
+                        "Height": 2.418999960330874,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "24e31d31-83e3-493d-afd0-881232d5bd94",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "End Trim": 0,
+            "Start Trim": 0,
+            "Center Trim": 1,
+            "Center Joint": 1
+        },
+        "3d47196f-aff1-4e9a-b6b0-6482049bac55": {
+            "BaseDefinition": "24e31d31-83e3-493d-afd0-881232d5bd94",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -6.467356286108586,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.542902524075829,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "3d47196f-aff1-4e9a-b6b0-6482049bac55",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "66b3a736-58e2-485f-a3ae-def6d395849c": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.03191062488555908,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.03191062488555908,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1795671720504761,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1795671720504761,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "66b3a736-58e2-485f-a3ae-def6d395849c",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "57ac0dff-59f3-4871-a488-27f2c5ec6850": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.03191062488555908,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": -0.03191062488555908,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1795671720504761,
+                        "Y": -1.5133412916839006E-07,
+                        "Z": 0.0009999999962747098
+                    },
+                    {
+                        "X": 1.1795671720504761,
+                        "Y": -0.020577965873479844,
+                        "Z": 0.0009999999962747098
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "57ac0dff-59f3-4871-a488-27f2c5ec6850",
+            "Name": null
+        },
+        "fdaef0f5-a50e-40a8-afc5-6803f6e26dae": {
+            "gltfLocation": "https://hypar.io/user-static/86b5a933-f842-49fd-a4d6-b61d6b45856e.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.03191062488555908,
+                    "Y": -0.020577965873479844,
+                    "Z": 0.0009999999962747098
+                },
+                "Max": {
+                    "X": 1.1795671720504761,
+                    "Y": -1.5133412916839006E-07,
+                    "Z": 2.4199999603271487
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "57ac0dff-59f3-4871-a488-27f2c5ec6850",
+                        "Height": 2.418999960330874,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "fdaef0f5-a50e-40a8-afc5-6803f6e26dae",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "End Trim": 1,
+            "Start Trim": 0,
+            "Center Trim": 0,
+            "Center Joint": 1
+        },
+        "6b6b569d-208e-4f66-81af-569d57bdd904": {
+            "BaseDefinition": "fdaef0f5-a50e-40a8-afc5-6803f6e26dae",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -5.293221893235684,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.542902524075829,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "6b6b569d-208e-4f66-81af-569d57bdd904",
+            "Name": "Steelcase PolyVision - Flow - 47W x 95H (1185 W x 2420 H)",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "5b4eb12f-54a7-4084-afc8-61f30e0fb8b0": {
+            "BaseDefinition": "3a70bb14-f627-4d0f-a99c-f2ebedef5ccd",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -4.283137036947884,
+                        0.0,
+                        1.0,
+                        0.0,
+                        6.522297026807465,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0762
+                    ]
+                }
+            },
+            "Id": "5b4eb12f-54a7-4084-afc8-61f30e0fb8b0",
+            "Name": "Steelcase PolyVision - Sans - Accessories - Magnetic Marker Tray",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "7cdb5419-b65e-41bb-af75-b3aa6211db50": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "7cdb5419-b65e-41bb-af75-b3aa6211db50",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "1826167b-a26d-4ca1-80f4-dfda90ff39eb": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": 4.39467850355868E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.7619999273300171,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "1826167b-a26d-4ca1-80f4-dfda90ff39eb",
+            "Name": null
+        },
+        "0f0ab31b-f609-47a9-87d7-d7d4858ec5bb": {
+            "gltfLocation": "https://hypar.io/user-static/683ef888-ea62-4097-8591-614d25266614.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -7.834906657535613E-08,
+                    "Y": -0.7619999273300171,
+                    "Z": -8.793007988394664E-15
+                },
+                "Max": {
+                    "X": 1.8287998546600344,
+                    "Y": 4.39467850355868E-08,
+                    "Z": 0.7239
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "1826167b-a26d-4ca1-80f4-dfda90ff39eb",
+                        "Height": 0.7239000000000088,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "0f0ab31b-f609-47a9-87d7-d7d4858ec5bb",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1
+        },
+        "aebaf4c8-aad3-40eb-91ba-ea5eb5c37cb5": {
+            "BaseDefinition": "0f0ab31b-f609-47a9-87d7-d7d4858ec5bb",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -9.030957984395075,
+                        0.0,
+                        1.0,
+                        0.0,
+                        3.620819933622795,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "aebaf4c8-aad3-40eb-91ba-ea5eb5c37cb5",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "9cab8ab3-f860-48a3-89bc-376572acb53b": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "9cab8ab3-f860-48a3-89bc-376572acb53b",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "8eb74b2a-e2c6-4fa1-855a-217b4cc1323b": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "8eb74b2a-e2c6-4fa1-855a-217b4cc1323b",
+            "Name": null
+        },
+        "96031faa-4f53-4f58-afa2-cfc0d6b45642": {
+            "gltfLocation": "https://hypar.io/user-static/228e71be-a7b8-46fd-b8f5-d1ca95c4b8f3.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -7.834906657535613E-08,
+                    "Y": -0.762,
+                    "Z": -8.793007988394664E-15
+                },
+                "Max": {
+                    "X": 1.8287998546600344,
+                    "Y": -2.8723215200443522E-08,
+                    "Z": 0.7239
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "8eb74b2a-e2c6-4fa1-855a-217b4cc1323b",
+                        "Height": 0.7239000000000088,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "96031faa-4f53-4f58-afa2-cfc0d6b45642",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1
+        },
+        "ad91b358-7484-44ce-8b4b-37691f49df59": {
+            "BaseDefinition": "96031faa-4f53-4f58-afa2-cfc0d6b45642",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -7.2021579843950745,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.1824199336228125,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "ad91b358-7484-44ce-8b4b-37691f49df59",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "0e82c8c8-6142-4ec8-8ca2-153a259c0640": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "0e82c8c8-6142-4ec8-8ca2-153a259c0640",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "f3188d2a-fa29-4797-8a28-7bbdd393d9d8": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": -7.834906657535613E-08,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -2.8723215200443522E-08,
+                        "Z": -8.793007988394664E-15
+                    },
+                    {
+                        "X": 1.8287998546600344,
+                        "Y": -0.762,
+                        "Z": -8.793007988394664E-15
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f3188d2a-fa29-4797-8a28-7bbdd393d9d8",
+            "Name": null
+        },
+        "1fbdaa6c-218c-4e58-a112-6e0b4f5ffc13": {
+            "gltfLocation": "https://hypar.io/user-static/10a631db-e70a-49ab-a93e-dd774f2ef222.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -7.834906657535613E-08,
+                    "Y": -0.762,
+                    "Z": -8.793007988394664E-15
+                },
+                "Max": {
+                    "X": 1.8287998546600344,
+                    "Y": -2.8723215200443522E-08,
+                    "Z": 0.7239
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f3188d2a-fa29-4797-8a28-7bbdd393d9d8",
+                        "Height": 0.7239000000000088,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "1fbdaa6c-218c-4e58-a112-6e0b4f5ffc13",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1
+        },
+        "0deb351b-b403-4fd0-8e7c-fdb169245007": {
+            "BaseDefinition": "1fbdaa6c-218c-4e58-a112-6e0b4f5ffc13",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        -9.030957984395075,
+                        0.0,
+                        1.0,
+                        0.0,
+                        1.1824199336228125,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "0deb351b-b403-4fd0-8e7c-fdb169245007",
+            "Name": "Steelcase - Akira - Table - Rectangle Fixed Top - L Base - Standard - Glide - 72L x 30W",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "9c7ada2f-ccf7-46b6-b60c-659e856f01ca": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818395042419433,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818395042419433,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113590473175049,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113590473175049,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "9c7ada2f-ccf7-46b6-b60c-659e856f01ca",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "accf6cbc-4605-4b36-96f2-bcbf6cf2d71a": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818395042419433,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818395042419433,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113590473175049,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113590473175049,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "accf6cbc-4605-4b36-96f2-bcbf6cf2d71a",
+            "Name": null
+        },
+        "77282719-2497-417f-bf04-bf2f1bc4d62b": {
+            "gltfLocation": "https://hypar.io/user-static/4427ae1e-9c6f-4f36-a153-8b58bed713b8.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.30818395042419433,
+                    "Y": 0.0006781123520806432,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.3113590473175049,
+                    "Y": 0.564850805568695,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "accf6cbc-4605-4b36-96f2-bcbf6cf2d71a",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "77282719-2497-417f-bf04-bf2f1bc4d62b",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "a7e017a7-568e-4c7e-8da3-44dae1a11a07": {
+            "BaseDefinition": "77282719-2497-417f-bf04-bf2f1bc4d62b",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -6.714877178990445,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        2.8588199336227778,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "a7e017a7-568e-4c7e-8da3-44dae1a11a07",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "a51c231b-4068-47ab-88f5-f500db55e3cb": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818409576416017,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818409576416017,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135890197753907,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135890197753907,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "a51c231b-4068-47ab-88f5-f500db55e3cb",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "0d08ac3d-fff9-451c-9014-433f7a6698ce": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818409576416017,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818409576416017,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135890197753907,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135890197753907,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "0d08ac3d-fff9-451c-9014-433f7a6698ce",
+            "Name": null
+        },
+        "1048206a-6d28-4534-a305-9b495624535c": {
+            "gltfLocation": "https://hypar.io/user-static/36b99f35-09e8-4b90-af08-ce41540e0313.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.30818409576416017,
+                    "Y": 0.0006782576920464636,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.31135890197753907,
+                    "Y": 0.564850878238678,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "0d08ac3d-fff9-451c-9014-433f7a6698ce",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "1048206a-6d28-4534-a305-9b495624535c",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "b26a61b8-8460-405e-96b4-b7841d6e8cc3": {
+            "BaseDefinition": "1048206a-6d28-4534-a305-9b495624535c",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -8.48332347352551,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        0.42041993362277774,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "b26a61b8-8460-405e-96b4-b7841d6e8cc3",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "9c39e96f-3c04-4244-8c69-1e7e645f19c8": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818380508422855,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818380508422855,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135861129760745,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135861129760745,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "9c39e96f-3c04-4244-8c69-1e7e645f19c8",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "668fd6cf-5327-4f75-a1db-12efff6afb4e": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818380508422855,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818380508422855,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135861129760745,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135861129760745,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "668fd6cf-5327-4f75-a1db-12efff6afb4e",
+            "Name": null
+        },
+        "5e693e7f-36d0-40d9-aedb-5f6f094c8fb6": {
+            "gltfLocation": "https://hypar.io/user-static/3e0f17a9-aac7-43d3-a568-0b1b8cb75929.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.30818380508422855,
+                    "Y": 0.0006782576920464636,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.31135861129760745,
+                    "Y": 0.564850878238678,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "668fd6cf-5327-4f75-a1db-12efff6afb4e",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "5e693e7f-36d0-40d9-aedb-5f6f094c8fb6",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "3d4ae670-5433-4d46-816d-38185532e6c6": {
+            "BaseDefinition": "5e693e7f-36d0-40d9-aedb-5f6f094c8fb6",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -7.698086818282184,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        0.42041993362277774,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "3d4ae670-5433-4d46-816d-38185532e6c6",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "3fd10d08-e7db-4386-8faf-3e6a6b965bce": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818402309417725,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818402309417725,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.311358974647522,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.311358974647522,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "3fd10d08-e7db-4386-8faf-3e6a6b965bce",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "56794d36-b4c9-4fda-a1cd-6b5c87843a41": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818402309417725,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818402309417725,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.311358974647522,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.311358974647522,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "56794d36-b4c9-4fda-a1cd-6b5c87843a41",
+            "Name": null
+        },
+        "9de6267d-de2a-4c23-8547-0712e79a36e4": {
+            "gltfLocation": "https://hypar.io/user-static/7842432b-4839-4734-ab19-6f1090b49d0b.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.30818402309417725,
+                    "Y": 0.0006782576920464636,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.311358974647522,
+                    "Y": 0.564850878238678,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "56794d36-b4c9-4fda-a1cd-6b5c87843a41",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "9de6267d-de2a-4c23-8547-0712e79a36e4",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "645310f4-949d-4bfe-8f13-37c9e464f2d3": {
+            "BaseDefinition": "9de6267d-de2a-4c23-8547-0712e79a36e4",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -6.6535118182821815,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        0.42041993362277774,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "645310f4-949d-4bfe-8f13-37c9e464f2d3",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "cef4dbf9-96a9-4f42-85d5-cb7b90fbd47c": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081837687492371,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081837687492371,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113586476325989,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113586476325989,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "cef4dbf9-96a9-4f42-85d5-cb7b90fbd47c",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "07e913cc-b094-44d4-b9ed-c5eaf19b44e8": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081837687492371,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081837687492371,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113586476325989,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.3113586476325989,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "07e913cc-b094-44d4-b9ed-c5eaf19b44e8",
+            "Name": null
+        },
+        "8e90e204-c1ab-4300-b7d5-72e1ea659d26": {
+            "gltfLocation": "https://hypar.io/user-static/9269a4c9-d5e5-4f4a-b157-286a3a4ea36c.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.3081837687492371,
+                    "Y": 0.0006781123520806432,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.3113586476325989,
+                    "Y": 0.564850805568695,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "07e913cc-b094-44d4-b9ed-c5eaf19b44e8",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "8e90e204-c1ab-4300-b7d5-72e1ea659d26",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "821fb073-11c2-419f-af19-00dcdd387c34": {
+            "BaseDefinition": "8e90e204-c1ab-4300-b7d5-72e1ea659d26",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -7.732828821234385,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        2.8588199336227778,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "821fb073-11c2-419f-af19-00dcdd387c34",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "9a56c183-4b2d-477b-959c-f8ee314e0072": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818387775421147,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818387775421147,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135911998748783,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135911998748783,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "9a56c183-4b2d-477b-959c-f8ee314e0072",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "0358096d-8845-4881-b68e-cb85a66d39a3": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.30818387775421147,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.30818387775421147,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135911998748783,
+                        "Y": 0.564850805568695,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135911998748783,
+                        "Y": 0.0006781123520806432,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "0358096d-8845-4881-b68e-cb85a66d39a3",
+            "Name": null
+        },
+        "59ba9d75-fe8f-420e-afca-781c230dacc0": {
+            "gltfLocation": "https://hypar.io/user-static/a01cdde7-af41-4316-9d9c-112d8b344a06.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.30818387775421147,
+                    "Y": 0.0006781123520806432,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.31135911998748783,
+                    "Y": 0.564850805568695,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "0358096d-8845-4881-b68e-cb85a66d39a3",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "59ba9d75-fe8f-420e-afca-781c230dacc0",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "a6179333-972f-4b3d-9edc-b5c8c999249e": {
+            "BaseDefinition": "59ba9d75-fe8f-420e-afca-781c230dacc0",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -8.507453184977255,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        2.8588199336227778,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "a6179333-972f-4b3d-9edc-b5c8c999249e",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "c56bc3f8-0f65-4be2-8a82-12337cc639fa": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081836597442627,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081836597442627,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135875663757323,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135875663757323,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "c56bc3f8-0f65-4be2-8a82-12337cc639fa",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "b14fd2c0-8cbf-49f4-880a-806cf87def47": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.3081836597442627,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": -0.3081836597442627,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135875663757323,
+                        "Y": 0.564850878238678,
+                        "Z": -3.677114296645606E-14
+                    },
+                    {
+                        "X": 0.31135875663757323,
+                        "Y": 0.0006782576920464636,
+                        "Z": -3.677114296645606E-14
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "b14fd2c0-8cbf-49f4-880a-806cf87def47",
+            "Name": null
+        },
+        "775d68c0-def3-4035-a5c0-67a22abbc5cf": {
+            "gltfLocation": "https://hypar.io/user-static/bdcae9a5-634e-496a-97f3-b7e4709faa47.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.3081836597442627,
+                    "Y": 0.0006782576920464636,
+                    "Z": -3.677114296645606E-14
+                },
+                "Max": {
+                    "X": 0.31135875663757323,
+                    "Y": 0.564850878238678,
+                    "Z": 0.8292150106430054
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "b14fd2c0-8cbf-49f4-880a-806cf87def47",
+                        "Height": 0.8292150106430421,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "775d68c0-def3-4035-a5c0-67a22abbc5cf",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "Opaque": 1,
+            "Cushion": 1
+        },
+        "755b77ba-427a-4be5-aba9-0212afcaa8db": {
+            "BaseDefinition": "775d68c0-def3-4035-a5c0-67a22abbc5cf",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.0,
+                        -1.4547323094649232E-15,
+                        0.0,
+                        -5.8994650496124645,
+                        1.4547323094649232E-15,
+                        -1.0,
+                        0.0,
+                        0.42041993362277774,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "755b77ba-427a-4be5-aba9-0212afcaa8db",
+            "Name": "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "aa05719a-51fb-414c-a60c-1543a4b504a6": {
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "IsClosedForRendering": true,
+                "Vertices": [
+                    {
+                        "X": -0.1515747233390808,
+                        "Y": -0.06234317411184311,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": -0.1515747233390808,
+                        "Y": 1.1531097745773878E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1532252766609192,
+                        "Y": 1.1531097745773878E-07,
+                        "Z": 0.7059932441711426
+                    },
+                    {
+                        "X": 0.1532252766609192,
+                        "Y": -0.06234317411184311,
+                        "Z": 0.7059932441711426
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "aa05719a-51fb-414c-a60c-1543a4b504a6",
+            "Name": null,
+            "discriminator": "Elements.Geometry.Profile"
+        },
+        "77e0971b-fb13-4c65-8a56-0bec4fc69c7f": {
+            "gltfLocation": "https://hypar.io/user-static/7d990d56-ce02-4f7e-9c41-f41d774a811f.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": -0.1515747233390808,
+                    "Y": -0.06234317411184311,
+                    "Z": 0.7059932441711426
+                },
+                "Max": {
+                    "X": 0.1532252766609192,
+                    "Y": 1.1531097745773878E-07,
+                    "Z": 0.7418073371887207
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "9babb829-9b96-4e73-97f4-9658d4d6c31c",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "aa05719a-51fb-414c-a60c-1543a4b504a6",
+                        "Height": 0.0358140930175781,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "Reverse Winding": false,
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "77e0971b-fb13-4c65-8a56-0bec4fc69c7f",
+            "Name": "Steelcase PolyVision - Sans - Accessories Mirrored - Magnetic Marker Tray",
+            "discriminator": "Elements.ContentElement",
+            "Elevation from Level": 0.0,
+            "Host": "Level : Level 1",
+            "Offset from Host": 0.0,
+            "Moves With Nearby Elements": 0,
+            "HyFamilyTypeName": "Steelcase PolyVision - Sans - Accessories Mirrored - Magnetic Marker Tray"
+        },
+        "d6a97183-005a-4569-8e2b-57039fa0231b": {
+            "BaseDefinition": "77e0971b-fb13-4c65-8a56-0bec4fc69c7f",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        5.304928773966009,
+                        0.0,
+                        1.0,
+                        0.0,
+                        -4.199305131637881,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "d6a97183-005a-4569-8e2b-57039fa0231b",
+            "Name": "Steelcase PolyVision - Sans - Accessories Mirrored - Magnetic Marker Tray",
+            "discriminator": "Elements.ElementInstance"
+        },
+        "e1bd7bc5-b2ef-46bc-a314-70c419a7d35e": {
+            "Content": [
+                "517c8336-7b47-4371-82fd-7672435d444b",
+                "e612a30e-b626-4c2e-875a-f3dedb375017",
+                "752736b5-bb9b-46b8-acdc-4abc84ef1953",
+                "24ad129f-beec-4a71-80f0-20b9fc2eeb49",
+                "8218c090-49b3-468e-b5ef-33be87fee4ac",
+                "3a70bb14-f627-4d0f-a99c-f2ebedef5ccd",
+                "77e0971b-fb13-4c65-8a56-0bec4fc69c7f"
+            ],
+            "ReferenceConfiguration": [
+                "c64b7221-f968-44a6-bcfa-18f9750c3131",
+                "31fa03d4-eeee-4710-b7ff-44ee97a542ca",
+                "7cacc2ad-d551-47eb-a5c7-674d62554587",
+                "8ef723dd-196c-4571-ac06-79d44f6b7e70",
+                "d3e387ac-8f27-4ed9-8c1a-f869145216d0",
+                "f3d788e5-0777-4812-bfbe-81bb4312fe90",
+                "06ba5f60-e02e-4f2e-a086-2acc9f1a85b3",
+                "3d47196f-aff1-4e9a-b6b0-6482049bac55",
+                "6b6b569d-208e-4f66-81af-569d57bdd904",
+                "5b4eb12f-54a7-4084-afc8-61f30e0fb8b0",
+                "aebaf4c8-aad3-40eb-91ba-ea5eb5c37cb5",
+                "ad91b358-7484-44ce-8b4b-37691f49df59",
+                "0deb351b-b403-4fd0-8e7c-fdb169245007",
+                "a7e017a7-568e-4c7e-8da3-44dae1a11a07",
+                "b26a61b8-8460-405e-96b4-b7841d6e8cc3",
+                "3d4ae670-5433-4d46-816d-38185532e6c6",
+                "645310f4-949d-4bfe-8f13-37c9e464f2d3",
+                "821fb073-11c2-419f-af19-00dcdd387c34",
+                "a6179333-972f-4b3d-9edc-b5c8c999249e",
+                "755b77ba-427a-4be5-aba9-0212afcaa8db",
+                "d6a97183-005a-4569-8e2b-57039fa0231b"
+            ],
+            "Id": "e1bd7bc5-b2ef-46bc-a314-70c419a7d35e",
+            "Name": null,
+            "discriminator": "Elements.ContentCatalog"
+        }
+    }
+}
