@@ -9,13 +9,6 @@ using System.IO;
 using System.Linq;
 namespace LayoutFunctionCommon
 {
-    public class LayoutInstantiated
-    {
-        public ComponentInstance Instance { get; set; }
-        public ContentConfiguration Config { get; set; }
-        public string ConfigName { get; internal set; }
-    }
-
     public static class LayoutStrategies
     {
         /// <summary>
