@@ -148,7 +148,7 @@ namespace PhoneBoothLayout
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in corridorSegments)
                 {
                     var dist = midpt.DistanceTo(seg);
