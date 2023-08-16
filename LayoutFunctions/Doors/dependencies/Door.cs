@@ -52,13 +52,7 @@ namespace Elements
 
         public override bool TryToGraphicsBuffers(out List<GraphicsBuffers> graphicsBuffers, out string id, out glTFLoader.Schema.MeshPrimitive.ModeEnum? mode)
         {
-            List<Vector3> points = new List<Vector3>();
-            points.AddRange(CollectSchematicVisualizationLines(true, false, 90));
-            if(OpeningSide == DoorOpeningSide.DoubleDoor)
-            {
-                points.AddRange(CollectSchematicVisualizationLines(false, false, 90));
-            }
-
+            var points = CollectPointsForSchematicVisualization();
             GraphicsBuffers buffer = new GraphicsBuffers();
             Color color = Colors.Black;
             for (int i = 0; i < points.Count; i++)
@@ -73,6 +67,39 @@ namespace Elements
             mode = glTFLoader.Schema.MeshPrimitive.ModeEnum.LINES;
             graphicsBuffers = new List<GraphicsBuffers> { buffer };
             return true;
+        }
+
+        // TODO: Move visualization logic out of the class in case of DoorOpeningType enum extension.
+        private List<Vector3> CollectPointsForSchematicVisualization()
+        {
+            var points = new List<Vector3>();
+
+            if (OpeningSide != DoorOpeningSide.LeftHand)
+            {
+                points.AddRange(CollectSchematicVisualizationLines(false, false, 90));
+            }
+
+            if (OpeningSide != DoorOpeningSide.RightHand)
+            {
+                points.AddRange(CollectSchematicVisualizationLines(true, false, 90));
+            }
+
+            if (OpeningType == DoorOpeningType.SingleSwing)
+            {
+                return points;
+            }
+
+            if (OpeningSide != DoorOpeningSide.LeftHand)
+            {
+                points.AddRange(CollectSchematicVisualizationLines(false, true, 90));
+            }
+
+            if (OpeningSide != DoorOpeningSide.RightHand)
+            {
+                points.AddRange(CollectSchematicVisualizationLines(true, true, 90));
+            }
+
+            return points;
         }
 
         private List<Vector3> CollectSchematicVisualizationLines(bool leftSide, bool inside, double angle)
