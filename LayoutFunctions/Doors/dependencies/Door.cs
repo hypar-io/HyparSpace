@@ -1,31 +1,52 @@
+using Doors.Dependencies;
 using Elements;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 
 namespace Elements
 {
-    public partial class Door
+    /// <summary>Definition of a door</summary>
+    public class Door : GeometricElement
     {
         public const double DOOR_THICKNESS = 0.125;
         public const double DOOR_FRAME_THICKNESS = 0.15;
         public const double DOOR_FRAME_WIDTH = 2 * 0.0254; //2 inches
 
-        public Door(WallCandidate wall, Vector3 position, DoorType type, double width, double height) :
-            this(WidthWithoutFrame(width, type), type, wall, height, material: new Material("Door material", Colors.White))
+        /// <summary>Door width without a frame</summary>
+        public double ClearWidth { get; private set; }
+        /// <summary>The opening type of the door that should be placed</summary>
+        public DoorOpeningType OpeningType { get; private set; }
+        /// <summary>The opening side of the door that should be placed</summary>
+        public DoorOpeningSide OpeningSide { get; private set; }
+        /// <summary>The wall on which a door is placed.</summary>
+        public WallCandidate Wall { get; private set; }
+        /// <summary>Height of a door without a frame.</summary>
+        public double ClearHeight { get; private set; }
+        /// <summary>Position where door was placed originally</summary>
+        public Vector3 OriginalPosition { get; private set; }
+
+        public Door(WallCandidate wall,
+                    Vector3 originalPosition,
+                    double width,
+                    double height,
+                    DoorOpeningSide openingSide = DoorOpeningSide.LeftHand,
+                    DoorOpeningType openingType = DoorOpeningType.SingleSwing)
         {
-            OriginalPosition = position;
+            Wall = wall;
+            OpeningType = openingType;
+            OpeningSide = openingSide;
+            OriginalPosition = originalPosition;
+            ClearWidth = WidthWithoutFrame(width, openingSide);
+            ClearHeight = height;
+            Material = new Material("Door material", Colors.White);
             var adjustedPosition = GetClosestValidDoorPos(wall.Line);
             Transform = new Transform(adjustedPosition, wall.Line.Direction(), Vector3.ZAxis);
+            Representation = new Representation(new List<SolidOperation>() { });
         }
 
-        public Vector3 OriginalPosition
+        public static bool CanFit(Line wallLine, DoorOpeningSide openingSide, double width)
         {
-            get; private set;
-        }
-
-        public static bool CanFit(Line wallLine, DoorType type, double width)
-        {
-            var doorWidth = WidthWithoutFrame(width, type) + DOOR_FRAME_WIDTH * 2;
+            var doorWidth = WidthWithoutFrame(width, openingSide) + DOOR_FRAME_WIDTH * 2;
             return wallLine.Length() - doorWidth > DOOR_FRAME_WIDTH * 2;
         }
 
@@ -33,7 +54,7 @@ namespace Elements
         {
             List<Vector3> points = new List<Vector3>();
             points.AddRange(CollectSchematicVisualizationLines(true, false, 90));
-            if( Type == DoorType.Double)
+            if(OpeningSide == DoorOpeningSide.DoubleDoor)
             {
                 points.AddRange(CollectSchematicVisualizationLines(false, false, 90));
             }
@@ -56,7 +77,7 @@ namespace Elements
 
         private List<Vector3> CollectSchematicVisualizationLines(bool leftSide, bool inside, double angle)
         {
-            var doorWidth = Type == DoorType.Double ? ClearWidth / 2 : ClearWidth;
+            var doorWidth = OpeningSide == DoorOpeningSide.DoubleDoor ? ClearWidth / 2 : ClearWidth;
 
             // Depending on which side door in there are different offsets.
             var doorOffset = leftSide ? ClearWidth / 2 : -ClearWidth / 2;
@@ -164,13 +185,14 @@ namespace Elements
             return OriginalPosition.ClosestPointOn(reducedWallLine);
         }
 
-        private static double WidthWithoutFrame(double internalWidth, DoorType type)
+        private static double WidthWithoutFrame(double internalWidth, DoorOpeningSide openingSide)
         {
-            switch (type)
+            switch (openingSide)
             {
-                case DoorType.Single:
+                case DoorOpeningSide.LeftHand:
+                case DoorOpeningSide.RightHand:
                     return internalWidth;
-                case DoorType.Double:
+                case DoorOpeningSide.DoubleDoor:
                     return internalWidth * 2;
             }
             return 0;

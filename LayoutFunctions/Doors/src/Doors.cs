@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using LayoutFunctionCommon;
+using Doors.Dependencies;
 
 namespace Doors
 {
@@ -36,7 +37,8 @@ namespace Doors
                     }
 
                     var wall = pair.Value.Wall;
-                    var type = (DoorType)input.DefaultType;
+                    var openingSide = (DoorOpeningSide)input.DefaultDoorOpeningSide;
+                    var openingType = (DoorOpeningType)input.DefaultDoorOpeningType;
                     var doorPosition = pair.Value.Segment.Mid();
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
@@ -44,14 +46,15 @@ namespace Doors
                     if (doorOverride != null && doorOverride.Value.Transform != null)
                     {
                         doorPosition = doorOverride.Value.Transform.Origin;
-                        type = (DoorType)doorOverride.Value.DefaultType;
+                        openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
+                        openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
                         wall = GetClosestWall(doorPosition, wallCandidates, out _);
                     }
 
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
                     double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
 
-                    var door = CreateDoor(wall, doorPosition, type, width, height, doorOverride);
+                    var door = CreateDoor(wall, doorPosition, width, height, openingSide, openingType, doorOverride);
                     if (door != null)
                     {
                         doors.Add(door);
@@ -128,7 +131,8 @@ namespace Doors
             foreach (var addition in additions)
             {
                 var position = addition.Value.Transform.Origin;
-                var type = (DoorType)addition.Value.Type;
+                var openingSide = (DoorOpeningSide)addition.Value.DoorOpeningSide;
+                var openingType = (DoorOpeningType)addition.Value.DoorOpeningType;
                 var wall = GetClosestWall(position, wallCandidates, out var closest);
                 if (wall == null)
                 {
@@ -145,10 +149,11 @@ namespace Doors
                     position = doorOverride.Value.Transform.Origin;
                     width = doorOverride.Value.DoorWidth;
                     height = doorOverride.Value.DoorHeight;
-                    type = (DoorType)doorOverride.Value.DefaultType;
+                    openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
+                    openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
                 }
 
-                var door = CreateDoor(wall, position, type, width, height, doorOverride);
+                var door = CreateDoor(wall, position, width, height, openingSide, openingType, doorOverride);
                 if (door != null)
                 {
                     doors.Add(door);
@@ -221,17 +226,18 @@ namespace Doors
 
         private static Door? CreateDoor(WallCandidate? wall,
                                         Vector3 position,
-                                        DoorType type,
                                         double width,
                                         double height,
+                                        DoorOpeningSide openingSide,
+                                        DoorOpeningType openingType,
                                         DoorPositionsOverride? doorOverride = null)
         {
-            if (wall == null || !Door.CanFit(wall.Line, type, width))
+            if (wall == null || !Door.CanFit(wall.Line, openingSide, width))
             {
                 return null;
             }
 
-            var door = new Door(wall, position, type, width, height);
+            var door = new Door(wall, position, width, height, openingSide, openingType);
 
             if (doorOverride != null)
             {
