@@ -20,7 +20,7 @@ namespace Doors
         {
             var rooms = GetSpaceBoundaries(inputModels);
             var corridors = GetCirculationSegments(inputModels);
-            var wallCandidates = GetWallCandidates(inputModels);
+            var walls = GetWalls(inputModels);
             var doors = new List<Door>();
 
             foreach (var roomsOfLevel in rooms.GroupBy(r => r.Level))
@@ -30,7 +30,7 @@ namespace Doors
                     c => c.Profile.Transformed(c.Transform).Segments()).ToList();
                 foreach (var room in rooms)
                 {
-                    var pair = RoomDefaultDoorWall(room, levelCorridorsSegments, wallCandidates);
+                    var pair = RoomDefaultDoorWall(room, levelCorridorsSegments, walls);
                     if (pair == null)
                     {
                         continue;
@@ -48,7 +48,7 @@ namespace Doors
                         doorPosition = doorOverride.Value.Transform.Origin;
                         openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
                         openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
-                        wall = GetClosestWall(doorPosition, wallCandidates, out _);
+                        wall = GetClosestWall(doorPosition, walls, out _);
                     }
 
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
@@ -62,7 +62,7 @@ namespace Doors
                 }
             }
 
-            AddDoors(doors, input.Overrides.Additions.DoorPositions, wallCandidates, input.Overrides);
+            AddDoors(doors, input.Overrides.Additions.DoorPositions, walls, input.Overrides);
             RemoveDoors(doors, input.Overrides.Removals.DoorPositions);
 
             var output = new DoorsOutputs();
@@ -90,20 +90,38 @@ namespace Doors
             return corridors.ToList();
         }
 
-        private static List<WallCandidate> GetWallCandidates(Dictionary<string, Model> inputModels)
+        private static List<StandardWall> GetWalls(Dictionary<string, Model> inputModels)
         {
             if (!inputModels.TryGetValue("Interior Partitions", out Model? interiorPartitions))
             {
                 throw new ArgumentException("Interior Partitions is missing");
             }
             var wallCandidates = interiorPartitions.AllElementsOfType<WallCandidate>().ToList();
-            return wallCandidates;
+
+            var wallLinesToWalls = new Dictionary<Line, StandardWall>();
+            var allWalls = interiorPartitions.AllElementsOfType<StandardWall>().Distinct().ToList();
+
+            foreach (var wall in allWalls)
+            {
+                // It is not the main wall. Most likely it is a Header, which cannot contain a door.
+                if (wall.AdditionalProperties.ContainsKey("Wall"))
+                {
+                    continue;
+                }
+
+                wallLinesToWalls.Add(wall.CenterLine, wall);
+            }
+
+            var walls = wallCandidates.Where(wc => wallLinesToWalls.ContainsKey(wc.Line))
+                .Select(wc => wallLinesToWalls[wc.Line]).ToList();
+
+            return walls;
         }
 
-        private static (Line Segment, WallCandidate Wall)? RoomDefaultDoorWall(
+        private static (Line Segment, StandardWall Wall)? RoomDefaultDoorWall(
             SpaceBoundary room,
             IEnumerable<Line> corridorsSegments,
-            IEnumerable<WallCandidate> wallCandidates)
+            IEnumerable<StandardWall> walls)
         {
             List<Line>? corridorEdges = RoomCorridorEdges(room, corridorsSegments);
             if (corridorEdges == null || !corridorEdges.Any())
@@ -111,21 +129,21 @@ namespace Doors
                 return null;
             }
 
-            var roomWallCandidates = RoomWallCandidates(corridorEdges, wallCandidates);
+            var roomWalls = GetRoomWalls(corridorEdges, walls);
             // Where are no walls or not all corridor edges are covered by walls.
             // There is open passage so no default door required.
-            if (!roomWallCandidates.Any() || roomWallCandidates.Count < corridorEdges.Count)
+            if (!roomWalls.Any() || roomWalls.Count < corridorEdges.Count)
             {
                 return null;
             }
             
-            var wall = RoomLongestWall(room, roomWallCandidates);
+            var wall = RoomLongestWall(room, roomWalls);
             return wall;
         }
 
         private static void AddDoors(List<Door> doors, 
                                      IEnumerable<DoorPositionsOverrideAddition> additions,
-                                     List<WallCandidate> wallCandidates,
+                                     List<StandardWall> walls,
                                      Overrides overrides)
         {
             foreach (var addition in additions)
@@ -133,7 +151,7 @@ namespace Doors
                 var position = addition.Value.Transform.Origin;
                 var openingSide = (DoorOpeningSide)addition.Value.DoorOpeningSide;
                 var openingType = (DoorOpeningType)addition.Value.DoorOpeningType;
-                var wall = GetClosestWall(position, wallCandidates, out var closest);
+                var wall = GetClosestWall(position, walls, out var closest);
                 if (wall == null)
                 {
                     continue;
@@ -183,10 +201,10 @@ namespace Doors
             return corridorEdges;
         }
 
-        private static List<(Line, WallCandidate)> RoomWallCandidates(List<Line> corridorEdges,
-                                                                      IEnumerable<WallCandidate> wallCandidates)
+        private static List<(Line, StandardWall)> GetRoomWalls(List<Line> corridorEdges,
+                                                               IEnumerable<StandardWall> wallCandidates)
         {
-            List<(Line, WallCandidate)> roomWalls = new List<(Line, WallCandidate)>();
+            var roomWalls = new List<(Line, StandardWall)>();
             foreach (var rs in corridorEdges)
             {
                 var wall = wallCandidates.FirstOrDefault(wc => IsWallCoverRoomSegment(rs, wc));
@@ -198,14 +216,14 @@ namespace Doors
             return roomWalls;
         }
 
-        private static (Line, WallCandidate)? RoomLongestWall(
+        private static (Line, StandardWall)? RoomLongestWall(
             SpaceBoundary room,
-            IEnumerable<(Line CorridorEdge, WallCandidate Wall)> roomWallCandidates)
+            IEnumerable<(Line CorridorEdge, StandardWall Wall)> roomWalls)
         {
             double maxLength = 0;
-            (Line, WallCandidate)? longestWall = null;
+            (Line, StandardWall)? longestWall = null;
 
-            foreach (var (edge, wall) in roomWallCandidates)
+            foreach (var (edge, wall) in roomWalls)
             {
                 var wallLength = edge.Length();
                 if (wallLength > maxLength)
@@ -217,14 +235,14 @@ namespace Doors
             return longestWall;
         }
 
-        private static bool IsWallCoverRoomSegment(Line segment, WallCandidate wall)
+        private static bool IsWallCoverRoomSegment(Line segment, StandardWall wall)
         {
             const double wallToRoomMatchTolerance = 1e-3;
-            return wall.Line.PointOnLine(segment.Start, true, wallToRoomMatchTolerance) &&
-                   wall.Line.PointOnLine(segment.End, true, wallToRoomMatchTolerance);
+            return wall.CenterLine.PointOnLine(segment.Start, true, wallToRoomMatchTolerance) &&
+                   wall.CenterLine.PointOnLine(segment.End, true, wallToRoomMatchTolerance);
         }
 
-        private static Door? CreateDoor(WallCandidate? wall,
+        private static Door? CreateDoor(StandardWall? wall,
                                         Vector3 position,
                                         double width,
                                         double height,
@@ -232,7 +250,7 @@ namespace Doors
                                         DoorOpeningType openingType,
                                         DoorPositionsOverride? doorOverride = null)
         {
-            if (wall == null || !Door.CanFit(wall.Line, openingSide, width))
+            if (wall == null || !Door.CanFit(wall.CenterLine, openingSide, width))
             {
                 return null;
             }
@@ -247,22 +265,22 @@ namespace Doors
             return door;
         }
 
-        private static WallCandidate? GetClosestWall(Vector3 pos,
-                                                     IEnumerable<WallCandidate> wallCandidates,
+        private static StandardWall? GetClosestWall(Vector3 pos,
+                                                     IEnumerable<StandardWall> walls,
                                                      out Vector3 closestPoint)
         {
             closestPoint = Vector3.Origin;
-            if (wallCandidates == null || !wallCandidates.Any())
+            if (walls == null || !walls.Any())
             {
                 return null;
             }
 
             double minDist = Double.MaxValue;
-            WallCandidate? closestWall = null;
+            StandardWall? closestWall = null;
 
-            foreach (var wall in wallCandidates)
+            foreach (var wall in walls)
             {
-                double dist = pos.DistanceTo(wall.Line, out var p);
+                double dist = pos.DistanceTo(wall.CenterLine, out var p);
 
                 if (dist < minDist)
                 {

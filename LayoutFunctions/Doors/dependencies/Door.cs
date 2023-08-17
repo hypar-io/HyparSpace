@@ -19,13 +19,13 @@ namespace Elements
         /// <summary>The opening side of the door that should be placed</summary>
         public DoorOpeningSide OpeningSide { get; private set; }
         /// <summary>The wall on which a door is placed.</summary>
-        public WallCandidate Wall { get; private set; }
+        public StandardWall Wall { get; private set; }
         /// <summary>Height of a door without a frame.</summary>
         public double ClearHeight { get; private set; }
         /// <summary>Position where door was placed originally</summary>
         public Vector3 OriginalPosition { get; private set; }
 
-        public Door(WallCandidate wall,
+        public Door(StandardWall wall,
                     Vector3 originalPosition,
                     double width,
                     double height,
@@ -39,8 +39,8 @@ namespace Elements
             ClearWidth = WidthWithoutFrame(width, openingSide);
             ClearHeight = height;
             Material = new Material("Door material", Colors.White);
-            var adjustedPosition = GetClosestValidDoorPos(wall.Line);
-            Transform = new Transform(adjustedPosition, wall.Line.Direction(), Vector3.ZAxis);
+            var adjustedPosition = GetClosestValidDoorPos(wall.CenterLine);
+            Transform = new Transform(adjustedPosition, wall.CenterLine.Direction(), Vector3.ZAxis);
             Representation = new Representation(new List<SolidOperation>() { });
         }
 
