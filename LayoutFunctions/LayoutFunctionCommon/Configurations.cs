@@ -11,6 +11,9 @@ namespace LayoutFunctionCommon
 {
     public static class Configurations
     {
+        private static Dictionary<string, ContentElement> _mirroredElements { get; set; }
+        private static Dictionary<string, ContentElement> _leftElements { get; set; }
+        private static Dictionary<string, ContentElement> _rightElements { get; set; }
         private static SpaceConfiguration _originalConfigs { get; set; }
         private static SpaceConfiguration _yFlippedConfigs { get; set; }
 
@@ -19,6 +22,10 @@ namespace LayoutFunctionCommon
 
         public static void Init(SpaceConfiguration configs)
         {
+            _mirroredElements = ContentCatalogRetrieval.GetCatalog().Content
+                .Where(c => c.Name.Contains("Mirrored"))
+                .ToDictionary(me => me.Name.Replace(" Mirrored", ""), me => me);
+
             _originalConfigs = configs;
             _yFlippedConfigs = GetFlippedConfigs(configs);
         }
@@ -33,12 +40,9 @@ namespace LayoutFunctionCommon
 
         public static SpaceConfiguration GetFlippedConfigs(SpaceConfiguration configs)
         {
-            var mirroredNames = ContentCatalogRetrieval.GetCatalog().Content
-                .Where(c => c.Name.Contains("Mirrored"))
-                .ToDictionary(me => me.Name.Replace(" Mirrored", ""), me => me);
             Action<ContentConfiguration.ContentItem, Vector3, Vector3> flip = (item, min, max) =>
             {
-                if (item.Name.Contains("Plinth Base - Pedestal - Mobile - Wood Top"))
+                if (item.ContentElement.Name.Contains("Plinth Base - Pedestal - Mobile - Wood Top"))
                 {
 
                 }
@@ -53,11 +57,22 @@ namespace LayoutFunctionCommon
                 item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedY));
 
                 // Move origin relative to the width of the object
-                if (mirroredNames.TryGetValue(item.Name, out var mirroredElement) && mirroredElement != null)
+                var t = _mirroredElements;
+                if (_mirroredElements.TryGetValue(item.ContentElement.Name, out var mirroredElement) && mirroredElement != null)
                 {
                     item.Name = mirroredElement.Name;
                     item.Url = mirroredElement.GltfLocation;
                     newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
+                }
+                else if (item.ContentElement.Name.Contains("Left") || item.ContentElement.Name.Contains("Right"))
+                {
+                    var oppositeElemName = string.Join(" ", item.ContentElement.Name.Split(" ").Select(w => w == "Right" ? "Left" : (w == "Left" ? "Right" : w)));
+                    var oppositeElem = ContentCatalogRetrieval.GetCatalog().Content.FirstOrDefault(e => e.Name == oppositeElemName);
+                    if (oppositeElem != null)
+                    {
+                        item.Name = oppositeElem.Name;
+                        item.Url = oppositeElem.GltfLocation;
+                    }
                 }
                 else
                 {
