@@ -39,22 +39,23 @@ namespace Doors
                     var wall = pair.Value.Wall;
                     var openingSide = (DoorOpeningSide)input.DefaultDoorOpeningSide;
                     var openingType = (DoorOpeningType)input.DefaultDoorOpeningType;
-                    var doorPosition = pair.Value.Segment.Mid();
+                    var doorOriginalPosition = pair.Value.Segment.Mid();
+                    var doorCurrentPosition = doorOriginalPosition;
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
-                        o => doorPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
+                        o => doorOriginalPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
 
                     if (doorOverride != null && doorOverride.Value.Transform != null)
                     {
-                        doorPosition = doorOverride.Value.Transform.Origin;
+                        doorCurrentPosition = doorOverride.Value.Transform.Origin;
                         openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
                         openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
-                        wall = GetClosestWall(doorPosition, walls, out _);
+                        wall = GetClosestWall(doorCurrentPosition, walls, out _);
                     }
 
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
                     double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
 
-                    var door = CreateDoor(wall, doorPosition, width, height, openingSide, openingType, doorOverride);
+                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, openingSide, openingType, doorOverride);
                     if (door != null)
                     {
                         doors.Add(door);
@@ -148,30 +149,30 @@ namespace Doors
         {
             foreach (var addition in additions)
             {
-                var position = addition.Value.Transform.Origin;
+                var originalPosition = addition.Value.Transform.Origin;
                 var openingSide = (DoorOpeningSide)addition.Value.DoorOpeningSide;
                 var openingType = (DoorOpeningType)addition.Value.DoorOpeningType;
-                var wall = GetClosestWall(position, walls, out var closest);
+                var wall = GetClosestWall(originalPosition, walls, out originalPosition);
                 if (wall == null)
                 {
                     continue;
                 }
 
-                position = closest;
+                var currentPosition = originalPosition;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
-                    o => closest.IsAlmostEqualTo(o.Identity.OriginalPosition));
+                    o => originalPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
                 double width = addition.Value.DoorWidth;
                 double height = addition.Value.DoorHeight;
                 if (doorOverride != null && doorOverride.Value.Transform != null)
                 {
-                    position = doorOverride.Value.Transform.Origin;
+                    currentPosition = doorOverride.Value.Transform.Origin;
                     width = doorOverride.Value.DoorWidth;
                     height = doorOverride.Value.DoorHeight;
                     openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
                     openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
                 }
 
-                var door = CreateDoor(wall, position, width, height, openingSide, openingType, doorOverride);
+                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, openingSide, openingType, doorOverride);
                 if (door != null)
                 {
                     doors.Add(door);
@@ -243,7 +244,8 @@ namespace Doors
         }
 
         private static Door? CreateDoor(StandardWall? wall,
-                                        Vector3 position,
+                                        Vector3 originalPosition,
+                                        Vector3 currentPosition,
                                         double width,
                                         double height,
                                         DoorOpeningSide openingSide,
@@ -255,7 +257,7 @@ namespace Doors
                 return null;
             }
 
-            var door = new Door(wall, position, width, height, openingSide, openingType);
+            var door = new Door(wall, originalPosition, currentPosition, width, height, openingSide, openingType);
 
             if (doorOverride != null)
             {

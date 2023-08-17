@@ -27,10 +27,11 @@ namespace Elements
 
         public Door(StandardWall wall,
                     Vector3 originalPosition,
+                    Vector3 currentPosition,
                     double width,
                     double height,
-                    DoorOpeningSide openingSide = DoorOpeningSide.LeftHand,
-                    DoorOpeningType openingType = DoorOpeningType.SingleSwing)
+                    DoorOpeningSide openingSide,
+                    DoorOpeningType openingType)
         {
             Wall = wall;
             OpeningType = openingType;
@@ -39,9 +40,25 @@ namespace Elements
             ClearWidth = WidthWithoutFrame(width, openingSide);
             ClearHeight = height;
             Material = new Material("Door material", Colors.White);
-            var adjustedPosition = GetClosestValidDoorPos(wall.CenterLine);
+            var adjustedPosition = GetClosestValidDoorPos(wall.CenterLine, currentPosition);
             Transform = new Transform(adjustedPosition, wall.CenterLine.Direction(), Vector3.ZAxis);
             Representation = new Representation(new List<SolidOperation>() { });
+        }
+
+        public Door(StandardWall wall,
+                    double tPos,
+                    double width,
+                    double height,
+                    DoorOpeningSide openingSide,
+                    DoorOpeningType openingType)
+            : this (wall,
+                    wall.CenterLine.PointAtNormalized(tPos),
+                    wall.CenterLine.PointAtNormalized(tPos),
+                    width,
+                    height,
+                    openingSide,
+                    openingType)
+        {
         }
 
         public static bool CanFit(Line wallLine, DoorOpeningSide openingSide, double width)
@@ -202,14 +219,14 @@ namespace Elements
             Representation = new Representation(new List<SolidOperation>() { doorExtrude, doorFrameExtrude });
         }
 
-        private Vector3 GetClosestValidDoorPos(Line wallLine)
+        private Vector3 GetClosestValidDoorPos(Line wallLine, Vector3 currentPosition)
         {
             var fullWidth = ClearWidth + DOOR_FRAME_WIDTH * 2;
             double wallWidth = wallLine.Length();
             Vector3 p1 = wallLine.PointAt(0.5 * fullWidth);
             Vector3 p2 = wallLine.PointAt(wallWidth - 0.5 * fullWidth);
             var reducedWallLine = new Line(p1, p2);
-            return OriginalPosition.ClosestPointOn(reducedWallLine);
+            return currentPosition.ClosestPointOn(reducedWallLine);
         }
 
         private static double WidthWithoutFrame(double internalWidth, DoorOpeningSide openingSide)
