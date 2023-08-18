@@ -22,8 +22,10 @@ namespace Elements
         public StandardWall Wall { get; private set; }
         /// <summary>Height of a door without a frame.</summary>
         public double ClearHeight { get; private set; }
-        /// <summary>Position where door was placed originally</summary>
+        /// <summary>Position where door was placed originally.</summary>
         public Vector3 OriginalPosition { get; private set; }
+        /// <summary>Opening for a door.</summary>
+        public Opening Opening { get; private set; }
 
         public Door(StandardWall wall,
                     Vector3 originalPosition,
@@ -31,7 +33,10 @@ namespace Elements
                     double width,
                     double height,
                     DoorOpeningSide openingSide,
-                    DoorOpeningType openingType)
+                    DoorOpeningType openingType,
+                    double depthFront = 1, 
+                    double depthBack = 1,
+                    bool flip = false)
         {
             Wall = wall;
             OpeningType = openingType;
@@ -40,9 +45,9 @@ namespace Elements
             ClearWidth = WidthWithoutFrame(width, openingSide);
             ClearHeight = height;
             Material = new Material("Door material", Colors.White);
-            var adjustedPosition = GetClosestValidDoorPos(wall.CenterLine, currentPosition);
-            Transform = new Transform(adjustedPosition, wall.CenterLine.Direction(), Vector3.ZAxis);
+            Transform = GetDoorTransform(currentPosition, flip);
             Representation = new Representation(new List<SolidOperation>() { });
+            Opening = new Opening(Polygon.Rectangle(width, height), depthFront, depthBack, GetOpeningTransform());
         }
 
         public Door(StandardWall wall,
@@ -50,15 +55,37 @@ namespace Elements
                     double width,
                     double height,
                     DoorOpeningSide openingSide,
-                    DoorOpeningType openingType)
+                    DoorOpeningType openingType,
+                    double depthFront = 1,
+                    double depthBack = 1,
+                    bool flip = false)
             : this (wall,
                     wall.CenterLine.PointAtNormalized(tPos),
                     wall.CenterLine.PointAtNormalized(tPos),
                     width,
                     height,
                     openingSide,
-                    openingType)
+                    openingType,
+                    depthFront,
+                    depthBack,
+                    flip)
         {
+        }
+
+        public Transform GetOpeningTransform()
+        {
+            var xAxis = Wall.CenterLine.Direction();
+            var halfHeightDir = 0.5 * (ClearHeight + DOOR_FRAME_THICKNESS) * Vector3.ZAxis;
+            var openingTransform = new Transform(Transform.Origin + halfHeightDir, xAxis, xAxis.Cross(Vector3.ZAxis));
+            return openingTransform;
+        }
+
+        private Transform GetDoorTransform(Vector3 currentPosition, bool flip)
+        {
+            var centerLine = Wall.CenterLine;
+            var adjustedPosition = GetClosestValidDoorPos(centerLine, currentPosition);
+            var xDoorAxis = flip ? centerLine.Direction().Negate() : centerLine.Direction();
+            return new Transform(adjustedPosition, xDoorAxis, Vector3.ZAxis);
         }
 
         public static bool CanFit(Line wallLine, DoorOpeningSide openingSide, double width)
@@ -200,7 +227,25 @@ namespace Elements
                 left - Vector3.YAxis * DOOR_THICKNESS,
                 right - Vector3.YAxis * DOOR_THICKNESS,
                 right + Vector3.YAxis * DOOR_THICKNESS});
-            var doorExtrude = new Extrude(new Profile(doorPolygon), ClearHeight, Vector3.ZAxis);
+
+            var doorPolygons = new List<Polygon>();
+
+            if (OpeningSide == DoorOpeningSide.DoubleDoor)
+            {
+                doorPolygons = doorPolygon.Split(new Polyline(new Vector3(0, DOOR_THICKNESS, 0), new Vector3(0, -DOOR_THICKNESS, 0)));
+            }
+            else
+            {
+                doorPolygons.Add(doorPolygon);
+            }
+
+            var doorExtrusions = new List<Extrude>();
+
+            foreach (var polygon in doorPolygons)
+            {
+                var doorExtrude = new Extrude(new Profile(polygon.Offset(-0.005)[0]), ClearHeight, Vector3.ZAxis);
+                doorExtrusions.Add(doorExtrude);
+            }
 
             var frameLeft = left + Vector3.XAxis * DOOR_FRAME_WIDTH;
             var frameRight = right - Vector3.XAxis * DOOR_FRAME_WIDTH;
@@ -216,7 +261,11 @@ namespace Elements
                 right + Vector3.ZAxis * ClearHeight - frameOffset });
             var doorFrameExtrude = new Extrude(new Profile(doorFramePolygon), DOOR_FRAME_THICKNESS * 2, Vector3.YAxis);
 
-            Representation = new Representation(new List<SolidOperation>() { doorExtrude, doorFrameExtrude });
+            Representation.SolidOperations.Add(doorFrameExtrude);
+            foreach (var extrusion in doorExtrusions)
+            {
+                Representation.SolidOperations.Add(extrusion);
+            }
         }
 
         private Vector3 GetClosestValidDoorPos(Line wallLine, Vector3 currentPosition)
