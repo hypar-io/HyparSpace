@@ -257,7 +257,7 @@ namespace Doors
                 return null;
             }
 
-            var door = new Door(wall, originalPosition, currentPosition, width, height, openingSide, openingType);
+            var door = new Door(wall, wall.CenterLine, originalPosition, currentPosition, width, height, openingSide, openingType);
 
             if (doorOverride != null)
             {

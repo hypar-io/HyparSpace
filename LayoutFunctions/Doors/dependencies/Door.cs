@@ -19,7 +19,7 @@ namespace Elements
         /// <summary>The opening side of the door that should be placed</summary>
         public DoorOpeningSide OpeningSide { get; private set; }
         /// <summary>The wall on which a door is placed.</summary>
-        public StandardWall Wall { get; private set; }
+        public Wall Wall { get; private set; }
         /// <summary>Height of a door without a frame.</summary>
         public double ClearHeight { get; private set; }
         /// <summary>Position where door was placed originally.</summary>
@@ -27,14 +27,15 @@ namespace Elements
         /// <summary>Opening for a door.</summary>
         public Opening Opening { get; private set; }
 
-        public Door(StandardWall wall,
+        public Door(Wall wall,
+                    Line wallLine,
                     Vector3 originalPosition,
                     Vector3 currentPosition,
                     double width,
                     double height,
                     DoorOpeningSide openingSide,
                     DoorOpeningType openingType,
-                    double depthFront = 1, 
+                    double depthFront = 1,
                     double depthBack = 1,
                     bool flip = false)
         {
@@ -45,44 +46,41 @@ namespace Elements
             ClearWidth = WidthWithoutFrame(width, openingSide);
             ClearHeight = height;
             Material = new Material("Door material", Colors.White);
-            Transform = GetDoorTransform(currentPosition, flip);
+            Transform = GetDoorTransform(currentPosition, wallLine, flip);
             Representation = new Representation(new List<SolidOperation>() { });
-            Opening = new Opening(Polygon.Rectangle(width, height), depthFront, depthBack, GetOpeningTransform());
+            Opening = new Opening(Polygon.Rectangle(width, height), depthFront, depthBack, GetOpeningTransform(wallLine.Direction()));
         }
 
-        public Door(StandardWall wall,
-                    double tPos,
+        public Door(Wall wall,
+                    Transform transform,
                     double width,
                     double height,
                     DoorOpeningSide openingSide,
                     DoorOpeningType openingType,
                     double depthFront = 1,
-                    double depthBack = 1,
-                    bool flip = false)
-            : this (wall,
-                    wall.CenterLine.PointAtNormalized(tPos),
-                    wall.CenterLine.PointAtNormalized(tPos),
-                    width,
-                    height,
-                    openingSide,
-                    openingType,
-                    depthFront,
-                    depthBack,
-                    flip)
+                    double depthBack = 1)
         {
+            Wall = wall;
+            Transform = transform;
+            OpeningSide = openingSide;
+            OpeningType = openingType;
+            ClearHeight = height;
+            ClearWidth = WidthWithoutFrame(width, openingSide);
+            Material = new Material("Door material", Colors.White);
+            Representation = new Representation(new List<SolidOperation>() { });
+            Opening = new Opening(Polygon.Rectangle(width, height), depthFront, depthBack, GetOpeningTransform(transform.XAxis));
+            OriginalPosition = Transform.Origin;
         }
 
-        public Transform GetOpeningTransform()
+        private Transform GetOpeningTransform(Vector3 xAxis)
         {
-            var xAxis = Wall.CenterLine.Direction();
             var halfHeightDir = 0.5 * (ClearHeight + DOOR_FRAME_THICKNESS) * Vector3.ZAxis;
             var openingTransform = new Transform(Transform.Origin + halfHeightDir, xAxis, xAxis.Cross(Vector3.ZAxis));
             return openingTransform;
         }
 
-        private Transform GetDoorTransform(Vector3 currentPosition, bool flip)
+        private Transform GetDoorTransform(Vector3 currentPosition, Line centerLine, bool flip)
         {
-            var centerLine = Wall.CenterLine;
             var adjustedPosition = GetClosestValidDoorPos(centerLine, currentPosition);
             var xDoorAxis = flip ? centerLine.Direction().Negate() : centerLine.Direction();
             return new Transform(adjustedPosition, xDoorAxis, Vector3.ZAxis);
@@ -204,7 +202,7 @@ namespace Elements
             {
                 (anchorAngle, endAngle) = (endAngle, anchorAngle);
             }
-            
+
             // Draw the arc from closed door to opened door.
             Arc arc = new Arc(c0, doorWidth, anchorAngle, endAngle);
             var tessalatedArc = arc.ToPolyline((int)(Math.Abs(angle) / 2));
@@ -223,7 +221,7 @@ namespace Elements
             Vector3 right = Vector3.XAxis.Negate() * ClearWidth / 2;
 
             var doorPolygon = new Polygon(new List<Vector3>() {
-                left + Vector3.YAxis * DOOR_THICKNESS, 
+                left + Vector3.YAxis * DOOR_THICKNESS,
                 left - Vector3.YAxis * DOOR_THICKNESS,
                 right - Vector3.YAxis * DOOR_THICKNESS,
                 right + Vector3.YAxis * DOOR_THICKNESS});
