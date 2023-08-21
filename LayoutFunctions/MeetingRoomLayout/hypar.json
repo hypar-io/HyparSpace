@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "9a574d33-ae1e-4a68-a548-148d65fcf79e",
+  "id": "001b14ac-b387-4199-ac0d-575619492847",
   "name": "Meeting Room Layout",
   "description": "Lay out meeting rooms.",
   "language": "C#",
@@ -58,6 +58,26 @@
       "schema": {
         "Transform": {
           "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    },
+    "Space Settings": {
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=Meeting Room]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Primary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
+        },
+        "Secondary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
         }
       }
     }

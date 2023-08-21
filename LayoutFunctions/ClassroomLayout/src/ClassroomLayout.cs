@@ -13,6 +13,10 @@ namespace ClassroomLayout
 {
     public static class ClassroomLayout
     {
+        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
+
+        private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
+
         /// <summary>
         /// The ClassroomLayout function.
         /// </summary>
@@ -21,6 +25,7 @@ namespace ClassroomLayout
         /// <returns>A ClassroomLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ClassroomLayoutOutputs Execute(Dictionary<string, Model> inputModels, ClassroomLayoutInputs input)
         {
+            proxies.Clear();
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
 
@@ -41,37 +46,32 @@ namespace ClassroomLayout
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            Configurations.Init(configs);
 
             int totalCountableSeats = 0;
             int seatsAtDesk = 0;
-            var deskConfig = configs["Desk"];
-            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
-                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
-            foreach (var item in deskConfig.ContentItems)
-            {
-                foreach (var countableSeat in countableSeats)
-                {
-                    if (item.ContentElement.Name != null && item.ContentElement.Name.Contains(countableSeat))
-                    {
-                        seatsAtDesk++;
-                    }
-                }
-            }
 
+            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
+                    var config = OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        new SpaceSettingsValue(false, false),
+                        proxies);
+
                     var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
                         .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
@@ -89,9 +89,10 @@ namespace ClassroomLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
+                        var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var componentInstance = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform.Concatenated(configsTransform));
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -101,7 +102,7 @@ namespace ClassroomLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
 
-                            var componentInstance = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform.Concatenated(configsTransform));
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -109,6 +110,20 @@ namespace ClassroomLayout
                         {
                             if (cell.U.Curve.Length() > 5.6)
                             {
+                                var deskConfig = selectedConfigs["Desk"];
+                                string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
+                                foreach (var item in deskConfig.ContentItems)
+                                {
+                                    foreach (var countableSeat in countableSeats)
+                                    {
+                                        if (item.ContentElement.Name != null && item.ContentElement.Name.Contains(countableSeat))
+                                        {
+                                            seatsAtDesk++;
+                                        }
+                                    }
+                                }
+
                                 cell.U.SplitAtOffset(2.3, false, true);
                                 cell.V.SplitAtOffset(0.5, false, true);
                                 cell.V.SplitAtOffset(0.5, true, true);
@@ -132,7 +147,7 @@ namespace ClassroomLayout
                                                 contentItem.Transform
                                                 .Concatenated(orientationTransform)
                                                 .Concatenated(new Transform(cellRect.Vertices[0]))
-                                                .Concatenated(room.Transform),
+                                                .Concatenated(room.Transform).Concatenated(configsTransform),
                                                 "Desk");
 
                                             LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);

@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "e83225ea-a792-45d6-8426-e19ebe00a929",
+  "id": "cb7dad4e-550c-4d7c-80fa-9b570a38b678",
   "name": "Classroom Layout",
   "description": "Generate an interior layout for classroom zones.",
   "model_output": "Classroom Layout",
@@ -60,6 +60,26 @@
       "schema": {
         "Transform": {
           "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    },
+    "Space Settings": {
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=Classroom]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Primary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
+        },
+        "Secondary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
         }
       }
     }

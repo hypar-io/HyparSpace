@@ -14,7 +14,7 @@ namespace MeetingRoomLayout
 
     public static class MeetingRoomLayout
     {
-        private class MeetingLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
+        private class MeetingLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, SpaceSettingsOverride, SpaceSettingsValue>
         {
             private Dictionary<string, RoomTally> seatsTable = new();
 
@@ -40,10 +40,10 @@ namespace MeetingRoomLayout
                 return new SeatsCount(seatsCount, 0, 0, 0);
             }
 
-            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
+            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Func<SpaceSettingsOverride, Vector3> getCentroid, SpaceSettingsValue defaultValue, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
             {
                 seatsTable = new Dictionary<string, RoomTally>();
-                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
+                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, getCentroid, defaultValue, createWalls, configurationsPath, catalogPath);
                 result.OutputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
                 return result;
             }
@@ -71,6 +71,7 @@ namespace MeetingRoomLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var layoutGeneration = new MeetingLayoutGeneration();
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Meeting Room", inputModels, input.Overrides, input.CreateWalls, (ov) => ov.Identity.ParentCentroid, new SpaceSettingsValue(false, false), false, "./ConferenceRoomConfigurations.json");
             var result = layoutGeneration.StandardLayoutOnAllLevels("Meeting Room", inputModels, input.Overrides, input.CreateWalls, "./ConferenceRoomConfigurations.json");
             var output = new MeetingRoomLayoutOutputs
             {

@@ -33,9 +33,9 @@ namespace LayoutFunctionCommon
         public static (SpaceConfiguration Configs, Transform Transform) GetConfigs(Vector3 centroid, bool hFlip, bool vFlip)
         {
             var newTransform = new Transform();
-            newTransform.RotateAboutPoint(centroid, Vector3.ZAxis, vFlip ? 180 : 0);
+            newTransform.RotateAboutPoint(centroid, Vector3.ZAxis, vFlip ? 180 : 0); /// this is work not for all layouts
 
-            return ((hFlip ^ vFlip ? _yFlippedConfigs : _originalConfigs), newTransform);
+            return (hFlip ^ vFlip ? _yFlippedConfigs : _originalConfigs, newTransform);
         }
 
         public static SpaceConfiguration GetFlippedConfigs(SpaceConfiguration configs)
