@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "1a57db32-3ac1-4874-a23a-61f160c54604",
+  "id": "30901831-bcfe-4227-b53e-f9bec5f44f96",
   "name": "Open Collaboration Layout",
   "description": "Lay out Open collaboration spaces.",
   "language": "C#",
@@ -47,6 +47,26 @@
       "schema": {
         "Transform": {
           "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    },
+    "Space Settings": {
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=Open Collaboration]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Primary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
+        },
+        "Secondary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
         }
       }
     }

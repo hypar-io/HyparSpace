@@ -224,7 +224,7 @@ namespace PrivateOfficeLayout
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
-            var overridesById = GetOverridesByBoundaryId(input, levels);
+            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             var totalPrivateOfficeCount = 0;
             foreach (var lvl in levels)
             {
@@ -232,8 +232,8 @@ namespace PrivateOfficeLayout
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
                 var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Private Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 var wallCandidateLines = new List<(Line line, string type)>();
@@ -241,7 +241,17 @@ namespace PrivateOfficeLayout
                 {
                     var seatsCount = 0;
                     var privateOfficeCount = 0;
-                    var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
+                    var config = OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        new SpaceSettingsValue(
+                            new SpaceSettingsValueOfficeSizing(
+                                input.OfficeSizing.AutomateOfficeSubdivisions,
+                                input.OfficeSizing.OfficeSize),
+                                input.CreateWalls,
+                            false,
+                            false),
+                        proxies);
                     var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
 
                     foreach (var roomBoundary in privateOfficeRoomBoundaries)
@@ -472,89 +482,6 @@ namespace PrivateOfficeLayout
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             return instance;
-        }
-
-        private static Dictionary<Guid, SpaceSettingsOverride> GetOverridesByBoundaryId(PrivateOfficeLayoutInputs input, IEnumerable<LevelElements> levels)
-        {
-            var overridesById = new Dictionary<Guid, SpaceSettingsOverride>();
-            foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
-            {
-                var matchingBoundary =
-                levels.SelectMany(l => l.Elements)
-                    .OfType<SpaceBoundary>()
-                    .OrderBy(ob => ob.ParentCentroid.Value
-                    .DistanceTo(spaceOverride.Identity.ParentCentroid))
-                    .First();
-
-                if (overridesById.ContainsKey(matchingBoundary.Id))
-                {
-                    var mbCentroid = matchingBoundary.ParentCentroid.Value;
-                    if (overridesById[matchingBoundary.Id].Identity.ParentCentroid.DistanceTo(mbCentroid) > spaceOverride.Identity.ParentCentroid.DistanceTo(mbCentroid))
-                    {
-                        overridesById[matchingBoundary.Id] = spaceOverride;
-                    }
-                }
-                else
-                {
-                    overridesById.Add(matchingBoundary.Id, spaceOverride);
-                }
-            }
-
-            return overridesById;
-        }
-
-        private static SpaceSettingsOverride MatchApplicableOverride(
-            Dictionary<Guid, SpaceSettingsOverride> overridesById,
-            ElementProxy<SpaceBoundary> boundaryProxy,
-            PrivateOfficeLayoutInputs input)
-        {
-            var overrideName = SpaceSettingsOverride.Name;
-            SpaceSettingsOverride config;
-
-            // See if we already have matching override attached
-            var existingOverrideId = boundaryProxy.OverrideIds<SpaceSettingsOverride>(overrideName).FirstOrDefault();
-            if (existingOverrideId != null)
-            {
-                if (overridesById.TryGetValue(Guid.Parse(existingOverrideId), out config))
-                {
-                    return config;
-                }
-            }
-
-            // Try to match from identity in configs dictionary. Use a default in case none found
-            if (!overridesById.TryGetValue(boundaryProxy.ElementId, out config))
-            {
-                config = new SpaceSettingsOverride(
-                            Guid.NewGuid().ToString(),
-                            null,
-                            new SpaceSettingsValue(
-                                new SpaceSettingsValueOfficeSizing(
-                                    input.OfficeSizing.AutomateOfficeSubdivisions,
-                                    input.OfficeSizing.OfficeSize),
-                                    input.CreateWalls,
-                                    false,
-                                    false
-                            )
-                    );
-                overridesById.Add(boundaryProxy.ElementId, config);
-            }
-
-            // Attach the identity and values data to the proxy
-            boundaryProxy.AddOverrideIdentity(overrideName, config.Id, config.Identity);
-            boundaryProxy.AddOverrideValue(overrideName, config.Value);
-
-            // Make sure proxies list has the proxy so that it will serialize in the model.
-            if (!proxies.Contains(boundaryProxy))
-            {
-                proxies.Add(boundaryProxy);
-            }
-
-            return config;
-        }
-
-        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary spaceBoundary, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
-        {
-            return allSpaceBoundaries.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryDependencyName);
         }
     }
 }

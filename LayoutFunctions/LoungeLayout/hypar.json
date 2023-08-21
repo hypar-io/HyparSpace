@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "2586d6e9-8586-42a0-9d49-b80d0d684925",
+  "id": "f9a40e01-43b9-403e-9e29-0022f72bfecc",
   "name": "Lounge Layout",
   "description": "Layout lounge spaces",
   "model_output": "Lounge Layout",
@@ -42,6 +42,26 @@
       "schema": {
         "Transform": {
           "$ref": "https://schemas.hypar.io/Transform.json"
+        }
+      }
+    },
+    "Space Settings": {
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=Lounge]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Primary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
+        },
+        "Secondary Axis Flip Layout": {
+          "type": "boolean",
+          "default": false
         }
       }
     }

@@ -20,10 +20,8 @@ namespace ReceptionLayout
             var input = GetInput();
 
             var modelDependencies = new Dictionary<string, Model> { 
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Space Planning Zones/66f9d818-1f2b-48da-ae1b-7d1cf1ef922f.json")) }, 
-                {"Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Circulation/125428d9-5154-4def-a5bd-0f3e5c96d9ec.json")) }, 
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Levels/e926a841-2613-471b-8ccd-80c942f75e7e.json")) }, 
-                {"Core", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/ReceptionLayout/test/Generated/ReceptionLayoutTest/model_dependencies/Core/073bcf41-696d-4716-b117-783c1074680c.json")) }, 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"D:\Hypar\Forks\HyparSpace\LayoutFunctions\ReceptionLayout\test\Generated\ReceptionLayoutTest\model_dependencies\Space Planning Zones\facac8c4-88d1-49b0-8a9c-05b77ba62a57.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"D:\Hypar\Forks\HyparSpace\LayoutFunctions\ReceptionLayout\test\Generated\ReceptionLayoutTest\model_dependencies\Levels\723250f8-9ea2-4e23-812b-39a8eb69862e.json")) }, 
             };
 
             var result = ReceptionLayout.Execute(modelDependencies, input);

@@ -14,7 +14,7 @@ namespace PantryLayout
 {
     public static class PantryLayout
     {
-        private class PantryLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
+        private class PantryLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, SpaceSettingsOverride, SpaceSettingsValue>
         {
             private static readonly string[] countableSeats = new[]
             {
@@ -53,7 +53,7 @@ namespace PantryLayout
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
 
             var layoutGeneration = new PantryLayoutGeneration();
-            var result = layoutGeneration.StandardLayoutOnAllLevels("Pantry", inputModels, input.Overrides, false, "./PantryConfigurations.json");
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Pantry", inputModels, input.Overrides, (ov) => ov.Identity.ParentCentroid, new SpaceSettingsValue(false, false), false, "./PantryConfigurations.json");
             var output = new PantryLayoutOutputs
             {
                 Model = result.OutputModel,

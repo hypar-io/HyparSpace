@@ -52,7 +52,7 @@ namespace PhoneBoothLayout
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
-            var overridesById = GetOverridesByBoundaryId(input, levels);
+            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
@@ -60,8 +60,8 @@ namespace PhoneBoothLayout
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Phone Booth");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
 
@@ -69,7 +69,12 @@ namespace PhoneBoothLayout
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
-                    var config = MatchApplicableOverride(overridesById, GetElementProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
+                    var config = OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        new SpaceSettingsValue(false, false),
+                        proxies);
+
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                   .Select(w =>
                                   {
@@ -100,10 +105,10 @@ namespace PhoneBoothLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var selectedConfigs = Configurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+                        var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, levelVolume?.Transform ?? new Transform());
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform));
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
@@ -117,7 +122,7 @@ namespace PhoneBoothLayout
 
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform));
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
@@ -223,85 +228,6 @@ namespace PhoneBoothLayout
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
             return instance;
-        }
-
-        private static Dictionary<Guid, SpaceSettingsOverride> GetOverridesByBoundaryId(PhoneBoothLayoutInputs input, IEnumerable<LevelElements> levels)
-        {
-            var overridesById = new Dictionary<Guid, SpaceSettingsOverride>();
-            foreach (var spaceOverride in input.Overrides?.SpaceSettings ?? new List<SpaceSettingsOverride>())
-            {
-                var matchingBoundary =
-                levels.SelectMany(l => l.Elements)
-                    .OfType<SpaceBoundary>()
-                    .OrderBy(ob => ob.ParentCentroid.Value
-                    .DistanceTo(spaceOverride.Identity.ParentCentroid))
-                    .First();
-
-                if (overridesById.ContainsKey(matchingBoundary.Id))
-                {
-                    var mbCentroid = matchingBoundary.ParentCentroid.Value;
-                    if (overridesById[matchingBoundary.Id].Identity.ParentCentroid.DistanceTo(mbCentroid) > spaceOverride.Identity.ParentCentroid.DistanceTo(mbCentroid))
-                    {
-                        overridesById[matchingBoundary.Id] = spaceOverride;
-                    }
-                }
-                else
-                {
-                    overridesById.Add(matchingBoundary.Id, spaceOverride);
-                }
-            }
-
-            return overridesById;
-        }
-
-        private static SpaceSettingsOverride MatchApplicableOverride(
-            Dictionary<Guid, SpaceSettingsOverride> overridesById,
-            ElementProxy<SpaceBoundary> boundaryProxy,
-            PhoneBoothLayoutInputs input)
-        {
-            var overrideName = SpaceSettingsOverride.Name;
-            SpaceSettingsOverride config;
-
-            // See if we already have matching override attached
-            var existingOverrideId = boundaryProxy.OverrideIds<SpaceSettingsOverride>(overrideName).FirstOrDefault();
-            if (existingOverrideId != null)
-            {
-                if (overridesById.TryGetValue(Guid.Parse(existingOverrideId), out config))
-                {
-                    return config;
-                }
-            }
-
-            // Try to match from identity in configs dictionary. Use a default in case none found
-            if (!overridesById.TryGetValue(boundaryProxy.ElementId, out config))
-            {
-                config = new SpaceSettingsOverride(
-                            Guid.NewGuid().ToString(),
-                            null,
-                            new SpaceSettingsValue(
-                                false,
-                                false
-                            )
-                    );
-                overridesById.Add(boundaryProxy.ElementId, config);
-            }
-
-            // Attach the identity and values data to the proxy
-            boundaryProxy.AddOverrideIdentity(overrideName, config.Id, config.Identity);
-            boundaryProxy.AddOverrideValue(overrideName, config.Value);
-
-            // Make sure proxies list has the proxy so that it will serialize in the model.
-            if (!proxies.Contains(boundaryProxy))
-            {
-                proxies.Add(boundaryProxy);
-            }
-
-            return config;
-        }
-
-        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary spaceBoundary, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
-        {
-            return allSpaceBoundaries.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryDependencyName);
         }
     }
 
