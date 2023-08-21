@@ -3,11 +3,16 @@ using Elements;
 using Elements.Geometry;
 using System.Linq;
 using System.Collections.Generic;
+using Elements.Components;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace LayoutFunctionCommon
 {
     public class OverrideUtilities
     {
+        public static readonly string SpaceBoundaryOverrideDependency = "Space Planning Zones";
+        public static readonly string SpaceBoundaryOverrideName = "Space Settings";
+
         public static void InstancePositionOverrides(dynamic overrides, Model model)
         {
             var allElementInstances = model.AllElementsOfType<ElementInstance>().ToList();
@@ -53,6 +58,116 @@ namespace LayoutFunctionCommon
                     }
                 }
             }
+        }
+
+        public static TSpaceSettingsOverride MatchApplicableOverride<TSpaceBoundary, TSpaceSettingsOverride, TSpaceSettingsOverrideValueType>(
+            Dictionary<Guid, TSpaceSettingsOverride> overridesById,
+            ElementProxy<TSpaceBoundary> boundaryProxy,
+            TSpaceSettingsOverrideValueType defaultValue,
+            List<ElementProxy<TSpaceBoundary>> proxies) 
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue 
+            where TSpaceBoundary : Element, ISpaceBoundary 
+            where TSpaceSettingsOverride : ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>, IOverride, new()
+        {
+            var overrideName = SpaceBoundaryOverrideName;
+            TSpaceSettingsOverride config;
+
+            // See if we already have matching override attached
+            var existingOverrideId = boundaryProxy.OverrideIds<TSpaceSettingsOverride>(overrideName).FirstOrDefault();
+            if (existingOverrideId != null)
+            {
+                if (overridesById.TryGetValue(Guid.Parse(existingOverrideId), out config))
+                {
+                    return config;
+                }
+            }
+
+            // Try to match from identity in configs dictionary. Use a default in case none found
+            if (!overridesById.TryGetValue(boundaryProxy.ElementId, out config))
+            {
+                config = new TSpaceSettingsOverride()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Value = defaultValue
+                };
+                overridesById.Add(boundaryProxy.ElementId, config);
+            }
+
+            // Attach the identity and values data to the proxy
+            boundaryProxy.AddOverrideIdentity(overrideName, config.Id, config.GetIdentity());
+            boundaryProxy.AddOverrideValue(overrideName, config.Value);
+
+            // Make sure proxies list has the proxy so that it will serialize in the model.
+            if (!proxies.Contains(boundaryProxy))
+            {
+                proxies.Add(boundaryProxy);
+            }
+
+            return config;
+        }
+
+        public static (
+            ContentConfiguration selectedConfig,
+            double rotation,
+            double collabDensity,
+            double aisleWidth,
+            double backToBackWidth,
+            string deskTypeName
+        ) GetSpaceSettings<TSpaceBoundary, TSpaceSettingsOverride, TSpaceSettingsOverrideValueType>(
+            TSpaceBoundary ob,
+            ContentConfiguration defaultConfig,
+            double rotation,
+            double collabDensity,
+            double aisleWidth,
+            double backToBackWidth,
+            string deskType,
+            Dictionary<Guid, TSpaceSettingsOverride> overridesById,
+            SpaceConfiguration configs,
+            ElementProxy<TSpaceBoundary> proxy,
+            Func<TSpaceSettingsOverride, ContentConfiguration> createCustomDesk = null) 
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideOpenOfficeValue 
+            where TSpaceBoundary : Element, ISpaceBoundary 
+            where TSpaceSettingsOverride : ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>, IOverride
+        {
+            var selectedConfig = defaultConfig;
+            var deskTypeName = deskType;
+            if (overridesById.ContainsKey(ob.Id))
+            {
+                var spaceOverride = overridesById[ob.Id];
+                if (createCustomDesk != null)
+                {
+                    selectedConfig = createCustomDesk(spaceOverride);
+                }
+                if (createCustomDesk == null || selectedConfig == null)
+                {
+                    selectedConfig = configs[spaceOverride.Value.GetDeskType];
+                }
+                Identity.AddOverrideIdentity(proxy, spaceOverride);
+                Identity.AddOverrideValue(proxy, "Space Settings", spaceOverride.Value);
+                rotation = spaceOverride.Value.GridRotation;
+                collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
+                aisleWidth = double.IsNaN(spaceOverride.Value.AisleWidth) ? aisleWidth : spaceOverride.Value.AisleWidth;
+                backToBackWidth = double.IsNaN(spaceOverride.Value.BackToBackWidth) ? backToBackWidth : spaceOverride.Value.BackToBackWidth;
+                deskTypeName = spaceOverride.Value.GetDeskType;
+            }
+            return (selectedConfig, rotation, collabDensity, aisleWidth, backToBackWidth, deskTypeName);
+        }
+
+        public static ElementProxy<TSpaceBoundary> GetSpaceBoundaryProxy<TSpaceBoundary>(
+            TSpaceBoundary spaceBoundary, 
+            IEnumerable<ElementProxy<TSpaceBoundary>> allSpaceBoundaries, 
+            Dictionary<string, dynamic> parameters = null) 
+            where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            var proxy = allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependency);
+            if (parameters != null)
+            {
+                foreach (var parameter in parameters)
+                {
+                    proxy.AdditionalProperties.Add(parameter.Key, parameter.Value);
+                }
+            }
+            return proxy;
         }
     }
 }
