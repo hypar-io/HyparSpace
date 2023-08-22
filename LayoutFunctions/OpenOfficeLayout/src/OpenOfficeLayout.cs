@@ -79,7 +79,7 @@ namespace OpenOfficeLayout
             var output = new OpenOfficeLayoutOutputs();
 
             var avoidanceStrat = input.ColumnAvoidanceStrategy;
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
 
             var columnSearchTree = new SearchablePointCollection<Profile>();
             if (avoidanceStrat != OpenOfficeLayoutInputsColumnAvoidanceStrategy.None)
