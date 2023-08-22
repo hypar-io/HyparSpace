@@ -3,17 +3,13 @@ using Elements.Components;
 using Elements.Geometry;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace LayoutFunctionCommon
 {
-    public static class Configurations
+    public static class FlippedConfigurations
     {
         private static Dictionary<string, ContentElement> _mirroredElements { get; set; }
-        private static Dictionary<string, ContentElement> _leftElements { get; set; }
-        private static Dictionary<string, ContentElement> _rightElements { get; set; }
         private static SpaceConfiguration _originalConfigs { get; set; }
         private static SpaceConfiguration _yFlippedConfigs { get; set; }
 
@@ -38,56 +34,51 @@ namespace LayoutFunctionCommon
             return (hFlip ^ vFlip ? _yFlippedConfigs : _originalConfigs, newTransform);
         }
 
-        public static SpaceConfiguration GetFlippedConfigs(SpaceConfiguration configs)
+        private static SpaceConfiguration GetFlippedConfigs(SpaceConfiguration configs)
         {
-            Action<ContentConfiguration.ContentItem, Vector3, Vector3> flip = (item, min, max) =>
-            {
-                if (item.ContentElement.Name.Contains("Plinth Base - Pedestal - Mobile - Wood Top"))
-                {
-
-                }
-
-                // Mirror origin
-                var newOrigin = item.Transform.Origin;
-                newOrigin.Y = max.Y - (item.Transform.Origin.Y - min.Y);
-
-                // Mirror directional
-                var flippedY = item.Transform.YAxis;
-                flippedY.Y = -flippedY.Y;
-                item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedY));
-
-                // Move origin relative to the width of the object
-                var t = _mirroredElements;
-                if (_mirroredElements.TryGetValue(item.ContentElement.Name, out var mirroredElement) && mirroredElement != null)
-                {
-                    item.Name = mirroredElement.Name;
-                    item.Url = mirroredElement.GltfLocation;
-                    newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
-                }
-                else if (item.ContentElement.Name.Contains("Left") || item.ContentElement.Name.Contains("Right"))
-                {
-                    var oppositeElemName = string.Join(" ", item.ContentElement.Name.Split(" ").Select(w => w == "Right" ? "Left" : (w == "Left" ? "Right" : w)));
-                    var oppositeElem = ContentCatalogRetrieval.GetCatalog().Content.FirstOrDefault(e => e.Name == oppositeElemName);
-                    if (oppositeElem != null)
-                    {
-                        item.Name = oppositeElem.Name;
-                        item.Url = oppositeElem.GltfLocation;
-                    }
-                }
-                else
-                {
-                    newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
-                }
-
-                item.Transform.Matrix.SetTranslation(newOrigin);
-
-                item.Anchor = new Vector3(item.Anchor.X, -item.Anchor.Y, item.Anchor.Z);
-            };
-
-            return GetNewConfigs(configs, flip);
+            return GetNewConfigs(configs, Flip);
         }
 
-        // public static SpaceConfiguration GetRotated180Configs(SpaceConfiguration configs)
+        private static void Flip(ContentConfiguration.ContentItem item, Vector3 min, Vector3 max)
+        {
+            // Mirror origin
+            var newOrigin = item.Transform.Origin;
+            newOrigin.Y = max.Y - (item.Transform.Origin.Y - min.Y);
+
+            // Mirror directional
+            var flippedY = item.Transform.YAxis;
+            flippedY.Y = -flippedY.Y;
+            item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedY));
+
+            // Move origin relative to the width of the object
+            if (_mirroredElements.TryGetValue(item.ContentElement.Name, out var mirroredElement) && mirroredElement != null)
+            {
+                item.Name = mirroredElement.Name;
+                item.Url = mirroredElement.GltfLocation;
+                newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
+            }
+            else if (item.ContentElement.Name.Contains("Left") || item.ContentElement.Name.Contains("Right"))
+            {
+                var oppositeElemName = string.Join(" ", item.ContentElement.Name.Split(" ").Select(w => w == "Right" ? "Left" : (w == "Left" ? "Right" : w)));
+                var oppositeElem = ContentCatalogRetrieval.GetCatalog().Content.FirstOrDefault(e => e.Name == oppositeElemName);
+                if (oppositeElem != null)
+                {
+                    item.Name = oppositeElem.Name;
+                    item.Url = oppositeElem.GltfLocation;
+                }
+            }
+            else
+            {
+                newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
+            }
+
+            item.Transform.Matrix.SetTranslation(newOrigin);
+
+            // замінити на щось краще?
+            item.Anchor = new Vector3(item.Anchor.X, -item.Anchor.Y, item.Anchor.Z);
+        }
+
+        // private static SpaceConfiguration GetRotated180Configs(SpaceConfiguration configs)
         // {
         //     Action<ContentConfiguration.ContentItem, Vector3, Vector3> rotate = (item, min, max) =>
         //     {
@@ -98,7 +89,7 @@ namespace LayoutFunctionCommon
         //     return GetNewConfigs(configs, rotate);
         // }
 
-        public static SpaceConfiguration GetNewConfigs(SpaceConfiguration configs, Action<ContentConfiguration.ContentItem, Vector3, Vector3> change)
+        private static SpaceConfiguration GetNewConfigs(SpaceConfiguration configs, Action<ContentConfiguration.ContentItem, Vector3, Vector3> change)
         {
             var newConfigs = new SpaceConfiguration();
             foreach (var config in configs)

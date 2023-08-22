@@ -47,9 +47,9 @@ namespace LayoutFunctionCommon
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = DeserializeConfigJson(configJson);
-            Configurations.Init(configs);
+            FlippedConfigurations.Init(configs);
 
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<TCirculationSegment>();
@@ -85,7 +85,7 @@ namespace LayoutFunctionCommon
                         foreach (var cell in grid.GetCells())
                         {
                             var rect = cell.GetCellGeometry() as Polygon;
-                            var (selectedConfigs, configsTransform) = ((SpaceConfiguration, Transform)) Configurations.GetConfigs(rect.Centroid(), spaceSettingsValue.PrimaryAxisFlipLayout , spaceSettingsValue.SecondaryAxisFlipLayout);
+                            var (selectedConfigs, configsTransform) = ((SpaceConfiguration, Transform)) FlippedConfigurations.GetConfigs(rect.Centroid(), spaceSettingsValue.PrimaryAxisFlipLayout , spaceSettingsValue.SecondaryAxisFlipLayout);
 
                             var config = FindConfigByFit(selectedConfigs, cell);
                             if (config != null)

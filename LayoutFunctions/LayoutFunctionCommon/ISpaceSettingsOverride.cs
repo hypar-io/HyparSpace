@@ -5,6 +5,10 @@ namespace Elements
         TValueType Value { get; set; }
     }
 
+    public interface ISpaceSettingsOverrideValue
+    {
+    }
+
     public interface ISpaceSettingsOverrideOpenOfficeValue : ISpaceSettingsOverrideValue
     {
         public string GetDeskType { get; }
@@ -17,7 +21,7 @@ namespace Elements
         public double BackToBackWidth { get; set; }
     }
 
-    public interface ISpaceSettingsOverrideValue
+    public interface ISpaceSettingsOverrideFlipValue : ISpaceSettingsOverrideValue
     {
         public bool PrimaryAxisFlipLayout { get; set; }
         public bool SecondaryAxisFlipLayout { get; set; }
