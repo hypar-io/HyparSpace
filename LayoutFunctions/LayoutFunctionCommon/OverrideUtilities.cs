@@ -9,7 +9,7 @@ namespace LayoutFunctionCommon
 {
     public class OverrideUtilities
     {
-        public static readonly string SpaceBoundaryOverrideDependency = "Space Planning Zones";
+        public static readonly string SpaceBoundaryOverrideDependencyName = "Space Planning Zones";
         public static readonly string SpaceBoundaryOverrideName = "Space Settings";
 
         public static void InstancePositionOverrides(dynamic overrides, Model model)
@@ -106,7 +106,7 @@ namespace LayoutFunctionCommon
             IEnumerable<ElementProxy<TSpaceBoundary>> allSpaceBoundaries = null,
             Dictionary<string, dynamic> parameters = null) where TSpaceBoundary : Element, ISpaceBoundary
         {
-            var proxy = allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependency);
+            var proxy = allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependencyName);
             if (parameters != null)
             {
                 foreach (var parameter in parameters)

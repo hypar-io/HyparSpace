@@ -16,8 +16,6 @@ namespace PrivateOfficeLayout
     {
         private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
 
-        private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
-
         /// <summary>
         /// Map between the layout and the number of seats it lays out
         /// </summary>
@@ -63,34 +61,34 @@ namespace PrivateOfficeLayout
             var dir = Path.GetDirectoryName(assmLoc);
             var configJson = File.ReadAllText(Path.Combine(dir, "PrivateOfficeConfigurations.json"));
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            Configurations.Init(configs);
+            FlippedConfigurations.Init(configs);
 
 
-            var configsNames = new string[] {
-                "ClassroomLayout",
-                "LoungeLayout",
-                "MeetingRoomLayout",
-                "OpenCollabLayout",
-                "OpenOfficeLayout",
-                "PantryLayout",
-                "ReceptionLayout",
-                "PrivateOfficeLayout",
-                "PhoneBoothLayout",
-            };
-            var configsNames1 = new string[] {
-                "ClassroomConfigurations",
-                "LoungeConfigurations",
-                "ConferenceRoomConfigurations",
-                "OpenCollaborationConfigurations",
-                "OpenOfficeDeskConfigurations",
-                "PantryConfigurations",
-                "ReceptionConfigurations",
-                "PrivateOfficeConfigurations",
-                "PhoneBoothConfigurations",
-            };
+            // var configsNames = new string[] {
+            //     "ClassroomLayout",
+            //     "LoungeLayout",
+            //     "MeetingRoomLayout",
+            //     "OpenCollabLayout",
+            //     "OpenOfficeLayout",
+            //     "PantryLayout",
+            //     "ReceptionLayout",
+            //     "PrivateOfficeLayout",
+            //     "PhoneBoothLayout",
+            // };
+            // var configsNames1 = new string[] {
+            //     "ClassroomConfigurations",
+            //     "LoungeConfigurations",
+            //     "ConferenceRoomConfigurations",
+            //     "OpenCollaborationConfigurations",
+            //     "OpenOfficeDeskConfigurations",
+            //     "PantryConfigurations",
+            //     "ReceptionConfigurations",
+            //     "PrivateOfficeConfigurations",
+            //     "PhoneBoothConfigurations",
+            // };
 
-            var elements = new Dictionary<string, List<string>>();
-            var elements1 = new Dictionary<string, List<(string, string)>>();
+            // var elements = new Dictionary<string, List<string>>();
+            // var elements1 = new Dictionary<string, List<(string, string)>>();
 
             // var configJson0 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/PrivateOfficeLayout/mirrored-catalog.json");
             // var model = Model.FromJson(configJson0);
@@ -224,7 +222,7 @@ namespace PrivateOfficeLayout
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             var totalPrivateOfficeCount = 0;
             foreach (var lvl in levels)
             {
@@ -243,7 +241,7 @@ namespace PrivateOfficeLayout
                     var privateOfficeCount = 0;
                     var config = OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, privateOfficeBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         new SpaceSettingsValue(
                             new SpaceSettingsValueOfficeSizing(
                                 input.OfficeSizing.AutomateOfficeSubdivisions,
@@ -280,14 +278,14 @@ namespace PrivateOfficeLayout
                         foreach (var cell in grid.GetCells())
                         {
                             var rect = cell.GetCellGeometry() as Polygon;
-                            var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+                            var selectedConfigs = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                             var segs = rect.Segments();
                             var width = segs[0].Length();
                             var depth = segs[1].Length();
                             var trimmedGeo = cell.GetTrimmedCellGeometry();
                             if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                             {
-                                var layout = InstantiateLayout(selectedConfigs, width, depth, rect, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform), out var seats);
+                                var layout = InstantiateLayout(selectedConfigs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
                                 privateOfficeCount++;
@@ -301,7 +299,7 @@ namespace PrivateOfficeLayout
                                 var areaRatio = cinchedPoly.Area() / rect.Area();
                                 if (areaRatio > 0.7)
                                 {
-                                    var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform), out var seats);
+                                    var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                     output.Model.AddElement(layout);
                                     privateOfficeCount++;

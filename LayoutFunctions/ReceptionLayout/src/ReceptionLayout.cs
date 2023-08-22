@@ -58,7 +58,7 @@ namespace ReceptionLayout
             var output = new ReceptionLayoutOutputs();
             var configJson = File.ReadAllText("./ReceptionConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            Configurations.Init(configs);
+            FlippedConfigurations.Init(configs);
 
             var hasCore = inputModels.TryGetValue("Core", out var coresModel) && coresModel.AllElementsOfType<ServiceCore>().Any();
             List<Line> coreSegments = new();
@@ -66,7 +66,7 @@ namespace ReceptionLayout
             {
                 coreSegments.AddRange(coresModel.AllElementsOfType<ServiceCore>().SelectMany(c => c.Profile.Perimeter.Segments()));
             }
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
@@ -103,10 +103,10 @@ namespace ReceptionLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+                        var selectedConfigs = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform.Concatenated(configsTransform), out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform, output.Model, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             seatsCount += seats;
@@ -117,7 +117,7 @@ namespace ReceptionLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform.Concatenated(configsTransform), out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform, output.Model, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
@@ -213,7 +213,7 @@ namespace ReceptionLayout
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
         }
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, out int seatsCount)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, Model model, out int seatsCount)
         {
             seatsCount = 0;
             ContentConfiguration selectedConfig = null;
@@ -233,7 +233,27 @@ namespace ReceptionLayout
                 return null;
             }
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
+            // for (int i = 0; i < baseRectangle.Vertices.Count(); i++)
+            // {
+            //     var t = baseRectangle.Vertices.ElementAt(i);
+            //     t.Z = 0;
+            // }
             var rules = selectedConfig.Rules();
+
+            // model.AddElements(selectedConfig.ContentItems.Select(i => 
+            // {
+            //     var tr = new Transform(rectangle.Vertices.First().X, rectangle.Vertices.First().Y, rectangle.Vertices.First().Z);
+            //     tr.RotateAboutPoint(rectangle.Centroid(), Vector3.ZAxis, baseRectangle.Segments().First().Direction().PlaneAngleTo(rectangle.Segments().First().Direction()));
+
+            //     var rt = new Vector3(rectangle.Vertices.Max(p => p.X) - rectangle.Vertices.Min(p => p.X), rectangle.Vertices.Max(p => p.Y) - rectangle.Vertices.Min(p => p.Y), 0);
+
+            //     List<(Vector3 location, Vector3 direction, double magnitude, Color? color)> o = new List<(Vector3 location, Vector3 direction, double magnitude, Color? color)>() {
+            //     (tr.OfPoint(i.Transform.Origin) + rt, 
+            //     tr.OfVector((i.Anchor - i.Transform.Origin).Unitized()), 
+            //     Math.Abs(i.Anchor.DistanceTo(i.Transform.Origin)), 
+            //     Colors.Magenta)};
+            //     return new ModelArrows(o, name: i.Name);
+            // }).ToList());
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
