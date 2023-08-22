@@ -10,7 +10,7 @@ The SpaceConfigurationFromModel function.
   "string",
   "null"
 ]||
-|Model File|https://prod-api.hypar.io/schemas/InputData||
+|Model File|https://schemas.hypar.io/InputData.json||
 
 
 <br>
