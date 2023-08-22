@@ -46,13 +46,13 @@ namespace PhoneBoothLayout
             var output = new PhoneBoothLayoutOutputs();
             var configJson = File.ReadAllText("./PhoneBoothConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            Configurations.Init(configs);
+            FlippedConfigurations.Init(configs);
 
             var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
@@ -105,7 +105,7 @@ namespace PhoneBoothLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+                        var (selectedConfigs, configsTransform) = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var layout = InstantiateLayout(selectedConfigs, width, depth, rect, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform));

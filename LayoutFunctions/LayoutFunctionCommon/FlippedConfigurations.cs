@@ -12,9 +12,8 @@ namespace LayoutFunctionCommon
         private static Dictionary<string, ContentElement> _mirroredElements { get; set; }
         private static SpaceConfiguration _originalConfigs { get; set; }
         private static SpaceConfiguration _yFlippedConfigs { get; set; }
-
-        public static SpaceConfiguration OriginalConfigs { get { return _originalConfigs; } }
-        public static SpaceConfiguration YFlippedConfigs { get { return _yFlippedConfigs; } }
+        private static SpaceConfiguration _xFlippedConfigs { get; set; }
+        private static SpaceConfiguration _xyFlippedConfigs { get; set; }
 
         public static void Init(SpaceConfiguration configs)
         {
@@ -24,14 +23,17 @@ namespace LayoutFunctionCommon
 
             _originalConfigs = configs;
             _yFlippedConfigs = GetFlippedConfigs(configs);
+            _xFlippedConfigs = GetRotated180Configs(_yFlippedConfigs);
+            _xyFlippedConfigs = GetRotated180Configs(configs);
         }
 
-        public static (SpaceConfiguration Configs, Transform Transform) GetConfigs(Vector3 centroid, bool hFlip, bool vFlip)
+        public static SpaceConfiguration GetConfigs(Vector3 centroid, bool primaryFlip, bool secondaryFlip)
         {
-            var newTransform = new Transform();
-            newTransform.RotateAboutPoint(centroid, Vector3.ZAxis, vFlip ? 180 : 0); /// this is work not for all layouts
-
-            return (hFlip ^ vFlip ? _yFlippedConfigs : _originalConfigs, newTransform);
+            return 
+                primaryFlip && !secondaryFlip ? _yFlippedConfigs :
+                !primaryFlip && secondaryFlip ? _xFlippedConfigs :
+                primaryFlip && secondaryFlip ? _xyFlippedConfigs :
+                _originalConfigs;
         }
 
         private static SpaceConfiguration GetFlippedConfigs(SpaceConfiguration configs)
@@ -39,11 +41,24 @@ namespace LayoutFunctionCommon
             return GetNewConfigs(configs, Flip);
         }
 
+        private static SpaceConfiguration GetRotated180Configs(SpaceConfiguration configs)
+        {
+            return GetNewConfigs(configs, Rotate);
+        }
+
+        private static void Rotate(ContentConfiguration.ContentItem item, Vector3 min, Vector3 max)
+        {
+            item.Transform.RotateAboutPoint((min + max) / 2, Vector3.ZAxis, 180);
+            item.Anchor = new Vector3(min.X + max.X - item.Anchor.X, min.Y + max.Y - item.Anchor.Y, item.Anchor.Z);
+        }
+
         private static void Flip(ContentConfiguration.ContentItem item, Vector3 min, Vector3 max)
         {
             // Mirror origin
             var newOrigin = item.Transform.Origin;
-            newOrigin.Y = max.Y - (item.Transform.Origin.Y - min.Y);
+            newOrigin.Y = min.Y + max.Y - item.Transform.Origin.Y;
+
+            item.Anchor = new Vector3(item.Anchor.X, min.Y + max.Y - item.Anchor.Y, item.Anchor.Z);
 
             // Mirror directional
             var flippedY = item.Transform.YAxis;
@@ -73,21 +88,7 @@ namespace LayoutFunctionCommon
             }
 
             item.Transform.Matrix.SetTranslation(newOrigin);
-
-            // замінити на щось краще?
-            item.Anchor = new Vector3(item.Anchor.X, -item.Anchor.Y, item.Anchor.Z);
         }
-
-        // private static SpaceConfiguration GetRotated180Configs(SpaceConfiguration configs)
-        // {
-        //     Action<ContentConfiguration.ContentItem, Vector3, Vector3> rotate = (item, min, max) =>
-        //     {
-        //         item.Transform.RotateAboutPoint((min + max) / 2, Vector3.ZAxis, 180);
-        //         item.Anchor = item.Anchor.Negate();
-        //     };
-
-        //     return GetNewConfigs(configs, rotate);
-        // }
 
         private static SpaceConfiguration GetNewConfigs(SpaceConfiguration configs, Action<ContentConfiguration.ContentItem, Vector3, Vector3> change)
         {

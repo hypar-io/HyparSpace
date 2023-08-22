@@ -46,12 +46,12 @@ namespace ClassroomLayout
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            Configurations.Init(configs);
+            FlippedConfigurations.Init(configs);
 
             int totalCountableSeats = 0;
             int seatsAtDesk = 0;
 
-            var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
@@ -89,7 +89,7 @@ namespace ClassroomLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var (selectedConfigs, configsTransform) = Configurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+                        var (selectedConfigs, configsTransform) = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
                             var componentInstance = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform.Concatenated(configsTransform));

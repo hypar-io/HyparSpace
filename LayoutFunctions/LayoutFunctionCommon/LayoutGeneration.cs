@@ -64,7 +64,7 @@ namespace LayoutFunctionCommon
                 {
                     var spaceSettingsValue = OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependency)),
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         defaultValue,
                         Proxies).Value;
 
