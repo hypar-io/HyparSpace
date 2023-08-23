@@ -45,7 +45,7 @@
         }
       },
       "Model File": {
-        "$ref": "https://prod-api.hypar.io/schemas/InputData",
+        "$ref": "https://schemas.hypar.io/InputData.json",
         "$hyparOrder": 1,
         "$hyparFileTypes": [
           "json"
