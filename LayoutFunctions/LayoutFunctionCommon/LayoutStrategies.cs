@@ -152,7 +152,7 @@ namespace LayoutFunctionCommon
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().ToList();
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => z.Name == programTypeName).ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
