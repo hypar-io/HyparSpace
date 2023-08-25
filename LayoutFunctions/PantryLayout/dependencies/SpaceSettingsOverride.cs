@@ -2,7 +2,7 @@ using Elements;
 
 namespace PantryLayout
 {
-    public partial class SpaceSettingsValue : ISpaceSettingsOverrideValue
+    public partial class SpaceSettingsValue : ISpaceSettingsOverrideFlipValue
     {
     }
 

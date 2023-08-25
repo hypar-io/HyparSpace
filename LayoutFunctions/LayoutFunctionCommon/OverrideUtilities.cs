@@ -133,8 +133,8 @@ namespace LayoutFunctionCommon
             TSpaceSettingsOverrideValueType defaultValue,
             List<ElementProxy<TSpaceBoundary>> proxies
             ) 
-            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue 
-            where TSpaceBoundary : Element, ISpaceBoundary 
+            where TSpaceBoundary : Element, ISpaceBoundary
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue
             where TSpaceSettingsOverride : ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>, IOverride, new()
         {
             var overrideName = SpaceBoundaryOverrideName;

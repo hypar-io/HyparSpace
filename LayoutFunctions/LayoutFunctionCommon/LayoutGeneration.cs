@@ -26,19 +26,18 @@ namespace LayoutFunctionCommon
         where TLevelVolume : GeometricElement, ILevelVolume
         where TCirculationSegment : Floor, ICirculationSegment
         where TOverride : IOverride
-        where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue
+        where TSpaceSettingsOverrideValueType : class, ISpaceSettingsOverrideValue
     {
         public static readonly List<ElementProxy<TSpaceBoundary>> Proxies = new List<ElementProxy<TSpaceBoundary>>();
         public virtual LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName,
                                               Dictionary<string, Model> inputModels,
                                               dynamic overrides,
-                                              Func<TOverride, Vector3> getCentroid,
-                                              TSpaceSettingsOverrideValueType defaultValue,
                                               bool createWalls,
                                               string configurationsPath,
-                                              string catalogPath = "catalog.json")
+                                              string catalogPath = "catalog.json",
+                                              Func<TOverride, Vector3> getCentroid = null,
+                                              TSpaceSettingsOverrideValueType defaultValue = null)
         {
-
             var outputModel = new Model();
             var totalSeats = 0;
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
@@ -49,7 +48,7 @@ namespace LayoutFunctionCommon
             var configs = DeserializeConfigJson(configJson);
             FlippedConfigurations.Init(configs);
 
-            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels);
+            var overridesBySpaceBoundaryId = getCentroid != null ? OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels) : new Dictionary<Guid, TOverride>();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<TCirculationSegment>();
@@ -62,11 +61,16 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
-                    var spaceSettingsValue = OverrideUtilities.MatchApplicableOverride(
-                        overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
-                        defaultValue,
-                        Proxies).Value;
+                    SpaceConfiguration selectedConfigs = configs;
+                    if (defaultValue != null)
+                    {
+                        var spaceSettingsValue = OverrideUtilities.MatchApplicableOverride(
+                            overridesBySpaceBoundaryId,
+                            OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                            defaultValue,
+                            Proxies).Value;
+                        selectedConfigs = FlippedConfigurations.GetConfigs(spaceSettingsValue.PrimaryAxisFlipLayout, spaceSettingsValue.SecondaryAxisFlipLayout);
+                    }
 
                     SeatsCount seatsCount = default;
                     var spaceBoundary = room.Boundary;
@@ -84,13 +88,10 @@ namespace LayoutFunctionCommon
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         foreach (var cell in grid.GetCells())
                         {
-                            var rect = cell.GetCellGeometry() as Polygon;
-                            var (selectedConfigs, configsTransform) = ((SpaceConfiguration, Transform)) FlippedConfigurations.GetConfigs(rect.Centroid(), spaceSettingsValue.PrimaryAxisFlipLayout , spaceSettingsValue.SecondaryAxisFlipLayout);
-
                             var config = FindConfigByFit(selectedConfigs, cell);
                             if (config != null)
                             {
-                                possibleConfigs.Add((config.Value, WallCandidates));
+                                possibleConfigs.Add(((ConfigInfo)config, WallCandidates));
                             }
                         }
                     }
@@ -126,6 +127,7 @@ namespace LayoutFunctionCommon
                     });
                 }
             }
+            
             outputModel.AddElements(Proxies);
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
 

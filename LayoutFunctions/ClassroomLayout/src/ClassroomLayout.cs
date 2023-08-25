@@ -71,6 +71,7 @@ namespace ClassroomLayout
                         OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
                         new SpaceSettingsValue(false, false),
                         proxies);
+                    var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
 
                     var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
@@ -89,10 +90,9 @@ namespace ClassroomLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var (selectedConfigs, configsTransform) = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform.Concatenated(configsTransform));
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -102,7 +102,7 @@ namespace ClassroomLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
 
-                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform.Concatenated(configsTransform));
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -124,10 +124,10 @@ namespace ClassroomLayout
                                     }
                                 }
 
-                                cell.U.SplitAtOffset(2.3, false, true);
+                                cell.U.SplitAtOffset(2.3, config.Value.SecondaryAxisFlipLayout, true);
                                 cell.V.SplitAtOffset(0.5, false, true);
                                 cell.V.SplitAtOffset(0.5, true, true);
-                                var classroomSide = cell[1, 1];
+                                var classroomSide = cell[config.Value.SecondaryAxisFlipLayout ? 0 : 1, 1];
                                 classroomSide.U.DivideByFixedLength(deskConfig.Width, FixedDivisionMode.RemainderAtBothEnds);
                                 classroomSide.V.DivideByFixedLength(deskConfig.Depth, FixedDivisionMode.RemainderAtBothEnds);
                                 foreach (var individualDesk in classroomSide.GetCells())
@@ -147,7 +147,7 @@ namespace ClassroomLayout
                                                 contentItem.Transform
                                                 .Concatenated(orientationTransform)
                                                 .Concatenated(new Transform(cellRect.Vertices[0]))
-                                                .Concatenated(room.Transform).Concatenated(configsTransform),
+                                                .Concatenated(room.Transform),
                                                 "Desk");
 
                                             LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
