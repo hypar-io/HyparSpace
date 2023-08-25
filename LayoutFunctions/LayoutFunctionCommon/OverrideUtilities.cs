@@ -9,8 +9,8 @@ namespace LayoutFunctionCommon
 {
     public class OverrideUtilities
     {
-        public static readonly string SpaceBoundaryOverrideDependencyName = "Space Planning Zones";
-        public static readonly string SpaceBoundaryOverrideName = "Space Settings";
+        public const string SpaceBoundaryOverrideDependencyName = "Space Planning Zones";
+        public const string SpaceBoundaryOverrideName = "Space Settings";
 
         public static void InstancePositionOverrides(dynamic overrides, Model model)
         {

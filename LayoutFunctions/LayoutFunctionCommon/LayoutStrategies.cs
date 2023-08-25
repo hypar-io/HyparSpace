@@ -194,11 +194,14 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
-                    var spaceSettingsValue = defaultValue != null && proxies != null ? OverrideUtilities.MatchApplicableOverride(
-                        overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
-                        defaultValue,
-                        proxies).Value : default;
+                    var spaceSettingsValue = 
+                        defaultValue != null && proxies != null ? 
+                        OverrideUtilities.MatchApplicableOverride(
+                            overridesBySpaceBoundaryId,
+                            OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                            defaultValue,
+                            proxies).Value : 
+                        default;
                     ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue, corridorSegments, levelVolume, wallCandidateLines);
                 }
 
@@ -217,11 +220,14 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
-                var spaceSettingsValue = defaultValue != null && proxies != null ? OverrideUtilities.MatchApplicableOverride(
+                var spaceSettingsValue = 
+                    defaultValue != null && proxies != null ? 
+                    OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
                         OverrideUtilities.GetSpaceBoundaryProxy(room, allSpaceBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         defaultValue,
-                        proxies).Value : default;
+                        proxies).Value : 
+                    default;
                 ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue);
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);

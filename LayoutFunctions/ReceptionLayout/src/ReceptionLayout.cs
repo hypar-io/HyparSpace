@@ -105,7 +105,7 @@ namespace ReceptionLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform, output.Model, out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             seatsCount += seats;
@@ -116,7 +116,7 @@ namespace ReceptionLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform, output.Model, out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
@@ -212,7 +212,7 @@ namespace ReceptionLayout
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
         }
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, Model model, out int seatsCount)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, out int seatsCount)
         {
             seatsCount = 0;
             ContentConfiguration selectedConfig = null;
