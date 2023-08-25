@@ -27,8 +27,6 @@ namespace ReceptionLayout
 
         private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
 
-        private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
-
         /// <summary>
         /// The ReceptionLayout function.
         /// </summary>
@@ -37,8 +35,8 @@ namespace ReceptionLayout
         /// <returns>A ReceptionLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ReceptionLayoutOutputs Execute(Dictionary<string, Model> inputModels, ReceptionLayoutInputs input)
         {
-            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             proxies.Clear();
+            Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
@@ -83,9 +81,10 @@ namespace ReceptionLayout
                     var spaceBoundary = room.Boundary;
                     var config = OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         new SpaceSettingsValue(false, false),
                         proxies);
+                    var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                     Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
 
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
@@ -103,7 +102,6 @@ namespace ReceptionLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var selectedConfigs = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
                             var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform, output.Model, out var seats);
@@ -233,27 +231,7 @@ namespace ReceptionLayout
                 return null;
             }
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
-            // for (int i = 0; i < baseRectangle.Vertices.Count(); i++)
-            // {
-            //     var t = baseRectangle.Vertices.ElementAt(i);
-            //     t.Z = 0;
-            // }
             var rules = selectedConfig.Rules();
-
-            // model.AddElements(selectedConfig.ContentItems.Select(i => 
-            // {
-            //     var tr = new Transform(rectangle.Vertices.First().X, rectangle.Vertices.First().Y, rectangle.Vertices.First().Z);
-            //     tr.RotateAboutPoint(rectangle.Centroid(), Vector3.ZAxis, baseRectangle.Segments().First().Direction().PlaneAngleTo(rectangle.Segments().First().Direction()));
-
-            //     var rt = new Vector3(rectangle.Vertices.Max(p => p.X) - rectangle.Vertices.Min(p => p.X), rectangle.Vertices.Max(p => p.Y) - rectangle.Vertices.Min(p => p.Y), 0);
-
-            //     List<(Vector3 location, Vector3 direction, double magnitude, Color? color)> o = new List<(Vector3 location, Vector3 direction, double magnitude, Color? color)>() {
-            //     (tr.OfPoint(i.Transform.Origin) + rt, 
-            //     tr.OfVector((i.Anchor - i.Transform.Origin).Unitized()), 
-            //     Math.Abs(i.Anchor.DistanceTo(i.Transform.Origin)), 
-            //     Colors.Magenta)};
-            //     return new ModelArrows(o, name: i.Name);
-            // }).ToList());
 
             var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
             var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
