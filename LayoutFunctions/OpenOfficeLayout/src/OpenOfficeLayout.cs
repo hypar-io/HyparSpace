@@ -106,6 +106,7 @@ namespace OpenOfficeLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
+                var officeBoundaryProxies = officeBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -114,7 +115,7 @@ namespace OpenOfficeLayout
                 foreach (var ob in officeBoundaries)
                 {
                     var seatsCount = 0;
-                    var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, Utilities.GetStringValueFromEnum(input.DeskType));
+                    var proxy = OverrideUtilities.GetOpenOfficeBoundaryProxy(Utilities.GetStringValueFromEnum(input.DeskType), input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, officeBoundaryProxies);
                     output.Model.AddElement(proxy);
                     var isCustom = defaultDeskTypeName == "Custom";
                     CustomWorkstation customDesk = null;
@@ -123,7 +124,7 @@ namespace OpenOfficeLayout
                         collabDensity,
                         aisleWidth,
                         backToBackWidth,
-                        deskTypeName) = LayoutStrategies.GetSpaceSettings<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
+                        deskTypeName) = OverrideUtilities.GetSpaceSettings<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
                             ob,
                             defaultConfig,
                             input.GridRotation,
