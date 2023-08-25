@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "30b5f0c5-67d7-40d5-bdb6-d86c66d58142",
+  "id": "6ddde416-c7e7-46cf-8fa0-8c5b1d268dd3",
   "name": "Phone Booth Layout",
   "model_output": "Phone Booth Layout",
   "description": "Lay out phone booths",

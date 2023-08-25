@@ -41,7 +41,6 @@ namespace PhoneBoothLayout
             var output = new PhoneBoothLayoutOutputs();
             var configJson = File.ReadAllText("./PhoneBoothConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            FlippedConfigurations.Init(configs);
 
             var wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);

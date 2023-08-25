@@ -1,6 +1,6 @@
 {
     "$schema": "https://hypar.io/Schemas/function.json",
-    "id": "b608e43a-5143-40dc-a1b7-271f2cab7db7",
+    "id": "94dc146d-a523-412a-989f-dafdacd1ac68",
     "name": "Private Office Layout",
     "description": "Lay out private offices.",
     "model_output": "Private Office Layout",
@@ -137,8 +137,6 @@
         "https://schemas.hypar.io/LevelElements.json",
         "https://schemas.hypar.io/CirculationSegment.json",
         "https://schemas.hypar.io/LevelVolume.json"
-    ],
-    "content_catalogs": [
     ],
     "outputs": [
         {
