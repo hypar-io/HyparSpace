@@ -146,9 +146,7 @@ namespace LayoutFunctionCommon
             Func<LayoutInstantiated, int> countSeats = null,
             Func<TOverride, Vector3> getCentroid = null,
             TSpaceSettingsOverrideValueType defaultValue = default,
-            List<ElementProxy<TSpaceBoundary>> proxies = default /*,
-            Func<IEnumerable<TLevelElements>, Dictionary<Guid, ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>>> getOverridesBySpaceBoundaryId = null,
-            Func<Dictionary<Guid, ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>>, TSpaceBoundary, IEnumerable<TSpaceBoundary>, TSpaceSettingsOverrideValueType> getSpaceSettingsValue = null*/
+            List<ElementProxy<TSpaceBoundary>> proxies = default
             )
             where TLevelElements : Element, ILevelElements
             where TSpaceBoundary : Element, ISpaceBoundary
@@ -175,8 +173,11 @@ namespace LayoutFunctionCommon
             FlippedConfigurations.Init(configs);
 
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => z.Name == programTypeName).ToList();
-            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels);
-            // var overridesBySpaceBoundaryId = getOverridesBySpaceBoundaryId != null ? getOverridesBySpaceBoundaryId(levels) : new Dictionary<Guid, ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>>();
+            var overridesBySpaceBoundaryId = 
+                getCentroid != null ? 
+                OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels) : 
+                new Dictionary<Guid, IOverride>();
+                
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
@@ -193,13 +194,12 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
-                    // var spaceSettingsValue = getSpaceSettingsValue != null ? getSpaceSettingsValue(overridesBySpaceBoundaryId, room, allSpaceBoundaries) : default;
                     var spaceSettingsValue = defaultValue != null && proxies != null ? OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
                         OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         defaultValue,
                         proxies).Value : default;
-                    ProcessRoom(room, outputModel, countSeats, configs, spaceSettingsValue, corridorSegments, levelVolume, wallCandidateLines);
+                    ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue, corridorSegments, levelVolume, wallCandidateLines);
                 }
 
                 double height = levelVolume?.Height ?? 3;
@@ -217,13 +217,12 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
-                // var spaceSettingsValue = getSpaceSettingsValue != null ? getSpaceSettingsValue(overridesBySpaceBoundaryId, room, allSpaceBoundaries) : default;
                 var spaceSettingsValue = defaultValue != null && proxies != null ? OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
                         OverrideUtilities.GetSpaceBoundaryProxy(room, allSpaceBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
                         defaultValue,
                         proxies).Value : default;
-                ProcessRoom<TLevelVolume, TSpaceBoundary, ISpaceSettingsOverrideValue>(room, outputModel, countSeats, configs, spaceSettingsValue);
+                ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue);
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
         }
@@ -248,7 +247,7 @@ namespace LayoutFunctionCommon
             var success = false;
             var spaceBoundary = room.Boundary;
             var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
-            var selectedConfigs = spaceSettingsValue is ISpaceSettingsOverrideFlipValue spaceSettingsFlipValue ?
+            var selectedConfigs = spaceSettingsValue != null && spaceSettingsValue is ISpaceSettingsOverrideFlipValue spaceSettingsFlipValue ?
                 FlippedConfigurations.GetConfigs(spaceSettingsFlipValue.PrimaryAxisFlipLayout, spaceSettingsFlipValue.SecondaryAxisFlipLayout) :
                 configs;
 
