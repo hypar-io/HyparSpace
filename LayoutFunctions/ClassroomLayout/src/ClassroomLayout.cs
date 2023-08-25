@@ -15,8 +15,6 @@ namespace ClassroomLayout
     {
         private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
 
-        private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
-
         /// <summary>
         /// The ClassroomLayout function.
         /// </summary>
@@ -57,6 +55,7 @@ namespace ClassroomLayout
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
+                var meetingRmBoundaryProxies = meetingRmBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString()) ??
@@ -68,7 +67,7 @@ namespace ClassroomLayout
                     var spaceBoundary = room.Boundary;
                     var config = OverrideUtilities.MatchApplicableOverride(
                         overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaryProxies),
                         new SpaceSettingsValue(false, false),
                         proxies);
                     var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);

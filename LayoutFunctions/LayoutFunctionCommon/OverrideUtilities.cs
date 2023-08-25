@@ -103,29 +103,26 @@ namespace LayoutFunctionCommon
 
         public static ElementProxy<TSpaceBoundary> GetSpaceBoundaryProxy<TSpaceBoundary>(
             TSpaceBoundary spaceBoundary,
-            IEnumerable<ElementProxy<TSpaceBoundary>> allSpaceBoundaries = null,
-            Dictionary<string, dynamic> parameters = null) where TSpaceBoundary : Element, ISpaceBoundary
+            IEnumerable<ElementProxy<TSpaceBoundary>> allSpaceBoundaries = null) where TSpaceBoundary : Element, ISpaceBoundary
         {
-            var proxy = allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependencyName);
-            if (parameters != null)
-            {
-                foreach (var parameter in parameters)
-                {
-                    proxy.AdditionalProperties.Add(parameter.Key, parameter.Value);
-                }
-            }
-            return proxy;
+            return allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependencyName);
         }
         
-        // public static ElementProxy<TSpaceBoundary> CreateSettingsProxy<TSpaceBoundary>(double collabSpaceDensity, double gridRotation, double aisleWidth, TSpaceBoundary ob, string deskType) where TSpaceBoundary : Element, ISpaceBoundary
-        // {
-        //     var proxy = ob.Proxy("Space Settings");
-        //     proxy.AdditionalProperties.Add("Desk Type", deskType);
-        //     proxy.AdditionalProperties.Add("Integrated Collaboration Space Density", collabSpaceDensity);
-        //     proxy.AdditionalProperties.Add("Aisle Width", aisleWidth);
-        //     proxy.AdditionalProperties.Add("Grid Rotation", gridRotation);
-        //     return proxy;
-        // }
+        public static ElementProxy<TSpaceBoundary> GetOpenOfficeBoundaryProxy<TSpaceBoundary>(
+            string deskType, 
+            double collabSpaceDensity, 
+            double gridRotation, 
+            double aisleWidth, 
+            TSpaceBoundary ob, 
+            IEnumerable<ElementProxy<TSpaceBoundary>> officeBoundaryProxies) where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            var proxy = GetSpaceBoundaryProxy(ob, officeBoundaryProxies);
+            proxy.AdditionalProperties.Add("Desk Type", deskType);
+            proxy.AdditionalProperties.Add("Integrated Collaboration Space Density", collabSpaceDensity);
+            proxy.AdditionalProperties.Add("Aisle Width", aisleWidth);
+            proxy.AdditionalProperties.Add("Grid Rotation", gridRotation);
+            return proxy;
+        }
         
         public static TSpaceSettingsOverride MatchApplicableOverride<TSpaceBoundary, TSpaceSettingsOverride, TSpaceSettingsOverrideValueType>(
             Dictionary<Guid, TSpaceSettingsOverride> overridesById,
