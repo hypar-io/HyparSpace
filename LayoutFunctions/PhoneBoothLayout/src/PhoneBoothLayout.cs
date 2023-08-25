@@ -13,10 +13,6 @@ namespace PhoneBoothLayout
 {
     public static class PhoneBoothLayout
     {
-        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
-
-        private static readonly string SpaceBoundaryDependencyName = SpaceSettingsOverride.Dependency;
-
         /// <summary>
         /// The PhoneBoothLayout function.
         /// </summary>
@@ -26,7 +22,6 @@ namespace PhoneBoothLayout
         public static PhoneBoothLayoutOutputs Execute(Dictionary<string, Model> inputModels, PhoneBoothLayoutInputs input)
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
-            proxies.Clear();
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
@@ -52,7 +47,6 @@ namespace PhoneBoothLayout
             var glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
             var mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
 
-            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
@@ -69,12 +63,6 @@ namespace PhoneBoothLayout
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
-                    var config = OverrideUtilities.MatchApplicableOverride(
-                        overridesBySpaceBoundaryId,
-                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaries.Proxies(SpaceBoundaryDependencyName)),
-                        new SpaceSettingsValue(false, false),
-                        proxies);
-
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                   .Select(w =>
                                   {
@@ -105,10 +93,9 @@ namespace PhoneBoothLayout
                         var width = segs[0].Length();
                         var depth = segs[1].Length();
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        var (selectedConfigs, configsTransform) = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform));
+                            var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
@@ -122,7 +109,7 @@ namespace PhoneBoothLayout
 
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
-                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, (levelVolume?.Transform ?? new Transform()).Concatenated(configsTransform));
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform());
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
@@ -150,7 +137,6 @@ namespace PhoneBoothLayout
             }
             output.PhoneBooths = totalBoothCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
-            output.Model.AddElements(proxies);
             return output;
         }
 

@@ -45,7 +45,20 @@ namespace LoungeLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var output = new LoungeLayoutOutputs();
-            LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, SpaceSettingsOverride, SpaceSettingsValue>("Lounge", inputModels, input.Overrides, (ov) => ov.Identity.ParentCentroid, new SpaceSettingsValue(false, false), proxies, output.Model, false, "./LoungeConfigurations.json", default, CountSeats);
+
+            Func<IEnumerable<LevelElements>, Dictionary<Guid, ISpaceSettingsOverride<SpaceSettingsValue>>> overridesBySpaceBoundaryId = (levels) => {
+                return OverrideUtilities.GetOverridesBySpaceBoundaryId<ISpaceSettingsOverride<SpaceSettingsValue>, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings.Select(s => s as ISpaceSettingsOverride<SpaceSettingsValue>).ToList(), (ov) => (ov as SpaceSettingsOverride).Identity.ParentCentroid, levels);
+            };
+
+            Func<Dictionary<Guid, ISpaceSettingsOverride<SpaceSettingsValue>>, SpaceBoundary, IEnumerable<SpaceBoundary>, SpaceSettingsValue> spaceSettingsValue = (overridesId, room, roomBoundaries) => {
+                return OverrideUtilities.MatchApplicableOverride<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
+                            overridesId.ToDictionary(id => id.Key, id => id.Value as SpaceSettingsOverride),
+                            OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                            new SpaceSettingsValue(false, false),
+                            proxies).Value;
+            };
+
+            LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, SpaceSettingsValue>("Lounge", inputModels, input.Overrides, output.Model, false, "./LoungeConfigurations.json", default, CountSeats, overridesBySpaceBoundaryId, spaceSettingsValue);
             
             output.Model.AddElements(proxies);
             return output;

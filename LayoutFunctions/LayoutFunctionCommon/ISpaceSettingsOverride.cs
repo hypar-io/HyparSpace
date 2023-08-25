@@ -1,12 +1,18 @@
 namespace Elements
 {
-    public interface ISpaceSettingsOverride<TValueType> where TValueType : ISpaceSettingsOverrideValue
+    public interface ISpaceSettingsOverride<TValueType>: IOverride where TValueType : ISpaceSettingsOverrideValue
     {
         TValueType Value { get; set; }
     }
 
     public interface ISpaceSettingsOverrideValue
     {
+    }
+
+    public interface ISpaceSettingsOverrideFlipValue : ISpaceSettingsOverrideValue
+    {
+        public bool PrimaryAxisFlipLayout { get; set; }
+        public bool SecondaryAxisFlipLayout { get; set; }
     }
 
     public interface ISpaceSettingsOverrideOpenOfficeValue : ISpaceSettingsOverrideValue
@@ -19,11 +25,5 @@ namespace Elements
         public double AisleWidth { get; set; }
 
         public double BackToBackWidth { get; set; }
-    }
-
-    public interface ISpaceSettingsOverrideFlipValue : ISpaceSettingsOverrideValue
-    {
-        public bool PrimaryAxisFlipLayout { get; set; }
-        public bool SecondaryAxisFlipLayout { get; set; }
     }
 }

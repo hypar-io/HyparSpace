@@ -64,35 +64,35 @@ namespace PrivateOfficeLayout
             FlippedConfigurations.Init(configs);
 
 
-            // var configsNames = new string[] {
-            //     "ClassroomLayout",
-            //     "LoungeLayout",
-            //     "MeetingRoomLayout",
-            //     "OpenCollabLayout",
-            //     "OpenOfficeLayout",
-            //     "PantryLayout",
-            //     "ReceptionLayout",
-            //     "PrivateOfficeLayout",
-            //     "PhoneBoothLayout",
-            // };
-            // var configsNames1 = new string[] {
-            //     "ClassroomConfigurations",
-            //     "LoungeConfigurations",
-            //     "ConferenceRoomConfigurations",
-            //     "OpenCollaborationConfigurations",
-            //     "OpenOfficeDeskConfigurations",
-            //     "PantryConfigurations",
-            //     "ReceptionConfigurations",
-            //     "PrivateOfficeConfigurations",
-            //     "PhoneBoothConfigurations",
-            // };
+            var configsNames = new string[] {
+                "ClassroomLayout",
+                "LoungeLayout",
+                "MeetingRoomLayout",
+                "OpenCollabLayout",
+                "OpenOfficeLayout",
+                "PantryLayout",
+                "ReceptionLayout",
+                "PrivateOfficeLayout",
+                "PhoneBoothLayout",
+            };
+            var configsNames1 = new string[] {
+                "ClassroomConfigurations",
+                "LoungeConfigurations",
+                "ConferenceRoomConfigurations",
+                "OpenCollaborationConfigurations",
+                "OpenOfficeDeskConfigurations",
+                "PantryConfigurations",
+                "ReceptionConfigurations",
+                "PrivateOfficeConfigurations",
+                "PhoneBoothConfigurations",
+            };
 
             // var elements = new Dictionary<string, List<string>>();
             // var elements1 = new Dictionary<string, List<(string, string)>>();
 
-            // var configJson0 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/PrivateOfficeLayout/mirrored-catalog.json");
-            // var model = Model.FromJson(configJson0);
-            // var catalog = model.AllElementsOfType<ContentCatalog>().First();
+            var configJson0 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/PrivateOfficeLayout/mirrored-catalog.json");
+            var model = Model.FromJson(configJson0);
+            var catalog = model.AllElementsOfType<ContentCatalog>().First();
 
             // var elemNames = new Dictionary<string, ContentElement>();
             // foreach (var item in catalog.Content)
@@ -126,86 +126,120 @@ namespace PrivateOfficeLayout
             // //     allCatalogs.Add(configsNames[i], catalog1);
             // // }
 
-            // for (int i = 0; i < configsNames.Count(); i++)
-            // {
-            //     // var configJson1 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/catalog-mirrored.json");
+            for (int i = 0; i < configsNames.Count(); i++)
+            {
+                var configJson1 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/catalog.json");
+                var model1 = Model.FromJson(configJson1);
+                var catalog1 = model1.AllElementsOfType<ContentCatalog>().First();
 
-            //     var configJson1 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/catalog.json");
-            //     var model1 = Model.FromJson(configJson1);
-            //     var catalog1 = model1.AllElementsOfType<ContentCatalog>().First();
+                var j = 0;
+                var ploi = new List<ContentElement>();
+                var redfploi = new List<Element>();
+                while (j < catalog1.Content.Count())
+                {
+                    var item = catalog1.Content[j];
+                    var content = catalog.Content.FirstOrDefault(u => u.Name == item.Name);
+                    var Reference = catalog.ReferenceConfiguration.Where(u => u.Name == item.Name);
+                    if (content != null)
+                    {
+                        catalog1.Content.Remove(item);
+                        ploi.Add(content);
 
-            //     var configJson2 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/{configsNames1[i]}.json");
-            //     var configs1 = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson2);
+                        var oldReference = catalog1.ReferenceConfiguration.Where(u => u.Name == item.Name).ToList();
+                        for (int p = 0; p < oldReference.Count(); p++)
+                        {
+                            catalog1.ReferenceConfiguration.Remove(oldReference[p]);
+                        }
+                        redfploi.AddRange(Reference);
+                        continue;
+                    }
+                    j++;
+                }
 
-            //     var allElem0 = configs1.SelectMany(c => c.Value.ContentItems).ToList();
-            //     // var allElem0 = configs1.SelectMany(c => c.Value.ContentItems).Where(e => !catalog1.Content.Any(cit => cit.Name == e.Name || cit.GltfLocation == e.Url)).ToList();
-            //     // var allElem00 = configs1.SelectMany(c => c.Value.ContentItems).Where(e => !catalog1.Content.Any(cit => cit.Name == e.Name && cit.GltfLocation == e.Url)).ToList();
-            //     // var allElem0 = catalog1.Content.Where(e => !configs1.SelectMany(c => c.Value.ContentItems).Any(cit => cit.Name == e.Name || e.GltfLocation == cit.Url)).ToList();
-            //     // var allElem00 = catalog1.Content.Where(e => !configs1.SelectMany(c => c.Value.ContentItems).Any(cit => cit.Name == e.Name && e.GltfLocation == cit.Url)).ToList();
+                foreach (var item in ploi)
+                {
+                    catalog1.Content.Add(item);
+                }
 
-            //     var j = 0;
-            //     // add names
-            //     while (j < allElem0.Count())
-            //     {
-            //         var item = allElem0[j];
-            //         var elem = catalog1.Content.FirstOrDefault(c => c.GltfLocation == item.Url);
-            //         if (elem != null)
-            //         {
-            //             item.Name = elem.Name;
-            //         }
-            //         j++;
-            //     }
+                foreach (var item in redfploi)
+                {
+                    catalog1.ReferenceConfiguration.Add(item);
+                }
 
-            //     using (FileStream s = File.Create($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/{configsNames1[i]}-out.json"))
-            //     using (StreamWriter writer = new StreamWriter(s))
-            //     using (JsonTextWriter jsonWriter = new JsonTextWriter(writer))
-            //     {
-            //         var serializer = new JsonSerializer();
-            //         serializer.Serialize(jsonWriter, configs1);
-            //         jsonWriter.Flush();
-            //     }
+                model1.ToJson($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/catalog-out.json", true);
 
-            //     j = 0;
-            //     // remove not used
-            //     while (j < catalog1.Content.Count())
-            //     {
-            //         var item = catalog1.Content[j];
-            //         if (!allElem0.Any(e => e.Name == item.Name || e.Url == item.GltfLocation))
-            //         {
-            //             var refes = catalog1.ReferenceConfiguration.Where(e => (e as ElementInstance).BaseDefinition?.Name == item.Name).ToList();
-            //             for (int k = refes.Count() - 1; k >= 0; k--)
-            //             {
-            //                 catalog1.ReferenceConfiguration.Remove(refes[k]);
-            //             }
-            //             catalog1.Content.Remove(item);
-            //             continue;
-            //         }
-            //         j++;
-            //     }
+                //     var configJson2 = File.ReadAllText($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/{configsNames1[i]}.json");
+                //     var configs1 = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson2);
 
-            //     // var allElem = configs1.SelectMany(c => c.Value.ContentItems.Select(it => (it.Name, it.Url)));
-            //     var allElem = configs1.SelectMany(c => c.Value.ContentItems.Select(it => !string.IsNullOrEmpty(it.Name) ? it.Name : catalog1.Content.FirstOrDefault(cit => cit.Name == it.Name || cit.GltfLocation == it.Url)?.Name)).Distinct().OrderBy(n => n).ToList();
-            //     var allElem1 = configs1.SelectMany(c => c.Value.ContentItems.Select(it => (!string.IsNullOrEmpty(it.Name) ? it.Name : catalog1.Content.FirstOrDefault(cit => cit.Name == it.Name || cit.GltfLocation == it.Url)?.Name, it.Url))).Distinct().OrderBy(n => n).ToList();
+                //     var allElem0 = configs1.SelectMany(c => c.Value.ContentItems).ToList();
+                //     // var allElem0 = configs1.SelectMany(c => c.Value.ContentItems).Where(e => !catalog1.Content.Any(cit => cit.Name == e.Name || cit.GltfLocation == e.Url)).ToList();
+                //     // var allElem00 = configs1.SelectMany(c => c.Value.ContentItems).Where(e => !catalog1.Content.Any(cit => cit.Name == e.Name && cit.GltfLocation == e.Url)).ToList();
+                //     // var allElem0 = catalog1.Content.Where(e => !configs1.SelectMany(c => c.Value.ContentItems).Any(cit => cit.Name == e.Name || e.GltfLocation == cit.Url)).ToList();
+                //     // var allElem00 = catalog1.Content.Where(e => !configs1.SelectMany(c => c.Value.ContentItems).Any(cit => cit.Name == e.Name && e.GltfLocation == cit.Url)).ToList();
 
-            //     // elements.Add(configsNames[i], catalog.Content.Where(c => allElem.Contains(c.Name)).Select(c => c.Name).ToList());
-            //     // elements.Add(configsNames[i], catalog.Content.Where(c => allElem.Any(a => c.Name.Replace(" Mirrored", "") == a)).Select(c => c.Name).ToList());
-            //     // elements.Add(configsNames[i], allElem.Where(e => e != null && (e.Contains("Left") || e.Contains("Right"))).ToList());
-            //     elements.Add(configsNames[i], allElem);
-            //     // elements1.Add(configsNames[i], allElem0.Select(n => (n.Name, n.GltfLocation)).ToList());
-            //     // elements1.Add(configsNames[i] + "1", allElem00.Select(n => (n.Name, n.GltfLocation)).ToList());
-            //     // elements1.Add(configsNames[i], allElem1.Where(n => string.IsNullOrEmpty(n.Item1)).ToList());
-            //     // elements1.Add(configsNames[i], catalog1.Content.Where(n => string.IsNullOrEmpty(n.Name)).Select(n => (n.Name, n.GltfLocation)).ToList());
+                //     var j = 0;
+                //     // add names
+                //     while (j < allElem0.Count())
+                //     {
+                //         var item = allElem0[j];
+                //         var elem = catalog1.Content.FirstOrDefault(c => c.GltfLocation == item.Url);
+                //         if (elem != null)
+                //         {
+                //             item.Name = elem.Name;
+                //         }
+                //         j++;
+                //     }
 
-            //     var elements4 = allElem.Distinct().OrderBy(n => n).Where(n => catalog.Content.Any(u => u.Name.Replace(" Mirrored", "").Replace("1 Mirrored", "") == n));
-            //     // var elements4 = allElem.Distinct().OrderBy(n => n).Where(n => elemNames.Any(u => u.Key == n));
-            //     foreach (var item in elements4)
-            //     {
-            //         var contentName = elemNames[item].Name;
-            //         var content = catalog.Content.FirstOrDefault(u => u.Name == contentName);
-            //         var Reference = catalog.ReferenceConfiguration.FirstOrDefault(u => u.Name == contentName);
-            //         if (content != null) catalog1.Content.Add(content);
-            //         if (Reference != null) catalog1.ReferenceConfiguration.Add(Reference);
-            //     }
+                //     using (FileStream s = File.Create($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/{configsNames1[i]}-out.json"))
+                //     using (StreamWriter writer = new StreamWriter(s))
+                //     using (JsonTextWriter jsonWriter = new JsonTextWriter(writer))
+                //     {
+                //         var serializer = new JsonSerializer();
+                //         serializer.Serialize(jsonWriter, configs1);
+                //         jsonWriter.Flush();
+                //     }
+
+                //     j = 0;
+                //     // remove not used
+                //     while (j < catalog1.Content.Count())
+                //     {
+                //         var item = catalog1.Content[j];
+                //         if (!allElem0.Any(e => e.Name == item.Name || e.Url == item.GltfLocation))
+                //         {
+                //             var refes = catalog1.ReferenceConfiguration.Where(e => (e as ElementInstance).BaseDefinition?.Name == item.Name).ToList();
+                //             for (int k = refes.Count() - 1; k >= 0; k--)
+                //             {
+                //                 catalog1.ReferenceConfiguration.Remove(refes[k]);
+                //             }
+                //             catalog1.Content.Remove(item);
+                //             continue;
+                //         }
+                //         j++;
+                //     }
+
+                //     // var allElem = configs1.SelectMany(c => c.Value.ContentItems.Select(it => (it.Name, it.Url)));
+                //     var allElem = configs1.SelectMany(c => c.Value.ContentItems.Select(it => !string.IsNullOrEmpty(it.Name) ? it.Name : catalog1.Content.FirstOrDefault(cit => cit.Name == it.Name || cit.GltfLocation == it.Url)?.Name)).Distinct().OrderBy(n => n).ToList();
+                //     var allElem1 = configs1.SelectMany(c => c.Value.ContentItems.Select(it => (!string.IsNullOrEmpty(it.Name) ? it.Name : catalog1.Content.FirstOrDefault(cit => cit.Name == it.Name || cit.GltfLocation == it.Url)?.Name, it.Url))).Distinct().OrderBy(n => n).ToList();
+
+                //     // elements.Add(configsNames[i], catalog.Content.Where(c => allElem.Contains(c.Name)).Select(c => c.Name).ToList());
+                //     // elements.Add(configsNames[i], catalog.Content.Where(c => allElem.Any(a => c.Name.Replace(" Mirrored", "") == a)).Select(c => c.Name).ToList());
+                //     // elements.Add(configsNames[i], allElem.Where(e => e != null && (e.Contains("Left") || e.Contains("Right"))).ToList());
+                //     elements.Add(configsNames[i], allElem);
+                //     // elements1.Add(configsNames[i], allElem0.Select(n => (n.Name, n.GltfLocation)).ToList());
+                //     // elements1.Add(configsNames[i] + "1", allElem00.Select(n => (n.Name, n.GltfLocation)).ToList());
+                //     // elements1.Add(configsNames[i], allElem1.Where(n => string.IsNullOrEmpty(n.Item1)).ToList());
+                //     // elements1.Add(configsNames[i], catalog1.Content.Where(n => string.IsNullOrEmpty(n.Name)).Select(n => (n.Name, n.GltfLocation)).ToList());
+
+                // var elements4 = allElem.Distinct().OrderBy(n => n).Where(n => catalog.Content.Any(u => u.Name.Replace(" Mirrored", "").Replace("1 Mirrored", "") == n));
+                //     // var elements4 = allElem.Distinct().OrderBy(n => n).Where(n => elemNames.Any(u => u.Key == n));
+                // foreach (var item in elements4)
+                // {
+                //     var contentName = elemNames[item].Name;
+                //     var content = catalog.Content.FirstOrDefault(u => u.Name == contentName);
+                //     var Reference = catalog.ReferenceConfiguration.FirstOrDefault(u => u.Name == contentName);
+                //     if (content != null) catalog1.Content.Add(content);
+                //     if (Reference != null) catalog1.ReferenceConfiguration.Add(Reference);
+            }
 
             //     model1.ToJson($"D:/Hypar/Forks/HyparSpace/LayoutFunctions/{configsNames[i]}/catalog-out.json", true);
 
@@ -250,6 +284,7 @@ namespace PrivateOfficeLayout
                             false,
                             false),
                         proxies);
+                    var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                     var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
 
                     foreach (var roomBoundary in privateOfficeRoomBoundaries)
@@ -278,7 +313,6 @@ namespace PrivateOfficeLayout
                         foreach (var cell in grid.GetCells())
                         {
                             var rect = cell.GetCellGeometry() as Polygon;
-                            var selectedConfigs = FlippedConfigurations.GetConfigs(rect.Centroid(), config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                             var segs = rect.Segments();
                             var width = segs[0].Length();
                             var depth = segs[1].Length();

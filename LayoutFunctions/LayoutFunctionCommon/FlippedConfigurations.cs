@@ -27,7 +27,7 @@ namespace LayoutFunctionCommon
             _xyFlippedConfigs = GetRotated180Configs(configs);
         }
 
-        public static SpaceConfiguration GetConfigs(Vector3 centroid, bool primaryFlip, bool secondaryFlip)
+        public static SpaceConfiguration GetConfigs(bool primaryFlip, bool secondaryFlip)
         {
             return 
                 primaryFlip && !secondaryFlip ? _yFlippedConfigs :

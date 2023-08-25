@@ -69,26 +69,6 @@
           "$ref": "https://schemas.hypar.io/Transform.json"
         }
       }
-    },
-    "Space Settings": {
-      "dependency": "Space Planning Zones",
-      "context": "[*discriminator=Elements.SpaceBoundary&Name=Phone Booth]",
-      "identity": {
-        "ParentCentroid": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        }
-      },
-      "paradigm": "edit",
-      "schema": {
-        "Primary Axis Flip Layout": {
-          "type": "boolean",
-          "default": false
-        },
-        "Secondary Axis Flip Layout": {
-          "type": "boolean",
-          "default": false
-        }
-      }
     }
   },
   "element_types": [
