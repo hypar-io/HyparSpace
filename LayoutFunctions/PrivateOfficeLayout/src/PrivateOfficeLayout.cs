@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using System;
 using Elements.Spatial;
 using LayoutFunctionCommon;
-using IFC;
 
 namespace PrivateOfficeLayout
 {
@@ -319,7 +318,6 @@ namespace PrivateOfficeLayout
             {
                 return null;
             }
-
             var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
             var rules = selectedConfig.Rules();
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "30901831-bcfe-4227-b53e-f9bec5f44f96",
+  "id": "1a57db32-3ac1-4874-a23a-61f160c54604",
   "name": "Open Collaboration Layout",
   "description": "Lay out Open collaboration spaces.",
   "language": "C#",
