@@ -47,24 +47,24 @@
         "$hyparOrder": 1
       },
       "Default Door Opening Side" : {
-        "default": "LeftHand",
+        "default": "Left Hand",
         "description": "The opening side of a door.",
         "type": "string",
         "$hyparOrder": 2,
         "enum": [
-          "LeftHand",
-          "RightHand",
-          "DoubleDoor"
+          "Left Hand",
+          "Right Hand",
+          "Double Door"
         ]
       },
       "Default Door Opening Type" : {
-        "default": "SingleSwing",
+        "default": "Single Swing",
         "description": "The type of a door.",
         "type": "string",
         "$hyparOrder": 2,
         "enum": [
-          "SingleSwing",
-          "DoubleSwing"
+          "Single Swing",
+          "Double Swing"
         ]
       }
     }
@@ -103,22 +103,22 @@
           "minimum": 2.032
         },
         "Default Door Opening Side" : {
-          "default": "LeftHand",
+          "default": "Left Hand",
           "description": "The opening side of a door.",
           "type": "string",
           "enum": [
-            "LeftHand",
-            "RightHand",
-            "DoubleDoor"
+            "Left Hand",
+            "Right Hand",
+            "Double Door"
           ]
         },
         "Default Door Opening Type" : {
-          "default": "SingleSwing",
+          "default": "Single Swing",
           "description": "The type of a door.",
           "type": "string",
           "enum": [
-            "SingleSwing",
-            "DoubleSwing"
+            "Single Swing",
+            "Double Swing"
           ]
         }
       },
@@ -156,22 +156,22 @@
               "minimum": 2.032
             },
             "Door Opening Side" : {
-              "default": "LeftHand",
+              "default": "Left Hand",
               "description": "The opening side of a door.",
               "type": "string",
               "enum": [
-                "LeftHand",
-                "RightHand",
-                "DoubleDoor"
+                "Left Hand",
+                "Right Hand",
+                "Double Door"
               ]
             },
             "Door Opening Type" : {
-              "default": "SingleSwing",
+              "default": "Single Swing",
               "description": "The type of a door.",
               "type": "string",
               "enum": [
-                "SingleSwing",
-                "DoubleSwing"
+                "Single Swing",
+                "Double Swing"
               ]
             }
           }

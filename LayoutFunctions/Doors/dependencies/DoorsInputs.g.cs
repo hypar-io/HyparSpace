@@ -63,12 +63,12 @@ namespace Doors
         /// <summary>The opening side of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorsInputsDefaultDoorOpeningSide DefaultDoorOpeningSide { get; set; } = DoorsInputsDefaultDoorOpeningSide.LeftHand;
+        public DoorsInputsDefaultDoorOpeningSide DefaultDoorOpeningSide { get; set; } = DoorsInputsDefaultDoorOpeningSide.Left_Hand;
     
         /// <summary>The type of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorsInputsDefaultDoorOpeningType DefaultDoorOpeningType { get; set; } = DoorsInputsDefaultDoorOpeningType.SingleSwing;
+        public DoorsInputsDefaultDoorOpeningType DefaultDoorOpeningType { get; set; } = DoorsInputsDefaultDoorOpeningType.Single_Swing;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
@@ -78,25 +78,25 @@ namespace Doors
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorsInputsDefaultDoorOpeningSide
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"LeftHand")]
-        LeftHand = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"RightHand")]
-        RightHand = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleDoor")]
-        DoubleDoor = 2,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorsInputsDefaultDoorOpeningType
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"SingleSwing")]
-        SingleSwing = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleSwing")]
-        DoubleSwing = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
     
     }
     
@@ -365,12 +365,12 @@ namespace Doors
         /// <summary>The opening side of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsValueDefaultDoorOpeningSide DefaultDoorOpeningSide { get; set; } = DoorPositionsValueDefaultDoorOpeningSide.LeftHand;
+        public DoorPositionsValueDefaultDoorOpeningSide DefaultDoorOpeningSide { get; set; } = DoorPositionsValueDefaultDoorOpeningSide.Left_Hand;
     
         /// <summary>The type of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Default Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsValueDefaultDoorOpeningType DefaultDoorOpeningType { get; set; } = DoorPositionsValueDefaultDoorOpeningType.SingleSwing;
+        public DoorPositionsValueDefaultDoorOpeningType DefaultDoorOpeningType { get; set; } = DoorPositionsValueDefaultDoorOpeningType.Single_Swing;
     
     }
     
@@ -416,62 +416,62 @@ namespace Doors
         /// <summary>The opening side of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsOverrideAdditionValueDoorOpeningSide DoorOpeningSide { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningSide.LeftHand;
+        public DoorPositionsOverrideAdditionValueDoorOpeningSide DoorOpeningSide { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningSide.Left_Hand;
     
         /// <summary>The type of a door.</summary>
         [Newtonsoft.Json.JsonProperty("Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsOverrideAdditionValueDoorOpeningType DoorOpeningType { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningType.SingleSwing;
+        public DoorPositionsOverrideAdditionValueDoorOpeningType DoorOpeningType { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningType.Single_Swing;
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorPositionsValueDefaultDoorOpeningSide
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"LeftHand")]
-        LeftHand = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"RightHand")]
-        RightHand = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleDoor")]
-        DoubleDoor = 2,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorPositionsValueDefaultDoorOpeningType
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"SingleSwing")]
-        SingleSwing = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleSwing")]
-        DoubleSwing = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorPositionsOverrideAdditionValueDoorOpeningSide
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"LeftHand")]
-        LeftHand = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"RightHand")]
-        RightHand = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleDoor")]
-        DoubleDoor = 2,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum DoorPositionsOverrideAdditionValueDoorOpeningType
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"SingleSwing")]
-        SingleSwing = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"DoubleSwing")]
-        DoubleSwing = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
     
     }
 }
