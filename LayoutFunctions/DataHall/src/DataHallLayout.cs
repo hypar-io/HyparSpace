@@ -139,7 +139,7 @@ namespace DataHallLayout
             var rackCount = model.AllElementsOfType<ElementInstance>().Count();
             var areaInSf = totalArea * 10.7639;
             var density = input.KWRack * rackCount / areaInSf;
-            var output = new DataHallDummyOutputs(rackCount, $"{density * 1000:0} watts/sf");
+            var output = new DataHallLayoutOutputs(rackCount, $"{density * 1000:0} watts/sf");
             output.Model = model;
             output.Warnings.AddRange(warnings);
             return output;
