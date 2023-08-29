@@ -153,16 +153,9 @@ namespace DataHallLayout
             }
 
             var allColumns = inputModels["Columns"].Elements.Values.OfType<Column>().ToList();
-            List<Column> columns = new List<Column>();
-
-            foreach (Column column in allColumns)
-            {
-                bool columnIn = column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location));
-                if (columnIn)
-                {
-                    columns.Add(column);
-                }
-            }
+            var columns = allColumns
+                .Where(column => column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location)))
+                .ToList();
 
             return columns.Count > 0 ? columns : null;
         }
