@@ -109,7 +109,7 @@ namespace DataHallLayout
                     var cellRect = cell.GetCellGeometry() as Polygon;
                     bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns);
 
-                    if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0 || intersectsColumn)
+                    if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0)
                     {
                         continue;
                     }
@@ -121,13 +121,13 @@ namespace DataHallLayout
                     {
                         model.AddElement(new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform));
                     }
-                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle - 180)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
-                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
