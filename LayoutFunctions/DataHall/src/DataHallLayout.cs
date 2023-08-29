@@ -60,6 +60,7 @@ namespace DataHallLayout
             var totalArea = 0.0;
             foreach (var room in roomBoundaries)
             {
+                List<Column> roomColumns = GetColumnsInRoom(room, inputModels);
                 var profile = room.Boundary;
                 totalArea += profile.Area();
                 //inset from walls
@@ -106,7 +107,9 @@ namespace DataHallLayout
                 foreach (var cell in grid.GetCells())
                 {
                     var cellRect = cell.GetCellGeometry() as Polygon;
-                    if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0)
+                    bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns);
+
+                    if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0 || intersectsColumn)
                     {
                         continue;
                     }
@@ -136,10 +139,42 @@ namespace DataHallLayout
             var rackCount = model.AllElementsOfType<ElementInstance>().Count();
             var areaInSf = totalArea * 10.7639;
             var density = input.KWRack * rackCount / areaInSf;
-            var output = new DataHallLayoutOutputs(rackCount, $"{density * 1000:0} watts/sf");
+            var output = new DataHallDummyOutputs(rackCount, $"{density * 1000:0} watts/sf");
             output.Model = model;
             output.Warnings.AddRange(warnings);
             return output;
+        }
+
+        private static List<Column> GetColumnsInRoom(SpaceBoundary room, Dictionary<string, Model> inputModels)
+        {
+            if (!inputModels.ContainsKey("Columns"))
+            {
+                return null;
+            }
+
+            var allColumns = inputModels["Columns"].Elements.Values.OfType<Column>().ToList();
+            List<Column> columns = new List<Column>();
+
+            foreach (Column column in allColumns)
+            {
+                bool columnIn = column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location));
+                if (columnIn)
+                {
+                    columns.Add(column);
+                }
+            }
+
+            return columns.Count > 0 ? columns : null;
+        }
+
+        private static bool CheckIntersectsWithColumns(Polygon? cellRect, List<Column> columns)
+        {
+            if (cellRect == null || columns == null || columns.Count == 0)
+            {
+                return false;
+            }
+
+            return columns.Any(column => cellRect.Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
         }
 
         private static ModelLines ToModelLines(Grid2d grid, Transform transform)
