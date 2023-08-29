@@ -69,11 +69,16 @@ namespace PrivateOfficeLayout
 
             var overridesById = GetOverridesByBoundaryId(input, levels);
             var totalPrivateOfficeCount = 0;
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Private Office").ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
-                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Private Office");
+                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Private Office");
+                foreach (var rm in privateOfficeBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -82,74 +87,7 @@ namespace PrivateOfficeLayout
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in privateOfficeBoundaries)
                 {
-                    var seatsCount = 0;
-                    var privateOfficeCount = 0;
-                    var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
-                    var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
-
-                    foreach (var roomBoundary in privateOfficeRoomBoundaries)
-                    {
-                        WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
-
-                        var relativeRoomTransform = room.Transform.Concatenated(levelVolume?.Transform.Inverted() ?? new Transform());
-                        var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                        orientationTransform.Concatenate(relativeRoomTransform);
-                        var boundaryCurves = new List<Polygon>();
-                        boundaryCurves.Add(roomBoundary.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
-                        boundaryCurves.AddRange(roomBoundary.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
-
-                        var grid = new Grid2d(boundaryCurves, orientationTransform);
-                        if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
-                        {
-                            try
-                            {
-                                grid.U.DivideByApproximateLength(config.Value.OfficeSizing.OfficeSize, EvenDivisionMode.RoundDown);
-                            }
-                            catch
-                            {
-                                // continue
-                            }
-                        }
-                        foreach (var cell in grid.GetCells())
-                        {
-                            var rect = cell.GetCellGeometry() as Polygon;
-                            var segs = rect.Segments();
-                            var width = segs[0].Length();
-                            var depth = segs[1].Length();
-                            var trimmedGeo = cell.GetTrimmedCellGeometry();
-                            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
-                            {
-                                var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
-                                LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                                output.Model.AddElement(layout);
-                                privateOfficeCount++;
-                                seatsCount += seats;
-                            }
-                            else if (trimmedGeo.Count() > 0)
-                            {
-                                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                                var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                                var cinchedPoly = new Polygon(cinchedVertices);
-                                var areaRatio = cinchedPoly.Area() / rect.Area();
-                                if (areaRatio > 0.7)
-                                {
-                                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
-                                    LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                                    output.Model.AddElement(layout);
-                                    privateOfficeCount++;
-                                    seatsCount += seats;
-                                }
-                            }
-                        }
-
-                        if (config.Value.CreateWalls)
-                        {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
-                        }
-                    }
-
-                    totalPrivateOfficeCount += privateOfficeCount;
-                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, privateOfficeCount, 0, 0));
+                    ProcessRoom(room, input, output.Model, configs, overridesById, privateOfficeBoundaries, ref totalPrivateOfficeCount, corridorSegments, levelVolume, wallCandidateLines);
                 }
 
                 var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
@@ -160,10 +98,100 @@ namespace PrivateOfficeLayout
                     LevelTransform = levelVolume?.Transform ?? new Transform()
                 });
             }
+            foreach (var room in allSpaceBoundaries)
+            {
+                ProcessRoom(room, input, output.Model, configs, overridesById, allSpaceBoundaries, ref totalPrivateOfficeCount);
+            }
             output.PrivateOfficeCount = totalPrivateOfficeCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             output.Model.AddElements(proxies);
             return output;
+        }
+
+        private static void ProcessRoom(
+            SpaceBoundary room,
+            PrivateOfficeLayoutInputs input,
+            Model outputModel,
+            SpaceConfiguration configs,
+            Dictionary<Guid, SpaceSettingsOverride> overridesById,
+            IEnumerable<SpaceBoundary> privateOfficeBoundaries,
+            ref int totalPrivateOfficeCount,
+            List<Line> corridorSegments = null,
+            LevelVolume levelVolume = null,
+            List<(Line line, string type)> wallCandidateLines = null
+            )
+        {
+            corridorSegments ??= new List<Line>();
+            wallCandidateLines ??= new List<(Line line, string type)>();
+
+            var seatsCount = 0;
+            var privateOfficeCount = 0;
+            var config = MatchApplicableOverride(overridesById, GetElementProxy(room, privateOfficeBoundaries.Proxies(SpaceBoundaryDependencyName)), input);
+            var privateOfficeRoomBoundaries = DivideBoundaryAlongVAxis(room, levelVolume, corridorSegments, wallCandidateLines, config);
+
+            foreach (var roomBoundary in privateOfficeRoomBoundaries)
+            {
+                WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
+
+                var relativeRoomTransform = room.Transform.Concatenated(levelVolume?.Transform.Inverted() ?? new Transform());
+                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                orientationTransform.Concatenate(relativeRoomTransform);
+                var boundaryCurves = new List<Polygon>();
+                boundaryCurves.Add(roomBoundary.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
+                boundaryCurves.AddRange(roomBoundary.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
+
+                var grid = new Grid2d(boundaryCurves, orientationTransform);
+                if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
+                {
+                    try
+                    {
+                        grid.U.DivideByApproximateLength(config.Value.OfficeSizing.OfficeSize, EvenDivisionMode.RoundDown);
+                    }
+                    catch
+                    {
+                        // continue
+                    }
+                }
+                foreach (var cell in grid.GetCells())
+                {
+                    var rect = cell.GetCellGeometry() as Polygon;
+                    var segs = rect.Segments();
+                    var width = segs[0].Length();
+                    var depth = segs[1].Length();
+                    var trimmedGeo = cell.GetTrimmedCellGeometry();
+                    if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+                    {
+                        var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
+                        LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                        outputModel.AddElement(layout);
+                        privateOfficeCount++;
+                        seatsCount += seats;
+                    }
+                    else if (trimmedGeo.Count() > 0)
+                    {
+                        var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                        var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
+                        var cinchedPoly = new Polygon(cinchedVertices);
+                        var areaRatio = cinchedPoly.Area() / rect.Area();
+                        if (areaRatio > 0.7)
+                        {
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
+                            LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                            outputModel.AddElement(layout);
+                            privateOfficeCount++;
+                            seatsCount += seats;
+                        }
+                    }
+                }
+
+                if (config.Value.CreateWalls)
+                {
+                    wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                }
+            }
+
+            totalPrivateOfficeCount += privateOfficeCount;
+            outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, privateOfficeCount, 0, 0));
         }
 
         private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<(Line line, string type)> wallCandidateLines, SpaceSettingsOverride config)

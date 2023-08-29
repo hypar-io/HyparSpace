@@ -152,7 +152,7 @@ namespace CustomSpaceType
         {
             Console.WriteLine($"Laying out {spaceTypeName}");
 
-            var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == spaceTypeName || z.AdditionalProperties["ProgramName"] as string == spaceTypeName);
+            var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == spaceTypeName || z.AdditionalProperties["ProgramName"] as string == spaceTypeName);
             var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??

@@ -101,11 +101,16 @@ namespace OpenOfficeLayout
             var defaultAisleWidth = double.IsNaN(input.AisleWidth) ? 1 : input.AisleWidth;
             var defaultBackToBackWidth = double.IsNaN(input.BackToBackWidth) ? 1 : input.BackToBackWidth;
             var totalDeskCount = 0;
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Open Office").ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
+                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Open Office");
+                foreach (var rm in officeBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -113,103 +118,132 @@ namespace OpenOfficeLayout
 
                 foreach (var ob in officeBoundaries)
                 {
-                    var seatsCount = 0;
-                    var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, Utilities.GetStringValueFromEnum(input.DeskType));
-                    output.Model.AddElement(proxy);
-                    var isCustom = defaultDeskTypeName == "Custom";
-                    CustomWorkstation customDesk = null;
-                    var (selectedConfig,
-                        rotation,
-                        collabDensity,
-                        aisleWidth,
-                        backToBackWidth,
-                        deskTypeName) = LayoutStrategies.GetSpaceSettings<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
-                            ob,
-                            defaultConfig,
-                            input.GridRotation,
-                            input.IntegratedCollaborationSpaceDensity,
-                            defaultAisleWidth,
-                            defaultBackToBackWidth,
-                            defaultDeskTypeName,
-                            overridesBySpaceBoundaryId,
-                            configs,
-                            proxy, (SpaceSettingsOverride spaceOverride) =>
-                            {
-                                isCustom = spaceOverride.Value.DeskType == SpaceSettingsValueDeskType.Custom;
-                                if (!isCustom)
-                                {
-                                    return null;
-                                }
-                                var selectedConfig = new ContentConfiguration()
-                                {
-                                    CellBoundary = new ContentConfiguration.BoundaryDefinition()
-                                    {
-                                        Min = (0, 0, 0),
-                                        Max = (spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length, 0)
-                                    },
-                                    ContentItems = new List<ContentConfiguration.ContentItem>()
-                                };
-                                customDesk = new CustomWorkstation(spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length);
-                                // this is a hack for if the space already has overrides on it.
-                                ob.AdditionalProperties.Remove("associatedIdentities");
-                                Identity.AddOverrideIdentity(ob, spaceOverride);
-                                return selectedConfig;
-                            });
-                    var spaceBoundary = ob.Boundary;
-
-                    var orientationTransform = LayoutStrategies.GetOrientationTransform(spaceBoundary, corridorSegments, rotation);
-
-                    var validGrids = LayoutStrategies.GetValidGrids(spaceBoundary, orientationTransform, columnSearchTree, Utilities.GetStringValueFromEnum(avoidanceStrat));
-
-                    foreach (var grid in validGrids)
-                    {
-                        try
-                        {
-                            var (desks, deskCount, collabProfiles) = LayoutStrategies.LayoutDesksInGrid(
-                                grid,
-                                ob,
-                                selectedConfig,
-                                aisleWidth,
-                                backToBackWidth,
-                                _doubleDeskTypes,
-                                _desksPerConfig,
-                                deskTypeName,
-                                collabDensity,
-                                Utilities.GetStringValueFromEnum(avoidanceStrat),
-                                columnSearchTree,
-                                orientationTransform,
-                                isCustom ? customDesk : null);
-
-                            foreach (var desk in desks)
-                            {
-                                LayoutStrategies.SetLevelVolume(desk as ElementInstance, levelVolume?.Id);
-                            }
-                            output.Model.AddElements(desks);
-
-                            seatsCount += deskCount;
-                            foreach (var profile in collabProfiles)
-                            {
-                                var sb = SpaceBoundary.Make(profile, "Open Collaboration", ob.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
-                                sb.Representation = new Representation(new[] { new Lamina(profile.Perimeter, false) });
-                                sb.AdditionalProperties.Add("Parent Level Id", lvl.Id);
-                                output.Model.AddElement(sb);
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            output.Warnings.Add($"Area skipped: Caught exception in desk layout: \"{e.Message}.");
-                        }
-                    }
-
-                    totalDeskCount += seatsCount;
-                    output.Model.AddElement(new SpaceMetric(ob.Id, seatsCount, seatsCount, seatsCount, 0));
+                    ProcessRoom(ob, input, output, configs, defaultDeskTypeName, defaultConfig, avoidanceStrat, overridesBySpaceBoundaryId, columnSearchTree, defaultAisleWidth, defaultBackToBackWidth, ref totalDeskCount, lvl, corridorSegments, levelVolume);
                 }
             }
-
+            foreach (var room in allSpaceBoundaries)
+            {
+                ProcessRoom(room, input, output, configs, defaultDeskTypeName, defaultConfig, avoidanceStrat, overridesBySpaceBoundaryId, columnSearchTree, defaultAisleWidth, defaultBackToBackWidth, ref totalDeskCount);
+            }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
 
             output.TotalDeskCount = totalDeskCount;
             return output;
+        }
+
+        private static void ProcessRoom(
+            SpaceBoundary room,
+            OpenOfficeLayoutInputs input,
+            OpenOfficeLayoutOutputs output,
+            SpaceConfiguration configs,
+            string defaultDeskTypeName,
+            ContentConfiguration defaultConfig,
+            OpenOfficeLayoutInputsColumnAvoidanceStrategy avoidanceStrat,
+            Dictionary<Guid, SpaceSettingsOverride> overridesBySpaceBoundaryId,
+            SearchablePointCollection<Profile> columnSearchTree,
+            double defaultAisleWidth,
+            double defaultBackToBackWidth,
+            ref int totalDeskCount,
+            LevelElements lvl = null,
+            IEnumerable<Line> corridorSegments = null,
+            LevelVolume levelVolume = null
+            )
+        {
+            corridorSegments ??= Enumerable.Empty<Line>();
+
+            var seatsCount = 0;
+            var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, room, Utilities.GetStringValueFromEnum(input.DeskType));
+            output.Model.AddElement(proxy);
+            var isCustom = defaultDeskTypeName == "Custom";
+            CustomWorkstation customDesk = null;
+            var (selectedConfig,
+                rotation,
+                collabDensity,
+                aisleWidth,
+                backToBackWidth,
+                deskTypeName) = LayoutStrategies.GetSpaceSettings<SpaceBoundary, SpaceSettingsOverride, SpaceSettingsValue>(
+                    room,
+                    defaultConfig,
+                    input.GridRotation,
+                    input.IntegratedCollaborationSpaceDensity,
+                    defaultAisleWidth,
+                    defaultBackToBackWidth,
+                    defaultDeskTypeName,
+                    overridesBySpaceBoundaryId,
+                    configs,
+                    proxy, (SpaceSettingsOverride spaceOverride) =>
+                    {
+                        isCustom = spaceOverride.Value.DeskType == SpaceSettingsValueDeskType.Custom;
+                        if (!isCustom)
+                        {
+                            return null;
+                        }
+                        var selectedConfig = new ContentConfiguration()
+                        {
+                            CellBoundary = new ContentConfiguration.BoundaryDefinition()
+                            {
+                                Min = (0, 0, 0),
+                                Max = (spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length, 0)
+                            },
+                            ContentItems = new List<ContentConfiguration.ContentItem>()
+                        };
+                        customDesk = new CustomWorkstation(spaceOverride.Value.CustomWorkstationProperties.Width, spaceOverride.Value.CustomWorkstationProperties.Length);
+                        // this is a hack for if the space already has overrides on it.
+                        room.AdditionalProperties.Remove("associatedIdentities");
+                        Identity.AddOverrideIdentity(room, spaceOverride);
+                        return selectedConfig;
+                    });
+            var spaceBoundary = room.Boundary;
+
+            var orientationTransform = LayoutStrategies.GetOrientationTransform(spaceBoundary, corridorSegments, rotation);
+
+            var validGrids = LayoutStrategies.GetValidGrids(spaceBoundary, orientationTransform, columnSearchTree, Utilities.GetStringValueFromEnum(avoidanceStrat));
+
+            foreach (var grid in validGrids)
+            {
+                try
+                {
+                    var (desks, deskCount, collabProfiles) = LayoutStrategies.LayoutDesksInGrid(
+                        grid,
+                        room,
+                        selectedConfig,
+                        aisleWidth,
+                        backToBackWidth,
+                        _doubleDeskTypes,
+                        _desksPerConfig,
+                        deskTypeName,
+                        collabDensity,
+                        Utilities.GetStringValueFromEnum(avoidanceStrat),
+                        columnSearchTree,
+                        orientationTransform,
+                        isCustom ? customDesk : null);
+
+                    foreach (var desk in desks)
+                    {
+                        LayoutStrategies.SetLevelVolume(desk as ElementInstance, levelVolume?.Id);
+                    }
+                    output.Model.AddElements(desks);
+
+                    seatsCount += deskCount;
+                    foreach (var profile in collabProfiles)
+                    {
+                        var sb = SpaceBoundary.Make(profile, "Open Collaboration", room.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
+                        sb.Representation = new Representation(new[] { new Lamina(profile.Perimeter, false) });
+                        if (lvl != null)
+                        {
+                            sb.AdditionalProperties.Add("Parent Level Id", lvl.Id);
+                        }
+                        output.Model.AddElement(sb);
+                    }
+                }
+                catch (Exception e)
+                {
+                    output.Warnings.Add($"Area skipped: Caught exception in desk layout: \"{e.Message}.");
+                }
+            }
+
+            totalDeskCount += seatsCount;
+            output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, seatsCount, seatsCount, 0));
         }
     }
 }

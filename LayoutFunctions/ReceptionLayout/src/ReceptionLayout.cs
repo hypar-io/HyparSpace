@@ -59,11 +59,16 @@ namespace ReceptionLayout
             {
                 coreSegments.AddRange(coresModel.AllElementsOfType<ServiceCore>().SelectMany(c => c.Profile.Perimeter.Segments()));
             }
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Reception").ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Reception");
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Reception");
+                foreach (var rm in meetingRmBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -71,51 +76,70 @@ namespace ReceptionLayout
 
                 foreach (var room in meetingRmBoundaries)
                 {
-                    var seatsCount = 0;
-                    var spaceBoundary = room.Boundary;
-                    Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
-
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                    var boundaryCurves = new List<Polygon>
-                    {
-                        spaceBoundary.Perimeter
-                    };
-                    boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
-                    var grid = new Grid2d(boundaryCurves, orientationTransform);
-                    foreach (var cell in grid.GetCells())
-                    {
-                        var rect = cell.GetCellGeometry() as Polygon;
-                        var segs = rect.Segments();
-                        var width = segs[0].Length();
-                        var depth = segs[1].Length();
-                        var trimmedGeo = cell.GetTrimmedCellGeometry();
-                        if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
-                        {
-                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform, out var seats);
-                            LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                            output.Model.AddElement(layout);
-                            seatsCount += seats;
-                        }
-                        else if (trimmedGeo.Length > 0)
-                        {
-                            var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                            var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                            var cinchedPoly = new Polygon(cinchedVertices);
-                            // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform, out var seats);
-                            LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                            output.Model.AddElement(layout);
-                            Console.WriteLine("🤷‍♂️ funny shape!!!");
-                            seatsCount += seats;
-                        }
-                    }
-
-                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
+                    ProcessRoom(room, output.Model, configs, hasCore, coreSegments, corridorSegments, levelVolume);
                 }
+            }
+            foreach (var room in allSpaceBoundaries)
+            {
+                ProcessRoom(room, output.Model, configs, hasCore, coreSegments);
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
+        }
+
+        private static void ProcessRoom(
+            SpaceBoundary room,
+            Model outputModel,
+            SpaceConfiguration configs,
+            bool hasCore,
+            List<Line> coreSegments,
+            IEnumerable<Line> corridorSegments  = null,
+            LevelVolume levelVolume = null
+            )
+        {
+            corridorSegments ??= Enumerable.Empty<Line>();
+
+            var seatsCount = 0;
+            var spaceBoundary = room.Boundary;
+            Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
+
+            var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+            var boundaryCurves = new List<Polygon>
+                    {
+                        spaceBoundary.Perimeter
+                    };
+            boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+
+            var grid = new Grid2d(boundaryCurves, orientationTransform);
+            foreach (var cell in grid.GetCells())
+            {
+                var rect = cell.GetCellGeometry() as Polygon;
+                var segs = rect.Segments();
+                var width = segs[0].Length();
+                var depth = segs[1].Length();
+                var trimmedGeo = cell.GetTrimmedCellGeometry();
+                if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
+                {
+                    var layout = InstantiateLayout(configs, width, depth, rect, room.Transform, out var seats);
+                    LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                    outputModel.AddElement(layout);
+                    seatsCount += seats;
+                }
+                else if (trimmedGeo.Length > 0)
+                {
+                    var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                    var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
+                    var cinchedPoly = new Polygon(cinchedVertices);
+                    // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
+                    var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform, out var seats);
+                    LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                    outputModel.AddElement(layout);
+                    Console.WriteLine("🤷‍♂️ funny shape!!!");
+                    seatsCount += seats;
+                }
+            }
+
+            outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
         }
 
         private static Line FindEdgeClosestToCore(Polygon perimeter, List<Line> coreSegments)
