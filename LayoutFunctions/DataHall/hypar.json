@@ -10,6 +10,11 @@
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Columns",
+      "optional": true
     }
   ],
   "input_schema": {
