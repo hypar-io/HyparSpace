@@ -18,6 +18,8 @@ namespace OpenOfficeLayout.Tests
         [Fact]
         public void OpenOfficeConfigurations()
         {
+            // Test to verify the use of all possible desk configurations with some input parameter values
+            // to check that every piece of expected content exists in a room of a matching desk type
             var testName = "Configurations";
             var configs = LayoutStrategies.GetConfigurations("OpenOfficeDeskConfigurations.json");
             var spacePlanningModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Space Planning Zones.json"));
@@ -26,36 +28,48 @@ namespace OpenOfficeLayout.Tests
             var columnsModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Columns.json"));
             var input = GetInput(testName);
 
+            // Check each value of the ColumnAvoidanceStrategy parameter separately
             foreach (var columnAvoidanceStrategy in Enum.GetNames(typeof(OpenOfficeLayoutInputsColumnAvoidanceStrategy)))
             {
+                // Get the result of OpenOfficeLayout.Execute()
                 var output = OpenOfficeLayoutTest(testName, columnAvoidanceStrategy, spacePlanningModel, levelsModel, circulationModel, columnsModel, input);
                 var elements = output.Model.AllElementsAssignableFromType<ElementInstance>().Where(e => e.BaseDefinition is not Column).ToList();
+
+                // "Open Collaboration" type rooms located inside "Open Office" rooms
                 var openCollabBoundaries = output.Model.AllElementsOfType<SpaceBoundary>().Where(b => b.Name == "Open Collaboration");
+
+                // Get rooms with each desk type on the Y axis, and with some variation of other input parameters on the X axis
                 var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(b => b.Name == "Open Office").OrderBy(b => b.Boundary.Perimeter.Center().Y).ThenBy((b => b.Boundary.Perimeter.Center().X)).ToList();
+
+                // Get data about the expected result for each room for this ColumnAvoidanceStrategy type
                 var expectedResults = GetTestResults(testName, columnAvoidanceStrategy.Replace("_", ""));
 
                 for (int i = 0; i < boundaries.Count(); i++)
                 {
+                    // Verify that the configuration for the expected desk type exists
                     var boundary = boundaries[i];
                     var expectedResult = expectedResults[i];
                     var config = configs.FirstOrDefault(c => c.Key == expectedResult.DeskType).Value;
                     Assert.NotNull(config);
 
+                    // Look for all the furniture placed within the room
                     var offsetedBox = boundary.Bounds.Offset(0.1);
                     offsetedBox.Min -= new Vector3(0, 0, 0.1);
                     var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
 
-                    // Check items
+                    // Check that the room has the required number of desks of the same type as in the configuration
                     foreach (var contentItem in config.ContentItems)
                     {
+                        // check the number of desks
                         var suitableElements = boundaryElements.Where(be => be.AdditionalProperties.TryGetValue("gltfLocation", out var gltfLocation) && gltfLocation.ToString() == contentItem.Url).ToList();
                         Assert.True(suitableElements.Count() >= expectedResult.Count);
 
+                        // delete checked desks
                         var expectedElements = suitableElements.SkipLast(suitableElements.Count() - expectedResult.Count);
                         boundaryElements.RemoveAll(b => expectedElements.Contains(b));
                     }
 
-                    // Check open collab areas
+                    // Check that the resulting "Open Collaboration" area for this room is the same as expected
                     var suitableCollabBoundaries = openCollabBoundaries.Where(b => boundary.Boundary.Perimeter.Contains(b.Boundary.Perimeter.Centroid()));
                     Assert.Equal(suitableCollabBoundaries.Count(), expectedResult.CollabCount);
                     Assert.True(suitableCollabBoundaries.Sum(b => b.Area).ApproximatelyEquals(expectedResult.CollabArea, 0.2));
@@ -64,7 +78,7 @@ namespace OpenOfficeLayout.Tests
         }
 
         private OpenOfficeLayoutOutputs OpenOfficeLayoutTest(
-            string testName, 
+            string testName,
             string columnAvoidanceStrategyName,
             Model spacePlanningModel,
             Model levelsModel,

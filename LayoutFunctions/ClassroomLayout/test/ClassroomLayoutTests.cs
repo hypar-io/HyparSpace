@@ -19,23 +19,30 @@ namespace ClassroomLayout.Tests
         [Fact]
         public void ClassroomConfigurations()
         {
-            // test with one room for each configuration
+            // Test with one room for each configuration to check that every piece of expected content exists in a room of a matching size
             var testName = "Configurations";
             var configs = LayoutStrategies.GetConfigurations("ClassroomConfigurations.json");
 
+            // Get the result of ClassroomLayout.Execute()
             var (output, spacePlanningModel) = ClassroomLayoutTest(testName);
             var elements = output.Model.AllElementsOfType<ElementInstance>();
+
+            // Get the rooms created according to the orderedKeys order 
             var boundaries = spacePlanningModel.AllElementsOfType<SpaceBoundary>().Where(z => z.Name == "Classroom").OrderBy(b => b.Bounds.Center().Y).ToList();
 
+            // Check each configuration separately
             for (int i = 0; i < orderedKeys.Count(); i++)
             {
+                // Confirm that the size of the room covers the size of the corresponding configuration
                 var boundary = boundaries[i];
                 var config = configs.FirstOrDefault(c => c.Key == orderedKeys[i]).Value;
                 Assert.True(config.Depth < boundary.Bounds.XSize);
 
+                // Look for all the furniture placed within the room
                 var offsetedBox = boundary.Bounds.Offset(0.1);
                 var boundaryElements = elements.Where(e => offsetedBox.Contains(e.Transform.Origin)).ToList();
 
+                // Check that the room has all furniture that are in the appropriate configuration
                 foreach (var contentItem in config.ContentItems)
                 {
                     var boundaryElement = boundaryElements.FirstOrDefault(be => be.Name == contentItem.Name || be.Name == contentItem.Url);
@@ -44,7 +51,7 @@ namespace ClassroomLayout.Tests
                 }
             }
 
-            // room with 3 desks
+            // room with 9 desks
             var roomWithDesks = boundaries.Last();
             var offsetedBoxWithDesks = roomWithDesks.Bounds.Offset(0.1);
             var boundaryElementsWithDesks = elements.Where(e => offsetedBoxWithDesks.Contains(e.Transform.Origin)).ToList();
