@@ -229,7 +229,7 @@
       "context": "[*discriminator=Elements.SpaceBoundary]",
       "identity": {
         "ParentCentroid": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+          "$ref": "https://schemas.hypar.io/Geometry/Vector3.json"
         }
       },
       "paradigm": "edit",
