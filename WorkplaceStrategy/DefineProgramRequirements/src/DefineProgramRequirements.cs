@@ -1,7 +1,12 @@
 using Elements;
 using Elements.Geometry;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Elements.Components;
 
 namespace DefineProgramRequirements
 {
@@ -25,11 +30,57 @@ namespace DefineProgramRequirements
                 pr.AdditionalProperties.Clear();
             }
             var sum = input.ProgramRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
-            output.Model.AddElements(input.ProgramRequirements);
+            // output.Model.AddElements(input.ProgramRequirements);
             var colorScheme = ColorScheme.ProgramColors;
             foreach (var req in input.ProgramRequirements)
             {
                 colorScheme.Mapping[req.QualifiedProgramName] = req.Color;
+                var layoutType = req.LayoutType;
+                CatalogWrapper catalogWrapper = null;
+                SpaceConfigurationElement spaceConfigElem = null;
+                if (req.LayoutType != null && req.LayoutType.Files != null)
+                {
+                    var configFile = req.LayoutType.Files;
+                    foreach (var file in configFile)
+                    {
+                        Console.WriteLine("\t" + file.FileName);
+                        Console.WriteLine("\t\t" + file.LocalFilePath);
+                    }
+                    foreach (var file in configFile)
+                    {
+                        Console.WriteLine(file.FileName);
+                        // TODO: remove this when the API lets me filter by extension.
+                        // check if the filename matches {guid}.json using regex
+                        // Create a regex to match a GUID pattern
+                        string guidPattern = @"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}";
+                        string pattern = @".*" + guidPattern + @"\.json$";
+
+                        Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+                        if (regex.IsMatch(file.FileName))
+                        {
+                            var catalogBytes = File.ReadAllBytes(file.LocalFilePath);
+                            // encode bytes as base64 string
+                            var catalogString = Convert.ToBase64String(catalogBytes);
+                            catalogWrapper = new CatalogWrapper
+                            {
+                                CatalogString = catalogString
+                            };
+                            output.Model.AddElement(catalogWrapper);
+                        }
+                        if (file.FileName.EndsWith(".hyspacetype"))
+                        {
+                            var contentConfiguration = JsonConvert.DeserializeObject<SpaceConfiguration>(File.ReadAllText(file.LocalFilePath));
+                            spaceConfigElem = new SpaceConfigurationElement
+                            {
+                                SpaceConfiguration = contentConfiguration
+                            };
+                            output.Model.AddElement(spaceConfigElem);
+                        }
+
+                    }
+                }
+                output.Model.AddElement(req.ToElement(catalogWrapper, spaceConfigElem));
+
             }
             output.Model.AddElement(colorScheme);
             output.TotalProgramArea = sum;

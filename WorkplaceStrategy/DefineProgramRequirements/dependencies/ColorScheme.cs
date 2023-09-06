@@ -9,7 +9,7 @@ namespace Elements
         {
             PropertyName = "Program Type",
             Name = "Program Colors",
-            Mapping = new Dictionary<string, Color> {
+            Mapping = new Mapping {
                 {"unspecified", new Color(0.8, 0.8, 0.8, 0.3)},
                 {"Unassigned Space Type", new Color(0.8, 0.8, 0.8, 0.3)},
                 {"unrecognized", new Color(0.8, 0.8, 0.2, 0.3)},

@@ -61,11 +61,11 @@ namespace DefineProgramRequirements
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
-                this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+            { 
+                this.store = new UrlModelStore<DefineProgramRequirementsInputs>(); 
             }
 
-            var l = new InvocationWrapper<DefineProgramRequirementsInputs,DefineProgramRequirementsOutputs>(store, DefineProgramRequirements.Execute);
+            var l = new InvocationWrapper<DefineProgramRequirementsInputs,DefineProgramRequirementsOutputs> (store, DefineProgramRequirements.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
