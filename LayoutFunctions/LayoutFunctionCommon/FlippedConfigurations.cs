@@ -29,7 +29,7 @@ namespace LayoutFunctionCommon
 
         public static SpaceConfiguration GetConfigs(bool primaryFlip, bool secondaryFlip)
         {
-            return 
+            return
                 primaryFlip && !secondaryFlip ? _yFlippedConfigs :
                 !primaryFlip && secondaryFlip ? _xFlippedConfigs :
                 primaryFlip && secondaryFlip ? _xyFlippedConfigs :
@@ -58,19 +58,22 @@ namespace LayoutFunctionCommon
             var newOrigin = item.Transform.Origin;
             newOrigin.Y = min.Y + max.Y - item.Transform.Origin.Y;
 
+            // Mirror anchor
             item.Anchor = new Vector3(item.Anchor.X, min.Y + max.Y - item.Anchor.Y, item.Anchor.Z);
 
-            // Mirror directional
-            var flippedY = item.Transform.YAxis;
-            flippedY.Y = -flippedY.Y;
-            item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedY));
+            var flippedYByY = item.Transform.YAxis;
+            flippedYByY.Y *= -1;
 
             // Move origin relative to the width of the object
             if (_mirroredElements.TryGetValue(item.ContentElement.Name, out var mirroredElement) && mirroredElement != null)
             {
                 item.Name = mirroredElement.Name;
                 item.Url = mirroredElement.GltfLocation;
-                newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
+
+                // Mirror directional by x
+                var flippedYByX = item.Transform.YAxis;
+                flippedYByX.X *= -1;
+                item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedYByX));
             }
             else if (item.ContentElement.Name.Contains("Left") || item.ContentElement.Name.Contains("Right"))
             {
@@ -81,9 +84,16 @@ namespace LayoutFunctionCommon
                     item.Name = oppositeElem.Name;
                     item.Url = oppositeElem.GltfLocation;
                 }
+
+                // Mirror directional by y
+                item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedYByY));
             }
             else
             {
+                // Mirror directional by y
+                item.Transform.RotateAboutPoint(item.Transform.Origin, Vector3.ZAxis, item.Transform.YAxis.PlaneAngleTo(flippedYByY));
+
+                // When moving a symmetrical object, there is a need to shift its location by the value of its width
                 newOrigin += item.Transform.XAxis.Negate() * (item.ContentElement.BoundingBox.Max.X - Math.Abs(item.ContentElement.BoundingBox.Min.X));
             }
 
