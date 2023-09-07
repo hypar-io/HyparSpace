@@ -61,11 +61,11 @@ namespace MeetingRoomLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<MeetingRoomLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<MeetingRoomLayoutInputs,MeetingRoomLayoutOutputs>(store, MeetingRoomLayout.Execute);
+            var l = new InvocationWrapper<MeetingRoomLayoutInputs,MeetingRoomLayoutOutputs> (store, MeetingRoomLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
