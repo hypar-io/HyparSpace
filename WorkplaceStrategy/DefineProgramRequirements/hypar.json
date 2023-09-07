@@ -19,10 +19,9 @@
         "items": {
           "type": "object",
           "$hyparStyle": "row",
-          "description": "Fill out your program requirements. Use \"Hypar Space Type\" to dictate which function should be used to lay out your space.",
+          "description": "Fill out your program requirements. Use \"Layout Type\" to dictate which function should be used to lay out your space.",
           "required": [
-            "Program Name",
-            "Hypar Space Type"
+            "Program Name"
           ],
           "$hyparHidden": [
             "Name",

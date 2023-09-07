@@ -131,7 +131,7 @@ namespace DefineProgramRequirements
     
     }
     
-    /// <summary>Fill out your program requirements. Use "Hypar Space Type" to dictate which function should be used to lay out your space.</summary>
+    /// <summary>Fill out your program requirements. Use "Layout Type" to dictate which function should be used to lay out your space.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class ProgramRequirements 
@@ -194,8 +194,7 @@ namespace DefineProgramRequirements
         public double? Depth { get; set; }
     
         /// <summary>Which furniture layout function should be used to lay out this space?</summary>
-        [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Always)]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        [Newtonsoft.Json.JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string HyparSpaceType { get; set; } = "unspecified";
     
         /// <summary>How should this requirement be counted? 
