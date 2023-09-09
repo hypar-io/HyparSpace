@@ -24,6 +24,9 @@
   ],
   "input_schema": {
     "type": "object",
+    "$hyparHidden": [
+      "Create Walls"
+    ],
     "properties": {
       "Create Walls": {
         "type": "boolean",

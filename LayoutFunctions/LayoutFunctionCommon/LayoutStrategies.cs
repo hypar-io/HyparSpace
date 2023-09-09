@@ -166,7 +166,7 @@ namespace LayoutFunctionCommon
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
                     ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
@@ -200,13 +200,13 @@ namespace LayoutFunctionCommon
                 SpaceConfiguration configs,
                 IEnumerable<Line> corridorSegments = null,
                 TLevelVolume levelVolume = null,
-                List<(Line line, string type)> wallCandidateLines = null
+                List<RoomEdge> wallCandidateLines = null
             )
             where TLevelVolume : GeometricElement, ILevelVolume
             where TSpaceBoundary : Element, ISpaceBoundary
         {
             corridorSegments ??= Enumerable.Empty<Line>();
-            wallCandidateLines ??= new List<(Line line, string type)>();
+            wallCandidateLines ??= new List<RoomEdge>();
             var seatsCount = 0;
             var success = false;
             var spaceBoundary = room.Boundary;
@@ -214,7 +214,7 @@ namespace LayoutFunctionCommon
 
             foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
             {
-                var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction(), Vector3.ZAxis);
+                var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction, Vector3.ZAxis);
                 var boundaryCurves = new List<Polygon>
                         {
                             spaceBoundary.Perimeter
@@ -393,8 +393,8 @@ namespace LayoutFunctionCommon
 
         public static Transform GetOrientationTransform(Profile spaceBoundary, IEnumerable<Line> corridorSegments, double rotation)
         {
-            Line orientationGuideEdge = WallGeneration.FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out _);
-            var dir = orientationGuideEdge.Direction();
+            var orientationGuideEdge = WallGeneration.FindEdgeAdjacentToSegments(spaceBoundary.RoomEdges(), corridorSegments, out _);
+            var dir = orientationGuideEdge.Direction;
             if (rotation != 0)
             {
                 var gridRotation = new Transform();
