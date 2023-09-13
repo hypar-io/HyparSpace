@@ -38,7 +38,7 @@ namespace DefineProgramRequirements
                 var layoutType = req.LayoutType;
                 CatalogWrapper catalogWrapper = null;
                 SpaceConfigurationElement spaceConfigElem = null;
-                if (req.LayoutType != null && req.LayoutType.Files != null)
+                if (req.LayoutType != null && req.LayoutType.Files != null && req.LayoutType.Files.Count > 0)
                 {
                     var configFile = req.LayoutType.Files;
                     foreach (var file in configFile)
@@ -56,7 +56,7 @@ namespace DefineProgramRequirements
                         string pattern = @".*" + guidPattern + @"\.json$";
 
                         Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-                        if (regex.IsMatch(file.FileName))
+                        if (file.FileName.EndsWith(".hycatalog") || regex.IsMatch(file.FileName))
                         {
                             var catalogBytes = File.ReadAllBytes(file.LocalFilePath);
                             // encode bytes as base64 string
@@ -78,7 +78,16 @@ namespace DefineProgramRequirements
                         }
 
                     }
+                    if (catalogWrapper == null)
+                    {
+                        output.Warnings.Add($"No catalog found for {req.QualifiedProgramName}.");
+                    }
+                    if (spaceConfigElem == null)
+                    {
+                        output.Warnings.Add($"No space configuration found for {req.QualifiedProgramName}.");
+                    }
                 }
+
                 output.Model.AddElement(req.ToElement(catalogWrapper, spaceConfigElem));
 
             }

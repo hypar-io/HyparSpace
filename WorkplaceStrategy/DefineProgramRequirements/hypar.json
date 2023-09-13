@@ -124,7 +124,6 @@
               "$ref": "https://schemas.hypar.io/InputFolder.json",
               "$hyparHasTag": "spaceType",
               "$hyparFileTypes": [
-                "json",
                 "hycatalog",
                 "hyspacetype"
               ]
