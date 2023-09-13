@@ -49,14 +49,7 @@ namespace DefineProgramRequirements
                     foreach (var file in configFile)
                     {
                         Console.WriteLine(file.FileName);
-                        // TODO: remove this when the API lets me filter by extension.
-                        // check if the filename matches {guid}.json using regex
-                        // Create a regex to match a GUID pattern
-                        string guidPattern = @"[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}";
-                        string pattern = @".*" + guidPattern + @"\.json$";
-
-                        Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-                        if (file.FileName.EndsWith(".hycatalog") || regex.IsMatch(file.FileName))
+                        if (file.FileName.EndsWith(".hycatalog"))
                         {
                             var catalogBytes = File.ReadAllBytes(file.LocalFilePath);
                             // encode bytes as base64 string
