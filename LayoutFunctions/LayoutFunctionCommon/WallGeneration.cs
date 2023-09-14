@@ -52,7 +52,7 @@ namespace LayoutFunctionCommon
         {
             var wallCandidateOptions = new List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)>();
             var allSegments = room.Boundary.Perimeter.Segments().Select(s => s.TransformedLine(room.Transform)).ToList();
-            var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile);
+            var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
                 var wallCandidateLines = new List<(Line line, string type)>
@@ -379,9 +379,10 @@ namespace LayoutFunctionCommon
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.Mid();
+                var midpt = edge.Mid().Project(Plane.XY);
                 foreach (var seg in segmentsToTestAgainst)
                 {
+                    var segProjected = seg.Projected(Plane.XY);
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
                     // prefer the longer one.
