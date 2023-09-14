@@ -2,10 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\DefineProgramRequirements.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Hypar.Server" Version="1.8.0" />
+    <ProjectReference Include="..\..\..\..\Hypar\Hypar.Server\Hypar.Server.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

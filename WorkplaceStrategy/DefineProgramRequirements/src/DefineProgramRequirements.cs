@@ -32,6 +32,10 @@ namespace DefineProgramRequirements
             var sum = input.ProgramRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
             // output.Model.AddElements(input.ProgramRequirements);
             var colorScheme = ColorScheme.ProgramColors;
+
+            Dictionary<string, CatalogWrapper> wrappers = new Dictionary<string, CatalogWrapper>();
+            Dictionary<string, SpaceConfigurationElement> spaceConfigurations = new Dictionary<string, SpaceConfigurationElement>();
+
             foreach (var req in input.ProgramRequirements)
             {
                 colorScheme.Mapping[req.QualifiedProgramName] = req.Color;
@@ -51,6 +55,12 @@ namespace DefineProgramRequirements
                         Console.WriteLine(file.FileName);
                         if (file.FileName.EndsWith(".hycatalog"))
                         {
+                            if (wrappers.ContainsKey(file.LocalFilePath))
+                            {
+                                catalogWrapper = wrappers[file.LocalFilePath];
+                                continue;
+                            }
+
                             var catalogBytes = File.ReadAllBytes(file.LocalFilePath);
                             // encode bytes as base64 string
                             var catalogString = Convert.ToBase64String(catalogBytes);
@@ -59,17 +69,23 @@ namespace DefineProgramRequirements
                                 CatalogString = catalogString
                             };
                             output.Model.AddElement(catalogWrapper);
+                            wrappers[file.LocalFilePath] = catalogWrapper;
                         }
                         if (file.FileName.EndsWith(".hyspacetype"))
                         {
+                            if (spaceConfigurations.ContainsKey(file.LocalFilePath))
+                            {
+                                spaceConfigElem = spaceConfigurations[file.LocalFilePath];
+                                continue;
+                            }
                             var contentConfiguration = JsonConvert.DeserializeObject<SpaceConfiguration>(File.ReadAllText(file.LocalFilePath));
                             spaceConfigElem = new SpaceConfigurationElement
                             {
                                 SpaceConfiguration = contentConfiguration
                             };
                             output.Model.AddElement(spaceConfigElem);
+                            spaceConfigurations[file.LocalFilePath] = spaceConfigElem;
                         }
-
                     }
                     if (catalogWrapper == null)
                     {
