@@ -16,9 +16,9 @@ namespace Hypar.Server
                 Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
                 async (executionRequest) =>
                 {
-                    var input = executionRequest.Args.ToObject<PrivateOfficeLayout.PrivateOfficeLayoutInputs>();
-                    var function = new PrivateOfficeLayout.Function();
-                    Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(PrivateOfficeLayout.Function).Assembly.Location)!);
+                    var input = executionRequest.Args.ToObject<MeetingRoomLayout.MeetingRoomLayoutInputs>();
+                    var function = new MeetingRoomLayout.Function();
+                    Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(MeetingRoomLayout.Function).Assembly.Location)!);
                     return await function.Handler(input, null);
                 });
         }

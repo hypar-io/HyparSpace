@@ -1,24 +1,45 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/test/bin/Debug/netcoreapp3.1/MeetingRoomLayout.Tests.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/test",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/test/bin/Debug/netcoreapp3.1/MeetingRoomLayout.Tests.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/test",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "name": "Attach to Hypar Run",
+      "type": "coreclr",
+      "request": "attach",
+      "processName": "MeetingRoomLayout.Server"
+    },
+    {
+      "name": "Launch Hypar Run (Run once only)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/bin/Debug/net6.0/MeetingRoomLayout.Server.dll",
+      "args": [
+        "--workflow-id",
+        "${input:workflowId}"
+      ],
+      "preLaunchTask": "server-build"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "workflowId",
+      "type": "promptString",
+      "description": "Enter the workflow id to run."
+    }
+  ]
 }
