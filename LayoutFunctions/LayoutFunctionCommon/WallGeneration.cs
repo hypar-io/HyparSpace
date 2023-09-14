@@ -445,14 +445,22 @@ namespace LayoutFunctionCommon
             {
                 var edgesByDist = edgesToClassify.Select(e =>
                 {
-                    var midpt = e.Mid();
+                    var midpt = e.Mid().Project(Plane.XY);
                     (Line line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
                     return edge;
                 });
 
                 if (maxDist != 0)
                 {
-                    edgesByDist = edgesByDist.Where(e => e.dist < maxDist);
+                    var edgesUnderMaxDist = edgesByDist.Where(e => e.dist < maxDist);
+                    if (edgesUnderMaxDist.Count() > 0)
+                    {
+                        edgesByDist = edgesUnderMaxDist;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"no matches under max dist — using all edges: {maxDist}");
+                    }
                 }
 
                 var comparer = new EdgesComparer();
