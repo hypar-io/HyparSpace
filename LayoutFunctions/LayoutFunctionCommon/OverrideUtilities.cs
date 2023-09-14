@@ -108,13 +108,13 @@ namespace LayoutFunctionCommon
             return allSpaceBoundaries?.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceBoundaryOverrideDependencyName);
         }
         
-        public static ElementProxy<TSpaceBoundary> GetOpenOfficeBoundaryProxy<TSpaceBoundary>(
-            string deskType, 
-            double collabSpaceDensity, 
-            double gridRotation, 
-            double aisleWidth, 
-            TSpaceBoundary ob, 
-            IEnumerable<ElementProxy<TSpaceBoundary>> officeBoundaryProxies) where TSpaceBoundary : Element, ISpaceBoundary
+        public static ElementProxy<TSpaceBoundary> GetSpaceBoundaryProxy<TSpaceBoundary>(
+            string deskType,
+            double collabSpaceDensity,
+            double gridRotation,
+            double aisleWidth,
+            TSpaceBoundary ob,
+            IEnumerable<ElementProxy<TSpaceBoundary>> officeBoundaryProxies = null) where TSpaceBoundary : Element, ISpaceBoundary
         {
             var proxy = GetSpaceBoundaryProxy(ob, officeBoundaryProxies);
             proxy.AdditionalProperties.Add("Desk Type", deskType);
@@ -191,7 +191,7 @@ namespace LayoutFunctionCommon
             ElementProxy<TSpaceBoundary> proxy,
             Func<TSpaceSettingsOverride, ContentConfiguration> createCustomDesk = null
             ) 
-            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideOpenOfficeValue 
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideDesksValue 
             where TSpaceBoundary : Element, ISpaceBoundary 
             where TSpaceSettingsOverride : ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>, IOverride
         {
