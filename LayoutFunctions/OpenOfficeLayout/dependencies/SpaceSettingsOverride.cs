@@ -3,7 +3,7 @@ using Hypar.Model;
 
 namespace OpenOfficeLayout
 {
-    public partial class SpaceSettingsValue : ISpaceSettingsOverrideOpenOfficeValue
+    public partial class SpaceSettingsValue : ISpaceSettingsOverrideDesksValue
     {
         public string GetDeskType => Utilities.GetStringValueFromEnum(DeskType);
     }

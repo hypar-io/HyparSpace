@@ -15,7 +15,7 @@ namespace Elements
         public bool SecondaryAxisFlipLayout { get; set; }
     }
 
-    public interface ISpaceSettingsOverrideOpenOfficeValue : ISpaceSettingsOverrideValue
+    public interface ISpaceSettingsOverrideDesksValue : ISpaceSettingsOverrideValue
     {
         public string GetDeskType { get; }
         public double GridRotation { get; set; }

@@ -115,7 +115,7 @@ namespace OpenOfficeLayout
                 foreach (var ob in officeBoundaries)
                 {
                     var seatsCount = 0;
-                    var proxy = OverrideUtilities.GetOpenOfficeBoundaryProxy(Utilities.GetStringValueFromEnum(input.DeskType), input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, officeBoundaryProxies);
+                    var proxy = OverrideUtilities.GetSpaceBoundaryProxy(Utilities.GetStringValueFromEnum(input.DeskType), input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, officeBoundaryProxies);
                     output.Model.AddElement(proxy);
                     var isCustom = defaultDeskTypeName == "Custom";
                     CustomWorkstation customDesk = null;
