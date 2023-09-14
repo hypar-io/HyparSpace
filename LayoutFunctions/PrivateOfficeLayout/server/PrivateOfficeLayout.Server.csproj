@@ -5,11 +5,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Server" Version="1.1.1" />
+    <PackageReference Include="Hypar.Server" Version="1.9.0-alpha.3" />
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>
