@@ -69,7 +69,7 @@ namespace LayoutFunctionCommon
                 Line = s.TransformedLine(room.Transform),
                 Thickness = thicknesses?.ElementAtOrDefault(i)
             }).ToList();
-            var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile);
+            var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
                 orientationGuideEdge.Line.Type = "Glass";
@@ -427,9 +427,10 @@ namespace LayoutFunctionCommon
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.Line.Mid();
+                var midpt = edge.Line.Mid().Project(Plane.XY);
                 foreach (var seg in segmentsToTestAgainst)
                 {
+                    var segProjected = seg.Projected(Plane.XY);
                     var dist = midpt.DistanceTo(seg);
                     // if two segments are basically the same distance to the corridor segment,
                     // prefer the longer one.
@@ -493,14 +494,22 @@ namespace LayoutFunctionCommon
             {
                 var edgesByDist = edgesToClassify.Select(e =>
                 {
-                    var midpt = e.Line.Mid();
+                    var midpt = e.Line.Mid().Project(Plane.XY);
                     (RoomEdge line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
                     return edge;
                 });
 
                 if (maxDist != 0)
                 {
-                    edgesByDist = edgesByDist.Where(e => e.dist < maxDist);
+                    var edgesUnderMaxDist = edgesByDist.Where(e => e.dist < maxDist);
+                    if (edgesUnderMaxDist.Count() > 0)
+                    {
+                        edgesByDist = edgesUnderMaxDist;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"no matches under max dist — using all edges: {maxDist}");
+                    }
                 }
 
                 var comparer = new EdgesComparer();
