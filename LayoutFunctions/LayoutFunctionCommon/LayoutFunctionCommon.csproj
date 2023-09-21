@@ -17,8 +17,8 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.0.0" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.0.0" />
+    <PackageReference Include="Hypar.Elements" Version="2.1.0-alpha.12" />
+    <PackageReference Include="Hypar.Elements.Components" Version="2.1.0-alpha.12" />
     <PackageReference Include="Elements.LargestInteriorRectangle" Version="2.0.0" />
     <!-- <ProjectReference Include="../../../Elements/Elements/src/Elements.csproj" />
     <ProjectReference Include="../../../Elements/Elements.Components/src/Elements.Components.csproj" /> -->
