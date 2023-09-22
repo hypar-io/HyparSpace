@@ -32,7 +32,8 @@ namespace InteriorPartitions
                 "Restroom Layout",
                 "Laundry Room Layout",
                 "Entertainment Room Layout",
-                "Room Layout"
+                "Room Layout",
+                "Furniture and Equipment"
                  };
             foreach (var md in modelDependencies)
             {
@@ -49,7 +50,8 @@ namespace InteriorPartitions
             {
                 var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? 3;
-                var wallCandidates = candidates.Select(c => new WallCandidate(c.Line.TransformedLine(levelGroup.Key), c.Type, new List<SpaceBoundary>()) {
+                var wallCandidates = candidates.Select(c => new WallCandidate(c.Line.TransformedLine(levelGroup.Key), c.Type, new List<SpaceBoundary>())
+                {
                     Thickness = c.Thickness
                 });
                 output.Model.AddElements(wallCandidates);
