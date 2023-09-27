@@ -284,7 +284,7 @@ namespace LayoutFunctionCommon
                 // centerline. If the left thickness doesn't equal the right
                 // thickness, we have to offset the centerline by their
                 // difference.
-                var offset = (thickness.Value.outerWidth - thickness.Value.innerWidth) / 2.0;
+                var offset = (thicknessOrDefault.outerWidth - thicknessOrDefault.innerWidth) / 2.0;
                 lineProjected = lineProjected.Offset(offset, false);
                 if (sumThickness < 0.01)
                 {
