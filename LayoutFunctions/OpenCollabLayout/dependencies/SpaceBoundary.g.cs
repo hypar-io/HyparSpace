@@ -43,6 +43,7 @@ namespace Elements
             this.HyparSpaceType = @hyparSpaceType;
             }
         
+        
         // Empty constructor
         public SpaceBoundary()
             : base()
@@ -78,7 +79,7 @@ namespace Elements
         public string ProgramGroup { get; set; }
     
         /// <summary>The name of the program type assigned to this space (like "Open Office" or "Meeting Room")</summary>
-        [JsonProperty("Program Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProgramType { get; set; }
     
         [JsonProperty("Level", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

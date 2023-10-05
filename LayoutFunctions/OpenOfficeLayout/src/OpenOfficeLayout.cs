@@ -105,7 +105,7 @@ namespace OpenOfficeLayout
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.HyparSpaceType ?? z.Name == "Open Office");
+                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Open Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??

@@ -17,7 +17,7 @@ public partial class ProgramRequirements
             SpaceCount = this.SpaceCount,
             Width = this.Width,
             Depth = this.Depth,
-            HyparSpaceType = this.QualifiedProgramName,
+            HyparSpaceType = this.HyparSpaceType ?? this.QualifiedProgramName,
             CountType = (Elements.ProgramRequirementCountType)this.CountType,
             Catalog = catalogWrapper?.Id,
             Enclosed = this.Enclosed ?? false,

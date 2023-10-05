@@ -61,11 +61,18 @@ namespace OpenCollaborationLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
-                this.store = new S3ModelStore<OpenCollaborationLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+            { 
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<OpenCollaborationLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<OpenCollaborationLayoutInputs>();
+                }
             }
 
-            var l = new InvocationWrapper<OpenCollaborationLayoutInputs,OpenCollaborationLayoutOutputs>(store, OpenCollaborationLayout.Execute);
+            var l = new InvocationWrapper<OpenCollaborationLayoutInputs,OpenCollaborationLayoutOutputs> (store, OpenCollaborationLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

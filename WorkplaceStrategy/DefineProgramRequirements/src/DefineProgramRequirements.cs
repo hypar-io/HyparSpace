@@ -42,6 +42,10 @@ namespace DefineProgramRequirements
                 var layoutType = req.LayoutType;
                 CatalogWrapper catalogWrapper = null;
                 SpaceConfigurationElement spaceConfigElem = null;
+                if (req.LayoutType?.Name != null)
+                {
+                    req.HyparSpaceType = req.LayoutType.Name;
+                }
                 if (req.LayoutType != null && req.LayoutType.Files != null && req.LayoutType.Files.Count > 0)
                 {
                     var configFile = req.LayoutType.Files;

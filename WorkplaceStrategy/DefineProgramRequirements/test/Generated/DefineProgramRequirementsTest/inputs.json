@@ -1,31 +1,292 @@
 {
-  "Show Advanced Options": false,
   "Program Requirements": [
     {
-      "Enclosed": true,
+      "Program Name": "Orpen Orfice",
+      "Color": {
+        "Red": 0.43529411764705883,
+        "Alpha": 1,
+        "Blue": 0.7450980392156863,
+        "Green": 0.6274509803921569
+      },
+      "Space Count": 11,
+      "Program Group": "",
+      "Depth": 6.5,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "34cc63ce-8e19-4796-828f-d7e8cca561ec",
+      "Width": 15.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "c461c32a-ec67-4d6e-959e-1c9b5bb1f43b",
+        "Name": "Open Office"
+      }
+    },
+    {
+      "Program Name": "Pervet Orfice",
+      "Color": {
+        "Red": 0.12156862745098039,
+        "Alpha": 1,
+        "Blue": 0.3607843137254902,
+        "Green": 0.27058823529411763
+      },
+      "Space Count": 12,
+      "Program Group": "",
+      "Depth": 4,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "84a5c8ae-7c9d-4e94-908a-b3476e3e754a",
+      "Width": 5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "c461c32a-ec67-4d6e-959e-1c9b5bb1f43b",
+        "Name": "Open Office"
+      }
+    },
+    {
+      "Program Name": "Lernge",
+      "Color": {
+        "Red": 1,
+        "Alpha": 1,
+        "Blue": 0.19607843137254902,
+        "Green": 0.5843137254901961
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 5.5,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "78d960b3-3a2a-48a6-9c0e-a4d1ba52701a",
+      "Width": 6.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "a1f29a10-b2b5-4664-980c-a4901c91a735",
+        "Name": "Lounge"
+      }
+    },
+    {
+      "Program Name": "Classroom",
+      "Color": {
+        "Red": 0.796078431372549,
+        "Alpha": 1,
+        "Blue": 0.796078431372549,
+        "Green": 0.9137254901960784
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 6,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "ebab8feb-5da6-4ea3-a58e-4f92266ff1bf",
+      "Width": 6,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "c1372d7a-da5e-481d-bafe-3cf3b9773d8c",
+        "Name": "Classroom"
+      }
+    },
+    {
+      "Program Name": "Perntry",
+      "Color": {
+        "Red": 0.5019607843137255,
+        "Alpha": 1,
+        "Blue": 0.7450980392156863,
+        "Green": 0.7137254901960784
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 7.5,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "fdc5f28c-1444-4c07-93f8-a934bc105f13",
+      "Width": 12,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "80b745b5-4421-436a-8ebb-aeb1e22fd7fe",
+        "Name": "Pantry"
+      }
+    },
+    {
+      "Program Name": "Merting Rerm",
+      "Color": {
+        "Red": 0.3803921568627451,
+        "Alpha": 1,
+        "Blue": 0.6078431372549019,
+        "Green": 0.8156862745098039
+      },
+      "Space Count": 12,
+      "Program Group": "",
+      "Depth": 4,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "e8de7c4b-674f-4d97-9505-f797712d01d2",
+      "Width": 5.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "434a713f-0381-4262-a08f-f100723a3071",
+        "Name": "Meeting Room"
+      }
+    },
+    {
+      "Program Name": "Pherne Berth",
+      "Color": {
+        "Red": 0.9764705882352941,
+        "Alpha": 1,
+        "Blue": 0.12941176470588237,
+        "Green": 0.788235294117647
+      },
+      "Space Count": 2,
+      "Program Group": "",
+      "Depth": 2,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "60e28337-ee9e-4c40-bb87-d6e0dce3653b",
+      "Width": 3.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "f1b27b68-3343-4b8e-8247-fe356babf539",
+        "Name": "Phone Booth"
+      }
+    },
+    {
+      "Program Name": "Support",
+      "Color": {
+        "Red": 0.4470588235294118,
+        "Alpha": 1,
+        "Blue": 0.5725490196078431,
+        "Green": 0.4980392156862745
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 4,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "96162a08-4b25-44a8-8053-16c21e6ed16c",
+      "Width": 4,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
       "Layout Type": {
         "Id": null,
         "Files": [],
         "Name": null
-      },
-      "Program Group": "New Group",
-      "Program Name": "Fazina",
+      }
+    },
+    {
+      "Program Name": "Recerption",
       "Color": {
-        "Red": 0.5769485941465435,
-        "Blue": 0.37701074420865477,
-        "Green": 0.6699189427203254,
+        "Red": 0.5764705882352941,
+        "Alpha": 1,
+        "Blue": 0.7529411764705882,
+        "Green": 0.4627450980392157
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 6.5,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "952af65f-653e-40e6-8fc1-01676f4be102",
+      "Width": 6.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "f26047b8-5a24-410b-b0f1-53e3cc7fff8d",
+        "Name": "Reception"
+      }
+    },
+    {
+      "Program Name": "Opern Collerboration",
+      "Color": {
+        "Red": 0.8196078431372549,
+        "Alpha": 1,
+        "Blue": 0.6980392156862745,
+        "Green": 0.8784313725490196
+      },
+      "Space Count": 2,
+      "Program Group": "",
+      "Depth": 2.5,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "6fdaa7b1-7bd3-49f7-9e54-5093728a13fe",
+      "Width": 6.5,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": "f0c36fee-ae0f-48e8-9319-529e2fa387a4",
+        "Name": "Open Collaboration"
+      }
+    },
+    {
+      "Program Name": "Circulertion",
+      "Color": {
+        "Red": 0.996078431372549,
+        "Alpha": 1,
+        "Blue": 0.8627450980392157,
+        "Green": 0.9647058823529412
+      },
+      "Space Count": 1,
+      "Program Group": "",
+      "Depth": 0,
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Id": "cae9f38c-3934-44ac-a307-110c4023858d",
+      "Width": 0,
+      "Hypar Space Type": "unspecified",
+      "Total Area": 0,
+      "Layout Type": {
+        "Id": null,
+        "Files": [],
+        "Name": null
+      }
+    },
+    {
+      "Program Name": "Exam Room",
+      "Enclosed": true,
+      "Area per Space": 0,
+      "Count Type": "Item",
+      "Color": {
+        "Red": 0.7342024301315839,
+        "Blue": 0.6124408572320359,
+        "Green": 0.380766739181539,
         "Alpha": 1
       },
-      "Area per Space": 0,
+      "Layout Type": {
+        "Id": "7b007c4e-dcc7-4d97-b9bd-39eb72ffe131",
+        "Name": "Exam Room"
+      },
       "Space Count": 1,
+      "Program Group": "",
       "Width": null,
       "Depth": null,
-      "Hypar Space Type": "unspecified",
-      "Count Type": "Item",
-      "Total Area": 0,
-      "Id": "330fb47b-c04d-4949-b14f-d6985d9437fc",
-      "Name": null,
-      "discriminator": "Elements.ProgramRequirement"
+      "Hypar Space Type": "unspecified"
     }
-  ]
+  ],
+  "Show Advanced Options": false
 }
