@@ -26,8 +26,7 @@
           "$hyparHidden": [
             "Name",
             "Program Group",
-            "Total Area",
-            "Hypar Space Type"
+            "Total Area"
           ],
           "properties": {
             "Program Group": {
@@ -83,6 +82,7 @@
               "description": "Optional. (Typically the shorter dimension \u2014 perpendicular to the side from which the space is accessed, like a corridor.)"
             },
             "Hypar Space Type": {
+              "$hyparDeprecated": true,
               "$hyparOrder": 7,
               "description": "Which furniture layout function should be used to lay out this space?",
               "type": "string",
