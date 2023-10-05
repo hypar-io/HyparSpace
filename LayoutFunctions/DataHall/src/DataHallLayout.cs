@@ -18,7 +18,7 @@ namespace DataHallLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>().Where(b => b.Name == "Data Hall");
+            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>().Where(b => b.HyparSpaceType ?? b.Name == "Data Hall");
 
             var model = new Model();
             var warnings = new List<string>();

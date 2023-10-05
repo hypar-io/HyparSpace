@@ -73,7 +73,7 @@ namespace PrivateOfficeLayout
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
-                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Private Office");
+                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.HyparSpaceType ?? z.Name == "Private Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??

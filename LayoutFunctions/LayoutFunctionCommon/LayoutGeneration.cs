@@ -22,7 +22,7 @@ namespace LayoutFunctionCommon
 
     public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>
         where TLevelElements : Element, ILevelElements
-        where TSpaceBoundary : ISpaceBoundary
+        where TSpaceBoundary : Element, ISpaceBoundary
         where TLevelVolume : GeometricElement, ILevelVolume
         where TCirculationSegment : Floor, ICirculationSegment
     {
@@ -42,6 +42,7 @@ namespace LayoutFunctionCommon
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = DeserializeConfigJson(configJson);
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<TCirculationSegment>();
