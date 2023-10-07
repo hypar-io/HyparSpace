@@ -3,11 +3,13 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- <PackageReference Include="Hypar.Elements.Components" Version="2.0.0" /> -->
+    <PackageReference Include="Hypar.Elements.Components" Version="2.1.0-alpha.18" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Elements\Elements\src\Elements.csproj" />
-    <ProjectReference Include="..\..\..\..\Elements\Elements.Components\src\Elements.Components.csproj" />
-    <ProjectReference Include="..\..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" />
+    <!-- <ProjectReference Include="..\..\..\..\Elements\Elements.Components\src\Elements.Components.csproj" /> -->
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Hypar.Elements" Version="2.1.0-alpha.18" />
+    <PackageReference Include="Hypar.Functions" Version="1.9.0-alpha.3" />
   </ItemGroup>
 </Project>
