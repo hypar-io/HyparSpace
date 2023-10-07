@@ -49,13 +49,13 @@
             },
             "Boundary": {
               "description": "The reference boundary around these furniture elements",
-              "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
+              "$ref": "https://schemas.hypar.io/Polygon.json"
             },
             "Walls": {
               "type": "array",
               "items": {
                 "$hyparDisplayName": "Wall",
-                "$ref": "https://prod-api.hypar.io/schemas/ThickenedPolyline.json",
+                "$ref": "https://schemas.hypar.io/ThickenedPolyline.json",
                 "$hyparAllowIntersection": true,
                 "$hyparConstrainToGround": true,
                 "default": {
@@ -88,7 +88,7 @@
       "paradigm": "edit",
       "schema": {
         "Transform": {
-          "$ref": "https://prod-api.hypar.io/schemas/Transform",
+          "$ref": "https://schemas.hypar.io/Transform.json",
           "$hyparConstraints": {
             "enablePosition": true,
             "enableRotation": true,
@@ -105,14 +105,13 @@
     }
   },
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/LevelElements",
-    "https://prod-api.hypar.io/schemas/CirculationSegment",
-    "https://prod-api.hypar.io/schemas/LevelVolume"
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/LevelElements.json",
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/LevelVolume.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,
-  "thumbnail_id": null,
-  "last_updated": "0001-01-01T00:00:00"
+  "thumbnail_id": null
 }

@@ -62,14 +62,7 @@ namespace DefineProgramRequirements
 
             if(this.store == null)
             { 
-                if (args.SignedResourceUrls == null)
-                {
-                    this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
-                }
-                else
-                {
-                    this.store = new UrlModelStore<DefineProgramRequirementsInputs>();
-                }
+                this.store = new S3ModelStore<DefineProgramRequirementsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
             var l = new InvocationWrapper<DefineProgramRequirementsInputs,DefineProgramRequirementsOutputs> (store, DefineProgramRequirements.Execute);

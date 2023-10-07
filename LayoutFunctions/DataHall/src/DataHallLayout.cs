@@ -60,6 +60,7 @@ namespace DataHallLayout
             var totalArea = 0.0;
             foreach (var room in roomBoundaries)
             {
+                List<Column> roomColumns = GetColumnsInRoom(room, inputModels);
                 var profile = room.Boundary;
                 totalArea += profile.Area();
                 //inset from walls
@@ -106,6 +107,8 @@ namespace DataHallLayout
                 foreach (var cell in grid.GetCells())
                 {
                     var cellRect = cell.GetCellGeometry() as Polygon;
+                    bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns);
+
                     if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0)
                     {
                         continue;
@@ -118,13 +121,13 @@ namespace DataHallLayout
                     {
                         model.AddElement(new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform));
                     }
-                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle - 180)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
-                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
@@ -140,6 +143,31 @@ namespace DataHallLayout
             output.Model = model;
             output.Warnings.AddRange(warnings);
             return output;
+        }
+
+        private static List<Column> GetColumnsInRoom(SpaceBoundary room, Dictionary<string, Model> inputModels)
+        {
+            if (!inputModels.ContainsKey("Columns"))
+            {
+                return null;
+            }
+
+            var allColumns = inputModels["Columns"].Elements.Values.OfType<Column>().ToList();
+            var columns = allColumns
+                .Where(column => column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location)))
+                .ToList();
+
+            return columns.Count > 0 ? columns : null;
+        }
+
+        private static bool CheckIntersectsWithColumns(Polygon? cellRect, List<Column> columns)
+        {
+            if (cellRect == null || columns == null || columns.Count == 0)
+            {
+                return false;
+            }
+
+            return columns.Any(column => cellRect.Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
         }
 
         private static ModelLines ToModelLines(Grid2d grid, Transform transform)

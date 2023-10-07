@@ -7,6 +7,6 @@
     <PackageReference Include="Hypar.Functions" Version="1.9.0-alpha.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj"/>
+    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
   </ItemGroup>
 </Project>
