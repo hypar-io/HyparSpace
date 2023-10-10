@@ -33,6 +33,7 @@ namespace Elements
             this.Geometry = @geometry;
             }
         
+        
         // Empty constructor
         public CirculationSegment()
             : base()

@@ -39,6 +39,17 @@ namespace LayoutFunctionCommon
                 return null;
             }
             var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
+            
+            // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
+            // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
+            foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
+            {
+                if (contentItem.Url == null)
+                {
+                    Console.WriteLine($"🚨 Null URL in config. content item name {contentItem.Name} / {layoutInstantiated.ConfigName}");
+                    layoutInstantiated.Config.ContentItems.Remove(contentItem);
+                }
+            }
             var rules = layoutInstantiated.Config.Rules();
 
             var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
@@ -152,7 +163,7 @@ namespace LayoutFunctionCommon
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => z.Name == programTypeName).ToList();
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
