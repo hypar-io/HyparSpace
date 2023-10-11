@@ -27,7 +27,7 @@ namespace Elements
     public partial class ProgramRequirement : Element
     {
         [JsonConstructor]
-        public ProgramRequirement(string @programGroup, string @programName, Color? @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid @id = default, string @name = null)
+        public ProgramRequirement(string @programGroup, string @programName, Color @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.ProgramGroup = @programGroup;
@@ -41,7 +41,6 @@ namespace Elements
             this.CountType = @countType;
             this.TotalArea = @totalArea;
             }
-        
         
         // Empty constructor
         public ProgramRequirement()
@@ -60,7 +59,7 @@ namespace Elements
     
         /// <summary>What color should be used to display this space type?</summary>
         [JsonProperty("Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Color? Color { get; set; }
+        public Color Color { get; set; }
     
         /// <summary>How much area should be allocated for this space?</summary>
         [JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

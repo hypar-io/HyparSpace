@@ -1,3 +1,4 @@
+using Elements.Geometry;
 using Newtonsoft.Json;
 using System;
 namespace DefineProgramRequirements;
@@ -12,7 +13,7 @@ public partial class ProgramRequirements
         {
             ProgramGroup = this.ProgramGroup,
             ProgramName = this.ProgramName,
-            Color = this.Color,
+            Color = this.Color ?? Colors.Magenta,
             AreaPerSpace = this.AreaPerSpace,
             SpaceCount = this.SpaceCount,
             Width = this.Width,
