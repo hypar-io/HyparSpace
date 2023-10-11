@@ -119,7 +119,7 @@
               "default": "Item"
             },
             "Layout Type": {
-              "description": "What sort of room type should be used to lay out furniture and equipment in this space?",
+              "description": "What sort of space type should be used to lay out furniture and equipment in this space?",
               "$hyparOrder": 7,
               "$ref": "https://schemas.hypar.io/InputFolder.json",
               "$hyparHasTag": "spaceType",
@@ -155,5 +155,22 @@
   "element_types": [
     "https://schemas.hypar.io/ProgramRequirement.json",
     "https://schemas.hypar.io/ColorScheme.json"
-  ]
+  ],
+  "messages": {
+    "en": {
+      "input_schema": {
+        "properties": {
+          "Program Requirements": {
+            "items": {
+              "properties": {
+                "Layout Type": {
+                  "name": "Space Type"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

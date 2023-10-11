@@ -39,7 +39,7 @@ namespace LayoutFunctionCommon
                 return null;
             }
             var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
-            
+
             // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
             // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
             foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
@@ -146,8 +146,21 @@ namespace LayoutFunctionCommon
             return levelVolumes;
         }
 
-        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json", Func<LayoutInstantiated, int> countSeats = null) where TLevelElements : Element, ILevelElements where TSpaceBoundary : Element, ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        public static HashSet<Guid> StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
+            string programTypeName,
+            Dictionary<string, Model> inputModels,
+            dynamic overrides, Model outputModel,
+            bool createWalls,
+            string configurationsPath,
+            string catalogPath = "catalog.json",
+            Func<LayoutInstantiated, int> countSeats = null
+             )
+             where TLevelElements : Element, ILevelElements
+             where TSpaceBoundary : Element, ISpaceBoundary
+             where TLevelVolume : GeometricElement, ILevelVolume
+             where TCirculationSegment : Floor, ICirculationSegment
         {
+            var processedSpaces = new HashSet<Guid>();
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
@@ -180,6 +193,7 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
+                    processedSpaces.Add(room.Id);
                     ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
                 }
 
@@ -198,9 +212,91 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
+                processedSpaces.Add(room.Id);
                 ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
+            return processedSpaces;
+        }
+
+
+        /// <summary>
+        /// Basically the same as StandardLayoutOnAllLevels, but without the actual furniture layout part — just the wall creation.
+        /// </summary> 
+        public static void GenerateWallsForAllSpaces<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
+            IEnumerable<TSpaceBoundary> spaceBoundaries,
+            Dictionary<string, Model> inputModels,
+            Model outputModel
+        ) where TLevelElements : Element, ILevelElements where TSpaceBoundary : Element, ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        {
+            var allSpaceBoundaries = new List<TSpaceBoundary>(spaceBoundaries);
+            var spacePlanningZones = inputModels["Space Planning Zones"];
+            var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsAssignableFromType<TCirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    matchingLevel?.Elements.Add(cs);
+                }
+            }
+            var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
+
+            foreach (var lvl in levels)
+            {
+                var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
+                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => allSpaceBoundaries.Contains(z)).ToList();
+                foreach (var rm in roomBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+                var wallCandidateLines = new List<RoomEdge>();
+                foreach (var room in roomBoundaries)
+                {
+                    GenerateWallsForSpace(room, levelVolume, corridorSegments, wallCandidateLines);
+                }
+
+                double height = levelVolume?.Height ?? 3;
+                Transform xform = levelVolume?.Transform ?? new Transform();
+
+                outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                {
+                    WallCandidateLines = wallCandidateLines,
+                    Height = height,
+                    LevelTransform = xform,
+                });
+            }
+            foreach (var room in allSpaceBoundaries)
+            {
+                GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(room, null, null, null);
+            }
+        }
+
+        public static void GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(
+                TSpaceBoundary room,
+                TLevelVolume levelVolume = null,
+                IEnumerable<Line> corridorSegments = null,
+                List<RoomEdge> wallCandidateLines = null
+            )
+            where TLevelVolume : GeometricElement, ILevelVolume
+            where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            corridorSegments ??= Enumerable.Empty<Line>();
+            wallCandidateLines ??= new List<RoomEdge>();
+            var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+            var bestOption = wallCandidateOptions.FirstOrDefault();
+            if (bestOption == default)
+            {
+                return;
+            }
+            var (_, WallCandidates) = bestOption;
+            wallCandidateLines.AddRange(WallCandidates);
         }
 
         private static void ProcessRoom<TLevelVolume, TSpaceBoundary>(

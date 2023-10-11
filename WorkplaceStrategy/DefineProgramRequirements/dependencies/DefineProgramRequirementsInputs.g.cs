@@ -206,7 +206,7 @@ namespace DefineProgramRequirements
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProgramRequirementsCountType CountType { get; set; } = ProgramRequirementsCountType.Item;
     
-        /// <summary>What sort of room type should be used to lay out furniture and equipment in this space?</summary>
+        /// <summary>What sort of space type should be used to lay out furniture and equipment in this space?</summary>
         [Newtonsoft.Json.JsonProperty("Layout Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public InputFolder LayoutType { get; set; }
     
