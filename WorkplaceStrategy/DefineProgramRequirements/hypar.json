@@ -134,6 +134,7 @@
                 "boolean",
                 "null"
               ],
+              "$hyparStyle": "checkbox",
               "default": true
             }
           }

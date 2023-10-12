@@ -25,7 +25,7 @@ public static class RoomEdgeExtensions
             return new RoomEdge
             {
                 Line = seg,
-                Thickness = thickness.ElementAtOrDefault(i)
+                Thickness = thickness?.ElementAtOrDefault(i)
             };
         }).ToList();
     }

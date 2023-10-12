@@ -189,7 +189,7 @@ namespace Elements
 
             if (corridorSegments != null)
             {
-                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments(), corridorSegments, out var otherSegments);
+                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments().Select(s => new RoomEdge { Line = s}), corridorSegments, out var otherSegments).Select(re => re.Line).ToList();
             }
             return sb;
         }
