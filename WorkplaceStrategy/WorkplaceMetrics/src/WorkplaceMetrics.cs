@@ -8,10 +8,6 @@ namespace WorkplaceMetrics
 {
     public static class WorkplaceMetrics
     {
-        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
-
-        private static readonly string SpaceMetricDependencyName = SpaceMetricsOverride.Dependency;
-
         private const string _openOffice = "Open Office";
         private const string _meetingRoom = "Meeting Room";
         private const string _classroom = "Classroom";
@@ -30,7 +26,6 @@ namespace WorkplaceMetrics
         /// <returns>A WorkplaceMetricsOutputs instance containing computed results and the model with any new elements.</returns>
         public static WorkplaceMetricsOutputs Execute(Dictionary<string, Model> inputModels, WorkplaceMetricsInputs input)
         {
-            proxies.Clear();
             var warnings = new List<string>();
             var outputModel = new Model();
             var zonesModel = inputModels["Space Planning Zones"];
@@ -143,18 +138,17 @@ namespace WorkplaceMetrics
                 metricByLayouts[layoutName] = CountWorkplaceTyped(inputModels, input, layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics);
             }
 
-            var otherSpacesMetric = allSpaceBoundaries.Where(sb => !layoutNames.Contains(sb.ProgramType) && sb.Name != "Circulation").Select(sb => GetSpaceMetricConfig(input, allSpaceBoundaries, sb).Value);
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
             
-            var desksMetric = metricByLayouts.Sum(m => m.Value.Desks) + otherSpacesMetric.Sum(m => m.Desks);
-            var collaborationSeatsMetric = metricByLayouts.Sum(m => m.Value.CollaborationSeats) + otherSpacesMetric.Sum(m => m.CollaborationSeats);
+            var desksMetric = metricByLayouts.Sum(m => m.Value.Desks);
+            var collaborationSeatsMetric = metricByLayouts.Sum(m => m.Value.CollaborationSeats);
 
             var headcount = -1;
             var deskSharingRatio = 1.0;
 
             if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Headcount)
             {
-                headcount = (int)metricByLayouts.Sum(m => m.Value.Headcount) + (int)otherSpacesMetric.Sum(m => m.Headcount);
+                headcount = (int)metricByLayouts.Sum(m => m.Value.Headcount);
                 deskSharingRatio = headcount / desksMetric;
             }
             else if (input.CalculationMode == WorkplaceMetricsInputsCalculationMode.Fixed_Headcount)
@@ -213,8 +207,6 @@ namespace WorkplaceMetrics
             {
                 output.Warnings = warnings;
             }
-
-            output.Model.AddElements(proxies);
             return output;
         }
 
@@ -247,21 +239,14 @@ namespace WorkplaceMetrics
                             }
                         }
 
-                        var config = GetSpaceMetricConfig(input, boundaries, room, sm);
-                        metric.Seats += (int)config.Value.Seats;
-                        metric.Headcount += (int)config.Value.Headcount;
-                        metric.Desks += (int)config.Value.Desks;
-                        metric.CollaborationSeats += (int)config.Value.CollaborationSeats;
+                        metric.Seats += sm.Seats;
+                        metric.Headcount += sm.Headcount;
+                        metric.Desks += sm.Desks;
+                        metric.CollaborationSeats += sm.CollaborationSeats;
                     }
                 }
             }
             return metric;
-        }
-
-        private static SpaceMetricsOverride GetSpaceMetricConfig(WorkplaceMetricsInputs input, List<SpaceBoundary> boundaries, SpaceBoundary room, SpaceMetric defaultMetric = null)
-        {
-            var proxy = GetElementProxy(room, boundaries.Proxies(SpaceMetricDependencyName));
-            return MatchApplicableOverride(input.Overrides.SpaceMetrics.ToList(), proxy, defaultMetric);
         }
 
         private static Dictionary<string, AreaTally> CalculateAreas(bool hasProgramRequirements, IEnumerable<SpaceBoundary> allSpaceBoundaries)
@@ -379,61 +364,6 @@ namespace WorkplaceMetrics
             }
 
             return areas;
-        }
-
-        private static SpaceMetricsOverride MatchApplicableOverride(
-            List<SpaceMetricsOverride> overridesById,
-            ElementProxy<SpaceBoundary> boundaryProxy,
-            SpaceMetric defaultMetric = null)
-        {
-            var overrideName = SpaceMetricsOverride.Name;
-            SpaceMetricsOverride config = null;
-
-            // See if we already have matching override attached
-            var existingOverrideId = boundaryProxy.OverrideIds<SpaceMetricsOverride>(overrideName).FirstOrDefault();
-            if (existingOverrideId != null)
-            {
-                config = overridesById.Find(o => o.Id == existingOverrideId);
-                if (config != null)
-                {
-                    return config;
-                }
-            }
-
-            // Try to match from identity in configs
-            config ??= overridesById.Find(o => o.Identity.ParentCentroid.IsAlmostEqualTo(boundaryProxy.Element.ParentCentroid.Value));
-
-            // Use a default in case none found
-            if (config == null)
-            {
-                config = new SpaceMetricsOverride(
-                    Guid.NewGuid().ToString(),
-                    new SpaceMetricsIdentity(boundaryProxy.Element.ParentCentroid.Value),
-                    new SpaceMetricsValue(
-                        defaultMetric?.Seats ?? 0,
-                        defaultMetric?.Headcount ?? 0,
-                        defaultMetric?.Desks ?? 0,
-                        defaultMetric?.CollaborationSeats ?? 0)
-                );
-                overridesById.Add(config);
-            }
-
-            // Attach the identity and values data to the proxy
-            boundaryProxy.AddOverrideIdentity(overrideName, config.Id, config.Identity);
-            boundaryProxy.AddOverrideValue(overrideName, config.Value);
-
-            // Make sure proxies list has the proxy so that it will serialize in the model.
-            if (!proxies.Contains(boundaryProxy))
-            {
-                proxies.Add(boundaryProxy);
-            }
-
-            return config;
-        }
-
-        private static ElementProxy<SpaceBoundary> GetElementProxy(SpaceBoundary spaceBoundary, IEnumerable<ElementProxy<SpaceBoundary>> allSpaceBoundaries)
-        {
-            return allSpaceBoundaries.Proxy(spaceBoundary) ?? spaceBoundary.Proxy(SpaceMetricDependencyName);
         }
     }
 }
