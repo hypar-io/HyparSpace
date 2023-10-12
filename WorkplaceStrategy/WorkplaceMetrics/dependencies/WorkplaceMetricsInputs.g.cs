@@ -98,16 +98,15 @@ namespace WorkplaceMetrics
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<SettingsOverride> @settings, IList<SpaceMetricsOverride> @spaceMetrics)
+        public Overrides(IList<SettingsOverride> @settings)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @settings, @spaceMetrics});
+                validator.PreConstruct(new object[]{ @settings});
             }
         
             this.Settings = @settings ?? this.Settings;
-            this.SpaceMetrics = @spaceMetrics ?? this.SpaceMetrics;
         
             if(validator != null)
             {
@@ -117,9 +116,6 @@ namespace WorkplaceMetrics
     
         [Newtonsoft.Json.JsonProperty("Settings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<SettingsOverride> Settings { get; set; } = new List<SettingsOverride>();
-    
-        [Newtonsoft.Json.JsonProperty("Space Metrics", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<SpaceMetricsOverride> SpaceMetrics { get; set; } = new List<SpaceMetricsOverride>();
     
     }
     
@@ -155,41 +151,6 @@ namespace WorkplaceMetrics
     
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SettingsValue Value { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class SpaceMetricsOverride 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricsOverride(string @id, SpaceMetricsIdentity @identity, SpaceMetricsValue @value)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsOverride>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @id, @identity, @value});
-            }
-        
-            this.Id = @id;
-            this.Identity = @identity;
-            this.Value = @value;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpaceMetricsIdentity Identity { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpaceMetricsValue Value { get; set; }
     
     }
     
@@ -245,72 +206,6 @@ namespace WorkplaceMetrics
         /// <summary>Adjust the Usable Area for calculations + display.</summary>
         [Newtonsoft.Json.JsonProperty("Usable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double UsableArea { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class SpaceMetricsIdentity 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricsIdentity(Vector3 @parentCentroid)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsIdentity>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @parentCentroid});
-            }
-        
-            this.ParentCentroid = @parentCentroid;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("ParentCentroid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Vector3 ParentCentroid { get; set; }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    
-    public partial class SpaceMetricsValue 
-    
-    {
-        [Newtonsoft.Json.JsonConstructor]
-        public SpaceMetricsValue(double @seats, double @headcount, double @desks, double @collaborationSeats)
-        {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpaceMetricsValue>();
-            if(validator != null)
-            {
-                validator.PreConstruct(new object[]{ @seats, @headcount, @desks, @collaborationSeats});
-            }
-        
-            this.Seats = @seats;
-            this.Headcount = @headcount;
-            this.Desks = @desks;
-            this.CollaborationSeats = @collaborationSeats;
-        
-            if(validator != null)
-            {
-                validator.PostConstruct(this);
-            }
-        }
-    
-        [Newtonsoft.Json.JsonProperty("Seats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Seats { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Headcount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Headcount { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Desks", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Desks { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Collaboration Seats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double CollaborationSeats { get; set; }
     
     }
 }

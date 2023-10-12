@@ -222,31 +222,6 @@
           "$hyparUnitType": "area"
         }
       }
-    },
-    "Space Metrics": {
-      "$hyparOrder": 1,
-      "dependency": "Space Planning Zones",
-      "context": "[*discriminator=Elements.SpaceBoundary]",
-      "identity": {
-        "ParentCentroid": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        }
-      },
-      "paradigm": "edit",
-      "schema": {
-        "Seats": {
-          "type": "number"
-        },
-        "Headcount": {
-          "type": "number"
-        },
-        "Desks": {
-          "type": "number"
-        },
-        "Collaboration Seats": {
-          "type": "number"
-        }
-      }
     }
   },
   "outputs": [
