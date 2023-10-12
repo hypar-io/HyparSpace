@@ -20,20 +20,24 @@ namespace LayoutFunctionCommon
 
     public record struct SeatsCount(int Seats, int Headcount, int Desks, int CollaborationSeats);
 
-    public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>
+    public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment, TOverride, TSpaceSettingsOverrideValueType>
         where TLevelElements : Element, ILevelElements
-        where TSpaceBoundary : ISpaceBoundary
+        where TSpaceBoundary : Element, ISpaceBoundary
         where TLevelVolume : GeometricElement, ILevelVolume
         where TCirculationSegment : Floor, ICirculationSegment
+        where TOverride : IOverride
+        where TSpaceSettingsOverrideValueType : class, ISpaceSettingsOverrideValue
     {
+        public static readonly List<ElementProxy<TSpaceBoundary>> Proxies = new List<ElementProxy<TSpaceBoundary>>();
         public virtual LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName,
                                               Dictionary<string, Model> inputModels,
                                               dynamic overrides,
                                               bool createWalls,
                                               string configurationsPath,
-                                              string catalogPath = "catalog.json")
+                                              string catalogPath = "catalog.json",
+                                              Func<TOverride, Vector3> getCentroid = null,
+                                              TSpaceSettingsOverrideValueType defaultValue = null)
         {
-
             var outputModel = new Model();
             var totalSeats = 0;
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
@@ -42,18 +46,32 @@ namespace LayoutFunctionCommon
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = DeserializeConfigJson(configJson);
+            FlippedConfigurations.Init(configs);
+
+            var overridesBySpaceBoundaryId = getCentroid != null ? OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels) : new Dictionary<Guid, TOverride>();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<TCirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
+                    SpaceConfiguration selectedConfigs = configs;
+                    if (defaultValue != null)
+                    {
+                        var spaceSettingsValue = OverrideUtilities.MatchApplicableOverride(
+                            overridesBySpaceBoundaryId,
+                            OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                            defaultValue,
+                            Proxies).Value;
+                        selectedConfigs = FlippedConfigurations.GetConfigs(spaceSettingsValue.PrimaryAxisFlipLayout, spaceSettingsValue.SecondaryAxisFlipLayout);
+                    }
+
                     SeatsCount seatsCount = default;
                     var spaceBoundary = room.Boundary;
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
@@ -70,10 +88,10 @@ namespace LayoutFunctionCommon
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         foreach (var cell in grid.GetCells())
                         {
-                            var config = FindConfigByFit(configs, cell);
+                            var config = FindConfigByFit(selectedConfigs, cell);
                             if (config != null)
                             {
-                                possibleConfigs.Add((config.Value, WallCandidates));
+                                possibleConfigs.Add(((ConfigInfo)config, WallCandidates));
                             }
                         }
                     }
@@ -109,6 +127,8 @@ namespace LayoutFunctionCommon
                     });
                 }
             }
+            
+            outputModel.AddElements(Proxies);
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
 
             return new LayoutGenerationResult

@@ -1,1 +1,81 @@
-{}
+{
+  "overrides": {
+    "Space Settings": [
+      {
+        "id": "835ce8b1-8102-482c-a3e3-b7fa1ebcfda0",
+        "identity": {
+          "ParentCentroid": {
+            "X": 4.8,
+            "Y": 8.25,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Primary Axis Flip Layout": true,
+          "Secondary Axis Flip Layout": false,
+          "Id": "f6923539-d20f-4028-acc7-c07359f16aef"
+        }
+      },
+      {
+        "id": "44bbda32-5343-490e-932d-bd2b8b748083",
+        "identity": {
+          "ParentCentroid": {
+            "X": 3.640000000000001,
+            "Y": 1.2500000000000002,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Primary Axis Flip Layout": true,
+          "Secondary Axis Flip Layout": false,
+          "Id": "309ab17f-3bcc-4a61-b4d3-4e5d32209ed0"
+        }
+      },
+      {
+        "id": "8e2d54f7-a5af-4c7c-8ca8-28bf43d8a586",
+        "identity": {
+          "ParentCentroid": {
+            "X": 2.5,
+            "Y": 12.3,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "f551e5d9-9844-4382-90e1-f0293558ee78",
+          "Primary Axis Flip Layout": true,
+          "Secondary Axis Flip Layout": false
+        }
+      },
+      {
+        "id": "452a5a34-e4ba-489d-8a91-15b5579cb821",
+        "identity": {
+          "ParentCentroid": {
+            "X": 1.25,
+            "Y": 5.9,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "6d684ecc-4d28-4fe9-9377-cb726d5c9720",
+          "Primary Axis Flip Layout": true,
+          "Secondary Axis Flip Layout": false
+        }
+      },
+      {
+        "id": "44f4cf8b-9ebd-4697-9ada-485c92488eab",
+        "identity": {
+          "ParentCentroid": {
+            "X": 2.1,
+            "Y": 3.7,
+            "Z": 0
+          }
+        },
+        "value": {
+          "Id": "c9ae93ed-f66c-4870-b681-5ca4edc6f971",
+          "Primary Axis Flip Layout": true,
+          "Secondary Axis Flip Layout": false
+        }
+      }
+    ]
+  }
+}

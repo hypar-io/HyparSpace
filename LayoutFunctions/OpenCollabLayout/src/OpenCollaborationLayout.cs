@@ -13,7 +13,7 @@ namespace OpenCollaborationLayout
 {
     public static class OpenCollaborationLayout
     {
-        private class OpenCollaborationLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
+        private class OpenCollaborationLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, IOverride, ISpaceSettingsOverrideValue>
         {
             private Dictionary<string, (ContentConfiguration config, int usedCount)> configsWithUsedCount = new();
 
@@ -87,7 +87,7 @@ namespace OpenCollaborationLayout
                 return spaceConfiguration;
             }
 
-            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
+            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json", Func<IOverride, Vector3> getCentroid = null, ISpaceSettingsOverrideValue defaultValue = null)
             {
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
                 return result;

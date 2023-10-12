@@ -33,6 +33,8 @@ namespace LoungeLayout
             ["Configuration M"] = 2,
         };
 
+        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
+
         /// <summary>
         /// The LoungeLayout function.
         /// </summary>
@@ -43,8 +45,10 @@ namespace LoungeLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var output = new LoungeLayoutOutputs();
-            LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>("Lounge", inputModels, input.Overrides, output.Model, false, "./LoungeConfigurations.json", default, CountSeats);
 
+            LayoutStrategies.StandardLayoutOnAllLevels<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, SpaceSettingsOverride, SpaceSettingsValue>("Lounge", inputModels, input.Overrides, output.Model, false, "./LoungeConfigurations.json", default, CountSeats, (ov) => ov.Identity.ParentCentroid, new SpaceSettingsValue(false, false), proxies);
+            
+            output.Model.AddElements(proxies);
             return output;
         }
 

@@ -7,7 +7,7 @@ namespace SpaceConfigurationFromModel
 {
     public static class SpaceConfigurationFromModel
     {
-        private class SpaceConfigurationFromModelLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
+        private class SpaceConfigurationFromModelLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment, IOverride, ISpaceSettingsOverrideValue>
         {
             private readonly SpaceConfiguration spaceConfig;
 

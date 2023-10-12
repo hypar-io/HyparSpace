@@ -135,7 +135,25 @@ namespace LayoutFunctionCommon
             return levelVolumes;
         }
 
-        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json", Func<LayoutInstantiated, int> countSeats = null) where TLevelElements : Element, ILevelElements where TSpaceBoundary : Element, ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment, TOverride, TSpaceSettingsOverrideValueType>(
+            string programTypeName,
+            Dictionary<string, Model> inputModels,
+            dynamic overrides,
+            Model outputModel,
+            bool createWalls,
+            string configurationsPath,
+            string catalogPath = "catalog.json",
+            Func<LayoutInstantiated, int> countSeats = null,
+            Func<TOverride, Vector3> getCentroid = null,
+            TSpaceSettingsOverrideValueType defaultValue = default,
+            List<ElementProxy<TSpaceBoundary>> proxies = default
+            )
+            where TLevelElements : Element, ILevelElements
+            where TSpaceBoundary : Element, ISpaceBoundary
+            where TLevelVolume : GeometricElement, ILevelVolume
+            where TCirculationSegment : Floor, ICirculationSegment
+            where TOverride : IOverride
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue
         {
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
@@ -152,7 +170,14 @@ namespace LayoutFunctionCommon
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            FlippedConfigurations.Init(configs);
+
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => z.Name == programTypeName).ToList();
+            var overridesBySpaceBoundaryId = 
+                getCentroid != null ? 
+                OverrideUtilities.GetOverridesBySpaceBoundaryId<TOverride, ISpaceBoundary, ILevelElements>(overrides?.SpaceSettings, getCentroid, levels) : 
+                new Dictionary<Guid, IOverride>();
+                
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
@@ -163,13 +188,21 @@ namespace LayoutFunctionCommon
                     allSpaceBoundaries.Remove(rm);
                 }
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in roomBoundaries)
                 {
-                    ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    var spaceSettingsValue = 
+                        defaultValue != null && proxies != null ? 
+                        OverrideUtilities.MatchApplicableOverride(
+                            overridesBySpaceBoundaryId,
+                            OverrideUtilities.GetSpaceBoundaryProxy(room, roomBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                            defaultValue,
+                            proxies).Value : 
+                        default;
+                    ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue, corridorSegments, levelVolume, wallCandidateLines);
                 }
 
                 double height = levelVolume?.Height ?? 3;
@@ -187,23 +220,32 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
-                ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                var spaceSettingsValue = 
+                    defaultValue != null && proxies != null ? 
+                    OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, allSpaceBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName)),
+                        defaultValue,
+                        proxies).Value : 
+                    default;
+                ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(room, outputModel, countSeats, configs, spaceSettingsValue);
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
         }
 
-        private static void ProcessRoom<TLevelVolume, TSpaceBoundary>(
+        private static void ProcessRoom<TLevelVolume, TSpaceBoundary, TSpaceSettingsOverrideValueType>(
                 TSpaceBoundary room,
                 Model outputModel,
-                Func<LayoutInstantiated,
-                int> countSeats,
+                Func<LayoutInstantiated, int> countSeats,
                 SpaceConfiguration configs,
+                TSpaceSettingsOverrideValueType spaceSettingsValue,
                 IEnumerable<Line> corridorSegments = null,
                 TLevelVolume levelVolume = null,
                 List<(Line line, string type)> wallCandidateLines = null
             )
             where TLevelVolume : GeometricElement, ILevelVolume
             where TSpaceBoundary : Element, ISpaceBoundary
+            where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue
         {
             corridorSegments ??= Enumerable.Empty<Line>();
             wallCandidateLines ??= new List<(Line line, string type)>();
@@ -211,6 +253,9 @@ namespace LayoutFunctionCommon
             var success = false;
             var spaceBoundary = room.Boundary;
             var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+            var selectedConfigs = spaceSettingsValue != null && spaceSettingsValue is ISpaceSettingsOverrideFlipValue spaceSettingsFlipValue ?
+                FlippedConfigurations.GetConfigs(spaceSettingsFlipValue.PrimaryAxisFlipLayout, spaceSettingsFlipValue.SecondaryAxisFlipLayout) :
+                configs;
 
             foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
             {
@@ -224,7 +269,7 @@ namespace LayoutFunctionCommon
                 var grid = new Grid2d(boundaryCurves, orientationTransform);
                 foreach (var cell in grid.GetCells())
                 {
-                    var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
+                    var layout = InstantiateLayoutByFit(selectedConfigs, cell, room.Transform);
                     if (layout != null)
                     {
                         success = true;
@@ -302,93 +347,6 @@ namespace LayoutFunctionCommon
                 }
             }
             yield break;
-        }
-
-
-        public static Dictionary<Guid, TOverride> GetOverridesBySpaceBoundaryId<TOverride, TSpaceBoundary, TLevelElements>(IList<TOverride> overrides, Func<TOverride, Vector3> getCentroid, IEnumerable<TLevelElements> levels) where TOverride : IOverride where TSpaceBoundary : ISpaceBoundary where TLevelElements : ILevelElements
-        {
-            var overridesBySpaceBoundaryId = new Dictionary<Guid, TOverride>();
-            foreach (var spaceOverride in overrides ?? new List<TOverride>())
-            {
-                var matchingBoundary =
-                levels.SelectMany(l => l.Elements)
-                    .OfType<TSpaceBoundary>()
-                    .OrderBy(ob => ob.ParentCentroid.Value
-                    .DistanceTo(getCentroid(spaceOverride)))
-                    .FirstOrDefault();
-                if (matchingBoundary == null)
-                {
-                    continue;
-                }
-
-                if (overridesBySpaceBoundaryId.ContainsKey(matchingBoundary.Id))
-                {
-                    var mbCentroid = matchingBoundary.ParentCentroid.Value;
-                    if (getCentroid(overridesBySpaceBoundaryId[matchingBoundary.Id]).DistanceTo(mbCentroid) > getCentroid(spaceOverride).DistanceTo(mbCentroid))
-                    {
-                        overridesBySpaceBoundaryId[matchingBoundary.Id] = spaceOverride;
-                    }
-                }
-                else
-                {
-                    overridesBySpaceBoundaryId.Add(matchingBoundary.Id, spaceOverride);
-                }
-            }
-
-            return overridesBySpaceBoundaryId;
-        }
-        public static ElementProxy<TSpaceBoundary> CreateSettingsProxy<TSpaceBoundary>(double collabSpaceDensity, double gridRotation, double aisleWidth, TSpaceBoundary ob, string deskType) where TSpaceBoundary : Element, ISpaceBoundary
-        {
-            var proxy = ob.Proxy("Space Settings");
-            proxy.AdditionalProperties.Add("Desk Type", deskType);
-            proxy.AdditionalProperties.Add("Integrated Collaboration Space Density", collabSpaceDensity);
-            proxy.AdditionalProperties.Add("Aisle Width", aisleWidth);
-            proxy.AdditionalProperties.Add("Grid Rotation", gridRotation);
-            return proxy;
-        }
-
-        public static (
-            ContentConfiguration selectedConfig,
-            double rotation,
-            double collabDensity,
-            double aisleWidth,
-            double backToBackWidth,
-            string deskTypeName
-        ) GetSpaceSettings<TSpaceBoundary, TSpaceSettingsOverride, TSpaceSettingsOverrideValueType>(
-            TSpaceBoundary ob,
-            ContentConfiguration defaultConfig,
-            double rotation,
-            double collabDensity,
-            double aisleWidth,
-            double backToBackWidth,
-            string deskType,
-            Dictionary<Guid, TSpaceSettingsOverride> overridesById,
-            SpaceConfiguration configs,
-            ElementProxy<TSpaceBoundary> proxy,
-            Func<TSpaceSettingsOverride, ContentConfiguration> createCustomDesk = null) where TSpaceSettingsOverrideValueType : ISpaceSettingsOverrideValue where TSpaceBoundary : Element, ISpaceBoundary where TSpaceSettingsOverride : ISpaceSettingsOverride<TSpaceSettingsOverrideValueType>, IOverride
-        {
-            var selectedConfig = defaultConfig;
-            var deskTypeName = deskType;
-            if (overridesById.ContainsKey(ob.Id))
-            {
-                var spaceOverride = overridesById[ob.Id];
-                if (createCustomDesk != null)
-                {
-                    selectedConfig = createCustomDesk(spaceOverride);
-                }
-                if (createCustomDesk == null || selectedConfig == null)
-                {
-                    selectedConfig = configs[spaceOverride.Value.GetDeskType];
-                }
-                Identity.AddOverrideIdentity(proxy, spaceOverride);
-                Identity.AddOverrideValue(proxy, "Space Settings", spaceOverride.Value);
-                rotation = spaceOverride.Value.GridRotation;
-                collabDensity = spaceOverride.Value.IntegratedCollaborationSpaceDensity;
-                aisleWidth = double.IsNaN(spaceOverride.Value.AisleWidth) ? aisleWidth : spaceOverride.Value.AisleWidth;
-                backToBackWidth = double.IsNaN(spaceOverride.Value.BackToBackWidth) ? backToBackWidth : spaceOverride.Value.BackToBackWidth;
-                deskTypeName = spaceOverride.Value.GetDeskType;
-            }
-            return (selectedConfig, rotation, collabDensity, aisleWidth, backToBackWidth, deskTypeName);
         }
 
         public static Transform GetOrientationTransform(Profile spaceBoundary, IEnumerable<Line> corridorSegments, double rotation)

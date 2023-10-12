@@ -120,6 +120,14 @@
                     "type": "boolean",
                     "description": "Should partitions be added around offices?",
                     "default": true
+                },
+                "Primary Axis Flip Layout": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "Secondary Axis Flip Layout": {
+                    "type": "boolean",
+                    "default": false
                 }
             }
         }

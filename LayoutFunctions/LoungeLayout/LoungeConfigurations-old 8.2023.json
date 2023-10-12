@@ -1,0 +1,5583 @@
+{
+  "Configuration A": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.3371456246530009,
+        "Y": 6.6340002089762855,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/2ce4e505-143d-4b5c-8b0d-09885998da61.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.76604619176394162,
+              -0.6427855257268652,
+              0.0,
+              1.8478495381351969,
+              0.6427855257268652,
+              -0.76604619176394162,
+              0.0,
+              4.6389509162867064,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m"
+      },
+      {
+        "Url": "https://hypar.io/user-static/f7ca9d12-290b-444d-900a-6a1d37af4a11.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.76604468352331445,
+              0.642787323183699,
+              0.0,
+              1.8613876166215952,
+              -0.642787323183699,
+              0.76604468352331445,
+              0.0,
+              1.886026843481897,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m 2"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              3.81093637810935,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              1.1043186891379797,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              3.81093637810935,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              1.7198080490503678,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              3.810936378109357,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              2.3436079617924115,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/c84d0092-962f-497e-ba1a-d5b25b61d1f4.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.96592582628906076,
+              0.25881904510254916,
+              0.0,
+              1.2081601298747877,
+              -0.25881904510254916,
+              0.96592582628906076,
+              0.0,
+              4.0920863729050287,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - B-Free - Seating - Cube - Small - Glide"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              1.9984156291078286,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              1.8465760240519788,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              1.9984156291078357,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              4.751157399049335,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.17364817766712762,
+              -0.98480775301217327,
+              0.0,
+              2.5509717911259493,
+              0.98480775301217327,
+              0.17364817766712762,
+              0.0,
+              2.5092964160797617,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.49999999999984557,
+              -0.86602540378452786,
+              0.0,
+              2.7582661791169052,
+              0.86602540378452786,
+              -0.49999999999984557,
+              0.0,
+              3.7012086441375818,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/242013db-7623-4cae-b39d-2c32d85ef15b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              2.9059431181502227,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              6.20837545770347,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Thread - Power Hub - NEMA - 30H"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8e4191a7-a78e-470b-96f3-cb2b61b33b23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              2.5539887878786054,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              6.2083747210271483,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Flos - Tatou F - Lighting"
+      },
+      {
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.96592582628914958,
+              -0.25881904510221737,
+              0.0,
+              1.8961759988177356,
+              0.25881904510221737,
+              0.96592582628914958,
+              0.0,
+              6.0296471454214249,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.90630778703645365,
+              -0.42261826174112044,
+              0.0,
+              1.6782680264071494,
+              0.42261826174112044,
+              -0.90630778703645365,
+              0.0,
+              0.66823197687183189,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar.io/user-static/b1e7fd86-3124-4f9d-9e0d-650f453df774.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              2.7903614243424961,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              2.2645332703137537,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Corner Left - Same Upholstery"
+      },
+      {
+        "Url": "https://hypar.io/user-static/537d3aad-7cb1-4a4c-af8f-3889e9becce7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              2.7903614243425032,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              4.2952945825075854,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Straight Inverted - Same Upholstery"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cdc18dac-396b-474d-a20b-2b1670a22a1a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -3.1641356201816969E-15,
+              1.0,
+              0.0,
+              2.7903614243425032,
+              -1.0,
+              -3.1641356201816969E-15,
+              0.0,
+              4.2952944732768445,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.1685728123264987,
+          "Y": 3.3170001044881428,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Corner Right - Same Upholstery"
+      }
+    ]
+  },
+  "Configuration B": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 1.5384959179253448,
+        "Y": 3.7161670582142889,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              9.94793844784737E-15,
+              0.0,
+              0.7019759710072544,
+              -9.94793844784737E-15,
+              1.0,
+              0.0,
+              2.728353110530076,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.7692479589626724,
+          "Y": 1.8580835291071445,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.96592582628909074,
+              -0.2588190451024372,
+              0.0,
+              0.88387356114518423,
+              0.2588190451024372,
+              -0.96592582628909074,
+              0.0,
+              2.3653679489374646,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.7692479589626724,
+          "Y": 1.8580835291071445,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.608224830031758E-15,
+              0.0,
+              0.700227456705372,
+              3.608224830031758E-15,
+              -1.0,
+              0.0,
+              1.2915925650521292,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.7692479589626724,
+          "Y": 1.8580835291071445,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.9659258262890924,
+              0.25881904510243109,
+              0.0,
+              0.51832986656743985,
+              -0.25881904510243109,
+              0.9659258262890924,
+              0.0,
+              1.6545777266447406,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.7692479589626724,
+          "Y": 1.8580835291071445,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/7809959f-ae7f-4ea6-aa1b-4a2b609a2ae3.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              6.1062266354383551E-16,
+              0.0,
+              0.18885494086989529,
+              -6.1062266354383551E-16,
+              1.0,
+              0.0,
+              0.39821651310255657,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 0.7692479589626724,
+          "Y": 1.8580835291071445,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Davos - Seating - Bench - Medium"
+      }
+    ]
+  },
+  "Configuration C": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 8.22989834232271,
+        "Y": 8.62229759471396,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.9111400181474049E-15,
+              1.0,
+              0.0,
+              0.84294198622253447,
+              -1.0,
+              -6.9111400181474049E-15,
+              0.0,
+              0.973941208017143,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7402744221143522E-14,
+              0.0,
+              7.3959506013144249,
+              1.7402744221143522E-14,
+              1.0,
+              0.0,
+              0.973941637491726,
+              0.0,
+              0.0,
+              1.0,
+              0.012581669044497069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.00752756383291E-14,
+              -1.0,
+              0.0,
+              7.3960603825909139,
+              1.0,
+              1.00752756383291E-14,
+              0.0,
+              2.6504153294555888,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.2733719048173046E-16,
+              0.0,
+              0.84288542366178376,
+              1.2733719048173046E-16,
+              -1.0,
+              0.0,
+              2.6503627487989627,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.2204460492503131E-16,
+              0.0,
+              6.8985133471080538,
+              -2.2204460492503131E-16,
+              1.0,
+              0.0,
+              0.64284147053083451,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.9392388638150912E-14,
+              1.0,
+              0.0,
+              7.784768024174241,
+              -1.0,
+              -7.9392388638150912E-14,
+              0.0,
+              1.6052587774125522,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              6.8361985671362575,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              3.0556343175342171,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              3.989942184328708,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              0.55172979042579939,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              1.3767763687646486,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              3.0556343175342846,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.38548480554004527,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              2.0859403226552438,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881904510265169,
+              -0.96592582628903312,
+              0.0,
+              6.5654913066777745,
+              0.96592582628903312,
+              0.25881904510265169,
+              0.0,
+              1.8291394011921529,
+              0.0,
+              0.0,
+              1.0,
+              0.32488041191101069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              6.1005686636714493,
+              0.0,
+              1.0,
+              0.0,
+              2.2693161677676388,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.8145682925856015,
+              0.0,
+              1.0,
+              0.0,
+              2.2693161677676388,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.2238960801424845,
+              0.0,
+              1.0,
+              0.0,
+              2.1169168445890332,
+              0.0,
+              0.0,
+              1.0,
+              0.012700000000000001
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.3877787807814459E-15,
+              0.0,
+              3.7383683638035627,
+              1.3877787807814459E-15,
+              1.0,
+              0.0,
+              2.7837562361202579,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              1.9097232453988795,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              0.84047662965702408,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              5.1099686043010557,
+              0.0,
+              1.0,
+              0.0,
+              0.97391608969608878,
+              0.0,
+              0.0,
+              1.0,
+              0.0062316690444946627
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.5543122344752192E-15,
+              0.0,
+              5.7197236741939541,
+              1.5543122344752192E-15,
+              1.0,
+              0.0,
+              3.2716358933929657,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.6188679296466191E-15,
+              1.0,
+              0.0,
+              8.01710624458816,
+              -1.0,
+              -4.6188679296466191E-15,
+              0.0,
+              2.650161032136177,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              7.3958136177474891,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              0.35259697238396992,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              5.1099686763221719,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              0.35259697238396992,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.3348698237725154E-16,
+              0.0,
+              3.7383683750251926,
+              -2.3348698237725154E-16,
+              1.0,
+              0.0,
+              3.271635888851093,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.0591527654923993E-13,
+              0.0,
+              1.9097232341771857,
+              1.0591527654923993E-13,
+              -1.0,
+              0.0,
+              0.35259697692618808,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.842923580583637,
+              0.0,
+              1.0,
+              0.0,
+              3.271635888851093,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.2216314654441085,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              0.97391640253713341,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3795267516227447,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8790514962438394,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              4.1475252634674682,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8790514962438394,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              6.8925025624107938,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8790514962438394,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              6.8925025624107938,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              6.4823600004528084,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              4.1475252634674682,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              6.4823600004528084,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.3795267516227447,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              6.4823600004528084,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.9111400181474049E-15,
+              1.0,
+              0.0,
+              0.84294198622253447,
+              -1.0,
+              -6.9111400181474049E-15,
+              0.0,
+              5.57724971222611,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7402744221143522E-14,
+              0.0,
+              7.3959506013144249,
+              1.7402744221143522E-14,
+              1.0,
+              0.0,
+              5.5772501417006941,
+              0.0,
+              0.0,
+              1.0,
+              0.012581669044497069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.00752756383291E-14,
+              -1.0,
+              0.0,
+              7.3960603825909139,
+              1.0,
+              1.00752756383291E-14,
+              0.0,
+              7.253723833664556,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.2733719048173046E-16,
+              0.0,
+              0.84288542366178376,
+              1.2733719048173046E-16,
+              -1.0,
+              0.0,
+              7.253671253007929,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.2204460492503131E-16,
+              0.0,
+              6.8985133471080538,
+              -2.2204460492503131E-16,
+              1.0,
+              0.0,
+              5.2461499747398017,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.9392388638150912E-14,
+              1.0,
+              0.0,
+              7.784768024174241,
+              -1.0,
+              -7.9392388638150912E-14,
+              0.0,
+              6.20856728162152,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              6.8361985671362575,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              7.6589428217431843,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              3.989942184328708,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              5.1550382946347666,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              1.3767763687646486,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              7.6589428217432518,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.38548480554004527,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              6.689248826864211,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881904510265169,
+              -0.96592582628903312,
+              0.0,
+              6.5654913066777745,
+              0.96592582628903312,
+              0.25881904510265169,
+              0.0,
+              6.43244790540112,
+              0.0,
+              0.0,
+              1.0,
+              0.32488041191101069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              6.1005686636714493,
+              0.0,
+              1.0,
+              0.0,
+              6.8726246719766069,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.8145682925856015,
+              0.0,
+              1.0,
+              0.0,
+              6.8726246719766069,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.2238960801424845,
+              0.0,
+              1.0,
+              0.0,
+              6.720225348798,
+              0.0,
+              0.0,
+              1.0,
+              0.012700000000000001
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.3877787807814459E-15,
+              0.0,
+              3.7383683638035627,
+              1.3877787807814459E-15,
+              1.0,
+              0.0,
+              7.3870647403292251,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              1.9097232453988795,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              5.4437851338659913,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              5.1099686043010557,
+              0.0,
+              1.0,
+              0.0,
+              5.5772245939050569,
+              0.0,
+              0.0,
+              1.0,
+              0.0062316690444946627
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.5543122344752192E-15,
+              0.0,
+              5.7197236741939541,
+              1.5543122344752192E-15,
+              1.0,
+              0.0,
+              7.874944397601932,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.6188679296466191E-15,
+              1.0,
+              0.0,
+              8.01710624458816,
+              -1.0,
+              -4.6188679296466191E-15,
+              0.0,
+              7.2534695363451442,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              7.3958136177474891,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              4.955905476592938,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              5.1099686763221719,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              4.955905476592938,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.3348698237725154E-16,
+              0.0,
+              3.7383683750251926,
+              -2.3348698237725154E-16,
+              1.0,
+              0.0,
+              7.8749443930600593,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.0591527654923993E-13,
+              0.0,
+              1.9097232341771857,
+              1.0591527654923993E-13,
+              -1.0,
+              0.0,
+              4.9559054811351553,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.842923580583637,
+              0.0,
+              1.0,
+              0.0,
+              7.8749443930600593,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.2216314654441085,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              5.5772249067461006,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.1149491711613564,
+          "Y": 4.3111487973569806,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      }
+    ]
+  },
+  "Configuration D": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.1004517361529516,
+        "Y": 3.8496819893764407,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.59130858465359037,
+              -0.806445384210839,
+              0.0,
+              1.1020973575067563,
+              0.806445384210839,
+              -0.59130858465359037,
+              0.0,
+              1.1547185656449255,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Lowback - Glide"
+      },
+      {
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.39415875506616294,
+              -0.91904236888442348,
+              0.0,
+              1.5894688841511337,
+              0.91904236888442348,
+              -0.39415875506616294,
+              0.0,
+              1.1703815779493087,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Ottoman - Ottoman"
+      },
+      {
+        "Url": "https://hypar.io/user-static/940c8185-9972-4f42-84cd-b002b9b318c3.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.6777231755979622,
+              0.0,
+              1.0,
+              0.0,
+              1.7019301904192279,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Holy Day - Table - Round - Wood Top"
+      },
+      {
+        "Url": "https://hypar.io/user-static/4b4a1da6-2ceb-4a19-92d4-21209756fb5d.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.0923990263872261,
+              0.0,
+              1.0,
+              0.0,
+              3.6916657559659907,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Exponents - Seating - Bench - Open - 72W - Metal Base"
+      },
+      {
+        "Url": "https://hypar.io/user-static/4b4a1da6-2ceb-4a19-92d4-21209756fb5d.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.26359844502734742,
+              0.0,
+              1.0,
+              0.0,
+              3.6916657559659907,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Exponents - Seating - Bench - Open - 72W - Metal Base"
+      },
+      {
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.61859443546883242,
+              -0.78571045837954623,
+              0.0,
+              1.1275553968579883,
+              0.78571045837954623,
+              0.61859443546883242,
+              0.0,
+              2.1282960013577483,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Ottoman - Ottoman"
+      },
+      {
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.59352546949344032,
+              -0.80481520677891716,
+              0.0,
+              0.86043553975066178,
+              0.80481520677891716,
+              0.59352546949344032,
+              0.0,
+              2.5449214654012149,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0502258680764758,
+          "Y": 1.9248409946882195,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Lowback - Glide"
+      }
+    ]
+  },
+  "Configuration E": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.0218041223571568,
+        "Y": 5.8996530482213529,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/6e53939d-6242-42ca-a879-835454f01cb7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              4.1140956364270451,
+              -1.6098233857064766E-15,
+              1.0,
+              0.0,
+              1.3015897166704651,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Collet 8x 10 Rug - 120_ x 96_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -2.5730837718119613E-14,
+              1.0,
+              0.0,
+              2.450039217053078,
+              -1.0,
+              -2.5730837718119613E-14,
+              0.0,
+              4.8588999624806544,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9595436384634013E-14,
+              -1.0,
+              0.0,
+              2.4500392170530816,
+              1.0,
+              1.9595436384634013E-14,
+              0.0,
+              4.0968999624806539,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              8.9511731360403246E-15,
+              -1.0,
+              0.0,
+              4.37410584353254,
+              1.0,
+              8.9511731360403246E-15,
+              0.0,
+              1.4252478393713073,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.99685119547280621,
+              -0.079294981458080116,
+              0.0,
+              2.7268933725530466,
+              0.079294981458080116,
+              0.99685119547280621,
+              0.0,
+              1.7074369728102976,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.717648576819557E-15,
+              1.0,
+              0.0,
+              5.4994829804544132,
+              -1.0,
+              -5.717648576819557E-15,
+              0.0,
+              2.1872478410102207,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.717648576819557E-15,
+              1.0,
+              0.0,
+              5.49948298045441,
+              -1.0,
+              -5.717648576819557E-15,
+              0.0,
+              1.4252478410102238,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.25615823848761965,
+              -0.966634862217849,
+              0.0,
+              2.8609882279633858,
+              0.966634862217849,
+              -0.25615823848761965,
+              0.0,
+              0.42874850227718753,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              5.691312123635539E-15,
+              0.0,
+              1.6866547585371929,
+              -5.691312123635539E-15,
+              1.0,
+              0.0,
+              5.6208998243411266,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              0.8326156979224546,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              4.5100346570970427,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.15847389830367575,
+              0.0,
+              1.0,
+              0.0,
+              5.6214078476381868,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.6098233857064766E-15,
+              -1.0,
+              0.0,
+              2.4500395024132082,
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              4.8588998743423684,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.6880392170530811,
+              0.0,
+              1.0,
+              0.0,
+              4.0968999624806539,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.91625403413937079,
+              0.0,
+              1.0,
+              0.0,
+              3.027621617193768,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.6782540341393712,
+              0.0,
+              1.0,
+              0.0,
+              3.027621617193768,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.655001039139389,
+              0.0,
+              1.0,
+              0.0,
+              4.8540930706937271,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.4402537530495305,
+              0.0,
+              1.0,
+              0.0,
+              3.0276218263225427,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.6550009778309018,
+              0.0,
+              1.0,
+              0.0,
+              4.47309309768271,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.0109020611785784,
+          "Y": 2.9498265241106765,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 30D"
+      }
+    ]
+  },
+  "Configuration F": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.7711427107684141,
+        "Y": 4.36791517320032,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -2.5730837718119613E-14,
+              1.0,
+              0.0,
+              2.3158776929679261,
+              -1.0,
+              -2.5730837718119613E-14,
+              0.0,
+              3.3719882697467511,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9595436384634013E-14,
+              -1.0,
+              0.0,
+              2.3158776929679288,
+              1.0,
+              1.9595436384634013E-14,
+              0.0,
+              2.6099882697467507,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              5.691312123635539E-15,
+              0.0,
+              1.5524932344520401,
+              -5.691312123635539E-15,
+              1.0,
+              0.0,
+              4.1339881316072233,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              0.69845417383730268,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              3.0231229643631394,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.024312374218523836,
+              0.0,
+              1.0,
+              0.0,
+              4.1344961549042836,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.6098233857064766E-15,
+              -1.0,
+              0.0,
+              2.3158779783280563,
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              3.371988181608466,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.5538776929679283,
+              0.0,
+              1.0,
+              0.0,
+              2.6099882697467507,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.782092510054218,
+              0.0,
+              1.0,
+              0.0,
+              1.5407099244598648,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.5440925100542184,
+              0.0,
+              1.0,
+              0.0,
+              1.5407099244598648,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.5208395150542362,
+              0.0,
+              1.0,
+              0.0,
+              3.3671813779598239,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.3060922289643777,
+              0.0,
+              1.0,
+              0.0,
+              1.5407101335886404,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.520839453745749,
+              0.0,
+              1.0,
+              0.0,
+              2.9861814049488071,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.3855713553842071,
+          "Y": 2.18395758660016,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 30D"
+      }
+    ]
+  },
+  "Configuration G": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 7.1901530032911118,
+        "Y": 3.46281616212012,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/6e53939d-6242-42ca-a879-835454f01cb7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.6098233857064766E-15,
+              -1.0,
+              0.0,
+              6.0582897930427979,
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              1.7123034453923243,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Collet 8x 10 Rug - 120_ x 96_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -2.5730837718119613E-14,
+              1.0,
+              0.0,
+              2.4500392170530789,
+              -1.0,
+              -2.5730837718119613E-14,
+              0.0,
+              2.422063076379418,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8f5418c7-ad8b-474d-aa90-322f989f018c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9595436384634013E-14,
+              -1.0,
+              0.0,
+              2.4500392170530816,
+              1.0,
+              1.9595436384634013E-14,
+              0.0,
+              1.6600630763794175,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Straight Lounge - Single - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              5.691312123635539E-15,
+              0.0,
+              1.6866547585371929,
+              -5.691312123635539E-15,
+              1.0,
+              0.0,
+              3.1840629382398919,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              0.83261569792245549,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              2.073197770995808,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2335245592207684E-15,
+              0.0,
+              6.0114130941578061,
+              3.2335245592207684E-15,
+              -1.0,
+              0.0,
+              2.036256201318027,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.07929498145808582,
+              -0.99685119547280576,
+              0.0,
+              5.7292239607188247,
+              0.99685119547280576,
+              -0.07929498145808582,
+              0.0,
+              0.3890437303385319,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/e21bbd93-8800-4632-a0c7-5084a903598b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.15847389830367664,
+              0.0,
+              1.0,
+              0.0,
+              3.1845709615369522,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.6098233857064766E-15,
+              -1.0,
+              0.0,
+              2.4500395024132091,
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              2.4220629882411338,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6f807770-c291-4baf-9f5e-36cd3714270b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.6880392170530811,
+              0.0,
+              1.0,
+              0.0,
+              1.6600630763794193,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Double - 15'' D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.91625403413937079,
+              0.0,
+              1.0,
+              0.0,
+              0.59078473109253338,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.6782540341393712,
+              0.0,
+              1.0,
+              0.0,
+              0.59078473109253338,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/93a62034-8f46-4312-a4be-bc043fe33206.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.655001039139389,
+              0.0,
+              1.0,
+              0.0,
+              2.4172561845924925,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Fabric - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/32534d22-4622-44ac-89d2-395f755ee4d9.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.4402537530495305,
+              0.0,
+              1.0,
+              0.0,
+              0.59078494022130812,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 15D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/b44b8d75-fc93-44e3-bca3-9c15502ffa25.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.6550009778309018,
+              0.0,
+              1.0,
+              0.0,
+              2.0362562115814757,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Platform - Single - Laminate and Veneer - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              5.2494130925188873,
+              0.0,
+              1.0,
+              0.0,
+              3.1616333382398949,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              6.0114130925188842,
+              0.0,
+              1.0,
+              0.0,
+              3.1616333382398967,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.96663486221784756,
+              0.2561582384876252,
+              0.0,
+              7.0079124312519383,
+              -0.2561582384876252,
+              -0.96663486221784756,
+              0.0,
+              0.52313858574887462,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.5950765016455559,
+          "Y": 1.73140808106006,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
+      }
+    ]
+  },
+  "Configuration H": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 6.6340002089762713,
+        "Y": 4.3371456246529805,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/f7ca9d12-290b-444d-900a-6a1d37af4a11.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.6427873231837008,
+              -0.766044683523313,
+              0.0,
+              4.81917455286111,
+              0.766044683523313,
+              0.6427873231837008,
+              0.0,
+              1.9140037080438761,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m 2"
+      },
+      {
+        "Url": "https://hypar.io/user-static/2ce4e505-143d-4b5c-8b0d-09885998da61.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.642785525726867,
+              0.76604619176394018,
+              0.0,
+              2.0662504800563006,
+              -0.76604619176394018,
+              -0.642785525726867,
+              0.0,
+              1.9004656295574884,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Blu Dot - Right On Rug - 1.829 m x 2.743 m"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              5.5296815198382951,
+              0.0,
+              1.0,
+              0.0,
+              3.8109363781093455,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              4.9141921599259071,
+              0.0,
+              1.0,
+              0.0,
+              3.8109363781093455,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/141cd9de-7a39-4e4a-9207-fe261cbaef0e.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              4.2903922471838634,
+              0.0,
+              1.0,
+              0.0,
+              3.8109363781093455,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Extremis - Sticks - Space Divider 60x30 - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/c84d0092-962f-497e-ba1a-d5b25b61d1f4.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881904510254611,
+              -0.96592582628906154,
+              0.0,
+              2.5419138360712523,
+              0.96592582628906154,
+              0.25881904510254611,
+              0.0,
+              1.2081601298747735,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - B-Free - Seating - Cube - Small - Glide"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              4.7874241849243013,
+              0.0,
+              1.0,
+              0.0,
+              1.9984156291078259,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d323eb73-c585-4ed2-a162-aab7b777ae31.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.8828428099269487,
+              0.0,
+              1.0,
+              0.0,
+              1.9984156291078259,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Round - 30dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.98480775301217394,
+              -0.17364817766712454,
+              0.0,
+              4.1247037928965185,
+              0.17364817766712454,
+              -0.98480775301217394,
+              0.0,
+              2.5509717911259413,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/5b857918-47c5-4498-86bb-997405e1e111.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.8660254037845263,
+              0.49999999999984829,
+              0.0,
+              2.9327915648386966,
+              -0.49999999999984829,
+              -0.8660254037845263,
+              0.0,
+              2.7582661791168972,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/242013db-7623-4cae-b39d-2c32d85ef15b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.42562475127280486,
+              0.0,
+              1.0,
+              0.0,
+              2.9059431181502049,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Thread - Power Hub - NEMA - 30H"
+      },
+      {
+        "Url": "https://hypar.io/user-static/8e4191a7-a78e-470b-96f3-cb2b61b33b23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.42562548794912836,
+              0.0,
+              1.0,
+              0.0,
+              2.553988787878585,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Flos - Tatou F - Lighting"
+      },
+      {
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.25881904510222042,
+              -0.9659258262891488,
+              0.0,
+              0.6043530635548553,
+              0.9659258262891488,
+              -0.25881904510222042,
+              0.0,
+              1.8961759988177178,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar.io/user-static/f64bc3cf-7421-4b53-9fbc-92c95ac672cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.42261826174111755,
+              0.906307787036455,
+              0.0,
+              5.9657682321044447,
+              -0.906307787036455,
+              -0.42261826174111755,
+              0.0,
+              1.6782680264071441,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "West Elm Work Collection - Metal Frame Chair - Chair"
+      },
+      {
+        "Url": "https://hypar.io/user-static/b1e7fd86-3124-4f9d-9e0d-650f453df774.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              4.36946693866253,
+              0.0,
+              1.0,
+              0.0,
+              2.7903614243424908,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Corner Left - Same Upholstery"
+      },
+      {
+        "Url": "https://hypar.io/user-static/537d3aad-7cb1-4a4c-af8f-3889e9becce7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.338705626468693,
+              0.0,
+              1.0,
+              0.0,
+              2.7903614243424908,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Straight Inverted - Same Upholstery"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cdc18dac-396b-474d-a20b-2b1670a22a1a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              2.3387057356994347,
+              0.0,
+              1.0,
+              0.0,
+              2.7903614243424908,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 3.3170001044881374,
+          "Y": 2.16857281232649,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Media Scape - Lounge - Corner Right - Same Upholstery"
+      }
+    ]
+  },
+  "Configuration I": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 3.7161670582142881,
+        "Y": 1.5384959179253404,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/7809959f-ae7f-4ea6-aa1b-4a2b609a2ae3.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.6098233857064766E-15,
+              -1.0,
+              0.0,
+              3.3179505451117315,
+              1.0,
+              1.6098233857064766E-15,
+              0.0,
+              0.1888549408698923,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8580835291071438,
+          "Y": 0.76924795896267018,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Davos - Seating - Bench - Medium"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881904510243203,
+              -0.96592582628909218,
+              0.0,
+              2.0615893315695479,
+              0.96592582628909218,
+              0.25881904510243203,
+              0.0,
+              0.518329866567437,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8580835291071438,
+          "Y": 0.76924795896267018,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.6074255521943989E-15,
+              1.0,
+              0.0,
+              2.4245744931621589,
+              -1.0,
+              -4.6074255521943989E-15,
+              0.0,
+              0.70022745670536857,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8580835291071438,
+          "Y": 0.76924795896267018,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.25881904510243808,
+              0.96592582628909029,
+              0.0,
+              1.3507991092768246,
+              -0.96592582628909029,
+              -0.25881904510243808,
+              0.0,
+              0.88387356114518223,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8580835291071438,
+          "Y": 0.76924795896267018,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/47ba6d86-89ca-47b0-81e1-051919514ebd.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0947139170010011E-14,
+              -1.0,
+              0.0,
+              0.98781394768421182,
+              1.0,
+              1.0947139170010011E-14,
+              0.0,
+              0.70197597100725329,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.8580835291071438,
+          "Y": 0.76924795896267018,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Seating - Lounge - One Seat - High Back_Left and Right Screen_End Arm Cushion"
+      }
+    ]
+  },
+  "Configuration J": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 8.5399008214998222,
+        "Y": 3.8728877831408228,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              7.0194739552014891,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8515735659126666,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              4.2744966562581634,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8515735659126666,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9c79b2b-b643-4df9-bde9-e7e49c9d25cb.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              1.50649814441344,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              1.8515735659126666,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Mitchell Gold Bob Williams - Lorenzo Rug - 144_ x 108_"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.34860285823480552,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              0.94643847220596056,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              0.96989497337433228,
+              0.0,
+              1.0,
+              0.0,
+              3.2441579585199189,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.0591527654923993E-13,
+              0.0,
+              2.0366946269678827,
+              1.0591527654923993E-13,
+              -1.0,
+              0.0,
+              0.32511904659501578,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.3348698237725154E-16,
+              0.0,
+              3.8653397678158878,
+              -2.3348698237725154E-16,
+              1.0,
+              0.0,
+              3.2441579585199189,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              5.2369400691128671,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              0.32511904205279724,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              7.5227850105381879,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              0.32511904205279724,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.6188679296466191E-15,
+              1.0,
+              0.0,
+              8.1440776373788548,
+              -1.0,
+              -4.6188679296466191E-15,
+              0.0,
+              2.6226831018050047,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.5543122344752192E-15,
+              0.0,
+              5.8466950669846494,
+              1.5543122344752192E-15,
+              1.0,
+              0.0,
+              3.2441579630617929,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/fb5ca161-397a-41f3-a469-532b61a43405.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              5.236939997091751,
+              0.0,
+              1.0,
+              0.0,
+              0.94643815936491615,
+              0.0,
+              0.0,
+              1.0,
+              0.0062316690444946627
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Inline"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              2.0366946381895747,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              0.81299869932585134,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.3877787807814459E-15,
+              0.0,
+              3.865339756594258,
+              1.3877787807814459E-15,
+              1.0,
+              0.0,
+              2.7562783057890847,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              1.350867472933178,
+              0.0,
+              1.0,
+              0.0,
+              2.0894389142578604,
+              0.0,
+              0.0,
+              1.0,
+              0.012700000000000001
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              3.9415396853762967,
+              0.0,
+              1.0,
+              0.0,
+              2.241838237436466,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/aa378d42-a380-4a63-ae3a-fc0d9f3482b5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              0.0,
+              0.0,
+              6.2275400564621446,
+              0.0,
+              1.0,
+              0.0,
+              2.241838237436466,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 36D x 36W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/1cb3ce66-1b45-4636-b28d-8df22f41458b.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25881904510265169,
+              -0.96592582628903312,
+              0.0,
+              6.69246269946847,
+              0.96592582628903312,
+              0.25881904510265169,
+              0.0,
+              1.8016614708609797,
+              0.0,
+              0.0,
+              1.0,
+              0.32488041191101069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "LeadHead Glass - Cottage Terrarium - Accessories"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.7763568394002505E-15,
+              -1.0,
+              0.0,
+              0.51245619833073874,
+              1.0,
+              1.7763568394002505E-15,
+              0.0,
+              2.0584623923240715,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.1641356201816961E-15,
+              0.0,
+              1.5037477615553438,
+              3.1641356201816961E-15,
+              -1.0,
+              0.0,
+              3.0281563872031119,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              4.1169135771194032,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              0.52425186009462688,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -3.2310891488651735E-15,
+              0.0,
+              6.9631699599269492,
+              3.2310891488651735E-15,
+              -1.0,
+              0.0,
+              3.0281563872030444,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -7.9392388638150912E-14,
+              1.0,
+              0.0,
+              7.9117394169649362,
+              -1.0,
+              -7.9392388638150912E-14,
+              0.0,
+              1.5777808470813797,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              2.2204460492503131E-16,
+              0.0,
+              7.0254847398987454,
+              -2.2204460492503131E-16,
+              1.0,
+              0.0,
+              0.61536354019966222,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -1.2733719048173046E-16,
+              0.0,
+              0.969856816452479,
+              1.2733719048173046E-16,
+              -1.0,
+              0.0,
+              2.6228848184677895,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.00752756383291E-14,
+              -1.0,
+              0.0,
+              7.5230317753816092,
+              1.0,
+              1.00752756383291E-14,
+              0.0,
+              2.622937399124416,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              -1.7402744221143522E-14,
+              0.0,
+              7.5229219941051166,
+              1.7402744221143522E-14,
+              1.0,
+              0.0,
+              0.94646370716055361,
+              0.0,
+              0.0,
+              1.0,
+              0.012581669044497069
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -6.9111400181474049E-15,
+              1.0,
+              0.0,
+              0.96991337901323149,
+              -1.0,
+              -6.9111400181474049E-15,
+              0.0,
+              0.94646327768597016,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 4.269950410749912,
+          "Y": 1.9364438915704114,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      }
+    ]
+  },
+  "Configuration K": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 4.0083720654469719,
+        "Y": 2.4394072243233209,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.0,
+              7.79931843784753E-15,
+              0.0,
+              2.8532135036187825,
+              -7.79931843784753E-15,
+              1.0,
+              0.0,
+              0.870513475590082,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a5c4260c-fd4e-4977-a4d0-a5f18ce283a2.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0155156101818557E-15,
+              1.0,
+              0.0,
+              1.1767919628369636,
+              -1.0,
+              -1.0155156101818557E-15,
+              0.0,
+              0.8704569130293317,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Ganging - Square - Corner"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.0523140398818214E-15,
+              1.0,
+              0.0,
+              0.77152039410164175,
+              -1.0,
+              -4.0523140398818214E-15,
+              0.0,
+              1.4043478581321991,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/cbb66906-c59d-4c19-9b40-9f933db9d16a.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -2.6645352591003757E-15,
+              0.0,
+              1.7412143889806817,
+              2.6645352591003757E-15,
+              -1.0,
+              0.0,
+              0.413056294907592,
+              0.0,
+              0.0,
+              1.0,
+              0.40640000000000004
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Savannah Hayes - Bruges Pillow 14 x 24 - Cotton Canvas"
+      },
+      {
+        "Url": "https://hypar.io/user-static/a93d03e4-4205-4482-aa67-3d010b2220a5.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              8.8817841970012523E-16,
+              -1.0,
+              0.0,
+              1.7102378670468941,
+              1.0,
+              8.8817841970012523E-16,
+              0.0,
+              1.2514675695100312,
+              0.0,
+              0.0,
+              1.0,
+              0.012700000000000001
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Occasional - Square - 24D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/6ccf9095-0afc-4f5e-91ef-c129b5767d06.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -4.0523140398818214E-15,
+              1.0,
+              0.0,
+              2.9866780819789032,
+              -1.0,
+              -4.0523140398818214E-15,
+              0.0,
+              1.9372947347664269,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Table - Lolli-Top - 20dia"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0680345496894006E-13,
+              1.0,
+              0.0,
+              3.4745577347097392,
+              -1.0,
+              -1.0680345496894006E-13,
+              0.0,
+              1.9372947235447335,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/75ccd3c4-4817-422f-86c5-f522ada7de37.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              8.8817841970012523E-16,
+              -1.0,
+              0.0,
+              0.55551882278483333,
+              1.0,
+              8.8817841970012523E-16,
+              0.0,
+              0.87049506995118719,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 42W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/12f48254-237b-493a-8e09-7c44d1102c23.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -1.0,
+              -2.6645352591003757E-15,
+              0.0,
+              2.8532383090987921,
+              2.6645352591003757E-15,
+              -1.0,
+              0.0,
+              0.24920295481165661,
+              0.0,
+              0.0,
+              1.0,
+              0.0127
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 2.0041860327234868,
+          "Y": 1.2197036121616605,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Sylvi - Lounge - Rectangular - 66W"
+      }
+    ]
+  },
+  "Configuration L": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 3.1879551292518271,
+        "Y": 2.2529947654793858,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -5.1764148523147924E-15,
+              1.0,
+              0.0,
+              1.280397751310105,
+              -1.0,
+              -5.1764148523147924E-15,
+              0.0,
+              1.1185762762301559,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5939775646259133,
+          "Y": 1.1264973827396927,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/908f27ca-7327-4566-8520-98cea7c71711.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.99685119547280587,
+              0.079294981458083877,
+              0.0,
+              2.9276102222895983,
+              -0.079294981458083877,
+              -0.99685119547280587,
+              0.0,
+              0.83638714279117132,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5939775646259133,
+          "Y": 1.1264973827396927,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - Lagunitas - Table - Personal1 - 13D x 24W"
+      },
+      {
+        "Url": "https://hypar.io/user-static/d9dba349-e9e0-4d4e-a9b9-6e4652291f0c.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9428902930940239E-15,
+              -1.0,
+              0.0,
+              0.15502061438823356,
+              1.0,
+              1.9428902930940239E-15,
+              0.0,
+              0.35657627459123808,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5939775646259133,
+          "Y": 1.1264973827396927,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - End Cap - Right End Cap"
+      },
+      {
+        "Url": "https://hypar.io/user-static/31c06210-c409-4086-a496-1ec3093deddc.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              1.9428902930940239E-15,
+              -1.0,
+              0.0,
+              0.15502061438823489,
+              1.0,
+              1.9428902930940239E-15,
+              0.0,
+              1.1185762745912349,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5939775646259133,
+          "Y": 1.1264973827396927,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Corner - 30D"
+      },
+      {
+        "Url": "https://hypar.io/user-static/2dcb44e3-71e5-4d50-93ba-c3abb259186f.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              0.25615823848762331,
+              0.96663486221784789,
+              0.0,
+              2.7935153668792574,
+              -0.96663486221784789,
+              0.25615823848762331,
+              0.0,
+              2.1150756133242847,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.5939775646259133,
+          "Y": 1.1264973827396927,
+          "Z": 0.0
+        },
+        "Name": "Steelcase - Seating - Umami - Lounge - Arm - Single - Two Arm"
+      }
+    ]
+  },
+  "Configuration M": {
+    "CellBoundary": {
+      "Min": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      },
+      "Max": {
+        "X": 2.2313876874582141,
+        "Y": 1.7495897061882744,
+        "Z": 0.0
+      }
+    },
+    "ContentItems": [
+      {
+        "Url": "https://hypar.io/user-static/28ec56cc-3ae5-40df-a87f-9f116c1f9c62.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.59130858465359037,
+              -0.806445384210839,
+              0.0,
+              1.0533240105399722,
+              0.806445384210839,
+              -0.59130858465359037,
+              0.0,
+              0.91150764343584678,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1156938437291071,
+          "Y": 0.87479485309413718,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Lowback - Glide"
+      },
+      {
+        "Url": "https://hypar.io/user-static/48d2887c-543e-4b57-bc58-2cf4a132d5e7.glb",
+        "Transform": {
+          "Matrix": {
+            "Components": [
+              -0.39415875506616294,
+              -0.91904236888442348,
+              0.0,
+              1.5406955371843503,
+              0.91904236888442348,
+              -0.39415875506616294,
+              0.0,
+              0.92717065574022872,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        },
+        "Anchor": {
+          "X": 1.1156938437291071,
+          "Y": 0.87479485309413718,
+          "Z": 0.0
+        },
+        "Name": "Steelcase Coalesse - SW_1 - Seating - Collaborative Lounge - Ottoman - Ottoman"
+      }
+    ]
+  }
+}

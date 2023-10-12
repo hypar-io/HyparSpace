@@ -1,11 +1,21 @@
 namespace Elements
 {
-    public interface ISpaceSettingsOverride<TValueType> where TValueType : ISpaceSettingsOverrideValue
+    public interface ISpaceSettingsOverride<TValueType>: IOverride where TValueType : ISpaceSettingsOverrideValue
     {
         TValueType Value { get; set; }
     }
 
     public interface ISpaceSettingsOverrideValue
+    {
+    }
+
+    public interface ISpaceSettingsOverrideFlipValue : ISpaceSettingsOverrideValue
+    {
+        public bool PrimaryAxisFlipLayout { get; set; }
+        public bool SecondaryAxisFlipLayout { get; set; }
+    }
+
+    public interface ISpaceSettingsOverrideOpenOfficeValue : ISpaceSettingsOverrideValue
     {
         public string GetDeskType { get; }
         public double GridRotation { get; set; }

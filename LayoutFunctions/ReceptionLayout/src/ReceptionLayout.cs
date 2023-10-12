@@ -25,6 +25,8 @@ namespace ReceptionLayout
             ["Configuration E"] = 6,
         };
 
+        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
+
         /// <summary>
         /// The ReceptionLayout function.
         /// </summary>
@@ -33,6 +35,7 @@ namespace ReceptionLayout
         /// <returns>A ReceptionLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ReceptionLayoutOutputs Execute(Dictionary<string, Model> inputModels, ReceptionLayoutInputs input)
         {
+            proxies.Clear();
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             inputModels.TryGetValue("Levels", out var levelsModel);
@@ -53,26 +56,36 @@ namespace ReceptionLayout
             var output = new ReceptionLayoutOutputs();
             var configJson = File.ReadAllText("./ReceptionConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            FlippedConfigurations.Init(configs);
+
             var hasCore = inputModels.TryGetValue("Core", out var coresModel) && coresModel.AllElementsOfType<ServiceCore>().Any();
             List<Line> coreSegments = new();
             if (coresModel != null)
             {
                 coreSegments.AddRange(coresModel.AllElementsOfType<ServiceCore>().SelectMany(c => c.Profile.Perimeter.Segments()));
             }
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Reception");
+                var meetingRmBoundaryProxies = meetingRmBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
+                    var config = OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaryProxies),
+                        new SpaceSettingsValue(false, false),
+                        proxies);
+                    var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
                     Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
 
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
@@ -92,7 +105,7 @@ namespace ReceptionLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
-                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform, out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             seatsCount += seats;
@@ -103,7 +116,7 @@ namespace ReceptionLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform, out var seats);
+                            var layout = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
@@ -115,6 +128,7 @@ namespace ReceptionLayout
                 }
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
+            output.Model.AddElements(proxies);
             return output;
         }
 

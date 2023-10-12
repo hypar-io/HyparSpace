@@ -13,6 +13,8 @@ namespace ClassroomLayout
 {
     public static class ClassroomLayout
     {
+        private static readonly List<ElementProxy<SpaceBoundary>> proxies = new List<ElementProxy<SpaceBoundary>>();
+
         /// <summary>
         /// The ClassroomLayout function.
         /// </summary>
@@ -21,6 +23,7 @@ namespace ClassroomLayout
         /// <returns>A ClassroomLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static ClassroomLayoutOutputs Execute(Dictionary<string, Model> inputModels, ClassroomLayoutInputs input)
         {
+            proxies.Clear();
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
 
@@ -41,37 +44,34 @@ namespace ClassroomLayout
             var output = new ClassroomLayoutOutputs();
             var configJson = File.ReadAllText("./ClassroomConfigurations.json");
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            FlippedConfigurations.Init(configs);
 
             int totalCountableSeats = 0;
             int seatsAtDesk = 0;
-            var deskConfig = configs["Desk"];
-            string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
-                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
-            foreach (var item in deskConfig.ContentItems)
-            {
-                foreach (var countableSeat in countableSeats)
-                {
-                    if (item.ContentElement.Name != null && item.ContentElement.Name.Contains(countableSeat))
-                    {
-                        seatsAtDesk++;
-                    }
-                }
-            }
 
+            var overridesBySpaceBoundaryId = OverrideUtilities.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
+                var meetingRmBoundaryProxies = meetingRmBoundaries.Proxies(OverrideUtilities.SpaceBoundaryOverrideDependencyName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
+                    lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString()) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
                 var wallCandidateLines = new List<(Line line, string type)>();
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
+                    var config = OverrideUtilities.MatchApplicableOverride(
+                        overridesBySpaceBoundaryId,
+                        OverrideUtilities.GetSpaceBoundaryProxy(room, meetingRmBoundaryProxies),
+                        new SpaceSettingsValue(false, false),
+                        proxies);
+                    var selectedConfigs = FlippedConfigurations.GetConfigs(config.Value.PrimaryAxisFlipLayout, config.Value.SecondaryAxisFlipLayout);
+
                     var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
                         .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
@@ -91,7 +91,7 @@ namespace ClassroomLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
                         {
-                            var componentInstance = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -101,7 +101,7 @@ namespace ClassroomLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
 
-                            var componentInstance = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            var componentInstance = InstantiateLayout(selectedConfigs, width, depth, cinchedPoly, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
                             output.Model.AddElement(componentInstance);
                         }
@@ -109,10 +109,24 @@ namespace ClassroomLayout
                         {
                             if (cell.U.Curve.Length() > 5.6)
                             {
-                                cell.U.SplitAtOffset(2.3, false, true);
+                                var deskConfig = selectedConfigs["Desk"];
+                                string[] countableSeats = new[] { "Steelcase Turnstone - Shortcut X Base - Chair - Chair",
+                                              "Steelcase Turnstone - Shortcut - Stool - Chair" };
+                                foreach (var item in deskConfig.ContentItems)
+                                {
+                                    foreach (var countableSeat in countableSeats)
+                                    {
+                                        if (item.ContentElement.Name != null && item.ContentElement.Name.Contains(countableSeat))
+                                        {
+                                            seatsAtDesk++;
+                                        }
+                                    }
+                                }
+
+                                cell.U.SplitAtOffset(2.3, config.Value.SecondaryAxisFlipLayout, true);
                                 cell.V.SplitAtOffset(0.5, false, true);
                                 cell.V.SplitAtOffset(0.5, true, true);
-                                var classroomSide = cell[1, 1];
+                                var classroomSide = cell[config.Value.SecondaryAxisFlipLayout ? 0 : 1, 1];
                                 classroomSide.U.DivideByFixedLength(deskConfig.Width, FixedDivisionMode.RemainderAtBothEnds);
                                 classroomSide.V.DivideByFixedLength(deskConfig.Depth, FixedDivisionMode.RemainderAtBothEnds);
                                 foreach (var individualDesk in classroomSide.GetCells())
