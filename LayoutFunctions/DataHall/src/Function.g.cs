@@ -71,6 +71,7 @@ namespace DataHallLayout
                     this.store = new UrlModelStore<DataHallLayoutInputs>();
                 }
             }
+            
 
             var l = new InvocationWrapper<DataHallLayoutInputs,DataHallLayoutOutputs> (store, DataHallLayout.Execute);
             var output = await l.InvokeAsync(args);

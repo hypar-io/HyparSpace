@@ -44,6 +44,7 @@ namespace Elements
             this.HyparSpaceType = @hyparSpaceType;
             }
         
+        
         // Empty constructor
         public SpaceBoundary()
             : base()

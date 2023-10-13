@@ -10,6 +10,7 @@ projects=(
     "PhoneBoothLayout"
     "PrivateOfficeLayout"
     "ReceptionLayout"
+    "InteriorPartitions"
 )
 
 # Initialize an empty array to hold projects that fail to build
@@ -20,10 +21,10 @@ task() {
     local project=$1
     echo "Building $project"
     cd "./$project"
-
-    # Run 'dotnet build' and capture the output
-    if ! dotnet build > /dev/null 2>&1; then
-        # If build fails, add to failedProjects array
+    if ! hypar init 2>&1; then
+        failedProjects+=("$project")
+    fi
+    if ! dotnet build 2>&1; then
         failedProjects+=("$project")
     fi
 
@@ -32,11 +33,8 @@ task() {
 
 # Loop through each project and call the task function
 for project in "${projects[@]}"; do
-    task "$project" &
+    task "$project"
 done
-
-# Wait for all background tasks to complete
-wait
 
 # Report projects that failed to build
 if [ ${#failedProjects[@]} -ne 0 ]; then
