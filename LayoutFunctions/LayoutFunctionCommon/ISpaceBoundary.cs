@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using Elements;
 using Elements.Geometry;
+using Newtonsoft.Json;
 
 namespace Elements
 {
-    public interface ISpaceBoundary
+    public interface ISpaceBoundary 
     {
         string Name { get; set; }
         Profile Boundary { get; set; }
@@ -15,7 +16,9 @@ namespace Elements
 
         Guid Id { get; set; }
 
-        string HyparSpaceType { get; set; }
+        [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string HyparSpaceType { get; set; }
+
     }
 
 }

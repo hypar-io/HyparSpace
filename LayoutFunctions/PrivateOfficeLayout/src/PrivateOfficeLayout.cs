@@ -73,13 +73,13 @@ namespace PrivateOfficeLayout
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
-                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Private Office");
+                var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Private Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in privateOfficeBoundaries)
                 {
                     var seatsCount = 0;
@@ -89,10 +89,10 @@ namespace PrivateOfficeLayout
 
                     foreach (var roomBoundary in privateOfficeRoomBoundaries)
                     {
-                        WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.type == "Glass-Edge").Select(w => w.line)), out Line orientationGuideEdge);
+                        WallGeneration.FindWallCandidates(roomBoundary, levelVolume?.Profile, corridorSegments.Union(wallCandidateLines.Where(w => w.Type == "Glass-Edge").Select(w => w.Line)), out RoomEdge orientationGuideEdge);
 
                         var relativeRoomTransform = room.Transform.Concatenated(levelVolume?.Transform.Inverted() ?? new Transform());
-                        var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                        var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
                         orientationTransform.Concatenate(relativeRoomTransform);
                         var boundaryCurves = new List<Polygon>();
                         boundaryCurves.Add(roomBoundary.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
@@ -166,7 +166,7 @@ namespace PrivateOfficeLayout
             return output;
         }
 
-        private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<(Line line, string type)> wallCandidateLines, SpaceSettingsOverride config)
+        private static IEnumerable<SpaceBoundary> DivideBoundaryAlongVAxis(SpaceBoundary room, LevelVolume levelVolume, List<Line> corridorSegments, List<RoomEdge> wallCandidateLines, SpaceSettingsOverride config)
         {
             var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
             if (config.Value.OfficeSizing.AutomateOfficeSubdivisions)
@@ -174,19 +174,19 @@ namespace PrivateOfficeLayout
                 var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                           .Select(w =>
                           {
-                              if (w.type == "Glass")
+                              if (w.Type == "Glass")
                               {
-                                  w.type = "Glass-Edge";
+                                  w.Type = "Glass-Edge";
                               }
                               return w;
                           });
                 if (config.Value.CreateWalls)
                 {
-                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness }));
                 }
                 var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
                 var relativeRoomTransformProjected = new Transform(0, 0, -relativeRoomTransform.Origin.Z);
-                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
                 orientationTransform.Concatenate(relativeRoomTransform);
                 var boundaryCurves = new List<Polygon>();
                 boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
@@ -276,13 +276,13 @@ namespace PrivateOfficeLayout
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                                           .Select(w =>
                                                           {
-                                                              if (w.type == "Glass")
+                                                              if (w.Type == "Glass")
                                                               {
-                                                                  w.type = "Glass-Edge";
+                                                                  w.Type = "Glass-Edge";
                                                               }
                                                               return w;
                                                           });
-                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness }));
                 }
                 return new[] { room };
             }

@@ -27,9 +27,9 @@ namespace OpenCollaborationLayout
                 return default;
             }
 
-            protected override (ConfigInfo? configInfo, List<(Line Line, string Type)> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)> possibleConfigs)
+            protected override (ConfigInfo? configInfo, List<RoomEdge> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<RoomEdge> wallCandidates)> possibleConfigs)
             {
-                var configsThatFitWell = new List<(ConfigInfo configInfo, int usedCount, List<(Line Line, string Type)> wallCandidates)>();
+                var configsThatFitWell = new List<(ConfigInfo configInfo, int usedCount, List<RoomEdge> wallCandidates)>();
                 var orderedConfigPairs = configsWithUsedCount.OrderByDescending(kvp => kvp.Value.config.CellBoundary.Depth * kvp.Value.config.CellBoundary.Width);
                 possibleConfigs = possibleConfigs.DistinctBy(pc => pc.configInfo.ConfigName).ToList();
                 foreach (var (configInfo, wallCandidates) in possibleConfigs)

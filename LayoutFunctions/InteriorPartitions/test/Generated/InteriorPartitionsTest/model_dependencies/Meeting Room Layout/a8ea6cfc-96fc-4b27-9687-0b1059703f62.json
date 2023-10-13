@@ -1,0 +1,575 @@
+{
+    "Transform": {
+        "Matrix": {
+            "Components": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+            ]
+        }
+    },
+    "Elements": {
+        "02287d8e-0862-4cca-8a99-09b28f9ed390": {
+            "discriminator": "Elements.Material",
+            "Color": {
+                "Red": 0.9,
+                "Green": 0.9,
+                "Blue": 0.9,
+                "Alpha": 1.0
+            },
+            "SpecularFactor": 0.1,
+            "GlossinessFactor": 0.1,
+            "Unlit": false,
+            "DoubleSided": false,
+            "RepeatTexture": true,
+            "InterpolateTexture": true,
+            "EmissiveFactor": 1.0,
+            "Draw In Front": false,
+            "EdgeDisplaySettings": null,
+            "Id": "02287d8e-0862-4cca-8a99-09b28f9ed390",
+            "Name": "Default Material"
+        },
+        "f452100c-0c11-4707-9a49-d10841b40a9c": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                    {
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 0.0,
+                        "Y": 1.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 1.0,
+                        "Y": 1.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 1.0,
+                        "Y": 0.0,
+                        "Z": 0.0
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "f452100c-0c11-4707-9a49-d10841b40a9c",
+            "Name": null
+        },
+        "981399dd-407e-476d-91a3-1161c88e4bdf": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/b2e9673f-7cfa-49b1-840a-d1d682995101.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "Max": {
+                    "X": 1.0,
+                    "Y": 1.0,
+                    "Z": 1.0
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "02287d8e-0862-4cca-8a99-09b28f9ed390",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "f452100c-0c11-4707-9a49-d10841b40a9c",
+                        "Height": 1.0,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "981399dd-407e-476d-91a3-1161c88e4bdf",
+            "Name": "Table_Chair_2022 - 14PAX"
+        },
+        "676bdc3e-6bc8-4800-b57d-4e3074c92d2d": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "981399dd-407e-476d-91a3-1161c88e4bdf",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        6.123233995736766E-17,
+                        -1.0,
+                        0.0,
+                        5.249379999999991,
+                        1.0,
+                        6.123233995736766E-17,
+                        0.0,
+                        10.865000000000009,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "676bdc3e-6bc8-4800-b57d-4e3074c92d2d",
+            "Name": "Table_Chair_2022 - 14PAX",
+            "OriginalLocation": {
+                "X": 5.249379999999991,
+                "Y": 10.865000000000009,
+                "Z": 0.0
+            },
+            "gltfLocation": "https://hypar.io/user-static/b2e9673f-7cfa-49b1-840a-d1d682995101.glb"
+        },
+        "ba8014fc-e493-4dd7-8d55-ac5e69caebca": {
+            "discriminator": "Elements.Components.ComponentInstance",
+            "Instances": [
+                "676bdc3e-6bc8-4800-b57d-4e3074c92d2d"
+            ],
+            "Id": "ba8014fc-e493-4dd7-8d55-ac5e69caebca",
+            "Name": null
+        },
+        "714451f4-a848-4752-adf5-4cb1200a60c0": {
+            "discriminator": "Elements.Geometry.Profile",
+            "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                    {
+                        "X": 0.0,
+                        "Y": 0.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 0.0,
+                        "Y": 1.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 1.0,
+                        "Y": 1.0,
+                        "Z": 0.0
+                    },
+                    {
+                        "X": 1.0,
+                        "Y": 0.0,
+                        "Z": 0.0
+                    }
+                ]
+            },
+            "Voids": [],
+            "Id": "714451f4-a848-4752-adf5-4cb1200a60c0",
+            "Name": null
+        },
+        "54267d46-1f72-4f2f-81c8-cec1ad9ff026": {
+            "discriminator": "Elements.ContentElement",
+            "gltfLocation": "https://hypar.io/user-static/2b730263-c3d0-48a1-8cbc-e7ad106dcdd1.glb",
+            "Bounding Box": {
+                "discriminator": "Elements.Geometry.BBox3",
+                "Min": {
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "Max": {
+                    "X": 1.0,
+                    "Y": 1.0,
+                    "Z": 1.0
+                }
+            },
+            "Gltf Scale to Meters": 1.0,
+            "SourceDirection": {
+                "X": 0.0,
+                "Y": 1.0,
+                "Z": 0.0
+            },
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Material": "02287d8e-0862-4cca-8a99-09b28f9ed390",
+            "Representation": {
+                "SolidOperations": [
+                    {
+                        "discriminator": "Elements.Geometry.Solids.Extrude",
+                        "Profile": "714451f4-a848-4752-adf5-4cb1200a60c0",
+                        "Height": 1.0,
+                        "Direction": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 1.0
+                        },
+                        "LocalTransform": null,
+                        "IsVoid": false
+                    }
+                ]
+            },
+            "IsElementDefinition": true,
+            "Id": "54267d46-1f72-4f2f-81c8-cec1ad9ff026",
+            "Name": "Table_Chair_2022 - 4PAX"
+        },
+        "28b6f143-b49d-4578-9fe9-0f346e91ac86": {
+            "discriminator": "Elements.ElementInstance",
+            "BaseDefinition": "54267d46-1f72-4f2f-81c8-cec1ad9ff026",
+            "Transform": {
+                "Matrix": {
+                    "Components": [
+                        -1.8369701987210297E-16,
+                        1.0,
+                        0.0,
+                        12.249320000000047,
+                        -1.0,
+                        -1.8369701987210297E-16,
+                        0.0,
+                        10.807539999999994,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "28b6f143-b49d-4578-9fe9-0f346e91ac86",
+            "Name": "Table_Chair_2022 - 4PAX",
+            "OriginalLocation": {
+                "X": 12.249320000000047,
+                "Y": 10.807539999999994,
+                "Z": 0.0
+            },
+            "gltfLocation": "https://hypar.io/user-static/2b730263-c3d0-48a1-8cbc-e7ad106dcdd1.glb"
+        },
+        "eecc4aac-dd65-415c-806c-47280e4b7464": {
+            "discriminator": "Elements.Components.ComponentInstance",
+            "Instances": [
+                "28b6f143-b49d-4578-9fe9-0f346e91ac86"
+            ],
+            "Id": "eecc4aac-dd65-415c-806c-47280e4b7464",
+            "Name": null
+        },
+        "7a4df643-a817-44cc-81c3-315fb59234ce": {
+            "discriminator": "Elements.InteriorPartitionCandidate",
+            "WallCandidateLines": [
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 8.39938,
+                            "Y": 12.715,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": -0.50062,
+                            "Y": 12.715,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Glass"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": -0.50062,
+                            "Y": 8.715,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 8.39938,
+                            "Y": 8.715,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 8.39938,
+                            "Y": 8.715,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 8.39938,
+                            "Y": 12.715,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 12.79008,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Glass"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 12.79008,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 12.79008,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 12.79008,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Glass"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 8.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Glass"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 2.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 2.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 10.29938,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 10.29938,
+                            "Y": 2.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                },
+                {
+                    "Item1": {
+                        "discriminator": "Elements.Geometry.Line",
+                        "Start": {
+                            "X": 14.19926,
+                            "Y": 2.825,
+                            "Z": 0.0
+                        },
+                        "End": {
+                            "X": 14.19926,
+                            "Y": 5.825,
+                            "Z": 0.0
+                        }
+                    },
+                    "Item2": "Solid"
+                }
+            ],
+            "Height": 4.0,
+            "LevelTransform": {
+                "Matrix": {
+                    "Components": [
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        0.0,
+                        1.0,
+                        0.0
+                    ]
+                }
+            },
+            "Id": "7a4df643-a817-44cc-81c3-315fb59234ce",
+            "Name": null
+        },
+        "e0103b6b-0e55-425f-9fae-0ddaafe9f724": {
+            "discriminator": "Elements.WorkpointCount",
+            "Count": 18,
+            "Type": "Meeting Room Seat",
+            "Id": "e0103b6b-0e55-425f-9fae-0ddaafe9f724",
+            "Name": null
+        }
+    }
+}

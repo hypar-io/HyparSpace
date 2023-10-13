@@ -25,61 +25,88 @@ namespace LayoutFunctionCommon
         private static Material wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
         private static Material glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
         private static Material mullionMat = new Material("Storefront Mullions", new Color(0.5, 0.5, 0.5, 1.0));
-        public static List<(Line line, string type)> FindWallCandidates(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, out Line orientationGuideEdge, IEnumerable<string> wallTypeFilter = null)
+        public static List<RoomEdge> FindWallCandidates(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, out RoomEdge orientationGuideEdge, IEnumerable<string> wallTypeFilter = null)
         {
             var spaceBoundary = room.Boundary;
-            var wallCandidateLines = new List<(Line line, string type)>();
-            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select(s => s.TransformedLine(room.Transform)), corridorSegments, levelProfile, out var wallCandidates);
-            wallCandidateLines.Add((orientationGuideEdge, "Glass"));
+            var wallCandidateLines = new List<RoomEdge>();
+            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select(s => new RoomEdge
+            {
+                Line = s.TransformedLine(room.Transform)
+            }), corridorSegments, levelProfile, out var wallCandidates);
+            orientationGuideEdge.Type = "Glass";
+            wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
                 var exteriorWalls = FindAllEdgesAdjacentToSegments(wallCandidates, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
-                wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s => (s, "Solid")));
+                wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
+                {
+                    s.Type = "Solid";
+                    return s;
+                }));
             }
             else
             {
                 // if no level or floor is present, everything that's not glass is solid.
-                wallCandidateLines.AddRange(wallCandidates.Select(s => (s, "Solid")));
+                wallCandidateLines.AddRange(wallCandidates.Select(s =>
+                {
+                    s.Type = "Solid";
+                    return s;
+                }));
             }
             if (wallTypeFilter != null)
             {
-                return wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList();
+                return wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.Type)).ToList();
             }
             return wallCandidateLines;
         }
 
-        public static List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)> FindWallCandidateOptions(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, IEnumerable<string> wallTypeFilter = null)
+        public static List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> FindWallCandidateOptions(ISpaceBoundary room, Profile levelProfile, IEnumerable<Line> corridorSegments, IEnumerable<string> wallTypeFilter = null)
         {
-            var wallCandidateOptions = new List<(Line OrientationGuideEdge, List<(Line Line, string Type)> WallCandidates)>();
-            var allSegments = room.Boundary.Perimeter.Segments().Select(s => s.TransformedLine(room.Transform)).ToList();
+            var wallCandidateOptions = new List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)>();
+            var thicknesses = room.Boundary.GetEdgeThickness();
+            var allSegments = room.Boundary.Perimeter.Segments().Select((s, i) => new RoomEdge
+            {
+                Line = s.TransformedLine(room.Transform),
+                Thickness = thicknesses?.ElementAtOrDefault(i)
+            }).ToList();
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
-                var wallCandidateLines = new List<(Line line, string type)>
+                orientationGuideEdge.Line.Type = "Glass";
+                var wallCandidateLines = new List<RoomEdge>
                 {
-                    (orientationGuideEdge.Line, "Glass")
+                    orientationGuideEdge.Line
                 };
                 if (levelProfile != null)
                 {
                     var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
-                    wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s => (s, "Solid")));
+                    wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
+                    {
+                        s.Type = "Solid";
+                        return s;
+                    }));
                 }
                 else
                 {
                     // if no level or floor is present, everything that's not glass is solid.
-                    wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s => (s, "Solid")));
+                    wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s =>
+                    {
+                        s.Type = "Solid";
+                        return s;
+                    }));
                 }
-                wallCandidateOptions.Add((orientationGuideEdge.Line, (wallTypeFilter != null ? wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.type)).ToList() : wallCandidateLines)));
+                wallCandidateOptions.Add((orientationGuideEdge.Line, (wallTypeFilter != null ? wallCandidateLines.Where((w) => wallTypeFilter.Contains(w.Type)).ToList() : wallCandidateLines)));
             }
 
             return wallCandidateOptions;
         }
 
-        public static List<(Line line, string type)> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
+        public static List<RoomEdge> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
-            var resultCandidates = new List<(Line line, string type)>();
+            return interiorPartitionCandidates.SelectMany(i => i.WallCandidateLines).Where(l => l.Type != null && interiorPartitionTypePriority.Keys.Contains(l.Type)).ToList();
+            var resultCandidates = new List<RoomEdge>();
             var typedLines = interiorPartitionCandidates.SelectMany(c => c.WallCandidateLines)
-                            .Where(l => interiorPartitionTypePriority.Keys.Contains(l.type));
+                            .Where(l => l.Type != null && interiorPartitionTypePriority.Keys.Contains(l.Type));
             var collinearLinesGroups = GroupCollinearLines(typedLines);
 
             foreach (var collinearLinesGroup in collinearLinesGroups)
@@ -89,16 +116,16 @@ namespace LayoutFunctionCommon
                     resultCandidates.Add(collinearLinesGroup.Value.First());
                     continue;
                 }
-                var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.line.Length());
-                var dominantLineForGroup = linesOrderedByLength.First().line;
-                var domLineDir = dominantLineForGroup.Direction();
+                var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.Line.Length());
+                var dominantLineForGroup = linesOrderedByLength.First();
+                var domLineDir = dominantLineForGroup.Direction;
 
                 var orderEnds = new List<(double pos, bool isEnd, string type)>();
                 foreach (var linePair in collinearLinesGroup.Value)
                 {
-                    var line = linePair.line;
-                    var start = (line.Start - dominantLineForGroup.Start).Dot(domLineDir);
-                    var end = (line.End - dominantLineForGroup.Start).Dot(domLineDir);
+                    var line = linePair.Line;
+                    var start = (line.Start - dominantLineForGroup.Line.Start).Dot(domLineDir);
+                    var end = (line.End - dominantLineForGroup.Line.Start).Dot(domLineDir);
                     if (start > end)
                     {
                         var oldStart = start;
@@ -106,8 +133,8 @@ namespace LayoutFunctionCommon
                         end = oldStart;
                     }
 
-                    orderEnds.Add((start, false, linePair.type));
-                    orderEnds.Add((end, true, linePair.type));
+                    orderEnds.Add((start, false, linePair.Type));
+                    orderEnds.Add((end, true, linePair.Type));
                 }
 
                 var totalCount = 0;
@@ -159,15 +186,15 @@ namespace LayoutFunctionCommon
             return resultCandidates;
         }
 
-        private static Dictionary<Line, List<(Line line, string type)>> GroupCollinearLines(IEnumerable<(Line line, string type)> typedLines)
+        private static Dictionary<Line, List<RoomEdge>> GroupCollinearLines(IEnumerable<RoomEdge> typedLines)
         {
-            var collinearLinesGroups = new Dictionary<Line, List<(Line line, string type)>>();
+            var collinearLinesGroups = new Dictionary<Line, List<RoomEdge>>();
             foreach (var typedLine in typedLines)
             {
                 var isLineAdded = false;
                 foreach (var linesGroup in collinearLinesGroups)
                 {
-                    if (typedLine.line.IsCollinear(linesGroup.Key))
+                    if (typedLine.Line.IsCollinear(linesGroup.Key))
                     {
                         linesGroup.Value.Add(typedLine);
                         isLineAdded = true;
@@ -176,21 +203,26 @@ namespace LayoutFunctionCommon
                 }
                 if (!isLineAdded)
                 {
-                    collinearLinesGroups.Add(typedLine.line, new List<(Line line, string type)>() { typedLine });
+                    collinearLinesGroups.Add(typedLine.Line, new List<RoomEdge>() { typedLine });
                 }
             }
 
             return collinearLinesGroups;
         }
 
-        private static void AddWallCandidateLine(List<(Line line, string type)> resultCandidates, Line dominantLineForGroup, Vector3 domLineDir, (double pos, bool isEnd, string type) segmentStart, (double pos, bool isEnd, string type) point)
+        private static void AddWallCandidateLine(List<RoomEdge> resultCandidates, RoomEdge dominantLineForGroup, Vector3 domLineDir, (double pos, bool isEnd, string type) segmentStart, (double pos, bool isEnd, string type) point)
         {
-            var startPt = segmentStart.pos * domLineDir + dominantLineForGroup.Start;
-            var endPt = point.pos * domLineDir + dominantLineForGroup.Start;
+            var startPt = segmentStart.pos * domLineDir + dominantLineForGroup.Line.Start;
+            var endPt = point.pos * domLineDir + dominantLineForGroup.Line.Start;
             if (startPt.DistanceTo(endPt) > 0.01)
             {
                 var newLine = new Line(startPt, endPt);
-                resultCandidates.Add((newLine, point.type));
+                resultCandidates.Add(new RoomEdge
+                {
+                    Line = newLine,
+                    Thickness = dominantLineForGroup.Thickness,
+                    Type = point.type
+                });
             }
         }
 
@@ -213,7 +245,7 @@ namespace LayoutFunctionCommon
             return mullion;
         }
 
-        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
+        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId, (double innerWidth, double outerWidth)? Thickness)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
         {
             if (debugMode)
             {
@@ -239,19 +271,35 @@ namespace LayoutFunctionCommon
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
             var mullion = CreateMullion(height);
-            foreach (var (line, type, wallCandidateId) in wallCandidateLines)
+            foreach (var (line, type, wallCandidateId, thickness) in wallCandidateLines)
             {
                 var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
+                if (thickness != null && thickness.Value.innerWidth == 0 && thickness.Value.outerWidth == 0)
+                {
+                    continue;
+                }
+                var thicknessOrDefault = thickness ?? (type == "Solid" ? (0.1, 0.1) : (0.05, 0.05));
+                var sumThickness = thicknessOrDefault.innerWidth + thicknessOrDefault.outerWidth;
+                // the line we supply for the wall creation is always a
+                // centerline. If the left thickness doesn't equal the right
+                // thickness, we have to offset the centerline by their
+                // difference.
+                var offset = (thicknessOrDefault.outerWidth - thicknessOrDefault.innerWidth) / 2.0;
+                lineProjected = lineProjected.Offset(offset, false);
+                if (sumThickness < 0.01)
+                {
+                    sumThickness = 0.2;
+                }
 
                 if (type == "Solid")
                 {
-                    var wall = new StandardWall(lineProjected, 0.2, height, wallMat, levelTransform);
+                    var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     model.AddElement(wall);
                 }
                 else if (type == "Partition")
                 {
-                    var wall = new StandardWall(lineProjected, 0.1, height, wallMat, levelTransform);
+                    var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     model.AddElement(wall);
                 }
@@ -294,7 +342,7 @@ namespace LayoutFunctionCommon
                     var headerHeight = height - totalStorefrontHeight;
                     if (headerHeight > 0.01)
                     {
-                        var header = new Header(lineProjected, 0.2, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)));
+                        var header = new Header(lineProjected, sumThickness, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)));
                         header.AdditionalProperties["Wall"] = primaryWall.Id;
                         model.AddElement(header);
                         header.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
@@ -303,7 +351,7 @@ namespace LayoutFunctionCommon
             }
         }
 
-        public static Line FindPrimaryAccessEdge(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, out IEnumerable<Line> otherSegments, double maxDist = 0)
+        public static RoomEdge FindPrimaryAccessEdge(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, out IEnumerable<RoomEdge> otherSegments, double maxDist = 0)
         {
             if (corridorSegments != null && corridorSegments.Count() != 0)
             {
@@ -314,11 +362,11 @@ namespace LayoutFunctionCommon
             {
                 // if we have no corridors, find the best edge not along the floor boundary
                 var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
-                var edgesByLength = edgesNotAlongFloorBoundary.OrderByDescending(l => l.Length());
+                var edgesByLength = edgesNotAlongFloorBoundary.OrderByDescending(l => l.Length);
                 var bestEdge = edgesByLength.FirstOrDefault();
                 if (bestEdge == null)
                 {
-                    bestEdge = edgesAlongFloorBoundary.OrderBy(e => e.Length()).Last();
+                    bestEdge = edgesAlongFloorBoundary.OrderBy(e => e.Length).Last();
                     otherSegments = edgesAlongFloorBoundary.Except(new[] { bestEdge });
                     return bestEdge;
                 }
@@ -331,21 +379,21 @@ namespace LayoutFunctionCommon
             }
             else
             {
-                var edgesByLength = edgesToClassify.OrderByDescending(l => l.Length());
+                var edgesByLength = edgesToClassify.OrderByDescending(l => l.Length);
                 var bestEdge = edgesByLength.First();
                 otherSegments = edgesByLength.Skip(1);
                 return bestEdge;
             }
         }
 
-        public static List<Line> FindAllEdgesAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<Line> otherSegments)
+        public static List<RoomEdge> FindAllEdgesAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<RoomEdge> otherSegments)
         {
-            otherSegments = new List<Line>();
-            var adjacentSegments = new List<Line>();
+            otherSegments = new List<RoomEdge>();
+            var adjacentSegments = new List<RoomEdge>();
 
             foreach (var edge in edgesToClassify)
             {
-                var midpt = edge.Mid();
+                var midpt = edge.Line.Mid();
                 midpt.Z = 0;
                 var adjacentToAny = false;
                 foreach (var comparisonSegment in comparisonSegments)
@@ -370,16 +418,16 @@ namespace LayoutFunctionCommon
             }
             return adjacentSegments;
         }
-        public static Line FindEdgeAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, out IEnumerable<Line> otherSegments, double maxDist = 0)
+        public static RoomEdge FindEdgeAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, out IEnumerable<RoomEdge> otherSegments, double maxDist = 0)
         {
             var minDist = double.MaxValue;
-            var minSeg = edgesToClassify.OrderBy(e => e.Length()).Last(); // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
+            var minSeg = edgesToClassify.OrderBy(e => e.Length).Last(); // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
             var allEdges = edgesToClassify.ToList();
             var selectedIndex = 0;
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.Mid().Project(Plane.XY);
+                var midpt = edge.Line.Mid().Project(Plane.XY);
                 foreach (var seg in segmentsToTestAgainst)
                 {
                     var segProjected = seg.Projected(Plane.XY);
@@ -389,7 +437,7 @@ namespace LayoutFunctionCommon
                     if (Math.Abs(dist - minDist) < 0.1)
                     {
                         minDist = dist;
-                        if (minSeg.Length() < edge.Length())
+                        if (minSeg.Length < edge.Length)
                         {
                             minSeg = edge;
                             selectedIndex = i;
@@ -413,7 +461,7 @@ namespace LayoutFunctionCommon
             return minSeg;
         }
 
-        public static List<(Line Line, IEnumerable<Line> OtherSegments)> SortEdgesByPrimaryAccess(IEnumerable<Line> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, double maxDist = 0)
+        public static List<(RoomEdge Line, IEnumerable<RoomEdge> OtherSegments)> SortEdgesByPrimaryAccess(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, double maxDist = 0)
         {
             if (corridorSegments != null && corridorSegments.Count() != 0)
             {
@@ -425,28 +473,29 @@ namespace LayoutFunctionCommon
             {
                 // if we have no corridors, find the best edge not along the floor boundary
                 var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
-                return (edgesNotAlongFloorBoundary.Count() == 0 ? edgesAlongFloorBoundary : edgesNotAlongFloorBoundary).OrderByDescending(e => e.Length()).Select(e =>
+                return (edgesNotAlongFloorBoundary.Count() == 0 ? edgesAlongFloorBoundary : edgesNotAlongFloorBoundary)
+                .OrderByDescending(e => e.Length).Select(e =>
                 {
                     var otherSegments = edgesToClassify.Except(new[] { e });
                     return (e, otherSegments);
                 }).ToList();
             }
 
-            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length());
+            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length);
             return edgesByLength.Select(e =>
             {
                 var otherSegments = edgesToClassify.Except(new[] { e });
                 return (e, otherSegments);
             }).ToList();
         }
-        public static List<(Line Line, IEnumerable<Line> OtherSegments)> FindEdgesAdjacentToSegments(IEnumerable<Line> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, double maxDist = 0)
+        public static List<(RoomEdge Line, IEnumerable<RoomEdge> OtherSegments)> FindEdgesAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, double maxDist = 0)
         {
             if (segmentsToTestAgainst.Count() > 0)
             {
                 var edgesByDist = edgesToClassify.Select(e =>
                 {
-                    var midpt = e.Mid().Project(Plane.XY);
-                    (Line line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
+                    var midpt = e.Line.Mid().Project(Plane.XY);
+                    (RoomEdge line, double dist) edge = (e, segmentsToTestAgainst.Min(s => midpt.DistanceTo(s)));
                     return edge;
                 });
 
@@ -476,11 +525,11 @@ namespace LayoutFunctionCommon
             if (maxDist != 0)
             {
                 Console.WriteLine($"no matches: {maxDist}");
-                return new List<(Line Line, IEnumerable<Line> OtherSegments)>() { (null, edgesToClassify) };
+                return new List<(RoomEdge Line, IEnumerable<RoomEdge> OtherSegments)>() { (null, edgesToClassify) };
             }
 
             // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
-            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length());
+            var edgesByLength = edgesToClassify.OrderByDescending(e => e.Length);
             return edgesByLength.Select(e =>
             {
                 var otherSegments = edgesToClassify.Except(new[] { e });
@@ -488,13 +537,13 @@ namespace LayoutFunctionCommon
             }).ToList();
         }
 
-        public static List<(Line line, string type)> PartitionsAndGlazingCandidatesFromGrid(List<(Line line, string type)> wallCandidateLines, Grid2d grid, Profile levelBoundary)
+        public static List<RoomEdge> PartitionsAndGlazingCandidatesFromGrid(List<RoomEdge> wallCandidateLines, Grid2d grid, Profile levelBoundary)
         {
-            var wallCandidatesOut = new List<(Line line, string type)>();
+            var wallCandidatesOut = new List<RoomEdge>();
             try
             {
                 var cellSeparators = grid.GetCellSeparators(GridDirection.V, true);
-                wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => (c, "Partition")));
+                wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => new RoomEdge { Line = c, Type = "Partition" }));
             }
             catch (Exception e)
             {
@@ -502,17 +551,18 @@ namespace LayoutFunctionCommon
                 Console.WriteLine(e.Message);
                 // exception in cell separators
             }
-            var glassLines = wallCandidateLines.Where(l => l.type == "Glass-Edge").Select(w => w.line);
+            var glassLines = wallCandidateLines.Where(l => l.Type == "Glass-Edge").Select(w => w.Line);
             foreach (var gridCell in grid.GetCells())
             {
                 var trimmedGeo = gridCell.GetTrimmedCellGeometry();
                 if (trimmedGeo.Count() > 0)
                 {
-                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments());
+                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments()).Select(g => new RoomEdge { Line = g });
                     var glassSegment = FindEdgeAdjacentToSegments(segments, glassLines, out var otherEdges);
                     if (glassSegment != null)
                     {
-                        wallCandidatesOut.Add((glassSegment, "Glass"));
+                        glassSegment.Type = "Glass";
+                        wallCandidatesOut.Add(glassSegment);
                     }
                 }
             }
@@ -521,15 +571,20 @@ namespace LayoutFunctionCommon
         }
     }
 
-    public class EdgesComparer : IComparer<(Line line, double dist)>
+    public class EdgesComparer : IComparer<(RoomEdge line, double dist)>
     {
-        public int Compare((Line line, double dist) edge1, (Line line, double dist) edge2)
+        public int Compare((RoomEdge line, double dist) edge1, (RoomEdge line, double dist) edge2)
         {
             if (Math.Abs(edge1.dist - edge2.dist) < 0.1)
             {
-                return edge2.line.Length().CompareTo(edge1.line.Length());
+                return edge2.line.Line.Length().CompareTo(edge1.line.Line.Length());
             }
             return edge1.dist.CompareTo(edge2.dist);
+        }
+
+        int IComparer<(RoomEdge line, double dist)>.Compare((RoomEdge line, double dist) x, (RoomEdge line, double dist) y)
+        {
+            return Compare(x, y);
         }
     }
 }

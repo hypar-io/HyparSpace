@@ -17,7 +17,127 @@
         "type": "array",
         "$hyparGroupBy": "Program Group",
         "items": {
-          "$ref": "https://schemas.hypar.io/ProgramRequirement.json"
+          "type": "object",
+          "$hyparStyle": "row",
+          "description": "Fill out your program requirements. Use \"Layout Type\" to dictate which function should be used to lay out your space.",
+          "required": [
+            "Program Name"
+          ],
+          "$hyparHidden": [
+            "Name",
+            "Program Group",
+            "Total Area"
+          ],
+          "properties": {
+            "Program Group": {
+              "$hyparOrder": 0,
+              "description": "What group does this program belong to?",
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": null
+            },
+            "Program Name": {
+              "$hyparOrder": 1,
+              "description": "What display name should be used for this program type?",
+              "type": "string"
+            },
+            "Color": {
+              "$hyparOrder": 2,
+              "description": "What color should be used to display this space type?",
+              "$ref": "https://schemas.hypar.io/Color.json"
+            },
+            "Area per Space": {
+              "$hyparOrder": 3,
+              "description": "How much area should be allocated for this space?",
+              "type": "number",
+              "$hyparUnitType": "area",
+              "multipleOf": 1
+            },
+            "Space Count": {
+              "$hyparOrder": 4,
+              "description": "How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.",
+              "type": "integer",
+              "default": 1
+            },
+            "Width": {
+              "$hyparOrder": 5,
+              "type": [
+                "number",
+                "null"
+              ],
+              "$hyparUnitType": "length",
+              "default": null,
+              "description": "Optional. (Typically the longer dimension \u2014 along the side from which the space is accessed, like a corridor.)"
+            },
+            "Depth": {
+              "$hyparOrder": 6,
+              "type": [
+                "number",
+                "null"
+              ],
+              "default": null,
+              "$hyparUnitType": "length",
+              "description": "Optional. (Typically the shorter dimension \u2014 perpendicular to the side from which the space is accessed, like a corridor.)"
+            },
+            "Hypar Space Type": {
+              "$hyparDeprecated": true,
+              "$hyparOrder": 7,
+              "description": "Which furniture layout function should be used to lay out this space?",
+              "type": "string",
+              "$hyparAutocomplete": [
+                "Open Office",
+                "Private Office",
+                "Lounge",
+                "Classroom",
+                "Pantry",
+                "Meeting Room",
+                "Phone Booth",
+                "Support",
+                "Reception",
+                "Open Collaboration",
+                "Data Hall"
+              ],
+              "default": "unspecified"
+            },
+            "Count Type": {
+              "$hyparShowIf": {
+                "conditions": [
+                  {
+                    "property": "Show Advanced Options",
+                    "value": true
+                  }
+                ]
+              },
+              "description": "How should this requirement be counted? \n\nUse \"Item\" for individual spaces (e.g. 3 conference rooms),\n\"Area Total\" for spaces where you only care about the total (e.g. 1000 SF of circulation), and \n\"Unit\" where you want total area divided by a \"unit\" size (e.g. this space supports 400 people at 120 SF / person)",
+              "type": "string",
+              "enum": [
+                "Item",
+                "Area Total"
+              ],
+              "default": "Item"
+            },
+            "Layout Type": {
+              "description": "What sort of space type should be used to lay out furniture and equipment in this space?",
+              "$hyparOrder": 7,
+              "$ref": "https://schemas.hypar.io/InputFolder.json",
+              "$hyparHasTag": "spaceType",
+              "$hyparFileTypes": [
+                "hycatalog",
+                "hyspacetype"
+              ]
+            },
+            "Enclosed": {
+              "description": "Should this space be enclosed by walls?",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "$hyparStyle": "checkbox",
+              "default": true
+            }
+          }
         }
       }
     }
@@ -36,5 +156,22 @@
   "element_types": [
     "https://schemas.hypar.io/ProgramRequirement.json",
     "https://schemas.hypar.io/ColorScheme.json"
-  ]
+  ],
+  "messages": {
+    "en": {
+      "input_schema": {
+        "properties": {
+          "Program Requirements": {
+            "items": {
+              "properties": {
+                "Layout Type": {
+                  "name": "Space Type"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -19,14 +19,14 @@ namespace MeetingRoomLayout
         {
             var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
-                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/4e984160-e57e-4edd-be4d-1f1626d5a559.json")) },
-                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/588ffe69-2cfc-4e0d-bd72-44009577586d.json")) },
-                {"Conceptual Mass", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Conceptual Mass/995968a9-0d44-492a-b46c-153ed427e451.json")) },
-                {"Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Circulation/3cc30f5b-2ed9-4753-a241-80f8e5c5a1e4.json")) },
+            var modelDependencies = new Dictionary<string, Model> { 
+                {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Space Planning Zones/a40efc0c-6495-4144-ad5a-bce7ea9301ff.json")) }, 
+                {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Levels/3582dfaf-6be7-4de0-8ed0-98da3d9d3bd1.json")) }, 
+                {"Circulation", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/MeetingRoomLayout/test/Generated/MeetingRoomLayoutTest/model_dependencies/Circulation/4a60bd5c-0d97-478b-ae2a-eee4cb9451f2.json")) }, 
             };
 
             var result = MeetingRoomLayout.Execute(modelDependencies, input);
+            result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.gltf", false);
             result.Model.ToGlTF("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.glb");
             File.WriteAllText("../../../Generated/MeetingRoomLayoutTest/results/MeetingRoomLayoutTest.json", result.Model.ToJson());
 

@@ -22,7 +22,7 @@ namespace LayoutFunctionCommon
 
     public class LayoutGeneration<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>
         where TLevelElements : Element, ILevelElements
-        where TSpaceBoundary : ISpaceBoundary
+        where TSpaceBoundary : Element, ISpaceBoundary
         where TLevelVolume : GeometricElement, ILevelVolume
         where TCirculationSegment : Floor, ICirculationSegment
     {
@@ -42,6 +42,7 @@ namespace LayoutFunctionCommon
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = DeserializeConfigJson(configJson);
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.OfType<TCirculationSegment>();
@@ -51,7 +52,7 @@ namespace LayoutFunctionCommon
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
                     SeatsCount seatsCount = default;
@@ -59,14 +60,14 @@ namespace LayoutFunctionCommon
                     var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
                     var boundaryCurves = new List<Polygon>
                     {
-                        spaceBoundary.Perimeter
+                        spaceBoundary.ThickenedInteriorProfile().Perimeter
                     };
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
-                    var possibleConfigs = new List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)>();
+                    var possibleConfigs = new List<(ConfigInfo configInfo, List<RoomEdge> wallCandidates)>();
                     foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
                     {
-                        var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction(), Vector3.ZAxis);
+                        var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction, Vector3.ZAxis);
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         foreach (var cell in grid.GetCells())
                         {
@@ -275,7 +276,7 @@ namespace LayoutFunctionCommon
             return levels;
         }
 
-        protected virtual (ConfigInfo? configInfo, List<(Line Line, string Type)> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<(Line Line, string Type)> wallCandidates)> possibleConfigs)
+        protected virtual (ConfigInfo? configInfo, List<RoomEdge> wallCandidates) SelectTheBestOfPossibleConfigs(List<(ConfigInfo configInfo, List<RoomEdge> wallCandidates)> possibleConfigs)
         {
             var distinctPossibleConfigs = possibleConfigs.DistinctBy(pc => pc.configInfo.ConfigName);
             var orderedConfigs = OrderConfigs(distinctPossibleConfigs.Select(pc => pc.configInfo).ToDictionary(ci => ci.ConfigName, ci => ci.Config));
