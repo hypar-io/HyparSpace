@@ -14,6 +14,8 @@ namespace Elements
         Vector3? ParentCentroid { get; set; }
 
         Guid Id { get; set; }
+
+        string HyparSpaceType { get; set; }
     }
 
 }
