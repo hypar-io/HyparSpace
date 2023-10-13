@@ -35,7 +35,6 @@ namespace Elements
             this.SpaceAdjacencies = @spaceAdjacencies;
             }
         
-        
         // Empty constructor
         public WallCandidate()
             : base()

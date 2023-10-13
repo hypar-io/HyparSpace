@@ -1,13 +1,62 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Elements.Geometry;
 
 namespace LayoutFunctionCommon;
 
 public class RoomEdge
 {
-    public Line Line { get; set; }
-    public string Type { get; set; }
+    private Line _line;
+    private string _type;
+    // Ugly — backwards serialization compatibility on read
+    [JsonIgnore]
+    public Line Item1
+    {
+        get
+        {
+            return _line;
+        }
+        set
+        {
+            _line = value;
+        }
+    }
+
+    [JsonIgnore]
+    public string Item2
+    {
+        get
+        {
+            return _type;
+        }
+        set
+        {
+            _type = value;
+        }
+    }
+    public Line Line
+    {
+        get
+        {
+            return _line;
+        }
+        set
+        {
+            _line = value;
+        }
+    }
+    public string Type
+    {
+        get
+        {
+            return _type;
+        }
+        set
+        {
+            _type = value;
+        }
+    }
     public (double innerWidth, double outerWidth)? Thickness { get; set; }
 
     public double Length => Line.Length();

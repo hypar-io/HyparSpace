@@ -27,7 +27,7 @@ namespace Elements
     public partial class LabelConfiguration 
     {
         [JsonConstructor]
-        public LabelConfiguration(Color? @color, Vector3 @offset, string @customText, string @forceVisible, Vector3 @direction)
+        public LabelConfiguration(Color @color, Vector3 @offset, string @customText, string @forceVisible, Vector3 @direction)
         {
             this.Color = @color;
             this.Offset = @offset;
@@ -36,7 +36,6 @@ namespace Elements
             this.Direction = @direction;
             }
         
-        
         // Empty constructor
         public LabelConfiguration()
         {
@@ -44,7 +43,7 @@ namespace Elements
     
         /// <summary>The label background color</summary>
         [JsonProperty("Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Color? Color { get; set; }
+        public Color Color { get; set; }
     
         /// <summary>A screen-space offset, in pixels, for the label from the object's bounding box center.</summary>
         [JsonProperty("Offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

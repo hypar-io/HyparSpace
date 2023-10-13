@@ -36,7 +36,6 @@ namespace Elements
             this.Centroid = @centroid;
             }
         
-        
         // Empty constructor
         public ServiceCore()
             : base()

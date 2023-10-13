@@ -32,7 +32,6 @@ namespace Elements
         {
             }
         
-        
         // Empty constructor
         public CollaborationSpaceBoundary()
             : base()
