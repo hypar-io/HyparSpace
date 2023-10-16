@@ -22,6 +22,86 @@ namespace DefineProgramRequirements
 {
     #pragma warning disable // Disable all warnings
 
+    /// <summary>Dimensional and shape constraints for profile geometry. This is not a schema that represents an element, rather it is to be attached to known schemas to modify polygon behavior.</summary>
+    [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class ProfileConstraint 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public ProfileConstraint(double @width, double @depth, double @maxWidth, double @maxDepth, double @minWidth, double @minDepth, double @area, double @minArea, double @maxArea, bool @flexible, bool @rectangle)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<ProfileConstraint>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @width, @depth, @maxWidth, @maxDepth, @minWidth, @minDepth, @area, @minArea, @maxArea, @flexible, @rectangle});
+            }
+        
+            this.Width = @width;
+            this.Depth = @depth;
+            this.MaxWidth = @maxWidth;
+            this.MaxDepth = @maxDepth;
+            this.MinWidth = @minWidth;
+            this.MinDepth = @minDepth;
+            this.Area = @area;
+            this.MinArea = @minArea;
+            this.MaxArea = @maxArea;
+            this.Flexible = @flexible;
+            this.Rectangle = @rectangle;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        /// <summary>Target width of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Width { get; set; }
+    
+        /// <summary>Target depth of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("depth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Depth { get; set; }
+    
+        /// <summary>Maximum width of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("maxWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MaxWidth { get; set; }
+    
+        /// <summary>Maximum depth of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("maxDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MaxDepth { get; set; }
+    
+        /// <summary>Minimum width of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("minWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MinWidth { get; set; }
+    
+        /// <summary>Minimum depth of the profile</summary>
+        [Newtonsoft.Json.JsonProperty("minDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MinDepth { get; set; }
+    
+        /// <summary>Target area of the profile. If populated, width and depth should be empty.</summary>
+        [Newtonsoft.Json.JsonProperty("area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Area { get; set; }
+    
+        /// <summary>Minimum area required. Is assumed to be MinWidth * MinDepth unless otherwise specified.</summary>
+        [Newtonsoft.Json.JsonProperty("minArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MinArea { get; set; }
+    
+        /// <summary>Maximum area required. Is assumed to be MaxWidth * MaxDepth unless otherwise specified.</summary>
+        [Newtonsoft.Json.JsonProperty("maxArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double MaxArea { get; set; }
+    
+        /// <summary>Whether we are able to deviate from the target width and depth.</summary>
+        [Newtonsoft.Json.JsonProperty("flexible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Flexible { get; set; }
+    
+        /// <summary>If true, the profile must be a rectangle and cannot be any other shape.</summary>
+        [Newtonsoft.Json.JsonProperty("rectangle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Rectangle { get; set; }
+    
+    }
+    
     /// <summary>A hosted file reference from InputData</summary>
     [Newtonsoft.Json.JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
@@ -138,19 +218,20 @@ namespace DefineProgramRequirements
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirements(string @programGroup, string @programName, Color? @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType @countType, InputFolder @layoutType, bool? @enclosed)
+        public ProgramRequirements(string @programGroup, string @programName, Color? @color, int @spaceCount, double @areaPerSpace, ProfileConstraint @dimensions, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType @countType, InputFolder @layoutType, bool? @enclosed)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirements>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @areaPerSpace, @spaceCount, @width, @depth, @hyparSpaceType, @countType, @layoutType, @enclosed});
+                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @spaceCount, @areaPerSpace, @dimensions, @width, @depth, @hyparSpaceType, @countType, @layoutType, @enclosed});
             }
         
             this.ProgramGroup = @programGroup;
             this.ProgramName = @programName;
             this.Color = @color;
-            this.AreaPerSpace = @areaPerSpace;
             this.SpaceCount = @spaceCount;
+            this.AreaPerSpace = @areaPerSpace;
+            this.Dimensions = @dimensions;
             this.Width = @width;
             this.Depth = @depth;
             this.HyparSpaceType = @hyparSpaceType;
@@ -177,13 +258,17 @@ namespace DefineProgramRequirements
         [Newtonsoft.Json.JsonProperty("Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color? Color { get; set; }
     
+        /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
+        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SpaceCount { get; set; } = 1;
+    
         /// <summary>How much area should be allocated for this space?</summary>
         [Newtonsoft.Json.JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AreaPerSpace { get; set; }
     
-        /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
-        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int SpaceCount { get; set; } = 1;
+        /// <summary>The required dimensions of the space. Supply specific dimension or just an area, and edit options to specify additional constraints.</summary>
+        [Newtonsoft.Json.JsonProperty("Dimensions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ProfileConstraint Dimensions { get; set; }
     
         /// <summary>Optional. (Typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
         [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

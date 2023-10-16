@@ -27,12 +27,13 @@ namespace Elements
     public partial class ColorScheme : Element
     {
         [JsonConstructor]
-        public ColorScheme(System.Collections.Generic.IDictionary<string, Color> @mapping, string @propertyName, System.Guid @id = default, string @name = null)
+        public ColorScheme(Mapping @mapping, string @propertyName, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.Mapping = @mapping;
             this.PropertyName = @propertyName;
             }
+        
         
         // Empty constructor
         public ColorScheme()
@@ -41,7 +42,7 @@ namespace Elements
         }
     
         [JsonProperty("Mapping", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.IDictionary<string, Color> Mapping { get; set; }
+        public Mapping Mapping { get; set; }
     
         /// <summary>The property name this color scheme applies to</summary>
         [JsonProperty("Property Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
