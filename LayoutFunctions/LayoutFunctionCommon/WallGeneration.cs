@@ -29,9 +29,11 @@ namespace LayoutFunctionCommon
         {
             var spaceBoundary = room.Boundary;
             var wallCandidateLines = new List<RoomEdge>();
-            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select(s => new RoomEdge
+            var thicknesses = spaceBoundary.GetEdgeThickness();
+            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
-                Line = s.TransformedLine(room.Transform)
+                Line = s.TransformedLine(room.Transform),
+                Thickness = thicknesses.ElementAtOrDefault(i)
             }), corridorSegments, levelProfile, out var wallCandidates);
             orientationGuideEdge.Type = "Glass";
             wallCandidateLines.Add(orientationGuideEdge);
@@ -552,12 +554,35 @@ namespace LayoutFunctionCommon
                 // exception in cell separators
             }
             var glassLines = wallCandidateLines.Where(l => l.Type == "Glass-Edge").Select(w => w.Line);
+
+            // Construct an appropriate room edge from the given line, matching thickness from already existing wall candidates.
+            RoomEdge GetRoomEdgeFromLine(Line line)
+            {
+                RoomEdge closestRoomEdge = null;
+                var closestDist = double.MaxValue;
+                foreach (var wallCandidateLine in wallCandidateLines.Where(l => l.Thickness is not null))
+                {
+                    var mid = line.Mid();
+                    var dist = mid.ClosestPointOn(wallCandidateLine.Line).DistanceTo(mid);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closestRoomEdge = wallCandidateLine;
+                    }
+                }
+                return new RoomEdge
+                {
+                    Line = line,
+                    Thickness = closestRoomEdge?.Thickness,
+                };
+            }
+
             foreach (var gridCell in grid.GetCells())
             {
                 var trimmedGeo = gridCell.GetTrimmedCellGeometry();
                 if (trimmedGeo.Count() > 0)
                 {
-                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments()).Select(g => new RoomEdge { Line = g });
+                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments()).Select(GetRoomEdgeFromLine);
                     var glassSegment = FindEdgeAdjacentToSegments(segments, glassLines, out var otherEdges);
                     if (glassSegment != null)
                     {
