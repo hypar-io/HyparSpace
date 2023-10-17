@@ -33,7 +33,7 @@ namespace Elements
             Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color;
+                var color = kvp.Value.Color ?? Colors.Magenta;
                 color.Alpha = 0.5;
             }
         }

@@ -33,6 +33,7 @@ namespace Elements
             this.Core = @core;
             }
         
+        
         // Empty constructor
         public CoreArea()
             : base()

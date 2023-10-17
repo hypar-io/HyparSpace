@@ -37,6 +37,7 @@ namespace Elements
             this.CollaborationSeats = @collaborationSeats;
             }
         
+        
         // Empty constructor
         public SpaceMetric()
             : base()
