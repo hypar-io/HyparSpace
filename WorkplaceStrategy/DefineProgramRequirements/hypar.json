@@ -151,6 +151,10 @@
               "default": true
             }
           }
+        },
+        "$hyparPopulateFromContent": {
+          "label": "Load Space Types",
+          "tag": "spaceType"
         }
       }
     }

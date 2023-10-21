@@ -22,23 +22,26 @@ namespace DefineProgramRequirements
         {
             Console.WriteLine("🌊");
             Console.WriteLine(JsonConvert.SerializeObject(input));
+            var programRequirements = input.ProgramRequirements.ToList();
             var output = new DefineProgramRequirementsOutputs();
-            if (input.ProgramRequirements.Select(p => p.ProgramName + p.ProgramGroup).Distinct().Count() != input.ProgramRequirements.Count)
+            if (programRequirements.Select(p => p.ProgramName + p.ProgramGroup).Distinct().Count() != programRequirements.Count)
             {
                 output.Errors.Add("No two programs can have the same Program Name. Please remove one of the duplicates.");
             }
-            foreach (var pr in input.ProgramRequirements)
+            foreach (var pr in programRequirements)
             {
                 pr.AdditionalProperties.Clear();
             }
-            var sum = input.ProgramRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
-            // output.Model.AddElements(input.ProgramRequirements);
+            var sum = programRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
+            // output.Model.AddElements(programRequirements);
             var colorScheme = ColorScheme.ProgramColors;
 
             Dictionary<string, CatalogWrapper> wrappers = new Dictionary<string, CatalogWrapper>();
             Dictionary<string, SpaceConfigurationElement> spaceConfigurations = new Dictionary<string, SpaceConfigurationElement>();
 
-            foreach (var req in input.ProgramRequirements)
+            AddDefaultProgramTypes(programRequirements);
+
+            foreach (var req in programRequirements)
             {
                 colorScheme.Mapping[req.QualifiedProgramName] = req.Color ?? Colors.Magenta;
                 var layoutType = req.LayoutType;
@@ -167,5 +170,47 @@ namespace DefineProgramRequirements
             }
             return output;
         }
+
+        private static void AddDefaultProgramTypes(List<ProgramRequirements> programRequirements)
+        {
+            var existingNames = programRequirements.Select(pr => pr.ProgramName).Distinct();
+            if (!existingNames.Contains("Circulation"))
+            {
+                programRequirements.Add(new ProgramRequirements(
+                    null,
+                    "Circulation",
+                    CORRIDOR_MATERIAL_COLOR,
+                    0,
+                    0,
+                    null,
+                    null,
+                    null,
+                    "Circulation",
+                    ProgramRequirementsCountType.Area_Total,
+                    null,
+                    false
+                ));
+            }
+            if (!existingNames.Contains("Core"))
+            {
+                programRequirements.Add(new ProgramRequirements(
+                    null,
+                    "Core",
+                    CORE_MATERIAL_COLOR,
+                    0,
+                    0,
+                    null,
+                    null,
+                    null,
+                    "Core",
+                    ProgramRequirementsCountType.Area_Total,
+                    null,
+                    false
+                ));
+            }
+        }
+
+        private static Color CORRIDOR_MATERIAL_COLOR = new(0.996, 0.965, 0.863, 1.0);
+        private static Color CORE_MATERIAL_COLOR = new(0.5f, 0.5f, 0.5f, 1.0f);
     }
 }

@@ -30,7 +30,7 @@ namespace DefineProgramRequirements
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProfileConstraint(double @width, double @depth, double @maxWidth, double @maxDepth, double @minWidth, double @minDepth, double @area, double @minArea, double @maxArea, bool @flexible, bool @rectangle)
+        public ProfileConstraint(double @width, double @depth, double? @maxWidth, double? @maxDepth, double? @minWidth, double? @minDepth, double? @area, double? @minArea, double? @maxArea, bool @flexible, bool @rectangle)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProfileConstraint>();
             if(validator != null)
@@ -65,32 +65,32 @@ namespace DefineProgramRequirements
         public double Depth { get; set; }
     
         /// <summary>Maximum width of the profile</summary>
-        [Newtonsoft.Json.JsonProperty("maxWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MaxWidth { get; set; }
+        [Newtonsoft.Json.JsonProperty("maxWidth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MaxWidth { get; set; }
     
         /// <summary>Maximum depth of the profile</summary>
-        [Newtonsoft.Json.JsonProperty("maxDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MaxDepth { get; set; }
+        [Newtonsoft.Json.JsonProperty("maxDepth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MaxDepth { get; set; }
     
         /// <summary>Minimum width of the profile</summary>
-        [Newtonsoft.Json.JsonProperty("minWidth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MinWidth { get; set; }
+        [Newtonsoft.Json.JsonProperty("minWidth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MinWidth { get; set; }
     
         /// <summary>Minimum depth of the profile</summary>
-        [Newtonsoft.Json.JsonProperty("minDepth", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MinDepth { get; set; }
+        [Newtonsoft.Json.JsonProperty("minDepth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MinDepth { get; set; }
     
         /// <summary>Target area of the profile. If populated, width and depth should be empty.</summary>
-        [Newtonsoft.Json.JsonProperty("area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Area { get; set; }
+        [Newtonsoft.Json.JsonProperty("area", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Area { get; set; }
     
         /// <summary>Minimum area required. Is assumed to be MinWidth * MinDepth unless otherwise specified.</summary>
-        [Newtonsoft.Json.JsonProperty("minArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MinArea { get; set; }
+        [Newtonsoft.Json.JsonProperty("minArea", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MinArea { get; set; }
     
         /// <summary>Maximum area required. Is assumed to be MaxWidth * MaxDepth unless otherwise specified.</summary>
-        [Newtonsoft.Json.JsonProperty("maxArea", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double MaxArea { get; set; }
+        [Newtonsoft.Json.JsonProperty("maxArea", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? MaxArea { get; set; }
     
         /// <summary>Whether we are able to deviate from the target width and depth.</summary>
         [Newtonsoft.Json.JsonProperty("flexible", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
