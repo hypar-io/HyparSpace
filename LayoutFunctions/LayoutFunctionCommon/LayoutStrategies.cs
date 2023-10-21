@@ -139,6 +139,12 @@ namespace LayoutFunctionCommon
             {
                 levelVolumes.AddRange(levelsModel.AllElementsAssignableFromType<TLevelVolume>());
             }
+            // Prefer level volumes from floors over those from conceptual mass.
+            if (inputModels.TryGetValue("Floors", out var floorsModel))
+            {
+                levelVolumes.AddRange(floorsModel.AllElementsAssignableFromType<TLevelVolume>());
+            }
+            else
             if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
             {
                 levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
@@ -180,7 +186,7 @@ namespace LayoutFunctionCommon
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
                 var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
                 foreach (var rm in roomBoundaries)
                 {
@@ -245,8 +251,7 @@ namespace LayoutFunctionCommon
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
                 var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => allSpaceBoundaries.Contains(z)).ToList();
                 foreach (var rm in roomBoundaries)
                 {

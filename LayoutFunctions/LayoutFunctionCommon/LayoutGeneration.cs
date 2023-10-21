@@ -45,9 +45,8 @@ namespace LayoutFunctionCommon
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<TCirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName);
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -176,6 +175,7 @@ namespace LayoutFunctionCommon
                 var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
                 try
                 {
+                    largestTrimmedShape = largestTrimmedShape.CollinearPointsRemoved();
                     if (largestTrimmedShape.Vertices.Count < 8)
                     {
                         // LIR does a better job if there are more vertices to work with.
