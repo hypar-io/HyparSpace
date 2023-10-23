@@ -39,7 +39,7 @@ namespace DefineProgramRequirements
             Dictionary<string, CatalogWrapper> wrappers = new Dictionary<string, CatalogWrapper>();
             Dictionary<string, SpaceConfigurationElement> spaceConfigurations = new Dictionary<string, SpaceConfigurationElement>();
 
-            AddDefaultProgramTypes(programRequirements);
+            // AddDefaultProgramTypes(programRequirements);
 
             foreach (var req in programRequirements)
             {
@@ -205,7 +205,7 @@ namespace DefineProgramRequirements
                     "Core",
                     ProgramRequirementsCountType.Area_Total,
                     null,
-                    false
+                    true
                 ));
             }
         }
