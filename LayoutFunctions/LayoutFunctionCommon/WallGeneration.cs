@@ -33,7 +33,7 @@ namespace LayoutFunctionCommon
             orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
                 Line = s.TransformedLine(room.Transform),
-                Thickness = thicknesses.ElementAtOrDefault(i)
+                Thickness = thicknesses?.ElementAtOrDefault(i)
             }), corridorSegments, levelProfile, out var wallCandidates);
             orientationGuideEdge.Type = "Glass";
             wallCandidateLines.Add(orientationGuideEdge);
