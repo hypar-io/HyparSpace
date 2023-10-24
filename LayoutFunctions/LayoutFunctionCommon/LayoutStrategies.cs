@@ -144,7 +144,7 @@ namespace LayoutFunctionCommon
             {
                 levelVolumes.AddRange(floorsModel.AllElementsAssignableFromType<TLevelVolume>());
             }
-            else if (inputModels.TryGetValue("Conceptual Mass", out var massModel) || levelVolumes.Count == 0)
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel) && levelVolumes.Count == 0)
             {
                 levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
             }
@@ -186,7 +186,7 @@ namespace LayoutFunctionCommon
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
                 var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
-                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName);
                 foreach (var rm in roomBoundaries)
                 {
                     allSpaceBoundaries.Remove(rm);
