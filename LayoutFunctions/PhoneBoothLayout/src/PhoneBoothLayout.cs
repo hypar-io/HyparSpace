@@ -71,7 +71,7 @@ namespace PhoneBoothLayout
                                       }
                                       return w;
                                   });
-                    var levelInvertedTransform = levelVolume.Transform.Inverted();
+                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
                     wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness }));
 
                     var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);

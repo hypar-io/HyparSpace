@@ -144,8 +144,7 @@ namespace LayoutFunctionCommon
             {
                 levelVolumes.AddRange(floorsModel.AllElementsAssignableFromType<TLevelVolume>());
             }
-            else
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            else if (inputModels.TryGetValue("Conceptual Mass", out var massModel) || levelVolumes.Count == 0)
             {
                 levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
             }
