@@ -6,9 +6,10 @@ using Newtonsoft.Json;
 
 namespace Elements
 {
-    public interface ISpaceBoundary 
+    public interface ISpaceBoundary
     {
         string Name { get; set; }
+        double Height { get; set; }
         Profile Boundary { get; set; }
         Transform Transform { get; set; }
 
