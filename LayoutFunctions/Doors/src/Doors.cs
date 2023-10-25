@@ -1,10 +1,7 @@
 using Elements;
 using Elements.Geometry;
-using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using LayoutFunctionCommon;
-using Doors.Dependencies;
+using static Doors.DoorOpeningEnumsHelper;
 
 namespace Doors
 {
@@ -37,8 +34,8 @@ namespace Doors
                     }
 
                     var wall = pair.Value.Wall;
-                    var openingSide = (DoorOpeningSide)input.DefaultDoorOpeningSide;
-                    var openingType = (DoorOpeningType)input.DefaultDoorOpeningType;
+                    var openingSide = ConvertOpeningSideEnum(input.DefaultDoorOpeningSide);
+                    var openingType = ConvertOpeningTypeEnum(input.DefaultDoorOpeningType);
                     var doorOriginalPosition = pair.Value.Segment.Mid();
                     var doorCurrentPosition = doorOriginalPosition;
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
@@ -47,8 +44,8 @@ namespace Doors
                     if (doorOverride != null && doorOverride.Value.Transform != null)
                     {
                         doorCurrentPosition = doorOverride.Value.Transform.Origin;
-                        openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
-                        openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
+                        openingSide = ConvertOpeningSideEnum(doorOverride.Value.DefaultDoorOpeningSide);
+                        openingType = ConvertOpeningTypeEnum(doorOverride.Value.DefaultDoorOpeningType);
                         wall = GetClosestWall(doorCurrentPosition, walls, out _);
                     }
 
@@ -110,6 +107,12 @@ namespace Doors
                     continue;
                 }
 
+                if (wallLinesToWalls.TryGetValue(wall.CenterLine, out var secondWall) && wall.Height.Equals(secondWall.Height))
+                {
+                    // In this case two different walls have the same centerline. Pick the first one and proceed.
+                    continue;
+                }
+
                 wallLinesToWalls.Add(wall.CenterLine, wall);
             }
 
@@ -150,8 +153,8 @@ namespace Doors
             foreach (var addition in additions)
             {
                 var originalPosition = addition.Value.Transform.Origin;
-                var openingSide = (DoorOpeningSide)addition.Value.DoorOpeningSide;
-                var openingType = (DoorOpeningType)addition.Value.DoorOpeningType;
+                var openingSide = ConvertOpeningSideEnum(addition.Value.DoorOpeningSide);
+                var openingType = ConvertOpeningTypeEnum(addition.Value.DoorOpeningType);
                 var wall = GetClosestWall(originalPosition, walls, out originalPosition);
                 if (wall == null)
                 {
@@ -168,8 +171,8 @@ namespace Doors
                     currentPosition = doorOverride.Value.Transform.Origin;
                     width = doorOverride.Value.DoorWidth;
                     height = doorOverride.Value.DoorHeight;
-                    openingSide = (DoorOpeningSide)doorOverride.Value.DefaultDoorOpeningSide;
-                    openingType = (DoorOpeningType)doorOverride.Value.DefaultDoorOpeningType;
+                    openingSide = ConvertOpeningSideEnum(doorOverride.Value.DefaultDoorOpeningSide);
+                    openingType = ConvertOpeningTypeEnum(doorOverride.Value.DefaultDoorOpeningType);
                 }
 
                 var door = CreateDoor(wall, originalPosition, currentPosition, width, height, openingSide, openingType, doorOverride);
