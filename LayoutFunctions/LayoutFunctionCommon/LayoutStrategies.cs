@@ -27,7 +27,7 @@ namespace LayoutFunctionCommon
             foreach (var key in orderedKeys)
             {
                 var config = configs[key];
-                if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
+                if (config.CellBoundary.Width < width + 0.01 && config.CellBoundary.Depth < length + 0.01)
                 {
                     layoutInstantiated.Config = config;
                     layoutInstantiated.ConfigName = key;
