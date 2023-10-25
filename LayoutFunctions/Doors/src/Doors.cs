@@ -200,8 +200,9 @@ namespace Doors
         private static List<Line>? RoomCorridorEdges(SpaceBoundary room, IEnumerable<Line> corridorSegments)
         {
             var roomSegments = room.Boundary.Perimeter.CollinearPointsRemoved().Segments().Select(
-                s => s.TransformedLine(room.Transform));
-            var corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _);
+                s => s.TransformedLine(room.Transform)).Select(l => new RoomEdge() { Line = l });
+            var corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _)
+                .Select(edge => edge.Line).ToList();
             return corridorEdges;
         }
 
