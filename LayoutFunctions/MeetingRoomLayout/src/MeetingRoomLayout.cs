@@ -71,7 +71,7 @@ namespace MeetingRoomLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var layoutGeneration = new MeetingLayoutGeneration();
-            var result = layoutGeneration.StandardLayoutOnAllLevels("Meeting Room", inputModels, input.Overrides, false, "./ConferenceRoomConfigurations.json");
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Meeting Room", inputModels, input.Overrides, input.CreateWalls, "./ConferenceRoomConfigurations.json");
             var output = new MeetingRoomLayoutOutputs
             {
                 Model = result.OutputModel,

@@ -63,7 +63,7 @@ namespace ReceptionLayout
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Reception");
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Reception");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -125,7 +125,7 @@ namespace ReceptionLayout
 
             foreach (var line in perimeter.Segments())
             {
-                var lineMidPt = line.PointAt(0.5);
+                var lineMidPt = line.Mid();
                 var linePerp = line.Direction().Cross(Vector3.ZAxis).Unitized();
                 foreach (var coreSegment in coreSegments)
                 {
@@ -157,7 +157,7 @@ namespace ReceptionLayout
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in corridorSegments)
                 {
                     var dist = midpt.DistanceTo(seg);

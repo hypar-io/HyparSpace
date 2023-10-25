@@ -61,11 +61,11 @@ namespace PlantEntourage
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
+            { 
                 this.store = new S3ModelStore<PlantEntourageInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
             }
 
-            var l = new InvocationWrapper<PlantEntourageInputs,PlantEntourageOutputs>(store, PlantEntourage.Execute);
+            var l = new InvocationWrapper<PlantEntourageInputs,PlantEntourageOutputs> (store, PlantEntourage.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

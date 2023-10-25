@@ -124,7 +124,7 @@
         "$hyparOrder": 3,
         "items": {
           "description": "A boundary around an area to be excluded from USF Calculation. This area will be excluded from each floor.",
-          "$ref": "https://hypar.io/Schemas/Geometry/Polygon.json"
+          "$ref": "https://schemas.hypar.io/Polygon.json"
         }
       }
     }
@@ -222,31 +222,6 @@
           "$hyparUnitType": "area"
         }
       }
-    },
-    "Space Metrics": {
-      "$hyparOrder": 1,
-      "dependency": "Space Planning Zones",
-      "context": "[*discriminator=Elements.SpaceBoundary]",
-      "identity": {
-        "ParentCentroid": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        }
-      },
-      "paradigm": "edit",
-      "schema": {
-        "Seats": {
-          "type": "number"
-        },
-        "Headcount": {
-          "type": "number"
-        },
-        "Desks": {
-          "type": "number"
-        },
-        "Collaboration Seats": {
-          "type": "number"
-        }
-      }
     }
   },
   "outputs": [
@@ -330,15 +305,13 @@
     }
   ],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceMetric.json",
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/AreaTally",
-    "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/ProgramRequirement",
-    "https://prod-api.hypar.io/schemas/CoreArea",
+    "https://schemas.hypar.io/SpaceMetric.json",
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/AreaTally.json",
+    "https://schemas.hypar.io/LevelVolume.json",
+    "https://schemas.hypar.io/ProgramRequirement.json",
+    "https://schemas.hypar.io/CoreArea.json",
     "https://schemas.hypar.io/CirculationSegment.json"
   ],
-  "repository_url": "https://github.com/hypar-io/HyparSpace",
-  "last_updated": "2022-06-11T12:34:31.394295",
-  "cli_version": "1.2.0-alpha.12"
+  "repository_url": "https://github.com/hypar-io/HyparSpace"
 }

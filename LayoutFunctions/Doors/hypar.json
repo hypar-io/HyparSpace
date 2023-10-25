@@ -74,13 +74,13 @@
       "context": "[*discriminator=Elements.Door]",
       "identity": {
         "OriginalPosition": {
-          "$ref": "https://prod-api.hypar.io/schemas/Vector3"
+          "$ref": "https://schemas.hypar.io/Vector3.json"
         }
       },
       "paradigm": "edit",
       "schema": {
         "Transform": {
-            "$ref": "https://prod-api.hypar.io/schemas/Transform",
+            "$ref": "https://schemas.hypar.io/Transform.json",
             "$hyparConstraints": {
 				      "enableRotation": false,
               "enableTranslation": ["x","y"]
@@ -133,7 +133,7 @@
         "add": {
           "schema": {
             "Transform": {
-              "$ref": "https://prod-api.hypar.io/schemas/Transform",
+              "$ref": "https://schemas.hypar.io/Transform.json",
               "$hyparConstraints": {
                 "enableRotation": false,
                 "enableTranslation": ["x","y"]
@@ -187,7 +187,5 @@
     "https://schemas.hypar.io/WallCandidate.json"
   ],
   "repository_url": "",
-  "filters": {},
-  "last_updated": "2023-05-17T10:11:51.557529",
-  "cli_version": "1.6.0"
+  "filters": {}
 }

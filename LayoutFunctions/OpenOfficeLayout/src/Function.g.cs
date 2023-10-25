@@ -62,8 +62,16 @@ namespace OpenOfficeLayout
 
             if(this.store == null)
             { 
-                this.store = new S3ModelStore<OpenOfficeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<OpenOfficeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<OpenOfficeLayoutInputs>();
+                }
             }
+            
 
             var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs> (store, OpenOfficeLayout.Execute);
             var output = await l.InvokeAsync(args);

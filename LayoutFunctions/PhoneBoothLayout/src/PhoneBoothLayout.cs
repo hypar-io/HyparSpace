@@ -51,31 +51,31 @@ namespace PhoneBoothLayout
             {
                 var corridors = lvl.Elements.OfType<CirculationSegment>();
                 var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Phone Booth");
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Phone Booth");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
 
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in meetingRmBoundaries)
                 {
                     var seatsCount = 0;
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                   .Select(w =>
                                   {
-                                      if (w.type == "Glass")
+                                      if (w.Type == "Glass")
                                       {
-                                          w.type = "Glass-Edge";
+                                          w.Type = "Glass-Edge";
                                       }
                                       return w;
                                   });
                     var levelInvertedTransform = levelVolume.Transform.Inverted();
-                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness}));
 
                     var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
                     orientationTransform.Concatenate(relativeRoomTransform);
 
                     var boundaryCurves = new List<Polygon>();
@@ -119,7 +119,7 @@ namespace PhoneBoothLayout
 
                     }
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
-                    
+
                     totalBoothCount += seatsCount;
                     output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
@@ -148,7 +148,7 @@ namespace PhoneBoothLayout
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in corridorSegments)
                 {
                     var dist = midpt.DistanceTo(seg);

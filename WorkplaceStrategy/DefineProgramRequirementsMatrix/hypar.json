@@ -11,7 +11,7 @@
     "properties": {
       "Program": {
         "$hyparCanPopOut": true,
-        "$ref": "https://prod-api.hypar.io/schemas/ProgramAdjacencyMatrix"
+        "$ref": "https://schemas.hypar.io/ProgramAdjacencyMatrix.json"
       }
     }
   },
@@ -27,7 +27,7 @@
   "source_file_key": null,
   "preview_image": null,
   "element_types": [
-    "https://prod-api.hypar.io/schemas/ProgramRequirement",
-    "https://prod-api.hypar.io/schemas/ProgramAdjacencyMatrix"
+    "https://schemas.hypar.io/ProgramRequirement.json",
+    "https://schemas.hypar.io/ProgramAdjacencyMatrix.json"
   ]
 }

@@ -14,8 +14,13 @@ namespace Hypar.Server
             await HyparServer.StartAsync(
                 args,
                 Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
-                typeof(PrivateOfficeLayout.Function),
-                typeof(PrivateOfficeLayout.PrivateOfficeLayoutInputs));
+                async (executionRequest) =>
+                {
+                    var input = executionRequest.Args.ToObject<PrivateOfficeLayout.PrivateOfficeLayoutInputs>();
+                    var function = new PrivateOfficeLayout.Function();
+                    Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(PrivateOfficeLayout.Function).Assembly.Location)!);
+                    return await function.Handler(input, null);
+                });
         }
     }
 }

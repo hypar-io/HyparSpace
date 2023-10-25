@@ -62,8 +62,16 @@ namespace ClassroomLayout
 
             if(this.store == null)
             { 
-                this.store = new S3ModelStore<ClassroomLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<ClassroomLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<ClassroomLayoutInputs>();
+                }
             }
+            
 
             var l = new InvocationWrapper<ClassroomLayoutInputs,ClassroomLayoutOutputs> (store, ClassroomLayout.Execute);
             var output = await l.InvokeAsync(args);

@@ -61,7 +61,7 @@ namespace Doors
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            { 
+            {
                 if (args.SignedResourceUrls == null)
                 {
                     this.store = new S3ModelStore<DoorsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));

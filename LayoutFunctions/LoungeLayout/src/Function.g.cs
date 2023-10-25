@@ -62,8 +62,16 @@ namespace LoungeLayout
 
             if(this.store == null)
             { 
-                this.store = new S3ModelStore<LoungeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<LoungeLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<LoungeLayoutInputs>();
+                }
             }
+            
 
             var l = new InvocationWrapper<LoungeLayoutInputs,LoungeLayoutOutputs> (store, LoungeLayout.Execute);
             var output = await l.InvokeAsync(args);

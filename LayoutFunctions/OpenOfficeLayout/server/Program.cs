@@ -14,8 +14,13 @@ namespace Hypar.Server
             await HyparServer.StartAsync(
                 args,
                 Path.GetFullPath(Path.Combine(Assembly.GetExecutingAssembly().Location, "../../../../..")),
-                typeof(OpenOfficeLayout.Function),
-                typeof(OpenOfficeLayout.OpenOfficeLayoutInputs));
+                async (executionRequest) =>
+                {
+                    var input = executionRequest.Args.ToObject<OpenOfficeLayout.OpenOfficeLayoutInputs>();
+                    var function = new OpenOfficeLayout.Function();
+                    Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(OpenOfficeLayout.Function).Assembly.Location)!);
+                    return await function.Handler(input, null);
+                });
         }
     }
 }

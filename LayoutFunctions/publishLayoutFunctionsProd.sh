@@ -10,17 +10,35 @@ projects=(
     "PhoneBoothLayout"
     "PrivateOfficeLayout"
     "ReceptionLayout"
+    "InteriorPartitions"
 )
 
+# Initialize an empty array to hold projects that fail to build
+declare -a failedProjects
+
+# Function to perform 'dotnet build' and check for errors
 task() {
-echo $project
-cd ./$project/
-hypar publish --disable-pull-check
-cd ../
+    local project=$1
+    echo "Building $project"
+    cd "./$project"
+    if ! hypar --dev publish --disable-pull-check 2>&1; then
+        failedProjects+=("$project")
+    fi
+
+    cd "../"
 }
 
-for project in ${projects[@]};
-do
-    task $project &
+# Loop through each project and call the task function
+for project in "${projects[@]}"; do
+    task "$project"
 done
-wait
+
+# Report projects that failed to build
+if [ ${#failedProjects[@]} -ne 0 ]; then
+    echo "Failed to build the following projects:"
+    for failed in "${failedProjects[@]}"; do
+        echo " - $failed"
+    done
+else
+    echo "All projects built successfully."
+fi

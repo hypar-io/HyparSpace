@@ -6,7 +6,7 @@ Define a set of program requirements for Hypar Space.
 
 |Input Name|Type|Description|
 |---|---|---|
-|Program|https://prod-api.hypar.io/schemas/ProgramAdjacencyMatrix||
+|Program|https://schemas.hypar.io/ProgramAdjacencyMatrix.json||
 
 
 <br>

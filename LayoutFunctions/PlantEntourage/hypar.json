@@ -114,7 +114,5 @@
           "context": "[*discriminator!=Elements.ContentElement]",
           "default": false
       }
-  },
-  "last_updated": "2023-06-16T12:25:19.340812",
-  "cli_version": "1.6.0"
+  }
 }
