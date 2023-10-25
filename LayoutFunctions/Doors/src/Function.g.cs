@@ -61,11 +61,18 @@ namespace Doors
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
-                this.store = new S3ModelStore<DoorsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+            { 
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<DoorsInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<DoorsInputs>();
+                }
             }
 
-            var l = new InvocationWrapper<DoorsInputs,DoorsOutputs>(store, Doors.Execute);
+            var l = new InvocationWrapper<DoorsInputs,DoorsOutputs> (store, Doors.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
