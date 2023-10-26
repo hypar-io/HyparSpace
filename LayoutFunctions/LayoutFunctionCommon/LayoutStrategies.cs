@@ -198,14 +198,14 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
-                    processedSpaces.Add(room.Id);
-                    ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    if (layoutSucceeded) { processedSpaces.Add(room.Id); }
                 }
 
                 double height = levelVolume?.Height ?? 3;
                 Transform xform = levelVolume?.Transform ?? new Transform();
 
-                if (createWalls)
+                if (createWalls && wallCandidateLines.Count > 0)
                 {
                     outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
@@ -217,8 +217,11 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
-                processedSpaces.Add(room.Id);
-                ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                var layoutSucceeded = ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                if (layoutSucceeded)
+                {
+                    processedSpaces.Add(room.Id);
+                }
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
             return processedSpaces;
@@ -303,7 +306,7 @@ namespace LayoutFunctionCommon
             wallCandidateLines.AddRange(WallCandidates);
         }
 
-        private static void ProcessRoom<TLevelVolume, TSpaceBoundary>(
+        private static bool ProcessRoom<TLevelVolume, TSpaceBoundary>(
                 TSpaceBoundary room,
                 Model outputModel,
                 Func<LayoutInstantiated,
@@ -366,6 +369,7 @@ namespace LayoutFunctionCommon
             {
                 outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
             }
+            return success;
         }
 
         public static SearchablePointCollection<Profile> GetColumnProfiles(ColumnAvoidanceStrategy avoidanceStrategy, Dictionary<string, Model> inputModels)
