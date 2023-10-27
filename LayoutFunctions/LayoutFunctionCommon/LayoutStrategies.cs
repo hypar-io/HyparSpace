@@ -70,14 +70,14 @@ namespace LayoutFunctionCommon
             var segs = rect.Segments();
             var width = segs[0].Length();
             var depth = segs[1].Length();
-            var trimmedGeo = cell.GetTrimmedCellGeometry();
-            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+            var trimmedGeo = cell.GetTrimmedCellGeometry().OfType<Polygon>();
+            if ((!cell.IsTrimmed() && trimmedGeo.Any()) || IsNearlyARectangle(trimmedGeo))
             {
                 return InstantiateLayoutByFit(configs, width, depth, rect, xform);
             }
-            else if (trimmedGeo.Count() > 0)
+            else if (trimmedGeo.Any())
             {
-                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                var largestTrimmedShape = trimmedGeo.OrderBy(s => s.Area()).Last();
                 try
                 {
                     if (largestTrimmedShape.Vertices.Count < 8)
@@ -132,6 +132,14 @@ namespace LayoutFunctionCommon
             return null;
         }
 
+        public static bool IsNearlyARectangle(IEnumerable<Polygon> polygons)
+        {
+            var areaSum = polygons.Sum(p => p.Area());
+            var bbox = new BBox3(polygons.SelectMany(p => p.Vertices));
+            var bbox2dArea = Polygon.Rectangle((bbox.Min.X, bbox.Min.Y), (bbox.Max.X, bbox.Max.Y)).Area();
+            // if area is within 5% of the bounding box area, just assume it's a rectangle.
+            return areaSum / bbox2dArea > 0.95;
+        }
         public static List<TLevelVolume> GetLevelVolumes<TLevelVolume>(Dictionary<string, Model> inputModels) where TLevelVolume : Element
         {
             var levelVolumes = new List<TLevelVolume>();
