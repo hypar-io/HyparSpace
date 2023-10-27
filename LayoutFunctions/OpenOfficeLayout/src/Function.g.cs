@@ -71,7 +71,6 @@ namespace OpenOfficeLayout
                     this.store = new UrlModelStore<OpenOfficeLayoutInputs>();
                 }
             }
-            
 
             var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs> (store, OpenOfficeLayout.Execute);
             var output = await l.InvokeAsync(args);

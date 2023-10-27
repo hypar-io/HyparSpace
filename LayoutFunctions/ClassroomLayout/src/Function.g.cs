@@ -71,7 +71,6 @@ namespace ClassroomLayout
                     this.store = new UrlModelStore<ClassroomLayoutInputs>();
                 }
             }
-            
 
             var l = new InvocationWrapper<ClassroomLayoutInputs,ClassroomLayoutOutputs> (store, ClassroomLayout.Execute);
             var output = await l.InvokeAsync(args);

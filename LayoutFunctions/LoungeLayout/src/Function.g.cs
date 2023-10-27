@@ -71,7 +71,6 @@ namespace LoungeLayout
                     this.store = new UrlModelStore<LoungeLayoutInputs>();
                 }
             }
-            
 
             var l = new InvocationWrapper<LoungeLayoutInputs,LoungeLayoutOutputs> (store, LoungeLayout.Execute);
             var output = await l.InvokeAsync(args);

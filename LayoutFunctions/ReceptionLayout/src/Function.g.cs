@@ -71,7 +71,6 @@ namespace ReceptionLayout
                     this.store = new UrlModelStore<ReceptionLayoutInputs>();
                 }
             }
-            
 
             var l = new InvocationWrapper<ReceptionLayoutInputs,ReceptionLayoutOutputs> (store, ReceptionLayout.Execute);
             var output = await l.InvokeAsync(args);
