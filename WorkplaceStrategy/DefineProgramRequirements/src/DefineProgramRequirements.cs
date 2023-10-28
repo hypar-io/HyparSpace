@@ -20,8 +20,6 @@ namespace DefineProgramRequirements
         /// <returns>A DefineProgramRequirementsOutputs instance containing computed results and the model with any new elements.</returns>
         public static DefineProgramRequirementsOutputs Execute(Dictionary<string, Model> inputModels, DefineProgramRequirementsInputs input)
         {
-            Console.WriteLine("🌊");
-            Console.WriteLine(JsonConvert.SerializeObject(input));
             var programRequirements = input.ProgramRequirements.ToList();
             var output = new DefineProgramRequirementsOutputs();
             if (programRequirements.Select(p => p.ProgramName + p.ProgramGroup).Distinct().Count() != programRequirements.Count)
@@ -33,7 +31,6 @@ namespace DefineProgramRequirements
                 pr.AdditionalProperties.Clear();
             }
             var sum = programRequirements.Sum(p => p.AreaPerSpace * p.SpaceCount);
-            // output.Model.AddElements(programRequirements);
             var colorScheme = ColorScheme.ProgramColors;
 
             Dictionary<string, CatalogWrapper> wrappers = new Dictionary<string, CatalogWrapper>();
@@ -97,10 +94,7 @@ namespace DefineProgramRequirements
                                 Console.WriteLine($"Could not find space configuration file {file.LocalFilePath}.");
                                 continue;
                             }
-                            Console.WriteLine("🐷 " + $"local: {file.LocalFilePath}");
                             var contentConfigText = File.ReadAllText(file.LocalFilePath);
-                            Console.WriteLine("👹 " + $"{req.ProgramName}: {file.FolderId}/{file.FileRefId}");
-                            Console.WriteLine(contentConfigText);
                             var contentConfiguration = JsonConvert.DeserializeObject<SpaceConfiguration>(File.ReadAllText(file.LocalFilePath));
                             spaceConfigElem = new SpaceConfigurationElement
                             {
