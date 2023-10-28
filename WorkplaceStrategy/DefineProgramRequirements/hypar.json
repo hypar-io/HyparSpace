@@ -179,10 +179,14 @@
       "input_schema": {
         "properties": {
           "Program Requirements": {
+            "name": "Requirements",
             "items": {
               "properties": {
                 "Layout Type": {
                   "name": "Space Type"
+                },
+                "Program Group": {
+                  "name": "New Group"
                 }
               }
             }
