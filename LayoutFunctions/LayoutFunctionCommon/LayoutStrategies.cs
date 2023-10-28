@@ -636,6 +636,8 @@ namespace LayoutFunctionCommon
                 PatternMode.Cycle,
                 FixedDivisionMode.RemainderAtBothEnds);
 
+            backToBackWidth = Math.Max(backToBackWidth, 0.1);
+
             var mainVPattern = new[] {
                                 ("Aisle", backToBackWidth),
                                 ("Forward", selectedConfig.Depth),
