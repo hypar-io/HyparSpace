@@ -228,21 +228,25 @@ namespace LayoutFunctionCommon
             }
         }
 
-        public static List<RoomEdge> SplitOverlappingWallCandidates(IEnumerable<(Line line, string type)> wallCandidateLines, IEnumerable<(Line line, string type)> prioritizedWallCandidateLines, double tolerance = 0.01)
+        public static List<RoomEdge> SplitOverlappingWallCandidates(IEnumerable<RoomEdge> wallCandidateLines,
+                                                                    IEnumerable<RoomEdge> prioritizedWallCandidateLines,
+                                                                    double tolerance = 0.01)
         {
             var resultCandidates = new List<RoomEdge>();
-            var typedLines = wallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.type));
-            var prioritizedTypedLines = prioritizedWallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.type));
+            var typedLines = wallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.Type));
+            var prioritizedTypedLines = prioritizedWallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.Type));
             var allTypedLines = new List<RoomEdge>();
             allTypedLines.AddRange(typedLines.Select(l => new RoomEdge()
             {
-                Line = l.line,
-                Type = $"{l.type}-0"
+                Line = l.Line,
+                Type = $"{l.Type}-0",
+                Thickness = l.Thickness
             }));
             allTypedLines.AddRange(prioritizedTypedLines.Select(l => new RoomEdge()
             {
-                Line = l.line,
-                Type = $"{l.type}-1"
+                Line = l.Line,
+                Type = $"{l.Type}-1",
+                Thickness = l.Thickness
             }));
             var collinearLinesGroups = GroupCollinearLines(allTypedLines, tolerance);
 
