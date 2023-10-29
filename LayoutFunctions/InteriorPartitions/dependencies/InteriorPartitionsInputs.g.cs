@@ -253,16 +253,16 @@ namespace InteriorPartitions
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public InteriorPartitionTypesIdentity(Line @line, string @addId)
+        public InteriorPartitionTypesIdentity(string @addId, Line @line)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @line, @addId});
+                validator.PreConstruct(new object[]{ @addId, @line});
             }
         
-            this.Line = @line;
             this.AddId = @addId;
+            this.Line = @line;
         
             if(validator != null)
             {
@@ -270,11 +270,11 @@ namespace InteriorPartitions
             }
         }
     
-        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Line Line { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("AddId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Line Line { get; set; }
     
     }
     
@@ -284,16 +284,16 @@ namespace InteriorPartitions
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public InteriorPartitionTypesValue(InteriorPartitionTypesValueType @type, Line @line)
+        public InteriorPartitionTypesValue(Line @line, InteriorPartitionTypesValueType @type)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @type, @line});
+                validator.PreConstruct(new object[]{ @line, @type});
             }
         
-            this.Type = @type;
             this.Line = @line;
+            this.Type = @type;
         
             if(validator != null)
             {
@@ -301,12 +301,12 @@ namespace InteriorPartitions
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Line Line { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public InteriorPartitionTypesValueType Type { get; set; } = InteriorPartitionTypesValueType.Solid;
-    
-        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Line Line { get; set; }
     
     }
     
@@ -316,16 +316,16 @@ namespace InteriorPartitions
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public InteriorPartitionTypesOverrideAdditionValue(InteriorPartitionTypesOverrideAdditionValueType @type, Line @line)
+        public InteriorPartitionTypesOverrideAdditionValue(Line @line, InteriorPartitionTypesOverrideAdditionValueType @type)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesOverrideAdditionValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @type, @line});
+                validator.PreConstruct(new object[]{ @line, @type});
             }
         
-            this.Type = @type;
             this.Line = @line;
+            this.Type = @type;
         
             if(validator != null)
             {
@@ -333,12 +333,12 @@ namespace InteriorPartitions
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Line Line { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public InteriorPartitionTypesOverrideAdditionValueType Type { get; set; } = InteriorPartitionTypesOverrideAdditionValueType.Solid;
-    
-        [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Line Line { get; set; }
     
     }
     

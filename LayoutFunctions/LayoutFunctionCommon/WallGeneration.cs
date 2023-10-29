@@ -105,7 +105,7 @@ namespace LayoutFunctionCommon
 
         public static List<RoomEdge> DeduplicateWallLines(List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
-            // return interiorPartitionCandidates.SelectMany(i => i.WallCandidateLines).Where(l => l.Type != null && interiorPartitionTypePriority.Keys.Contains(l.Type)).ToList();
+            return interiorPartitionCandidates.SelectMany(i => i.WallCandidateLines).Where(l => l.Type != null && interiorPartitionTypePriority.Keys.Contains(l.Type)).ToList();
             var resultCandidates = new List<RoomEdge>();
             var typedLines = interiorPartitionCandidates.SelectMany(c => c.WallCandidateLines)
                             .Where(l => l.Type != null && interiorPartitionTypePriority.Keys.Contains(l.Type));

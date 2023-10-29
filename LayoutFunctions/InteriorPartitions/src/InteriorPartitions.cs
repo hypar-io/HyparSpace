@@ -93,27 +93,28 @@ namespace InteriorPartitions
                     levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes, input.Overrides.Removals.InteriorPartitionTypes);
                 }
 
-                var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
-                    levelWallCandidates.Select(w => new RoomEdge
-                    {
-                        Line = w.Line,
-                        Type = w.Type,
-                        Thickness = w.Thickness
-                    }),
-                    userAddedWallLinesCandidates.Select(w => new RoomEdge()
-                    {
-                        Line = w.Line.TransformedLine(w.LevelTransform),
-                        Type = w.Type,
-                        Thickness = w.Thickness
-                    }));
-                var splittedWallCandidates = splittedCandidates
-                    .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>())
-                    {
-                        Thickness = c.Thickness
-                    })
-                    .ToList();
+                // var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
+                //     levelWallCandidates.Select(w => new RoomEdge
+                //     {
+                //         Line = w.Line,
+                //         Type = w.Type,
+                //         Thickness = w.Thickness
+                //     }),
+                //     userAddedWallLinesCandidates.Select(w => new RoomEdge()
+                //     {
+                //         Line = w.Line.TransformedLine(w.LevelTransform),
+                //         Type = w.Type,
+                //         Thickness = w.Thickness
+                //     }));
+                // var splittedWallCandidates = splittedCandidates
+                //     .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>())
+                //     {
+                //         Thickness = c.Thickness
+                //     })
+                //     .ToList();
 
-                wallCandidates.AddRange(splittedWallCandidates);
+                // wallCandidates.AddRange(splittedWallCandidates);
+                wallCandidates.AddRange(levelWallCandidates);
             }
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates, input.Overrides.Additions.InteriorPartitionTypes);
             RemoveWallCandidates(input.Overrides.Removals.InteriorPartitionTypes, wallCandidates);
