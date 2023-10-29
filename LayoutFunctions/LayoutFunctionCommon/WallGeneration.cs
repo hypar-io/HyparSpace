@@ -230,7 +230,7 @@ namespace LayoutFunctionCommon
 
         public static List<RoomEdge> SplitOverlappingWallCandidates(IEnumerable<RoomEdge> wallCandidateLines,
                                                                     IEnumerable<RoomEdge> prioritizedWallCandidateLines,
-                                                                    double tolerance = 0.01)
+                                                                    double tolerance = Vector3.EPSILON)
         {
             var resultCandidates = new List<RoomEdge>();
             var typedLines = wallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.Type));

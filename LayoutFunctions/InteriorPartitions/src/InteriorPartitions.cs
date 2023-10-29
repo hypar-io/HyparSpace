@@ -225,14 +225,23 @@ namespace InteriorPartitions
                         resultElements.Remove(overlappingWallCandidate);
                         if (!orderedVectors[0].IsAlmostEqualTo(orderedVectors[1]))
                         {
-                            resultElements.Add(new WallCandidate(new Line(orderedVectors[0], orderedVectors[1]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform));
+                            resultElements.Add(new WallCandidate(new Line(orderedVectors[0], orderedVectors[1]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
+                            {
+                                Thickness = overlappingWallCandidate.Thickness
+                            });
                         }
 
-                        resultElements.Add(new WallCandidate(editedElement.Value.Line, editedElement.Value.Type.ToString(), overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform));
+                        resultElements.Add(new WallCandidate(editedElement.Value.Line, editedElement.Value.Type.ToString(), overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
+                        {
+                            Thickness = overlappingWallCandidate.Thickness
+                        });
 
                         if (!orderedVectors[2].IsAlmostEqualTo(orderedVectors[3]))
                         {
-                            resultElements.Add(new WallCandidate(new Line(orderedVectors[2], orderedVectors[3]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform));
+                            resultElements.Add(new WallCandidate(new Line(orderedVectors[2], orderedVectors[3]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
+                            {
+                                Thickness = overlappingWallCandidate.Thickness
+                            });
                         }
                     }
                 }
