@@ -14,11 +14,52 @@ namespace MeetingRoomLayout
 
     public static class MeetingRoomLayout
     {
-        private class LayoutInstantiated
+        private class MeetingLayoutGeneration : LayoutGeneration<LevelElements, LevelVolume, SpaceBoundary, CirculationSegment>
         {
-            public ComponentInstance Instance { get; set; }
-            public RoomTally Tally { get; set; }
-        };
+            private Dictionary<string, RoomTally> seatsTable = new();
+
+            protected override SeatsCount CountSeats(LayoutInstantiated layout)
+            {
+                int seatsCount = 0;
+                if (layout != null)
+                {
+                    if (configInfos.TryGetValue(layout.ConfigName, out var configInfo))
+                    {
+                        seatsCount = configInfo.capacity;
+                    }
+
+                    if (seatsTable.ContainsKey(layout.ConfigName))
+                    {
+                        seatsTable[layout.ConfigName].SeatsCount += seatsCount;
+                    }
+                    else
+                    {
+                        seatsTable[layout.ConfigName] = new RoomTally(layout.ConfigName, seatsCount);
+                    }
+                }
+                return new SeatsCount(seatsCount, 0, 0, 0);
+            }
+
+            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
+            {
+                seatsTable = new Dictionary<string, RoomTally>();
+                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
+                result.OutputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
+                return result;
+            }
+
+            protected override IEnumerable<KeyValuePair<string, ContentConfiguration>> OrderConfigs(Dictionary<string, ContentConfiguration> configs)
+            {
+                return configs.OrderBy(i =>
+                {
+                    if (!configInfos.ContainsKey(i.Key))
+                    {
+                        return int.MaxValue;
+                    }
+                    return configInfos[i.Key].orderIndex;
+                });
+            }
+        }
 
         /// <summary>
         /// The MeetingRoomLayout function.
@@ -29,159 +70,28 @@ namespace MeetingRoomLayout
         public static MeetingRoomLayoutOutputs Execute(Dictionary<string, Model> inputModels, MeetingRoomLayoutInputs input)
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
-            var spacePlanningZones = inputModels["Space Planning Zones"];
-            var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
-            if (inputModels.TryGetValue("Circulation", out var circModel))
+            var layoutGeneration = new MeetingLayoutGeneration();
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Meeting Room", inputModels, input.Overrides, input.CreateWalls, "./ConferenceRoomConfigurations.json");
+            var output = new MeetingRoomLayoutOutputs
             {
-                var circSegments = circModel.AllElementsOfType<CirculationSegment>();
-                foreach (var cs in circSegments)
-                {
-                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
-                    if (matchingLevel != null)
-                    {
-                        matchingLevel.Elements.Add(cs);
-                    }
-                }
-            }
-            var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
-            var configJson = File.ReadAllText("./ConferenceRoomConfigurations.json");
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-
-            var outputModel = new Model();
-            int totalSeats = 0;
-            var seatsTable = new Dictionary<string, RoomTally>();
-            foreach (var lvl in levels)
-            {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Meeting Room");
-                var levelVolume = levelVolumes.FirstOrDefault(l =>
-                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
-                        levelVolumeId as string == l.Id.ToString())) ??
-                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-
-                var wallCandidateLines = new List<(Line line, string type)>();
-                foreach (var room in meetingRmBoundaries)
-                {
-                    var spaceBoundary = room.Boundary;
-                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
-                    var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
-                        .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
-                    wallCandidateLines.AddRange(roomWallCandidatesLines);
-
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
-                    var boundaryCurves = new List<Polygon>();
-                    boundaryCurves.Add(spaceBoundary.Perimeter);
-                    boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
-                    try
-                    {
-                        var grid = new Grid2d(boundaryCurves, orientationTransform);
-                        foreach (var cell in grid.GetCells())
-                        {
-                            var rect = cell.GetCellGeometry() as Polygon;
-                            var segs = rect.Segments();
-                            var width = segs[0].Length();
-                            var depth = segs[1].Length();
-                            var trimmedGeo = cell.GetTrimmedCellGeometry();
-                            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
-                            {
-                                var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
-                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
-                            }
-                            else if (trimmedGeo.Count() > 0)
-                            {
-                                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
-                                var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
-                                var cinchedPoly = new Polygon(cinchedVertices);
-                                var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
-                                totalSeats += AddInstantiatedLayout(layout, outputModel, seatsTable, levelVolume);
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Error generating layout for room " + room.Id);
-                    }
-
-                }
-
-                var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
-                if (input.CreateWalls)
-                {
-                    outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
-                    {
-                        WallCandidateLines = wallCandidateLines,
-                        Height = height,
-                        LevelTransform = levelVolume?.Transform ?? new Transform()
-                    });
-                }
-            }
-            OverrideUtilities.InstancePositionOverrides(input.Overrides, outputModel);
-
-            outputModel.AddElement(new WorkpointCount(totalSeats, "Meeting Room Seat"));
-            outputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
-
-            var output = new MeetingRoomLayoutOutputs(totalSeats);
-            output.Model = outputModel;
+                Model = result.OutputModel,
+                TotalSeatCount = result.SeatsCount
+            };
             return output;
         }
 
-        private static int AddInstantiatedLayout(LayoutInstantiated layout, Model model, Dictionary<string, RoomTally> seatsTable, LevelVolume levelVolume)
+        private static readonly Dictionary<string, (int capacity, int orderIndex)> configInfos = new()
         {
-            if (layout == null)
-            {
-                return 0;
-            }
-
-            LayoutStrategies.SetLevelVolume(layout.Instance, levelVolume?.Id);
-            model.AddElement(layout.Instance);
-
-            int seatsCount = 0;
-            if (layout.Tally != null)
-            {
-                if (seatsTable.ContainsKey(layout.Tally.RoomType))
-                {
-                    seatsTable[layout.Tally.RoomType].SeatsCount += layout.Tally.SeatsCount;
-                }
-                else
-                {
-                    seatsTable[layout.Tally.RoomType] = new RoomTally(layout.Tally.RoomType, layout.Tally.SeatsCount);
-                }
-                seatsCount = layout.Tally.SeatsCount;
-            }
-
-            return seatsCount;
-        }
-
-        private static LayoutInstantiated InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
-        {
-            ContentConfiguration selectedConfig = null;
-            var result = new LayoutInstantiated();
-            for (int i = 0; i < orderedKeys.Length; ++i)
-            {
-                var config = configs[orderedKeys[i]];
-                if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
-                {
-                    selectedConfig = config;
-                    result.Tally = new RoomTally(orderedKeys[i], orderedKeysCapacity[i]);
-                    break;
-                }
-            }
-            if (selectedConfig == null)
-            {
-                return null;
-            }
-            var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
-            var rules = selectedConfig.Rules();
-
-            var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            result.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            return result;
-        }
-
-        private static string[] orderedKeys = new[] { "22P", "20P", "14P", "13P", "8P", "6P-A", "6P-B", "4P-A", "4P-B" };
-        private static int[] orderedKeysCapacity = new[] { 22, 20, 14, 13, 8, 6, 6, 4, 4 };
+            {"22P", (22, 1)},
+            {"20P", (20, 2)},
+            {"14P", (14, 3)},
+            {"13P", (13, 4)},
+            {"8P", (8, 5)},
+            {"6P-A", (6, 6)},
+            {"6P-B", (6, 7)},
+            {"4P-A", (4, 8)},
+            {"4P-B", (4, 9)}
+        };
     }
 
 }

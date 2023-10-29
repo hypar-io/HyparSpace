@@ -31,6 +31,10 @@
                 "optional": true
             },
             {
+                "name": "Floors",
+                "optional": true
+            },
+            {
                 "autohide": false,
                 "name": "Conceptual Mass",
                 "optional": true
@@ -43,7 +47,7 @@
                 "context": "[*discriminator=Elements.ElementInstance]",
                 "identity": {
                     "OriginalLocation": {
-                        "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+                        "$ref": "https://schemas.hypar.io/Vector3.json"
                     },
                     "gltfLocation": {
                         "type": "string"
@@ -51,7 +55,7 @@
                 },
                 "schema": {
                     "Transform": {
-                        "$ref": "https://prod-api.hypar.io/schemas/Transform"
+                        "$ref": "https://schemas.hypar.io/Transform.json"
                     }
                 }
             }

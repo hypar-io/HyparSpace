@@ -83,6 +83,11 @@
       "autohide": false,
       "name": "Room Layout",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Furniture and Equipment",
+      "optional": true
     }
   ],
   "model_output": "Interior Partitions",

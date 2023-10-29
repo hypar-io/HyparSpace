@@ -20,6 +20,7 @@ This repository contains the source code to a range of functions for doing spati
   * Meeting Room Layout
   * Phone Booth Layout
   * Lounge Layout
+  * Data Hall Layout
 
 
 ## To develop your own function based on one of these:

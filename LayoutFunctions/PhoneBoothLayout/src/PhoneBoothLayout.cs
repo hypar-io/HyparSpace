@@ -21,6 +21,7 @@ namespace PhoneBoothLayout
         /// <returns>A PhoneBoothLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static PhoneBoothLayoutOutputs Execute(Dictionary<string, Model> inputModels, PhoneBoothLayoutInputs input)
         {
+            rand = new Random(4);
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
@@ -49,32 +50,32 @@ namespace PhoneBoothLayout
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Phone Booth");
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Phone Booth");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
 
 
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var initialWallCandidates = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out var orientationGuideEdge)
                                   .Select(w =>
                                   {
-                                      if (w.type == "Glass")
+                                      if (w.Type == "Glass")
                                       {
-                                          w.type = "Glass-Edge";
+                                          w.Type = "Glass-Edge";
                                       }
                                       return w;
                                   });
-                    var levelInvertedTransform = levelVolume.Transform.Inverted();
-                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type)));
+                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness }));
 
                     var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
                     orientationTransform.Concatenate(relativeRoomTransform);
 
                     var boundaryCurves = new List<Polygon>();
@@ -98,7 +99,7 @@ namespace PhoneBoothLayout
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalBoothCount++;
+                                seatsCount++;
                             }
                         }
                         else if (trimmedGeo.Count() > 0)
@@ -112,12 +113,15 @@ namespace PhoneBoothLayout
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                                 output.Model.AddElement(layout);
-                                totalBoothCount++;
+                                seatsCount++;
                             }
                         }
 
                     }
                     wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+
+                    totalBoothCount += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
@@ -130,7 +134,6 @@ namespace PhoneBoothLayout
                     });
                 }
             }
-            output.Model.AddElement(new WorkpointCount() { Type = "Phone Booth", Count = totalBoothCount });
             output.PhoneBooths = totalBoothCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;
@@ -145,7 +148,7 @@ namespace PhoneBoothLayout
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in corridorSegments)
                 {
                     var dist = midpt.DistanceTo(seg);

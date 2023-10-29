@@ -60,22 +60,22 @@ namespace ClassroomLayout
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Classroom");
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Classroom");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
-                    var levelInvertedTransform = levelVolume.Transform.Inverted();
-                    var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out Line orientationGuideEdge)
-                        .Select(c => (c.line.TransformedLine(levelInvertedTransform), c.type));
+                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
+                    var roomWallCandidatesLines = WallGeneration.FindWallCandidates(room, levelVolume?.Profile, corridorSegments, out RoomEdge orientationGuideEdge)
+                        .Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness });
                     wallCandidateLines.AddRange(roomWallCandidatesLines);
-                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                    var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
                     var boundaryCurves = new List<Polygon>();
                     boundaryCurves.Add(spaceBoundary.Perimeter);
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
@@ -124,7 +124,7 @@ namespace ClassroomLayout
                                     }
                                     if (trimmedShape.Area().ApproximatelyEquals(deskConfig.Width * deskConfig.Depth, 0.1))
                                     {
-                                        totalCountableSeats += seatsAtDesk;
+                                        seatsCount += seatsAtDesk;
                                         foreach (var contentItem in deskConfig.ContentItems)
                                         {
                                             var instance = contentItem.ContentElement.CreateInstance(
@@ -145,6 +145,9 @@ namespace ClassroomLayout
                         {
                         }
                     }
+
+                    totalCountableSeats += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
                 if (input.CreateWalls)
@@ -157,7 +160,6 @@ namespace ClassroomLayout
                     });
                 }
             }
-            output.Model.AddElement(new WorkpointCount() { Count = totalCountableSeats, Type = "Classroom Seat" });
             output.TotalCountOfDeskSeats = totalCountableSeats;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
             return output;

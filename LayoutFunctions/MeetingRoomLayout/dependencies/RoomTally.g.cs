@@ -34,6 +34,7 @@ namespace Elements
             this.SeatsCount = @seatsCount;
             }
         
+        
         // Empty constructor
         public RoomTally()
             : base()

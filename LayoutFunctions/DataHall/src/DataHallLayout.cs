@@ -18,7 +18,7 @@ namespace DataHallLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
-            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>().Where(b => b.Name == "Data Hall");
+            var roomBoundaries = spacePlanningZones.AllElementsOfType<SpaceBoundary>().Where(b => (b.HyparSpaceType ?? b.Name) == "Data Hall");
 
             var model = new Model();
             var warnings = new List<string>();
@@ -56,35 +56,59 @@ namespace DataHallLayout
             }
             var width = dataRack.BoundingBox.Max.X - dataRack.BoundingBox.Min.X;
             var depth = dataRack.BoundingBox.Max.Y - dataRack.BoundingBox.Min.Y;
+
             var totalArea = 0.0;
             foreach (var room in roomBoundaries)
             {
+                List<Column> roomColumns = GetColumnsInRoom(room, inputModels);
                 var profile = room.Boundary;
                 totalArea += profile.Area();
                 //inset from walls
-                var inset = profile.Perimeter.Offset(-1.2);
-                Line longestEdge = null;
+                var inset = profile.Perimeter.Offset(-input.Clearance);
+                Line alignmentEdge = null;
                 try
                 {
-                    longestEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                    if (input.FlipDirection)
+                    {
+                        alignmentEdge = inset.SelectMany(s => s.Segments()).OrderByDescending(l => l.Length()).Last();
+                    }
+                    else
+                    {
+                        alignmentEdge = inset.SelectMany(s => s.Segments()).OrderBy(l => l.Length()).Last();
+                    }
                 }
                 catch
                 {
                     warnings.Add("One space was too small for a data hall.");
                     continue;
                 }
-                var alignment = new Transform(Vector3.Origin, longestEdge.Direction(), Vector3.ZAxis);
+                var alignment = new Transform(Vector3.Origin, alignmentEdge.Direction(), Vector3.ZAxis);
                 var grid = new Grid2d(inset, alignment);
-                grid.U.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
-                grid.V.DivideByFixedLength(width);
+
+                grid.U.DivideByFixedLength(width);
+
+                if (input.SwapColdHotPattern)
+                {
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Cold Aisle", input.ColdAisleWidth), ("Backward Rack", depth), ("Hot Aisle", input.HotAisleWidth) });
+                }
+                else
+                {
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
+                }
+
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
-                model.AddElements(floorGrid.ToModelCurves(room.Transform));
+                model.AddElement(ToModelLines(floorGrid, room.Transform));
+
+                double rackAngle = 0;
+                if (input.SwapColdHotPattern) rackAngle = 180;
 
                 foreach (var cell in grid.GetCells())
                 {
                     var cellRect = cell.GetCellGeometry() as Polygon;
+                    bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns);
+
                     if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0)
                     {
                         continue;
@@ -97,16 +121,16 @@ namespace DataHallLayout
                     {
                         model.AddElement(new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform));
                     }
-                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
-                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), -90)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle - 180)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
-                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01))
+                    else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
-                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), 90)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
                         model.AddElement(rackInstance);
                     }
                 }
@@ -119,6 +143,52 @@ namespace DataHallLayout
             output.Model = model;
             output.Warnings.AddRange(warnings);
             return output;
+        }
+
+        private static List<Column> GetColumnsInRoom(SpaceBoundary room, Dictionary<string, Model> inputModels)
+        {
+            if (!inputModels.ContainsKey("Columns"))
+            {
+                return null;
+            }
+
+            var allColumns = inputModels["Columns"].Elements.Values.OfType<Column>().ToList();
+            var columns = allColumns
+                .Where(column => column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location)))
+                .ToList();
+
+            return columns.Count > 0 ? columns : null;
+        }
+
+        private static bool CheckIntersectsWithColumns(Polygon? cellRect, List<Column> columns)
+        {
+            if (cellRect == null || columns == null || columns.Count == 0)
+            {
+                return false;
+            }
+
+            return columns.Any(column => cellRect.Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
+        }
+
+        private static ModelLines ToModelLines(Grid2d grid, Transform transform)
+        {
+            var boundary = grid.GetTrimmedCellGeometry();
+            var uLines = grid.GetCellSeparators(GridDirection.U, true);
+            var vLines = grid.GetCellSeparators(GridDirection.V, true);
+            var curves = boundary.Concat(uLines).Concat(vLines).OfType<BoundedCurve>();
+
+            ModelLines ml = new ModelLines(transform: transform);
+            foreach (var b in boundary.Concat(curves))
+            {
+                var parameters = b.GetSubdivisionParameters();
+                var points = parameters.Select(p => b.PointAt(p)).ToList();
+                for (int i = 0; i < points.Count - 1; i++)
+                {
+                    ml.Lines.Add(new Line(points[i], points[i + 1]));
+                }
+            }
+            ml.SetSelectable(false);
+            return ml;
         }
     }
 }

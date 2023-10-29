@@ -50,6 +50,9 @@ namespace WorkplaceMetrics
             }
         }
     
+        /// <summary>“Headcount” is a sum of the headcount of each space.
+        /// “Fixed sharing ratio” will multiply a ratio value by the sum of the number of desks in the spaces.
+        /// “Fixed headcount” will allow you to manually type in a number to use as your overall headcount and ignore headcount on individual spaces.</summary>
         [Newtonsoft.Json.JsonProperty("Calculation Mode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public WorkplaceMetricsInputsCalculationMode CalculationMode { get; set; } = WorkplaceMetricsInputsCalculationMode.Fixed_Headcount;
@@ -64,7 +67,7 @@ namespace WorkplaceMetrics
         [System.ComponentModel.DataAnnotations.Range(1D, double.MaxValue)]
         public double DeskSharingRatio { get; set; } = 1D;
     
-        /// <summary>Draw regions around areas intended to be excluded from USF calculation. This typically includes elevator shafts and stairwells for a full floor lease.</summary>
+        /// <summary>Exclude regions from floor area calculations such as elevator shafts and stairwells.</summary>
         [Newtonsoft.Json.JsonProperty("USF Exclusions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> USFExclusions { get; set; } = new List<Polygon>();
     
@@ -76,11 +79,14 @@ namespace WorkplaceMetrics
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum WorkplaceMetricsInputsCalculationMode
     {
+        [System.Runtime.Serialization.EnumMember(Value = @"Headcount")]
+        Headcount = 0,
+    
         [System.Runtime.Serialization.EnumMember(Value = @"Fixed Headcount")]
-        Fixed_Headcount = 0,
+        Fixed_Headcount = 1,
     
         [System.Runtime.Serialization.EnumMember(Value = @"Fixed Sharing Ratio")]
-        Fixed_Sharing_Ratio = 1,
+        Fixed_Sharing_Ratio = 2,
     
     }
     
@@ -181,15 +187,14 @@ namespace WorkplaceMetrics
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SettingsValue(double @rentableArea, double @usableArea)
+        public SettingsValue(double @usableArea)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SettingsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @rentableArea, @usableArea});
+                validator.PreConstruct(new object[]{ @usableArea});
             }
         
-            this.RentableArea = @rentableArea;
             this.UsableArea = @usableArea;
         
             if(validator != null)
@@ -197,10 +202,6 @@ namespace WorkplaceMetrics
                 validator.PostConstruct(this);
             }
         }
-    
-        /// <summary>Adjust the Rentable Area for calculations + display.  Note: unless you update this manually, it is computed using a fixed ratio of 1.2 * Usable Area.</summary>
-        [Newtonsoft.Json.JsonProperty("Rentable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double RentableArea { get; set; }
     
         /// <summary>Adjust the Usable Area for calculations + display.</summary>
         [Newtonsoft.Json.JsonProperty("Usable Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

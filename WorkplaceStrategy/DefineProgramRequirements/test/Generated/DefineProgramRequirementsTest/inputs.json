@@ -1,48 +1,266 @@
 {
-  "Headcount": 0,
-  "Show Advanced Options": false,
-  "Length": 1,
-  "Width": 1,
   "Program Requirements": [
     {
-      "Program Name": "Desk :Workstation",
+      "Program Group": "",
+      "Program Name": "executive office",
       "Color": {
-        "Red": 1,
-        "Alpha": 1,
-        "Blue": 0,
-        "Green": 0
+        "Red": 0.33725490196078434,
+        "Blue": 0.7686274509803922,
+        "Green": 0.6196078431372549,
+        "Alpha": 1
       },
-      "Space Count": 85,
-      "Program Group": "Task Zone",
-      "Depth": 0,
-      "Name": null,
-      "discriminator": null,
-      "Area per Space": 0,
-      "Count Type": "Item",
-      "Id": "51cc9451-60dd-4f89-bda6-8f5bf719e576",
+      "Area per Space": 30.193488000000002,
+      "Space Count": 1,
       "Width": 0,
-      "Hypar Space Type": "Open Office",
-      "Total Area": 0
+      "Depth": 0,
+      "Hypar Space Type": "Private Office",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "a702b499-f209-4059-ac53-693ed9f5b7ff",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "0b8286d8-c663-40b3-8a44-6506933a4584",
+        "Name": "Private Office"
+      }
     },
     {
-      "Program Name": "Desk : Drop In",
+      "Program Group": "",
+      "Program Name": "private office b",
+      "Color": {
+        "Red": 0.7098039215686275,
+        "Blue": 0.8941176470588236,
+        "Green": 0.8235294117647058,
+        "Alpha": 1
+      },
+      "Area per Space": 18.580608,
+      "Space Count": 14,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Private Office",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "f01f9fca-df11-48c4-bbe2-cae88df78563",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "0b8286d8-c663-40b3-8a44-6506933a4584",
+        "Name": "Private Office"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "trading desk ",
+      "Color": {
+        "Red": 0.8549019607843137,
+        "Blue": 0.6784313725490196,
+        "Green": 0.9098039215686274,
+        "Alpha": 1
+      },
+      "Area per Space": 3.34450944,
+      "Space Count": 300,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Open Office",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "dbc39655-c536-4d17-af2c-fb8797aa8ef4",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "c461c32a-ec67-4d6e-959e-1c9b5bb1f43b",
+        "Name": "Open Office"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "reception ",
+      "Color": {
+        "Red": 0.9019607843137255,
+        "Blue": 0.807843137254902,
+        "Green": 0.8,
+        "Alpha": 1
+      },
+      "Area per Space": 37.161216,
+      "Space Count": 1,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Reception",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "0700193c-9771-41b2-bc0d-1599f956dc15",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "f26047b8-5a24-410b-b0f1-53e3cc7fff8d",
+        "Name": "Reception"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "cafe",
+      "Color": {
+        "Red": 0.9019607843137255,
+        "Blue": 0.807843137254902,
+        "Green": 0.8,
+        "Alpha": 1
+      },
+      "Area per Space": 175.5867456,
+      "Space Count": 2,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Pantry",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "f7649619-3c3b-4a34-a4d8-880f2d0a5512",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "80b745b5-4421-436a-8ebb-aeb1e22fd7fe",
+        "Name": "Pantry"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "storage/ support ",
+      "Color": {
+        "Red": 0.7529411764705882,
+        "Blue": 0.7529411764705882,
+        "Green": 0.7529411764705882,
+        "Alpha": 1
+      },
+      "Area per Space": 0,
+      "Space Count": 0,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Support",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "73798851-3574-44bf-8de1-caa841f808c6",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement"
+    },
+    {
+      "Program Group": "",
+      "Program Name": "conference - large",
+      "Color": {
+        "Red": 0.8235294117647058,
+        "Blue": 0.3843137254901961,
+        "Green": 0.7058823529411765,
+        "Alpha": 1
+      },
+      "Area per Space": 55.741824,
+      "Space Count": 1,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Meeting Room",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "07b37bf3-90f5-46e8-a28e-be7e39dee736",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "434a713f-0381-4262-a08f-f100723a3071",
+        "Name": "Meeting Room"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "conference - medium ",
+      "Color": {
+        "Red": 0.8784313725490196,
+        "Blue": 0.5882352941176471,
+        "Green": 0.8,
+        "Alpha": 1
+      },
+      "Area per Space": 200.6705664,
+      "Space Count": 8,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Meeting Room",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "dc139bfd-2c9c-4469-85bc-fca0f17052d3",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": null,
+        "Files": [],
+        "Name": null
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "conference - small ",
+      "Color": {
+        "Red": 0.9215686274509803,
+        "Blue": 0.7450980392156863,
+        "Green": 0.8705882352941177,
+        "Alpha": 1
+      },
+      "Area per Space": 150.50292480000002,
+      "Space Count": 9,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Meeting Room",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "40f665d7-b0db-47bd-b8ed-6d8571acbcb7",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "434a713f-0381-4262-a08f-f100723a3071",
+        "Name": "Meeting Room"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "open collaboration ",
+      "Color": {
+        "Red": 0.984313725490196,
+        "Blue": 0.9647058823529412,
+        "Green": 0.8745098039215686,
+        "Alpha": 1
+      },
+      "Area per Space": 44.5934592,
+      "Space Count": 4,
+      "Width": 0,
+      "Depth": 0,
+      "Hypar Space Type": "Lounge",
+      "Count Type": "Item",
+      "Total Area": 0,
+      "Id": "12bdfe25-a49b-4876-bca3-e939dd4054e4",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "a1f29a10-b2b5-4664-980c-a4901c91a735",
+        "Name": "Lounge"
+      }
+    },
+    {
+      "Program Group": "",
+      "Program Name": "focus room",
       "Color": {
         "Red": 1,
-        "Alpha": 1,
-        "Blue": 0.4,
-        "Green": 0.4
+        "Blue": 0.6784313725490196,
+        "Green": 0.9882352941176471,
+        "Alpha": 1
       },
-      "Space Count": 22,
-      "Program Group": "Task Zone",
+      "Area per Space": 50.1676416,
+      "Space Count": 9,
+      "Width": 0.3048,
       "Depth": 0,
-      "Name": null,
-      "discriminator": null,
-      "Area per Space": 0,
+      "Hypar Space Type": "Phone Booth",
       "Count Type": "Item",
-      "Id": "ac7536eb-8e05-4c2c-bfa8-e07a50cf6291",
-      "Width": 0,
-      "Hypar Space Type": "Open Office",
-      "Total Area": 0
+      "Total Area": 0,
+      "Id": "76e137a3-a6de-46ac-a53e-d06e70a966ae",
+      "Name": null,
+      "discriminator": "Elements.ProgramRequirement",
+      "Layout Type": {
+        "Id": "f1b27b68-3343-4b8e-8247-fe356babf539",
+        "Name": "Phone Booth"
+      }
     }
-  ]
+  ],
+  "Show Advanced Options": false
 }

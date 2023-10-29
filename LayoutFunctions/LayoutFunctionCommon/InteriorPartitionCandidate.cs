@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Elements.Geometry;
+using LayoutFunctionCommon;
 
 namespace Elements
 {
     public class InteriorPartitionCandidate : Element
     {
-        public List<(Line line, string type)> WallCandidateLines { get; set; }
+        public List<RoomEdge> WallCandidateLines { get; set; }
 
         public double Height { get; set; }
 

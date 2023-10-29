@@ -27,7 +27,7 @@ namespace Elements
     public partial class AreaTally : Element
     {
         [JsonConstructor]
-        public AreaTally(string @programType, Color @programColor, double @areaTarget, double @achievedArea, double @distinctAreaCount, double? @targetCount, double? @achievedCount, string @cost, double? @seatCount, System.Guid @id = default, string @name = null)
+        public AreaTally(string @programType, Color? @programColor, double @areaTarget, double @achievedArea, double @distinctAreaCount, double? @targetCount, double? @achievedCount, string @cost, double? @seatCount, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.ProgramType = @programType;
@@ -41,6 +41,7 @@ namespace Elements
             this.SeatCount = @seatCount;
             }
         
+        
         // Empty constructor
         public AreaTally()
             : base()
@@ -51,7 +52,7 @@ namespace Elements
         public string ProgramType { get; set; }
     
         [JsonProperty("Program Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Color ProgramColor { get; set; }
+        public Color? ProgramColor { get; set; }
     
         [JsonProperty("Area Target", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double AreaTarget { get; set; }

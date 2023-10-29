@@ -103,9 +103,8 @@ namespace OpenOfficeLayout
             var totalDeskCount = 0;
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Open Office");
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
+                var officeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Open Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -113,6 +112,7 @@ namespace OpenOfficeLayout
 
                 foreach (var ob in officeBoundaries)
                 {
+                    var seatsCount = 0;
                     var proxy = LayoutStrategies.CreateSettingsProxy(input.IntegratedCollaborationSpaceDensity, input.GridRotation, defaultAisleWidth, ob, Utilities.GetStringValueFromEnum(input.DeskType));
                     output.Model.AddElement(proxy);
                     var isCustom = defaultDeskTypeName == "Custom";
@@ -185,7 +185,7 @@ namespace OpenOfficeLayout
                             }
                             output.Model.AddElements(desks);
 
-                            totalDeskCount += deskCount;
+                            seatsCount += deskCount;
                             foreach (var profile in collabProfiles)
                             {
                                 var sb = SpaceBoundary.Make(profile, "Open Collaboration", ob.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
@@ -199,13 +199,14 @@ namespace OpenOfficeLayout
                             output.Warnings.Add($"Area skipped: Caught exception in desk layout: \"{e.Message}.");
                         }
                     }
+
+                    totalDeskCount += seatsCount;
+                    output.Model.AddElement(new SpaceMetric(ob.Id, seatsCount, seatsCount, seatsCount, 0));
                 }
             }
 
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
 
-
-            output.Model.AddElement(new WorkpointCount() { Count = totalDeskCount, Type = "Desk" });
             output.TotalDeskCount = totalDeskCount;
             return output;
         }

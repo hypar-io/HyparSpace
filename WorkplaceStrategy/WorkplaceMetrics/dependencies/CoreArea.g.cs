@@ -27,11 +27,12 @@ namespace Elements
     public partial class CoreArea : SpaceBoundary
     {
         [JsonConstructor]
-        public CoreArea(System.Guid @core, Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @level, System.Guid? @levelLayout, string @hyparSpaceType, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
-            : base(boundary, cells, area, length, depth, height, programGroup, programType, level, levelLayout, hyparSpaceType, transform, material, representation, isElementDefinition, id, name)
+        public CoreArea(System.Guid @core, Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @programRequirement, System.Guid? @level, System.Guid? @levelLayout, string @hyparSpaceType, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
+            : base(boundary, cells, area, length, depth, height, programGroup, programType, programRequirement, level, levelLayout, hyparSpaceType, transform, material, representation, isElementDefinition, id, name)
         {
             this.Core = @core;
             }
+        
         
         // Empty constructor
         public CoreArea()

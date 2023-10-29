@@ -1,17 +1,6 @@
-using Elements;
-using Elements.GeoJSON;
 using Elements.Geometry;
-using Elements.Geometry.Solids;
-using Elements.Spatial;
-using Elements.Validators;
-using Elements.Serialization.JSON;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Line = Elements.Geometry.Line;
-using Polygon = Elements.Geometry.Polygon;
-
 namespace Elements
 {
     public partial class WallCandidate
@@ -28,5 +17,6 @@ namespace Elements
             Height = height;
             LevelTransform = levelTransform;
         }
+        public (double innerWidth, double outerWidth)? Thickness { get; set; }
     }
 }

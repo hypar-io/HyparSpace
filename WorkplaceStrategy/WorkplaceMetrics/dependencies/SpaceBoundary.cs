@@ -7,6 +7,8 @@ namespace Elements
 {
     public partial class SpaceBoundary
     {
+        public Vector3? ParentCentroid { get; set; }
+
         public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)
         {
             if (Requirements.TryGetValue(nameToFind, out fullRequirement))
@@ -31,7 +33,7 @@ namespace Elements
             Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color;
+                var color = kvp.Value.Color ?? Colors.Magenta;
                 color.Alpha = 0.5;
             }
         }

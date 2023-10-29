@@ -61,11 +61,19 @@ namespace DataHallLayout
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
             if(this.store == null)
-            {
-                this.store = new S3ModelStore<DataHallLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+            { 
+                if (args.SignedResourceUrls == null)
+                {
+                    this.store = new S3ModelStore<DataHallLayoutInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
+                }
+                else
+                {
+                    this.store = new UrlModelStore<DataHallLayoutInputs>();
+                }
             }
+            
 
-            var l = new InvocationWrapper<DataHallLayoutInputs,DataHallLayoutOutputs>(store, DataHallLayout.Execute);
+            var l = new InvocationWrapper<DataHallLayoutInputs,DataHallLayoutOutputs> (store, DataHallLayout.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }

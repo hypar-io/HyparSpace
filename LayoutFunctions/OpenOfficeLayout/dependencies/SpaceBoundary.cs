@@ -35,7 +35,7 @@ namespace Elements
             Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color;
+                var color = kvp.Value.Color ?? Colors.Aqua;
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: true);
             }
@@ -189,7 +189,7 @@ namespace Elements
 
             if (corridorSegments != null)
             {
-                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments(), corridorSegments, out var otherSegments);
+                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments().Select(s => new RoomEdge { Line = s}), corridorSegments, out var otherSegments).Select(re => re.Line).ToList();
             }
             return sb;
         }

@@ -14,6 +14,18 @@ namespace ReceptionLayout
     public static class ReceptionLayout
     {
         /// <summary>
+        /// Map between the layout and the number of seats it lays out
+        /// </summary>
+        private static Dictionary<string, int> _configSeats = new Dictionary<string, int>()
+        {
+            ["Configuration A"] = 3,
+            ["Configuration B"] = 2,
+            ["Configuration C"] = 1,
+            ["Configuration D"] = 5,
+            ["Configuration E"] = 6,
+        };
+
+        /// <summary>
         /// The ReceptionLayout function.
         /// </summary>
         /// <param name="model">The input model.</param>
@@ -49,9 +61,8 @@ namespace ReceptionLayout
             }
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => z.Name == "Reception");
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
+                var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Reception");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
@@ -59,6 +70,7 @@ namespace ReceptionLayout
 
                 foreach (var room in meetingRmBoundaries)
                 {
+                    var seatsCount = 0;
                     var spaceBoundary = room.Boundary;
                     Line orientationGuideEdge = hasCore ? FindEdgeClosestToCore(spaceBoundary.Perimeter, coreSegments) : FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out var wallCandidates);
 
@@ -79,9 +91,10 @@ namespace ReceptionLayout
                         var trimmedGeo = cell.GetTrimmedCellGeometry();
                         if (!cell.IsTrimmed() && trimmedGeo.Length > 0)
                         {
-                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform);
+                            var layout = InstantiateLayout(configs, width, depth, rect, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
+                            seatsCount += seats;
                         }
                         else if (trimmedGeo.Length > 0)
                         {
@@ -89,13 +102,15 @@ namespace ReceptionLayout
                             var cinchedVertices = rect.Vertices.Select(v => largestTrimmedShape.Vertices.OrderBy(v2 => v2.DistanceTo(v)).First()).ToList();
                             var cinchedPoly = new Polygon(cinchedVertices);
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
-                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
+                            var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
                             output.Model.AddElement(layout);
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
+                            seatsCount += seats;
                         }
                     }
 
+                    output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
             }
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
@@ -109,7 +124,7 @@ namespace ReceptionLayout
 
             foreach (var line in perimeter.Segments())
             {
-                var lineMidPt = line.PointAt(0.5);
+                var lineMidPt = line.Mid();
                 var linePerp = line.Direction().Cross(Vector3.ZAxis).Unitized();
                 foreach (var coreSegment in coreSegments)
                 {
@@ -141,7 +156,7 @@ namespace ReceptionLayout
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
-                var midpt = edge.PointAt(0.5);
+                var midpt = edge.Mid();
                 foreach (var seg in corridorSegments)
                 {
                     var dist = midpt.DistanceTo(seg);
@@ -182,8 +197,9 @@ namespace ReceptionLayout
             otherSegments = Enumerable.Range(0, allEdges.Count).Except(new[] { selectedIndex }).Select(i => allEdges[i]);
             return minSeg;
         }
-        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        private static ComponentInstance InstantiateLayout(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform, out int seatsCount)
         {
+            seatsCount = 0;
             ContentConfiguration selectedConfig = null;
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             foreach (var key in orderedKeys)
@@ -192,6 +208,7 @@ namespace ReceptionLayout
                 if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
                 {
                     selectedConfig = config;
+                    seatsCount += _configSeats[key];
                     break;
                 }
             }

@@ -37,7 +37,8 @@ namespace InteriorPartitions
                 "Restroom Layout",
                 "Laundry Room Layout",
                 "Entertainment Room Layout",
-                "Room Layout"
+                "Room Layout",
+                "Furniture and Equipment"
                  };
             foreach (var md in modelDependencies)
             {
@@ -53,7 +54,7 @@ namespace InteriorPartitions
             var wallCandidatesGroups = wallCandidates.GroupBy(w => (w.LevelTransform, w.Height));
             foreach (var wallCandidatesGroup in wallCandidatesGroups)
             {
-                WallGeneration.GenerateWalls(output.Model, wallCandidatesGroup.Select(w => (w.Line, w.Type, w.Id)), wallCandidatesGroup.Key.Height, wallCandidatesGroup.Key.LevelTransform);
+                WallGeneration.GenerateWalls(output.Model, wallCandidatesGroup.Select(w => (w.Line, w.Type, w.Id, w.Thickness)), wallCandidatesGroup.Key.Height, wallCandidatesGroup.Key.LevelTransform);
             }
             return output;
         }
@@ -79,11 +80,14 @@ namespace InteriorPartitions
                 var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? defaultHeight;
                 var levelWallCandidates = candidates.Select(c =>
-                    new WallCandidate(c.line.TransformedLine(levelGroup.Key),
-                                      c.type,
+                    new WallCandidate(c.Line.TransformedLine(levelGroup.Key),
+                                      c.Type,
                                       height,
                                       levelGroup.Key,
-                                      new List<SpaceBoundary>()));
+                                      new List<SpaceBoundary>())
+                    {
+                        Thickness = c.Thickness
+                    });
                 if (input.Overrides?.InteriorPartitionTypes != null)
                 {
                     levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes, input.Overrides.Removals.InteriorPartitionTypes);
@@ -93,7 +97,7 @@ namespace InteriorPartitions
                     levelWallCandidates.Select(w => (w.Line, w.Type)),
                     userAddedWallLinesCandidates.Select(w => (w.Line.TransformedLine(w.LevelTransform), w.Type)));
                 var splittedWallCandidates = splittedCandidates
-                    .Select(c => new WallCandidate(c.line, c.type, height, levelGroup.Key, new List<SpaceBoundary>()))
+                    .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>()))
                     .ToList();
 
                 wallCandidates.AddRange(splittedWallCandidates);

@@ -10,6 +10,11 @@
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Columns",
+      "optional": true
     }
   ],
   "input_schema": {
@@ -55,6 +60,25 @@
         "multipleOf": 0.01,
         "default": 1.2192,
         "$hyparUnitType": "length"
+      },
+      "Clearance": {
+        "type": "number",
+        "description": "The clearance around the perimeter of the Data Hall.",
+        "minimum": 0.0,
+        "maximum": 4,
+        "multipleOf": 0.01,
+        "default": 1.2192,
+        "$hyparUnitType": "length"
+      },
+      "Flip Direction": {
+        "type": "boolean",
+        "description": "Flip the direction of the layout.",
+        "default": false
+      },
+      "Swap Cold/Hot Pattern": {
+        "type": "boolean",
+        "description": "Swap the cold/hot aisle pattern.",
+        "default": false
       }
     }
   },
@@ -72,12 +96,18 @@
     }
   ],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/LevelElements"
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/LevelElements.json"
   ],
   "content_catalogs": [
     "https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/56433155-6494-428c-b800-53d18234e5cf/data-rack-56433155-6494-428c-b800-53d18234e5cf-model.json"
   ],
+  "filters": {
+    "No Grid": {
+      "context": "[*discriminator!=Elements.ModelLines]",
+      "default": true
+    }
+  },
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,

@@ -20,30 +20,41 @@ namespace LayoutFunctionCommon
         /// <param name="rectangle">The more-or-less rectangular polygon to fill</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public static ComponentInstance InstantiateLayoutByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
+        public static LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, double width, double length, Polygon rectangle, Transform xform)
         {
-            ContentConfiguration selectedConfig = null;
+            LayoutInstantiated layoutInstantiated = new LayoutInstantiated();
             var orderedKeys = configs.OrderByDescending(kvp => kvp.Value.CellBoundary.Depth * kvp.Value.CellBoundary.Width).Select(kvp => kvp.Key);
             foreach (var key in orderedKeys)
             {
                 var config = configs[key];
-                if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
+                if (config.CellBoundary.Width < width + 0.01 && config.CellBoundary.Depth < length + 0.01)
                 {
-                    selectedConfig = config;
+                    layoutInstantiated.Config = config;
+                    layoutInstantiated.ConfigName = key;
                     break;
                 }
             }
-            if (selectedConfig == null)
+            if (layoutInstantiated.Config == null)
             {
                 return null;
             }
-            var baseRectangle = Polygon.Rectangle(selectedConfig.CellBoundary.Min, selectedConfig.CellBoundary.Max);
-            var rules = selectedConfig.Rules();
+            var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
 
-            var componentDefinition = new ComponentDefinition(rules, selectedConfig.Anchors());
-            var instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
-            var allPlacedInstances = instance.Instances;
-            return instance;
+            // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
+            // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
+            foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
+            {
+                if (contentItem.Url == null)
+                {
+                    Console.WriteLine($"🚨 Null URL in config. content item name {contentItem.Name} / {layoutInstantiated.ConfigName}");
+                    layoutInstantiated.Config.ContentItems.Remove(contentItem);
+                }
+            }
+            var rules = layoutInstantiated.Config.Rules();
+
+            var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
+            layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+            return layoutInstantiated;
         }
 
         /// <summary>
@@ -53,20 +64,20 @@ namespace LayoutFunctionCommon
         /// <param name="width">The 2d grid cell to fill.</param>
         /// <param name="xform">A transform to apply to the rectangle.</param>
         /// <returns></returns>
-        public static ComponentInstance InstantiateLayoutByFit(SpaceConfiguration configs, Grid2d cell, Transform xform)
+        public static LayoutInstantiated InstantiateLayoutByFit(SpaceConfiguration configs, Grid2d cell, Transform xform)
         {
             var rect = cell.GetCellGeometry() as Polygon;
             var segs = rect.Segments();
             var width = segs[0].Length();
             var depth = segs[1].Length();
-            var trimmedGeo = cell.GetTrimmedCellGeometry();
-            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+            var trimmedGeo = cell.GetTrimmedCellGeometry().OfType<Polygon>();
+            if ((!cell.IsTrimmed() && trimmedGeo.Any()) || IsNearlyARectangle(trimmedGeo))
             {
                 return InstantiateLayoutByFit(configs, width, depth, rect, xform);
             }
-            else if (trimmedGeo.Count() > 0)
+            else if (trimmedGeo.Any())
             {
-                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                var largestTrimmedShape = trimmedGeo.OrderBy(s => s.Area()).Last();
                 try
                 {
                     if (largestTrimmedShape.Vertices.Count < 8)
@@ -121,6 +132,14 @@ namespace LayoutFunctionCommon
             return null;
         }
 
+        public static bool IsNearlyARectangle(IEnumerable<Polygon> polygons)
+        {
+            var areaSum = polygons.Sum(p => p.Area());
+            var bbox = new BBox3(polygons.SelectMany(p => p.Vertices));
+            var bbox2dArea = Polygon.Rectangle((bbox.Min.X, bbox.Min.Y), (bbox.Max.X, bbox.Max.Y)).Area();
+            // if area is within 5% of the bounding box area, just assume it's a rectangle.
+            return areaSum / bbox2dArea > 0.95;
+        }
         public static List<TLevelVolume> GetLevelVolumes<TLevelVolume>(Dictionary<string, Model> inputModels) where TLevelVolume : Element
         {
             var levelVolumes = new List<TLevelVolume>();
@@ -128,15 +147,33 @@ namespace LayoutFunctionCommon
             {
                 levelVolumes.AddRange(levelsModel.AllElementsAssignableFromType<TLevelVolume>());
             }
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            // Prefer level volumes from floors over those from conceptual mass.
+            if (inputModels.TryGetValue("Floors", out var floorsModel))
+            {
+                levelVolumes.AddRange(floorsModel.AllElementsAssignableFromType<TLevelVolume>());
+            }
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel) && levelVolumes.Count == 0)
             {
                 levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
             }
             return levelVolumes;
         }
 
-        public static void StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, Model outputModel, bool createWalls, string configurationsPath, string catalogPath = "catalog.json") where TLevelElements : Element, ILevelElements where TSpaceBoundary : ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        public static HashSet<Guid> StandardLayoutOnAllLevels<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
+            string programTypeName,
+            Dictionary<string, Model> inputModels,
+            dynamic overrides, Model outputModel,
+            bool createWalls,
+            string configurationsPath,
+            string catalogPath = "catalog.json",
+            Func<LayoutInstantiated, int> countSeats = null
+             )
+             where TLevelElements : Element, ILevelElements
+             where TSpaceBoundary : Element, ISpaceBoundary
+             where TLevelVolume : GeometricElement, ILevelVolume
+             where TCirculationSegment : Floor, ICirculationSegment
         {
+            var processedSpaces = new HashSet<Guid>();
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
@@ -152,61 +189,31 @@ namespace LayoutFunctionCommon
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
             var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName);
+                foreach (var rm in roomBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<(Line line, string type)>();
+                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
-                    var success = false;
-                    var spaceBoundary = room.Boundary;
-                    var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
-
-                    foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
-                    {
-                        var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction(), Vector3.ZAxis);
-                        var boundaryCurves = new List<Polygon>
-                        {
-                            spaceBoundary.Perimeter
-                        };
-                        boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
-
-                        var grid = new Grid2d(boundaryCurves, orientationTransform);
-                        foreach (var cell in grid.GetCells())
-                        {
-                            var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
-                            if (layout != null)
-                            {
-                                success = true;
-                                SetLevelVolume(layout, levelVolume?.Id);
-
-                                wallCandidateLines.AddRange(WallCandidates);
-                                outputModel.AddElement(layout);
-                            }
-                            else if (configs.Count == 0)
-                            {
-                                success = true;
-                                wallCandidateLines.AddRange(WallCandidates);
-                            }
-                        }
-
-                        if (success)
-                        {
-                            break;
-                        }
-                    }
+                    var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    if (layoutSucceeded) { processedSpaces.Add(room.Id); }
                 }
 
                 double height = levelVolume?.Height ?? 3;
                 Transform xform = levelVolume?.Transform ?? new Transform();
 
-                if (createWalls)
+                if (createWalls && wallCandidateLines.Count > 0)
                 {
                     outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
@@ -216,7 +223,161 @@ namespace LayoutFunctionCommon
                     });
                 }
             }
+            foreach (var room in allSpaceBoundaries)
+            {
+                var layoutSucceeded = ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                if (layoutSucceeded)
+                {
+                    processedSpaces.Add(room.Id);
+                }
+            }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
+            return processedSpaces;
+        }
+
+
+        /// <summary>
+        /// Basically the same as StandardLayoutOnAllLevels, but without the actual furniture layout part — just the wall creation.
+        /// </summary> 
+        public static void GenerateWallsForAllSpaces<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
+            IEnumerable<TSpaceBoundary> spaceBoundaries,
+            Dictionary<string, Model> inputModels,
+            Model outputModel
+        ) where TLevelElements : Element, ILevelElements where TSpaceBoundary : Element, ISpaceBoundary where TLevelVolume : GeometricElement, ILevelVolume where TCirculationSegment : Floor, ICirculationSegment
+        {
+            var allSpaceBoundaries = new List<TSpaceBoundary>(spaceBoundaries);
+            var spacePlanningZones = inputModels["Space Planning Zones"];
+            var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
+            if (inputModels.TryGetValue("Circulation", out var circModel))
+            {
+                var circSegments = circModel.AllElementsAssignableFromType<TCirculationSegment>();
+                foreach (var cs in circSegments)
+                {
+                    var matchingLevel = levels.FirstOrDefault(l => l.Level == cs.Level);
+                    matchingLevel?.Elements.Add(cs);
+                }
+            }
+            var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
+
+            foreach (var lvl in levels)
+            {
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => allSpaceBoundaries.Contains(z)).ToList();
+                foreach (var rm in roomBoundaries)
+                {
+                    allSpaceBoundaries.Remove(rm);
+                }
+                var levelVolume = levelVolumes.FirstOrDefault(l =>
+                    (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
+                        levelVolumeId as string == l.Id.ToString())) ??
+                        levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
+                var wallCandidateLines = new List<RoomEdge>();
+                foreach (var room in roomBoundaries)
+                {
+                    GenerateWallsForSpace(room, levelVolume, corridorSegments, wallCandidateLines);
+                }
+
+                double height = levelVolume?.Height ?? 3;
+                Transform xform = levelVolume?.Transform ?? new Transform();
+
+                outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                {
+                    WallCandidateLines = wallCandidateLines,
+                    Height = height,
+                    LevelTransform = xform,
+                });
+            }
+            foreach (var room in allSpaceBoundaries)
+            {
+                GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(room, null, null, null);
+            }
+        }
+
+        public static void GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(
+                TSpaceBoundary room,
+                TLevelVolume levelVolume = null,
+                IEnumerable<Line> corridorSegments = null,
+                List<RoomEdge> wallCandidateLines = null
+            )
+            where TLevelVolume : GeometricElement, ILevelVolume
+            where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            corridorSegments ??= Enumerable.Empty<Line>();
+            wallCandidateLines ??= new List<RoomEdge>();
+            var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+            var bestOption = wallCandidateOptions.FirstOrDefault();
+            if (bestOption == default)
+            {
+                return;
+            }
+            var (_, WallCandidates) = bestOption;
+            wallCandidateLines.AddRange(WallCandidates);
+        }
+
+        private static bool ProcessRoom<TLevelVolume, TSpaceBoundary>(
+                TSpaceBoundary room,
+                Model outputModel,
+                Func<LayoutInstantiated,
+                int> countSeats,
+                SpaceConfiguration configs,
+                IEnumerable<Line> corridorSegments = null,
+                TLevelVolume levelVolume = null,
+                List<RoomEdge> wallCandidateLines = null
+            )
+            where TLevelVolume : GeometricElement, ILevelVolume
+            where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            corridorSegments ??= Enumerable.Empty<Line>();
+            wallCandidateLines ??= new List<RoomEdge>();
+            var seatsCount = 0;
+            var success = false;
+            var spaceBoundary = room.Boundary;
+            var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+
+            foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
+            {
+                var orientationTransform = new Transform(Vector3.Origin, OrientationGuideEdge.Direction, Vector3.ZAxis);
+                var boundaryCurves = new List<Polygon>
+                        {
+                            spaceBoundary.Perimeter
+                        };
+                boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
+
+                var grid = new Grid2d(boundaryCurves, orientationTransform);
+                foreach (var cell in grid.GetCells())
+                {
+                    var layout = InstantiateLayoutByFit(configs, cell, room.Transform);
+                    if (layout != null)
+                    {
+                        success = true;
+                        SetLevelVolume(layout.Instance, levelVolume?.Id);
+
+                        wallCandidateLines.AddRange(WallCandidates);
+                        outputModel.AddElement(layout.Instance);
+
+                        if (countSeats != null)
+                        {
+                            seatsCount += countSeats(layout);
+                        }
+                    }
+                    else if (configs.Count == 0)
+                    {
+                        success = true;
+                        wallCandidateLines.AddRange(WallCandidates);
+                    }
+                }
+
+                if (success)
+                {
+                    break;
+                }
+            }
+
+            if (countSeats != null)
+            {
+                outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
+            }
+            return success;
         }
 
         public static SearchablePointCollection<Profile> GetColumnProfiles(ColumnAvoidanceStrategy avoidanceStrategy, Dictionary<string, Model> inputModels)
@@ -355,8 +516,8 @@ namespace LayoutFunctionCommon
 
         public static Transform GetOrientationTransform(Profile spaceBoundary, IEnumerable<Line> corridorSegments, double rotation)
         {
-            Line orientationGuideEdge = WallGeneration.FindEdgeAdjacentToSegments(spaceBoundary.Perimeter.Segments(), corridorSegments, out _);
-            var dir = orientationGuideEdge.Direction();
+            var orientationGuideEdge = WallGeneration.FindEdgeAdjacentToSegments(spaceBoundary.RoomEdges(), corridorSegments, out _);
+            var dir = orientationGuideEdge.Direction;
             if (rotation != 0)
             {
                 var gridRotation = new Transform();
@@ -474,6 +635,8 @@ namespace LayoutFunctionCommon
                 pattern,
                 PatternMode.Cycle,
                 FixedDivisionMode.RemainderAtBothEnds);
+
+            backToBackWidth = Math.Max(backToBackWidth, 0.1);
 
             var mainVPattern = new[] {
                                 ("Aisle", backToBackWidth),
