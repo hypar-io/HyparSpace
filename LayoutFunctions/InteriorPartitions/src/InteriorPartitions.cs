@@ -94,10 +94,23 @@ namespace InteriorPartitions
                 }
 
                 var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
-                    levelWallCandidates.Select(w => (w.Line, w.Type)),
-                    userAddedWallLinesCandidates.Select(w => (w.Line.TransformedLine(w.LevelTransform), w.Type)));
+                    levelWallCandidates.Select(w => new RoomEdge
+                    {
+                        Line = w.Line,
+                        Type = w.Type,
+                        Thickness = w.Thickness
+                    }),
+                    userAddedWallLinesCandidates.Select(w => new RoomEdge()
+                    {
+                        Line = w.Line.TransformedLine(w.LevelTransform),
+                        Type = w.Type,
+                        Thickness = w.Thickness
+                    }));
                 var splittedWallCandidates = splittedCandidates
-                    .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>()))
+                    .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>())
+                    {
+                        Thickness = c.Thickness
+                    })
                     .ToList();
 
                 wallCandidates.AddRange(splittedWallCandidates);
