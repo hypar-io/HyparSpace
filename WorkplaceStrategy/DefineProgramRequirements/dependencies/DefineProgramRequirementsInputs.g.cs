@@ -218,12 +218,12 @@ namespace DefineProgramRequirements
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirements(string @programGroup, string @programName, Color? @color, int @spaceCount, double @areaPerSpace, ProfileConstraint @dimensions, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType @countType, InputFolder @layoutType, bool? @enclosed)
+        public ProgramRequirements(string @programGroup, string @programName, Color? @color, int @spaceCount, double @areaPerSpace, ProfileConstraint @dimensions, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType @countType, InputFolder @layoutType, bool? @enclosed, ProgramRequirementsDefaultWallType? @defaultWallType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirements>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @spaceCount, @areaPerSpace, @dimensions, @width, @depth, @hyparSpaceType, @countType, @layoutType, @enclosed});
+                validator.PreConstruct(new object[]{ @programGroup, @programName, @color, @spaceCount, @areaPerSpace, @dimensions, @width, @depth, @hyparSpaceType, @countType, @layoutType, @enclosed, @defaultWallType});
             }
         
             this.ProgramGroup = @programGroup;
@@ -238,6 +238,7 @@ namespace DefineProgramRequirements
             this.CountType = @countType;
             this.LayoutType = @layoutType;
             this.Enclosed = @enclosed;
+            this.DefaultWallType = @defaultWallType;
         
             if(validator != null)
             {
@@ -297,7 +298,12 @@ namespace DefineProgramRequirements
     
         /// <summary>Should this space be enclosed by walls?</summary>
         [Newtonsoft.Json.JsonProperty("Enclosed", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Enclosed { get; set; } = true;
+        public bool? Enclosed { get; set; }
+    
+        /// <summary>What should the default wall type be for this space?</summary>
+        [Newtonsoft.Json.JsonProperty("Default Wall Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ProgramRequirementsDefaultWallType? DefaultWallType { get; set; } = ProgramRequirementsDefaultWallType.None;
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -317,6 +323,20 @@ namespace DefineProgramRequirements
     
         [System.Runtime.Serialization.EnumMember(Value = @"Area Total")]
         Area_Total = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum ProgramRequirementsDefaultWallType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"None")]
+        None = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Solid")]
+        Solid = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Glass")]
+        Glass = 2,
     
     }
     

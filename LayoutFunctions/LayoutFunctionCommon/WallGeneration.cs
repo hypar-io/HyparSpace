@@ -35,7 +35,7 @@ namespace LayoutFunctionCommon
                 Line = s.TransformedLine(room.Transform),
                 Thickness = thicknesses?.ElementAtOrDefault(i)
             }), corridorSegments, levelProfile, out var wallCandidates);
-            orientationGuideEdge.Type = "Glass";
+            orientationGuideEdge.Type = room.DefaultWallType ?? "Glass";
             wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
@@ -74,7 +74,7 @@ namespace LayoutFunctionCommon
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
-                orientationGuideEdge.Line.Type = "Glass";
+                orientationGuideEdge.Line.Type = room.DefaultWallType ?? "Glass";
                 var wallCandidateLines = new List<RoomEdge>
                 {
                     orientationGuideEdge.Line
@@ -539,7 +539,7 @@ namespace LayoutFunctionCommon
             }).ToList();
         }
 
-        public static List<RoomEdge> PartitionsAndGlazingCandidatesFromGrid(List<RoomEdge> wallCandidateLines, Grid2d grid, Profile levelBoundary)
+        public static List<RoomEdge> PartitionsAndGlazingCandidatesFromGrid(List<RoomEdge> wallCandidateLines, Grid2d grid, ISpaceBoundary room)
         {
             var wallCandidatesOut = new List<RoomEdge>();
             try
@@ -586,7 +586,7 @@ namespace LayoutFunctionCommon
                     var glassSegment = FindEdgeAdjacentToSegments(segments, glassLines, out var otherEdges);
                     if (glassSegment != null)
                     {
-                        glassSegment.Type = "Glass";
+                        glassSegment.Type = room.DefaultWallType ?? "Glass";
                         wallCandidatesOut.Add(glassSegment);
                     }
                 }

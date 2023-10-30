@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Elements
 {
-    public interface ISpaceBoundary 
+    public interface ISpaceBoundary
     {
         string Name { get; set; }
         Profile Boundary { get; set; }
@@ -18,6 +18,8 @@ namespace Elements
 
         [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string HyparSpaceType { get; set; }
+
+        public string DefaultWallType { get; set; }
 
     }
 

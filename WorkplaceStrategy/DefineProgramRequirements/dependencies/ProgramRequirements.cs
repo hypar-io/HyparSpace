@@ -23,7 +23,8 @@ public partial class ProgramRequirements
             CountType = (Elements.ProgramRequirementCountType)this.CountType,
             Catalog = catalogWrapper?.Id,
             Enclosed = this.Enclosed ?? false,
-            SpaceConfig = spaceConfigElem?.Id
+            SpaceConfig = spaceConfigElem?.Id,
+            DefaultWallType = this.DefaultWallType
         };
     }
 

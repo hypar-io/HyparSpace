@@ -33,6 +33,7 @@
   ],
   "input_schema": {
     "type": "object",
+    "$hyparDeprecated": true,
     "properties": {
       "Create Walls": {
         "type": "boolean",
