@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Elements.Serialization.glTF;
 using Elements.Geometry;
 using System.Linq;
+using LayoutFunctionCommon;
 
 namespace InteriorPartitions.Tests
 {
@@ -20,8 +21,12 @@ namespace InteriorPartitions.Tests
         private static List<InteriorPartitionCandidate> CreateInteriorPartitions()
         {
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
-            var wallCandidateLines = new List<(Line line, string type)>();
-            wallCandidateLines.Add((new Line(new Vector3(), new Vector3(30, 0)), "Solid"));
+            var wallCandidateLines = new List<RoomEdge>();
+            wallCandidateLines.Add(new RoomEdge()
+            {
+                Line = new Line(new Vector3(), new Vector3(30, 0)),
+                Type = "Solid"
+            });
             interiorPartitionCandidates.Add(new InteriorPartitionCandidate(Guid.NewGuid())
             {
                 WallCandidateLines = wallCandidateLines,
