@@ -33,9 +33,9 @@
   ],
   "input_schema": {
     "type": "object",
-    "$hyparDeprecated": true,
     "properties": {
       "Create Walls": {
+        "$hyparDeprecated": true,
         "type": "boolean",
         "description": "Should partitions be added around phone booths?",
         "default": true
