@@ -50,12 +50,16 @@ namespace InteriorPartitions
 
             var output = new InteriorPartitionsOutputs();
             var wallCandidates = CreateWallCandidates(input, interiorPartitionCandidates);
+
             output.Model.AddElements(wallCandidates);
+
             var wallCandidatesGroups = wallCandidates.GroupBy(w => (w.LevelTransform, w.Height));
+
             foreach (var wallCandidatesGroup in wallCandidatesGroups)
             {
                 WallGeneration.GenerateWalls(output.Model, wallCandidatesGroup.Select(w => (w.Line, w.Type, w.Id, w.Thickness)), wallCandidatesGroup.Key.Height, wallCandidatesGroup.Key.LevelTransform);
             }
+
             return output;
         }
 
@@ -68,8 +72,6 @@ namespace InteriorPartitions
             if (input.Overrides?.InteriorPartitionTypes != null)
             {
                 userAddedWallLinesCandidates = input.Overrides.InteriorPartitionTypes.CreateElementsFromEdits(
-                    input.Overrides.Additions.InteriorPartitionTypes,
-                    (add) => new WallCandidate(add.Value.Line, add.Value.Type.ToString(), defaultHeight, new Transform()) { AddId = add.Id },
                     (wall, ident) => MatchIdentityWallCandidate(wall, ident),
                     (wall, edit) => UpdateWallCandidate(wall, edit)
                 );
@@ -90,7 +92,7 @@ namespace InteriorPartitions
                     });
                 if (input.Overrides?.InteriorPartitionTypes != null)
                 {
-                    levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes, input.Overrides.Removals.InteriorPartitionTypes);
+                    levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes);
                 }
 
                 // var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
@@ -116,8 +118,7 @@ namespace InteriorPartitions
                 // wallCandidates.AddRange(splittedWallCandidates);
                 wallCandidates.AddRange(levelWallCandidates);
             }
-            AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates, input.Overrides.Additions.InteriorPartitionTypes);
-            RemoveWallCandidates(input.Overrides.Removals.InteriorPartitionTypes, wallCandidates);
+            AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
 
             return wallCandidates;
         }
@@ -130,28 +131,16 @@ namespace InteriorPartitions
 
         private static WallCandidate UpdateWallCandidate(WallCandidate wallCandidate, InteriorPartitionTypesOverride edit)
         {
-            wallCandidate.Line = edit.Value.Line ?? wallCandidate.Line;
             wallCandidate.Type = edit.Value.Type.ToString();
             return wallCandidate;
         }
 
         public static List<WallCandidate> CreateElementsFromEdits(
             this IList<InteriorPartitionTypesOverride> edits,
-            IList<InteriorPartitionTypesOverrideAddition> additions,
-            Func<InteriorPartitionTypesOverrideAddition, WallCandidate> createElement,
             Func<WallCandidate, InteriorPartitionTypesIdentity, bool> identityMatch,
             Func<WallCandidate, InteriorPartitionTypesOverride, WallCandidate> modifyElement)
         {
             var resultElements = new List<WallCandidate>();
-            if (additions != null)
-            {
-                foreach (var addedElement in additions)
-                {
-                    var elementToAdd = createElement(addedElement);
-                    resultElements.Add(elementToAdd);
-                    Identity.AddOverrideIdentity(elementToAdd, addedElement);
-                }
-            }
             if (edits != null)
             {
                 foreach (var editedElement in edits)
@@ -166,7 +155,8 @@ namespace InteriorPartitions
                     }
                     else
                     {
-                        var newElement = new WallCandidate(editedElement.Value.Line, editedElement.Value.Type.ToString(), defaultHeight, new Transform(), null);
+                        // Not editing line, so we are using the original identity line
+                        var newElement = new WallCandidate(editedElement.Identity.Line, editedElement.Value.Type.ToString(), defaultHeight, new Transform(), null);
                         resultElements.Add(newElement);
                         Identity.AddOverrideIdentity(newElement, editedElement);
                     }
@@ -177,21 +167,9 @@ namespace InteriorPartitions
 
         private static List<WallCandidate> UpdateLevelWallCandidates(
             IEnumerable<WallCandidate> levelWallCandidates,
-            IList<InteriorPartitionTypesOverride> edits,
-            IList<InteriorPartitionTypesOverrideRemoval> removals)
+            IList<InteriorPartitionTypesOverride> edits)
         {
             var resultElements = new List<WallCandidate>(levelWallCandidates);
-            if (removals != null)
-            {
-                foreach (var removedElement in removals)
-                {
-                    var elementToRemove = resultElements.FirstOrDefault(e => removedElement.Identity.Line.IsAlmostEqualTo(e.Line, false, 0.1));
-                    if (elementToRemove != null)
-                    {
-                        resultElements.Remove(elementToRemove);
-                    }
-                }
-            }
             if (edits != null)
             {
                 foreach (var editedElement in edits)
@@ -232,7 +210,8 @@ namespace InteriorPartitions
                             });
                         }
 
-                        resultElements.Add(new WallCandidate(editedElement.Value.Line, editedElement.Value.Type.ToString(), overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
+                        // Not editing line, so we are using the original identity line
+                        resultElements.Add(new WallCandidate(editedElement.Identity.Line, editedElement.Value.Type.ToString(), overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
                         {
                             Thickness = overlappingWallCandidate.Thickness
                         });
@@ -250,62 +229,18 @@ namespace InteriorPartitions
             return resultElements;
         }
 
-        public static void AttachOverrides(this IList<InteriorPartitionTypesOverride> overrideData, IEnumerable<WallCandidate> existingElements, IList<InteriorPartitionTypesOverrideAddition> additions)
+        public static void AttachOverrides(this IList<InteriorPartitionTypesOverride> overrideData, IEnumerable<WallCandidate> existingElements)
         {
             if (overrideData != null)
             {
                 foreach (var overrideValue in overrideData)
                 {
-                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Value.Line.IsAlmostEqualTo(e.Line, false, 0.01));
+                    // Not editing line, so we are using the original identity line
+                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.IsAlmostEqualTo(e.Line, false, 0.01));
                     if (matchingElement != null)
                     {
                         matchingElement.Type = overrideValue.Value.Type.ToString();
                         Identity.AddOverrideIdentity(matchingElement, overrideValue);
-
-                        var addOverride = additions?.FirstOrDefault(a => a.Id.Equals(overrideValue.Identity.AddId));
-                        if (addOverride != null)
-                        {
-                            Identity.AddOverrideIdentity(matchingElement, addOverride);
-                            SetAddIdForContainedElements(existingElements, overrideValue.Value.Line, addOverride);
-                        }
-                    }
-                }
-            }
-            if (additions != null)
-            {
-                var elementsWithoutIdentities = existingElements.Where(e => !e.AdditionalProperties.ContainsKey("associatedIdentities"));
-                foreach (var addedElement in additions)
-                {
-                    var matchingElement = elementsWithoutIdentities.FirstOrDefault(e => addedElement.Value.Line.IsAlmostEqualTo(e.Line, false, 0.01));
-                    if (matchingElement != null)
-                    {
-                        Identity.AddOverrideIdentity(matchingElement, addedElement);
-                    }
-                    SetAddIdForContainedElements(existingElements, addedElement.Value.Line, addedElement);
-                }
-            }
-        }
-
-        private static void SetAddIdForContainedElements(IEnumerable<WallCandidate> existingElements, Line overrideLine, InteriorPartitionTypesOverrideAddition addOverride)
-        {
-            var containedElements = existingElements.Where(e => Line.PointOnLine(e.Line.Start, overrideLine.Start, overrideLine.End, true, 0.01)
-                                                                && Line.PointOnLine(e.Line.End, overrideLine.Start, overrideLine.End, true, 0.01));
-            foreach (var containedElement in containedElements)
-            {
-                containedElement.AddId = addOverride.Id;
-            }
-        }
-
-        private static void RemoveWallCandidates(IList<InteriorPartitionTypesOverrideRemoval> removals, List<WallCandidate> wallCandidates)
-        {
-            if (removals != null)
-            {
-                foreach (var removedElement in removals)
-                {
-                    var elementToRemove = wallCandidates.FirstOrDefault(e => MatchIdentityWallCandidate(e, removedElement.Identity));
-                    if (elementToRemove != null)
-                    {
-                        wallCandidates.Remove(elementToRemove);
                     }
                 }
             }

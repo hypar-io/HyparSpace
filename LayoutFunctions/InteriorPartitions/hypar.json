@@ -95,25 +95,6 @@
   "outputs": [],
   "overrides": {
     "Interior Partition Types": {
-      "behaviors": {
-        "add": {
-          "schema": {
-            "Line": {
-              "$ref": "https://schemas.hypar.io/Line.json"
-            },
-            "Type": {
-              "default": "Solid",
-              "enum": [
-                "Solid",
-                "Partition",
-                "Glass"
-              ],
-              "type": "string"
-            }
-          }
-        },
-        "remove": true
-      },
       "context": "[*discriminator=Elements.WallCandidate]",
       "identity": {
         "AddId": {
@@ -125,14 +106,10 @@
       },
       "paradigm": "edit",
       "schema": {
-        "Line": {
-          "$ref": "https://schemas.hypar.io/Line.json"
-        },
         "Type": {
           "default": "Solid",
           "enum": [
             "Solid",
-            "Partition",
             "Glass"
           ],
           "type": "string"

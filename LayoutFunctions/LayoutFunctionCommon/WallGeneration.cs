@@ -382,7 +382,9 @@ namespace LayoutFunctionCommon
                 return;
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
+
             var mullion = CreateMullion(height);
+
             foreach (var (line, type, wallCandidateId, thickness) in wallCandidateLines)
             {
                 var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
