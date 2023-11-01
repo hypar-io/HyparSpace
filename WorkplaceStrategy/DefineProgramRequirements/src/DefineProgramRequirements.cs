@@ -182,7 +182,8 @@ namespace DefineProgramRequirements
                     "Circulation",
                     ProgramRequirementsCountType.Area_Total,
                     null,
-                    false
+                    false,
+                    ProgramRequirementsDefaultWallType.None
                 ));
             }
             if (!existingNames.Contains("Core"))
@@ -199,7 +200,8 @@ namespace DefineProgramRequirements
                     "Core",
                     ProgramRequirementsCountType.Area_Total,
                     null,
-                    true
+                    true,
+                    ProgramRequirementsDefaultWallType.None
                 ));
             }
         }

@@ -15,5 +15,9 @@ namespace Elements
 
         public bool Enclosed { get; set; }
         public ProfileConstraint Dimensions { get; internal set; }
+
+        [JsonProperty("Default Wall Type")]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ProgramRequirementsDefaultWallType? DefaultWallType { get; internal set; }
     }
 }

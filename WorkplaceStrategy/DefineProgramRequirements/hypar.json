@@ -142,13 +142,27 @@
               ]
             },
             "Enclosed": {
+              "$hyparDeprecated": true,
               "description": "Should this space be enclosed by walls?",
               "type": [
                 "boolean",
                 "null"
               ],
               "$hyparStyle": "checkbox",
-              "default": true
+              "default": null
+            },
+            "Default Wall Type": {
+              "description": "What should the default wall type be for this space?",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "None",
+                "Solid",
+                "Glass"
+              ],
+              "default": "None"
             }
           }
         },
