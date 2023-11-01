@@ -12,7 +12,7 @@ namespace OpenOfficeLayout
 	{
         public static string Name = "Space Settings";
         public static string Dependency = "Space Planning Zones";
-        public static string Context = "[*discriminator=Elements.SpaceBoundary&Name=Open Office]";
+        public static string Context = "[*discriminator=Elements.SpaceBoundary & Hypar Space Type = Open Office | Name = Open Office]";
 		public static string Paradigm = "Edit";
 
         /// <summary>
