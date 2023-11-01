@@ -20,9 +20,7 @@ namespace PrivateOfficeLayout
 		/// The number of private offices.
 		/// </summary>
 		[JsonProperty("Private office count")]
-		public double PrivateOfficeCount {get; set;}
-
-
+		public double PrivateOfficeCount { get; set; }
 
         /// <summary>
         /// Construct a PrivateOfficeLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace PrivateOfficeLayout
         /// </summary>
         public PrivateOfficeLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a PrivateOfficeLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PrivateOfficeLayoutOutputs(double privateOfficeCount): base()
+        public PrivateOfficeLayoutOutputs(double privateOfficeCount) : base()
         {
 			this.PrivateOfficeCount = privateOfficeCount;
 
