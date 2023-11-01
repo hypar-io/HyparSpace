@@ -61,6 +61,8 @@ public class RoomEdge
 
     public double Length => Line.Length();
     public Vector3 Direction => Line.Direction();
+
+    public bool PrimaryEntryEdge { get; set; } = false;
 }
 
 public static class RoomEdgeExtensions

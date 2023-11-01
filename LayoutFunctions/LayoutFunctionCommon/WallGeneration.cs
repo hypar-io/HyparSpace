@@ -216,6 +216,7 @@ namespace LayoutFunctionCommon
         {
             var startPt = startPos * domLineDir + dominantLineForGroup.Line.Start;
             var endPt = endPos * domLineDir + dominantLineForGroup.Line.Start;
+
             if (startPt.DistanceTo(endPt) > 0.01)
             {
                 var newLine = new Line(startPt, endPt);
@@ -223,7 +224,8 @@ namespace LayoutFunctionCommon
                 {
                     Line = newLine,
                     Thickness = dominantLineForGroup.Thickness,
-                    Type = type
+                    Type = type,
+                    PrimaryEntryEdge = dominantLineForGroup.PrimaryEntryEdge
                 });
             }
         }
@@ -240,13 +242,15 @@ namespace LayoutFunctionCommon
             {
                 Line = l.Line,
                 Type = $"{l.Type}-0",
-                Thickness = l.Thickness
+                Thickness = l.Thickness,
+                PrimaryEntryEdge = l.PrimaryEntryEdge
             }));
             allTypedLines.AddRange(prioritizedTypedLines.Select(l => new RoomEdge()
             {
                 Line = l.Line,
                 Type = $"{l.Type}-1",
-                Thickness = l.Thickness
+                Thickness = l.Thickness,
+                PrimaryEntryEdge = l.PrimaryEntryEdge
             }));
             var collinearLinesGroups = GroupCollinearLines(allTypedLines, tolerance);
 
@@ -718,6 +722,7 @@ namespace LayoutFunctionCommon
                 {
                     Line = line,
                     Thickness = closestRoomEdge?.Thickness,
+                    PrimaryEntryEdge = closestRoomEdge?.PrimaryEntryEdge ?? false
                 };
             }
 

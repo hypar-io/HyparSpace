@@ -3,7 +3,8 @@
   "cli_version": "0.9.11-alpha.2",
   "description": "Produce all interior partition elements.",
   "element_types": [
-    "https://schemas.hypar.io/WallCandidate.json"
+    "https://schemas.hypar.io/WallCandidate.json",
+    "https://schemas.hypar.io/CirculationSegment.json"
   ],
   "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
   "language": "C#",
@@ -87,6 +88,11 @@
     {
       "autohide": false,
       "name": "Furniture and Equipment",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Circulation",
       "optional": true
     }
   ],

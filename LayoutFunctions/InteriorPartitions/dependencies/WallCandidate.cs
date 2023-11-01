@@ -8,6 +8,7 @@ namespace Elements
         public double Height { get; set; }
 
         public Transform LevelTransform { get; set; }
+        public bool PrimaryEntryEdge { get; set; }
 
         public string AddId { get; set; }
 

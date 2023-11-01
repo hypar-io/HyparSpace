@@ -66,6 +66,9 @@ namespace InteriorPartitions
                 }
             }
 
+            inputModels.TryGetValue("Circulation", out var circulationModel);
+            List<CirculationSegment> circulationSegments = circulationModel?.AllElementsOfType<CirculationSegment>().ToList() ?? new List<CirculationSegment>();
+
             var output = new InteriorPartitionsOutputs();
             var wallCandidates = CreateWallCandidates(input, interiorPartitionCandidates);
 
@@ -104,7 +107,6 @@ namespace InteriorPartitions
             };
             return mullion;
         }
-
 
         public static List<Element> GenerateWall(WallCandidate wallCandidate)
         {
@@ -148,13 +150,12 @@ namespace InteriorPartitions
                 wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
+                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge)
                 {
                     double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
                     // Adding Wall as a property to door makes the wall not show up :shrug:
-                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing, 1, 1, true)
                     {
-                        Material = BuiltInMaterials.Concrete
                     };
                     door.Transform.Concatenate(new Transform(0, 0, 0.005));
                     wall.Openings.Add(door.Opening);
@@ -180,12 +181,11 @@ namespace InteriorPartitions
                 var grid = new Grid1d(lineProjected);
                 var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
+                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge)
                 {
                     double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
-                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing, 1, 1, true)
                     {
-                        Material = BuiltInMaterials.Concrete
                     };
 
                     wall.Openings.Add(door.Opening);
@@ -222,7 +222,9 @@ namespace InteriorPartitions
                 {
                     baseMullion.UpdateRepresentations();
                     var mullionRep = baseMullion.Representation;
-                    wall.RepresentationInstances.Add(new RepresentationInstance(new SolidRepresentation(mullionRep.SolidOperations), baseMullion.Material, true));
+                    var repInstance = new RepresentationInstance(new SolidRepresentation(mullionRep.SolidOperations), baseMullion.Material, true);
+
+                    wall.RepresentationInstances.Add(repInstance);
                 }
 
                 // foreach (var mullionInstance in mullionInstances)
@@ -253,8 +255,6 @@ namespace InteriorPartitions
                     // elements.Add(new ModelCurve(line, BuiltInMaterials.XAxis, levelTransform));
                     // var instance = mullion.CreateInstance(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
                     // mullionObject.AdditionalProperties["Wall"] = wall.Id;
-
-
                     // elements.Add(mullionObject);
                 }
 
@@ -270,6 +270,8 @@ namespace InteriorPartitions
                     wall.RepresentationInstances.Add(new RepresentationInstance(new SolidRepresentation(headerRep.SolidOperations), header.Material, true));
                 }
             }
+
+            wall.UpdateRepresentations();
 
             elements.Add(wall);
 
@@ -288,6 +290,17 @@ namespace InteriorPartitions
 
         internal static List<WallCandidate> CreateWallCandidates(InteriorPartitionsInputs input, List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
+            foreach (var interiorPartitionCandidate in interiorPartitionCandidates)
+            {
+                foreach (var roomEdge in interiorPartitionCandidate.WallCandidateLines)
+                {
+                    if (roomEdge.Type.Contains("Glass"))
+                    {
+                        roomEdge.PrimaryEntryEdge = true;
+                    }
+                }
+            }
+
             // TODO: don't assume one height for all walls on a level — pass height through deduplication.
             var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             var wallCandidates = new List<WallCandidate>();
@@ -311,35 +324,40 @@ namespace InteriorPartitions
                                       levelGroup.Key,
                                       new List<SpaceBoundary>())
                     {
-                        Thickness = c.Thickness
+                        Thickness = c.Thickness,
+                        PrimaryEntryEdge = c.PrimaryEntryEdge
                     });
                 if (input.Overrides?.InteriorPartitionTypes != null)
                 {
                     levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes);
                 }
 
-                // var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
-                //     levelWallCandidates.Select(w => new RoomEdge
-                //     {
-                //         Line = w.Line,
-                //         Type = w.Type,
-                //         Thickness = w.Thickness
-                //     }),
-                //     userAddedWallLinesCandidates.Select(w => new RoomEdge()
-                //     {
-                //         Line = w.Line.TransformedLine(w.LevelTransform),
-                //         Type = w.Type,
-                //         Thickness = w.Thickness
-                //     }));
-                // var splittedWallCandidates = splittedCandidates
-                //     .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>())
-                //     {
-                //         Thickness = c.Thickness
-                //     })
-                //     .ToList();
+                var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
+                    levelWallCandidates.Select(w => new RoomEdge
+                    {
+                        Line = w.Line,
+                        Type = w.Type,
+                        Thickness = w.Thickness,
+                        PrimaryEntryEdge = w.PrimaryEntryEdge
 
-                // wallCandidates.AddRange(splittedWallCandidates);
-                wallCandidates.AddRange(levelWallCandidates);
+                    }),
+                    userAddedWallLinesCandidates.Select(w => new RoomEdge()
+                    {
+                        Line = w.Line.TransformedLine(w.LevelTransform),
+                        Type = w.Type,
+                        Thickness = w.Thickness,
+                        PrimaryEntryEdge = w.PrimaryEntryEdge
+                    }));
+                var splittedWallCandidates = splittedCandidates
+                    .Select(c => new WallCandidate(c.Line, c.Type, height, levelGroup.Key, new List<SpaceBoundary>())
+                    {
+                        Thickness = c.Thickness,
+                        PrimaryEntryEdge = c.PrimaryEntryEdge
+                    })
+                    .ToList();
+
+                wallCandidates.AddRange(splittedWallCandidates);
+                // wallCandidates.AddRange(levelWallCandidates);
             }
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
 
@@ -429,21 +447,24 @@ namespace InteriorPartitions
                         {
                             resultElements.Add(new WallCandidate(new Line(orderedVectors[0], orderedVectors[1]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
                             {
-                                Thickness = overlappingWallCandidate.Thickness
+                                Thickness = overlappingWallCandidate.Thickness,
+                                PrimaryEntryEdge = overlappingWallCandidate.PrimaryEntryEdge
                             });
                         }
 
                         // Not editing line, so we are using the original identity line
                         resultElements.Add(new WallCandidate(editedElement.Identity.Line, editedElement.Value.Type.ToString(), overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
                         {
-                            Thickness = overlappingWallCandidate.Thickness
+                            Thickness = overlappingWallCandidate.Thickness,
+                            PrimaryEntryEdge = overlappingWallCandidate.PrimaryEntryEdge
                         });
 
                         if (!orderedVectors[2].IsAlmostEqualTo(orderedVectors[3]))
                         {
                             resultElements.Add(new WallCandidate(new Line(orderedVectors[2], orderedVectors[3]), overlappingWallCandidate.Type, overlappingWallCandidate.Height, overlappingWallCandidate.LevelTransform)
                             {
-                                Thickness = overlappingWallCandidate.Thickness
+                                Thickness = overlappingWallCandidate.Thickness,
+                                PrimaryEntryEdge = overlappingWallCandidate.PrimaryEntryEdge
                             });
                         }
                     }
