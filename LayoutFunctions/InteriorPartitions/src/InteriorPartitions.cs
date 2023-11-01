@@ -150,7 +150,7 @@ namespace InteriorPartitions
                 wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge)
+                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge.Value)
                 {
                     double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
                     // Adding Wall as a property to door makes the wall not show up :shrug:
@@ -181,7 +181,7 @@ namespace InteriorPartitions
                 var grid = new Grid1d(lineProjected);
                 var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge)
+                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge.Value)
                 {
                     double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
                     var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing, 1, 1, true)
@@ -290,17 +290,6 @@ namespace InteriorPartitions
 
         internal static List<WallCandidate> CreateWallCandidates(InteriorPartitionsInputs input, List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
-            foreach (var interiorPartitionCandidate in interiorPartitionCandidates)
-            {
-                foreach (var roomEdge in interiorPartitionCandidate.WallCandidateLines)
-                {
-                    if (roomEdge.Type.Contains("Glass"))
-                    {
-                        roomEdge.PrimaryEntryEdge = true;
-                    }
-                }
-            }
-
             // TODO: don't assume one height for all walls on a level — pass height through deduplication.
             var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             var wallCandidates = new List<WallCandidate>();
