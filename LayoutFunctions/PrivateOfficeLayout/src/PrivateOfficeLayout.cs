@@ -143,7 +143,7 @@ namespace PrivateOfficeLayout
 
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, room));
                         }
                     }
 
@@ -231,7 +231,7 @@ namespace PrivateOfficeLayout
                         }
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, room));
                         }
                         return returnCells;
                     }
@@ -240,7 +240,7 @@ namespace PrivateOfficeLayout
                         tempGrid.V.DivideByApproximateLength(config.Value.OfficeSizing.OfficeSize, EvenDivisionMode.RoundDown);
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, room));
                         }
                         return tempGrid.GetCells().Select(c =>
                         {

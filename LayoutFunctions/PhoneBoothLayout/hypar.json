@@ -35,6 +35,7 @@
     "type": "object",
     "properties": {
       "Create Walls": {
+        "$hyparDeprecated": true,
         "type": "boolean",
         "description": "Should partitions be added around phone booths?",
         "default": true

@@ -118,7 +118,7 @@ namespace PhoneBoothLayout
                         }
 
                     }
-                    wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                    wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, room));
 
                     totalBoothCount += seatsCount;
                     output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
