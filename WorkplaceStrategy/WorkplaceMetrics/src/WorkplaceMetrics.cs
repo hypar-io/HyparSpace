@@ -42,7 +42,7 @@ namespace WorkplaceMetrics
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
             if (programReqs != null && programReqs.Any())
             {
-                SpaceBoundary.SetRequirements(programReqs);
+                SpaceBoundary.SetRequirements(programReqs, warnings);
             }
 
             // figure out the special key containing circulation
@@ -139,7 +139,7 @@ namespace WorkplaceMetrics
             }
 
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
-            
+
             var desksMetric = metricByLayouts.Sum(m => m.Value.Desks);
             var collaborationSeatsMetric = metricByLayouts.Sum(m => m.Value.CollaborationSeats);
 
@@ -175,8 +175,8 @@ namespace WorkplaceMetrics
             foreach (var at in areaTallies)
             {
                 at.Id = Guid.NewGuid();
-                at.AchievedCount = 
-                    at.Name == _privateOffice ? metricByLayouts[at.Name].Headcount : 
+                at.AchievedCount =
+                    at.Name == _privateOffice ? metricByLayouts[at.Name].Headcount :
                     at.Name == _phoneBooth ? metricByLayouts[at.Name].Seats : at.AchievedCount;
                 at.SeatCount = layoutNames.Contains(at.Name) ? metricByLayouts[at.Name].Seats : at.SeatCount;
             }
