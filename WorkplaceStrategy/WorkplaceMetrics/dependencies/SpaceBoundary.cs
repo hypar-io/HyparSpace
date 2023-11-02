@@ -30,6 +30,8 @@ namespace Elements
         public int SpaceCount { get; set; } = 1;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs, List<string> warnings)
         {
+            var badProgramNames = new List<string>();
+
             foreach (var req in reqs)
             {
                 try
@@ -38,16 +40,16 @@ namespace Elements
                 }
                 catch
                 {
-                    string firstWarning = @"There are duplicate Program Names in your Program Requirements.
-                    Please ensure that all Program Names are unique if you want to use them in Workplace Metrics.";
-
-                    if (!warnings.Contains(firstWarning)) warnings.Add(firstWarning);
-
-                    string programName = "Duplicate Program Names:";
-                    warnings.Add(programName);
-
-                    warnings.Add($"{req.QualifiedProgramName}");
+                    badProgramNames.Add($"{req.QualifiedProgramName}");
                 }
+            }
+
+            if (badProgramNames.Count > 0)
+            {
+                warnings.Add(@"There are duplicate Program Names in your Program Requirements.
+                    Please ensure that all Program Names are unique if you want to use them in Workplace Metrics.");
+                warnings.Add("Duplicate Program Names:");
+                warnings.AddRange(badProgramNames);
             }
 
             foreach (var kvp in Requirements)
