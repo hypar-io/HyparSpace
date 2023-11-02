@@ -290,18 +290,6 @@ namespace InteriorPartitions
 
         internal static List<WallCandidate> CreateWallCandidates(InteriorPartitionsInputs input, List<InteriorPartitionCandidate> interiorPartitionCandidates)
         {
-            // TODO: Update this when the upstream Layout functions set the PrimaryEntryEdge correctly
-            foreach (var interiorPartitionCandidate in interiorPartitionCandidates)
-            {
-                foreach (var roomEdge in interiorPartitionCandidate.WallCandidateLines)
-                {
-                    if (roomEdge.Type.Contains("Glass"))
-                    {
-                        roomEdge.PrimaryEntryEdge = true;
-                    }
-                }
-            }
-
             // TODO: don't assume one height for all walls on a level — pass height through deduplication.
             var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             var wallCandidates = new List<WallCandidate>();

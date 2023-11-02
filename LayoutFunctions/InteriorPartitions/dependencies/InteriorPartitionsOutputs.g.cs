@@ -17,16 +17,13 @@ namespace InteriorPartitions
     public class InteriorPartitionsOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a InteriorPartitionsOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public InteriorPartitionsOutputs() : base()
         {
-
         }
-
 
 	}
 }
