@@ -87,7 +87,7 @@
         },
         "Space Settings": {
             "dependency": "Space Planning Zones",
-            "context": "[*discriminator=Elements.SpaceBoundary&Name=Private Office]",
+            "context": "[*discriminator=Elements.SpaceBoundary & Hypar Space Type = Private Office | Name=Private Office]",
             "identity": {
                 "ParentCentroid": {
                     "$ref": "https://schemas.hypar.io/Vector3.json"

@@ -12,7 +12,7 @@ namespace PrivateOfficeLayout
 	{
         public static string Name = "Space Settings";
         public static string Dependency = "Space Planning Zones";
-        public static string Context = "[*discriminator=Elements.SpaceBoundary&Name=Private Office]";
+        public static string Context = "[*discriminator=Elements.SpaceBoundary & Hypar Space Type = Private Office | Name=Private Office]";
 		public static string Paradigm = "Edit";
 
         /// <summary>
