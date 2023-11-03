@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.0.0" />
-    <PackageReference Include="Hypar.Functions" Version="1.7.1" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.0.0" />
+    <PackageReference Include="Hypar.Elements" Version="2.1.0" />
+    <PackageReference Include="Hypar.Elements.Components" Version="2.1.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>

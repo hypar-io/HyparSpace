@@ -40,7 +40,7 @@ namespace LayoutFunctionCommon
             }
             var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
 
-            // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
+            // This null url check is needed because a few configs got generated with instances that weren't contentelements.
             // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
             foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
             {
@@ -54,6 +54,19 @@ namespace LayoutFunctionCommon
 
             var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
             layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+
+            // Ensure that all content items have representations
+            foreach (var instance in layoutInstantiated.Instance.Instances)
+            {
+                if (instance is ElementInstance elemInstance)
+                {
+                    if (elemInstance.BaseDefinition is GeometricElement geo)
+                    {
+                        geo.UpdateRepresentations();
+                    }
+                }
+            }
+
             return layoutInstantiated;
         }
 
@@ -238,7 +251,7 @@ namespace LayoutFunctionCommon
 
         /// <summary>
         /// Basically the same as StandardLayoutOnAllLevels, but without the actual furniture layout part — just the wall creation.
-        /// </summary> 
+        /// </summary>
         public static void GenerateWallsForAllSpaces<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
             IEnumerable<TSpaceBoundary> spaceBoundaries,
             Dictionary<string, Model> inputModels,
@@ -353,6 +366,7 @@ namespace LayoutFunctionCommon
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
 
                         wallCandidateLines.AddRange(WallCandidates);
+
                         outputModel.AddElement(layout.Instance);
 
                         if (countSeats != null)
