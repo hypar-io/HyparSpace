@@ -20,81 +20,79 @@ namespace WorkplaceMetrics
 		/// The total usable floor area of the project.
 		/// </summary>
 		[JsonProperty("Total Usable Floor Area")]
-		public double TotalUsableFloorArea {get; set;}
+		public double TotalUsableFloorArea { get; set; }
 
 		/// <summary>
 		/// The usable floor area per person.
 		/// </summary>
 		[JsonProperty("Area per Person")]
-		public double AreaPerPerson {get; set;}
+		public double AreaPerPerson { get; set; }
 
 		/// <summary>
 		/// The total number of desks.
 		/// </summary>
 		[JsonProperty("Total Desk Count")]
-		public double TotalDeskCount {get; set;}
+		public double TotalDeskCount { get; set; }
 
 		/// <summary>
 		/// The total number of seats in the meeting rooms.
 		/// </summary>
 		[JsonProperty("Meeting room seats")]
-		public double MeetingRoomSeats {get; set;}
+		public double MeetingRoomSeats { get; set; }
 
 		/// <summary>
 		/// The total number of classroom seats.
 		/// </summary>
 		[JsonProperty("Classroom seats")]
-		public double ClassroomSeats {get; set;}
+		public double ClassroomSeats { get; set; }
 
 		/// <summary>
 		/// Total number of Phone booths.
 		/// </summary>
 		[JsonProperty("Phone Booths")]
-		public double PhoneBooths {get; set;}
+		public double PhoneBooths { get; set; }
 
 		/// <summary>
 		/// Total seats in open collaboration areas.
 		/// </summary>
 		[JsonProperty("Collaboration seats")]
-		public double CollaborationSeats {get; set;}
+		public double CollaborationSeats { get; set; }
 
 		/// <summary>
 		/// The total number of employees and visitors accommodated.
 		/// </summary>
 		[JsonProperty("Total Headcount")]
-		public double TotalHeadcount {get; set;}
+		public double TotalHeadcount { get; set; }
 
 		/// <summary>
 		/// The usable floor area per desk.
 		/// </summary>
 		[JsonProperty("Area per Desk")]
-		public double AreaPerDesk {get; set;}
+		public double AreaPerDesk { get; set; }
 
 		/// <summary>
 		/// How many people are there for each desk?
 		/// </summary>
 		[JsonProperty("Desk Sharing Ratio")]
-		public double DeskSharingRatio {get; set;}
+		public double DeskSharingRatio { get; set; }
 
 		/// <summary>
 		/// On average how many people does each meeting room serve? A value of 30 means there's one meeting room for every 30 people.
 		/// </summary>
 		[JsonProperty("Meeting room ratio")]
-		public double MeetingRoomRatio {get; set;}
+		public double MeetingRoomRatio { get; set; }
 
 		/// <summary>
 		/// Total number of private offices.
 		/// </summary>
 		[JsonProperty("Private Office Count")]
-		public double PrivateOfficeCount {get; set;}
+		public double PrivateOfficeCount { get; set; }
 
 		/// <summary>
 		/// The ratio of circulation area to usable floor area.
 		/// </summary>
 		[JsonProperty("Circulation / USF Ratio")]
-		public double CirculationUSFRatio {get; set;}
-
-
+		public double CirculationUSFRatio { get; set; }
 
         /// <summary>
         /// Construct a WorkplaceMetricsOutputs with default inputs.
@@ -102,16 +100,14 @@ namespace WorkplaceMetrics
         /// </summary>
         public WorkplaceMetricsOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a WorkplaceMetricsOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double areaPerPerson, double totalDeskCount, double meetingRoomSeats, double classroomSeats, double phoneBooths, double collaborationSeats, double totalHeadcount, double areaPerDesk, double deskSharingRatio, double meetingRoomRatio, double privateOfficeCount, double circulationUSFRatio): base()
+        public WorkplaceMetricsOutputs(double totalUsableFloorArea, double areaPerPerson, double totalDeskCount, double meetingRoomSeats, double classroomSeats, double phoneBooths, double collaborationSeats, double totalHeadcount, double areaPerDesk, double deskSharingRatio, double meetingRoomRatio, double privateOfficeCount, double circulationUSFRatio) : base()
         {
 			this.TotalUsableFloorArea = totalUsableFloorArea;
 			this.AreaPerPerson = areaPerPerson;

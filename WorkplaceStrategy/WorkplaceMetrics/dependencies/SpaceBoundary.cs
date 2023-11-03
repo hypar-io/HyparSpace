@@ -28,9 +28,30 @@ namespace Elements
         }
         public static Dictionary<string, ProgramRequirement> Requirements { get; private set; } = new Dictionary<string, ProgramRequirement>();
         public int SpaceCount { get; set; } = 1;
-        public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
+        public static void SetRequirements(IEnumerable<ProgramRequirement> reqs, List<string> warnings)
         {
-            Requirements = reqs.ToDictionary(v => v.QualifiedProgramName, v => v);
+            var badProgramNames = new List<string>();
+
+            foreach (var req in reqs)
+            {
+                try
+                {
+                    Requirements.Add(req.QualifiedProgramName, req);
+                }
+                catch
+                {
+                    badProgramNames.Add($"{req.QualifiedProgramName}");
+                }
+            }
+
+            if (badProgramNames.Count > 0)
+            {
+                warnings.Add(@"There are duplicate Program Names in your Program Requirements.
+                    Please ensure that all Program Names are unique if you want to use them in Workplace Metrics.");
+                warnings.Add("Duplicate Program Names:");
+                warnings.AddRange(badProgramNames);
+            }
+
             foreach (var kvp in Requirements)
             {
                 var color = kvp.Value.Color ?? Colors.Magenta;
