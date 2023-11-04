@@ -30,6 +30,8 @@ namespace Elements
         public int SpaceCount { get; set; } = 1;
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs, List<string> warnings)
         {
+            Requirements.Clear();
+
             var badProgramNames = new List<string>();
 
             foreach (var req in reqs)
