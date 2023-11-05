@@ -20,9 +20,7 @@ namespace OpenCollaborationLayout
 		/// Total seats in open collaboration areas.
 		/// </summary>
 		[JsonProperty("Collaboration seats")]
-		public double CollaborationSeats {get; set;}
-
-
+		public double CollaborationSeats { get; set; }
 
         /// <summary>
         /// Construct a OpenCollaborationLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace OpenCollaborationLayout
         /// </summary>
         public OpenCollaborationLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a OpenCollaborationLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public OpenCollaborationLayoutOutputs(double collaborationSeats): base()
+        public OpenCollaborationLayoutOutputs(double collaborationSeats) : base()
         {
 			this.CollaborationSeats = collaborationSeats;
 

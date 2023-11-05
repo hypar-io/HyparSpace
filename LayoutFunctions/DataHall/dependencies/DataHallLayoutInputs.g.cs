@@ -24,13 +24,13 @@ namespace DataHallLayout
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class DataHallLayoutInputs : S3Args
+    public  class DataHallLayoutInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DataHallLayoutInputs(DataHallLayoutInputsCabinetDepth @cabinetDepth, DataHallLayoutInputsCabinetHeight @cabinetHeight, double @kWRack, double @hotAisleWidth, double @coldAisleWidth, double @clearance, bool @flipDirection, bool @swapColdHotPattern, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public DataHallLayoutInputs(DataHallLayoutInputsCabinetDepth @cabinetDepth, DataHallLayoutInputsCabinetHeight @cabinetHeight, double @kWRack, double @hotAisleWidth, double @coldAisleWidth, double @clearance, bool @flipDirection, bool @swapColdHotPattern, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DataHallLayoutInputs>();
             if(validator != null)

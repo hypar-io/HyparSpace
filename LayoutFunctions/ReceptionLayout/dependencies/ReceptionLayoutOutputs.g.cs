@@ -17,16 +17,13 @@ namespace ReceptionLayout
     public class ReceptionLayoutOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a ReceptionLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public ReceptionLayoutOutputs() : base()
         {
-
         }
-
 
 	}
 }

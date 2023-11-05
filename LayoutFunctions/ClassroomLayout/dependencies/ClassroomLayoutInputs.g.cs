@@ -24,13 +24,13 @@ namespace ClassroomLayout
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class ClassroomLayoutInputs : S3Args
+    public  class ClassroomLayoutInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public ClassroomLayoutInputs(bool @createWalls, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public ClassroomLayoutInputs(bool @createWalls, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ClassroomLayoutInputs>();
             if(validator != null)
