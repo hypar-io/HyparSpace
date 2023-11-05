@@ -20,9 +20,7 @@ namespace PantryLayout
 		/// Total count of seats.
 		/// </summary>
 		[JsonProperty("Total cafe chairs count")]
-		public double TotalCafeChairsCount {get; set;}
-
-
+		public double TotalCafeChairsCount { get; set; }
 
         /// <summary>
         /// Construct a PantryLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace PantryLayout
         /// </summary>
         public PantryLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a PantryLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PantryLayoutOutputs(double totalCafeChairsCount): base()
+        public PantryLayoutOutputs(double totalCafeChairsCount) : base()
         {
 			this.TotalCafeChairsCount = totalCafeChairsCount;
 

@@ -24,13 +24,13 @@ namespace MeetingRoomLayout
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class MeetingRoomLayoutInputs : S3Args
+    public  class MeetingRoomLayoutInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public MeetingRoomLayoutInputs(bool @createWalls, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public MeetingRoomLayoutInputs(bool @createWalls, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<MeetingRoomLayoutInputs>();
             if(validator != null)
