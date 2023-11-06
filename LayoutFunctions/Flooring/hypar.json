@@ -1,0 +1,87 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "025a0e28-a2e5-474d-b90d-6f4cadb5218e",
+  "name": "Flooring",
+  "description": "The Flooring function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "name": "Floors",
+      "optional": true
+    }
+  ],
+  "overrides": {
+    "Floor Types": {
+      "targetType": "https://schemas.hypar.io/FlooringType.json",
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "context": "[*discriminator=Elements.FlooringType]",
+      "behaviors": {
+        "add": true,
+        "remove": true
+      },
+      "schema": {
+        "Name": {
+          "description": "The name of this flooring type",
+          "type": "string"
+        },
+        "Thickness": {
+          "description": "The thickness of this flooring type",
+          "type": "number",
+          "$hyparUnitType": "length",
+          "$hyparPreferredUnits": {
+            "imperial": "in",
+            "metric": "mm"
+          }
+        },
+        "Color": {
+          "description": "The primary color of this material type",
+          "$ref": "https://schemas.hypar.io/Color.json"
+        }
+      }
+    },
+    "Floor Treatments": {
+      "targetType": "https://schemas.hypar.io/FlooringRegion.json",
+      "context": "[*discriminator=Elements.FlooringRegion]",
+      "behaviors": {
+        "add": true,
+        "remove": true
+      },
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "schema": {
+        "Type": {
+          "description": "The flooring type applied to this region.",
+          "type": "object",
+          "$hyparPickElement": {
+            "context": "[*discriminator=Elements.FlooringType]",
+            "selfDependency": true
+          },
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Id": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "Boundary": {
+          "description": "The shape of this region.",
+          "$ref": "https://schemas.hypar.io/Profile.json"
+        }
+      }
+    }
+  },
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.10.0",
+  "stream_model": true
+}

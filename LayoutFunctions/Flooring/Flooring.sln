@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flooring", "src\Flooring.csproj", "{D1A99638-8EEE-4ADF-AC46-BDBFE01D9F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flooring.Dependencies", "dependencies\Flooring.Dependencies.csproj", "{53062635-5268-4595-9ECC-485A81A9051C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flooring.Tests", "test\Flooring.Tests.csproj", "{A87BED69-5BAC-4EDC-AEF4-19A4E1CF08E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1A99638-8EEE-4ADF-AC46-BDBFE01D9F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A99638-8EEE-4ADF-AC46-BDBFE01D9F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A99638-8EEE-4ADF-AC46-BDBFE01D9F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A99638-8EEE-4ADF-AC46-BDBFE01D9F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53062635-5268-4595-9ECC-485A81A9051C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53062635-5268-4595-9ECC-485A81A9051C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53062635-5268-4595-9ECC-485A81A9051C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53062635-5268-4595-9ECC-485A81A9051C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87BED69-5BAC-4EDC-AEF4-19A4E1CF08E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87BED69-5BAC-4EDC-AEF4-19A4E1CF08E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87BED69-5BAC-4EDC-AEF4-19A4E1CF08E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87BED69-5BAC-4EDC-AEF4-19A4E1CF08E1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
