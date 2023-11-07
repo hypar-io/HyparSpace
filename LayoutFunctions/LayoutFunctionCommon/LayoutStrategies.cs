@@ -55,18 +55,6 @@ namespace LayoutFunctionCommon
             var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
             layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
 
-            // Ensure that all content items have representations
-            foreach (var instance in layoutInstantiated.Instance.Instances)
-            {
-                if (instance is ElementInstance elemInstance)
-                {
-                    if (elemInstance.BaseDefinition is GeometricElement geo)
-                    {
-                        geo.UpdateRepresentations();
-                    }
-                }
-            }
-
             return layoutInstantiated;
         }
 
