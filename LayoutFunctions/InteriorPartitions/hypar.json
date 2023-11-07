@@ -5,6 +5,10 @@
   "description": "Produce all interior partition elements.",
   "language": "C#",
   "model_output": "Interior Partitions",
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
   "model_dependencies": [
     {
       "autohide": false,

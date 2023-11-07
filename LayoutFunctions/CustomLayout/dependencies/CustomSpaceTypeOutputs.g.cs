@@ -17,16 +17,13 @@ namespace CustomSpaceType
     public class CustomSpaceTypeOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a CustomSpaceTypeOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public CustomSpaceTypeOutputs() : base()
         {
-
         }
-
 
 	}
 }

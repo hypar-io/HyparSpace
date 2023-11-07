@@ -34,6 +34,7 @@ namespace Elements
             this.Level = @level;
             }
         
+        
         // Empty constructor
         public LevelElements()
             : base()
