@@ -54,6 +54,7 @@ namespace LayoutFunctionCommon
 
             var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
             layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+
             return layoutInstantiated;
         }
 
@@ -357,6 +358,7 @@ namespace LayoutFunctionCommon
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
 
                         wallCandidateLines.AddRange(WallCandidates);
+
                         outputModel.AddElement(layout.Instance);
 
                         if (countSeats != null)
