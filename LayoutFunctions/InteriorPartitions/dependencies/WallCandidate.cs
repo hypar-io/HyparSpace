@@ -8,5 +8,6 @@ namespace Elements
     public partial class WallCandidate
     {
         public (double innerWidth, double outerWidth)? Thickness { get; set; }
+        public List<Guid> SpaceBoundaryIds = new List<Guid>();
     }
 }

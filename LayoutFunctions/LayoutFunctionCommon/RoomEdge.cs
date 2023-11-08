@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -57,6 +58,9 @@ public class RoomEdge
             _type = value;
         }
     }
+
+    public List<Guid> Rooms { get; set; }
+
     public (double innerWidth, double outerWidth)? Thickness { get; set; }
 
     public double Length => Line.Length();

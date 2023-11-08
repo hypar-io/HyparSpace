@@ -80,6 +80,10 @@ namespace LayoutFunctionCommon
                     if (possibleConfigs.Any())
                     {
                         var (configInfo, wallCandidates) = SelectTheBestOfPossibleConfigs(possibleConfigs);
+                        foreach (var candidate in wallCandidates)
+                        {
+                            candidate.Rooms = new List<Guid>() { room.Id };
+                        }
 
                         var layout = InstantiateLayoutByFit(configInfo, room.Transform);
                         SetLevelVolume(layout.Instance, levelVolume?.Id);

@@ -87,9 +87,15 @@
       "optional": true
     }
   ],
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
   "outputs": [],
   "element_types": [
-    "https://schemas.hypar.io/WallCandidate.json"
+    "https://schemas.hypar.io/WallCandidate.json",
+    "https://schemas.hypar.io/StandardWall.json",
+    "https://schemas.hypar.io/Wall.json"
   ],
   "repository_url": "https://github.com/hypar-io/function"
 }

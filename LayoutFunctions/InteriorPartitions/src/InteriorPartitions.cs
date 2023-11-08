@@ -3,6 +3,7 @@ using Elements.Geometry;
 using System.Collections.Generic;
 using System.Linq;
 using LayoutFunctionCommon;
+using System;
 
 namespace InteriorPartitions
 {
@@ -52,10 +53,11 @@ namespace InteriorPartitions
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? 3;
                 var wallCandidates = candidates.Select(c => new WallCandidate(c.Line.TransformedLine(levelGroup.Key), c.Type, new List<SpaceBoundary>())
                 {
-                    Thickness = c.Thickness
+                    Thickness = c.Thickness,
+                    SpaceBoundaryIds = c.Rooms,
                 });
                 output.Model.AddElements(wallCandidates);
-                WallGeneration.GenerateWalls(output.Model, wallCandidates.Select(w => (w.Line, w.Type, w.Id, w.Thickness)), height, levelGroup.Key);
+                WallGeneration.GenerateWalls(output.Model, wallCandidates.Select(w => (w.Line, w.Type, w.Id, w.Thickness, w.SpaceBoundaryIds)), height, levelGroup.Key);
             }
 
             return output;

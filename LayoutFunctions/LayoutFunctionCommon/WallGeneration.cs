@@ -10,6 +10,7 @@ namespace LayoutFunctionCommon
     public static class WallGeneration
     {
         private const string wallCandidatePropertyName = "Wall Candidate";
+        private const string wallParentsPropertyName = "Parents";
         private static double mullionSize = 0.07;
         private static double doorWidth = 0.9;
         private static double doorHeight = 2.1;
@@ -33,7 +34,8 @@ namespace LayoutFunctionCommon
             orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
                 Line = s.TransformedLine(room.Transform),
-                Thickness = thicknesses?.ElementAtOrDefault(i)
+                Thickness = thicknesses?.ElementAtOrDefault(i),
+                Rooms = new List<Guid> { room.Id },
             }), corridorSegments, levelProfile, out var wallCandidates);
             orientationGuideEdge.Type = room.DefaultWallType ?? "Glass";
             orientationGuideEdge.PrimaryEntryEdge = true;
@@ -70,7 +72,8 @@ namespace LayoutFunctionCommon
             var allSegments = room.Boundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
                 Line = s.TransformedLine(room.Transform),
-                Thickness = thicknesses?.ElementAtOrDefault(i)
+                Thickness = thicknesses?.ElementAtOrDefault(i),
+                Rooms = new List<Guid> { room.Id },
             }).ToList();
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
@@ -225,7 +228,8 @@ namespace LayoutFunctionCommon
                 {
                     Line = newLine,
                     Thickness = dominantLineForGroup.Thickness,
-                    Type = point.type
+                    Type = point.type,
+                    Rooms = dominantLineForGroup.Rooms,
                 });
             }
         }
@@ -249,7 +253,7 @@ namespace LayoutFunctionCommon
             return mullion;
         }
 
-        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId, (double innerWidth, double outerWidth)? Thickness)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
+        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId, (double innerWidth, double outerWidth)? Thickness, List<Guid> roomIds)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
         {
             if (debugMode)
             {
@@ -275,7 +279,7 @@ namespace LayoutFunctionCommon
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
             var mullion = CreateMullion(height);
-            foreach (var (line, type, wallCandidateId, thickness) in wallCandidateLines)
+            foreach (var (line, type, wallCandidateId, thickness, roomIds) in wallCandidateLines)
             {
                 var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
                 if (thickness != null && thickness.Value.innerWidth == 0 && thickness.Value.outerWidth == 0)
@@ -299,18 +303,21 @@ namespace LayoutFunctionCommon
                 {
                     var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
+                    wall.AdditionalProperties[wallParentsPropertyName] = roomIds;
                     model.AddElement(wall);
                 }
                 else if (type == "Partition")
                 {
                     var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
+                    wall.AdditionalProperties[wallParentsPropertyName] = roomIds;
                     model.AddElement(wall);
                 }
                 else if (type == "Glass")
                 {
                     var primaryWall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
                     primaryWall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
+                    primaryWall.AdditionalProperties[wallParentsPropertyName] = roomIds;
                     model.AddElement(primaryWall);
                     var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
@@ -547,7 +554,7 @@ namespace LayoutFunctionCommon
             try
             {
                 var cellSeparators = grid.GetCellSeparators(GridDirection.V, true);
-                wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => new RoomEdge { Line = c, Type = "Partition" }));
+                wallCandidatesOut.AddRange(cellSeparators.OfType<Line>().Select(c => new RoomEdge { Line = c, Type = "Partition", Rooms = new List<Guid> { room.Id } }));
             }
             catch (Exception e)
             {

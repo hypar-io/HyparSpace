@@ -40,7 +40,7 @@ namespace LayoutFunctionCommon
             }
             var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
 
-            // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
+            // This null url check is needed because a few configs got generated with instances that weren't contentelements.
             // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
             foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
             {
@@ -238,7 +238,7 @@ namespace LayoutFunctionCommon
 
         /// <summary>
         /// Basically the same as StandardLayoutOnAllLevels, but without the actual furniture layout part — just the wall creation.
-        /// </summary> 
+        /// </summary>
         public static void GenerateWallsForAllSpaces<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
             IEnumerable<TSpaceBoundary> spaceBoundaries,
             Dictionary<string, Model> inputModels,
@@ -291,6 +291,7 @@ namespace LayoutFunctionCommon
             {
                 GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(room, null, null, null);
             }
+
         }
 
         public static void GenerateWallsForSpace<TLevelVolume, TSpaceBoundary>(
@@ -311,6 +312,9 @@ namespace LayoutFunctionCommon
                 return;
             }
             var (_, WallCandidates) = bestOption;
+            foreach (var candidate in WallCandidates) {
+                candidate.Rooms = new List<Guid>() { room.Id };
+            }
             wallCandidateLines.AddRange(WallCandidates);
         }
 
