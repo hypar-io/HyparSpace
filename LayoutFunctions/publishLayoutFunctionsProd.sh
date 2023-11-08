@@ -21,7 +21,7 @@ task() {
     local project=$1
     echo "Building $project"
     cd "./$project"
-    if ! hypar --dev publish --disable-pull-check 2>&1; then
+    if ! hypar publish --disable-pull-check 2>&1; then
         failedProjects+=("$project")
     fi
 

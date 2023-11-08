@@ -71,8 +71,7 @@ namespace PrivateOfficeLayout
             var totalPrivateOfficeCount = 0;
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments()).ToList();
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
                 var privateOfficeBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Private Office");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
@@ -144,7 +143,7 @@ namespace PrivateOfficeLayout
 
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, room));
                         }
                     }
 
@@ -232,7 +231,7 @@ namespace PrivateOfficeLayout
                         }
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, room));
                         }
                         return returnCells;
                     }
@@ -241,7 +240,7 @@ namespace PrivateOfficeLayout
                         tempGrid.V.DivideByApproximateLength(config.Value.OfficeSizing.OfficeSize, EvenDivisionMode.RoundDown);
                         if (config.Value.CreateWalls)
                         {
-                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, levelVolume?.Profile));
+                            wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, tempGrid, room));
                         }
                         return tempGrid.GetCells().Select(c =>
                         {

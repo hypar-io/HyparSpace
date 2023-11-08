@@ -21,6 +21,7 @@ namespace PhoneBoothLayout
         /// <returns>A PhoneBoothLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static PhoneBoothLayoutOutputs Execute(Dictionary<string, Model> inputModels, PhoneBoothLayoutInputs input)
         {
+            rand = new Random(4);
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var hasLevels = inputModels.TryGetValue("Levels", out var levelsModel);
@@ -49,8 +50,7 @@ namespace PhoneBoothLayout
             int totalBoothCount = 0;
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.OfType<CirculationSegment>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
+                var corridorSegments = Circulation.GetCorridorSegments<CirculationSegment, SpaceBoundary>(lvl.Elements);
                 var meetingRmBoundaries = lvl.Elements.OfType<SpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == "Phone Booth");
                 var levelVolume = levelVolumes.FirstOrDefault(l =>
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
@@ -71,8 +71,8 @@ namespace PhoneBoothLayout
                                       }
                                       return w;
                                   });
-                    var levelInvertedTransform = levelVolume.Transform.Inverted();
-                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness}));
+                    var levelInvertedTransform = levelVolume?.Transform.Inverted() ?? new Transform();
+                    wallCandidateLines.AddRange(initialWallCandidates.Select(c => new RoomEdge { Line = c.Line.TransformedLine(levelInvertedTransform), Type = c.Type, Thickness = c.Thickness }));
 
                     var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
                     var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
@@ -118,7 +118,7 @@ namespace PhoneBoothLayout
                         }
 
                     }
-                    wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, levelVolume?.Profile));
+                    wallCandidateLines.AddRange(WallGeneration.PartitionsAndGlazingCandidatesFromGrid(wallCandidateLines, grid, room));
 
                     totalBoothCount += seatsCount;
                     output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));

@@ -22,6 +22,10 @@
       "optional": true
     },
     {
+      "name": "Floors",
+      "optional": true
+    },
+    {
       "autohide": false,
       "name": "Conceptual Mass",
       "optional": true
@@ -29,6 +33,7 @@
   ],
   "input_schema": {
     "type": "object",
+    "$hyparDeprecated": true,
     "properties": {
       "Create Walls": {
         "type": "boolean",

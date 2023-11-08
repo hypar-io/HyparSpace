@@ -27,7 +27,7 @@ namespace LayoutFunctionCommon
             foreach (var key in orderedKeys)
             {
                 var config = configs[key];
-                if (config.CellBoundary.Width < width && config.CellBoundary.Depth < length)
+                if (config.CellBoundary.Width < width + 0.01 && config.CellBoundary.Depth < length + 0.01)
                 {
                     layoutInstantiated.Config = config;
                     layoutInstantiated.ConfigName = key;
@@ -40,7 +40,7 @@ namespace LayoutFunctionCommon
             }
             var baseRectangle = Polygon.Rectangle(layoutInstantiated.Config.CellBoundary.Min, layoutInstantiated.Config.CellBoundary.Max);
 
-            // This null url check is needed because a few configs got generated with instances that weren't contentelements. 
+            // This null url check is needed because a few configs got generated with instances that weren't contentelements.
             // We've fixed this API-side, but there might be a few configs circa 2023-09 that need this.
             foreach (var contentItem in layoutInstantiated.Config.ContentItems.ToArray())
             {
@@ -54,6 +54,7 @@ namespace LayoutFunctionCommon
 
             var componentDefinition = new ComponentDefinition(rules, layoutInstantiated.Config.Anchors());
             layoutInstantiated.Instance = componentDefinition.Instantiate(ContentConfiguration.AnchorsFromRect(rectangle.TransformedPolygon(xform)));
+
             return layoutInstantiated;
         }
 
@@ -70,14 +71,14 @@ namespace LayoutFunctionCommon
             var segs = rect.Segments();
             var width = segs[0].Length();
             var depth = segs[1].Length();
-            var trimmedGeo = cell.GetTrimmedCellGeometry();
-            if (!cell.IsTrimmed() && trimmedGeo.Count() > 0)
+            var trimmedGeo = cell.GetTrimmedCellGeometry().OfType<Polygon>();
+            if ((!cell.IsTrimmed() && trimmedGeo.Any()) || IsNearlyARectangle(trimmedGeo))
             {
                 return InstantiateLayoutByFit(configs, width, depth, rect, xform);
             }
-            else if (trimmedGeo.Count() > 0)
+            else if (trimmedGeo.Any())
             {
-                var largestTrimmedShape = trimmedGeo.OfType<Polygon>().OrderBy(s => s.Area()).Last();
+                var largestTrimmedShape = trimmedGeo.OrderBy(s => s.Area()).Last();
                 try
                 {
                     if (largestTrimmedShape.Vertices.Count < 8)
@@ -132,6 +133,14 @@ namespace LayoutFunctionCommon
             return null;
         }
 
+        public static bool IsNearlyARectangle(IEnumerable<Polygon> polygons)
+        {
+            var areaSum = polygons.Sum(p => p.Area());
+            var bbox = new BBox3(polygons.SelectMany(p => p.Vertices));
+            var bbox2dArea = Polygon.Rectangle((bbox.Min.X, bbox.Min.Y), (bbox.Max.X, bbox.Max.Y)).Area();
+            // if area is within 5% of the bounding box area, just assume it's a rectangle.
+            return areaSum / bbox2dArea > 0.95;
+        }
         public static List<TLevelVolume> GetLevelVolumes<TLevelVolume>(Dictionary<string, Model> inputModels) where TLevelVolume : Element
         {
             var levelVolumes = new List<TLevelVolume>();
@@ -139,7 +148,12 @@ namespace LayoutFunctionCommon
             {
                 levelVolumes.AddRange(levelsModel.AllElementsAssignableFromType<TLevelVolume>());
             }
-            if (inputModels.TryGetValue("Conceptual Mass", out var massModel))
+            // Prefer level volumes from floors over those from conceptual mass.
+            if (inputModels.TryGetValue("Floors", out var floorsModel))
+            {
+                levelVolumes.AddRange(floorsModel.AllElementsAssignableFromType<TLevelVolume>());
+            }
+            if (inputModels.TryGetValue("Conceptual Mass", out var massModel) && levelVolumes.Count == 0)
             {
                 levelVolumes.AddRange(massModel.AllElementsAssignableFromType<TLevelVolume>());
             }
@@ -180,8 +194,8 @@ namespace LayoutFunctionCommon
             foreach (var lvl in levels)
             {
                 var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
-                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => z.Name == programTypeName);
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
+                var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName);
                 foreach (var rm in roomBoundaries)
                 {
                     allSpaceBoundaries.Remove(rm);
@@ -193,14 +207,14 @@ namespace LayoutFunctionCommon
                 var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
-                    processedSpaces.Add(room.Id);
-                    ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+                    if (layoutSucceeded) { processedSpaces.Add(room.Id); }
                 }
 
                 double height = levelVolume?.Height ?? 3;
                 Transform xform = levelVolume?.Transform ?? new Transform();
 
-                if (createWalls)
+                if (createWalls && wallCandidateLines.Count > 0)
                 {
                     outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
@@ -212,8 +226,11 @@ namespace LayoutFunctionCommon
             }
             foreach (var room in allSpaceBoundaries)
             {
-                processedSpaces.Add(room.Id);
-                ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                var layoutSucceeded = ProcessRoom<TLevelVolume, TSpaceBoundary>(room, outputModel, countSeats, configs);
+                if (layoutSucceeded)
+                {
+                    processedSpaces.Add(room.Id);
+                }
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
             return processedSpaces;
@@ -222,7 +239,7 @@ namespace LayoutFunctionCommon
 
         /// <summary>
         /// Basically the same as StandardLayoutOnAllLevels, but without the actual furniture layout part — just the wall creation.
-        /// </summary> 
+        /// </summary>
         public static void GenerateWallsForAllSpaces<TLevelElements, TLevelVolume, TSpaceBoundary, TCirculationSegment>(
             IEnumerable<TSpaceBoundary> spaceBoundaries,
             Dictionary<string, Model> inputModels,
@@ -245,8 +262,7 @@ namespace LayoutFunctionCommon
 
             foreach (var lvl in levels)
             {
-                var corridors = lvl.Elements.Where(e => e is Floor).OfType<Floor>();
-                var corridorSegments = corridors.SelectMany(p => p.Profile.Segments());
+                var corridorSegments = Circulation.GetCorridorSegments<TCirculationSegment, TSpaceBoundary>(lvl.Elements);
                 var roomBoundaries = lvl.Elements.OfType<TSpaceBoundary>().Where(z => allSpaceBoundaries.Contains(z)).ToList();
                 foreach (var rm in roomBoundaries)
                 {
@@ -299,7 +315,7 @@ namespace LayoutFunctionCommon
             wallCandidateLines.AddRange(WallCandidates);
         }
 
-        private static void ProcessRoom<TLevelVolume, TSpaceBoundary>(
+        private static bool ProcessRoom<TLevelVolume, TSpaceBoundary>(
                 TSpaceBoundary room,
                 Model outputModel,
                 Func<LayoutInstantiated,
@@ -338,6 +354,7 @@ namespace LayoutFunctionCommon
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
 
                         wallCandidateLines.AddRange(WallCandidates);
+
                         outputModel.AddElement(layout.Instance);
 
                         if (countSeats != null)
@@ -362,6 +379,7 @@ namespace LayoutFunctionCommon
             {
                 outputModel.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
             }
+            return success;
         }
 
         public static SearchablePointCollection<Profile> GetColumnProfiles(ColumnAvoidanceStrategy avoidanceStrategy, Dictionary<string, Model> inputModels)
@@ -619,6 +637,8 @@ namespace LayoutFunctionCommon
                 pattern,
                 PatternMode.Cycle,
                 FixedDivisionMode.RemainderAtBothEnds);
+
+            backToBackWidth = Math.Max(backToBackWidth, 0.1);
 
             var mainVPattern = new[] {
                                 ("Aisle", backToBackWidth),

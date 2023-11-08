@@ -29,11 +29,14 @@ namespace LayoutFunctionCommon
         {
             var spaceBoundary = room.Boundary;
             var wallCandidateLines = new List<RoomEdge>();
-            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select(s => new RoomEdge
+            var thicknesses = spaceBoundary.GetEdgeThickness();
+            orientationGuideEdge = FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
-                Line = s.TransformedLine(room.Transform)
+                Line = s.TransformedLine(room.Transform),
+                Thickness = thicknesses?.ElementAtOrDefault(i)
             }), corridorSegments, levelProfile, out var wallCandidates);
-            orientationGuideEdge.Type = "Glass";
+            orientationGuideEdge.Type = room.DefaultWallType ?? "Glass";
+            orientationGuideEdge.PrimaryEntryEdge = true;
             wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
@@ -72,7 +75,8 @@ namespace LayoutFunctionCommon
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
             foreach (var orientationGuideEdge in orientationGuideEdges)
             {
-                orientationGuideEdge.Line.Type = "Glass";
+                orientationGuideEdge.Line.Type = room.DefaultWallType ?? "Glass";
+                orientationGuideEdge.Line.PrimaryEntryEdge = true;
                 var wallCandidateLines = new List<RoomEdge>
                 {
                     orientationGuideEdge.Line
@@ -537,7 +541,7 @@ namespace LayoutFunctionCommon
             }).ToList();
         }
 
-        public static List<RoomEdge> PartitionsAndGlazingCandidatesFromGrid(List<RoomEdge> wallCandidateLines, Grid2d grid, Profile levelBoundary)
+        public static List<RoomEdge> PartitionsAndGlazingCandidatesFromGrid(List<RoomEdge> wallCandidateLines, Grid2d grid, ISpaceBoundary room)
         {
             var wallCandidatesOut = new List<RoomEdge>();
             try
@@ -552,17 +556,41 @@ namespace LayoutFunctionCommon
                 // exception in cell separators
             }
             var glassLines = wallCandidateLines.Where(l => l.Type == "Glass-Edge").Select(w => w.Line);
+
+            // Construct an appropriate room edge from the given line, matching thickness from already existing wall candidates.
+            RoomEdge GetRoomEdgeFromLine(Line line)
+            {
+                RoomEdge closestRoomEdge = null;
+                var closestDist = double.MaxValue;
+                foreach (var wallCandidateLine in wallCandidateLines.Where(l => l.Thickness is not null))
+                {
+                    var mid = line.Mid();
+                    var dist = mid.ClosestPointOn(wallCandidateLine.Line).DistanceTo(mid);
+                    if (dist < closestDist)
+                    {
+                        closestDist = dist;
+                        closestRoomEdge = wallCandidateLine;
+                    }
+                }
+                return new RoomEdge
+                {
+                    Line = line,
+                    Thickness = closestRoomEdge?.Thickness,
+                };
+            }
+
             foreach (var gridCell in grid.GetCells())
             {
                 var trimmedGeo = gridCell.GetTrimmedCellGeometry();
                 if (trimmedGeo.Count() > 0)
                 {
-                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments()).Select(g => new RoomEdge { Line = g });
-                    var glassSegment = FindEdgeAdjacentToSegments(segments, glassLines, out var otherEdges);
-                    if (glassSegment != null)
+                    var segments = trimmedGeo.OfType<Polygon>().SelectMany(g => g.Segments()).Select(GetRoomEdgeFromLine);
+                    var entrySegment = FindEdgeAdjacentToSegments(segments, glassLines, out var otherEdges);
+                    if (entrySegment != null)
                     {
-                        glassSegment.Type = "Glass";
-                        wallCandidatesOut.Add(glassSegment);
+                        entrySegment.Type = room.DefaultWallType ?? "Glass";
+                        entrySegment.PrimaryEntryEdge = true;
+                        wallCandidatesOut.Add(entrySegment);
                     }
                 }
             }

@@ -31,6 +31,10 @@
       "optional": true
     },
     {
+      "name": "Floors",
+      "optional": true
+    },
+    {
       "autohide": false,
       "name": "Conceptual Mass",
       "optional": true
@@ -143,7 +147,7 @@
   "overrides": {
     "Space Settings": {
       "dependency": "Space Planning Zones",
-      "context": "[*discriminator=Elements.SpaceBoundary&Name=Open Office]",
+      "context": "[*discriminator=Elements.SpaceBoundary & Hypar Space Type = Open Office | Name = Open Office]",
       "identity": {
         "ParentCentroid": {
           "$ref": "https://schemas.hypar.io/Vector3.json"

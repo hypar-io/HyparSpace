@@ -20,9 +20,7 @@ namespace OpenOfficeLayout
 		/// The number of desks.
 		/// </summary>
 		[JsonProperty("Total Desk Count")]
-		public double TotalDeskCount {get; set;}
-
-
+		public double TotalDeskCount { get; set; }
 
         /// <summary>
         /// Construct a OpenOfficeLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace OpenOfficeLayout
         /// </summary>
         public OpenOfficeLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a OpenOfficeLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public OpenOfficeLayoutOutputs(double totalDeskCount): base()
+        public OpenOfficeLayoutOutputs(double totalDeskCount) : base()
         {
 			this.TotalDeskCount = totalDeskCount;
 

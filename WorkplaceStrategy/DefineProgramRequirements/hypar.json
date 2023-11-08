@@ -17,6 +17,7 @@
         "type": "array",
         "$hyparGroupBy": "Program Group",
         "items": {
+          "$hyparDisplayName": "Program Requirement",
           "type": "object",
           "$hyparStyle": "row",
           "description": "Fill out your program requirements. Use \"Layout Type\" to dictate which function should be used to lay out your space.",
@@ -48,20 +49,31 @@
               "description": "What color should be used to display this space type?",
               "$ref": "https://schemas.hypar.io/Color.json"
             },
-            "Area per Space": {
+            "Space Count": {
               "$hyparOrder": 3,
+              "description": "How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.",
+              "type": "integer",
+              "default": 1
+            },
+            "Area per Space": {
+              "$hyparDeprecated": true,
+              "$hyparOrder": 4,
               "description": "How much area should be allocated for this space?",
               "type": "number",
               "$hyparUnitType": "area",
               "multipleOf": 1
             },
-            "Space Count": {
+            "Dimensions": {
               "$hyparOrder": 4,
-              "description": "How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.",
-              "type": "integer",
-              "default": 1
+              "description": "The required dimensions of the space. Supply specific dimension or just an area, and edit options to specify additional constraints.",
+              "$ref": "https://schemas.hypar.io/ProfileConstraint.json",
+              "default": {
+                "rectangle": false,
+                "flexible": true
+              }
             },
             "Width": {
+              "$hyparDeprecated": true,
               "$hyparOrder": 5,
               "type": [
                 "number",
@@ -72,6 +84,7 @@
               "description": "Optional. (Typically the longer dimension \u2014 along the side from which the space is accessed, like a corridor.)"
             },
             "Depth": {
+              "$hyparDeprecated": true,
               "$hyparOrder": 6,
               "type": [
                 "number",
@@ -129,15 +142,33 @@
               ]
             },
             "Enclosed": {
+              "$hyparDeprecated": true,
               "description": "Should this space be enclosed by walls?",
               "type": [
                 "boolean",
                 "null"
               ],
               "$hyparStyle": "checkbox",
-              "default": true
+              "default": null
+            },
+            "Default Wall Type": {
+              "description": "What should the default wall type be for this space?",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "None",
+                "Solid",
+                "Glass"
+              ],
+              "default": "None"
             }
           }
+        },
+        "$hyparPopulateFromContent": {
+          "label": "Load Space Types",
+          "tag": "spaceType"
         }
       }
     }
@@ -162,10 +193,14 @@
       "input_schema": {
         "properties": {
           "Program Requirements": {
+            "name": "Requirements",
             "items": {
               "properties": {
                 "Layout Type": {
                   "name": "Space Type"
+                },
+                "Program Group": {
+                  "name": "New Group"
                 }
               }
             }

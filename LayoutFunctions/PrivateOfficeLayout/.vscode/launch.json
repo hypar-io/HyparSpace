@@ -29,6 +29,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/server/bin/Debug/net6.0/PrivateOfficeLayout.Server.dll",
       "args": [
+        "--dev",
         "--workflow-id",
         "${input:workflowId}"
       ],

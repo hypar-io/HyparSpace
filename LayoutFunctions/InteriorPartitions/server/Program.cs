@@ -19,7 +19,7 @@ namespace Hypar.Server
                     var input = executionRequest.Args.ToObject<InteriorPartitions.InteriorPartitionsInputs>();
                     var function = new InteriorPartitions.Function();
                     Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(InteriorPartitions.Function).Assembly.Location)!);
-                    return await function.Handler(input, null);
+                    return await function.Handler(input);
                 });
         }
     }

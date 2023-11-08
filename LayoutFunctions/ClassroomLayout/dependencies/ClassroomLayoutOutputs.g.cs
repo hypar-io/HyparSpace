@@ -20,9 +20,7 @@ namespace ClassroomLayout
 		/// Total count of seats
 		/// </summary>
 		[JsonProperty("Total count of desk seats")]
-		public double TotalCountOfDeskSeats {get; set;}
-
-
+		public double TotalCountOfDeskSeats { get; set; }
 
         /// <summary>
         /// Construct a ClassroomLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace ClassroomLayout
         /// </summary>
         public ClassroomLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a ClassroomLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public ClassroomLayoutOutputs(double totalCountOfDeskSeats): base()
+        public ClassroomLayoutOutputs(double totalCountOfDeskSeats) : base()
         {
 			this.TotalCountOfDeskSeats = totalCountOfDeskSeats;
 

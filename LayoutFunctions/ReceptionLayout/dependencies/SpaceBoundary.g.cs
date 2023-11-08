@@ -27,7 +27,7 @@ namespace Elements
     public partial class SpaceBoundary : GeometricElement
     {
         [JsonConstructor]
-        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @programRequirement, System.Guid? @level, System.Guid? @levelLayout, string @hyparSpaceType, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
+        public SpaceBoundary(Profile @boundary, IList<Polygon> @cells, double @area, double? @length, double? @depth, double @height, string @programGroup, string @programType, System.Guid? @programRequirement, System.Guid? @level, System.Guid? @levelLayout, string @hyparSpaceType, string @defaultWallType, Transform @transform = null, Material @material = null, Representation @representation = null, bool @isElementDefinition = false, System.Guid @id = default, string @name = null)
             : base(transform, material, representation, isElementDefinition, id, name)
         {
             this.Boundary = @boundary;
@@ -42,6 +42,7 @@ namespace Elements
             this.Level = @level;
             this.LevelLayout = @levelLayout;
             this.HyparSpaceType = @hyparSpaceType;
+            this.DefaultWallType = @defaultWallType;
             }
         
         
@@ -96,6 +97,10 @@ namespace Elements
         /// <summary>The hypar-recognized space type name which will be used to determine which layout function to apply. In older space boundaries, this may not be set — fall back to the Name property for this purpose if not provided.</summary>
         [JsonProperty("Hypar Space Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string HyparSpaceType { get; set; }
+    
+        /// <summary>What wall type should generally be created for this space type? This may get overridden later on for a specific wall.</summary>
+        [JsonProperty("Default Wall Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DefaultWallType { get; set; }
     
     
     }
