@@ -159,13 +159,13 @@ namespace LayoutFunctionCommon
                     }
                     else if (totalCount == 0) // end segment
                     {
-                        AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, point);
+                        AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart.pos, point.pos, point.type);
                     }
                     else if (segmentStart.type.Equals(point.type))
                     {
                         if (typePointsCounts[segmentStart.type] == 0) // end segment with current type
                         {
-                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, point);
+                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart.pos, point.pos, point.type);
                             var nextType = typePointsCounts
                                 .FirstOrDefault(t => interiorPartitionTypePriority[t.Key] < interiorPartitionTypePriority[point.type]
                                             && t.Value > 0);
@@ -180,7 +180,7 @@ namespace LayoutFunctionCommon
                         // new type with higher priority starts
                         if (interiorPartitionTypePriority[point.type] > interiorPartitionTypePriority[segmentStart.type])
                         {
-                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart, (point.pos, point.isEnd, segmentStart.type));
+                            AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart.pos, point.pos, segmentStart.type);
                             segmentStart = point;
                         }
                     }
@@ -190,7 +190,7 @@ namespace LayoutFunctionCommon
             return resultCandidates;
         }
 
-        private static Dictionary<Line, List<RoomEdge>> GroupCollinearLines(IEnumerable<RoomEdge> typedLines)
+        private static Dictionary<Line, List<RoomEdge>> GroupCollinearLines(IEnumerable<RoomEdge> typedLines, double tolerance = Vector3.EPSILON)
         {
             var collinearLinesGroups = new Dictionary<Line, List<RoomEdge>>();
             foreach (var typedLine in typedLines)
@@ -198,7 +198,7 @@ namespace LayoutFunctionCommon
                 var isLineAdded = false;
                 foreach (var linesGroup in collinearLinesGroups)
                 {
-                    if (typedLine.Line.IsCollinear(linesGroup.Key))
+                    if (typedLine.Line.IsCollinear(linesGroup.Key, tolerance))
                     {
                         linesGroup.Value.Add(typedLine);
                         isLineAdded = true;
@@ -214,10 +214,11 @@ namespace LayoutFunctionCommon
             return collinearLinesGroups;
         }
 
-        private static void AddWallCandidateLine(List<RoomEdge> resultCandidates, RoomEdge dominantLineForGroup, Vector3 domLineDir, (double pos, bool isEnd, string type) segmentStart, (double pos, bool isEnd, string type) point)
+        private static void AddWallCandidateLine(List<RoomEdge> resultCandidates, RoomEdge dominantLineForGroup, Vector3 domLineDir, double startPos, double endPos, string type)
         {
-            var startPt = segmentStart.pos * domLineDir + dominantLineForGroup.Line.Start;
-            var endPt = point.pos * domLineDir + dominantLineForGroup.Line.Start;
+            var startPt = startPos * domLineDir + dominantLineForGroup.Line.Start;
+            var endPt = endPos * domLineDir + dominantLineForGroup.Line.Start;
+
             if (startPt.DistanceTo(endPt) > 0.01)
             {
                 var newLine = new Line(startPt, endPt);
@@ -225,9 +226,122 @@ namespace LayoutFunctionCommon
                 {
                     Line = newLine,
                     Thickness = dominantLineForGroup.Thickness,
-                    Type = point.type
+                    Type = type,
+                    PrimaryEntryEdge = dominantLineForGroup.PrimaryEntryEdge
                 });
             }
+        }
+
+        public static List<RoomEdge> SplitOverlappingWallCandidates(IEnumerable<RoomEdge> wallCandidateLines,
+                                                                    IEnumerable<RoomEdge> prioritizedWallCandidateLines,
+                                                                    double tolerance = 0.01)
+        {
+            var resultCandidates = new List<RoomEdge>();
+            var typedLines = wallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.Type));
+            var prioritizedTypedLines = prioritizedWallCandidateLines.Where(l => interiorPartitionTypePriority.ContainsKey(l.Type));
+            var allTypedLines = new List<RoomEdge>();
+            allTypedLines.AddRange(typedLines.Select(l => new RoomEdge()
+            {
+                Line = l.Line,
+                Type = $"{l.Type}-0",
+                Thickness = l.Thickness,
+                PrimaryEntryEdge = l.PrimaryEntryEdge
+            }));
+            allTypedLines.AddRange(prioritizedTypedLines.Select(l => new RoomEdge()
+            {
+                Line = l.Line,
+                Type = $"{l.Type}-1",
+                Thickness = l.Thickness,
+                PrimaryEntryEdge = l.PrimaryEntryEdge
+            }));
+            var collinearLinesGroups = GroupCollinearLines(allTypedLines, tolerance);
+
+            foreach (var collinearLinesGroup in collinearLinesGroups)
+            {
+                if (collinearLinesGroup.Value.Count == 1)
+                {
+                    var candidate = collinearLinesGroup.Value.First();
+                    candidate.Type = candidate.Type.Split('-').First();
+                    resultCandidates.Add(candidate);
+                    continue;
+                }
+                var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.Line.Length());
+                var dominantLineForGroup = linesOrderedByLength.First();
+                var domLineDir = dominantLineForGroup.Line.Direction();
+
+                var orderEnds = new List<(double pos, bool isEnd, string type, int priority)>();
+                foreach (var linePair in collinearLinesGroup.Value)
+                {
+                    var line = linePair.Line;
+                    var start = (line.Start - dominantLineForGroup.Line.Start).Dot(domLineDir);
+                    var end = (line.End - dominantLineForGroup.Line.Start).Dot(domLineDir);
+                    if (start > end)
+                    {
+                        var oldStart = start;
+                        start = end;
+                        end = oldStart;
+                    }
+
+                    var typePriorityStrings = linePair.Type.Split('-');
+                    orderEnds.Add((start, false, typePriorityStrings[0], int.Parse(typePriorityStrings[1])));
+                    orderEnds.Add((end, true, typePriorityStrings[0], int.Parse(typePriorityStrings[1])));
+                }
+
+                var totalCount = 0;
+                (double pos, bool isEnd, string type, int priority) segmentStart = default;
+                var endsOrdered = orderEnds.OrderBy(e => e.pos).ThenBy(e => !e.isEnd);
+                var typePointsCounts = new Dictionary<(string type, int priority), int>();
+                foreach (var point in endsOrdered)
+                {
+                    var prevCount = totalCount;
+                    typePointsCounts.TryGetValue((point.type, point.priority), out var typeCount);
+                    var delta = point.isEnd ? -1 : 1;
+                    totalCount += delta;
+                    typeCount += delta;
+                    typePointsCounts[(point.type, point.priority)] = typeCount;
+                    if (totalCount == 1 && prevCount == 0) // begin segment
+                    {
+                        segmentStart = point;
+                    }
+                    else if (totalCount == 0) // end segment
+                    {
+                        AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart.pos, point.pos, point.type);
+                    }
+                    else
+                    {
+                        AddWallCandidateLine(resultCandidates, dominantLineForGroup, domLineDir, segmentStart.pos, point.pos, segmentStart.type);
+
+                        if (segmentStart.priority < point.priority)
+                        {
+                            segmentStart = point;
+                        }
+                        else if (segmentStart.priority > point.priority)
+                        {
+                            segmentStart = (point.pos, false, segmentStart.type, segmentStart.priority);
+                        }
+                        else
+                        {
+                            var nextType = typePointsCounts
+                                .OrderByDescending(t => t.Key.priority)
+                                .ThenByDescending(t => interiorPartitionTypePriority[t.Key.type])
+                                .FirstOrDefault(t => (t.Key.priority == point.priority
+                                                      && interiorPartitionTypePriority[t.Key.type] < interiorPartitionTypePriority[point.type]
+                                                      || t.Key.priority < point.priority)
+                                                     && t.Value > 0);
+                            if (nextType.Key.type != null) // start segment with lower priority if it exists
+                            {
+                                segmentStart = (point.pos, false, nextType.Key.type, nextType.Key.priority);
+                            }
+                            else
+                            {
+                                segmentStart = (point.pos, false, segmentStart.type, segmentStart.priority);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return resultCandidates;
         }
 
         private static double CalculateTotalStorefrontHeight(double volumeHeight)
@@ -249,8 +363,10 @@ namespace LayoutFunctionCommon
             return mullion;
         }
 
-        public static void GenerateWalls(Model model, IEnumerable<(Line line, string type, Guid elementId, (double innerWidth, double outerWidth)? Thickness)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
+        public static List<Element> GenerateWalls(IEnumerable<(Line line, string type, Guid elementId, (double innerWidth, double outerWidth)? Thickness)> wallCandidateLines, double height, Transform levelTransform, bool debugMode = false)
         {
+            var elements = new List<Element>();
+
             if (debugMode)
             {
                 foreach (var wallCandidate in wallCandidateLines)
@@ -260,21 +376,23 @@ namespace LayoutFunctionCommon
                     switch (wallCandidate.type)
                     {
                         case "Solid":
-                            model.AddElement(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.ZAxis, levelTransform));
+                            elements.Add(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.ZAxis, levelTransform));
                             break;
                         case "Glass":
-                            model.AddElement(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.XAxis, levelTransform));
+                            elements.Add(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.XAxis, levelTransform));
                             break;
                         case "Partition":
-                            model.AddElement(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.YAxis, levelTransform));
+                            elements.Add(new StandardWall(lineProjected, 0.2, height, BuiltInMaterials.YAxis, levelTransform));
                             break;
                     }
                 }
 
-                return;
+                return elements;
             }
             var totalStorefrontHeight = CalculateTotalStorefrontHeight(height);
+
             var mullion = CreateMullion(height);
+
             foreach (var (line, type, wallCandidateId, thickness) in wallCandidateLines)
             {
                 var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
@@ -299,21 +417,49 @@ namespace LayoutFunctionCommon
                 {
                     var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
-                    model.AddElement(wall);
+
+                    if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
+                    {
+                        double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
+                        // Adding Wall as a property to door makes the wall not show up :shrug:
+                        var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        {
+                            Material = BuiltInMaterials.Concrete
+                        };
+                        door.Transform.Concatenate(new Transform(0, 0, 0.005));
+                        wall.Openings.Add(door.Opening);
+
+                        elements.Add(door);
+                    }
+
+                    elements.Add(wall);
                 }
                 else if (type == "Partition")
                 {
                     var wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                     wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
-                    model.AddElement(wall);
+                    elements.Add(wall);
                 }
                 else if (type == "Glass")
                 {
                     var primaryWall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
                     primaryWall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
-                    model.AddElement(primaryWall);
+                    elements.Add(primaryWall);
                     var grid = new Grid1d(lineProjected);
                     var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
+
+                    if (primaryWall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
+                    {
+                        double tPos = (sideLightWidth + doorWidth / 2) / primaryWall.CenterLine.Length();
+                        var door = new Door(null, primaryWall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        {
+                            Material = BuiltInMaterials.Concrete
+                        };
+
+                        primaryWall.Openings.Add(door.Opening);
+                        elements.Add(door);
+                    }
+
                     grid.SplitAtOffsets(offsets);
                     if (grid.Cells != null && grid.Cells.Count >= 3)
                     {
@@ -332,15 +478,15 @@ namespace LayoutFunctionCommon
                     foreach (var mullionInstance in mullionInstances)
                     {
                         mullionInstance.AdditionalProperties["Wall"] = primaryWall.Id;
-                        model.AddElement(mullionInstance);
+                        elements.Add(mullionInstance);
                     }
                     foreach (var separator in separators)
                     {
                         // var line = new Line(separator, separator + new Vector3(0, 0, height));
-                        // model.AddElement(new ModelCurve(line, BuiltInMaterials.XAxis, levelTransform));
+                        // elements.Add(new ModelCurve(line, BuiltInMaterials.XAxis, levelTransform));
                         var instance = mullion.CreateInstance(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
                         instance.AdditionalProperties["Wall"] = primaryWall.Id;
-                        model.AddElement(instance);
+                        elements.Add(instance);
                     }
 
                     var headerHeight = height - totalStorefrontHeight;
@@ -348,11 +494,13 @@ namespace LayoutFunctionCommon
                     {
                         var header = new Header(lineProjected, sumThickness, headerHeight, wallMat, levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)));
                         header.AdditionalProperties["Wall"] = primaryWall.Id;
-                        model.AddElement(header);
+                        elements.Add(header);
                         header.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     }
                 }
             }
+
+            return elements;
         }
 
         public static RoomEdge FindPrimaryAccessEdge(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> corridorSegments, Profile floorBoundary, out IEnumerable<RoomEdge> otherSegments, double maxDist = 0)
@@ -576,6 +724,7 @@ namespace LayoutFunctionCommon
                 {
                     Line = line,
                     Thickness = closestRoomEdge?.Thickness,
+                    PrimaryEntryEdge = closestRoomEdge?.PrimaryEntryEdge ?? false
                 };
             }
 
