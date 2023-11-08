@@ -24,13 +24,13 @@ namespace Doors
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class DoorsInputs : S3Args
+    public  class DoorsInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DoorsInputs(double @defaultDoorWidth, double @defaultDoorHeight, DoorsInputsDefaultDoorOpeningSide @defaultDoorOpeningSide, DoorsInputsDefaultDoorOpeningType @defaultDoorOpeningType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public DoorsInputs(double @defaultDoorWidth, double @defaultDoorHeight, DoorsInputsDefaultDoorOpeningSide @defaultDoorOpeningSide, DoorsInputsDefaultDoorOpeningType @defaultDoorOpeningType, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorsInputs>();
             if(validator != null)

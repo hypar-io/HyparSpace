@@ -13,12 +13,87 @@
     },
     {
       "autohide": false,
-      "name": "Circulation",
-      "optional": false
+      "name": "Private Office Layout",
+      "optional": true
     },
     {
       "autohide": false,
-      "name": "Interior Partitions",
+      "name": "Phone Booth Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Classroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Meeting Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bedroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Living Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Kitchen Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Workshop Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Home Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Bathroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Restroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Laundry Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Entertainment Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Furniture and Equipment",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Circulation",
       "optional": false
     }
   ],
@@ -36,7 +111,7 @@
         "$hyparUnitType": "length",
         "minimum": 0.8128
       },
-      "Default Door Height" : {
+      "Default Door Height": {
         "multipleOf": 0.01,
         "type": "number",
         "default": 2.10,
@@ -46,7 +121,7 @@
         "minimum": 2.032,
         "$hyparOrder": 1
       },
-      "Default Door Opening Side" : {
+      "Default Door Opening Side": {
         "default": "Left Hand",
         "description": "The opening side of a door.",
         "type": "string",
@@ -57,7 +132,7 @@
           "Double Door"
         ]
       },
-      "Default Door Opening Type" : {
+      "Default Door Opening Type": {
         "default": "Single Swing",
         "description": "The type of a door.",
         "type": "string",
@@ -80,12 +155,15 @@
       "paradigm": "edit",
       "schema": {
         "Transform": {
-            "$ref": "https://schemas.hypar.io/Transform.json",
-            "$hyparConstraints": {
-				      "enableRotation": false,
-              "enableTranslation": ["x","y"]
-        	  }
-		    },
+          "$ref": "https://schemas.hypar.io/Transform.json",
+          "$hyparConstraints": {
+            "enableRotation": false,
+            "enableTranslation": [
+              "x",
+              "y"
+            ]
+          }
+        },
         "Door Width": {
           "type": "number",
           "default": 0.9144,
@@ -94,7 +172,7 @@
           "$hyparUnitType": "length",
           "minimum": 0.8128
         },
-        "Door Height" : {
+        "Door Height": {
           "type": "number",
           "default": 2.10,
           "maximum": 2.54,
@@ -102,7 +180,7 @@
           "$hyparUnitType": "length",
           "minimum": 2.032
         },
-        "Default Door Opening Side" : {
+        "Default Door Opening Side": {
           "default": "Left Hand",
           "description": "The opening side of a door.",
           "type": "string",
@@ -112,7 +190,7 @@
             "Double Door"
           ]
         },
-        "Default Door Opening Type" : {
+        "Default Door Opening Type": {
           "default": "Single Swing",
           "description": "The type of a door.",
           "type": "string",
@@ -136,7 +214,10 @@
               "$ref": "https://schemas.hypar.io/Transform.json",
               "$hyparConstraints": {
                 "enableRotation": false,
-                "enableTranslation": ["x","y"]
+                "enableTranslation": [
+                  "x",
+                  "y"
+                ]
               }
             },
             "Door Width": {
@@ -147,7 +228,7 @@
               "$hyparUnitType": "length",
               "minimum": 0.8128
             },
-            "Door Height" : {
+            "Door Height": {
               "type": "number",
               "default": 2.10,
               "maximum": 2.54,
@@ -155,7 +236,7 @@
               "$hyparUnitType": "length",
               "minimum": 2.032
             },
-            "Door Opening Side" : {
+            "Door Opening Side": {
               "default": "Left Hand",
               "description": "The opening side of a door.",
               "type": "string",
@@ -165,7 +246,7 @@
                 "Double Door"
               ]
             },
-            "Door Opening Type" : {
+            "Door Opening Type": {
               "default": "Single Swing",
               "description": "The type of a door.",
               "type": "string",

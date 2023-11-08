@@ -89,6 +89,11 @@
       "autohide": false,
       "name": "Furniture and Equipment",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Doors",
+      "optional": true
     }
   ],
   "outputs": [],
