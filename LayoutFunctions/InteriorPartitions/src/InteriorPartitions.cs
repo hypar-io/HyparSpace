@@ -19,21 +19,21 @@ namespace InteriorPartitions
         {
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
             var modelDependencies = new[] {
-                "Private Office Layout",
-                "Phone Booth Layout",
-                "Classroom Layout",
-                "Meeting Room Layout",
-                "Space Planning Zones",
-                "Bedroom Layout",
-                "Living Room Layout",
-                "Kitchen Layout",
-                "Workshop Layout",
-                "Home Office Layout",
-                "Bathroom Layout",
-                "Restroom Layout",
-                "Laundry Room Layout",
-                "Entertainment Room Layout",
-                "Room Layout",
+                // "Private Office Layout",
+                // "Phone Booth Layout",
+                // "Classroom Layout",
+                // "Meeting Room Layout",
+                // "Space Planning Zones",
+                // "Bedroom Layout",
+                // "Living Room Layout",
+                // "Kitchen Layout",
+                // "Workshop Layout",
+                // "Home Office Layout",
+                // "Bathroom Layout",
+                // "Restroom Layout",
+                // "Laundry Room Layout",
+                // "Entertainment Room Layout",
+                // "Room Layout",
                 "Furniture and Equipment"
                  };
             foreach (var md in modelDependencies)

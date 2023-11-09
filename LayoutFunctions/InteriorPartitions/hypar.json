@@ -99,7 +99,11 @@
   "element_types": [
     "https://schemas.hypar.io/WallCandidate.json",
     "https://schemas.hypar.io/StandardWall.json",
-    "https://schemas.hypar.io/Wall.json"
+    "https://schemas.hypar.io/Wall.json",
+    "https://schemas.hypar.io/StorefrontWall.json",
+    "https://schemas.hypar.io/Mullion.json",
+    "https://schemas.hypar.io/Header.json",
+    "https://schemas.hypar.io/Beam.json"
   ],
   "repository_url": "https://github.com/hypar-io/function"
 }
