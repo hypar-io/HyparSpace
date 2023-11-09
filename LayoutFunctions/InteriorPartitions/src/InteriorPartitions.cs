@@ -7,6 +7,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Elements.Spatial;
 using Elements.Geometry.Solids;
+using System.Xml.Schema;
 
 [assembly: InternalsVisibleTo("InteriorPartitions.Tests")]
 namespace InteriorPartitions
@@ -69,6 +70,9 @@ namespace InteriorPartitions
             inputModels.TryGetValue("Circulation", out var circulationModel);
             List<CirculationSegment> circulationSegments = circulationModel?.AllElementsOfType<CirculationSegment>().ToList() ?? new List<CirculationSegment>();
 
+            inputModels.TryGetValue("Doors", out var doorsModel);
+            List<Door> doors = doorsModel?.AllElementsOfType<Door>().ToList() ?? new List<Door>();
+
             var output = new InteriorPartitionsOutputs();
             var wallCandidates = CreateWallCandidates(input, interiorPartitionCandidates);
 
@@ -76,7 +80,7 @@ namespace InteriorPartitions
 
             foreach (var wallCandidate in wallCandidates)
             {
-                var elements = GenerateWall(wallCandidate);
+                var elements = GenerateWall(wallCandidate, doors);
 
                 output.Model.AddElements(elements);
             }
@@ -108,7 +112,7 @@ namespace InteriorPartitions
             return mullion;
         }
 
-        public static List<Element> GenerateWall(WallCandidate wallCandidate)
+        public static List<Element> GenerateWall(WallCandidate wallCandidate, List<Door> doors)
         {
             var elements = new List<Element>();
 
@@ -124,6 +128,8 @@ namespace InteriorPartitions
             var height = wallCandidate.Height;
             var levelTransform = wallCandidate.LevelTransform;
             var wallCandidateId = wallCandidate.Id;
+
+            var doorsToAdd = doors.Where(x => x.Transform.Origin.DistanceTo(line) < 0.001).ToList();
 
             var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
             if (thickness != null && thickness.Value.innerWidth == 0 && thickness.Value.outerWidth == 0)
@@ -150,17 +156,11 @@ namespace InteriorPartitions
                 wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge != null ? wallCandidate.PrimaryEntryEdge.Value : false)
+                foreach (var door in doorsToAdd)
                 {
-                    double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
-                    // Adding Wall as a property to door makes the wall not show up :shrug:
-                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing, 1, 1, true)
-                    {
-                    };
-                    door.Transform.Concatenate(new Transform(0, 0, 0.005));
-                    wall.Openings.Add(door.Opening);
-
-                    elements.Add(door);
+                    var doorLocation = door.Transform.Origin;
+                    var doorRelativeLocation = wall.CenterLine.Start.DistanceTo(doorLocation);
+                    wall.AddOpening(door.Opening.Perimeter, doorRelativeLocation, door.ClearHeight / 2, 1, 1);
                 }
 
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
@@ -179,18 +179,23 @@ namespace InteriorPartitions
                 wall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                 var grid = new Grid1d(lineProjected);
-                var offsets = new[] { sideLightWidth, sideLightWidth + doorWidth }.Where(o => grid.Domain.Min + o < grid.Domain.Max);
 
-                if (wall.CenterLine.Length() > doorWidth + 2 * sideLightWidth && wallCandidate.PrimaryEntryEdge != null ? wallCandidate.PrimaryEntryEdge.Value : false)
+                var doorEdgeDistances = new List<double>();
+
+                foreach (var door in doorsToAdd)
                 {
-                    double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
-                    var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing, 1, 1, true)
-                    {
-                    };
+                    var widthFactor = 1;
+                    if (door.OpeningSide == DoorOpeningSide.DoubleDoor) widthFactor = 2;
 
-                    wall.Openings.Add(door.Opening);
-                    elements.Add(door);
+                    var doorLocation = door.Transform.Origin;
+                    var doorRelativeLocation = wall.CenterLine.Start.DistanceTo(doorLocation);
+                    wall.AddOpening(door.Opening.Perimeter, doorRelativeLocation, door.ClearHeight / 2, 1, 1);
+
+                    doorEdgeDistances.Add(doorRelativeLocation - door.ClearWidth * widthFactor / 2 - mullionSize / 2);
+                    doorEdgeDistances.Add(doorRelativeLocation + door.ClearWidth * widthFactor / 2 + mullionSize / 2);
                 }
+
+                var offsets = doorEdgeDistances.Where(o => grid.Domain.Min + o < grid.Domain.Max);
 
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
                 wall.RepresentationInstances.Add(wallRepresentationInstance);
@@ -201,20 +206,16 @@ namespace InteriorPartitions
                     grid[2].DivideByApproximateLength(2);
                 }
                 var separators = grid.GetCellSeparators(true);
+
                 var beam = new Beam(lineProjected, Polygon.Rectangle(mullionSize, mullionSize), null, mullionMat)
                 {
                     IsElementDefinition = true
                 };
-                var mullionInstances = new[] {
-                        beam.CreateInstance(levelTransform, "Base Mullion"),
-                        beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, doorHeight)), "Base Mullion"),
-                        beam.CreateInstance(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight)), "Base Mullion")
-                    };
 
                 var baseMullions = new List<Beam>()
                 {
-                    new Beam(beam.Curve, beam.Profile, new Transform(), beam.Material, null, false, default, "Base Mullion"),
-                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, doorHeight)), beam.Profile, new Transform(0, 0, doorHeight), beam.Material, null, false, default, "Base Mullion"),
+                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0,  mullionSize/2)), beam.Profile, new Transform(0, 0, mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
+                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, doorHeight + mullionSize/2)), beam.Profile, new Transform(0, 0, doorHeight + mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, totalStorefrontHeight)), beam.Profile, new Transform(0, 0, totalStorefrontHeight), beam.Material, null, false, default, "Base Mullion")
                 };
 
@@ -227,13 +228,9 @@ namespace InteriorPartitions
                     wall.RepresentationInstances.Add(repInstance);
                 }
 
-                // foreach (var mullionInstance in mullionInstances)
-                // {
-                //     mullionInstance.AdditionalProperties["Wall"] = wall.Id;
-                //     mullionInstance.BaseDefinition.UpdateRepresentations();
+                int i = 0;
 
-                //     elements.Add(mullionInstance);
-                // }
+                var lastMullionIndex = separators.Count() - 1;
 
                 foreach (var separator in separators)
                 {
@@ -256,6 +253,8 @@ namespace InteriorPartitions
                     // var instance = mullion.CreateInstance(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
                     // mullionObject.AdditionalProperties["Wall"] = wall.Id;
                     // elements.Add(mullionObject);
+
+                    i++;
                 }
 
                 var headerHeight = height - totalStorefrontHeight;
@@ -271,7 +270,8 @@ namespace InteriorPartitions
                 }
             }
 
-            wall.UpdateRepresentations();
+
+            // wall.UpdateRepresentations();
 
             elements.Add(wall);
 
@@ -283,8 +283,17 @@ namespace InteriorPartitions
             Line wallLine1 = wall.CenterLine.Offset(wall.Thickness / 2.0, flip: false);
             Line wallLine2 = wall.CenterLine.Offset(wall.Thickness / 2.0, flip: true);
             Polygon polygon = new Polygon(wallLine1.Start, wallLine1.End, wallLine2.End, wallLine2.Start);
+
+            var solidOperations = new List<SolidOperation>();
             var wallExtrude = new Extrude(polygon, wall.Height, Vector3.ZAxis);
-            var wallRepresentationInstance = new RepresentationInstance(new SolidRepresentation(wallExtrude), wall.Material, true);
+
+            solidOperations.Add(wallExtrude);
+            foreach (var opening in wall.Openings)
+            {
+                solidOperations.AddRange(opening.Representation.SolidOperations);
+            }
+
+            var wallRepresentationInstance = new RepresentationInstance(new SolidRepresentation(solidOperations), wall.Material, true);
             return wallRepresentationInstance;
         }
 

@@ -422,7 +422,7 @@ namespace LayoutFunctionCommon
                     {
                         double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
                         // Adding Wall as a property to door makes the wall not show up :shrug:
-                        var door = new Door(null, wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        var door = new Door(wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
                         {
                             Material = BuiltInMaterials.Concrete
                         };
@@ -451,7 +451,7 @@ namespace LayoutFunctionCommon
                     if (primaryWall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
                     {
                         double tPos = (sideLightWidth + doorWidth / 2) / primaryWall.CenterLine.Length();
-                        var door = new Door(null, primaryWall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        var door = new Door(primaryWall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
                         {
                             Material = BuiltInMaterials.Concrete
                         };

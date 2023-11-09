@@ -48,7 +48,7 @@ namespace Doors
                         doorCurrentPosition = doorOverride.Value.Transform.Origin;
                         openingSide = ConvertOpeningSideEnum(doorOverride.Value.DefaultDoorOpeningSide);
                         openingType = ConvertOpeningTypeEnum(doorOverride.Value.DefaultDoorOpeningType);
-                        wall = GetClosestWallCandidate(doorCurrentPosition, walls, out _);
+                        wall = GetClosestWallCandidate(doorCurrentPosition, walls, out doorCurrentPosition);
                     }
 
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
@@ -297,7 +297,7 @@ namespace Doors
 
             var rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
 
-            var door = new Door(width, height, openingSide, openingType)
+            var door = new Door(width, height, openingSide, openingType, null, null, null, false, default, "Door", 1, 1)
             {
                 OriginalPosition = originalPosition,
                 Transform = new Transform(currentPosition).RotatedAboutPoint(currentPosition, Vector3.ZAxis, rotation)

@@ -20,168 +20,168 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace InteriorPartitions
 {
-#pragma warning disable // Disable all warnings
+    #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-
-    public class InteriorPartitionsInputs : ArgsBase
-
+    
+    public  class InteriorPartitionsInputs : ArgsBase
+    
     {
         [Newtonsoft.Json.JsonConstructor]
-
-        public InteriorPartitionsInputs(Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey) :
+        
+        public InteriorPartitionsInputs(Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionsInputs>();
-            if (validator != null)
+            if(validator != null)
             {
-                validator.PreConstruct(new object[] { @overrides });
+                validator.PreConstruct(new object[]{ @overrides});
             }
-
+        
             this.Overrides = @overrides ?? this.Overrides;
-
-            if (validator != null)
+        
+            if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-
+    
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-
-    public partial class Overrides
-
+    
+    public partial class Overrides 
+    
     {
         public Overrides() { }
-
+        
         [Newtonsoft.Json.JsonConstructor]
         public Overrides(IList<InteriorPartitionTypesOverride> @interiorPartitionTypes)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
-            if (validator != null)
+            if(validator != null)
             {
-                validator.PreConstruct(new object[] { @interiorPartitionTypes });
+                validator.PreConstruct(new object[]{ @interiorPartitionTypes});
             }
-
+        
             this.InteriorPartitionTypes = @interiorPartitionTypes ?? this.InteriorPartitionTypes;
-
-            if (validator != null)
+        
+            if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-
+    
         [Newtonsoft.Json.JsonProperty("Interior Partition Types", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<InteriorPartitionTypesOverride> InteriorPartitionTypes { get; set; } = new List<InteriorPartitionTypesOverride>();
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-
-    public partial class InteriorPartitionTypesOverride
-
+    
+    public partial class InteriorPartitionTypesOverride 
+    
     {
         [Newtonsoft.Json.JsonConstructor]
         public InteriorPartitionTypesOverride(string @id, InteriorPartitionTypesIdentity @identity, InteriorPartitionTypesValue @value)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesOverride>();
-            if (validator != null)
+            if(validator != null)
             {
-                validator.PreConstruct(new object[] { @id, @identity, @value });
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
             }
-
+        
             this.Id = @id;
             this.Identity = @identity;
             this.Value = @value;
-
-            if (validator != null)
+        
+            if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-
+    
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Id { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public InteriorPartitionTypesIdentity Identity { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public InteriorPartitionTypesValue Value { get; set; }
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-
-    public partial class InteriorPartitionTypesIdentity
-
+    
+    public partial class InteriorPartitionTypesIdentity 
+    
     {
         [Newtonsoft.Json.JsonConstructor]
         public InteriorPartitionTypesIdentity(string @addId, Line @line)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesIdentity>();
-            if (validator != null)
+            if(validator != null)
             {
-                validator.PreConstruct(new object[] { @addId, @line });
+                validator.PreConstruct(new object[]{ @addId, @line});
             }
-
+        
             this.AddId = @addId;
             this.Line = @line;
-
-            if (validator != null)
+        
+            if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-
+    
         [Newtonsoft.Json.JsonProperty("AddId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AddId { get; set; }
-
+    
         [Newtonsoft.Json.JsonProperty("Line", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Line Line { get; set; }
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-
-    public partial class InteriorPartitionTypesValue
-
+    
+    public partial class InteriorPartitionTypesValue 
+    
     {
         [Newtonsoft.Json.JsonConstructor]
         public InteriorPartitionTypesValue(InteriorPartitionTypesValueType @type)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<InteriorPartitionTypesValue>();
-            if (validator != null)
+            if(validator != null)
             {
-                validator.PreConstruct(new object[] { @type });
+                validator.PreConstruct(new object[]{ @type});
             }
-
+        
             this.Type = @type;
-
-            if (validator != null)
+        
+            if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-
+    
         [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public InteriorPartitionTypesValueType Type { get; set; } = InteriorPartitionTypesValueType.Solid;
-
+    
     }
-
+    
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     public enum InteriorPartitionTypesValueType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"Solid")]
         Solid = 0,
-
+    
         [System.Runtime.Serialization.EnumMember(Value = @"Glass")]
         Glass = 1,
-
+    
     }
 }
