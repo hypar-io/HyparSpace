@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMetrics", "src\SpaceMetrics.csproj", "{6FF5C3A5-79FC-426A-9F58-25DF57530B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMetrics.Dependencies", "dependencies\SpaceMetrics.Dependencies.csproj", "{CDB3F17C-D096-4BEB-94D8-BFDB3E1888F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMetrics.Tests", "test\SpaceMetrics.Tests.csproj", "{360608A1-942E-4751-B878-E5239BF0595D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FF5C3A5-79FC-426A-9F58-25DF57530B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF5C3A5-79FC-426A-9F58-25DF57530B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF5C3A5-79FC-426A-9F58-25DF57530B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF5C3A5-79FC-426A-9F58-25DF57530B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB3F17C-D096-4BEB-94D8-BFDB3E1888F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB3F17C-D096-4BEB-94D8-BFDB3E1888F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB3F17C-D096-4BEB-94D8-BFDB3E1888F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB3F17C-D096-4BEB-94D8-BFDB3E1888F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{360608A1-942E-4751-B878-E5239BF0595D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360608A1-942E-4751-B878-E5239BF0595D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360608A1-942E-4751-B878-E5239BF0595D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360608A1-942E-4751-B878-E5239BF0595D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
