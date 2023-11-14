@@ -76,7 +76,7 @@ namespace Elements
         public System.Guid? PlanView { get; set; }
     
         /// <summary>Multiple profiles used for a collection of volumes</summary>
-        [JsonProperty("Profiles", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Profiles", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Profile> Profiles { get; set; }
     
     

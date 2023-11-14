@@ -23,6 +23,7 @@ namespace SpaceMetrics
             proxies.Clear();
             var output = new SpaceMetricsOutputs();
 
+            var spaceMetrics = new List<SpaceMetric>();
             if (inputModels.TryGetValue("Space Planning Zones", out var zonesModel))
             {
                 inputModels.TryGetValue(_openOffice + " Layout", out var openOfficeModel);
@@ -35,15 +36,16 @@ namespace SpaceMetrics
                 var layoutNames = new string[] { _openOffice, _openCollab, "Meeting Room", "Classroom", "Phone Booth", "Private Office", "Lounge", "Reception", "Pantry" };
                 foreach (var layoutName in layoutNames)
                 {
-                    UpdateSpaceMetricsByLayoutType(inputModels, input.Overrides.SpaceMetrics.ToList(), layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics);
+                    spaceMetrics.AddRange(UpdateSpaceMetricsByLayoutType(inputModels, input.Overrides.SpaceMetrics.ToList(), layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics));
                 }
             }
 
             output.Model.AddElements(proxies);
+            output.Model.AddElements(spaceMetrics);
             return output;
         }
 
-        private static void UpdateSpaceMetricsByLayoutType(
+        private static List<SpaceMetric> UpdateSpaceMetricsByLayoutType(
             Dictionary<string, Model> inputModels,
             List<SpaceMetricsOverride> overrides,
             string layoutName,
@@ -51,9 +53,10 @@ namespace SpaceMetrics
             List<SpaceBoundary> openOfficeBoundaries,
             List<SpaceMetric> openCollabSpaceMetrics)
         {
+            var spaceMetrics = new List<SpaceMetric>();
             if (!inputModels.TryGetValue(layoutName + " Layout", out var layoutModel))
             {
-                return;
+                return spaceMetrics;
             }
 
             foreach (var sm in layoutModel.AllElementsOfType<SpaceMetric>())
@@ -78,8 +81,11 @@ namespace SpaceMetrics
                 }
 
                 var proxy = GetElementProxy(room, boundaries.Proxies(SpaceMetricDependencyName));
-                MatchApplicableOverride(overrides, proxy, sm);
+                var config = MatchApplicableOverride(overrides, proxy, sm);
+                spaceMetrics.Add(new SpaceMetric(room.Id, config.Value.Seats, config.Value.Headcount, config.Value.Desks, config.Value.CollaborationSeats));
             }
+
+            return spaceMetrics;
         }
 
         private static SpaceMetricsOverride MatchApplicableOverride(
