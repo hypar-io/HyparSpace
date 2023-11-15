@@ -13,6 +13,7 @@ namespace LayoutFunctionCommon
         private static double mullionSize = 0.07;
         private static double doorWidth = 0.9;
         private static double doorHeight = 2.1;
+        private static double doorThickness = 4 * 0.0254;
         private static double sideLightWidth = 0.4;
 
         private static Dictionary<string, int> interiorPartitionTypePriority = new Dictionary<string, int>()
@@ -422,12 +423,12 @@ namespace LayoutFunctionCommon
                     {
                         double tPos = (sideLightWidth + doorWidth / 2) / wall.CenterLine.Length();
                         // Adding Wall as a property to door makes the wall not show up :shrug:
-                        var door = new Door(wall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        var door = new Door(wall.CenterLine, tPos, doorWidth, doorHeight, doorThickness, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
                         {
                             Material = BuiltInMaterials.Concrete
                         };
                         door.Transform.Concatenate(new Transform(0, 0, 0.005));
-                        wall.Openings.Add(door.Opening);
+                        wall.AddDoorOpening(door);
 
                         elements.Add(door);
                     }
@@ -451,12 +452,12 @@ namespace LayoutFunctionCommon
                     if (primaryWall.CenterLine.Length() > doorWidth + 2 * sideLightWidth)
                     {
                         double tPos = (sideLightWidth + doorWidth / 2) / primaryWall.CenterLine.Length();
-                        var door = new Door(primaryWall.CenterLine, tPos, doorWidth, doorHeight, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
+                        var door = new Door(primaryWall.CenterLine, tPos, doorWidth, doorHeight, doorThickness, DoorOpeningSide.LeftHand, DoorOpeningType.SingleSwing)
                         {
                             Material = BuiltInMaterials.Concrete
                         };
 
-                        primaryWall.Openings.Add(door.Opening);
+                        primaryWall.AddDoorOpening(door);
                         elements.Add(door);
                     }
 

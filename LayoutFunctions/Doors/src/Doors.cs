@@ -54,7 +54,7 @@ namespace Doors
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
                     double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
 
-                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, openingSide, openingType, doorOverride);
+                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, Door.DOOR_THICKNESS, openingSide, openingType, doorOverride);
                     if (door != null)
                     {
                         doors.Add(door);
@@ -209,7 +209,7 @@ namespace Doors
                     openingType = ConvertOpeningTypeEnum(doorOverride.Value.DefaultDoorOpeningType);
                 }
 
-                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, openingSide, openingType, doorOverride);
+                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, Door.DOOR_THICKNESS, openingSide, openingType, doorOverride);
                 if (door != null)
                 {
                     doors.Add(door);
@@ -286,6 +286,7 @@ namespace Doors
                                         Vector3 currentPosition,
                                         double width,
                                         double height,
+                                        double thickness,
                                         DoorOpeningSide openingSide,
                                         DoorOpeningType openingType,
                                         DoorPositionsOverride? doorOverride = null)
@@ -297,13 +298,11 @@ namespace Doors
 
             var rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
 
-            var door = new Door(width, height, openingSide, openingType, null, null, null, false, default, "Door", 1, 1)
+            var door = new Door(width, height, thickness, openingSide, openingType, null, null, null, false, default, "Door")
             {
                 OriginalPosition = originalPosition,
                 Transform = new Transform(currentPosition).RotatedAboutPoint(currentPosition, Vector3.ZAxis, rotation)
             };
-
-            // var door = new Door(wallCandidate.Line, originalPosition, currentPosition, width, height, openingSide, openingType);
 
             if (doorOverride != null)
             {

@@ -160,7 +160,7 @@ namespace InteriorPartitions
                 {
                     var doorLocation = door.Transform.Origin;
                     var doorRelativeLocation = wall.CenterLine.Start.DistanceTo(doorLocation);
-                    wall.AddOpening(door.Opening.Perimeter, doorRelativeLocation, door.ClearHeight / 2, 1, 1);
+                    wall.AddDoorOpening(door);
                 }
 
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
@@ -189,7 +189,7 @@ namespace InteriorPartitions
 
                     var doorLocation = door.Transform.Origin;
                     var doorRelativeLocation = wall.CenterLine.Start.DistanceTo(doorLocation);
-                    wall.AddOpening(door.Opening.Perimeter, doorRelativeLocation, door.ClearHeight / 2, 1, 1);
+                    wall.AddDoorOpening(door);
 
                     doorEdgeDistances.Add(doorRelativeLocation - door.ClearWidth * widthFactor / 2 - mullionSize / 2);
                     doorEdgeDistances.Add(doorRelativeLocation + door.ClearWidth * widthFactor / 2 + mullionSize / 2);
@@ -203,7 +203,12 @@ namespace InteriorPartitions
                 grid.SplitAtOffsets(offsets);
                 if (grid.Cells != null && grid.Cells.Count >= 3)
                 {
-                    grid[2].DivideByApproximateLength(2);
+                    grid[2].DivideByApproximateLength(1.5);
+                    grid[0].DivideByApproximateLength(1.5);
+                }
+                if (grid.Cells == null)
+                {
+                    grid.DivideByApproximateLength(1.5);
                 }
                 var separators = grid.GetCellSeparators(true);
 

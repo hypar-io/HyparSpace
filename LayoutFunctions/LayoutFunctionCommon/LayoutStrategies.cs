@@ -178,6 +178,7 @@ namespace LayoutFunctionCommon
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
+
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
                 var circSegments = circModel.AllElementsAssignableFromType<TCirculationSegment>();
