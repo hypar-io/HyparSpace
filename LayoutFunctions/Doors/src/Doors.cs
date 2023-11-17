@@ -298,7 +298,7 @@ namespace Doors
 
             var rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
 
-            var door = new Door(width, height, thickness, openingSide, openingType, null, null, null, false, default, "Door")
+            var door = new Door(width, height, thickness, openingSide, openingType)
             {
                 OriginalPosition = originalPosition,
                 Transform = new Transform(currentPosition).RotatedAboutPoint(currentPosition, Vector3.ZAxis, rotation)

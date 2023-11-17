@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Elements.Spatial;
 using Elements.Geometry.Solids;
 using System.Xml.Schema;
+using Elements;
 
 [assembly: InternalsVisibleTo("InteriorPartitions.Tests")]
 namespace InteriorPartitions

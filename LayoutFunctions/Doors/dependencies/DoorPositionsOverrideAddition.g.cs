@@ -10,19 +10,21 @@ namespace Doors
 	/// </summary>
 	public partial class DoorPositionsOverrideAddition : IOverride
 	{
-        public static string Name = "Door Positions Addition";
-        public static string Dependency = null;
-        public static string Context = "[*discriminator=Elements.Door]";
+		public static string Name = "Door Positions Addition";
+		public static string Dependency = null;
+		public static string Context = "[*discriminator=Elements.Door]";
 		public static string Paradigm = "Edit";
 
-        /// <summary>
-        /// Get the override name for this override.
-        /// </summary>
-        public string GetName() {
+		/// <summary>
+		/// Get the override name for this override.
+		/// </summary>
+		public string GetName()
+		{
 			return Name;
 		}
 
-		public object GetIdentity() {
+		public object GetIdentity()
+		{
 
 			return Identity;
 		}

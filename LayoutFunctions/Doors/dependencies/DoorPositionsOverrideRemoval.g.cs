@@ -12,7 +12,7 @@ namespace Doors
 	{
         public static string Name = "Door Positions Removal";
         public static string Dependency = null;
-        public static string Context = "[*discriminator=Elements.Door]";
+        public static string Context = "[*discriminator=Elements.BIM.Door]";
 		public static string Paradigm = "Edit";
 
         /// <summary>
