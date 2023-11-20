@@ -104,11 +104,6 @@ namespace Doors
 
         private static List<RoomEdge> GetWallCandidates(Dictionary<string, Model> inputModels)
         {
-            // if (!inputModels.TryGetValue("Interior Partitions", out Model? interiorPartitions))
-            // {
-            //     throw new ArgumentException("Interior Partitions is missing");
-            // }
-
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
             var modelDependencies = new[] {
                 "Private Office Layout",
@@ -137,30 +132,6 @@ namespace Doors
             }
 
             var roomEdges = interiorPartitionCandidates.SelectMany(wc => wc.WallCandidateLines).ToList();
-
-            // var wallLinesToWalls = new Dictionary<Line, StandardWall>();
-
-            // // var allWalls = interiorPartitions.AllElementsOfType<StandardWall>().Distinct().ToList();
-
-            // // foreach (var wall in allWalls)
-            // // {
-            // //     // It is not the main wall. Most likely it is a Header, which cannot contain a door.
-            // //     if (wall.AdditionalProperties.ContainsKey("Wall"))
-            // //     {
-            // //         continue;
-            // //     }
-
-            // //     if (wallLinesToWalls.TryGetValue(wall.CenterLine, out var secondWall) && wall.Height.Equals(secondWall.Height))
-            // //     {
-            // //         // In this case two different walls have the same centerline. Pick the first one and proceed.
-            // //         continue;
-            // //     }
-
-            // //     wallLinesToWalls.Add(wall.CenterLine, wall);
-            // // }
-
-            // var walls = wallCandidates.Where(wc => wallLinesToWalls.ContainsKey(wc.Line))
-            //     .Select(wc => wallLinesToWalls[wc.Line]).ToList();
 
             return roomEdges;
         }
