@@ -17,17 +17,8 @@ namespace InteriorPartitions
     {
         private const string wallCandidatePropertyName = "Wall Candidate";
         private static double mullionSize = 0.07;
-        private static double doorWidth = 0.9;
         private static double doorHeight = 2.1;
-        private static double sideLightWidth = 0.4;
         private static double defaultHeight = 3;
-
-        private static Dictionary<string, int> interiorPartitionTypePriority = new Dictionary<string, int>()
-        {
-            {"Solid", 3},
-            {"Partition", 2},
-            {"Glass", 1}
-        };
 
         private static Material wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
         private static Material glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
@@ -85,13 +76,6 @@ namespace InteriorPartitions
 
                 output.Model.AddElements(elements);
             }
-
-            // foreach (var wallCandidatesGroup in wallCandidatesGroups)
-            // {
-            //     var elements = WallGeneration.GenerateWalls(wallCandidatesGroup.Select(w => (w.Line, w.Type, w.Id, w.Thickness)), wallCandidatesGroup.Key.Height, wallCandidatesGroup.Key.LevelTransform, false);
-
-            //     output.Model.AddElements(elements);
-            // }
 
             output.Model.AddElements(wallCandidates);
 
@@ -254,12 +238,6 @@ namespace InteriorPartitions
                     var mullionRep = mullionObject.Representation;
                     wall.RepresentationInstances.Add(new RepresentationInstance(new SolidRepresentation(mullionRep.SolidOperations), mullionObject.Material, true));
 
-                    // var line = new Line(separator, separator + new Vector3(0, 0, height));
-                    // elements.Add(new ModelCurve(line, BuiltInMaterials.XAxis, levelTransform));
-                    // var instance = mullion.CreateInstance(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform), "Mullion");
-                    // mullionObject.AdditionalProperties["Wall"] = wall.Id;
-                    // elements.Add(mullionObject);
-
                     i++;
                 }
 
@@ -267,17 +245,11 @@ namespace InteriorPartitions
                 if (headerHeight > 0.01)
                 {
                     var header = new Header((Line)lineProjected.Transformed(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight))), sumThickness, headerHeight, wallMat);
-                    // header.AdditionalProperties["Wall"] = wall.Id;
-                    // elements.Add(header);
-                    // header.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                     header.UpdateRepresentations();
                     var headerRep = header.Representation;
                     wall.RepresentationInstances.Add(new RepresentationInstance(new SolidRepresentation(headerRep.SolidOperations), header.Material, true));
                 }
             }
-
-
-            // wall.UpdateRepresentations();
 
             elements.Add(wall);
 
@@ -361,7 +333,6 @@ namespace InteriorPartitions
                     .ToList();
 
                 wallCandidates.AddRange(splittedWallCandidates);
-                // wallCandidates.AddRange(levelWallCandidates);
             }
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
 

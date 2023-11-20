@@ -22,6 +22,8 @@ namespace Doors
             var walls = GetWallCandidates(inputModels);
             var doors = new List<Door>();
 
+            double doorOffset = 9 * 0.0254;
+
             foreach (var roomsOfLevel in rooms.GroupBy(r => r.Level))
             {
                 var levelCorridors = corridors.Where(c => c.Level == roomsOfLevel.Key);
@@ -38,7 +40,18 @@ namespace Doors
                     var wall = pair.Value.Wall;
                     var openingSide = ConvertOpeningSideEnum(input.DefaultDoorOpeningSide);
                     var openingType = ConvertOpeningTypeEnum(input.DefaultDoorOpeningType);
-                    var doorOriginalPosition = pair.Value.Segment.Mid();
+
+                    if (!wall.Thickness.HasValue) continue;
+                    var wallThickness = wall.Thickness.Value.innerWidth + wall.Thickness.Value.outerWidth;
+
+                    // Don't add door if the wall is zero thickness.
+                    if (wallThickness == 0.0) continue;
+
+                    // Don't add door if the wall length is too short.
+                    if (wall.Line.Length() < doorOffset + input.DefaultDoorWidth) continue;
+
+                    var doorOriginalPosition = pair.Value.Segment.PointAt(doorOffset + input.DefaultDoorWidth / 2);
+
                     var doorCurrentPosition = doorOriginalPosition;
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
                         o => doorOriginalPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
