@@ -127,7 +127,11 @@ namespace Doors
             {
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {
-                    interiorPartitionCandidates.AddRange(mdModel?.AllElementsOfType<InteriorPartitionCandidate>());
+                    var elements = mdModel?.AllElementsOfType<InteriorPartitionCandidate>();
+                    if (elements != null)
+                    {
+                        interiorPartitionCandidates.AddRange(elements);
+                    }
                 }
             }
 
