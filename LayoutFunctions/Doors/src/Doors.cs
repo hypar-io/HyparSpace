@@ -7,6 +7,8 @@ namespace Doors
 {
     public static class Doors
     {
+        // Door offset from end of wall. Determines initial position.
+        private const double doorOffset = 9 * 0.0254;
         /// <summary>
         ///
         /// </summary>
@@ -21,8 +23,6 @@ namespace Doors
             var corridors = GetCirculationSegments(inputModels);
             var walls = GetWallCandidates(inputModels);
             var doors = new List<Door>();
-
-            double doorOffset = 9 * 0.0254;
 
             foreach (var roomsOfLevel in rooms.GroupBy(r => r.Level))
             {

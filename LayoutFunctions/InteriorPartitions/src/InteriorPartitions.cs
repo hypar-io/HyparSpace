@@ -111,12 +111,10 @@ namespace InteriorPartitions
             var thickness = wallCandidate.Thickness;
             var type = wallCandidate.Type;
             var height = wallCandidate.Height;
-            var levelTransform = wallCandidate.LevelTransform;
             var wallCandidateId = wallCandidate.Id;
 
-            var doorsToAdd = doors.Where(x => x.Transform.Origin.DistanceTo(line) < 0.001).ToList();
+            var doorsToAdd = doors.Where(x => x.Transform.Origin.DistanceTo(line) < 0.01).ToList();
 
-            var lineProjected = line.TransformedLine(new Transform(0, 0, -line.End.Z));
             if (thickness != null && thickness.Value.innerWidth == 0 && thickness.Value.outerWidth == 0)
             {
                 return elements;
@@ -128,7 +126,7 @@ namespace InteriorPartitions
             // thickness, we have to offset the centerline by their
             // difference.
             var offset = (thicknessOrDefault.outerWidth - thicknessOrDefault.innerWidth) / 2.0;
-            lineProjected = lineProjected.Offset(offset, false);
+            var lineOffset = line.Offset(offset, false);
             if (sumThickness < 0.01)
             {
                 sumThickness = 0.2;
@@ -138,7 +136,7 @@ namespace InteriorPartitions
 
             if (type == "Solid")
             {
-                wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
+                wall = new StandardWall(lineOffset, sumThickness, height, wallMat);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
 
                 foreach (var door in doorsToAdd)
@@ -153,7 +151,7 @@ namespace InteriorPartitions
             }
             else if (type == "Partition")
             {
-                wall = new StandardWall(lineProjected, sumThickness, height, wallMat, levelTransform);
+                wall = new StandardWall(lineOffset, sumThickness, height, wallMat);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
 
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
@@ -161,9 +159,9 @@ namespace InteriorPartitions
             }
             else if (type == "Glass")
             {
-                wall = new StorefrontWall(lineProjected, 0.05, height, glassMat, levelTransform);
+                wall = new StorefrontWall(lineOffset, 0.05, height, glassMat);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
-                var grid = new Grid1d(lineProjected);
+                var grid = new Grid1d(lineOffset);
 
                 var doorEdgeDistances = new List<double>();
 
@@ -197,7 +195,7 @@ namespace InteriorPartitions
                 }
                 var separators = grid.GetCellSeparators(true);
 
-                var beam = new Beam(lineProjected, Polygon.Rectangle(mullionSize, mullionSize), null, mullionMat)
+                var beam = new Beam(lineOffset, Polygon.Rectangle(mullionSize, mullionSize), null, mullionMat)
                 {
                     IsElementDefinition = true
                 };
@@ -228,7 +226,7 @@ namespace InteriorPartitions
 
                     var mullionObject = new Mullion()
                     {
-                        BaseLine = (Line)mullionLine.Transformed(new Transform(separator, lineProjected.Direction(), Vector3.ZAxis, 0).Concatenated(levelTransform)),
+                        BaseLine = (Line)mullionLine.Transformed(new Transform(separator, lineOffset.Direction(), Vector3.ZAxis, 0)),
                         Width = mullionSize,
                         Height = totalStorefrontHeight,
                         Material = mullionMat
@@ -244,7 +242,7 @@ namespace InteriorPartitions
                 var headerHeight = height - totalStorefrontHeight;
                 if (headerHeight > 0.01)
                 {
-                    var header = new Header((Line)lineProjected.Transformed(levelTransform.Concatenated(new Transform(0, 0, totalStorefrontHeight))), sumThickness, headerHeight, wallMat);
+                    var header = new Header((Line)lineOffset.Transformed(new Transform(0, 0, totalStorefrontHeight)), sumThickness, headerHeight, wallMat);
                     header.UpdateRepresentations();
                     var headerRep = header.Representation;
                     wall.RepresentationInstances.Add(new RepresentationInstance(new SolidRepresentation(headerRep.SolidOperations), header.Material, true));
@@ -294,7 +292,7 @@ namespace InteriorPartitions
                 var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? defaultHeight;
                 var levelWallCandidates = candidates.Select(c =>
-                    new WallCandidate(c.Line.TransformedLine(levelGroup.Key),
+                    new WallCandidate(c.Line,
                                       c.Type,
                                       height,
                                       levelGroup.Key,
