@@ -16,9 +16,9 @@ namespace InteriorPartitions
     public static class InteriorPartitions
     {
         private const string wallCandidatePropertyName = "Wall Candidate";
-        private static double mullionSize = 0.07;
-        private static double doorHeight = 2.1;
-        private static double defaultHeight = 3;
+        private static double mullionSize = 2 * 0.0254;
+        private static double defaultWallHeight = 3;
+        private static double defaultDoorHeight = 2.10;
 
         private static Material wallMat = new Material("Drywall", new Color(0.9, 0.9, 0.9, 1.0), 0.01, 0.01);
         private static Material glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
@@ -159,11 +159,13 @@ namespace InteriorPartitions
             }
             else if (type == "Glass")
             {
-                wall = new StorefrontWall(lineOffset, 0.05, height, glassMat);
+                wall = new StorefrontWall(lineOffset, 1 * 0.0254, height, glassMat);
                 wall.AdditionalProperties[wallCandidatePropertyName] = wallCandidateId;
                 var grid = new Grid1d(lineOffset);
 
                 var doorEdgeDistances = new List<double>();
+
+                var maxDoorHeight = defaultDoorHeight;
 
                 foreach (var door in doorsToAdd)
                 {
@@ -176,6 +178,8 @@ namespace InteriorPartitions
 
                     doorEdgeDistances.Add(doorRelativeLocation - door.ClearWidth * widthFactor / 2 - mullionSize / 2);
                     doorEdgeDistances.Add(doorRelativeLocation + door.ClearWidth * widthFactor / 2 + mullionSize / 2);
+
+                    maxDoorHeight = Math.Max(maxDoorHeight, door.ClearHeight);
                 }
 
                 var offsets = doorEdgeDistances.Where(o => grid.Domain.Min + o < grid.Domain.Max);
@@ -203,7 +207,7 @@ namespace InteriorPartitions
                 var baseMullions = new List<Beam>()
                 {
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0,  mullionSize/2)), beam.Profile, new Transform(0, 0, mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
-                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, doorHeight + mullionSize/2)), beam.Profile, new Transform(0, 0, doorHeight + mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
+                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, maxDoorHeight + mullionSize/2)), beam.Profile, new Transform(0, 0, maxDoorHeight + mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, totalStorefrontHeight)), beam.Profile, new Transform(0, 0, totalStorefrontHeight), beam.Material, null, false, default, "Base Mullion")
                 };
 
@@ -290,7 +294,7 @@ namespace InteriorPartitions
             foreach (var levelGroup in levelGroups)
             {
                 var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
-                var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? defaultHeight;
+                var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? defaultWallHeight;
                 var levelWallCandidates = candidates.Select(c =>
                     new WallCandidate(c.Line,
                                       c.Type,
@@ -370,7 +374,7 @@ namespace InteriorPartitions
                     else
                     {
                         // Not editing line, so we are using the original identity line
-                        var newElement = new WallCandidate(editedElement.Identity.Line, editedElement.Value.Type.ToString(), defaultHeight, new Transform(), null);
+                        var newElement = new WallCandidate(editedElement.Identity.Line, editedElement.Value.Type.ToString(), defaultWallHeight, new Transform(), null);
                         resultElements.Add(newElement);
                         Identity.AddOverrideIdentity(newElement, editedElement);
                     }
