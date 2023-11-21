@@ -78,7 +78,7 @@ namespace Doors
             AddDoors(doors, input.Overrides.Additions.DoorPositions, walls, input.Overrides);
             RemoveDoors(doors, input.Overrides.Removals.DoorPositions);
 
-            // output.Model.AddElements(doors);
+            output.Model.AddElements(doors);
             return output;
         }
 
