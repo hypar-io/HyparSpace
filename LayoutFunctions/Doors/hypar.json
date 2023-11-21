@@ -180,7 +180,7 @@
           "$hyparUnitType": "length",
           "minimum": 2.032
         },
-        "Default Door Opening Side": {
+        "Door Opening Side": {
           "default": "Left Hand",
           "description": "The opening side of a door.",
           "type": "string",
@@ -190,7 +190,7 @@
             "Double Door"
           ]
         },
-        "Default Door Opening Type": {
+        "Door Opening Type": {
           "default": "Single Swing",
           "description": "The type of a door.",
           "type": "string",
