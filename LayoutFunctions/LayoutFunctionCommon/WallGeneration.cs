@@ -278,9 +278,7 @@ namespace LayoutFunctionCommon
                     var end = (line.End - dominantLineForGroup.Line.Start).Dot(domLineDir);
                     if (start > end)
                     {
-                        var oldStart = start;
-                        start = end;
-                        end = oldStart;
+                        (end, start) = (start, end);
                     }
 
                     var typePriorityStrings = linePair.Type.Split('-');

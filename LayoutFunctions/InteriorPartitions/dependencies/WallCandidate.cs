@@ -12,8 +12,8 @@ namespace Elements
 
         public string AddId { get; set; }
 
-        public WallCandidate(Line @line, string @type, double height, Transform levelTransform, IList<SpaceBoundary> @spaceAdjacencies = null, System.Guid @id = default, string @name = null)
-            : this(@line, @type, @spaceAdjacencies, id, name)
+        public WallCandidate(Line line, string type, double height, Transform levelTransform, IList<SpaceBoundary> spaceAdjacencies = null, System.Guid id = default, string name = null)
+            : this(line, type, spaceAdjacencies, id, name)
         {
             Height = height;
             LevelTransform = levelTransform;
