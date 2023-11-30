@@ -107,7 +107,7 @@
         "maximum": 1.2192,
         "description": "Width of a door panel without a frame. For double doors, the clear width will be double the door width.",
         "type": "number",
-        "$hyparOrder": 0,
+        "$hyparOrder": 1,
         "$hyparUnitType": "length",
         "minimum": 0.8128
       },
@@ -119,13 +119,13 @@
         "description": "Height of a door without a frame.",
         "$hyparUnitType": "length",
         "minimum": 2.032,
-        "$hyparOrder": 1
+        "$hyparOrder": 2
       },
       "Default Door Opening Side": {
         "default": "Left Hand",
         "description": "The opening side of a door.",
         "type": "string",
-        "$hyparOrder": 2,
+        "$hyparOrder": 3,
         "enum": [
           "Left Hand",
           "Right Hand",
@@ -136,7 +136,7 @@
         "default": "Single Swing",
         "description": "The type of a door.",
         "type": "string",
-        "$hyparOrder": 2,
+        "$hyparOrder": 4,
         "enum": [
           "Single Swing",
           "Double Swing"
@@ -163,6 +163,14 @@
               "y"
             ]
           }
+        },
+        "Door Type": {
+          "default": "Solid",
+          "enum": [
+            "Solid",
+            "Glass"
+          ],
+          "type": "string"
         },
         "Door Width": {
           "type": "number",
@@ -219,6 +227,14 @@
                   "y"
                 ]
               }
+            },
+            "Door Type": {
+              "default": "Solid",
+              "enum": [
+                "Solid",
+                "Glass"
+              ],
+              "type": "string"
             },
             "Door Width": {
               "type": "number",

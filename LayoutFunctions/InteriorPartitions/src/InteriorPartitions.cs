@@ -7,8 +7,6 @@ using System;
 using System.Runtime.CompilerServices;
 using Elements.Spatial;
 using Elements.Geometry.Solids;
-using System.Xml.Schema;
-using Elements;
 
 [assembly: InternalsVisibleTo("InteriorPartitions.Tests")]
 namespace InteriorPartitions
@@ -68,7 +66,12 @@ namespace InteriorPartitions
             var output = new InteriorPartitionsOutputs();
             var wallCandidates = CreateWallCandidates(input, interiorPartitionCandidates);
 
-            var wallCandidatesGroups = wallCandidates.GroupBy(w => (w.LevelTransform, w.Height));
+            var wallCandidatesDictionary = wallCandidates.ToDictionary(w => w.Id, w => (false, false));
+
+            foreach (var wallCandidate in wallCandidates)
+            {
+                TrimWallCandidate(wallCandidate, wallCandidates, wallCandidatesDictionary);
+            }
 
             foreach (var wallCandidate in wallCandidates)
             {
@@ -80,6 +83,79 @@ namespace InteriorPartitions
             output.Model.AddElements(wallCandidates);
 
             return output;
+        }
+
+        private static void TrimWallCandidate(WallCandidate wallCandidate, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary)
+        {
+            var nonCollinearList = wallCandidates.Where(x => !x.Line.IsCollinear(wallCandidate.Line, 0.1) && (wallCandidatesDictionary[x.Id].StartModified == false || wallCandidatesDictionary[x.Id].EndModified == false));
+
+            foreach (var wallCandidateCheck in nonCollinearList)
+            {
+                if (wallCandidateCheck.Thickness == null || wallCandidate.Thickness == null) continue;
+
+                UpdateWallCandidateLines(wallCandidate, wallCandidateCheck, wallCandidates, wallCandidatesDictionary);
+            }
+        }
+
+        private static void UpdateWallCandidateLines(WallCandidate wallCandidate, WallCandidate wallCandidateCheck, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary)
+        {
+            var wallCandidateCheckWidth = GetTotalWidth(wallCandidateCheck.Thickness.Value);
+            var wallCandidateWidth = GetTotalWidth(wallCandidate.Thickness.Value);
+
+            var wallCandidateOffset = wallCandidate.Line.Direction() * wallCandidateCheckWidth / 2;
+            var wallCandidateCheckOffset = wallCandidateCheck.Line.Direction() * wallCandidateWidth / 2;
+
+            var wallCandidateVector = wallCandidateCheck.Line.Direction();
+
+            var wallCandidateCheckCollinear = wallCandidates.Where(x => Math.Abs(x.Line.Direction().Dot(wallCandidateVector)) > 0.99 && x.Id != wallCandidateCheck.Id).ToList();
+
+            bool startHasColinearWithStart = false;
+            bool endHasColinearWithStart = false;
+            bool startHasColinearWithEnd = false;
+            bool endHasColinearWithEnd = false;
+
+            if (wallCandidateCheckCollinear.Count > 0)
+            {
+                startHasColinearWithStart = wallCandidateCheckCollinear.Min(x => wallCandidateCheck.Line.Start.DistanceTo(x.Line.Start)) < 0.01;
+                startHasColinearWithEnd = wallCandidateCheckCollinear.Min(x => wallCandidateCheck.Line.Start.DistanceTo(x.Line.End)) < 0.01;
+                endHasColinearWithStart = wallCandidateCheckCollinear.Min(x => wallCandidateCheck.Line.End.DistanceTo(x.Line.Start)) < 0.01;
+                endHasColinearWithEnd = wallCandidateCheckCollinear.Min(x => wallCandidateCheck.Line.End.DistanceTo(x.Line.End)) < 0.01;
+            }
+
+            if (wallCandidateCheck.Line.Start.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].StartModified == false)
+            {
+                if (!startHasColinearWithStart && !startHasColinearWithEnd)
+                {
+                    wallCandidateCheck.Line = new Line(wallCandidateCheck.Line.Start - wallCandidateCheckOffset, wallCandidateCheck.Line.End);
+                    wallCandidatesDictionary[wallCandidateCheck.Id] = (true, wallCandidatesDictionary[wallCandidateCheck.Id].EndModified);
+
+                }
+
+            }
+            else if (wallCandidateCheck.Line.End.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].EndModified == false)
+            {
+                if (!endHasColinearWithStart && !endHasColinearWithEnd)
+                {
+                    wallCandidateCheck.Line = new Line(wallCandidateCheck.Line.Start, wallCandidateCheck.Line.End + wallCandidateCheckOffset);
+                    wallCandidatesDictionary[wallCandidateCheck.Id] = (wallCandidatesDictionary[wallCandidateCheck.Id].StartModified, true);
+                }
+            }
+
+            if (wallCandidate.Line.Start.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].StartModified == false)
+            {
+                wallCandidate.Line = new Line(wallCandidate.Line.Start + wallCandidateOffset, wallCandidate.Line.End);
+                wallCandidatesDictionary[wallCandidate.Id] = (true, wallCandidatesDictionary[wallCandidate.Id].EndModified);
+            }
+            else if (wallCandidate.Line.End.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].EndModified == false)
+            {
+                wallCandidate.Line = new Line(wallCandidate.Line.Start, wallCandidate.Line.End - wallCandidateOffset);
+                wallCandidatesDictionary[wallCandidate.Id] = (wallCandidatesDictionary[wallCandidate.Id].StartModified, true);
+            }
+        }
+
+        private static double GetTotalWidth((double innerWidth, double outerWidth) thickness)
+        {
+            return thickness.outerWidth + thickness.innerWidth;
         }
 
 
@@ -176,13 +252,13 @@ namespace InteriorPartitions
                     var doorRelativeLocation = wall.CenterLine.Start.DistanceTo(doorLocation);
                     wall.AddDoorOpening(door);
 
-                    doorEdgeDistances.Add(doorRelativeLocation - door.ClearWidth * widthFactor / 2 - mullionSize / 2);
-                    doorEdgeDistances.Add(doorRelativeLocation + door.ClearWidth * widthFactor / 2 + mullionSize / 2);
+                    doorEdgeDistances.Add(doorRelativeLocation - door.DoorWidth * widthFactor / 2 - mullionSize / 2);
+                    doorEdgeDistances.Add(doorRelativeLocation + door.DoorWidth * widthFactor / 2 + mullionSize / 2);
 
-                    maxDoorHeight = Math.Max(maxDoorHeight, door.ClearHeight);
+                    maxDoorHeight = Math.Max(maxDoorHeight, door.DoorHeight);
                 }
 
-                var offsets = doorEdgeDistances.Where(o => grid.Domain.Min + o < grid.Domain.Max);
+                var offsets = doorEdgeDistances.Where(o => grid.Domain.Min + o < grid.Domain.Max).ToList();
 
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
                 wall.RepresentationInstances.Add(wallRepresentationInstance);
@@ -206,10 +282,33 @@ namespace InteriorPartitions
 
                 var baseMullions = new List<Beam>()
                 {
-                    new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0,  mullionSize/2)), beam.Profile, new Transform(0, 0, mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, maxDoorHeight + mullionSize/2)), beam.Profile, new Transform(0, 0, maxDoorHeight + mullionSize/2), beam.Material, null, false, default, "Base Mullion"),
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, totalStorefrontHeight)), beam.Profile, new Transform(0, 0, totalStorefrontHeight), beam.Material, null, false, default, "Base Mullion")
                 };
+
+                if (offsets.Count > 0)
+                {
+                    for (int d = 0; d < offsets.Count; d++)
+                    {
+                        if (d == 0)
+                        {
+                            var beamLine = new Line(lineOffset.Start, lineOffset.PointAt(offsets[d]));
+
+                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
+                        }
+                        else if (d % 2 == 0)
+                        {
+                            var beamLine = new Line(lineOffset.PointAt(offsets[d]), lineOffset.PointAt(offsets[d + 1]));
+                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
+                        }
+                        else if (d == offsets.Count - 1)
+                        {
+                            var beamLine = new Line(lineOffset.PointAt(offsets[d]), lineOffset.End);
+                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
+                        }
+                    }
+                }
+
 
                 foreach (var baseMullion in baseMullions)
                 {
@@ -283,13 +382,6 @@ namespace InteriorPartitions
             var levelGroups = interiorPartitionCandidates.Where(c => c.WallCandidateLines.Count > 0).GroupBy(c => c.LevelTransform);
             var wallCandidates = new List<WallCandidate>();
             var userAddedWallLinesCandidates = new List<WallCandidate>();
-            if (input.Overrides?.InteriorPartitionTypes != null)
-            {
-                userAddedWallLinesCandidates = input.Overrides.InteriorPartitionTypes.CreateElementsFromEdits(
-                    (wall, ident) => MatchIdentityWallCandidate(wall, ident),
-                    (wall, edit) => UpdateWallCandidate(wall, edit)
-                );
-            }
 
             foreach (var levelGroup in levelGroups)
             {
@@ -336,6 +428,7 @@ namespace InteriorPartitions
 
                 wallCandidates.AddRange(splittedWallCandidates);
             }
+
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
 
             return wallCandidates;
@@ -356,9 +449,8 @@ namespace InteriorPartitions
         public static List<WallCandidate> CreateElementsFromEdits(
             this IList<InteriorPartitionTypesOverride> edits,
             Func<WallCandidate, InteriorPartitionTypesIdentity, bool> identityMatch,
-            Func<WallCandidate, InteriorPartitionTypesOverride, WallCandidate> modifyElement)
+            Func<WallCandidate, InteriorPartitionTypesOverride, WallCandidate> modifyElement, List<WallCandidate> resultElements)
         {
-            var resultElements = new List<WallCandidate>();
             if (edits != null)
             {
                 foreach (var editedElement in edits)
@@ -456,8 +548,13 @@ namespace InteriorPartitions
             {
                 foreach (var overrideValue in overrideData)
                 {
-                    // Not editing line, so we are using the original identity line
                     var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.IsAlmostEqualTo(e.Line, false, 0.01));
+
+                    if (overrideValue.Identity.AddId != null)
+                    {
+                        matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.AddId.Equals(e.AddId?.ToString()));
+                    }
+                    // Not editing line, so we are using the original identity line
                     if (matchingElement != null)
                     {
                         matchingElement.Type = overrideValue.Value.Type.ToString();

@@ -1,5 +1,7 @@
+using System.Runtime.Serialization.Formatters;
 using Elements;
 using Elements.Geometry;
+using IFC;
 using LayoutFunctionCommon;
 using static Doors.DoorOpeningEnumsHelper;
 
@@ -9,6 +11,7 @@ namespace Doors
     {
         // Door offset from end of wall. Determines initial position.
         private const double doorOffset = 9 * 0.0254;
+        private static Material glassMat = new Material("Glass", new Color(0.7, 0.7, 0.7, 0.3), 0.3, 0.6);
         /// <summary>
         ///
         /// </summary>
@@ -18,6 +21,8 @@ namespace Doors
         public static DoorsOutputs Execute(Dictionary<string, Model> inputModels, DoorsInputs input)
         {
             var output = new DoorsOutputs();
+
+            DoorRepresentationStorage.Doors.Clear();
 
             var rooms = GetSpaceBoundaries(inputModels);
             var corridors = GetCirculationSegments(inputModels);
@@ -41,6 +46,9 @@ namespace Doors
                     var openingSide = ConvertOpeningSideEnum(input.DefaultDoorOpeningSide);
                     var openingType = ConvertOpeningTypeEnum(input.DefaultDoorOpeningType);
 
+                    var doorType = "Solid";
+                    if (room.DefaultWallType == "Glass") doorType = "Glass";
+
                     if (!wall.Thickness.HasValue) continue;
                     var wallThickness = wall.Thickness.Value.innerWidth + wall.Thickness.Value.outerWidth;
 
@@ -61,15 +69,31 @@ namespace Doors
                         doorCurrentPosition = doorOverride.Value.Transform.Origin;
                         openingSide = ConvertOpeningSideEnum(doorOverride.Value.DoorOpeningSide);
                         openingType = ConvertOpeningTypeEnum(doorOverride.Value.DoorOpeningType);
+                        doorType = doorOverride.Value.DoorType.ToString();
                         wall = GetClosestWallCandidate(doorCurrentPosition, walls, out doorCurrentPosition);
                     }
 
-                    double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
                     double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
+                    double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
 
-                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, Door.DOOR_THICKNESS, openingSide, openingType, doorOverride);
+                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, Door.DEFAULT_DOOR_THICKNESS, openingSide, openingType, doorOverride);
+
                     if (door != null)
                     {
+                        if (doorType == "Solid")
+                        {
+                            door.Material = BuiltInMaterials.Default;
+                            door.FrameDepth = wall.Thickness.Value.outerWidth + wall.Thickness.Value.innerWidth + 1 * 0.0254;
+                            door.DoorType = "Solid";
+                        }
+                        else if (doorType == "Glass")
+                        {
+                            door.Material = glassMat;
+                            door.FrameDepth = 0;
+                            door.FrameWidth = 0;
+                            door.DoorType = "Glass";
+                        }
+
                         doors.Add(door);
                     }
                 }
@@ -182,6 +206,8 @@ namespace Doors
                     continue;
                 }
 
+                var doorType = wall.Type;
+
                 var currentPosition = originalPosition;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
                     o => originalPosition.IsAlmostEqualTo(o.Identity.OriginalPosition));
@@ -195,11 +221,20 @@ namespace Doors
                     wall = GetClosestWallCandidate(currentPosition, walls, out currentPosition);
                     openingSide = ConvertOpeningSideEnum(doorOverride.Value.DoorOpeningSide);
                     openingType = ConvertOpeningTypeEnum(doorOverride.Value.DoorOpeningType);
+                    doorType = doorOverride.Value.DoorType.ToString();
                 }
 
-                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, Door.DOOR_THICKNESS, openingSide, openingType, doorOverride);
+                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, 2 * 0.0254, openingSide, openingType, doorOverride);
                 if (door != null)
                 {
+                    if (doorType == "Solid") door.Material = BuiltInMaterials.Default;
+                    else if (doorType == "Glass")
+                    {
+                        door.Material = glassMat;
+                        door.FrameDepth = 0;
+                        door.FrameWidth = 0;
+                        door.DoorType = "Glass";
+                    }
                     doors.Add(door);
                 }
             }
@@ -279,11 +314,6 @@ namespace Doors
                                         DoorOpeningType openingType,
                                         DoorPositionsOverride? doorOverride = null)
         {
-            if (wallCandidate == null || !Door.CanFit(wallCandidate.Line, openingSide, width))
-            {
-                return null;
-            }
-
             var rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
 
             var door = new Door(width, height, thickness, openingSide, openingType)
@@ -292,12 +322,39 @@ namespace Doors
                 Transform = new Transform(currentPosition).RotatedAboutPoint(currentPosition, Vector3.ZAxis, rotation)
             };
 
+            if (wallCandidate == null || !CanFit(wallCandidate.Line, door))
+            {
+                return null;
+            }
+
             if (doorOverride != null)
             {
                 door.AddOverrideIdentity(doorOverride);
             }
 
             return door;
+        }
+
+        /// <summary>
+        /// Checks if the door can fit into the wall with the center line @<paramref name="wallLine"/>.
+        /// </summary>
+        private static bool CanFit(Line wallLine, Door door)
+        {
+            var doorWidth = GetDoorFullWidthWithoutFrame(door) + door.FrameWidth * 2;
+            return wallLine.Length() - doorWidth > door.FrameWidth * 2;
+        }
+
+        private static double GetDoorFullWidthWithoutFrame(Door door)
+        {
+            switch (door.OpeningSide)
+            {
+                case DoorOpeningSide.LeftHand:
+                case DoorOpeningSide.RightHand:
+                    return door.DoorWidth;
+                case DoorOpeningSide.DoubleDoor:
+                    return door.DoorWidth * 2;
+            }
+            return 0;
         }
 
         private static RoomEdge? GetClosestWallCandidate(Vector3 pos,
