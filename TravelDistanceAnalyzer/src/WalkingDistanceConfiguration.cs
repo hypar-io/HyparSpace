@@ -64,7 +64,7 @@ namespace Elements
             //Update positions is case exit is snapped
             Transform = new Transform(grid.GetVertex(exit).Point);
 
-            var alg = new AdaptiveGraphRouting(grid, new RoutingConfiguration());
+            var alg = new AdaptiveGraphRouting(grid, new RoutingConfiguration(turnCost: 0.01));
 
             var exits = new List<ulong> { exit };
             var filteredRooms = builder.RoomExits.Where(

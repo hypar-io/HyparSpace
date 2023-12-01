@@ -63,7 +63,7 @@ namespace Elements
                 var endVertex = grid.GetVertex(end);
                 AdditionalConnections(grid, endVertex, connection);
                 Destinations[i] = endVertex.Point;
-                var alg = new AdaptiveGraphRouting(grid, new RoutingConfiguration());
+                var alg = new AdaptiveGraphRouting(grid, new RoutingConfiguration(turnCost: 0.01));
                 var leafs = new List<RoutingVertex> { new RoutingVertex(start, 0) };
                 var trunks = new List<ulong> { end };
                 var tree = alg.BuildSimpleNetwork(leafs, trunks, null);
