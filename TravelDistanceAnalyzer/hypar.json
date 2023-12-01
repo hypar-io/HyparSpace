@@ -1,0 +1,140 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "d9f36eba-8038-4a2e-929b-bae2edb824b1",
+  "name": "Travel Distance Analyzer",
+  "description": "The Travel Distance Analyzer function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Circulation",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Doors",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Interior Partitions",
+      "optional": true
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {}
+  },
+  "overrides": {
+    "Route Distance": {
+      "context": "[*discriminator=Elements.RouteDistanceConfiguration]",
+      "identity": {
+        "AddId": {
+          "type": "string"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Destinations": {
+          "type": "array",
+          "items": {
+            "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+          }
+        },
+        "Color": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Color.json"
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Destinations": {
+              "type": "array",
+              "items": {
+                "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+              } 
+            }
+          }
+        },
+        "remove": true,
+        "revert": false
+      }
+    },
+    "Walking Distance": {
+      "context": "[*discriminator=Elements.WalkingDistanceConfiguration]",
+      "identity": {
+        "AddId": {
+          "type": "string"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Transform": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Transform.json",
+          "$hyparConstraints": {
+            "enableRotation": false
+          }
+        },
+        "Program Types": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "$hyparEnumQuery": {
+              "dependency": "Space Planning Zones",
+              "query": "[*discriminator=Elements.SpaceBoundary].Program Type"
+            }
+          }
+        },
+        "Color": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Color.json"
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "Transform": {
+              "$ref": "https://hypar.io/Schemas/Geometry/Transform.json",
+              "$hyparConstraints": {
+                "enableRotation": false
+              }
+            },
+            "Program Types": {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "$hyparEnumQuery": {
+                  "dependency": "Space Planning Zones",
+                  "query": "[*discriminator=Elements.SpaceBoundary].Program Type"
+                }
+              }
+            }
+          }
+        },
+        "remove": true,
+        "revert": false
+      }
+    }
+  },
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/Door.json",
+    "https://schemas.hypar.io/WallCandidate.json",
+    "https://schemas.hypar.io/ThickenedPolyline.json"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.10.0"
+}
