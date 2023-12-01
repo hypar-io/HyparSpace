@@ -52,7 +52,8 @@ namespace TravelDistanceAnalyzer
             foreach (var levelRooms in roomsByLevel)
             {
                 var levelCorridors = corridorsByLevel.Where(c => c.Key == levelRooms.Key).FirstOrDefault();
-                if (levelCorridors == null)
+                if (levelCorridors == null || !levelCorridors.Any() ||
+                    roomsByLevel == null || !roomsByLevel.Any())
                 {
                     continue;
                 }
@@ -60,12 +61,14 @@ namespace TravelDistanceAnalyzer
                 var builder = new AdaptiveGridBuilder();
                 builder.Build(levelCorridors, levelRooms, walls, doors);
 
-                foreach (var config in walkingDistanceConfigs)
+                var elevation = levelCorridors.First().Elevation;
+
+                foreach (var config in walkingDistanceConfigs.Where(c => c.OnElevation(elevation)))
                 {
                     output.Model.AddElements(config.Compute(builder));
                 }
 
-                foreach (var config in routeDistanceConfigs)
+                foreach (var config in routeDistanceConfigs.Where(c => c.OnElevation(elevation)))
                 {
                     output.Model.AddElements(config.Compute(builder));
                 }

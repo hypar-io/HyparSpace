@@ -347,9 +347,10 @@ namespace TravelDistanceAnalyzer
         {
             foreach (var polygon in segment.Geometry.GetPolygons())
             {
+                var transformedPolygon = polygon.offsetPolygon.TransformedPolygon(segment.Transform);
                 var trimLine = new Line(l.Start - l.Direction() * maxDistance,
                                         l.End + l.Direction() * maxDistance);
-                var inside = trimLine.Trim(polygon.offsetPolygon, out _);
+                var inside = trimLine.Trim(transformedPolygon, out _);
                 foreach (var line in inside)
                 {
                     if (l.PointOnLine(line.Start) || l.PointOnLine(line.End))

@@ -14,6 +14,9 @@ namespace Elements
         [JsonProperty("Program Types")]
         public List<string> ProgramTypes;
 
+        private double _snapingDistance = 0.25;
+        private double _routeHeight = 1;
+
         public WalkingDistanceConfiguration(string addId, IList<string> programTypes, Transform transform)
         {
             AddId = addId;
@@ -30,6 +33,7 @@ namespace Elements
 
             var color = ColorFactory.FromGuid(AddId);
             Material = new Material("Route", color);
+            Statistics = new();
         }
 
         public override void UpdateRepresentations()
@@ -39,7 +43,7 @@ namespace Elements
             var shape = new Polygon((-0.1, -0.1), (-0.25, 0), (-0.1, 0.1), (0, 0.25),
                         (0.1, 0.1), (0.25, 0), (0.1, -0.1), (0, -0.25));
             Representation.SolidOperations.Add(new Geometry.Solids.Extrude(
-                shape, 0.5, Vector3.ZAxis));
+                shape, _routeHeight, Vector3.ZAxis));
         }
 
         public List<WalkingDistanceStatistics> Statistics { get; set; }
@@ -53,7 +57,7 @@ namespace Elements
         public List<Element> Compute(AdaptiveGridBuilder builder)
         {
             List<Element> additionalVisualization = new List<Element>();
-            var exit = builder.AddEndPoint(Transform.Origin, 0.25, out _);
+            var exit = builder.AddEndPoint(Transform.Origin, _snapingDistance, out _);
             if (exit == 0)
             {
                 return additionalVisualization;
@@ -84,22 +88,30 @@ namespace Elements
                 }
             }
 
-            additionalVisualization.AddRange(CalculateDistances(grid, bestExits, tree));
+            var distances = grid.ComputeDistances(bestExits.Select(e => e.Exit), tree);
+            RecordStatistics(grid, distances, bestExits, tree);
+
+            additionalVisualization.Add(grid.TreeVisualization(
+                distances.Keys, _routeHeight, Material));
             return additionalVisualization;
         }
 
-        private List<ModelCurve> CalculateDistances(
-            AdaptiveGrid grid,
-            List<(SpaceBoundary Room, GridVertex Exit)> inputs,
-            IDictionary<ulong, TreeNode> tree)
+        public bool OnElevation(double elevation)
         {
-            Dictionary<Edge, double> accumulatedDistances = new Dictionary<Edge, double>();
+            return Transform.Origin.Z.ApproximatelyEquals(elevation);
+        }
+
+        private void RecordStatistics(AdaptiveGrid grid,
+                                      Dictionary<Edge, double> accumulatedDistances,
+                                      List<(SpaceBoundary Room, GridVertex Exit)> inputs,
+                                      IDictionary<ulong, TreeNode> tree)
+        {
+
             Dictionary<string, (WalkingDistanceStatistics Stat, int Num)> statisticsByType = new();
             foreach (var input in inputs)
             {
                 //Distances are caches in Dictionary. It's mostly to draw edge lines only once as
                 //distance calculations are cheap.
-                grid.CalculateDistanceRecursive(input.Exit, tree, accumulatedDistances);
                 var next = tree[input.Exit.Id];
                 if (next != null && next.Trunk != null)
                 {
@@ -126,20 +138,6 @@ namespace Elements
             }
 
             Statistics = statisticsByType.Select(s => s.Value.Stat).ToList();
-
-            double VisualizationHeight = 1.5;
-            var t = new Transform(0, 0, VisualizationHeight);
-            List<ModelCurve> visualizations = new List<ModelCurve>();
-            foreach (var item in accumulatedDistances)
-            {
-                var start = grid.GetVertex(item.Key.StartId);
-                var end = grid.GetVertex(item.Key.EndId);
-                var shape = new Line(start.Point, end.Point);
-                var modelCurve = new ModelCurve(shape, Material, t);
-                modelCurve.SetSelectable(false);
-                visualizations.Add(modelCurve);
-            }
-            return visualizations;
         }
 
         /// <summary>
@@ -149,7 +147,7 @@ namespace Elements
         /// <param name="tree">Traveling tree from rooms corners to exits.</param>
         /// <param name="exits">Combinations of exits and their corresponding corners for each room.</param>
         /// <returns>Most distance efficient exit.</returns>
-        private static GridVertex ChooseExit(
+        private static GridVertex? ChooseExit(
             AdaptiveGrid grid,
             IDictionary<ulong, TreeNode> tree,
             List<GridVertex> exits)
@@ -158,31 +156,29 @@ namespace Elements
             {
                 return exits.First();
             }
-            else
-            {
-                double bestLength = double.MaxValue;
-                GridVertex bestExit = null;
-                foreach (var exit in exits)
-                {
-                    double accumulatedLength = 0;
-                    var current = tree[exit.Id];
-                    while (current.Trunk != null)
-                    {
-                        var p0 = grid.GetVertex(current.Id).Point;
-                        var p1 = grid.GetVertex(current.Trunk.Id).Point;
-                        accumulatedLength += p0.DistanceTo(p1);
-                        current = current.Trunk;
-                    }
 
-                    if (accumulatedLength < bestLength)
-                    {
-                        bestLength = accumulatedLength;
-                        bestExit = exit;
-                    }
+            double bestLength = double.MaxValue;
+            GridVertex? bestExit = null;
+            foreach (var exit in exits)
+            {
+                double accumulatedLength = 0;
+                var current = tree[exit.Id];
+                while (current.Trunk != null)
+                {
+                    var p0 = grid.GetVertex(current.Id).Point;
+                    var p1 = grid.GetVertex(current.Trunk.Id).Point;
+                    accumulatedLength += p0.DistanceTo(p1);
+                    current = current.Trunk;
                 }
 
-                return bestExit;
+                if (accumulatedLength < bestLength)
+                {
+                    bestLength = accumulatedLength;
+                    bestExit = exit;
+                }
             }
+
+            return bestExit;
         }
     }
 }

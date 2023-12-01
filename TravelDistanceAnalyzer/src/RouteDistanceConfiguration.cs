@@ -12,6 +12,9 @@ namespace Elements
 
         public List<Vector3> Destinations;
 
+        private double _snapingDistance = 0.25;
+        private double _routeHeight = 1;
+
         public RouteDistanceConfiguration(string addId, IList<Vector3> destinations) 
         {
             AddId = addId;
@@ -28,7 +31,7 @@ namespace Elements
             {
                 var shape = new Circle(point, 0.25).ToPolygon(8);
                 Representation.SolidOperations.Add(new Geometry.Solids.Extrude(
-                    shape, 0.5, Vector3.ZAxis));
+                    shape, _routeHeight, Vector3.ZAxis));
             }
         }
 
@@ -48,8 +51,10 @@ namespace Elements
                 return additionalVisualization;
             }
 
-            ulong start = builder.AddEndPoint(Destinations[0], 0.25, out var connection);
+            ulong start = builder.AddEndPoint(Destinations[0], _snapingDistance, out var connection);
             var grid = builder.Grid;
+
+
             var startVertex = grid.GetVertex(start);
             AdditionalConnections(grid, startVertex, connection);
             ulong end;
@@ -59,7 +64,7 @@ namespace Elements
 
             for (int i = 1; i < Destinations.Count; i++)
             {
-                end = builder.AddEndPoint(Destinations[i], 0.25, out connection);
+                end = builder.AddEndPoint(Destinations[i], _snapingDistance, out connection);
                 var endVertex = grid.GetVertex(end);
                 AdditionalConnections(grid, endVertex, connection);
                 Destinations[i] = endVertex.Point;
@@ -80,17 +85,9 @@ namespace Elements
                     distance += accumulatedDistances[edge];
                 }
 
-                double VisualizationHeight = 1.5;
-                var t = new Transform(0, 0, VisualizationHeight);
-                foreach (var item in accumulatedDistances)
-                {
-                    var v0 = grid.GetVertex(item.Key.StartId);
-                    var v1 = grid.GetVertex(item.Key.EndId);
-                    var shape = new Line(v0.Point, v1.Point);
-                    var modelCurve = new ModelCurve(shape, Material, t);
-                    modelCurve.SetSelectable(false);
-                    additionalVisualization.Add(modelCurve);
-                }
+                //TODO: height on level can have extra elevation.
+                additionalVisualization.Add(grid.TreeVisualization(
+                    accumulatedDistances.Keys, _routeHeight, Material));
 
                 start = end;
             }
@@ -99,9 +96,14 @@ namespace Elements
             return additionalVisualization;
         }
 
-        private static void AdditionalConnections(AdaptiveGrid grid,
-                                                  GridVertex exit,
-                                                  GridVertex mainConnection)
+        public bool OnElevation(double elevation)
+        {
+            return Destinations.All(d => d.Z.ApproximatelyEquals(elevation));
+        }
+
+        private void AdditionalConnections(AdaptiveGrid grid,
+                                           GridVertex exit,
+                                           GridVertex mainConnection)
         {
             var basePoint = exit.Point;
             var maxDist = basePoint.DistanceTo(mainConnection.Point) * 2;
@@ -136,29 +138,24 @@ namespace Elements
                 }
 
                 var directionIndex = -1;
-                //if (Vector3.AreCollinearByAngle(basePoint + xDir, basePoint, closest, 0.01))
+                var dot = delta.Unitized().Dot(xDir);
+                if (dot.ApproximatelyEquals(1, 0.01))
                 {
-                    var dot = delta.Unitized().Dot(xDir);
-                    if (dot.ApproximatelyEquals(1, 0.01))
-                    {
-                        directionIndex = 0;
-                    }
-                    else if (dot.ApproximatelyEquals(-1, 0.01))
-                    {
-                        directionIndex = 1;
-                    }
+                    directionIndex = 0;
                 }
-                //else if (Vector3.AreCollinearByAngle(basePoint + yDir, basePoint, closest, 0.01))
+                else if (dot.ApproximatelyEquals(-1, 0.01))
                 {
-                    var dot = delta.Unitized().Dot(yDir);
-                    if (dot.ApproximatelyEquals(1, 0.01))
-                    {
-                        directionIndex = 2;
-                    }
-                    else if (dot.ApproximatelyEquals(-1, 0.01))
-                    {
-                        directionIndex = 3;
-                    }
+                    directionIndex = 1;
+                }
+
+                dot = delta.Unitized().Dot(yDir);
+                if (dot.ApproximatelyEquals(1, 0.01))
+                {
+                    directionIndex = 2;
+                }
+                else if (dot.ApproximatelyEquals(-1, 0.01))
+                {
+                    directionIndex = 3;
                 }
 
                 if (directionIndex >= 0)
@@ -185,7 +182,7 @@ namespace Elements
             var texts = new List<(Vector3 Location, Vector3 FacingDirection, Vector3 LineDirection, string Text, Color? Color)>();
             for (int i = 0; i < Destinations.Count; i++)
             {
-                texts.Add((Destinations[i] + new Vector3(0, 0, 0.5),
+                texts.Add((Destinations[i] + new Vector3(0, 0, _routeHeight + Vector3.EPSILON),
                            Vector3.ZAxis,
                            Vector3.XAxis,
                            (i + 1).ToString(),
