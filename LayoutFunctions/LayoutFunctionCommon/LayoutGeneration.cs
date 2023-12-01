@@ -82,7 +82,8 @@ namespace LayoutFunctionCommon
                         var (configInfo, wallCandidates) = SelectTheBestOfPossibleConfigs(possibleConfigs);
 
                         var layout = InstantiateLayoutByFit(configInfo, room.Transform);
-                        SetLevelVolume(layout.Instance, levelVolume?.Id);
+                        LayoutStrategies.SetLevelVolume(layout.Instance, levelVolume?.Id);
+                        LayoutStrategies.SetParentSpace(layout.Instance, room.Id);
                         wallCandidateLines.AddRange(wallCandidates);
                         outputModel.AddElement(layout.Instance);
                         seatsCount = CountSeats(layout);
@@ -288,20 +289,6 @@ namespace LayoutFunctionCommon
         protected virtual SeatsCount CountSeats(LayoutInstantiated layoutInstantiated)
         {
             return new SeatsCount(0, 0, 0, 0);
-        }
-
-        private static void SetLevelVolume(ComponentInstance componentInstance, Guid? levelVolumeId)
-        {
-            if (componentInstance != null)
-            {
-                foreach (var instance in componentInstance.Instances)
-                {
-                    if (instance != null)
-                    {
-                        instance.AdditionalProperties["Level"] = levelVolumeId;
-                    }
-                }
-            }
         }
     }
 }

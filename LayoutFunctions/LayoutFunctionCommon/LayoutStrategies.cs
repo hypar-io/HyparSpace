@@ -352,6 +352,7 @@ namespace LayoutFunctionCommon
                     {
                         success = true;
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
+                        SetParentSpace(layout.Instance, room.Id);
 
                         wallCandidateLines.AddRange(WallCandidates);
 
@@ -845,6 +846,20 @@ namespace LayoutFunctionCommon
                     if (instance != null)
                     {
                         instance.AdditionalProperties["Level"] = levelVolumeId;
+                    }
+                }
+            }
+        }
+
+        public static void SetParentSpace(ComponentInstance componentInstance, Guid? parentSpaceId)
+        {
+            if (componentInstance != null)
+            {
+                foreach (var instance in componentInstance.Instances)
+                {
+                    if (instance != null)
+                    {
+                        instance.AdditionalProperties["Space"] = parentSpaceId;
                     }
                 }
             }
