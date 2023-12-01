@@ -102,14 +102,16 @@ namespace Doors
                     double height = doorOverride?.Value.DoorHeight ?? input.DefaultDoorHeight;
                     double width = doorOverride?.Value.DoorWidth ?? input.DefaultDoorWidth;
 
-                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, Door.DEFAULT_DOOR_THICKNESS, openingSide, openingType, doorOverride);
+                    var doorThickness = doorType == "Glass" ? Units.InchesToMeters(1) : Door.DEFAULT_DOOR_THICKNESS;
+
+                    var door = CreateDoor(wall, doorOriginalPosition, doorCurrentPosition, width, height, doorThickness, openingSide, openingType, doorOverride);
 
                     if (door != null)
                     {
                         if (doorType == "Solid")
                         {
                             door.Material = BuiltInMaterials.Default;
-                            door.FrameDepth = wall.Thickness.Value.outerWidth + wall.Thickness.Value.innerWidth + 1 * 0.0254;
+                            door.FrameDepth = wall == null ? Units.InchesToMeters(7) : wall.Thickness.Value.outerWidth + wall.Thickness.Value.innerWidth + Units.InchesToMeters(1);
                             door.DoorType = "Solid";
                         }
                         else if (doorType == "Glass")
@@ -280,7 +282,9 @@ namespace Doors
                     doorType = doorOverride.Value.DoorType.ToString();
                 }
 
-                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, 2 * 0.0254, openingSide, openingType, doorOverride);
+                var doorThickness = doorType == "Glass" ? 1 * 0.0254 : Door.DEFAULT_DOOR_THICKNESS;
+
+                var door = CreateDoor(wall, originalPosition, currentPosition, width, height, doorThickness, openingSide, openingType, doorOverride);
                 if (door != null)
                 {
                     if (doorType == "Solid") door.Material = BuiltInMaterials.Default;
