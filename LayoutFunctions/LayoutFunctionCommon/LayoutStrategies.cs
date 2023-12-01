@@ -307,7 +307,7 @@ namespace LayoutFunctionCommon
             corridorSegments ??= Enumerable.Empty<Line>();
             wallCandidateLines ??= new List<RoomEdge>();
             var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
-            var bestOption = wallCandidateOptions.FirstOrDefault();
+            var bestOption = wallCandidateOptions.OrderBy(x => x.Item1.Line.Length()).FirstOrDefault();
             if (bestOption == default)
             {
                 return;

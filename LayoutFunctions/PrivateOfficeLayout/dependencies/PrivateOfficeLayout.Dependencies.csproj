@@ -3,10 +3,10 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.1.0-alpha.22" />
-    <PackageReference Include="Hypar.Functions" Version="1.9.0-alpha.3" />
+    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    <PackageReference Include="Hypar.Elements" Version="2.1.0" />
+    <PackageReference Include="Hypar.Functions" Version="1.10.0" />
   </ItemGroup>
 </Project>

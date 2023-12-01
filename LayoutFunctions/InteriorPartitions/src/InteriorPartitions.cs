@@ -122,7 +122,7 @@ namespace InteriorPartitions
                 endHasColinearWithEnd = wallCandidateCheckCollinear.Min(x => wallCandidateCheck.Line.End.DistanceTo(x.Line.End)) < 0.01;
             }
 
-            if (wallCandidateCheck.Line.Start.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].StartModified == false)
+            if (wallCandidateCheck.Line.Start.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].StartModified == false && !(wallCandidateCheck.Type == "Glass" && wallCandidate.Type == "Glass"))
             {
                 if (!startHasColinearWithStart && !startHasColinearWithEnd)
                 {
@@ -132,7 +132,7 @@ namespace InteriorPartitions
                 }
 
             }
-            else if (wallCandidateCheck.Line.End.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].EndModified == false)
+            else if (wallCandidateCheck.Line.End.DistanceTo(wallCandidate.Line) < 0.01 && wallCandidatesDictionary[wallCandidateCheck.Id].EndModified == false && !(wallCandidateCheck.Type == "Glass" && wallCandidate.Type == "Glass"))
             {
                 if (!endHasColinearWithStart && !endHasColinearWithEnd)
                 {
@@ -141,12 +141,12 @@ namespace InteriorPartitions
                 }
             }
 
-            if (wallCandidate.Line.Start.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].StartModified == false)
+            if (wallCandidate.Line.Start.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].StartModified == false && !(wallCandidateCheck.Type == "Glass" && wallCandidate.Type == "Glass"))
             {
                 wallCandidate.Line = new Line(wallCandidate.Line.Start + wallCandidateOffset, wallCandidate.Line.End);
                 wallCandidatesDictionary[wallCandidate.Id] = (true, wallCandidatesDictionary[wallCandidate.Id].EndModified);
             }
-            else if (wallCandidate.Line.End.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].EndModified == false)
+            else if (wallCandidate.Line.End.DistanceTo(wallCandidateCheck.Line) < 0.01 && wallCandidatesDictionary[wallCandidate.Id].EndModified == false && !(wallCandidateCheck.Type == "Glass" && wallCandidate.Type == "Glass"))
             {
                 wallCandidate.Line = new Line(wallCandidate.Line.Start, wallCandidate.Line.End - wallCandidateOffset);
                 wallCandidatesDictionary[wallCandidate.Id] = (wallCandidatesDictionary[wallCandidate.Id].StartModified, true);
@@ -260,6 +260,12 @@ namespace InteriorPartitions
 
                 var offsets = doorEdgeDistances.Where(o => grid.Domain.Min + o < grid.Domain.Max).ToList();
 
+                for (int o = 0; o < offsets.Count; o++)
+                {
+                    offsets[o] = Math.Min(offsets[o], grid.Domain.Max);
+                    offsets[o] = Math.Max(offsets[o], grid.Domain.Min);
+                }
+
                 RepresentationInstance wallRepresentationInstance = CreateWallRepresentationInstance(wall);
                 wall.RepresentationInstances.Add(wallRepresentationInstance);
 
@@ -286,29 +292,8 @@ namespace InteriorPartitions
                     new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, totalStorefrontHeight)), beam.Profile, new Transform(0, 0, totalStorefrontHeight), beam.Material, null, false, default, "Base Mullion")
                 };
 
-                if (offsets.Count > 0)
-                {
-                    for (int d = 0; d < offsets.Count; d++)
-                    {
-                        if (d == 0)
-                        {
-                            var beamLine = new Line(lineOffset.Start, lineOffset.PointAt(offsets[d]));
-
-                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
-                        }
-                        else if (d % 2 == 0)
-                        {
-                            var beamLine = new Line(lineOffset.PointAt(offsets[d]), lineOffset.PointAt(offsets[d + 1]));
-                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
-                        }
-                        else if (d == offsets.Count - 1)
-                        {
-                            var beamLine = new Line(lineOffset.PointAt(offsets[d]), lineOffset.End);
-                            baseMullions.Add(new Beam((BoundedCurve)beamLine.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
-                        }
-                    }
-                }
-
+                // TODO: Make base mullion look better (discontinuous) at door locations
+                baseMullions.Add(new Beam((BoundedCurve)beam.Curve.Transformed(new Transform(0, 0, mullionSize / 2)), beam.Profile, new Transform(0, 0, mullionSize / 2), beam.Material, null, false, default, "Base Mullion"));
 
                 foreach (var baseMullion in baseMullions)
                 {

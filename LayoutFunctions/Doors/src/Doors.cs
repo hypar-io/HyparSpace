@@ -55,10 +55,36 @@ namespace Doors
                     // Don't add door if the wall is zero thickness.
                     if (wallThickness == 0.0) continue;
 
-                    // Don't add door if the wall length is too short.
-                    if (wall.Line.Length() < doorOffset + input.DefaultDoorWidth) continue;
+                    var wallLineForAdjacentEdges = new List<RoomEdge> { wall };
+                    var corridorLines = new List<Line>();
+                    WallGeneration.FindAllEdgesAdjacentToSegments(wallLineForAdjacentEdges, levelCorridorsSegments, out _, out corridorLines).Select(edge => edge.Line);
 
-                    var doorOriginalPosition = pair.Value.Segment.PointAt(doorOffset + input.DefaultDoorWidth / 2);
+                    var corridorEdge = corridorLines.OrderByDescending(x => x.Length()).FirstOrDefault();
+
+                    if (corridorEdge == null) continue;
+
+                    var closestStart = corridorEdge.Start.ClosestPointOn(wall.Line);
+                    var closestEnd = corridorEdge.End.ClosestPointOn(wall.Line);
+
+                    if (closestStart == closestEnd) continue;
+
+                    var doorPlacementLine = new Line(closestStart, closestEnd);
+
+                    if (doorPlacementLine.Direction().Dot(wall.Line.Direction()) < 0) doorPlacementLine = doorPlacementLine.Reversed();
+
+                    // Don't add door if the wall length is too short.
+                    if (doorPlacementLine.Length() < doorOffset + input.DefaultDoorWidth) continue;
+
+                    var doorPlacementLineMidPoint = doorPlacementLine.Mid();
+                    var doorWallSideParam = wall.Line.GetParameterAt(doorPlacementLineMidPoint);
+
+                    var doorOriginalPosition = doorPlacementLine.PointAt(doorOffset + input.DefaultDoorWidth / 2);
+
+                    if (doorWallSideParam / wall.Line.Length() > 0.55)
+                    {
+                        doorOriginalPosition = doorPlacementLine.PointAt(doorPlacementLine.Length() - (doorOffset + input.DefaultDoorWidth / 2));
+                        openingSide = DoorOpeningSide.RightHand;
+                    }
 
                     var doorCurrentPosition = doorOriginalPosition;
                     var doorOverride = input.Overrides.DoorPositions.FirstOrDefault(
@@ -183,9 +209,39 @@ namespace Doors
                 return null;
             }
 
-            var wall = RoomLongestWallCandidate(room, roomWalls);
+            var wallCorridors = new List<(Line, RoomEdge)>();
 
-            wall = roomWalls.FirstOrDefault(x => x.Item2.PrimaryEntryEdge == true);
+            // Creating a list of room walls that can be sorted by the length of corridor next to it (since it isn't always the full length of wall)
+            foreach (var wallCheck in roomWalls)
+            {
+                var wallsNearCorridor = new List<RoomEdge> { wallCheck.Item2 };
+
+                var corridorLines = new List<Line>();
+                var roomLines = WallGeneration.FindAllEdgesAdjacentToSegments(wallsNearCorridor, corridorsSegments, out _, out corridorLines).ToList();
+
+                var corridorEdge = corridorLines.OrderByDescending(x => x.Length()).FirstOrDefault();
+
+                if (corridorEdge == null) continue;
+
+                var closestStart = corridorEdge.Start.ClosestPointOn(wallCheck.Item2.Line);
+                var closestEnd = corridorEdge.End.ClosestPointOn(wallCheck.Item2.Line);
+
+                if (closestStart == closestEnd) continue;
+
+                var doorPlacementLine = new Line(closestStart, closestEnd);
+
+                var wallCorridor = (doorPlacementLine, wallCheck.Item2);
+                wallCorridors.Add(wallCorridor);
+            }
+
+            var wall = wallCorridors.OrderByDescending(x => x.Item1.Length()).FirstOrDefault();
+
+
+            var primaryEdges = wallCorridors.Where(x => x.Item2.PrimaryEntryEdge == true).ToList();
+            if (primaryEdges.Count > 0)
+            {
+                wall = primaryEdges.OrderByDescending(x => x.Item1.Length()).FirstOrDefault();
+            }
 
             return wall;
         }
@@ -201,12 +257,12 @@ namespace Doors
                 var openingSide = ConvertOpeningSideEnum(addition.Value.DoorOpeningSide);
                 var openingType = ConvertOpeningTypeEnum(addition.Value.DoorOpeningType);
                 var wall = GetClosestWallCandidate(originalPosition, walls, out originalPosition);
-                if (wall == null)
-                {
-                    continue;
-                }
+                // if (wall == null)
+                // {
+                //     continue;
+                // }
 
-                var doorType = wall.Type;
+                string? doorType = wall?.Type;
 
                 var currentPosition = originalPosition;
                 var doorOverride = overrides.DoorPositions.FirstOrDefault(
@@ -258,7 +314,7 @@ namespace Doors
         {
             var roomSegments = room.Boundary.Perimeter.CollinearPointsRemoved().Segments().Select(
                 s => s.TransformedLine(room.Transform)).Select(l => new RoomEdge() { Line = l });
-            var corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _)
+            var corridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(roomSegments, corridorSegments, out _, out _)
                 .Select(edge => edge.Line).ToList();
             return corridorEdges;
         }
@@ -314,7 +370,8 @@ namespace Doors
                                         DoorOpeningType openingType,
                                         DoorPositionsOverride? doorOverride = null)
         {
-            var rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
+            double rotation = 0;
+            if (wallCandidate != null) rotation = Vector3.XAxis.PlaneAngleTo(wallCandidate.Direction.Negate());
 
             var door = new Door(width, height, thickness, openingSide, openingType)
             {
@@ -322,10 +379,10 @@ namespace Doors
                 Transform = new Transform(currentPosition).RotatedAboutPoint(currentPosition, Vector3.ZAxis, rotation)
             };
 
-            if (wallCandidate == null || !CanFit(wallCandidate.Line, door))
-            {
-                return null;
-            }
+            // if (wallCandidate == null || !CanFit(wallCandidate.Line, door))
+            // {
+            //     return null;
+            // }
 
             if (doorOverride != null)
             {
@@ -361,13 +418,13 @@ namespace Doors
                                                      IEnumerable<RoomEdge> wallCandidates,
                                                      out Vector3 closestPoint)
         {
-            closestPoint = Vector3.Origin;
+            closestPoint = pos;
             if (wallCandidates == null || !wallCandidates.Any())
             {
                 return null;
             }
 
-            double minDist = Double.MaxValue;
+            double minDist = 1;
             RoomEdge? closestWall = null;
 
             foreach (var wall in wallCandidates)

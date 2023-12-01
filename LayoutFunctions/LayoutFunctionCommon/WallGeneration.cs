@@ -41,7 +41,7 @@ namespace LayoutFunctionCommon
             wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
-                var exteriorWalls = FindAllEdgesAdjacentToSegments(wallCandidates, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
+                var exteriorWalls = FindAllEdgesAdjacentToSegments(wallCandidates, levelProfile.Segments(), out var notAdjacentToFloorBoundary, out var corridorEdges);
                 wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
                 {
                     s.Type = "Solid";
@@ -84,10 +84,13 @@ namespace LayoutFunctionCommon
                 };
                 if (levelProfile != null)
                 {
-                    var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary);
+                    var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary, out var corridorEdges);
                     wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
                     {
-                        s.Type = "Solid";
+                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
+                        {
+                            s.Type = "Solid";
+                        }
                         return s;
                     }));
                 }
@@ -96,7 +99,10 @@ namespace LayoutFunctionCommon
                     // if no level or floor is present, everything that's not glass is solid.
                     wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s =>
                     {
-                        s.Type = "Solid";
+                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
+                        {
+                            s.Type = "Solid";
+                        }
                         return s;
                     }));
                 }
@@ -267,7 +273,14 @@ namespace LayoutFunctionCommon
                     continue;
                 }
                 var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.Line.Length());
-                var dominantLineForGroup = linesOrderedByLength.First();
+
+                var dominantLineForGroup = linesOrderedByLength.FirstOrDefault(x => x.PrimaryEntryEdge == true);
+
+                if (dominantLineForGroup == null)
+                {
+                    dominantLineForGroup = linesOrderedByLength.First();
+                }
+
                 var domLineDir = dominantLineForGroup.Line.Direction();
 
                 var orderEnds = new List<(double pos, bool isEnd, string type, int priority)>();
@@ -512,7 +525,7 @@ namespace LayoutFunctionCommon
             else if (floorBoundary != null)
             {
                 // if we have no corridors, find the best edge not along the floor boundary
-                var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
+                var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary, out var corridorEdges);
                 var edgesByLength = edgesNotAlongFloorBoundary.OrderByDescending(l => l.Length);
                 var bestEdge = edgesByLength.FirstOrDefault();
                 if (bestEdge == null)
@@ -537,31 +550,47 @@ namespace LayoutFunctionCommon
             }
         }
 
-        public static List<RoomEdge> FindAllEdgesAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<RoomEdge> otherSegments)
+        public static List<RoomEdge> FindAllEdgesAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<RoomEdge> otherSegments, out List<Line> corridorEdges)
         {
             otherSegments = new List<RoomEdge>();
             var adjacentSegments = new List<RoomEdge>();
+            corridorEdges = new List<Line>();
+
+            List<double> checkPoints = Enumerable.Range(1, 9) // Creates a range of integers [0, 10]
+                                 .Select(i => i * 0.1) // Multiplies each integer by 0.1
+                                 .ToList();
+
 
             foreach (var edge in edgesToClassify)
             {
-                var midpt = edge.Line.Mid();
-                midpt.Z = 0;
                 var adjacentToAny = false;
-                foreach (var comparisonSegment in comparisonSegments)
+                foreach (var checkPoint in checkPoints)
                 {
-                    var start = comparisonSegment.Start;
-                    var end = comparisonSegment.End;
-                    start.Z = 0;
-                    end.Z = 0;
-                    var comparisonSegmentProjected = new Line(start, end);
-                    var dist = midpt.DistanceTo(comparisonSegmentProjected);
-                    if (dist < 0.3 + 1e-3)
+                    if (!adjacentToAny)
                     {
-                        adjacentToAny = true;
-                        adjacentSegments.Add(edge);
-                        break;
+                        var midpt = edge.Line.PointAtNormalized(checkPoint);
+
+                        // var midpt = edge.Line.Mid();
+                        midpt.Z = 0;
+                        foreach (var comparisonSegment in comparisonSegments)
+                        {
+                            var start = comparisonSegment.Start;
+                            var end = comparisonSegment.End;
+                            start.Z = 0;
+                            end.Z = 0;
+                            var comparisonSegmentProjected = new Line(start, end);
+                            var dist = midpt.DistanceTo(comparisonSegmentProjected);
+                            if (dist < 0.1 + 1e-3)
+                            {
+                                adjacentToAny = true;
+                                adjacentSegments.Add(edge);
+                                corridorEdges.Add(comparisonSegment);
+                                break;
+                            }
+                        }
                     }
                 }
+
                 if (!adjacentToAny)
                 {
                     otherSegments.Add(edge);
@@ -569,6 +598,40 @@ namespace LayoutFunctionCommon
             }
             return adjacentSegments;
         }
+
+        // public static List<RoomEdge> FindAllEdgesAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> comparisonSegments, out List<RoomEdge> otherSegments, out List<Line> corridorEdges)
+        // {
+        //     otherSegments = new List<RoomEdge>();
+        //     var adjacentSegments = new List<RoomEdge>();
+        //     corridorEdges = new List<Line>();
+
+        //     foreach (var edge in edgesToClassify)
+        //     {
+        //         var midpt = edge.Line.Mid();
+        //         midpt.Z = 0;
+        //         var adjacentToAny = false;
+        //         foreach (var comparisonSegment in comparisonSegments)
+        //         {
+        //             var start = comparisonSegment.Start;
+        //             var end = comparisonSegment.End;
+        //             start.Z = 0;
+        //             end.Z = 0;
+        //             var comparisonSegmentProjected = new Line(start, end);
+        //             var dist = midpt.DistanceTo(comparisonSegmentProjected);
+        //             if (dist < 0.3 + 1e-3)
+        //             {
+        //                 adjacentToAny = true;
+        //                 adjacentSegments.Add(edge);
+        //                 break;
+        //             }
+        //         }
+        //         if (!adjacentToAny)
+        //         {
+        //             otherSegments.Add(edge);
+        //         }
+        //     }
+        //     return adjacentSegments;
+        // }
         public static RoomEdge FindEdgeAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, out IEnumerable<RoomEdge> otherSegments, double maxDist = 0)
         {
             var minDist = double.MaxValue;
@@ -623,7 +686,7 @@ namespace LayoutFunctionCommon
             if (floorBoundary != null)
             {
                 // if we have no corridors, find the best edge not along the floor boundary
-                var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary);
+                var edgesAlongFloorBoundary = FindAllEdgesAdjacentToSegments(edgesToClassify, floorBoundary.Segments(), out var edgesNotAlongFloorBoundary, out var corridorEdges);
                 return (edgesNotAlongFloorBoundary.Count() == 0 ? edgesAlongFloorBoundary : edgesNotAlongFloorBoundary)
                 .OrderByDescending(e => e.Length).Select(e =>
                 {
