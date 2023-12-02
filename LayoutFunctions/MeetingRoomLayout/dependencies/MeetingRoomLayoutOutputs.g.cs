@@ -20,9 +20,7 @@ namespace MeetingRoomLayout
 		/// Total Seat Count
 		/// </summary>
 		[JsonProperty("Total Seat Count")]
-		public double TotalSeatCount {get; set;}
-
-
+		public double TotalSeatCount { get; set; }
 
         /// <summary>
         /// Construct a MeetingRoomLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace MeetingRoomLayout
         /// </summary>
         public MeetingRoomLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a MeetingRoomLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public MeetingRoomLayoutOutputs(double totalSeatCount): base()
+        public MeetingRoomLayoutOutputs(double totalSeatCount) : base()
         {
 			this.TotalSeatCount = totalSeatCount;
 

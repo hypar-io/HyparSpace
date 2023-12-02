@@ -24,23 +24,24 @@ namespace Doors
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class DoorsInputs : S3Args
+    public  class DoorsInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DoorsInputs(double @defaultDoorWidth, double @defaultDoorHeight, DoorsInputsDefaultType @defaultType, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public DoorsInputs(double @defaultDoorWidth, double @defaultDoorHeight, DoorsInputsDefaultDoorOpeningSide @defaultDoorOpeningSide, DoorsInputsDefaultDoorOpeningType @defaultDoorOpeningType, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorsInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @defaultDoorWidth, @defaultDoorHeight, @defaultType, @overrides});
+                validator.PreConstruct(new object[]{ @defaultDoorWidth, @defaultDoorHeight, @defaultDoorOpeningSide, @defaultDoorOpeningType, @overrides});
             }
         
             this.DefaultDoorWidth = @defaultDoorWidth;
             this.DefaultDoorHeight = @defaultDoorHeight;
-            this.DefaultType = @defaultType;
+            this.DefaultDoorOpeningSide = @defaultDoorOpeningSide;
+            this.DefaultDoorOpeningType = @defaultDoorOpeningType;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -59,10 +60,15 @@ namespace Doors
         [System.ComponentModel.DataAnnotations.Range(2.032D, 2.54D)]
         public double DefaultDoorHeight { get; set; } = 2.1D;
     
-        /// <summary>The type of door.</summary>
-        [Newtonsoft.Json.JsonProperty("Default Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        /// <summary>The opening side of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Default Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorsInputsDefaultType DefaultType { get; set; } = DoorsInputsDefaultType.Single;
+        public DoorsInputsDefaultDoorOpeningSide DefaultDoorOpeningSide { get; set; } = DoorsInputsDefaultDoorOpeningSide.Left_Hand;
+    
+        /// <summary>The type of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Default Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorsInputsDefaultDoorOpeningType DefaultDoorOpeningType { get; set; } = DoorsInputsDefaultDoorOpeningType.Single_Swing;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();
@@ -70,13 +76,27 @@ namespace Doors
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    public enum DoorsInputsDefaultType
+    public enum DoorsInputsDefaultDoorOpeningSide
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
-        Single = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
-        Double = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorsInputsDefaultDoorOpeningType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
     
     }
     
@@ -309,18 +329,20 @@ namespace Doors
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public DoorPositionsValue(Transform @transform, double @doorWidth, double @doorHeight, DoorPositionsValueDefaultType @defaultType)
+        public DoorPositionsValue(Transform @transform, DoorPositionsValueDoorType @doorType, double @doorWidth, double @doorHeight, DoorPositionsValueDoorOpeningSide @doorOpeningSide, DoorPositionsValueDoorOpeningType @doorOpeningType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorPositionsValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @transform, @doorWidth, @doorHeight, @defaultType});
+                validator.PreConstruct(new object[]{ @transform, @doorType, @doorWidth, @doorHeight, @doorOpeningSide, @doorOpeningType});
             }
         
             this.Transform = @transform;
+            this.DoorType = @doorType;
             this.DoorWidth = @doorWidth;
             this.DoorHeight = @doorHeight;
-            this.DefaultType = @defaultType;
+            this.DoorOpeningSide = @doorOpeningSide;
+            this.DoorOpeningType = @doorOpeningType;
         
             if(validator != null)
             {
@@ -330,6 +352,10 @@ namespace Doors
     
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Door Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsValueDoorType DoorType { get; set; } = DoorPositionsValueDoorType.Solid;
     
         /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width.</summary>
         [Newtonsoft.Json.JsonProperty("Door Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -341,10 +367,15 @@ namespace Doors
         [System.ComponentModel.DataAnnotations.Range(2.032D, 2.54D)]
         public double DoorHeight { get; set; } = 2.1D;
     
-        /// <summary>The type of door.</summary>
-        [Newtonsoft.Json.JsonProperty("Default Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        /// <summary>The opening side of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsValueDefaultType DefaultType { get; set; } = DoorPositionsValueDefaultType.Single;
+        public DoorPositionsValueDoorOpeningSide DoorOpeningSide { get; set; } = DoorPositionsValueDoorOpeningSide.Left_Hand;
+    
+        /// <summary>The type of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsValueDoorOpeningType DoorOpeningType { get; set; } = DoorPositionsValueDoorOpeningType.Single_Swing;
     
     }
     
@@ -354,18 +385,20 @@ namespace Doors
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public DoorPositionsOverrideAdditionValue(Transform @transform, double @doorWidth, double @doorHeight, DoorPositionsOverrideAdditionValueType @type)
+        public DoorPositionsOverrideAdditionValue(Transform @transform, DoorPositionsOverrideAdditionValueDoorType @doorType, double @doorWidth, double @doorHeight, DoorPositionsOverrideAdditionValueDoorOpeningSide @doorOpeningSide, DoorPositionsOverrideAdditionValueDoorOpeningType @doorOpeningType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DoorPositionsOverrideAdditionValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @transform, @doorWidth, @doorHeight, @type});
+                validator.PreConstruct(new object[]{ @transform, @doorType, @doorWidth, @doorHeight, @doorOpeningSide, @doorOpeningType});
             }
         
             this.Transform = @transform;
+            this.DoorType = @doorType;
             this.DoorWidth = @doorWidth;
             this.DoorHeight = @doorHeight;
-            this.Type = @type;
+            this.DoorOpeningSide = @doorOpeningSide;
+            this.DoorOpeningType = @doorOpeningType;
         
             if(validator != null)
             {
@@ -375,6 +408,10 @@ namespace Doors
     
         [Newtonsoft.Json.JsonProperty("Transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Door Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsOverrideAdditionValueDoorType DoorType { get; set; } = DoorPositionsOverrideAdditionValueDoorType.Solid;
     
         /// <summary>Width of a door panel without a frame. For double doors, the clear width will be double the door width.</summary>
         [Newtonsoft.Json.JsonProperty("Door Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -386,32 +423,87 @@ namespace Doors
         [System.ComponentModel.DataAnnotations.Range(2.032D, 2.54D)]
         public double DoorHeight { get; set; } = 2.1D;
     
-        /// <summary>The type of door.</summary>
-        [Newtonsoft.Json.JsonProperty("Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        /// <summary>The opening side of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Door Opening Side", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public DoorPositionsOverrideAdditionValueType Type { get; set; } = DoorPositionsOverrideAdditionValueType.Single;
+        public DoorPositionsOverrideAdditionValueDoorOpeningSide DoorOpeningSide { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningSide.Left_Hand;
+    
+        /// <summary>The type of a door.</summary>
+        [Newtonsoft.Json.JsonProperty("Door Opening Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DoorPositionsOverrideAdditionValueDoorOpeningType DoorOpeningType { get; set; } = DoorPositionsOverrideAdditionValueDoorOpeningType.Single_Swing;
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    public enum DoorPositionsValueDefaultType
+    public enum DoorPositionsValueDoorType
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
-        Single = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Solid")]
+        Solid = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
-        Double = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Glass")]
+        Glass = 1,
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
-    public enum DoorPositionsOverrideAdditionValueType
+    public enum DoorPositionsValueDoorOpeningSide
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"Single")]
-        Single = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = @"Double")]
-        Double = 1,
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsValueDoorOpeningType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsOverrideAdditionValueDoorType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Solid")]
+        Solid = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Glass")]
+        Glass = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsOverrideAdditionValueDoorOpeningSide
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Left Hand")]
+        Left_Hand = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Right Hand")]
+        Right_Hand = 1,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Door")]
+        Double_Door = 2,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    public enum DoorPositionsOverrideAdditionValueDoorOpeningType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"Single Swing")]
+        Single_Swing = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = @"Double Swing")]
+        Double_Swing = 1,
     
     }
 }

@@ -17,16 +17,13 @@ namespace Doors
     public class DoorsOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a DoorsOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public DoorsOutputs() : base()
         {
-
         }
-
 
 	}
 }

@@ -20,15 +20,13 @@ namespace DataHallLayout
 		/// The number of server cabinets.
 		/// </summary>
 		[JsonProperty("Rack Count")]
-		public double RackCount {get; set;}
+		public double RackCount { get; set; }
 
 		/// <summary>
 		/// Watts per square foot
 		/// </summary>
 		[JsonProperty("Watts/sf")]
-		public string Wattssf {get; set;}
-
-
+		public string Wattssf { get; set; }
 
         /// <summary>
         /// Construct a DataHallLayoutOutputs with default inputs.
@@ -36,16 +34,14 @@ namespace DataHallLayout
         /// </summary>
         public DataHallLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a DataHallLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DataHallLayoutOutputs(double rackCount, string wattssf): base()
+        public DataHallLayoutOutputs(double rackCount, string wattssf) : base()
         {
 			this.RackCount = rackCount;
 			this.Wattssf = wattssf;

@@ -17,16 +17,13 @@ namespace LoungeLayout
     public class LoungeLayoutOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a LoungeLayoutOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public LoungeLayoutOutputs() : base()
         {
-
         }
-
 
 	}
 }

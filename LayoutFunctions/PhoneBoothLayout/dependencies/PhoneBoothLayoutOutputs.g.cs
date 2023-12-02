@@ -20,9 +20,7 @@ namespace PhoneBoothLayout
 		/// Total number of Phone booths
 		/// </summary>
 		[JsonProperty("Phone Booths")]
-		public double PhoneBooths {get; set;}
-
-
+		public double PhoneBooths { get; set; }
 
         /// <summary>
         /// Construct a PhoneBoothLayoutOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace PhoneBoothLayout
         /// </summary>
         public PhoneBoothLayoutOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a PhoneBoothLayoutOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public PhoneBoothLayoutOutputs(double phoneBooths): base()
+        public PhoneBoothLayoutOutputs(double phoneBooths) : base()
         {
 			this.PhoneBooths = phoneBooths;
 

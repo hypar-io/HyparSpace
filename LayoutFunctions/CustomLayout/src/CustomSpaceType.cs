@@ -62,7 +62,7 @@ namespace CustomSpaceType
                         var anchorIndex = Enumerable.Range(0, anchors.Count).OrderBy(a => anchors[a].DistanceTo(anchor)).First();
                         var closestAnchor = anchors[anchorIndex];
                         var offsetXform = placedInstance.Transform.Concatenated(new Transform(anchor.Negate())).Concatenated(new Transform(anchor - closestAnchor));
-                        // create rule 
+                        // create rule
                         var placementRule = new PositionPlacementRule(placedInstance.Name, anchorIndex, placedInstance.BaseDefinition, offsetXform);
                         rules.Add(placementRule);
 
@@ -132,19 +132,14 @@ namespace CustomSpaceType
         public static Polygon[] OffsetThickenedPolyline(ThickenedPolyline wall, Polyline p)
         {
             Polygon[] offsets = null;
-            if (wall.Width.HasValue && wall.Flip.HasValue)
-            {
-                offsets = p.OffsetOnSide(wall.Width.Value, wall.Flip.Value);
-            }
-            else
-            {
-                if (wall.LeftWidth > Vector3.EPSILON)
-                {
-                    p = p.OffsetOpen(-wall.LeftWidth);
-                }
 
-                offsets = p.OffsetOnSide(wall.LeftWidth + wall.RightWidth, false);
+            if (wall.LeftWidth > Vector3.EPSILON)
+            {
+                p = p.OffsetOpen(-wall.LeftWidth);
             }
+
+            offsets = p.OffsetOnSide(wall.LeftWidth + wall.RightWidth, false);
+
             return offsets;
         }
 
@@ -161,9 +156,13 @@ namespace CustomSpaceType
             foreach (var room in meetingRmBoundaries)
             {
                 var spaceBoundary = room.Boundary;
-                Line orientationGuideEdge = WallGeneration.FindPrimaryAccessEdge(spaceBoundary.Perimeter.Segments(), corridorSegments, levelVolume?.Profile, out var otherSegments);
 
-                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction(), Vector3.ZAxis);
+                var roomEdges = new List<RoomEdge>();
+                roomEdges.AddRange(spaceBoundary.Perimeter.Segments().Select(s => new RoomEdge() { Line = s }));
+
+                RoomEdge orientationGuideEdge = WallGeneration.FindPrimaryAccessEdge(roomEdges, corridorSegments, levelVolume?.Profile, out var otherSegments);
+
+                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Line.Direction(), Vector3.ZAxis);
                 var boundaryCurves = new List<Polygon>();
                 boundaryCurves.Add(spaceBoundary.Perimeter);
                 boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());

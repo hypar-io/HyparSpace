@@ -19,7 +19,7 @@ namespace Hypar.Server
                     var input = executionRequest.Args.ToObject<DataHallLayout.DataHallLayoutInputs>();
                     var function = new DataHallLayout.Function();
                     Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(DataHallLayout.Function).Assembly.Location)!);
-                    return await function.Handler(input, null);
+                    return await function.Handler(input);
                 });
         }
     }

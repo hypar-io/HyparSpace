@@ -35,6 +35,7 @@ namespace Elements
             this.Height = @height;
             }
         
+        
         // Empty constructor
         public Plant()
             : base()

@@ -1,0 +1,68 @@
+{
+  "overrides": {
+    "additions": {
+      "Interior Partition Types": [
+        {
+          "value": {
+            "Line": {
+              "Start": {
+                "X": 20,
+                "Y": 0,
+                "Z": 0
+              },
+              "End": {
+                "X": 30,
+                "Y": 0,
+                "Z": 0
+              },
+              "discriminator": "Elements.Geometry.Line"
+            },
+            "Type": "Glass",
+            "Id": "6d2439dc-d83f-4ccf-922a-5492ac20fb26"
+          },
+          "id": "b04484f9-a9cc-4ff2-a29e-b6be9d316344"
+        }
+      ]
+    },
+    "removals": {
+      "Interior Partition Types": []
+    },
+    "Interior Partition Types": [
+      {
+        "value": {
+          "Line": {
+            "Start": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
+            "End": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "Type": "Glass"
+        },
+        "identity": {
+          "Line": {
+            "IsClosedForRendering": false,
+            "End": {
+              "X": 30,
+              "Y": 0,
+              "Z": 0
+            },
+            "Start": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          }
+        },
+        "id": "ab249b29-d04c-4e50-8528-6502e971374c"
+      }
+    ]
+  }
+}

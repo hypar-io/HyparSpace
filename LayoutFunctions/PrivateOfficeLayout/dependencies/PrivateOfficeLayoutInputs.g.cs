@@ -24,13 +24,13 @@ namespace PrivateOfficeLayout
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class PrivateOfficeLayoutInputs : S3Args
+    public  class PrivateOfficeLayoutInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public PrivateOfficeLayoutInputs(OfficeSizing @officeSizing, bool @createWalls, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public PrivateOfficeLayoutInputs(OfficeSizing @officeSizing, bool @createWalls, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<PrivateOfficeLayoutInputs>();
             if(validator != null)
