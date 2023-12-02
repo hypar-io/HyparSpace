@@ -4,11 +4,6 @@
     <ProjectReference Include="..\dependencies\DefineProgramRequirements.Dependencies.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.0.0" />
-    <PackageReference Include="Hypar.Functions" Version="1.6.0" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>

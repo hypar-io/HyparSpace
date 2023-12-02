@@ -17,16 +17,13 @@ namespace PlantEntourage
     public class PlantEntourageOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a PlantEntourageOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public PlantEntourageOutputs() : base()
         {
-
         }
-
 
 	}
 }

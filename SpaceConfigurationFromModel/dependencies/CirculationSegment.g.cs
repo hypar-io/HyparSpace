@@ -19,7 +19,7 @@ using Polygon = Elements.Geometry.Polygon;
 
 namespace Elements
 {
-#pragma warning disable // Disable all warnings
+    #pragma warning disable // Disable all warnings
 
     /// <summary>Represents a section of a circulation network, such as a corridor.</summary>
     [JsonConverter(typeof(Elements.Serialization.JSON.JsonInheritanceConverter), "discriminator")]
@@ -31,18 +31,19 @@ namespace Elements
             : base(profile, thickness, level, transform, material, representation, isElementDefinition, id, name)
         {
             this.Geometry = @geometry;
-        }
-
+            }
+        
+        
         // Empty constructor
         public CirculationSegment()
             : base()
         {
         }
-
+    
         /// <summary>The geometry of this circulation segment</summary>
         [JsonProperty("Geometry", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ThickenedPolyline Geometry { get; set; }
-
-
+    
+    
     }
 }

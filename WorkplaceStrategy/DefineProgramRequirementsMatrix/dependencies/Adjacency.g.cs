@@ -34,6 +34,7 @@ namespace Elements
             this.Weight = @weight;
             }
         
+        
         // Empty constructor
         public Adjacency()
         {

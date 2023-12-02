@@ -19,7 +19,7 @@ namespace Hypar.Server
                     var input = executionRequest.Args.ToObject<MeetingRoomLayout.MeetingRoomLayoutInputs>();
                     var function = new MeetingRoomLayout.Function();
                     Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(MeetingRoomLayout.Function).Assembly.Location)!);
-                    return await function.Handler(input, null);
+                    return await function.Handler(input);
                 });
         }
     }

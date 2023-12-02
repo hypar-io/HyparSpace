@@ -19,7 +19,7 @@ namespace Hypar.Server
                     var input = executionRequest.Args.ToObject<PrivateOfficeLayout.PrivateOfficeLayoutInputs>();
                     var function = new PrivateOfficeLayout.Function();
                     Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(PrivateOfficeLayout.Function).Assembly.Location)!);
-                    return await function.Handler(input, null);
+                    return await function.Handler(input);
                 });
         }
     }
