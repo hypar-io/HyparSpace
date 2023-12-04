@@ -1,0 +1,158 @@
+{
+  "overrides": {
+    "additions": {
+      "Interior Partition Types": [
+        {
+          "value": {
+            "Line": {
+              "Start": {
+                "X": 10,
+                "Y": 0,
+                "Z": 0
+              },
+              "End": {
+                "X": 20,
+                "Y": 0,
+                "Z": 0
+              },
+              "discriminator": "Elements.Geometry.Line"
+            },
+            "Type": "Glass",
+            "Id": "3b45b9f4-984b-4939-a929-ef3f9a529c58"
+          },
+          "id": "cf9dfc48-9484-4647-a026-6a51c827bd56"
+        },
+        {
+          "value": {
+            "Line": {
+              "Start": {
+                "X": 20,
+                "Y": 0,
+                "Z": 0
+              },
+              "End": {
+                "X": 30,
+                "Y": 0,
+                "Z": 0
+              },
+              "discriminator": "Elements.Geometry.Line"
+            },
+            "Type": "Glass",
+            "Id": "9b206979-46b4-4094-b62a-a0088a162e56"
+          },
+          "id": "f0ed8ce2-bd15-4317-900d-736a3063ead3"
+        }
+      ]
+    },
+    "removals": {},
+    "Interior Partition Types": [
+      {
+        "value": {
+          "Line": {
+            "Start": {
+              "X": 0,
+              "Y": 10.000000000000002,
+              "Z": 0
+            },
+            "End": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "Type": "Solid"
+        },
+        "identity": {
+          "Line": {
+            "IsClosedForRendering": false,
+            "End": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "Start": {
+              "X": 0,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          }
+        },
+        "id": "a1010a87-d615-4fa1-840f-6a8b14c3fa32"
+      },
+      {
+        "value": {
+          "Line": {
+            "Start": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "End": {
+              "X": 20,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "Type": "Glass"
+        },
+        "identity": {
+          "Line": {
+            "IsClosedForRendering": false,
+            "End": {
+              "X": 20,
+              "Y": 0,
+              "Z": 0
+            },
+            "Start": {
+              "X": 10,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "AddId": "cf9dfc48-9484-4647-a026-6a51c827bd56"
+        },
+        "id": "de0e49ed-70a7-416d-b4ab-ba2e4d8209a3"
+      },
+      {
+        "value": {
+          "Line": {
+            "Start": {
+              "X": 20,
+              "Y": 0,
+              "Z": 0
+            },
+            "End": {
+              "X": 30,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "Type": "Glass"
+        },
+        "identity": {
+          "Line": {
+            "IsClosedForRendering": false,
+            "End": {
+              "X": 30,
+              "Y": 0,
+              "Z": 0
+            },
+            "Start": {
+              "X": 20,
+              "Y": 0,
+              "Z": 0
+            },
+            "discriminator": "Elements.Geometry.Line"
+          },
+          "AddId": "f0ed8ce2-bd15-4317-900d-736a3063ead3"
+        },
+        "id": "8bc23230-fb3f-4e99-b9f6-44ea1d2a2fb4"
+      }
+    ]
+  }
+}

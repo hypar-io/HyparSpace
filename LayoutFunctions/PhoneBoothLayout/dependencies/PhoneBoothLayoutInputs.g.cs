@@ -24,13 +24,13 @@ namespace PhoneBoothLayout
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class PhoneBoothLayoutInputs : S3Args
+    public  class PhoneBoothLayoutInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public PhoneBoothLayoutInputs(bool @createWalls, double @minimumSize, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public PhoneBoothLayoutInputs(bool @createWalls, double @minimumSize, Overrides @overrides, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<PhoneBoothLayoutInputs>();
             if(validator != null)

@@ -20,9 +20,7 @@ namespace DefineProgramRequirements
 		/// The total area of all program requirements.
 		/// </summary>
 		[JsonProperty("Total Program Area")]
-		public double TotalProgramArea {get; set;}
-
-
+		public double TotalProgramArea { get; set; }
 
         /// <summary>
         /// Construct a DefineProgramRequirementsOutputs with default inputs.
@@ -30,16 +28,14 @@ namespace DefineProgramRequirements
         /// </summary>
         public DefineProgramRequirementsOutputs() : base()
         {
-
         }
-
 
         /// <summary>
         /// Construct a DefineProgramRequirementsOutputs specifying all inputs.
         /// </summary>
         /// <returns></returns>
         [JsonConstructor]
-        public DefineProgramRequirementsOutputs(double totalProgramArea): base()
+        public DefineProgramRequirementsOutputs(double totalProgramArea) : base()
         {
 			this.TotalProgramArea = totalProgramArea;
 

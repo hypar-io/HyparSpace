@@ -180,13 +180,13 @@ namespace DefineProgramRequirements
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public  class DefineProgramRequirementsInputs : S3Args
+    public  class DefineProgramRequirementsInputs : ArgsBase
     
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DefineProgramRequirementsInputs(bool @showAdvancedOptions, IList<ProgramRequirements> @programRequirements, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
-        base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
+        public DefineProgramRequirementsInputs(bool @showAdvancedOptions, IList<ProgramRequirements> @programRequirements, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DefineProgramRequirementsInputs>();
             if(validator != null)

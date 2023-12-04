@@ -12,36 +12,36 @@ using System.Linq;
 
 namespace PantryLayout
 {
-    public class PantryLayoutTest2
+  public class PantryLayoutTest2
+  {
+    [Fact]
+    public void TestExecute()
     {
-        [Fact]
-        public void TestExecute()
-        {
-            var input = GetInput();
+      var input = GetInput();
 
-            var modelDependencies = new Dictionary<string, Model> {
+      var modelDependencies = new Dictionary<string, Model> {
                 {"Levels", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PantryLayout/test/Generated/PantryLayoutTest/model_dependencies/Levels/model.json")) },
                 {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PantryLayout/test/Generated/PantryLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
             };
 
-            var input2 = new PantryLayoutInputs(null, null, null, null, null, null, null);
-            var result2 = PantryLayout.Execute(modelDependencies, input2);
-            File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_wo_overrides.json", result2.Model.ToJson());
+      var input2 = new PantryLayoutInputs(null, null, null, null, null);
+      var result2 = PantryLayout.Execute(modelDependencies, input2);
+      File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_wo_overrides.json", result2.Model.ToJson());
 
-            var elementInstanceCount2 = result2.Model.AllElementsOfType<ElementInstance>().Count();
+      var elementInstanceCount2 = result2.Model.AllElementsOfType<ElementInstance>().Count();
 
-            var result1 = PantryLayout.Execute(modelDependencies, input);
-            File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_w_overrides.json", result1.Model.ToJson());
-            var elementInstanceCount1 = result1.Model.AllElementsOfType<ElementInstance>().Count();
+      var result1 = PantryLayout.Execute(modelDependencies, input);
+      File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_w_overrides.json", result1.Model.ToJson());
+      var elementInstanceCount1 = result1.Model.AllElementsOfType<ElementInstance>().Count();
 
 
-            Assert.Equal(elementInstanceCount1, elementInstanceCount2);
+      Assert.Equal(elementInstanceCount1, elementInstanceCount2);
 
-        }
+    }
 
-        public PantryLayoutInputs GetInput()
-        {
-            var inputText = @"
+    public PantryLayoutInputs GetInput()
+    {
+      var inputText = @"
             {
   ""model_input_keys"": {
     ""Levels"": ""077330bc-994e-4f97-9077-f3df3355db5d_61dbb9f8-aaae-4295-9112-c8ae81655361_elements.zip"",
@@ -403,7 +403,7 @@ namespace PantryLayout
   }
 }
             ";
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PantryLayoutInputs>(inputText);
-        }
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<PantryLayoutInputs>(inputText);
     }
+  }
 }

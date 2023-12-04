@@ -178,6 +178,7 @@ namespace LayoutFunctionCommon
             ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
+
             if (inputModels.TryGetValue("Circulation", out var circModel))
             {
                 var circSegments = circModel.AllElementsAssignableFromType<TCirculationSegment>();
@@ -306,7 +307,7 @@ namespace LayoutFunctionCommon
             corridorSegments ??= Enumerable.Empty<Line>();
             wallCandidateLines ??= new List<RoomEdge>();
             var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
-            var bestOption = wallCandidateOptions.FirstOrDefault();
+            var bestOption = wallCandidateOptions.OrderBy(x => x.Item1.Line.Length()).FirstOrDefault();
             if (bestOption == default)
             {
                 return;
@@ -352,6 +353,7 @@ namespace LayoutFunctionCommon
                     {
                         success = true;
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
+                        SetParentSpace(layout.Instance, room.Id);
 
                         wallCandidateLines.AddRange(WallCandidates);
 
@@ -845,6 +847,20 @@ namespace LayoutFunctionCommon
                     if (instance != null)
                     {
                         instance.AdditionalProperties["Level"] = levelVolumeId;
+                    }
+                }
+            }
+        }
+
+        public static void SetParentSpace(ComponentInstance componentInstance, Guid? parentSpaceId)
+        {
+            if (componentInstance != null)
+            {
+                foreach (var instance in componentInstance.Instances)
+                {
+                    if (instance != null)
+                    {
+                        instance.AdditionalProperties["Space"] = parentSpaceId;
                     }
                 }
             }

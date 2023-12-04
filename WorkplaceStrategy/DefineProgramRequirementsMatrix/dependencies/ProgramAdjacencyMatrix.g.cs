@@ -34,6 +34,7 @@ namespace Elements
             this.Edges = @edges;
             }
         
+        
         // Empty constructor
         public ProgramAdjacencyMatrix()
             : base()

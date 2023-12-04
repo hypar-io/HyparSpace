@@ -1,8 +1,12 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
-  "name": "Interior Partitions",
+  "cli_version": "0.9.11-alpha.2",
   "description": "Produce all interior partition elements.",
+  "element_types": [
+    "https://schemas.hypar.io/WallCandidate.json",
+    "https://schemas.hypar.io/CirculationSegment.json"
+  ],
+  "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
   "language": "C#",
   "model_output": "Interior Partitions",
   "input_schema": {
@@ -89,11 +93,40 @@
       "autohide": false,
       "name": "Furniture and Equipment",
       "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Doors",
+      "optional": true
     }
   ],
+  "model_output": "Interior Partitions",
+  "name": "Interior Partitions",
   "outputs": [],
-  "element_types": [
-    "https://schemas.hypar.io/WallCandidate.json"
-  ],
-  "repository_url": "https://github.com/hypar-io/function"
+  "overrides": {
+    "Interior Partition Types": {
+      "context": "[*discriminator=Elements.WallCandidate]",
+      "identity": {
+        "AddId": {
+          "type": "string"
+        },
+        "Line": {
+          "$ref": "https://schemas.hypar.io/Line.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Type": {
+          "default": "Solid",
+          "enum": [
+            "Solid",
+            "Glass"
+          ],
+          "type": "string"
+        }
+      }
+    }
+  },
+  "repository_url": "https://github.com/hypar-io/function",
+  "stream_model": true
 }
