@@ -16,6 +16,7 @@ namespace Elements
 
         private double _snapingDistance = 0.25;
         private double _routeHeight = 1;
+        private LinesRepresentation? _lineRepresentation = null;
 
         public WalkingDistanceConfiguration(string addId, IList<string> programTypes, Transform transform)
         {
@@ -38,12 +39,19 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            Representation = new Representation();
+            if (RepresentationInstances.Count == 0)
+            {
+                var shape = new Polygon((-0.1, -0.1), (-0.25, 0), (-0.1, 0.1), (0, 0.25),
+                            (0.1, 0.1), (0.25, 0), (0.1, -0.1), (0, -0.25));
+                var extrude = new Geometry.Solids.Extrude(shape, _routeHeight, Vector3.ZAxis);
+                SolidRepresentation sr = new SolidRepresentation(extrude);
+                RepresentationInstances.Add(new RepresentationInstance(sr, Material));
 
-            var shape = new Polygon((-0.1, -0.1), (-0.25, 0), (-0.1, 0.1), (0, 0.25),
-                        (0.1, 0.1), (0.25, 0), (0.1, -0.1), (0, -0.25));
-            Representation.SolidOperations.Add(new Geometry.Solids.Extrude(
-                shape, _routeHeight, Vector3.ZAxis));
+                if (_lineRepresentation != null)
+                {
+                    RepresentationInstances.Add(new RepresentationInstance(_lineRepresentation, Material));
+                }
+            }
         }
 
         public List<WalkingDistanceStatistics> Statistics { get; set; }
@@ -54,13 +62,12 @@ namespace Elements
             set { Material.Color = value; }
         }
 
-        public List<Element> Compute(AdaptiveGridBuilder builder)
+        public void Compute(AdaptiveGridBuilder builder)
         {
-            List<Element> additionalVisualization = new List<Element>();
             var exit = builder.AddEndPoint(Transform.Origin, _snapingDistance, out _);
             if (exit == 0)
             {
-                return additionalVisualization;
+                return;
             }
 
             var grid = builder.Grid;
@@ -91,9 +98,9 @@ namespace Elements
             var distances = grid.ComputeDistances(bestExits.Select(e => e.Exit), tree);
             RecordStatistics(grid, distances, bestExits, tree);
 
-            additionalVisualization.Add(grid.TreeVisualization(
-                distances.Keys, _routeHeight, Material));
-            return additionalVisualization;
+            //Representation instance will apply transformation so everything need to be in its local frame.
+            Transform t = Transform.Inverted().Moved(z: _routeHeight);
+            _lineRepresentation = new LinesRepresentation(grid.TreeVisualization(distances.Keys, t), true);
         }
 
         public bool OnElevation(double elevation)

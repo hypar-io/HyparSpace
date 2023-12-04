@@ -14,6 +14,7 @@ namespace Elements
 
         private double _snapingDistance = 0.25;
         private double _routeHeight = 1;
+        private List<Line> _lineRepresentation = new();
 
         public RouteDistanceConfiguration(string addId, IList<Vector3> destinations) 
         {
@@ -25,13 +26,21 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            Representation = new Representation();
-
-            foreach (var point in Destinations)
+            if (RepresentationInstances.Count == 0)
             {
-                var shape = new Circle(point, 0.25).ToPolygon(8);
-                Representation.SolidOperations.Add(new Geometry.Solids.Extrude(
-                    shape, _routeHeight, Vector3.ZAxis));
+                foreach (var point in Destinations)
+                {
+                    var shape = new Circle(point, 0.25).ToPolygon(8);
+                    var extrude = new Geometry.Solids.Extrude(shape, _routeHeight, Vector3.ZAxis);
+                    SolidRepresentation sr = new SolidRepresentation(extrude);
+                    RepresentationInstances.Add(new RepresentationInstance(sr, Material));
+                }
+
+                if (_lineRepresentation.Any())
+                {
+                    LinesRepresentation r = new LinesRepresentation(_lineRepresentation, true);
+                    RepresentationInstances.Add(new RepresentationInstance(r, Material));
+                }
             }
         }
 
@@ -43,12 +52,11 @@ namespace Elements
             set { Material.Color = value; }
         }
 
-        public List<Element> Compute(AdaptiveGridBuilder builder)
+        public void Compute(AdaptiveGridBuilder builder)
         {
-            List<Element> additionalVisualization = new List<Element>();
             if (Destinations.Count < 2)
             {
-                return additionalVisualization;
+                return;
             }
 
             ulong start = builder.AddEndPoint(Destinations[0], _snapingDistance, out var connection);
@@ -85,15 +93,12 @@ namespace Elements
                     distance += accumulatedDistances[edge];
                 }
 
-                //TODO: height on level can have extra elevation.
-                additionalVisualization.Add(grid.TreeVisualization(
-                    accumulatedDistances.Keys, _routeHeight, Material));
+                _lineRepresentation.AddRange(
+                    grid.TreeVisualization(accumulatedDistances.Keys, new Transform(0, 0, _routeHeight)));
 
                 start = end;
             }
             Distance = distance;
-            additionalVisualization.Add(DestinationLabels());
-            return additionalVisualization;
         }
 
         public bool OnElevation(double elevation)
@@ -177,7 +182,7 @@ namespace Elements
             }
         }
 
-        private ModelText DestinationLabels()
+        public ModelText DestinationLabels()
         {
             var texts = new List<(Vector3 Location, Vector3 FacingDirection, Vector3 LineDirection, string Text, Color? Color)>();
             for (int i = 0; i < Destinations.Count; i++)

@@ -50,22 +50,19 @@ namespace TravelDistanceAnalyzer
             return d;
         }
 
-        public static ModelLines TreeVisualization(this AdaptiveGrid grid, 
+        public static List<Line> TreeVisualization(this AdaptiveGrid grid, 
                                                    IEnumerable<Edge> edges,
-                                                   double elevation,
-                                                   Material material)
+                                                   Transform transform)
         {
             List<Line> lines = new List<Line>();
             foreach (var item in edges)
             {
-                var start = grid.GetVertex(item.StartId);
-                var end = grid.GetVertex(item.EndId);
-                var shape = new Line(start.Point, end.Point);
+                var start = grid.GetVertex(item.StartId).Point;
+                var end = grid.GetVertex(item.EndId).Point;
+                var shape = new Line(start, end).TransformedLine(transform);
                 lines.Add(shape);
             }
-            ModelLines modelLines = new ModelLines(lines, material, new Transform(0, 0, elevation));
-            modelLines.SetSelectable(false);
-            return modelLines;
+            return lines;
         }
     }
 }

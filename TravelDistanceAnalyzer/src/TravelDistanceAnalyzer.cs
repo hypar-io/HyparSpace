@@ -65,12 +65,13 @@ namespace TravelDistanceAnalyzer
 
                 foreach (var config in walkingDistanceConfigs.Where(c => c.OnElevation(elevation)))
                 {
-                    output.Model.AddElements(config.Compute(builder));
+                    config.Compute(builder);
                 }
 
                 foreach (var config in routeDistanceConfigs.Where(c => c.OnElevation(elevation)))
                 {
-                    output.Model.AddElements(config.Compute(builder));
+                    config.Compute(builder);
+                    output.Model.AddElement(config.DestinationLabels());
                 }
                 
                 //Grid visualization for debug purposes
