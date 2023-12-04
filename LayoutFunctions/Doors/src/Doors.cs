@@ -24,17 +24,29 @@ namespace Doors
 
             DoorRepresentationStorage.Doors.Clear();
 
-            var rooms = GetSpaceBoundaries(inputModels);
+            var allSpaces = GetSpaceBoundaries(inputModels);
+
+            var rooms = allSpaces.Where(x => x.ProgramType != "Circulation").ToList();
+            var circulationSpaces = allSpaces.Where(x => x.ProgramType == "Circulation").ToList();
+
             var corridors = GetCirculationSegments(inputModels);
             var walls = GetWallCandidates(inputModels);
             var doors = new List<Door>();
 
-            foreach (var roomsOfLevel in rooms.GroupBy(r => r.Level))
+            var roomGroups = rooms.GroupBy(r => r.Level);
+
+            foreach (var roomsOfLevel in roomGroups)
             {
                 var levelCorridors = corridors.Where(c => c.Level == roomsOfLevel.Key);
                 var levelCorridorsSegments = levelCorridors.SelectMany(
                     c => c.Profile.Transformed(c.Transform).Segments()).ToList();
-                foreach (var room in rooms)
+
+                // Get circulation space boundary segments
+                var levelCorridorSpaces = circulationSpaces.Where(x => x.Level == roomsOfLevel.Key);
+                var levelCorridorSpaceSegments = levelCorridorSpaces.SelectMany(x => x.Boundary.Perimeter.Segments()).ToList();
+                levelCorridorsSegments.AddRange(levelCorridorSpaceSegments);
+
+                foreach (var room in roomsOfLevel)
                 {
                     var pair = RoomDefaultDoorWall(room, levelCorridorsSegments, walls);
                     if (pair == null || pair.Value.Wall == null || pair.Value.Segment == null)
