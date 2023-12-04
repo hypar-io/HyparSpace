@@ -43,6 +43,12 @@ namespace TravelDistanceAnalyzer
                 walls = wallsModel.AllElementsOfType<WallCandidate>().ToList();
             }
 
+            List<Level>? levels = null;
+            if (inputModels.TryGetValue("Levels", out var levelModel))
+            {
+                levels = levelModel.AllElementsOfType<Level>().ToList();
+            }
+
             var corridorsByLevel = corridors.GroupBy(c => c.Level);
             var roomsByLevel = rooms.GroupBy(r => r.Level);
 
@@ -58,17 +64,23 @@ namespace TravelDistanceAnalyzer
                     continue;
                 }
 
+                var level = levels?.FirstOrDefault(l => l.Id ==  levelRooms.Key);
+                if (level == null)
+                {
+                    level = new Level(levelCorridors.First().Elevation, null, null);
+                }
+
+                var levelWalls = WallsForLevel(walls, level);
+
                 var builder = new AdaptiveGridBuilder();
                 builder.Build(levelCorridors, levelRooms, walls, doors);
 
-                var elevation = levelCorridors.First().Elevation;
-
-                foreach (var config in walkingDistanceConfigs.Where(c => c.OnElevation(elevation)))
+                foreach (var config in walkingDistanceConfigs.Where(c => c.OnElevation(level.Elevation)))
                 {
                     config.Compute(builder);
                 }
 
-                foreach (var config in routeDistanceConfigs.Where(c => c.OnElevation(elevation)))
+                foreach (var config in routeDistanceConfigs.Where(c => c.OnElevation(level.Elevation)))
                 {
                     config.Compute(builder);
                     output.Model.AddElement(config.DestinationLabels());
@@ -85,6 +97,36 @@ namespace TravelDistanceAnalyzer
             output.Model.AddElements(walkingDistanceConfigs);
             output.Model.AddElements(routeDistanceConfigs);
             return output;
+        }
+
+        private static List<WallCandidate>? WallsForLevel(List<WallCandidate>? allWalls, Level level)
+        {
+            List<WallCandidate>? levelWalls = null;
+            if (allWalls != null)
+            {
+                levelWalls = new List<WallCandidate>();
+                foreach (var item in allWalls)
+                {
+                    if (item.Line.Start.Z.ApproximatelyEquals(level.Elevation))
+                    {
+                        levelWalls.Add(item);
+                    }
+                    // Some walls have their lines set to 0.
+                    // This is hack not to ignore them while the issue is not fixed.
+                    else if (item.AdditionalProperties.TryGetValue("Height", out var height))
+                    {
+                        if (height is double H && 
+                            item.Line.Start.Z < level.Elevation && 
+                            item.Line.Start.Z + H - Vector3.EPSILON > level.Elevation)
+                        {
+                            item.Line = new Line(new Vector3(item.Line.Start.X, item.Line.Start.Y, level.Elevation),
+                                                 new Vector3(item.Line.End.X, item.Line.End.Y, level.Elevation));
+                            levelWalls.Add(item);
+                        }
+                    }
+                }
+            }
+            return levelWalls;
         }
 
         private static List<RouteDistanceConfiguration> CreateRoutingDistanceConfigurations(Overrides overrides)

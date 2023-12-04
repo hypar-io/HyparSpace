@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elements.Geometry;
 using GridVertex = Elements.Spatial.AdaptiveGrid.Vertex;
 
 namespace TravelDistanceAnalyzer
@@ -171,11 +172,13 @@ namespace TravelDistanceAnalyzer
                         Vector3 closestLeftItem = Vector3.Origin, closestRightItem = Vector3.Origin;
                         int closestLeftProximity = -1, closestRightProximity = -1;
                         double closestDistance = double.PositiveInfinity;
+                        Line leftLine = new Line(leftVertices[i], leftVertices[i + 1]);
 
-                        Action<Line, Vector3, int, int, bool> check =
-                            (Line line, Vector3 point, int leftIndex, int rightIndex, bool left) =>
+                        Action<Line, Vector3, Vector3, int, int, bool> check =
+                            (Line line, Vector3 point, Vector3 direction, int leftIndex, int rightIndex, bool left) =>
                             {
-                                if (CanConnect(point, line, Math.Min(maxDistance, closestDistance), out var closest, out var d))
+                                if (CanConnectDirectional(point, direction, line, Math.Min(maxDistance, closestDistance),
+                                                          out var closest, out var d))
                                 {
                                     closestDistance = d;
                                     (closestLeftItem, closestRightItem) = left ? (closest, point) : (point, closest);
@@ -184,7 +187,6 @@ namespace TravelDistanceAnalyzer
                                 }
                             };
 
-                        Line leftLine = new Line(leftVertices[i], leftVertices[i + 1]);
                         for (int j = 0; j < rightVertices.Count - 1; j++)
                         {
                             if (item == candidate && Math.Abs(i - j) < 2)
@@ -195,10 +197,10 @@ namespace TravelDistanceAnalyzer
                             Line rightLine = new Line(rightVertices[j], rightVertices[j + 1]);
                             if (!leftLine.Intersects(rightLine, out var intersection))
                             {
-                                check(rightLine, leftLine.Start, i, j, false);
-                                check(rightLine, leftLine.End, i, j, false);
-                                check(leftLine, rightLine.Start, i, j, true);
-                                check(leftLine, rightLine.End, i, j, true);
+                                check(rightLine, leftLine.Start, leftLine.Direction(), i, j, false);
+                                check(rightLine, leftLine.End, leftLine.Direction(), i, j, false);
+                                check(leftLine, rightLine.Start, rightLine.Direction(), i, j, true);
+                                check(leftLine, rightLine.End, rightLine.Direction(), i, j, true);
                             }
                             else
                             {
@@ -225,41 +227,17 @@ namespace TravelDistanceAnalyzer
                         }
                         else
                         {
-                            GridVertex leftVertex = null;
+                            GridVertex? leftVertex = null;
                             if (!leftExist)
                             {
                                 _grid.TryGetVertexIndex(leftVertices[closestLeftProximity], out var leftCon);
                                 _grid.TryGetVertexIndex(leftVertices[closestLeftProximity + 1], out var rightCon);
                                 var segment = new Line(leftVertices[closestLeftProximity], leftVertices[closestLeftProximity + 1]);
                                 var vertex = _grid.GetVertex(leftCon);
-                                while (vertex.Id != rightCon)
+                                var edge = FindOnColinearEdges(vertex, rightCon, segment.Direction(), closestLeftItem);
+                                if (edge != null)
                                 {
-                                    GridVertex otherVertex = null;
-                                    Edge edge = null;
-                                    foreach (var e in vertex.Edges)
-                                    {
-                                        otherVertex = _grid.GetVertex(e.OtherVertexId(vertex.Id));
-                                        var edgeDirection = (otherVertex.Point - vertex.Point).Unitized();
-                                        if (edgeDirection.Dot(segment.Direction()).ApproximatelyEquals(1))
-                                        {
-                                            edge = e;
-                                            break;
-                                        }
-                                    }
-
-                                    if (edge == null)
-                                    {
-                                        throw new Exception("End edge is not reached");
-                                    }
-
-                                    var edgeLine = new Line(vertex.Point, otherVertex.Point);
-                                    if (edgeLine.PointOnLine(closestLeftItem))
-                                    {
-                                        leftVertex = _grid.CutEdge(edge, closestLeftItem);
-                                        break;
-                                    }
-
-                                    vertex = otherVertex;
+                                    leftVertex = _grid.CutEdge(edge, closestLeftItem);
                                 }
                             }
                             else
@@ -279,39 +257,15 @@ namespace TravelDistanceAnalyzer
                                 }
 
                                 var segment = new Line(rightVertices[closestRightProximity], rightVertices[closestRightProximity + 1]);
-                                while (vertex.Id != rightCon)
+                                var edge = FindOnColinearEdges(vertex, rightCon, segment.Direction(), closestRightItem);
+                                if (edge != null)
                                 {
-                                    GridVertex otherVertex = null;
-                                    Edge edge = null;
-                                    foreach (var e in vertex.Edges)
-                                    {
-                                        otherVertex = _grid.GetVertex(e.OtherVertexId(vertex.Id));
-                                        var edgeDirection = (otherVertex.Point - vertex.Point).Unitized();
-                                        if (edgeDirection.Dot(segment.Direction()).ApproximatelyEquals(1))
-                                        {
-                                            edge = e;
-                                            break;
-                                        }
-                                    }
-
-                                    if (edge == null)
-                                    {
-                                        throw new Exception("End edge is not reached");
-                                    }
-
-                                    var edgeLine = new Line(vertex.Point, otherVertex.Point);
-                                    if (edgeLine.PointOnLine(closestRightItem))
-                                    {
-                                        connections.Add(vertex);
-                                        connections.Add(otherVertex);
-                                        _grid.AddVertex(closestRightItem,
-                                                        new ConnectVertexStrategy(connections.ToArray()),
-                                                        cut: false);
-                                        _grid.RemoveEdge(edge);
-                                        break;
-                                    }
-
-                                    vertex = otherVertex;
+                                    connections.Add(Grid.GetVertex(edge.StartId));
+                                    connections.Add(Grid.GetVertex(edge.EndId));
+                                    _grid.AddVertex(closestRightItem,
+                                                    new ConnectVertexStrategy(connections.ToArray()),
+                                                    cut: false);
+                                    _grid.RemoveEdge(edge);
                                 }
                             }
                             else if (leftVertex.Id != rightId)
@@ -323,6 +277,41 @@ namespace TravelDistanceAnalyzer
                 }
             }
         }
+
+        private Edge? FindOnColinearEdges(GridVertex start, ulong endId, Vector3 direction, Vector3 destination)
+        {
+            while (start.Id != endId)
+            {
+                GridVertex otherVertex = null;
+                Edge edge = null;
+                foreach (var e in start.Edges)
+                {
+                    otherVertex = _grid.GetVertex(e.OtherVertexId(start.Id));
+                    var edgeDirection = (otherVertex.Point - start.Point).Unitized();
+                    if (edgeDirection.Dot(direction).ApproximatelyEquals(1))
+                    {
+                        edge = e;
+                        break;
+                    }
+                }
+
+                if (edge == null)
+                {
+                    throw new Exception("End edge is not reached");
+                }
+
+                var edgeLine = new Line(start.Point, otherVertex.Point);
+                if (edgeLine.PointOnLine(destination))
+                {
+                    return edge;
+                }
+
+                start = otherVertex;
+            }
+
+            return null;
+        }
+
         private void Extend(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
         {
             foreach (var item in centerlines)
@@ -334,19 +323,19 @@ namespace TravelDistanceAnalyzer
                         continue;
                     }
 
-                    var maxDistance = item.Segment.Geometry.GetWidth() + candidate.Segment.Geometry.GetWidth();
                     foreach (var segment in item.Centerline.Segments())
                     {
-                        ExtendToCorridor(segment, candidate.Segment, maxDistance);
+                        ExtendToCorridor(segment, candidate.Segment);
                     }
                 }
             }
         }
 
-        private void ExtendToCorridor(Line l, CirculationSegment segment, double maxDistance)
+        private void ExtendToCorridor(Line l, CirculationSegment segment)
         {
             foreach (var polygon in segment.Geometry.GetPolygons())
             {
+                var maxDistance = polygon.offsetPolygon.Segments().Max(s => s.Length());
                 var transformedPolygon = polygon.offsetPolygon.TransformedPolygon(segment.Transform);
                 var trimLine = new Line(l.Start - l.Direction() * maxDistance,
                                         l.End + l.Direction() * maxDistance);
@@ -355,7 +344,7 @@ namespace TravelDistanceAnalyzer
                 {
                     if (l.PointOnLine(line.Start) || l.PointOnLine(line.End))
                     {
-                        Grid.AddEdge(line.Start, line.End);
+                         Grid.AddEdge(line.Start, line.End);
                     }
                 }
             }
@@ -406,8 +395,8 @@ namespace TravelDistanceAnalyzer
             AdaptiveGrid grid)
         {
             var door = doors?.FirstOrDefault(d => roomEdge.PointOnLine(d.Transform.Origin, false, RoomToWallTolerance));
-            var wall = walls?.FirstOrDefault(w => w.Line.PointOnLine(roomEdge.Start, true, RoomToWallTolerance) &&
-                                             w.Line.PointOnLine(roomEdge.End, true, RoomToWallTolerance));
+            var wall = walls?.FirstOrDefault(w => w.Line.PointOnLine(roomEdge.PointAtNormalized(0.25), true, RoomToWallTolerance) &&
+                                             w.Line.PointOnLine(roomEdge.PointAtNormalized(0.75), true, RoomToWallTolerance));
 
             // There are doors in the workflow and this segment is a wall without a door.
             if (wall != null && doors != null && door == null)
@@ -505,6 +494,26 @@ namespace TravelDistanceAnalyzer
             var dot = (closest - point).Unitized().Dot(segment.Direction());
             bool aligned = dot.ApproximatelyEquals(0) || Math.Abs(dot).ApproximatelyEquals(1);
             return dist < maxDistance && aligned;
+        }
+
+        private bool CanConnectDirectional(Vector3 point,
+                                           Vector3 direction,
+                                           Line segment,
+                                           double maxDistance,
+                                           out Vector3 closest,
+                                           out double dist)
+        {
+            InfiniteLine a = new InfiniteLine(point, direction);
+            if (a.Intersects(segment, out var result))
+            {
+                closest = result.First();
+                dist = closest.DistanceTo(point);
+                return dist < maxDistance;
+            }
+
+            closest = Vector3.Origin;
+            dist = double.MaxValue;
+            return false;
         }
     }
 }

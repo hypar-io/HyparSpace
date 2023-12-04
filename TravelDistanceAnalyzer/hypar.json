@@ -17,6 +17,11 @@
     },
     {
       "autohide": false,
+      "name": "Levels",
+      "optional": true
+    },
+    {
+      "autohide": false,
       "name": "Doors",
       "optional": true
     },
@@ -130,9 +135,9 @@
   "element_types": [
     "https://schemas.hypar.io/SpaceBoundary.json",
     "https://schemas.hypar.io/CirculationSegment.json",
-    "https://schemas.hypar.io/Door.json",
     "https://schemas.hypar.io/WallCandidate.json",
-    "https://schemas.hypar.io/ThickenedPolyline.json"
+    "https://schemas.hypar.io/ThickenedPolyline.json",
+    "https://schemas.hypar.io/Level.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",
