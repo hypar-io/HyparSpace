@@ -92,6 +92,7 @@ namespace ClassroomLayout
                         {
                             var componentInstance = InstantiateLayout(configs, width, depth, rect, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            LayoutStrategies.SetParentSpace(componentInstance, room.Id);
                             output.Model.AddElement(componentInstance);
                         }
                         else if (trimmedGeo.Count() > 0)
@@ -102,6 +103,7 @@ namespace ClassroomLayout
 
                             var componentInstance = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform);
                             LayoutStrategies.SetLevelVolume(componentInstance, levelVolume?.Id);
+                            LayoutStrategies.SetParentSpace(componentInstance, room.Id);
                             output.Model.AddElement(componentInstance);
                         }
                         try
@@ -135,6 +137,7 @@ namespace ClassroomLayout
                                                 "Desk");
 
                                             LayoutStrategies.SetLevelVolume(instance, levelVolume?.Id);
+                                            LayoutStrategies.SetParentSpace(instance, room.Id);
                                             output.Model.AddElement(instance);
                                         }
                                     }

@@ -1,0 +1,12 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":[],"name":"csharp"}]}}
+
+#!csharp
+
+#r "nuget: Hypar.Elements, *-*"
+
+#!csharp
+
+var modelPath = "/Users/andrewheumann/Downloads/model 45.json";
+Model.FromJson(File)

@@ -120,6 +120,7 @@ namespace PrivateOfficeLayout
                             {
                                 var layout = InstantiateLayout(configs, width, depth, rect, levelVolume?.Transform ?? new Transform(), out var seats);
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                                LayoutStrategies.SetParentSpace(layout, room.Id);
                                 output.Model.AddElement(layout);
                                 privateOfficeCount++;
                                 seatsCount += seats;
@@ -134,6 +135,7 @@ namespace PrivateOfficeLayout
                                 {
                                     var layout = InstantiateLayout(configs, width, depth, cinchedPoly, levelVolume?.Transform ?? new Transform(), out var seats);
                                     LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
+                                    LayoutStrategies.SetParentSpace(layout, room.Id);
                                     output.Model.AddElement(layout);
                                     privateOfficeCount++;
                                     seatsCount += seats;

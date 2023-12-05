@@ -865,5 +865,13 @@ namespace LayoutFunctionCommon
                 }
             }
         }
+
+        public static void SetParentSpace(ElementInstance elementInstance, Guid parentSpaceId)
+        {
+            if (elementInstance != null)
+            {
+                elementInstance.AdditionalProperties["Space"] = parentSpaceId;
+            }
+        }
     }
 }
