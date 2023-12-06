@@ -234,7 +234,7 @@ namespace TravelDistanceAnalyzer
                                 _grid.TryGetVertexIndex(leftVertices[closestLeftProximity + 1], out var rightCon);
                                 var segment = new Line(leftVertices[closestLeftProximity], leftVertices[closestLeftProximity + 1]);
                                 var vertex = _grid.GetVertex(leftCon);
-                                var edge = FindOnColinearEdges(vertex, rightCon, segment.Direction(), closestLeftItem);
+                                var edge = FindOnCollinearEdges(vertex, rightCon, segment.Direction(), closestLeftItem);
                                 if (edge != null)
                                 {
                                     leftVertex = _grid.CutEdge(edge, closestLeftItem);
@@ -257,15 +257,21 @@ namespace TravelDistanceAnalyzer
                                 }
 
                                 var segment = new Line(rightVertices[closestRightProximity], rightVertices[closestRightProximity + 1]);
-                                var edge = FindOnColinearEdges(vertex, rightCon, segment.Direction(), closestRightItem);
+                                var edge = FindOnCollinearEdges(vertex, rightCon, segment.Direction(), closestRightItem);
                                 if (edge != null)
                                 {
-                                    connections.Add(Grid.GetVertex(edge.StartId));
-                                    connections.Add(Grid.GetVertex(edge.EndId));
-                                    _grid.AddVertex(closestRightItem,
-                                                    new ConnectVertexStrategy(connections.ToArray()),
-                                                    cut: false);
-                                    _grid.RemoveEdge(edge);
+                                    var start = Grid.GetVertex(edge.StartId);
+                                    var end = Grid.GetVertex(edge.EndId);
+                                    if (!closestRightItem.IsAlmostEqualTo(start.Point) &&
+                                        !closestRightItem.IsAlmostEqualTo(end.Point))
+                                    {
+                                        connections.Add(start);
+                                        connections.Add(end);
+                                        _grid.AddVertex(closestRightItem,
+                                                        new ConnectVertexStrategy(connections.ToArray()),
+                                                        cut: false);
+                                        _grid.RemoveEdge(edge);
+                                    }
                                 }
                             }
                             else if (leftVertex.Id != rightId)
@@ -278,7 +284,7 @@ namespace TravelDistanceAnalyzer
             }
         }
 
-        private Edge? FindOnColinearEdges(GridVertex start, ulong endId, Vector3 direction, Vector3 destination)
+        private Edge? FindOnCollinearEdges(GridVertex start, ulong endId, Vector3 direction, Vector3 destination)
         {
             while (start.Id != endId)
             {
@@ -301,7 +307,7 @@ namespace TravelDistanceAnalyzer
                 }
 
                 var edgeLine = new Line(start.Point, otherVertex.Point);
-                if (edgeLine.PointOnLine(destination))
+                if (edgeLine.PointOnLine(destination, true))
                 {
                     return edge;
                 }
@@ -405,95 +411,87 @@ namespace TravelDistanceAnalyzer
             }
 
             var midpoint = door?.Transform.Origin ?? roomEdge.Mid();
+            var exitDirection = door?.Transform.XAxis ?? roomEdge.Direction();
 
             foreach (var line in centerlines)
             {
                 for (int i = 0; i < line.Centerline.Vertices.Count - 1; i++)
                 {
                     var segment = new Line(line.Centerline.Vertices[i], line.Centerline.Vertices[i + 1]);
-                    if (CanConnect(midpoint, segment, line.Segment.Geometry.GetWidth() / 2 + 0.1, out var closest, out _))
+                    var distance = midpoint.DistanceTo(segment, out var closest);
+                    if (distance > line.Segment.Geometry.GetWidth() / 2 + 0.10)
                     {
-                        GridVertex exitVertex = null;
-                        grid.TryGetVertexIndex(segment.Start, out var id);
-                        var vertex = grid.GetVertex(id);
+                        continue;
+                    }
 
-                        //We know corridor line but it can already be split into several edges.
-                        //Need to find exact edge to insert new vertex into.
-                        //First vertex corresponding start of the segment is found.
-                        //Then, edges that do in the same direction as segment is traversed
-                        //until target edge is found or end vertex is reached.
-                        //This is much faster than traverse every single edge in the grid.
-                        if (vertex.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                    GridVertex exitVertex = null;
+                    grid.TryGetVertexIndex(segment.Start, out var id);
+                    var vertex = grid.GetVertex(id);
+
+                    //We know corridor line but it can already be split into several edges.
+                    //Need to find exact edge to insert new vertex into.
+                    //First vertex corresponding start of the segment is found.
+                    //Then, edges that do in the same direction as segment is traversed
+                    //until target edge is found or end vertex is reached.
+                    //This is much faster than traverse every single edge in the grid.
+                    if (vertex.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                    {
+                        exitVertex = vertex;
+                    }
+                    else
+                    {
+                        grid.TryGetVertexIndex(segment.End, out var endId);
+                        var edge = FindOnCollinearEdges(vertex, endId, segment.Direction(), closest);
+                        if (edge != null)
                         {
-                            exitVertex = vertex;
-                        }
-                        else
-                        {
-                            while (!vertex.Point.IsAlmostEqualTo(segment.End, grid.Tolerance))
+                            var start = grid.GetVertex(edge.StartId);
+                            var end = grid.GetVertex(edge.EndId);
+
+                            if (start.Point.IsAlmostEqualTo(closest, grid.Tolerance))
                             {
-                                Edge edge = null;
-                                GridVertex otherVertex = null;
-                                foreach (var e in vertex.Edges)
-                                {
-                                    otherVertex = grid.GetVertex(e.OtherVertexId(vertex.Id));
-                                    var edgeDirection = (otherVertex.Point - vertex.Point).Unitized();
-                                    if (edgeDirection.Dot(segment.Direction()).ApproximatelyEquals(1))
-                                    {
-                                        edge = e;
-                                        break;
-                                    }
-                                }
-
-                                if (edge == null)
-                                {
-                                    break;
-                                }
-
-                                if (otherVertex.Point.IsAlmostEqualTo(closest, grid.Tolerance))
-                                {
-                                    exitVertex = otherVertex;
-                                    break;
-                                }
-
-                                var edgeLine = new Line(vertex.Point, otherVertex.Point);
-                                if (edgeLine.PointOnLine(closest))
-                                {
-                                    exitVertex = grid.AddVertex(closest,
-                                                                new ConnectVertexStrategy(vertex, otherVertex),
-                                                                cut: false);
-                                    grid.RemoveEdge(edge);
-                                }
-                                vertex = otherVertex;
+                                exitVertex = start;
+                            }
+                            else if (end.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                            {
+                                exitVertex = end;
+                            }
+                            else
+                            {
+                                exitVertex = grid.AddVertex(closest, new ConnectVertexStrategy(start, end), cut: false);
+                                grid.RemoveEdge(edge);
                             }
                         }
+                    }
 
-                        if (exitVertex != null)
+                    if (exitVertex != null)
+                    {
+                        if (!exitVertex.Point.IsAlmostEqualTo(midpoint, grid.Tolerance))
                         {
-                            if (!exitVertex.Point.IsAlmostEqualTo(midpoint, grid.Tolerance))
+                            var delta = closest - midpoint;
+                            var dot = delta.Dot(segment.Direction());
+                            if (dot.ApproximatelyEquals(0) || dot.ApproximatelyEquals(delta.Length()))
                             {
                                 return grid.AddVertex(midpoint, new ConnectVertexStrategy(exitVertex));
                             }
                             else
                             {
-                                return exitVertex;
+                                var cornerPoint = Math.Abs(exitDirection.Dot(segment.Direction())) > 1 / Math.Sqrt(2) ?
+                                    closest - dot * segment.Direction() : midpoint + dot * segment.Direction();
+                                    
+                                var strip = grid.AddVertices(
+                                    new List<Vector3> { midpoint, cornerPoint, closest },
+                                    AdaptiveGrid.VerticesInsertionMethod.ConnectAndCut);
+                                return strip.First();
                             }
+                        }
+                        else
+                        {
+                            return exitVertex;
                         }
                     }
                 }
             }
             return null;
-        }
-
-        private bool CanConnect(Vector3 point,
-                                Line segment,
-                                double maxDistance,
-                                out Vector3 closest,
-                                out double dist)
-        {
-            dist = point.DistanceTo(segment, out closest);
-            var dot = (closest - point).Unitized().Dot(segment.Direction());
-            bool aligned = dot.ApproximatelyEquals(0) || Math.Abs(dot).ApproximatelyEquals(1);
-            return dist < maxDistance && aligned;
         }
 
         private bool CanConnectDirectional(Vector3 point,
