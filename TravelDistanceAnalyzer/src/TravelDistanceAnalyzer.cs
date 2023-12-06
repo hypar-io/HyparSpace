@@ -1,6 +1,8 @@
 using Elements;
 using Elements.Geometry;
 using Elements.Spatial.AdaptiveGrid;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using AdaptiveGraphRouting = Elements.Spatial.AdaptiveGrid.AdaptiveGraphRouting;
 
 namespace TravelDistanceAnalyzer
@@ -73,7 +75,7 @@ namespace TravelDistanceAnalyzer
                 var levelWalls = WallsForLevel(walls, level);
 
                 var builder = new AdaptiveGridBuilder();
-                builder.Build(levelCorridors, levelRooms, walls, doors);
+                builder.Build(levelCorridors, levelRooms, levelWalls, doors);
 
                 foreach (var config in walkingDistanceConfigs.Where(c => c.OnElevation(level.Elevation)))
                 {
@@ -107,6 +109,24 @@ namespace TravelDistanceAnalyzer
                 levelWalls = new List<WallCandidate>();
                 foreach (var item in allWalls)
                 {
+                    // Ignore wall candidates with zero thickness as they produce no walls.
+                    // Previously open walls did not have wall candidates, but now they are.
+                    // Its either transition to use actual walls or do this thickness check.
+                    // Thickness is only available in additional properties and require ugly code.
+                    if (item.AdditionalProperties.TryGetValue("Thickness", out var obj))
+                    {
+                        if (obj is JObject jobj)
+                        {
+                            var tuple = jobj.ToObject<(double, double)?>();
+                            if (tuple != null && 
+                                tuple.Value.Item1.ApproximatelyEquals(0) &&
+                                tuple.Value.Item2.ApproximatelyEquals(0))
+                            {
+                                continue;
+                            }
+                        }
+                    }
+
                     if (item.Line.Start.Z.ApproximatelyEquals(level.Elevation))
                     {
                         levelWalls.Add(item);
