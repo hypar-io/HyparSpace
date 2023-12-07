@@ -2,7 +2,6 @@
 using Elements.Geometry;
 using Elements.Spatial.AdaptiveGrid;
 using TravelDistanceAnalyzer;
-using GridVertex = Elements.Spatial.AdaptiveGrid.Vertex;
 
 namespace Elements
 {

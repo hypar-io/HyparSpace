@@ -88,14 +88,14 @@ namespace Elements
             List<(SpaceBoundary Room, GridVertex Exit)> bestExits = new();
             foreach (var room in filteredRooms)
             {
-                var bestExit = ChooseExit(grid, tree, room.Value);
+                var bestExit = ChooseClosestExit(grid, tree, room.Value);
                 if (bestExit != null)
                 {
                     bestExits.Add((room.Key, bestExit));
                 }
             }
 
-            var distances = grid.ComputeDistances(bestExits.Select(e => e.Exit), tree);
+            var distances = grid.CalculateDistances(bestExits.Select(e => e.Exit), tree);
             RecordStatistics(grid, distances, bestExits, tree);
 
             //Representation instance will apply transformation so everything need to be in its local frame.
@@ -147,14 +147,7 @@ namespace Elements
             Statistics = statisticsByType.Select(s => s.Value.Stat).ToList();
         }
 
-        /// <summary>
-        /// For each room find exit that provides smallest distance.
-        /// </summary>
-        /// <param name="grid">AdaptiveGrid to traverse.</param>
-        /// <param name="tree">Traveling tree from rooms corners to exits.</param>
-        /// <param name="exits">Combinations of exits and their corresponding corners for each room.</param>
-        /// <returns>Most distance efficient exit.</returns>
-        private static GridVertex? ChooseExit(
+        private static GridVertex? ChooseClosestExit(
             AdaptiveGrid grid,
             IDictionary<ulong, TreeNode> tree,
             List<GridVertex> exits)

@@ -13,9 +13,9 @@ namespace Elements
         private bool _isSelectable = true;
 
         /// <summary>
-        /// Initializes a new instance of CurveRepresentation.
+        /// Initializes a new instance of LinesRepresentation.
         /// </summary>
-        /// <param name="curve">The curve.</param>
+        /// <param name="lines">The lines.</param>
         /// <param name="isSelectable">If curve is selectable.</param>
         public LinesRepresentation(List<Line> lines, bool isSelectable)
         {
@@ -24,7 +24,7 @@ namespace Elements
         }
 
         /// <summary>
-        /// Indicates if curve is selectable.
+        /// Indicates if lines are selectable.
         /// </summary>
         public bool IsSelectable => _isSelectable;
 

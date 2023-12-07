@@ -12,7 +12,7 @@ namespace TravelDistanceAnalyzer
 {
     internal static class AdaptiveGridExtensions
     {
-        public static Dictionary<Edge, double> ComputeDistances(
+        public static Dictionary<Edge, double> CalculateDistances(
             this AdaptiveGrid grid,
             IEnumerable<GridVertex> leafs,
             IDictionary<ulong, TreeNode> tree)
@@ -44,6 +44,8 @@ namespace TravelDistanceAnalyzer
             }
 
             var tail = grid.GetVertex(node.Trunk.Id);
+            // With large grids, stack overflow is possible here.
+            // TODO: replace with stack based function.
             var d = CalculateDistanceRecursive(grid, tail, tree, accumulatedDistances);
             d += tail.Point.DistanceTo(head.Point);
             accumulatedDistances[edge] = d;
