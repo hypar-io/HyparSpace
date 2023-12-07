@@ -99,7 +99,7 @@ namespace DataHallLayout
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
-                model.AddElement(ToModelLines(floorGrid, room.Transform));
+                model.AddElement(ToModelLines(floorGrid, room.Transform, room.Id));
 
                 double rackAngle = 0;
                 if (input.SwapColdHotPattern) rackAngle = 180;
@@ -115,22 +115,28 @@ namespace DataHallLayout
                     }
                     if (cell.Type == "Hot Aisle")
                     {
-                        model.AddElement(new Panel(cellRect, BuiltInMaterials.XAxis, room.Transform));
+                        var panel = new Panel(cellRect, BuiltInMaterials.XAxis, room.Transform);
+                        panel.AdditionalProperties["Space"] = room.Id;
+                        model.AddElement(panel);
                     }
                     else if (cell.Type == "Cold Aisle")
                     {
-                        model.AddElement(new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform));
+                        var panel = new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform);
+                        panel.AdditionalProperties["Space"] = room.Id;
+                        model.AddElement(panel);
                     }
                     else if (cell.Type == "Forward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle - 180)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        rackInstance.AdditionalProperties["Space"] = room.Id;
                         model.AddElement(rackInstance);
                     }
                     else if (cell.Type == "Backward Rack" && cellRect.Area().ApproximatelyEquals(width * depth, 0.01) && !intersectsColumn)
                     {
                         var centroid = cellRect.Centroid();
                         var rackInstance = dataRack.CreateInstance(alignment.Concatenated(new Transform(new Vector3(), rackAngle)).Concatenated(new Transform(centroid)).Concatenated(room.Transform), "Rack");
+                        rackInstance.AdditionalProperties["Space"] = room.Id;
                         model.AddElement(rackInstance);
                     }
                 }
@@ -170,14 +176,14 @@ namespace DataHallLayout
             return columns.Any(column => cellRect.Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
         }
 
-        private static ModelLines ToModelLines(Grid2d grid, Transform transform)
+        private static ModelLines ToModelLines(Grid2d grid, Transform transform, System.Guid id)
         {
             var boundary = grid.GetTrimmedCellGeometry();
             var uLines = grid.GetCellSeparators(GridDirection.U, true);
             var vLines = grid.GetCellSeparators(GridDirection.V, true);
             var curves = boundary.Concat(uLines).Concat(vLines).OfType<BoundedCurve>();
 
-            ModelLines ml = new ModelLines(transform: transform);
+            var ml = new ModelLines(transform: transform);
             foreach (var b in boundary.Concat(curves))
             {
                 var parameters = b.GetSubdivisionParameters();
@@ -188,6 +194,7 @@ namespace DataHallLayout
                 }
             }
             ml.SetSelectable(false);
+            ml.AdditionalProperties["Space"] = id;
             return ml;
         }
     }
