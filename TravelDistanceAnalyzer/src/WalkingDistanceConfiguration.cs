@@ -64,7 +64,7 @@ namespace Elements
 
         public void Compute(AdaptiveGridBuilder builder)
         {
-            var exit = builder.AddEndPoint(Transform.Origin, _snapingDistance, out _);
+            var exit = builder.AddEndPoint(Transform.Origin, _snapingDistance);
             if (exit == 0)
             {
                 return;

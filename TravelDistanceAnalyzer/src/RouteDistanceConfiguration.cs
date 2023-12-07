@@ -59,12 +59,11 @@ namespace Elements
                 return;
             }
 
-            ulong start = builder.AddEndPoint(Destinations[0], _snapingDistance, out var connection);
+            ulong start = builder.AddEndPoint(Destinations[0], _snapingDistance);
             var grid = builder.Grid;
 
 
             var startVertex = grid.GetVertex(start);
-            AdditionalConnections(grid, startVertex, connection);
             ulong end;
             double distance = 0;
             //Update positions is case exit is snapped
@@ -72,9 +71,8 @@ namespace Elements
 
             for (int i = 1; i < Destinations.Count; i++)
             {
-                end = builder.AddEndPoint(Destinations[i], _snapingDistance, out connection);
+                end = builder.AddEndPoint(Destinations[i], _snapingDistance);
                 var endVertex = grid.GetVertex(end);
-                AdditionalConnections(grid, endVertex, connection);
                 Destinations[i] = endVertex.Point;
                 var alg = new AdaptiveGraphRouting(grid, new RoutingConfiguration(turnCost: 0.01));
                 var leafs = new List<RoutingVertex> { new RoutingVertex(start, 0) };
@@ -104,82 +102,6 @@ namespace Elements
         public bool OnElevation(double elevation)
         {
             return Destinations.All(d => d.Z.ApproximatelyEquals(elevation));
-        }
-
-        private void AdditionalConnections(AdaptiveGrid grid,
-                                           GridVertex exit,
-                                           GridVertex mainConnection)
-        {
-            var basePoint = exit.Point;
-            var maxDist = basePoint.DistanceTo(mainConnection.Point) * 2;
-            var additionalConnections = new (double Distance, Vector3 Point)[4]
-            {
-                (double.MaxValue, Vector3.Origin),
-                (double.MaxValue, Vector3.Origin),
-                (double.MaxValue, Vector3.Origin),
-                (double.MaxValue, Vector3.Origin)
-            };
-
-            var xDir = (mainConnection.Point - basePoint).Unitized();
-            var yDir = xDir.Cross(Vector3.ZAxis);
-
-            foreach (var edge in grid.GetEdges())
-            {
-                if (edge.StartId == mainConnection.Id || edge.EndId == mainConnection.Id)
-                {
-                    continue;
-                }
-
-                var start = grid.GetVertex(edge.StartId);
-                var end = grid.GetVertex(edge.EndId);
-
-                var line = new Line(start.Point, end.Point);
-                var closest = exit.Point.ClosestPointOn(line);
-                var delta = closest - basePoint;
-                var length = delta.Length();
-                if (length > maxDist)
-                {
-                    continue;
-                }
-
-                var directionIndex = -1;
-                var dot = delta.Unitized().Dot(xDir);
-                if (dot.ApproximatelyEquals(1, 0.01))
-                {
-                    directionIndex = 0;
-                }
-                else if (dot.ApproximatelyEquals(-1, 0.01))
-                {
-                    directionIndex = 1;
-                }
-
-                dot = delta.Unitized().Dot(yDir);
-                if (dot.ApproximatelyEquals(1, 0.01))
-                {
-                    directionIndex = 2;
-                }
-                else if (dot.ApproximatelyEquals(-1, 0.01))
-                {
-                    directionIndex = 3;
-                }
-
-                if (directionIndex >= 0)
-                {
-                    var connection = additionalConnections[directionIndex];
-                    if (length < connection.Distance)
-                    {
-                        additionalConnections[directionIndex] = (length, closest);
-                    }
-                }
-            }
-
-            foreach (var connection in additionalConnections)
-            {
-                if (connection.Distance != double.MaxValue)
-                {
-                    grid.AddEdge(exit.Point, connection.Point);
-                }
-            }
         }
 
         public ModelText DestinationLabels()

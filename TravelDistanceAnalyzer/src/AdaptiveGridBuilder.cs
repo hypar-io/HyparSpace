@@ -19,89 +19,167 @@ namespace TravelDistanceAnalyzer
         private AdaptiveGrid _grid;
 
         private Dictionary<SpaceBoundary, List<GridVertex>> _roomExits;
+        private List<(CirculationSegment Segment, Polyline Centerline)> _centerlines = new();
 
         public AdaptiveGrid Build(IEnumerable<CirculationSegment> corridors,
                                   IEnumerable<SpaceBoundary> rooms,
                                   List<WallCandidate>? walls = null,
                                   List<Door>? doors = null)
         {
-            var centerlines = new List<(CirculationSegment Segment, Polyline Centerline)>();
             foreach (var item in corridors)
             {
                 var centerLine = CorridorCenterLine(item);
                 if (centerLine != null && centerLine.Vertices.Count > 1)
                 {
-                    centerlines.Add((item, centerLine));
+                    _centerlines.Add((item, centerLine));
                 }
             }
 
             _grid = new AdaptiveGrid(new Transform());
 
-            foreach (var line in centerlines)
+            foreach (var line in _centerlines)
             {
                 _grid.AddVertices(line.Centerline.Vertices,
                     AdaptiveGrid.VerticesInsertionMethod.ConnectAndSelfIntersect);
             }
 
-            Intersect(centerlines);
-            Extend(centerlines);
+            Intersect(_centerlines);
+            Extend(_centerlines);
 
             _roomExits = new Dictionary<SpaceBoundary, List<GridVertex>>();
             foreach (var room in rooms)
             {
-                var exits = AddRoom(room, centerlines, walls, doors, _grid);
+                var exits = AddRoom(room, _centerlines, walls, doors);
                 _roomExits.Add(room, exits);
             }
 
             return _grid;
         }
 
-
-        /// <summary>
-        /// Add end point to the grid that are close enough to any of existing edges.
-        /// </summary>
-        /// <param name="exits">Exit points positions.</param>
-        /// <param name="grid">AdaptiveGrid to insert new vertices and edge into.</param>
-        /// <returns>Ids of exit vertices that are added to the grid.</returns>
-        public ulong AddEndPoint(Vector3 exit, double snapDistance, out GridVertex closestVertex)
+        public ulong AddEndPoint(Vector3 exit, double snapDistance)
         {
-            var edge = ClosestEdgeOnElevation(exit, out var closest);
-            closestVertex = null;
-            if (edge == null)
+            List<GridVertex> verticesToConnect = new();
+            foreach (var room in _roomExits)
             {
+                var p = room.Key.Boundary.Perimeter.TransformedPolygon(room.Key.Transform);
+                if (p.Covers(exit))
+                {
+                    verticesToConnect.AddRange(room.Value);
+                    break;
+                }
+            }
+
+            if (!verticesToConnect.Any())
+            {
+                ClosestEdgeOnElevation(exit, out var closest);
+                if (exit.DistanceTo(closest) < snapDistance)
+                {
+                    exit = closest;
+                }
+                var vertex = LinkToCenterlines(new Transform(exit), snapDistance);
+                if (vertex != null)
+                {
+                    AdditionalConnections(vertex);
+                    return vertex.Id;
+                }
                 return 0u;
             }
 
-            var startVertex = _grid.GetVertex(edge.StartId);
-            var endVertex = _grid.GetVertex(edge.EndId);
+            GridVertex? exitVertex = null;
+            foreach (var item in verticesToConnect)
+            {
+                if (item.Point.IsAlmostEqualTo(exit, _grid.Tolerance))
+                {
+                    exitVertex = item;
+                }
+                else
+                {
+                    exitVertex = _grid.AddVertex(exit, new ConnectVertexStrategy(item), cut: false);
+                }
+            }
+            return exitVertex == null ? 0u : exitVertex.Id;
+        }
 
-            var exitOnLevel = new Vector3(exit.X, exit.Y, closest.Z);
-            var distance = exitOnLevel.DistanceTo(closest);
-
-            if (closest.IsAlmostEqualTo(startVertex.Point, _grid.Tolerance))
+        private void AdditionalConnections(GridVertex exit)
+        {
+            if (exit.Edges.Count > 2)
             {
-                closestVertex = startVertex;
-            }
-            else if (closest.IsAlmostEqualTo(endVertex.Point, _grid.Tolerance))
-            {
-                closestVertex = endVertex;
-            }
-            else
-            {
-                closestVertex = _grid.CutEdge(edge, closest);
+                return;
             }
 
-            //Snap to existing vertex if it's close enough.
-            if (distance < snapDistance)
+            var mainConnection = _grid.GetVertex(exit.Edges.First().OtherVertexId(exit.Id));
+            var basePoint = exit.Point;
+            var maxDist = basePoint.DistanceTo(mainConnection.Point) * 2;
+            var additionalConnections = new (double Distance, Vector3 Point)[4]
             {
-                return closestVertex.Id;
+                (double.MaxValue, Vector3.Origin),
+                (double.MaxValue, Vector3.Origin),
+                (double.MaxValue, Vector3.Origin),
+                (double.MaxValue, Vector3.Origin)
+            };
+
+            var xDir = (mainConnection.Point - basePoint).Unitized();
+            var yDir = xDir.Cross(Vector3.ZAxis);
+
+            foreach (var edge in _grid.GetEdges())
+            {
+                if (edge.StartId == mainConnection.Id || edge.EndId == mainConnection.Id)
+                {
+                    continue;
+                }
+
+                var start = _grid.GetVertex(edge.StartId);
+                var end = _grid.GetVertex(edge.EndId);
+
+                var line = new Line(start.Point, end.Point);
+                var closest = exit.Point.ClosestPointOn(line);
+                var delta = closest - basePoint;
+                var length = delta.Length();
+                if (length > maxDist)
+                {
+                    continue;
+                }
+
+                var directionIndex = -1;
+                var dot = delta.Unitized().Dot(xDir);
+                if (dot.ApproximatelyEquals(1, 0.01))
+                {
+                    directionIndex = 0;
+                }
+                else if (dot.ApproximatelyEquals(-1, 0.01))
+                {
+                    directionIndex = 1;
+                }
+
+                dot = delta.Unitized().Dot(yDir);
+                if (dot.ApproximatelyEquals(1, 0.01))
+                {
+                    directionIndex = 2;
+                }
+                else if (dot.ApproximatelyEquals(-1, 0.01))
+                {
+                    directionIndex = 3;
+                }
+
+                if (directionIndex >= 0)
+                {
+                    var connection = additionalConnections[directionIndex];
+                    if (length < connection.Distance)
+                    {
+                        additionalConnections[directionIndex] = (length, closest);
+                    }
+                }
             }
-            else
+
+            foreach (var connection in additionalConnections)
             {
-                var vertex = _grid.AddVertex(exitOnLevel, new ConnectVertexStrategy(closestVertex), cut: false);
-                return vertex.Id;
+                if (connection.Distance != double.MaxValue)
+                {
+                    _grid.AddEdge(exit.Point, connection.Point);
+                }
             }
         }
+
 
         public AdaptiveGrid Grid
         {
@@ -263,8 +341,8 @@ namespace TravelDistanceAnalyzer
                                 {
                                     var start = Grid.GetVertex(edge.StartId);
                                     var end = Grid.GetVertex(edge.EndId);
-                                    if (!closestRightItem.IsAlmostEqualTo(start.Point) &&
-                                        !closestRightItem.IsAlmostEqualTo(end.Point))
+                                    if (!closestRightItem.IsAlmostEqualTo(start.Point, _grid.Tolerance) &&
+                                        !closestRightItem.IsAlmostEqualTo(end.Point, _grid.Tolerance))
                                     {
                                         connections.Add(start);
                                         connections.Add(end);
@@ -349,7 +427,8 @@ namespace TravelDistanceAnalyzer
                 var inside = trimLine.Trim(transformedPolygon, out _);
                 foreach (var line in inside)
                 {
-                    if (l.PointOnLine(line.Start, true) || l.PointOnLine(line.End, true))
+                    if (l.PointOnLine(line.Start, true) || l.PointOnLine(line.End, true) ||
+                        line.PointOnLine(l.Start, true) || line.PointOnLine(l.End, true))
                     {
                          Grid.AddEdge(line.Start, line.End);
                     }
@@ -370,8 +449,7 @@ namespace TravelDistanceAnalyzer
             SpaceBoundary room,
             List<(CirculationSegment Segment, Polyline Centerline)> centerlines,
             List<WallCandidate>? walls,
-            List<Door>? doors,
-            AdaptiveGrid grid)
+            List<Door>? doors)
         {
             var roomExits = new List<GridVertex>();
             var perimeter = room.Boundary.Perimeter.CollinearPointsRemoved().TransformedPolygon(room.Transform);
@@ -423,7 +501,7 @@ namespace TravelDistanceAnalyzer
             List<GridVertex> exitVertices = new();
             foreach (var t in exitLocations)
             {
-                var v = AddRoomExit(t, centerlines);
+                var v = LinkToCenterlines(t, _grid.Tolerance);
                 if (v != null)
                 {
                     exitVertices.Add(v);
@@ -489,10 +567,10 @@ namespace TravelDistanceAnalyzer
             return uncoveredRanges;
         }
 
-        private GridVertex? AddRoomExit(Transform location, 
-                                        List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
+        private GridVertex? LinkToCenterlines(Transform location, 
+                                             double snapDistance)
         {
-            foreach (var line in centerlines)
+            foreach (var line in _centerlines)
             {
                 for (int i = 0; i < line.Centerline.Vertices.Count - 1; i++)
                 {
@@ -544,7 +622,7 @@ namespace TravelDistanceAnalyzer
 
                     if (exitVertex != null)
                     {
-                        if (!exitVertex.Point.IsAlmostEqualTo(location.Origin, _grid.Tolerance))
+                        if (!exitVertex.Point.IsAlmostEqualTo(location.Origin, snapDistance))
                         {
                             var delta = closest - location.Origin;
                             var dot = delta.Dot(segment.Direction());
