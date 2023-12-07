@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elements.Geometry;
 using GridVertex = Elements.Spatial.AdaptiveGrid.Vertex;
 using DotLiquid.Tags;
 
@@ -350,7 +349,7 @@ namespace TravelDistanceAnalyzer
                 var inside = trimLine.Trim(transformedPolygon, out _);
                 foreach (var line in inside)
                 {
-                    if (l.PointOnLine(line.Start) || l.PointOnLine(line.End))
+                    if (l.PointOnLine(line.Start, true) || l.PointOnLine(line.End, true))
                     {
                          Grid.AddEdge(line.Start, line.End);
                     }
@@ -551,7 +550,9 @@ namespace TravelDistanceAnalyzer
                             var dot = delta.Dot(segment.Direction());
                             if (dot.ApproximatelyEquals(0) || dot.ApproximatelyEquals(delta.Length()))
                             {
-                                return _grid.AddVertex(location.Origin, new ConnectVertexStrategy(exitVertex));
+                                var v = _grid.AddVertex(location.Origin, new ConnectVertexStrategy(exitVertex));
+                                ExtendToCorridor(new Line(v.Point, exitVertex.Point), line.Segment);
+                                return v;
                             }
                             else
                             {
@@ -561,6 +562,7 @@ namespace TravelDistanceAnalyzer
                                 var strip = _grid.AddVertices(
                                     new List<Vector3> { location.Origin, cornerPoint, closest },
                                     AdaptiveGrid.VerticesInsertionMethod.ConnectAndCut);
+                                ExtendToCorridor(new Line(strip.First().Point, cornerPoint), line.Segment);
                                 return strip.First();
                             }
                         }
