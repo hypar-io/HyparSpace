@@ -205,24 +205,24 @@ namespace LayoutFunctionCommon
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<RoomEdge>();
                 foreach (var room in roomBoundaries)
                 {
+                    var wallCandidateLines = new List<RoomEdge>();
                     var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
                     if (layoutSucceeded) { processedSpaces.Add(room.Id); }
-                }
 
-                double height = levelVolume?.Height ?? 3;
-                Transform xform = levelVolume?.Transform ?? new Transform();
+                    double height = room.Height == 0 ? 3 : room.Height;
+                    Transform xform = levelVolume?.Transform ?? new Transform();
 
-                if (createWalls && wallCandidateLines.Count > 0)
-                {
-                    outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    if (createWalls && wallCandidateLines.Count > 0)
                     {
-                        WallCandidateLines = wallCandidateLines,
-                        Height = height,
-                        LevelTransform = xform,
-                    });
+                        outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                        {
+                            WallCandidateLines = wallCandidateLines,
+                            Height = height,
+                            LevelTransform = xform,
+                        });
+                    }
                 }
             }
             foreach (var room in allSpaceBoundaries)
@@ -273,21 +273,22 @@ namespace LayoutFunctionCommon
                     (lvl.AdditionalProperties.TryGetValue("LevelVolumeId", out var levelVolumeId) &&
                         levelVolumeId as string == l.Id.ToString())) ??
                         levelVolumes.FirstOrDefault(l => l.Name == lvl.Name);
-                var wallCandidateLines = new List<RoomEdge>();
+
                 foreach (var room in roomBoundaries)
                 {
+                    var wallCandidateLines = new List<RoomEdge>();
                     GenerateWallsForSpace(room, levelVolume, corridorSegments, wallCandidateLines);
+
+                    double height = room.Height == 0 ? 3 : room.Height;
+                    Transform xform = levelVolume?.Transform ?? new Transform();
+
+                    outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    {
+                        WallCandidateLines = wallCandidateLines,
+                        Height = height,
+                        LevelTransform = xform,
+                    });
                 }
-
-                double height = levelVolume?.Height ?? 3;
-                Transform xform = levelVolume?.Transform ?? new Transform();
-
-                outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
-                {
-                    WallCandidateLines = wallCandidateLines,
-                    Height = height,
-                    LevelTransform = xform,
-                });
             }
             foreach (var room in allSpaceBoundaries)
             {
