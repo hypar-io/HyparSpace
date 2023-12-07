@@ -15,6 +15,8 @@ namespace TravelDistanceAnalyzer
     {
         private const double RoomToWallTolerance = 1e-3;
         private const double MinExitWidth = 0.5;
+        private const double RoomToCorridorDistanceTolerance = 0.1;
+        private const double RoomToCorridorDotTolerance = 1e-3;
 
         private AdaptiveGrid _grid;
 
@@ -484,7 +486,11 @@ namespace TravelDistanceAnalyzer
             // Take middle point to give user at least some exits.
             if (doors == null && !openSections.Any())
             {
-                openSections.Add(roomEdge);
+                openSections = GetCorridorAdjacentSegments(roomEdge);
+                if (openSections.Count > 1)
+                {
+                    openSections = CombineLines(roomEdge, openSections);
+                }
             }
 
             List<Transform> exitLocations = new List<Transform>();
@@ -508,6 +514,63 @@ namespace TravelDistanceAnalyzer
                 }
             }
             return exitVertices;
+        }
+
+        public List<Line> GetCorridorAdjacentSegments(Line roomSide)
+        {
+            List<Line> exitLines = new List<Line>();
+            foreach (var line in _centerlines)
+            {
+                foreach (var polygon in line.Segment.Geometry.GetPolygons())
+                {
+                    foreach (var side in polygon.offsetPolygon.Segments())
+                    {
+                        if (side.Direction().IsParallelTo(roomSide.Direction(), RoomToCorridorDotTolerance) &&
+                            side.DistanceTo(roomSide) < RoomToCorridorDistanceTolerance &&
+                            side.TryGetOverlap(roomSide, RoomToCorridorDistanceTolerance, out Line exitLine))
+                        {
+                            var v0 = exitLine.Start.ClosestPointOn(roomSide);
+                            var v1 = exitLine.End.ClosestPointOn(roomSide);
+                            exitLines.Add(new Line(v0, v1));
+                        }
+                    }
+                }
+            }
+            return exitLines;
+        }
+
+        public List<Line> CombineLines(Line roomSide, List<Line> corridorAdjacent)
+        {
+            List<Domain1d> parameters = new List<Domain1d>();
+            foreach (var c in corridorAdjacent)
+            {
+                var p0 = roomSide.GetParameterAt(c.Start);
+                var p1 = roomSide.GetParameterAt(c.End);
+                parameters.Add(new Domain1d(p0 < p1 ? p0 : p1, p0 < p1 ? p1 : p0));
+            }
+            parameters = parameters.OrderBy(p => p.Min).ToList();
+
+            List<Domain1d> adjacentRanges = new();
+
+            var min = Math.Max(roomSide.Domain.Min, parameters.First().Min);
+            var max = Math.Min(roomSide.Domain.Max, parameters.First().Max);
+            Domain1d current = new Domain1d(min, max);
+            foreach (var domain in parameters.Skip(1))
+            {
+                if (domain.Min <= current.Max)
+                {
+                    var newMax = Math.Max(domain.Max, current.Max);
+                    current = new Domain1d(current.Min, newMax);
+                }
+                else
+                {
+                    adjacentRanges.Add(current);
+                    current = domain;
+                }
+            }
+
+            adjacentRanges.Add(current);
+            return adjacentRanges.Select(r => new Line(roomSide.PointAt(r.Min), roomSide.PointAt(r.Max))).ToList();
         }
 
         public List<Line> GetOpenPassages(Line roomSide, List<WallCandidate>? walls)
