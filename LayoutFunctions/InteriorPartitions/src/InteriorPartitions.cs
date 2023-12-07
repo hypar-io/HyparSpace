@@ -93,7 +93,11 @@ namespace InteriorPartitions
             {
                 if (wallCandidateCheck.Thickness == null || wallCandidate.Thickness == null) continue;
 
+                // This ensures that we are always extending the wall with the larger thickness
+                if ((wallCandidateCheck.Thickness.Value.outerWidth + wallCandidateCheck.Thickness.Value.innerWidth) < (wallCandidate.Thickness.Value.outerWidth + wallCandidate.Thickness.Value.innerWidth)) continue;
+
                 UpdateWallCandidateLines(wallCandidate, wallCandidateCheck, wallCandidates, wallCandidatesDictionary);
+
             }
         }
 
@@ -411,10 +415,23 @@ namespace InteriorPartitions
                     })
                     .ToList();
 
+                var levelGroupWallCandidateLines = levelGroup.SelectMany(x => x.WallCandidateLines).ToList();
+
+                foreach (var splittedCandidate in splittedWallCandidates)
+                {
+                    var closestInteriorPartition = levelGroupWallCandidateLines.OrderBy(x => splittedCandidate.Line.Mid().DistanceTo(x.Line)).First();
+
+                    splittedCandidate.Thickness = closestInteriorPartition.Thickness;
+                }
+
                 wallCandidates.AddRange(splittedWallCandidates);
             }
 
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
+
+            foreach (var wallCandidate in wallCandidates)
+            {
+            }
 
             return wallCandidates;
         }
