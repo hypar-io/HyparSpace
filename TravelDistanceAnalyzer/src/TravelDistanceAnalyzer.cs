@@ -87,13 +87,6 @@ namespace TravelDistanceAnalyzer
                     config.Compute(builder);
                     output.Model.AddElement(config.DestinationLabels());
                 }
-                
-                //Grid visualization for debug purposes
-                var a = new AdaptiveGraphRouting(builder.Grid, new RoutingConfiguration());
-                var elements = a.RenderElements(
-                   new List<RoutingHintLine>(),
-                   new List<Vector3>());
-                output.Model.AddElements(elements);
             }
 
             output.Model.AddElements(walkingDistanceConfigs);
@@ -198,6 +191,12 @@ namespace TravelDistanceAnalyzer
                 return elem;
             });
             return walkingDistanceConfigs;
+        }
+
+        private static IList<Element> GridDebugVisualization(AdaptiveGrid grid)
+        {
+            var a = new AdaptiveGraphRouting(grid, new RoutingConfiguration());
+            return a.RenderElements(new List<RoutingHintLine>(), new List<Vector3>());
         }
     }
 }
