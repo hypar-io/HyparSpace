@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Elements.Geometry;
 using GridVertex = Elements.Spatial.AdaptiveGrid.Vertex;
+using DotLiquid.Tags;
 
 namespace TravelDistanceAnalyzer
 {
     internal class AdaptiveGridBuilder
     {
         private const double RoomToWallTolerance = 1e-3;
+        private const double MinExitWidth = 0.5;
 
         private AdaptiveGrid _grid;
 
@@ -376,10 +378,9 @@ namespace TravelDistanceAnalyzer
             var perimeter = room.Boundary.Perimeter.CollinearPointsRemoved().TransformedPolygon(room.Transform);
             foreach (var roomEdge in perimeter.Segments())
             {
-                var exitVertex = FindRoomExit(roomEdge, centerlines, walls, doors, grid);
-                if (exitVertex != null)
+                foreach(var exit in FindRoomExits(roomEdge, centerlines, walls, doors))
                 {
-                    roomExits.Add(exitVertex);
+                    roomExits.Add(exit);
                 }
             }
             return roomExits;
@@ -393,40 +394,119 @@ namespace TravelDistanceAnalyzer
         /// <param name="centerlines">Corridor segments with precalculated center lines.</param>
         /// <param name="grid">AdaptiveGrid to insert new vertices and edge into.</param>
         /// <returns>New Vertex on room edge midpoint.</returns>
-        private GridVertex FindRoomExit(
+        private List<GridVertex> FindRoomExits(
             Line roomEdge,
             List<(CirculationSegment Segment, Polyline Centerline)> centerlines,
             List<WallCandidate>? walls,
-            List<Door>? doors,
-            AdaptiveGrid grid)
+            List<Door>? doors)
         {
-            var door = doors?.FirstOrDefault(d => roomEdge.PointOnLine(d.Transform.Origin, false, RoomToWallTolerance));
-            var wall = walls?.FirstOrDefault(w => w.Line.PointOnLine(roomEdge.PointAtNormalized(0.25), true, RoomToWallTolerance) &&
-                                             w.Line.PointOnLine(roomEdge.PointAtNormalized(0.75), true, RoomToWallTolerance));
+            var doorsOnWall = doors?.Where(d => roomEdge.PointOnLine(d.Transform.Origin, false, RoomToWallTolerance));
+            var openSections = GetOpenPassages(roomEdge, walls);
 
-            // There are doors in the workflow and this segment is a wall without a door.
-            if (wall != null && doors != null && door == null)
+            // There are no doors in the workflow and this segment covered by walls.
+            // Take middle point to give user at least some exits.
+            if (doors == null && !openSections.Any())
             {
-                return null;
+                openSections.Add(roomEdge);
             }
 
-            var midpoint = door?.Transform.Origin ?? roomEdge.Mid();
-            var exitDirection = door?.Transform.XAxis ?? roomEdge.Direction();
+            List<Transform> exitLocations = new List<Transform>();
+            if (doorsOnWall != null && doorsOnWall.Any())
+            {
+                exitLocations.AddRange(doorsOnWall.Select(d => d.Transform));
+            }
 
+            foreach (var item in openSections)
+            {
+                exitLocations.Add(new Transform(item.Mid(), item.Direction(), Vector3.ZAxis));
+            }
+
+            List<GridVertex> exitVertices = new();
+            foreach (var t in exitLocations)
+            {
+                var v = AddRoomExit(t, centerlines);
+                if (v != null)
+                {
+                    exitVertices.Add(v);
+                }
+            }
+            return exitVertices;
+        }
+
+        public List<Line> GetOpenPassages(Line roomSide, List<WallCandidate>? walls)
+        {
+            if (walls == null)
+            {
+                return new List<Line>() { roomSide };
+            }
+
+            List<Domain1d> coveredRanges = new();
+            foreach (var wall in walls)
+            {
+                if (roomSide.TryGetOverlap(wall.Line, RoomToWallTolerance, out Line overlap))
+                {
+                    var d0 = roomSide.GetParameterAt(overlap.Start);
+                    var d1 = roomSide.GetParameterAt(overlap.End);
+                    coveredRanges.Add(d0 < d1 ? new Domain1d(d0, d1) : new Domain1d(d1, d0));
+                }
+            }
+
+            var domains = FindUncoveredParametricRanges(roomSide.Domain, coveredRanges);
+            List<Line> openExits = new();
+            foreach (var domain in domains)
+            {
+                var a = roomSide.PointAt(domain.Min);
+                var b = roomSide.PointAt(domain.Max);
+                if (a.DistanceTo(b) > MinExitWidth)
+                {
+                    openExits.Add(new Line(a, b));
+                }
+            }
+            return openExits;
+        }
+
+        private List<Domain1d> FindUncoveredParametricRanges(Domain1d lineDomain, List<Domain1d> wallDomains)
+        {
+            List<Domain1d> uncoveredRanges = new ();
+
+            wallDomains.Sort((a, b) => a.Min.CompareTo(b.Min));
+
+            double current = lineDomain.Min;
+            foreach (var domain in wallDomains)
+            {
+                if (current < domain.Min)
+                {
+                    uncoveredRanges.Add(new Domain1d(current, domain.Min));
+                }
+
+                current = Math.Max(current, domain.Max);
+            }
+
+            if (current < lineDomain.Max)
+            {
+                uncoveredRanges.Add(new Domain1d(current, lineDomain.Max));
+            }
+
+            return uncoveredRanges;
+        }
+
+        private GridVertex? AddRoomExit(Transform location, 
+                                        List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
+        {
             foreach (var line in centerlines)
             {
                 for (int i = 0; i < line.Centerline.Vertices.Count - 1; i++)
                 {
                     var segment = new Line(line.Centerline.Vertices[i], line.Centerline.Vertices[i + 1]);
-                    var distance = midpoint.DistanceTo(segment, out var closest);
+                    var distance = location.Origin.DistanceTo(segment, out var closest);
                     if (distance > line.Segment.Geometry.GetWidth() / 2 + 0.10)
                     {
                         continue;
                     }
 
                     GridVertex exitVertex = null;
-                    grid.TryGetVertexIndex(segment.Start, out var id);
-                    var vertex = grid.GetVertex(id);
+                    _grid.TryGetVertexIndex(segment.Start, out var id);
+                    var vertex = _grid.GetVertex(id);
 
                     //We know corridor line but it can already be split into several edges.
                     //Need to find exact edge to insert new vertex into.
@@ -434,52 +514,52 @@ namespace TravelDistanceAnalyzer
                     //Then, edges that do in the same direction as segment is traversed
                     //until target edge is found or end vertex is reached.
                     //This is much faster than traverse every single edge in the grid.
-                    if (vertex.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                    if (vertex.Point.IsAlmostEqualTo(closest, _grid.Tolerance))
                     {
                         exitVertex = vertex;
                     }
                     else
                     {
-                        grid.TryGetVertexIndex(segment.End, out var endId);
+                        _grid.TryGetVertexIndex(segment.End, out var endId);
                         var edge = FindOnCollinearEdges(vertex, endId, segment.Direction(), closest);
                         if (edge != null)
                         {
-                            var start = grid.GetVertex(edge.StartId);
-                            var end = grid.GetVertex(edge.EndId);
+                            var start = _grid.GetVertex(edge.StartId);
+                            var end = _grid.GetVertex(edge.EndId);
 
-                            if (start.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                            if (start.Point.IsAlmostEqualTo(closest, _grid.Tolerance))
                             {
                                 exitVertex = start;
                             }
-                            else if (end.Point.IsAlmostEqualTo(closest, grid.Tolerance))
+                            else if (end.Point.IsAlmostEqualTo(closest, _grid.Tolerance))
                             {
                                 exitVertex = end;
                             }
                             else
                             {
-                                exitVertex = grid.AddVertex(closest, new ConnectVertexStrategy(start, end), cut: false);
-                                grid.RemoveEdge(edge);
+                                exitVertex = _grid.AddVertex(closest, new ConnectVertexStrategy(start, end), cut: false);
+                                _grid.RemoveEdge(edge);
                             }
                         }
                     }
 
                     if (exitVertex != null)
                     {
-                        if (!exitVertex.Point.IsAlmostEqualTo(midpoint, grid.Tolerance))
+                        if (!exitVertex.Point.IsAlmostEqualTo(location.Origin, _grid.Tolerance))
                         {
-                            var delta = closest - midpoint;
+                            var delta = closest - location.Origin;
                             var dot = delta.Dot(segment.Direction());
                             if (dot.ApproximatelyEquals(0) || dot.ApproximatelyEquals(delta.Length()))
                             {
-                                return grid.AddVertex(midpoint, new ConnectVertexStrategy(exitVertex));
+                                return _grid.AddVertex(location.Origin, new ConnectVertexStrategy(exitVertex));
                             }
                             else
                             {
-                                var cornerPoint = Math.Abs(exitDirection.Dot(segment.Direction())) > 1 / Math.Sqrt(2) ?
-                                    closest - dot * segment.Direction() : midpoint + dot * segment.Direction();
-                                    
-                                var strip = grid.AddVertices(
-                                    new List<Vector3> { midpoint, cornerPoint, closest },
+                                var cornerPoint = Math.Abs(location.XAxis.Dot(segment.Direction())) > 1 / Math.Sqrt(2) ?
+                                    closest - dot * segment.Direction() : location.Origin + dot * segment.Direction();
+
+                                var strip = _grid.AddVertices(
+                                    new List<Vector3> { location.Origin, cornerPoint, closest },
                                     AdaptiveGrid.VerticesInsertionMethod.ConnectAndCut);
                                 return strip.First();
                             }
