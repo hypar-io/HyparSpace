@@ -94,7 +94,7 @@ namespace InteriorPartitions
                 if (wallCandidateCheck.Thickness == null || wallCandidate.Thickness == null) continue;
 
                 // This ensures that we are always extending the wall with the larger thickness
-                if ((wallCandidateCheck.Thickness.Value.outerWidth + wallCandidateCheck.Thickness.Value.innerWidth) < (wallCandidate.Thickness.Value.outerWidth + wallCandidate.Thickness.Value.innerWidth)) continue;
+                if (GetTotalWidth(wallCandidateCheck.Thickness.Value) < GetTotalWidth(wallCandidate.Thickness.Value)) continue;
 
                 UpdateWallCandidateLines(wallCandidate, wallCandidateCheck, wallCandidates, wallCandidatesDictionary);
 
@@ -428,10 +428,6 @@ namespace InteriorPartitions
             }
 
             AttachOverrides(input.Overrides.InteriorPartitionTypes, wallCandidates);
-
-            foreach (var wallCandidate in wallCandidates)
-            {
-            }
 
             return wallCandidates;
         }
