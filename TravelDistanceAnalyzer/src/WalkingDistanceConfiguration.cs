@@ -127,10 +127,10 @@ namespace Elements
                     var type = input.Room.ProgramType;
                     if (statisticsByType.TryGetValue(type, out var value))
                     {
-                        value.Num++;
                         value.Stat.LongestDistance = Math.Max(value.Stat.LongestDistance, distance);
                         value.Stat.ShortestDistance = Math.Min(value.Stat.ShortestDistance, distance);
                         value.Stat.AverageDistance += distance;
+                        statisticsByType[type] = (value.Stat, value.Num + 1);
                     }
                     else
                     {
