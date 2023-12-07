@@ -558,7 +558,8 @@ namespace TravelDistanceAnalyzer
             Domain1d current = new Domain1d(min, max);
             foreach (var domain in parameters.Skip(1))
             {
-                if (domain.Min <= current.Max)
+                // Line domain is between 0 and length so EPSILON can be used here without scaling concerns.
+                if (domain.Min <= current.Max + Vector3.EPSILON)
                 {
                     var newMax = Math.Max(domain.Max, current.Max);
                     current = new Domain1d(current.Min, newMax);
