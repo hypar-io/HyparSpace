@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GridVertex = Elements.Spatial.AdaptiveGrid.Vertex;
-using DotLiquid.Tags;
 
 namespace TravelDistanceAnalyzer
 {
@@ -20,8 +19,13 @@ namespace TravelDistanceAnalyzer
 
         private AdaptiveGrid _grid;
 
-        private Dictionary<SpaceBoundary, List<GridVertex>> _roomExits;
+        private Dictionary<SpaceBoundary, List<GridVertex>> _roomExits = new();
         private List<(CirculationSegment Segment, Polyline Centerline)> _centerlines = new();
+
+        public AdaptiveGridBuilder()
+        {
+            _grid = new AdaptiveGrid(new Transform());
+        }
 
         public AdaptiveGrid Build(IEnumerable<CirculationSegment> corridors,
                                   IEnumerable<SpaceBoundary> rooms,
@@ -37,8 +41,6 @@ namespace TravelDistanceAnalyzer
                 }
             }
 
-            _grid = new AdaptiveGrid(new Transform());
-
             foreach (var line in _centerlines)
             {
                 _grid.AddVertices(line.Centerline.Vertices,
@@ -48,7 +50,6 @@ namespace TravelDistanceAnalyzer
             Intersect(_centerlines);
             Extend(_centerlines);
 
-            _roomExits = new Dictionary<SpaceBoundary, List<GridVertex>>();
             foreach (var room in rooms)
             {
                 var exits = AddRoom(room, _centerlines, walls, doors);
@@ -193,10 +194,10 @@ namespace TravelDistanceAnalyzer
             get { return _roomExits; }
         }
 
-        private Edge ClosestEdgeOnElevation(Vector3 location, out Vector3 point)
+        private Edge? ClosestEdgeOnElevation(Vector3 location, out Vector3 point)
         {
             double lowestDist = double.MaxValue;
-            Edge closestEdge = null;
+            Edge? closestEdge = null;
             point = Vector3.Origin;
             foreach (var e in Grid.GetEdges())
             {
@@ -326,7 +327,7 @@ namespace TravelDistanceAnalyzer
                                 leftVertex = _grid.GetVertex(leftId);
                             }
 
-                            if (!rightExist)
+                            if (leftVertex != null && !rightExist)
                             {
                                 _grid.TryGetVertexIndex(rightVertices[closestRightProximity], out var leftCon);
                                 _grid.TryGetVertexIndex(rightVertices[closestRightProximity + 1], out var rightCon);
@@ -355,7 +356,7 @@ namespace TravelDistanceAnalyzer
                                     }
                                 }
                             }
-                            else if (leftVertex.Id != rightId)
+                            else if (leftVertex != null && leftVertex.Id != rightId)
                             {
                                 _grid.AddEdge(leftVertex.Id, rightId);
                             }
@@ -369,8 +370,8 @@ namespace TravelDistanceAnalyzer
         {
             while (start.Id != endId)
             {
-                GridVertex otherVertex = null;
-                Edge edge = null;
+                GridVertex otherVertex = start;
+                Edge? edge = null;
                 foreach (var e in start.Edges)
                 {
                     otherVertex = _grid.GetVertex(e.OtherVertexId(start.Id));
@@ -644,7 +645,7 @@ namespace TravelDistanceAnalyzer
                         continue;
                     }
 
-                    GridVertex exitVertex = null;
+                    GridVertex? exitVertex = null;
                     _grid.TryGetVertexIndex(segment.Start, out var id);
                     var vertex = _grid.GetVertex(id);
 
