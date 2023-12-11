@@ -24,9 +24,9 @@ namespace PantryLayout
                 {"Space Planning Zones", Model.FromJson(File.ReadAllText(@"/Users/andrewheumann/Dev/HyparSpace/LayoutFunctions/PantryLayout/test/Generated/PantryLayoutTest/model_dependencies/Space Planning Zones/model.json")) },
             };
 
-            var input2 = new PantryLayoutInputs(null, null, null, null, null);
-            var result2 = PantryLayout.Execute(modelDependencies, input2);
-            File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_wo_overrides.json", result2.Model.ToJson());
+      var input2 = new PantryLayoutInputs(null, null, null, null, null);
+      var result2 = PantryLayout.Execute(modelDependencies, input2);
+      File.WriteAllText("../../../Generated/PantryLayoutTest/results/PantryLayoutTest_wo_overrides.json", result2.Model.ToJson());
 
       var elementInstanceCount2 = result2.Model.AllElementsOfType<ElementInstance>().Count();
 
