@@ -33,7 +33,7 @@ namespace LayoutFunctionCommon
                     layoutInstantiated.ConfigName = key;
                     break;
                 }
-                else if (config.AllowRotatation && config.CellBoundary.Depth < width + 0.01 && config.CellBoundary.Width < length + 0.01)
+                else if (config.AllowRotation && config.CellBoundary.Depth < width + 0.01 && config.CellBoundary.Width < length + 0.01)
                 {
                     layoutInstantiated.Config = GetRotatedConfig(config, -90);
                     layoutInstantiated.ConfigName = key;
