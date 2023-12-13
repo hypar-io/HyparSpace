@@ -59,7 +59,6 @@ public class RoomEdge
         }
     }
     public (double innerWidth, double outerWidth)? Thickness { get; set; }
-
     public double Length => Line.Length();
     public Vector3 Direction => Line.Direction();
 
