@@ -16,6 +16,7 @@ namespace TravelDistanceAnalyzer
         private const double MinExitWidth = 0.5;
         private const double RoomToCorridorDistanceTolerance = 0.1;
         private const double RoomToCorridorDotTolerance = 1e-3;
+        private const double AxisGroupingDotTolerance = 0.01;
 
         private AdaptiveGrid _grid;
 
@@ -29,8 +30,8 @@ namespace TravelDistanceAnalyzer
 
         public AdaptiveGrid Build(IEnumerable<CirculationSegment> corridors,
                                   IEnumerable<SpaceBoundary> rooms,
-                                  List<WallCandidate>? walls = null,
-                                  List<Door>? doors = null)
+                                  IEnumerable<WallCandidate>? walls = null,
+                                  IEnumerable<Door>? doors = null)
         {
             foreach (var item in corridors)
             {
@@ -47,12 +48,12 @@ namespace TravelDistanceAnalyzer
                     AdaptiveGrid.VerticesInsertionMethod.ConnectAndSelfIntersect);
             }
 
-            Intersect(_centerlines);
-            Extend(_centerlines);
+            CreateConnectionEdges(_centerlines);
+            ExtendOntoClosestCorridor(_centerlines);
 
             foreach (var room in rooms)
             {
-                var exits = AddRoom(room, _centerlines, walls, doors);
+                var exits = AddRoom(room, walls, doors);
                 _roomExits.Add(room, exits);
             }
 
@@ -64,8 +65,8 @@ namespace TravelDistanceAnalyzer
             List<GridVertex> verticesToConnect = new();
             foreach (var room in _roomExits)
             {
-                var p = room.Key.Boundary.Perimeter.TransformedPolygon(room.Key.Transform);
-                if (p.Covers(exit))
+                var boundaryOnLevel = room.Key.Boundary.Perimeter.TransformedPolygon(room.Key.Transform);
+                if (boundaryOnLevel.Covers(exit))
                 {
                     verticesToConnect.AddRange(room.Value);
                     break;
@@ -74,7 +75,7 @@ namespace TravelDistanceAnalyzer
 
             if (!verticesToConnect.Any())
             {
-                ClosestEdgeOnElevation(exit, out var closest);
+                FindClosestEdgeOnElevation(exit, out var closest);
                 if (exit.DistanceTo(closest) < snapDistance)
                 {
                     exit = closest;
@@ -145,21 +146,21 @@ namespace TravelDistanceAnalyzer
 
                 var directionIndex = -1;
                 var dot = delta.Unitized().Dot(xDir);
-                if (dot.ApproximatelyEquals(1, 0.01))
+                if (dot.ApproximatelyEquals(1, AxisGroupingDotTolerance))
                 {
                     directionIndex = 0;
                 }
-                else if (dot.ApproximatelyEquals(-1, 0.01))
+                else if (dot.ApproximatelyEquals(-1, AxisGroupingDotTolerance))
                 {
                     directionIndex = 1;
                 }
 
                 dot = delta.Unitized().Dot(yDir);
-                if (dot.ApproximatelyEquals(1, 0.01))
+                if (dot.ApproximatelyEquals(1, AxisGroupingDotTolerance))
                 {
                     directionIndex = 2;
                 }
-                else if (dot.ApproximatelyEquals(-1, 0.01))
+                else if (dot.ApproximatelyEquals(-1, AxisGroupingDotTolerance))
                 {
                     directionIndex = 3;
                 }
@@ -194,7 +195,7 @@ namespace TravelDistanceAnalyzer
             get { return _roomExits; }
         }
 
-        private Edge? ClosestEdgeOnElevation(Vector3 location, out Vector3 point)
+        private Edge? FindClosestEdgeOnElevation(Vector3 location, out Vector3 point)
         {
             double lowestDist = double.MaxValue;
             Edge? closestEdge = null;
@@ -240,7 +241,7 @@ namespace TravelDistanceAnalyzer
         /// </summary>
         /// <param name="centerlines">Corridor segments with precalculated center lines.</param>
         /// <param name="grid">AdaptiveGrid to insert new vertices and edge into.</param>
-        private void Intersect(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
+        private void CreateConnectionEdges(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
         {
             foreach (var item in centerlines)
             {
@@ -400,7 +401,7 @@ namespace TravelDistanceAnalyzer
             return null;
         }
 
-        private void Extend(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
+        private void ExtendOntoClosestCorridor(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
         {
             foreach (var item in centerlines)
             {
@@ -450,15 +451,14 @@ namespace TravelDistanceAnalyzer
         /// <returns></returns>
         private List<GridVertex> AddRoom(
             SpaceBoundary room,
-            List<(CirculationSegment Segment, Polyline Centerline)> centerlines,
-            List<WallCandidate>? walls,
-            List<Door>? doors)
+            IEnumerable<WallCandidate>? walls,
+            IEnumerable<Door>? doors)
         {
             var roomExits = new List<GridVertex>();
             var perimeter = room.Boundary.Perimeter.CollinearPointsRemoved().TransformedPolygon(room.Transform);
             foreach (var roomEdge in perimeter.Segments())
             {
-                foreach(var exit in FindRoomExits(roomEdge, centerlines, walls, doors))
+                foreach(var exit in FindRoomExits(roomEdge, walls, doors))
                 {
                     roomExits.Add(exit);
                 }
@@ -476,9 +476,8 @@ namespace TravelDistanceAnalyzer
         /// <returns>New Vertex on room edge midpoint.</returns>
         private List<GridVertex> FindRoomExits(
             Line roomEdge,
-            List<(CirculationSegment Segment, Polyline Centerline)> centerlines,
-            List<WallCandidate>? walls,
-            List<Door>? doors)
+            IEnumerable<WallCandidate>? walls,
+            IEnumerable<Door>? doors)
         {
             var doorsOnWall = doors?.Where(d => roomEdge.PointOnLine(d.Transform.Origin, false, RoomToWallTolerance));
             var openSections = GetOpenPassages(roomEdge, walls);
@@ -575,7 +574,7 @@ namespace TravelDistanceAnalyzer
             return adjacentRanges.Select(r => new Line(roomSide.PointAt(r.Min), roomSide.PointAt(r.Max))).ToList();
         }
 
-        public List<Line> GetOpenPassages(Line roomSide, List<WallCandidate>? walls)
+        public List<Line> GetOpenPassages(Line roomSide, IEnumerable<WallCandidate>? walls)
         {
             if (walls == null)
             {
