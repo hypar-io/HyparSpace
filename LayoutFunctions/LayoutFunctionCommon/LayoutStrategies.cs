@@ -33,6 +33,12 @@ namespace LayoutFunctionCommon
                     layoutInstantiated.ConfigName = key;
                     break;
                 }
+                else if (config.AllowRotation && config.CellBoundary.Depth < width + 0.01 && config.CellBoundary.Width < length + 0.01)
+                {
+                    layoutInstantiated.Config = GetRotatedConfig(config, -90);
+                    layoutInstantiated.ConfigName = key;
+                    break;
+                }
             }
             if (layoutInstantiated.Config == null)
             {
@@ -873,6 +879,34 @@ namespace LayoutFunctionCommon
             {
                 elementInstance.AdditionalProperties["Space"] = parentSpaceId;
             }
+        }
+
+        private static ContentConfiguration GetRotatedConfig(ContentConfiguration config, double degrees)
+        {
+            var transform = new Transform().Rotated(Vector3.ZAxis, degrees);
+            var box = new BBox3(new List<Vector3> { transform.OfPoint(config.CellBoundary.Min), transform.OfPoint(config.CellBoundary.Max) });
+
+            // Create new config
+            var newConfig = new ContentConfiguration()
+            {
+                CellBoundary = new ContentConfiguration.BoundaryDefinition() { Min = box.Min, Max = box.Max, },
+                ContentItems = new List<ContentConfiguration.ContentItem>()
+            };
+
+            foreach (var item in config.ContentItems)
+            {
+                var newItem = new ContentConfiguration.ContentItem()
+                {
+                    Url = item.Url,
+                    Name = item.Name,
+                    Transform = item.Transform.Concatenated(transform),
+                    Anchor = transform.OfPoint(item.Anchor)
+                };
+
+                newConfig.ContentItems.Add(newItem);
+            }
+
+            return newConfig;
         }
     }
 }
