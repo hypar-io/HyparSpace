@@ -57,7 +57,6 @@ namespace InteriorPartitions
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {
                     var interiorPartitions = mdModel?.AllElementsOfType<InteriorPartitionCandidate>();
-
                     interiorPartitionCandidates.AddRange(interiorPartitions);
                 }
             }
