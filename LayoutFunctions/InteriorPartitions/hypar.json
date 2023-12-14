@@ -133,5 +133,6 @@
       }
     }
   },
-  "repository_url": "https://github.com/hypar-io/function"
+  "repository_url": "https://github.com/hypar-io/function",
+  "stream_model": true
 }

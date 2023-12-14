@@ -30,6 +30,9 @@ namespace InteriorPartitions
         /// <returns>A InteriorPartitionsOutputs instance containing computed results and the model with any new elements.</returns>
         public static InteriorPartitionsOutputs Execute(Dictionary<string, Model> inputModels, InteriorPartitionsInputs input)
         {
+            // Initializing a dummy InteriorPartitionCandidate to ensure that the InteriorPartitionCandidate type is loaded
+            var interiorPartitionDummy = new InteriorPartitionCandidate();
+
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
             var modelDependencies = new[] {
                 "Private Office Layout",
@@ -53,12 +56,7 @@ namespace InteriorPartitions
             {
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {
-                    Console.WriteLine($"Found model dependency: {md}");
-                    Console.WriteLine($"Model {md} elements count: {mdModel.Elements.Count()}");
-
                     var interiorPartitions = mdModel?.AllElementsOfType<InteriorPartitionCandidate>();
-
-                    Console.WriteLine($"Model {md} InteriorPartitionCandidate count: {interiorPartitions.Count()}");
 
                     interiorPartitionCandidates.AddRange(interiorPartitions);
                 }
@@ -432,6 +430,15 @@ namespace InteriorPartitions
                         PrimaryEntryEdge = c.PrimaryEntryEdge
                     })
                     .ToList();
+
+                var levelGroupWallCandidateLines = levelGroup.SelectMany(x => x.WallCandidateLines).ToList();
+
+                foreach (var splittedCandidate in splittedWallCandidates)
+                {
+                    var closestInteriorPartition = levelGroupWallCandidateLines.OrderBy(x => splittedCandidate.Line.Mid().DistanceTo(x.Line)).First();
+
+                    splittedCandidate.Thickness = closestInteriorPartition.Thickness;
+                }
 
                 wallCandidates.AddRange(splittedWallCandidates);
             }
