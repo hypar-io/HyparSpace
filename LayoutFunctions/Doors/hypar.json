@@ -284,5 +284,6 @@
     "https://schemas.hypar.io/WallCandidate.json"
   ],
   "repository_url": "",
-  "filters": {}
+  "filters": {},
+  "stream_model": true
 }
