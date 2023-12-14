@@ -30,8 +30,8 @@ namespace TravelDistanceAnalyzer
 
         public AdaptiveGrid Build(IEnumerable<CirculationSegment> corridors,
                                   IEnumerable<SpaceBoundary> rooms,
-                                  IEnumerable<WallCandidate>? walls = null,
-                                  IEnumerable<Door>? doors = null)
+                                  IEnumerable<WallCandidate>? walls,
+                                  IEnumerable<Door>? doors)
         {
             foreach (var item in corridors)
             {
@@ -106,6 +106,11 @@ namespace TravelDistanceAnalyzer
 
         private void AdditionalConnections(GridVertex exit)
         {
+            if (!exit.Edges.Any())
+            {
+                throw new Exception("Free vertices should not be present in the grid");
+            }
+
             if (exit.Edges.Count > 2)
             {
                 return;
