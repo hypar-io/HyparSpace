@@ -53,7 +53,14 @@ namespace InteriorPartitions
             {
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {
-                    interiorPartitionCandidates.AddRange(mdModel?.AllElementsOfType<InteriorPartitionCandidate>());
+                    Console.WriteLine($"Found model dependency: {md}");
+                    Console.WriteLine($"Model {md} elements count: {mdModel.Elements.Count()}");
+
+                    var interiorPartitions = mdModel?.AllElementsOfType<InteriorPartitionCandidate>();
+
+                    Console.WriteLine($"Model {md} InteriorPartitionCandidate count: {interiorPartitions.Count()}");
+
+                    interiorPartitionCandidates.AddRange();
                 }
             }
 
@@ -557,7 +564,7 @@ namespace InteriorPartitions
             {
                 foreach (var overrideValue in overrideData)
                 {
-                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.IsAlmostEqualTo(e.Line, false, 0.01));
+                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.Mid().DistanceTo(e.Line) < 0.01);
 
                     if (overrideValue.Identity.AddId != null)
                     {
