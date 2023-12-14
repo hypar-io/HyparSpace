@@ -4,13 +4,7 @@
   "description": "Produce all interior partition elements.",
   "element_types": [
     "https://schemas.hypar.io/WallCandidate.json",
-    "https://schemas.hypar.io/CirculationSegment.json",
-    "https://schemas.hypar.io/StandardWall.json",
-    "https://schemas.hypar.io/Wall.json",
-    "https://schemas.hypar.io/StorefrontWall.json",
-    "https://schemas.hypar.io/Mullion.json",
-    "https://schemas.hypar.io/Header.json",
-    "https://schemas.hypar.io/Beam.json"
+    "https://schemas.hypar.io/CirculationSegment.json"
   ],
   "id": "323b23d2-eb5a-4922-8020-47538a6ba0b0",
   "language": "C#",
