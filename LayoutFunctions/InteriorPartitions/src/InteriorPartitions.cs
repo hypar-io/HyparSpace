@@ -30,6 +30,9 @@ namespace InteriorPartitions
         /// <returns>A InteriorPartitionsOutputs instance containing computed results and the model with any new elements.</returns>
         public static InteriorPartitionsOutputs Execute(Dictionary<string, Model> inputModels, InteriorPartitionsInputs input)
         {
+            // Initializing a dummy InteriorPartitionCandidate to ensure that the InteriorPartitionCandidate type is loaded
+            var interiorPartitionDummy = new InteriorPartitionCandidate();
+
             var interiorPartitionCandidates = new List<InteriorPartitionCandidate>();
             var modelDependencies = new[] {
                 "Private Office Layout",
@@ -53,7 +56,8 @@ namespace InteriorPartitions
             {
                 if (inputModels.TryGetValue(md, out var mdModel))
                 {
-                    interiorPartitionCandidates.AddRange(mdModel?.AllElementsOfType<InteriorPartitionCandidate>());
+                    var interiorPartitions = mdModel?.AllElementsOfType<InteriorPartitionCandidate>();
+                    interiorPartitionCandidates.AddRange(interiorPartitions);
                 }
             }
 
@@ -68,9 +72,17 @@ namespace InteriorPartitions
 
             var wallCandidatesDictionary = wallCandidates.ToDictionary(w => w.Id, w => (false, false));
 
+            var removals = new List<WallCandidate>();
+
             foreach (var wallCandidate in wallCandidates)
             {
-                TrimWallCandidate(wallCandidate, wallCandidates, wallCandidatesDictionary);
+                TrimWallCandidate(wallCandidate, wallCandidates, wallCandidatesDictionary, removals);
+            }
+
+            // Just in case there is a wall that is perfectly inside of a joint
+            foreach (var removal in removals)
+            {
+                wallCandidates.Remove(removal);
             }
 
             foreach (var wallCandidate in wallCandidates)
@@ -85,7 +97,7 @@ namespace InteriorPartitions
             return output;
         }
 
-        private static void TrimWallCandidate(WallCandidate wallCandidate, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary)
+        private static void TrimWallCandidate(WallCandidate wallCandidate, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary, List<WallCandidate> removals)
         {
             var nonCollinearList = wallCandidates.Where(x => !x.Line.IsCollinear(wallCandidate.Line, 0.1) && (wallCandidatesDictionary[x.Id].StartModified == false || wallCandidatesDictionary[x.Id].EndModified == false));
 
@@ -96,18 +108,24 @@ namespace InteriorPartitions
                 // This ensures that we are always extending the wall with the larger thickness
                 if (GetTotalWidth(wallCandidateCheck.Thickness.Value) < GetTotalWidth(wallCandidate.Thickness.Value)) continue;
 
-                UpdateWallCandidateLines(wallCandidate, wallCandidateCheck, wallCandidates, wallCandidatesDictionary);
-
+                UpdateWallCandidateLines(wallCandidate, wallCandidateCheck, wallCandidates, wallCandidatesDictionary, removals);
             }
         }
 
-        private static void UpdateWallCandidateLines(WallCandidate wallCandidate, WallCandidate wallCandidateCheck, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary)
+        private static void UpdateWallCandidateLines(WallCandidate wallCandidate, WallCandidate wallCandidateCheck, List<WallCandidate> wallCandidates, Dictionary<Guid, (bool StartModified, bool EndModified)> wallCandidatesDictionary, List<WallCandidate> removals)
         {
             var wallCandidateCheckWidth = GetTotalWidth(wallCandidateCheck.Thickness.Value);
             var wallCandidateWidth = GetTotalWidth(wallCandidate.Thickness.Value);
 
             var wallCandidateOffset = wallCandidate.Line.Direction() * wallCandidateCheckWidth / 2;
             var wallCandidateCheckOffset = wallCandidateCheck.Line.Direction() * wallCandidateWidth / 2;
+
+            // Short wall that is inside of a joint that we should probably remove
+            if (Math.Abs(wallCandidateCheckWidth / 2 - wallCandidate.Line.Length()) < 0.01)
+            {
+                removals.Add(wallCandidate);
+                return;
+            }
 
             var wallCandidateVector = wallCandidateCheck.Line.Direction();
 
@@ -375,6 +393,7 @@ namespace InteriorPartitions
             foreach (var levelGroup in levelGroups)
             {
                 var candidates = WallGeneration.DeduplicateWallLines(levelGroup.ToList());
+
                 var height = levelGroup.OrderBy(l => l.Height).FirstOrDefault()?.Height ?? defaultWallHeight;
                 var levelWallCandidates = candidates.Select(c =>
                     new WallCandidate(c.Line,
@@ -386,10 +405,6 @@ namespace InteriorPartitions
                         Thickness = c.Thickness,
                         PrimaryEntryEdge = c.PrimaryEntryEdge
                     });
-                if (input.Overrides?.InteriorPartitionTypes != null)
-                {
-                    levelWallCandidates = UpdateLevelWallCandidates(levelWallCandidates, input.Overrides.InteriorPartitionTypes);
-                }
 
                 var splittedCandidates = WallGeneration.SplitOverlappingWallCandidates(
                     levelWallCandidates.Select(w => new RoomEdge
@@ -546,7 +561,7 @@ namespace InteriorPartitions
             {
                 foreach (var overrideValue in overrideData)
                 {
-                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.IsAlmostEqualTo(e.Line, false, 0.01));
+                    var matchingElement = existingElements.FirstOrDefault(e => overrideValue.Identity.Line.Mid().DistanceTo(e.Line) < 0.01);
 
                     if (overrideValue.Identity.AddId != null)
                     {
