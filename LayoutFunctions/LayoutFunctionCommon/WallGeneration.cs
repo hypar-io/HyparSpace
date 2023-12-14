@@ -272,7 +272,7 @@ namespace LayoutFunctionCommon
                     resultCandidates.Add(candidate);
                     continue;
                 }
-                var linesOrderedByLength = collinearLinesGroup.Value.OrderByDescending(v => v.Line.Length());
+                var linesOrderedByLength = collinearLinesGroup.Value.Where(x => !x.Item2.Contains("Partition")).OrderByDescending(v => v.Line.Length());
 
                 var dominantLineForGroup = linesOrderedByLength.FirstOrDefault(x => x.PrimaryEntryEdge == true);
 
