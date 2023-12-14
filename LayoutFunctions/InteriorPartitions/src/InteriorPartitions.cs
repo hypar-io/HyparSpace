@@ -60,7 +60,7 @@ namespace InteriorPartitions
 
                     Console.WriteLine($"Model {md} InteriorPartitionCandidate count: {interiorPartitions.Count()}");
 
-                    interiorPartitionCandidates.AddRange();
+                    interiorPartitionCandidates.AddRange(interiorPartitions);
                 }
             }
 
