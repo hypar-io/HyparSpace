@@ -63,7 +63,7 @@ namespace OpenOfficeLayout
             {
                 this.store = new UrlModelStore<OpenOfficeLayoutInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<OpenOfficeLayoutInputs,OpenOfficeLayoutOutputs> (store, OpenOfficeLayout.Execute);
             var output = await l.InvokeAsync(args);

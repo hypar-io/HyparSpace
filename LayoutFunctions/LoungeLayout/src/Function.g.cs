@@ -63,7 +63,7 @@ namespace LoungeLayout
             {
                 this.store = new UrlModelStore<LoungeLayoutInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<LoungeLayoutInputs,LoungeLayoutOutputs> (store, LoungeLayout.Execute);
             var output = await l.InvokeAsync(args);

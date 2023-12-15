@@ -63,7 +63,7 @@ namespace DataHallLayout
             {
                 this.store = new UrlModelStore<DataHallLayoutInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<DataHallLayoutInputs,DataHallLayoutOutputs> (store, DataHallLayout.Execute);
             var output = await l.InvokeAsync(args);

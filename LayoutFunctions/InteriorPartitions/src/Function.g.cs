@@ -63,7 +63,7 @@ namespace InteriorPartitions
             {
                 this.store = new UrlModelStore<InteriorPartitionsInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<InteriorPartitionsInputs,InteriorPartitionsOutputs> (store, InteriorPartitions.Execute);
             var output = await l.InvokeAsync(args);
