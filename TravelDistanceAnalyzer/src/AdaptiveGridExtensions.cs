@@ -52,9 +52,9 @@ namespace TravelDistanceAnalyzer
             return d;
         }
 
-        public static List<Line> TreeVisualization(this AdaptiveGrid grid, 
-                                                   IEnumerable<Edge> edges,
-                                                   Transform transform)
+        public static List<Line> VisualizeTree(this AdaptiveGrid grid, 
+                                               IEnumerable<Edge> edges,
+                                               Transform transform)
         {
             List<Line> lines = new List<Line>();
             foreach (var item in edges)

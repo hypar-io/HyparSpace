@@ -91,7 +91,7 @@ namespace Elements
                 }
 
                 _lineRepresentation.AddRange(
-                    grid.TreeVisualization(accumulatedDistances.Keys, new Transform(0, 0, _routeHeight)));
+                    grid.VisualizeTree(accumulatedDistances.Keys, new Transform(0, 0, _routeHeight)));
 
                 start = end;
             }
@@ -103,7 +103,7 @@ namespace Elements
             return Destinations.All(d => d.Z.ApproximatelyEquals(elevation));
         }
 
-        public ModelText DestinationLabels()
+        public ModelText GrawDestinationLabels()
         {
             var texts = new List<(Vector3 Location, Vector3 FacingDirection, Vector3 LineDirection, string Text, Color? Color)>();
             for (int i = 0; i < Destinations.Count; i++)

@@ -100,7 +100,7 @@ namespace Elements
 
             //Representation instance will apply transformation so everything need to be in its local frame.
             Transform t = Transform.Inverted().Moved(z: _routeHeight);
-            _lineRepresentation = new LinesRepresentation(grid.TreeVisualization(distances.Keys, t), true);
+            _lineRepresentation = new LinesRepresentation(grid.VisualizeTree(distances.Keys, t), true);
         }
 
         public bool OnElevation(double elevation)

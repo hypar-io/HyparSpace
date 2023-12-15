@@ -72,7 +72,7 @@ namespace TravelDistanceAnalyzer
                     level = new Level(levelCorridors.First().Elevation, null, null);
                 }
 
-                var levelWalls = WallsForLevel(walls, level);
+                var levelWalls = CollectWallsForLevel(walls, level);
 
                 var builder = new AdaptiveGridBuilder();
                 builder.Build(levelCorridors, levelRooms, levelWalls, doors);
@@ -85,7 +85,7 @@ namespace TravelDistanceAnalyzer
                 foreach (var config in routeDistanceConfigs.Where(c => c.OnElevation(level.Elevation)))
                 {
                     config.Compute(builder);
-                    output.Model.AddElement(config.DestinationLabels());
+                    output.Model.AddElement(config.GrawDestinationLabels());
                 }
             }
 
@@ -94,7 +94,7 @@ namespace TravelDistanceAnalyzer
             return output;
         }
 
-        private static List<WallCandidate>? WallsForLevel(List<WallCandidate>? allWalls, Level level)
+        private static List<WallCandidate>? CollectWallsForLevel(List<WallCandidate>? allWalls, Level level)
         {
             List<WallCandidate>? levelWalls = null;
             if (allWalls != null)
@@ -193,7 +193,7 @@ namespace TravelDistanceAnalyzer
             return walkingDistanceConfigs;
         }
 
-        private static IList<Element> GridDebugVisualization(AdaptiveGrid grid)
+        private static IList<Element> GetGridDebugVisualization(AdaptiveGrid grid)
         {
             var a = new AdaptiveGraphRouting(grid, new RoutingConfiguration());
             return a.RenderElements(new List<RoutingHintLine>(), new List<Vector3>());

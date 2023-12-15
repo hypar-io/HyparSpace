@@ -35,7 +35,7 @@ namespace TravelDistanceAnalyzer
         {
             foreach (var item in corridors)
             {
-                var centerLine = CorridorCenterLine(item);
+                var centerLine = GetCorridorCenterLine(item);
                 if (centerLine != null && centerLine.Vertices.Count > 1)
                 {
                     _centerlines.Add((item, centerLine));
@@ -83,7 +83,7 @@ namespace TravelDistanceAnalyzer
                 var vertex = LinkToCenterlines(new Transform(exit), snapDistance);
                 if (vertex != null)
                 {
-                    AdditionalConnections(vertex);
+                    AddAdditionalConnections(vertex);
                     return vertex.Id;
                 }
                 return 0u;
@@ -104,7 +104,7 @@ namespace TravelDistanceAnalyzer
             return exitVertex == null ? 0u : exitVertex.Id;
         }
 
-        private void AdditionalConnections(GridVertex exit)
+        private void AddAdditionalConnections(GridVertex exit)
         {
             if (!exit.Edges.Any())
             {
@@ -226,7 +226,7 @@ namespace TravelDistanceAnalyzer
             return closestEdge;
         }
 
-        private Polyline CorridorCenterLine(CirculationSegment corridor)
+        private Polyline GetCorridorCenterLine(CirculationSegment corridor)
         {
             double offsetDistance = corridor.Geometry.GetOffset();
             var corridorPolyline = corridor.Geometry.Polyline;
