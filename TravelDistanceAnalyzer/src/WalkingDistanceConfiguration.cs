@@ -9,14 +9,14 @@ namespace Elements
 {
     internal class WalkingDistanceConfiguration : GeometricElement
     {
+        private double _snapingDistance = 0.25;
+        private double _routeHeight = 1;
+        private LinesRepresentation? _lineRepresentation = null;
+
         public string AddId;
 
         [JsonProperty("Program Types")]
         public List<string> ProgramTypes;
-
-        private double _snapingDistance = 0.25;
-        private double _routeHeight = 1;
-        private LinesRepresentation? _lineRepresentation = null;
 
         public WalkingDistanceConfiguration(string addId, IList<string> programTypes, Transform transform)
         {
@@ -37,6 +37,14 @@ namespace Elements
             Statistics = new();
         }
 
+        public List<WalkingDistanceStatistics> Statistics { get; set; }
+
+        public Color Color
+        {
+            get { return Material.Color; }
+            set { Material.Color = value; }
+        }
+
         public override void UpdateRepresentations()
         {
             if (RepresentationInstances.Count == 0)
@@ -52,14 +60,6 @@ namespace Elements
                     RepresentationInstances.Add(new RepresentationInstance(_lineRepresentation, Material));
                 }
             }
-        }
-
-        public List<WalkingDistanceStatistics> Statistics { get; set; }
-
-        public Color Color
-        {
-            get { return Material.Color; }
-            set { Material.Color = value; }
         }
 
         public void Compute(AdaptiveGridBuilder builder)

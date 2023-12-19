@@ -28,6 +28,16 @@ namespace TravelDistanceAnalyzer
             _grid = new AdaptiveGrid(new Transform());
         }
 
+        public AdaptiveGrid Grid
+        {
+            get { return _grid; }
+        }
+
+        public Dictionary<SpaceBoundary, List<GridVertex>> RoomExits
+        {
+            get { return _roomExits; }
+        }
+
         public AdaptiveGrid Build(IEnumerable<CirculationSegment> corridors,
                                   IEnumerable<SpaceBoundary> rooms,
                                   IEnumerable<WallCandidate>? walls,
@@ -101,7 +111,7 @@ namespace TravelDistanceAnalyzer
                     exitVertex = _grid.AddVertex(exit, new ConnectVertexStrategy(item), cut: false);
                 }
             }
-            return exitVertex == null ? 0u : exitVertex.Id;
+            return exitVertex?.Id ?? 0u;
         }
 
         private void AddAdditionalConnections(GridVertex exit)
@@ -189,17 +199,6 @@ namespace TravelDistanceAnalyzer
             }
         }
 
-
-        public AdaptiveGrid Grid
-        {
-            get { return _grid; }
-        }
-
-        public Dictionary<SpaceBoundary, List<GridVertex>> RoomExits
-        {
-            get { return _roomExits; }
-        }
-
         private Edge? FindClosestEdgeOnElevation(Vector3 location, out Vector3 point)
         {
             double lowestDist = double.MaxValue;
@@ -245,9 +244,11 @@ namespace TravelDistanceAnalyzer
         /// For each line points are found with other corridors and itself that are closer that their combined width.
         /// </summary>
         /// <param name="centerlines">Corridor segments with precalculated center lines.</param>
-        /// <param name="grid">AdaptiveGrid to insert new vertices and edge into.</param>
         private void CreateConnectionEdges(List<(CirculationSegment Segment, Polyline Centerline)> centerlines)
         {
+            const int InvalidProximity = -1;
+            const int MaxProximityDifference = 2;
+
             foreach (var item in centerlines)
             {
                 var leftVertices = item.Centerline.Vertices;
@@ -258,7 +259,7 @@ namespace TravelDistanceAnalyzer
                     for (int i = 0; i < leftVertices.Count - 1; i++)
                     {
                         Vector3 closestLeftItem = Vector3.Origin, closestRightItem = Vector3.Origin;
-                        int closestLeftProximity = -1, closestRightProximity = -1;
+                        int closestLeftProximity = InvalidProximity, closestRightProximity = InvalidProximity;
                         double closestDistance = double.PositiveInfinity;
                         Line leftLine = new Line(leftVertices[i], leftVertices[i + 1]);
 
@@ -277,7 +278,7 @@ namespace TravelDistanceAnalyzer
 
                         for (int j = 0; j < rightVertices.Count - 1; j++)
                         {
-                            if (item == candidate && Math.Abs(i - j) < 2)
+                            if (item == candidate && Math.Abs(i - j) < MaxProximityDifference)
                             {
                                 continue;
                             }
@@ -299,7 +300,7 @@ namespace TravelDistanceAnalyzer
                             }
                         }
 
-                        if (closestLeftProximity == -1 || closestRightProximity == -1)
+                        if (closestLeftProximity == InvalidProximity || closestRightProximity == InvalidProximity)
                         {
                             continue;
                         }
@@ -376,12 +377,12 @@ namespace TravelDistanceAnalyzer
         {
             while (start.Id != endId)
             {
-                GridVertex otherVertex = start;
+                GridVertex nextVertex = start;
                 Edge? edge = null;
                 foreach (var e in start.Edges)
                 {
-                    otherVertex = _grid.GetVertex(e.OtherVertexId(start.Id));
-                    var edgeDirection = (otherVertex.Point - start.Point).Unitized();
+                    nextVertex = _grid.GetVertex(e.OtherVertexId(start.Id));
+                    var edgeDirection = (nextVertex.Point - start.Point).Unitized();
                     if (edgeDirection.Dot(direction).ApproximatelyEquals(1))
                     {
                         edge = e;
@@ -394,13 +395,13 @@ namespace TravelDistanceAnalyzer
                     throw new Exception("End edge is not reached");
                 }
 
-                var edgeLine = new Line(start.Point, otherVertex.Point);
+                var edgeLine = new Line(start.Point, nextVertex.Point);
                 if (edgeLine.PointOnLine(destination, true))
                 {
                     return edge;
                 }
 
-                start = otherVertex;
+                start = nextVertex;
             }
 
             return null;
@@ -425,21 +426,21 @@ namespace TravelDistanceAnalyzer
             }
         }
 
-        private void ExtendToCorridor(Line l, CirculationSegment segment)
+        private void ExtendToCorridor(Line line, CirculationSegment segment)
         {
             foreach (var polygon in segment.Geometry.GetPolygons())
             {
                 var maxDistance = polygon.offsetPolygon.Segments().Max(s => s.Length());
                 var transformedPolygon = polygon.offsetPolygon.TransformedPolygon(segment.Transform);
-                var trimLine = new Line(l.Start - l.Direction() * maxDistance,
-                                        l.End + l.Direction() * maxDistance);
-                var inside = trimLine.Trim(transformedPolygon, out _);
-                foreach (var line in inside)
+                var trimLine = new Line(line.Start - line.Direction() * maxDistance,
+                                        line.End + line.Direction() * maxDistance);
+                var insideLines = trimLine.Trim(transformedPolygon, out _);
+                foreach (var il in insideLines)
                 {
-                    if (l.PointOnLine(line.Start, true) || l.PointOnLine(line.End, true) ||
-                        line.PointOnLine(l.Start, true) || line.PointOnLine(l.End, true))
+                    if (il.PointOnLine(il.Start, true) || il.PointOnLine(il.End, true) ||
+                        il.PointOnLine(il.Start, true) || il.PointOnLine(il.End, true))
                     {
-                         Grid.AddEdge(line.Start, line.End);
+                         Grid.AddEdge(il.Start, il.End);
                     }
                 }
             }
@@ -451,24 +452,22 @@ namespace TravelDistanceAnalyzer
         /// This is very simple approaches that ignores voids or obstacles inside room and won't work for complex rooms.
         /// </summary>
         /// <param name="room">Room geometry.</param>
-        /// <param name="centerlines">Corridor segments with precalculated center lines.</param>
-        /// <param name="grid">AdaptiveGrid to insert new vertices and edge into.</param>
         /// <returns></returns>
         private List<GridVertex> AddRoom(
             SpaceBoundary room,
             IEnumerable<WallCandidate>? walls,
             IEnumerable<Door>? doors)
         {
-            var roomExits = new List<GridVertex>();
+            var roomExitVertices = new List<GridVertex>();
             var perimeter = room.Boundary.Perimeter.CollinearPointsRemoved().TransformedPolygon(room.Transform);
             foreach (var roomEdge in perimeter.Segments())
             {
                 foreach(var exit in FindRoomExits(roomEdge, walls, doors))
                 {
-                    roomExits.Add(exit);
+                    roomExitVertices.Add(exit);
                 }
             }
-            return roomExits;
+            return roomExitVertices;
         }
 
         /// <summary>
@@ -521,7 +520,7 @@ namespace TravelDistanceAnalyzer
             return exitVertices;
         }
 
-        public List<Line> GetCorridorAdjacentSegments(Line roomSide)
+        private List<Line> GetCorridorAdjacentSegments(Line roomSide)
         {
             List<Line> exitLines = new List<Line>();
             foreach (var line in _centerlines)
@@ -544,7 +543,7 @@ namespace TravelDistanceAnalyzer
             return exitLines;
         }
 
-        public List<Line> CombineLines(Line roomSide, List<Line> corridorAdjacent)
+        private List<Line> CombineLines(Line roomSide, List<Line> corridorAdjacent)
         {
             List<Domain1d> parameters = new List<Domain1d>();
             foreach (var c in corridorAdjacent)
@@ -579,7 +578,7 @@ namespace TravelDistanceAnalyzer
             return adjacentRanges.Select(r => new Line(roomSide.PointAt(r.Min), roomSide.PointAt(r.Max))).ToList();
         }
 
-        public List<Line> GetOpenPassages(Line roomSide, IEnumerable<WallCandidate>? walls)
+        private List<Line> GetOpenPassages(Line roomSide, IEnumerable<WallCandidate>? walls)
         {
             if (walls == null)
             {

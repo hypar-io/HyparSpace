@@ -7,13 +7,13 @@ namespace Elements
 {
     internal class RouteDistanceConfiguration : GeometricElement
     {
-        public string AddId;
-
-        public List<Vector3> Destinations;
-
         private double _snapingDistance = 0.25;
         private double _routeHeight = 1;
         private List<Line> _lineRepresentation = new();
+
+        public string AddId;
+
+        public List<Vector3> Destinations;
 
         public RouteDistanceConfiguration(string addId, IList<Vector3> destinations) 
         {
@@ -22,6 +22,14 @@ namespace Elements
             var color = ColorFactory.FromGuid(AddId);
             Material = new Material("Route", color);
         } 
+
+        public double Distance { get; set; }
+
+        public Color Color
+        {
+            get { return Material.Color; }
+            set { Material.Color = value; }
+        }
 
         public override void UpdateRepresentations()
         {
@@ -41,14 +49,6 @@ namespace Elements
                     RepresentationInstances.Add(new RepresentationInstance(r, Material));
                 }
             }
-        }
-
-        public double Distance { get; set; }
-
-        public Color Color
-        {
-            get { return Material.Color; }
-            set { Material.Color = value; }
         }
 
         public void Compute(AdaptiveGridBuilder builder)
