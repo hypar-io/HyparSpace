@@ -35,9 +35,19 @@ namespace OpenOfficeLayout
         /// <returns>A OpenOfficeLayoutOutputs instance containing computed results and the model with any new elements.</returns>
         public static OpenOfficeLayoutOutputs Execute(Dictionary<string, Model> inputModels, OpenOfficeLayoutInputs input)
         {
+            var output = new OpenOfficeLayoutOutputs();
+
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             // var catalog = JsonConvert.DeserializeObject<ContentCatalog>(File.ReadAllText("./catalog.json"));
+
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "OpenOfficeDeskConfigurations.json");
+            if (ContentManagement.LoadConfigAndCatalog<ProgramRequirement>(inputModels, "Open Office", out var configPath, out var catPath, new Guid("65640703-dfbf-485f-a291-8f1e3193c28c")))
+            {
+                output.Warnings.Add("Using catalog and config from program reqs.");
+                configJsonPath = configPath;
+                ContentCatalogRetrieval.SetCatalogFilePath(catPath);
+            }
+
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
             inputModels.TryGetValue("Levels", out var levelsModel);
@@ -76,7 +86,6 @@ namespace OpenOfficeLayout
             var defaultDeskTypeName = Hypar.Model.Utilities.GetStringValueFromEnum(input.DeskType);
             var defaultConfig = configs[defaultDeskTypeName];
 
-            var output = new OpenOfficeLayoutOutputs();
 
             var avoidanceStrat = input.ColumnAvoidanceStrategy;
             var overridesBySpaceBoundaryId = LayoutStrategies.GetOverridesBySpaceBoundaryId<SpaceSettingsOverride, SpaceBoundary, LevelElements>(input.Overrides?.SpaceSettings, (ov) => ov.Identity.ParentCentroid, levels);

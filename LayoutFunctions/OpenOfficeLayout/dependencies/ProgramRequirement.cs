@@ -3,8 +3,14 @@ using Newtonsoft.Json;
 
 namespace Elements
 {
-    public partial class ProgramRequirement
+    public partial class ProgramRequirement : IProgramRequirement
     {
+        [JsonProperty("Layout Type")]
+        public LayoutType LayoutType { get; set; }
+        public Guid? SpaceConfig { get; set; }
+
+        public Guid? Catalog { get; set; }
+
         public int CountPlaced { get; set; }
         public int RemainingToPlace
         {

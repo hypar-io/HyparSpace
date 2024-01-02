@@ -6,6 +6,10 @@
   "language": "C#",
   "model_dependencies": [
     {
+      "name": "Program Requirements",
+      "optional": true
+    },
+    {
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
