@@ -360,7 +360,7 @@ namespace LayoutFunctionCommon
                     {
                         success = true;
                         SetLevelVolume(layout.Instance, levelVolume?.Id);
-                        SetParentSpace(layout.Instance, room.Id);
+                        SetParentSpace(layout.Instance, room);
 
                         wallCandidateLines.AddRange(WallCandidates);
 
@@ -859,7 +859,7 @@ namespace LayoutFunctionCommon
             }
         }
 
-        public static void SetParentSpace(ComponentInstance componentInstance, Guid? parentSpaceId)
+        public static void SetParentSpace(ComponentInstance componentInstance, ISpaceBoundary parentSpaceBoundary)
         {
             if (componentInstance != null)
             {
@@ -867,17 +867,19 @@ namespace LayoutFunctionCommon
                 {
                     if (instance != null)
                     {
-                        instance.AdditionalProperties["Space"] = parentSpaceId;
+                        instance.AdditionalProperties["Space"] = parentSpaceBoundary.Id;
+                        instance.AdditionalProperties["Space Boundary"] = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform).Vertices;
                     }
                 }
             }
         }
 
-        public static void SetParentSpace(ElementInstance elementInstance, Guid parentSpaceId)
+        public static void SetParentSpace(ElementInstance elementInstance, ISpaceBoundary parentSpaceBoundary)
         {
             if (elementInstance != null)
             {
-                elementInstance.AdditionalProperties["Space"] = parentSpaceId;
+                elementInstance.AdditionalProperties["Space"] = parentSpaceBoundary.Id;
+                elementInstance.AdditionalProperties["Space Boundary"] = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform).Vertices;
             }
         }
 

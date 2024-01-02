@@ -98,7 +98,7 @@ namespace PhoneBoothLayout
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                                LayoutStrategies.SetParentSpace(layout, room.Id);
+                                LayoutStrategies.SetParentSpace(layout, room);
                                 output.Model.AddElement(layout);
                                 seatsCount++;
                             }
@@ -113,7 +113,7 @@ namespace PhoneBoothLayout
                             if (layout != null)
                             {
                                 LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                                LayoutStrategies.SetParentSpace(layout, room.Id);
+                                LayoutStrategies.SetParentSpace(layout, room);
                                 output.Model.AddElement(layout);
                                 seatsCount++;
                             }
