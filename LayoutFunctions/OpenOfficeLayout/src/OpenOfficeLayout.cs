@@ -182,7 +182,7 @@ namespace OpenOfficeLayout
                             foreach (var desk in desks)
                             {
                                 LayoutStrategies.SetLevelVolume(desk as ElementInstance, levelVolume?.Id);
-                                LayoutStrategies.SetParentSpace(desk as ElementInstance, ob.Id);
+                                LayoutStrategies.SetParentSpace(desk as ElementInstance, ob);
                             }
                             output.Model.AddElements(desks);
 

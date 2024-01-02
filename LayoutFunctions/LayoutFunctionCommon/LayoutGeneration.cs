@@ -83,7 +83,7 @@ namespace LayoutFunctionCommon
 
                         var layout = InstantiateLayoutByFit(configInfo, room.Transform);
                         LayoutStrategies.SetLevelVolume(layout.Instance, levelVolume?.Id);
-                        LayoutStrategies.SetParentSpace(layout.Instance, room.Id);
+                        LayoutStrategies.SetParentSpace(layout.Instance, room);
                         wallCandidateLines.AddRange(wallCandidates);
                         outputModel.AddElement(layout.Instance);
                         seatsCount = CountSeats(layout);

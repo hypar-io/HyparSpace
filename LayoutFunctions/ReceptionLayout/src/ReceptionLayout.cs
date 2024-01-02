@@ -93,7 +93,7 @@ namespace ReceptionLayout
                         {
                             var layout = InstantiateLayout(configs, width, depth, rect, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                            LayoutStrategies.SetParentSpace(layout, room.Id);
+                            LayoutStrategies.SetParentSpace(layout, room);
                             output.Model.AddElement(layout);
                             seatsCount += seats;
                         }
@@ -105,7 +105,7 @@ namespace ReceptionLayout
                             // output.Model.AddElement(new ModelCurve(cinchedPoly, BuiltInMaterials.ZAxis, levelVolume.Transform));
                             var layout = InstantiateLayout(configs, width, depth, cinchedPoly, room.Transform, out var seats);
                             LayoutStrategies.SetLevelVolume(layout, levelVolume?.Id);
-                            LayoutStrategies.SetParentSpace(layout, room.Id);
+                            LayoutStrategies.SetParentSpace(layout, room);
                             output.Model.AddElement(layout);
                             Console.WriteLine("🤷‍♂️ funny shape!!!");
                             seatsCount += seats;
