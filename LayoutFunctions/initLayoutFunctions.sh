@@ -19,3 +19,5 @@ cd ../PrivateOfficeLayout
 hypar init
 cd ../ReceptionLayout
 hypar init
+cd ../Doors
+hypar init

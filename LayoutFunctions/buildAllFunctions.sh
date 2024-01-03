@@ -11,6 +11,7 @@ projects=(
     "PrivateOfficeLayout"
     "ReceptionLayout"
     "InteriorPartitions"
+    "Doors"
 )
 
 # Initialize an empty array to hold projects that fail to build

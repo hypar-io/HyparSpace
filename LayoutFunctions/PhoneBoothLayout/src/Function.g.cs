@@ -63,7 +63,7 @@ namespace PhoneBoothLayout
             {
                 this.store = new UrlModelStore<PhoneBoothLayoutInputs>();
             }
-            args.StreamModel = true;
+            
 
             var l = new InvocationWrapper<PhoneBoothLayoutInputs,PhoneBoothLayoutOutputs> (store, PhoneBoothLayout.Execute);
             var output = await l.InvokeAsync(args);

@@ -19,3 +19,7 @@ cd ../PrivateOfficeLayout
 hypar update
 cd ../ReceptionLayout
 hypar update
+cd ../InteriorPartitions
+hypar update
+cd ../Doors
+hypar update
