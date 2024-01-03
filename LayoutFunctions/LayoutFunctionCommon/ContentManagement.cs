@@ -26,6 +26,11 @@ namespace LayoutFunctionCommon
             }
             var programReqs = programReqModel.AllElementsAssignableFromType<TProgramRequirement>();
             var req = programReqs?.FirstOrDefault(r => r.HyparSpaceType == programName);
+            if(req == null)
+            {
+                Console.WriteLine($"No Program Requirement found for {programName}.");
+                return false;
+            }
             var (catPath, confPath) = WriteLayoutConfigs(req, programReqModel);
             if (catPath == null || confPath == null)
             {
