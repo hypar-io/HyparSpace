@@ -63,7 +63,7 @@ namespace OpenCollaborationLayout
             {
                 this.store = new UrlModelStore<OpenCollaborationLayoutInputs>();
             }
-            args.StreamModel = true;
+            
 
             var l = new InvocationWrapper<OpenCollaborationLayoutInputs,OpenCollaborationLayoutOutputs> (store, OpenCollaborationLayout.Execute);
             var output = await l.InvokeAsync(args);

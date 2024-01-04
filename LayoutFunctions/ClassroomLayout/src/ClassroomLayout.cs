@@ -39,8 +39,12 @@ namespace ClassroomLayout
             }
             var levelVolumes = LayoutStrategies.GetLevelVolumes<LevelVolume>(inputModels);
             var output = new ClassroomLayoutOutputs();
-            var configJson = File.ReadAllText("./ClassroomConfigurations.json");
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "ClassroomConfigurations.json");
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, "Classroom");
+
+            // var configJson = File.ReadAllText("./ClassroomConfigurations.json");
+            // var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
             int totalCountableSeats = 0;
             int seatsAtDesk = 0;

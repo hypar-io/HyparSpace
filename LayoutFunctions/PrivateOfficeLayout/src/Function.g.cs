@@ -63,7 +63,7 @@ namespace PrivateOfficeLayout
             {
                 this.store = new UrlModelStore<PrivateOfficeLayoutInputs>();
             }
-            args.StreamModel = true;
+            
 
             var l = new InvocationWrapper<PrivateOfficeLayoutInputs,PrivateOfficeLayoutOutputs> (store, PrivateOfficeLayout.Execute);
             var output = await l.InvokeAsync(args);

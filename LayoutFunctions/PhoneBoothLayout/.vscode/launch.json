@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "inputs": [
+    {
+      "id": "workflowId",
+      "type": "promptString",
+      "description": "Enter the workflow id to run."
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Attach to Hypar Run",
+      "type": "coreclr",
+      "request": "attach",
+      "processName": "PhoneBoothLayout.Server"
+    },
+    {
+      "name": "Launch Hypar Run (Run once only)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/bin/Debug/net6.0/PhoneBoothLayout.Server.dll",
+      "args": [
+        "--workflow-id",
+        "${input:workflowId}"
+      ],
+      "preLaunchTask": "server-build"
+    }
+  ]
+}

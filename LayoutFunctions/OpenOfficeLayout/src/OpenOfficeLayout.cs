@@ -41,12 +41,7 @@ namespace OpenOfficeLayout
             // var catalog = JsonConvert.DeserializeObject<ContentCatalog>(File.ReadAllText("./catalog.json"));
 
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "OpenOfficeDeskConfigurations.json");
-            if (ContentManagement.LoadConfigAndCatalog<ProgramRequirement>(inputModels, "Open Office", out var configPath, out var catPath, new Guid("65640703-dfbf-485f-a291-8f1e3193c28c")))
-            {
-                output.Warnings.Add("Using catalog and config from program reqs.");
-                configJsonPath = configPath;
-                ContentCatalogRetrieval.SetCatalogFilePath(catPath);
-            }
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, "Open Office");
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsOfType<LevelElements>();
@@ -64,9 +59,6 @@ namespace OpenOfficeLayout
                     }
                 }
             }
-
-            var configJson = File.ReadAllText(configJsonPath);
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
 
             if (input.CustomWorkstationProperties == null)
             {

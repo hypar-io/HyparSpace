@@ -172,7 +172,6 @@ namespace LayoutFunctionCommon
             dynamic overrides, Model outputModel,
             bool createWalls,
             string configurationsPath,
-            string catalogPath = "catalog.json",
             Func<LayoutInstantiated, int> countSeats = null
              )
              where TLevelElements : Element, ILevelElements
@@ -181,7 +180,14 @@ namespace LayoutFunctionCommon
              where TCirculationSegment : Floor, ICirculationSegment
         {
             var processedSpaces = new HashSet<Guid>();
-            ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
+
+            // ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
+            // var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
+            // var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), configurationsPath);
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, programTypeName);
+
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();
 
@@ -195,8 +201,6 @@ namespace LayoutFunctionCommon
                 }
             }
             var levelVolumes = GetLevelVolumes<TLevelVolume>(inputModels);
-            var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
-            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {

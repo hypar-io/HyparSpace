@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Elements;
+using Elements.Components;
 using Newtonsoft.Json;
 
 namespace LayoutFunctionCommon
@@ -13,8 +14,7 @@ namespace LayoutFunctionCommon
             Dictionary<string, Model> inputModels,
             string programName,
             out string configPath,
-            out string catalogPath,
-            Guid? programId = null
+            out string catalogPath
             ) where TProgramRequirement : Element, IProgramRequirement
         {
             configPath = null;
@@ -26,7 +26,7 @@ namespace LayoutFunctionCommon
             }
             var programReqs = programReqModel.AllElementsAssignableFromType<TProgramRequirement>();
             var req = programReqs?.FirstOrDefault(r => r.HyparSpaceType == programName);
-            if(req == null)
+            if (req == null)
             {
                 Console.WriteLine($"No Program Requirement found for {programName}.");
                 return false;
@@ -42,7 +42,7 @@ namespace LayoutFunctionCommon
             return true;
         }
 
-        private static (string catalogPath, string configPath) WriteLayoutConfigs(IProgramRequirement req, Model programReqModel)
+        public static (string catalogPath, string configPath) WriteLayoutConfigs(IProgramRequirement req, Model programReqModel)
         {
             if (!req.SpaceConfig.HasValue || !req.Catalog.HasValue)
             {
@@ -68,6 +68,19 @@ namespace LayoutFunctionCommon
             var config = spaceConfig.SpaceConfiguration;
             File.WriteAllText(configPath, JsonConvert.SerializeObject(config));
             return (catalogPath, configPath);
+        }
+
+        public static SpaceConfiguration GetSpaceConfiguration(Dictionary<string, Model> inputModels, string configJsonPath, string programName)
+        {
+            if (LoadConfigAndCatalog<ProgramRequirement>(inputModels, programName, out var configPath, out var catPath))
+            {
+                configJsonPath = configPath;
+                ContentCatalogRetrieval.SetCatalogFilePath(catPath);
+            }
+
+            var configJson = File.ReadAllText(configJsonPath);
+            var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            return configs;
         }
     }
 }

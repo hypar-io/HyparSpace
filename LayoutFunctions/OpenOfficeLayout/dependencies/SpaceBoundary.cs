@@ -10,7 +10,6 @@ namespace Elements
     public partial class SpaceBoundary : ISpaceBoundary
     {
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
-
         public Line AlignmentEdge { get; set; } = null;
         public double AvailableLength { get; set; } = 0;
         public Transform ToAlignmentEdge = null;
@@ -40,8 +39,6 @@ namespace Elements
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: true);
             }
         }
-
-
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.
