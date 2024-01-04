@@ -41,7 +41,7 @@ namespace LayoutFunctionCommon
             // var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
             // var configs = DeserializeConfigJson(configJson);
 
-            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), catalogPath);
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), configurationsPath);
             SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, programTypeName);
 
             var spacePlanningZones = inputModels["Space Planning Zones"];

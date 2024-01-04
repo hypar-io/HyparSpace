@@ -100,7 +100,7 @@ namespace Elements
         public double TotalArea { get; set; }
     
         /// <summary>The guid of the space configuration</summary>
-        [JsonProperty("Space Config", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("SpaceConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SpaceConfig { get; set; }
     
         /// <summary>The guid of the layout type</summary>
