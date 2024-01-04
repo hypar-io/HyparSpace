@@ -44,12 +44,9 @@ namespace LayoutFunctionCommon
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), catalogPath);
             SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, programTypeName);
 
-
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = GetLevels(inputModels, spacePlanningZones);
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
-
-
 
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
