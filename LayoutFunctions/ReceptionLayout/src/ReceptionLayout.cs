@@ -53,10 +53,7 @@ namespace ReceptionLayout
             var output = new ReceptionLayoutOutputs();
 
             string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "./ReceptionConfigurations.json");
-            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, "Reception");
-
-            // var configJson = File.ReadAllText("./ReceptionConfigurations.json");
-            // var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration<ProgramRequirement>(inputModels, configJsonPath, "Reception");
 
             var hasCore = inputModels.TryGetValue("Core", out var coresModel) && coresModel.AllElementsOfType<ServiceCore>().Any();
             List<Line> coreSegments = new();

@@ -70,9 +70,9 @@ namespace LayoutFunctionCommon
             return (catalogPath, configPath);
         }
 
-        public static SpaceConfiguration GetSpaceConfiguration(Dictionary<string, Model> inputModels, string configJsonPath, string programName)
+        public static SpaceConfiguration GetSpaceConfiguration<TProgramRequirement>(Dictionary<string, Model> inputModels, string configJsonPath, string programName) where TProgramRequirement : Element, IProgramRequirement
         {
-            if (LoadConfigAndCatalog<ProgramRequirement>(inputModels, programName, out var configPath, out var catPath))
+            if (LoadConfigAndCatalog<TProgramRequirement>(inputModels, programName, out var configPath, out var catPath))
             {
                 configJsonPath = configPath;
                 ContentCatalogRetrieval.SetCatalogFilePath(catPath);

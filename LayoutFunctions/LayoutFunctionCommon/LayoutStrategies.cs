@@ -171,7 +171,7 @@ namespace LayoutFunctionCommon
             Dictionary<string, Model> inputModels,
             dynamic overrides, Model outputModel,
             bool createWalls,
-            string configurationsPath,
+            SpaceConfiguration configs,
             Func<LayoutInstantiated, int> countSeats = null
              )
              where TLevelElements : Element, ILevelElements
@@ -180,13 +180,6 @@ namespace LayoutFunctionCommon
              where TCirculationSegment : Floor, ICirculationSegment
         {
             var processedSpaces = new HashSet<Guid>();
-
-            // ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
-            // var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
-            // var configs = JsonConvert.DeserializeObject<SpaceConfiguration>(configJson);
-
-            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), configurationsPath);
-            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, programTypeName);
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = spacePlanningZones.AllElementsAssignableFromType<TLevelElements>();

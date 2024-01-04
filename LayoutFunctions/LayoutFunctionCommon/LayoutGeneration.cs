@@ -30,18 +30,11 @@ namespace LayoutFunctionCommon
                                               Dictionary<string, Model> inputModels,
                                               dynamic overrides,
                                               bool createWalls,
-                                              string configurationsPath)
+                                              SpaceConfiguration configs)
         {
 
             var outputModel = new Model();
             var totalSeats = 0;
-
-            // ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
-            // var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
-            // var configs = DeserializeConfigJson(configJson);
-
-            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), configurationsPath);
-            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration(inputModels, configJsonPath, programTypeName);
 
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = GetLevels(inputModels, spacePlanningZones);

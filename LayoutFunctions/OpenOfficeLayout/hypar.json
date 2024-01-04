@@ -290,7 +290,8 @@
     "https://schemas.hypar.io/CirculationSegment.json",
     "https://schemas.hypar.io/LevelVolume.json",
     "https://schemas.hypar.io/LabelConfiguration.json",
-    "https://schemas.hypar.io/CollaborationSpaceBoundary.json"
+    "https://schemas.hypar.io/CollaborationSpaceBoundary.json",
+    "https://schemas.hypar.io/ProgramRequirement.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "default_camera": {
