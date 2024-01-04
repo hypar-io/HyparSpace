@@ -30,8 +30,7 @@ namespace LayoutFunctionCommon
                                               Dictionary<string, Model> inputModels,
                                               dynamic overrides,
                                               bool createWalls,
-                                              string configurationsPath,
-                                              string catalogPath = "catalog.json")
+                                              string configurationsPath)
         {
 
             var outputModel = new Model();
