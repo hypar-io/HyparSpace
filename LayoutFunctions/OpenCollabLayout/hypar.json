@@ -78,5 +78,6 @@
   "repository_url": "https://github.com/hypar-io/function",
   "source_file_key": null,
   "preview_image": null,
-  "thumbnail_id": null
+  "thumbnail_id": null,
+  "stream_model": true
 }

@@ -79,5 +79,6 @@
     "https://schemas.hypar.io/CirculationSegment.json",
     "https://schemas.hypar.io/LevelVolume.json",
     "https://schemas.hypar.io/RoomTally.json"
-  ]
+  ],
+  "stream_model": true
 }

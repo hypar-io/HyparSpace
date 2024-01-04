@@ -63,7 +63,7 @@ namespace MeetingRoomLayout
             {
                 this.store = new UrlModelStore<MeetingRoomLayoutInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<MeetingRoomLayoutInputs,MeetingRoomLayoutOutputs> (store, MeetingRoomLayout.Execute);
             var output = await l.InvokeAsync(args);

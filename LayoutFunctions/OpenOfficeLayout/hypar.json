@@ -296,5 +296,6 @@
   "default_camera": {
     "named_position": "top",
     "projection": "orthographic"
-  }
+  },
+  "stream_model": true
 }
