@@ -52,7 +52,11 @@ namespace SpaceConfigurationFromModel
 
             var programName = input.Program ?? "Open Office";
             var layoutGeneration = new SpaceConfigurationFromModelLayoutGeneration(spaceConfiguration);
-            var result = layoutGeneration.StandardLayoutOnAllLevels(programName, inputModels, null, false, null, input.ModelFile.LocalFilePath);
+
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), input.ModelFile.LocalFilePath);
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration<ProgramRequirement>(inputModels, configJsonPath, programName);
+
+            var result = layoutGeneration.StandardLayoutOnAllLevels(programName, inputModels, null, false, configs);
             output.Model = result.OutputModel;
             return output;
         }

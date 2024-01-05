@@ -59,7 +59,8 @@
     "https://schemas.hypar.io/LevelElements.json",
     "https://schemas.hypar.io/CirculationSegment.json",
     "https://schemas.hypar.io/LevelVolume.json",
-    "https://schemas.hypar.io/ServiceCore.json"
+    "https://schemas.hypar.io/ServiceCore.json",
+    "https://schemas.hypar.io/ProgramRequirement.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",
