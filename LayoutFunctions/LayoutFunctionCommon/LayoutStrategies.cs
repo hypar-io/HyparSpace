@@ -249,7 +249,7 @@ namespace LayoutFunctionCommon
         /// <summary>
         /// Pringle-specific behavior to pick a specific config and orientation. This code only executes if the room has a `ConfigId` property, which is only set on pringle.
         /// </summary>
-        public static SpaceConfiguration LimitConfigsToId<TSpaceBoundary>(SpaceConfiguration configs, TSpaceBoundary room, List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> wallCandidateOptions = null) where TSpaceBoundary : Element, ISpaceBoundary
+        public static SpaceConfiguration LimitConfigsToId<TSpaceBoundary>(SpaceConfiguration originalConfigs, TSpaceBoundary room, List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> wallCandidateOptions = null) where TSpaceBoundary : Element, ISpaceBoundary
         {
             // If a set of wall candidate options are provided, limit to the one that aligns with the boundary's first edge.
             // In the future, as room shapes become more editable, we might want to pass in an explicit "orientation edge" instead of just using the first edge.
@@ -266,16 +266,16 @@ namespace LayoutFunctionCommon
                 }
             }
 
-            // Limit the possible configs to the one specified by the room's ConfigId property.
+            // Limit the possible configs to the one specified by the room's ConfigId property, if it's found in the set.
             var configId = room.ConfigId;
-            var config = new SpaceConfiguration();
-            if (configs.ContainsKey(configId))
+            var newConfigs = new SpaceConfiguration();
+            if (originalConfigs.ContainsKey(configId))
             {
-                config.Add(configId, configs[configId]);
-                return config;
+                newConfigs.Add(configId, originalConfigs[configId]);
+                return newConfigs;
             }
 
-            return configs;
+            return originalConfigs;
         }
 
 
