@@ -211,7 +211,13 @@ namespace LayoutFunctionCommon
                 foreach (var room in roomBoundaries)
                 {
                     var wallCandidateLines = new List<RoomEdge>();
-                    var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configs, corridorSegments, levelVolume, wallCandidateLines);
+
+                    var configsForRoom = configs;
+                    if (room.ConfigId != null)
+                    {
+                        configsForRoom = LimitConfigsToId(configs, room);
+                    }
+                    var layoutSucceeded = ProcessRoom(room, outputModel, countSeats, configsForRoom, corridorSegments, levelVolume, wallCandidateLines);
                     if (layoutSucceeded) { processedSpaces.Add(room.Id); }
 
                     double height = room.Height == 0 ? 3 : room.Height;
@@ -238,6 +244,38 @@ namespace LayoutFunctionCommon
             }
             OverrideUtilities.InstancePositionOverrides(overrides, outputModel);
             return processedSpaces;
+        }
+
+        /// <summary>
+        /// Pringle-specific behavior to pick a specific config and orientation. This code only executes if the room has a `ConfigId` property, which is only set on pringle.
+        /// </summary>
+        public static SpaceConfiguration LimitConfigsToId<TSpaceBoundary>(SpaceConfiguration originalConfigs, TSpaceBoundary room, List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> wallCandidateOptions = null) where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            // If a set of wall candidate options are provided, limit to the one that aligns with the boundary's first edge.
+            // In the future, as room shapes become more editable, we might want to pass in an explicit "orientation edge" instead of just using the first edge.
+            if (wallCandidateOptions != null)
+            {
+                var roomOrientationEdge = room.Boundary.Perimeter.Segments().First();
+                for (int i = wallCandidateOptions.Count - 1; i >= 0; i--)
+                {
+                    var (OrientationGuideEdge, _) = wallCandidateOptions[i];
+                    if (OrientationGuideEdge.Line.Mid().DistanceTo(roomOrientationEdge.Mid()) > 0.01)
+                    {
+                        wallCandidateOptions.RemoveAt(i);
+                    }
+                }
+            }
+
+            // Limit the possible configs to the one specified by the room's ConfigId property, if it's found in the set.
+            var configId = room.ConfigId;
+            var newConfigs = new SpaceConfiguration();
+            if (originalConfigs.ContainsKey(configId))
+            {
+                newConfigs.Add(configId, originalConfigs[configId]);
+                return newConfigs;
+            }
+
+            return originalConfigs;
         }
 
 

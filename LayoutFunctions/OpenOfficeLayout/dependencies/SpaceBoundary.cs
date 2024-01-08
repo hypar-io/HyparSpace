@@ -4,6 +4,7 @@ using System.Linq;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using LayoutFunctionCommon;
+using Newtonsoft.Json;
 
 namespace Elements
 {
@@ -23,6 +24,9 @@ namespace Elements
         public int CountPlaced { get; set; } = 0;
 
         public int SpaceCount { get; set; } = 1;
+
+        [JsonProperty("Config Id")]
+        public string ConfigId { get; set; } // unused by this layout type
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
