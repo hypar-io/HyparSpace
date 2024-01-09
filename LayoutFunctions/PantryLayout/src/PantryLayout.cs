@@ -53,7 +53,11 @@ namespace PantryLayout
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
 
             var layoutGeneration = new PantryLayoutGeneration();
-            var result = layoutGeneration.StandardLayoutOnAllLevels("Pantry", inputModels, input.Overrides, false, "./PantryConfigurations.json");
+
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "./PantryConfigurations.json");
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration<ProgramRequirement>(inputModels, configJsonPath, "Pantry");
+
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Pantry", inputModels, input.Overrides, false, configs);
             var output = new PantryLayoutOutputs
             {
                 Model = result.OutputModel,

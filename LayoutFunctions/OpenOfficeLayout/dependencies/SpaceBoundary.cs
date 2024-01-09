@@ -4,13 +4,13 @@ using System.Linq;
 using Elements.Geometry;
 using Elements.Geometry.Solids;
 using LayoutFunctionCommon;
+using Newtonsoft.Json;
 
 namespace Elements
 {
     public partial class SpaceBoundary : ISpaceBoundary
     {
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
-
         public Line AlignmentEdge { get; set; } = null;
         public double AvailableLength { get; set; } = 0;
         public Transform ToAlignmentEdge = null;
@@ -24,6 +24,9 @@ namespace Elements
         public int CountPlaced { get; set; } = 0;
 
         public int SpaceCount { get; set; } = 1;
+
+        [JsonProperty("Config Id")]
+        public string ConfigId { get; set; } // unused by this layout type
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
@@ -40,8 +43,6 @@ namespace Elements
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: true);
             }
         }
-
-
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.

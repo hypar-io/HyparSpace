@@ -30,18 +30,16 @@ namespace LayoutFunctionCommon
                                               Dictionary<string, Model> inputModels,
                                               dynamic overrides,
                                               bool createWalls,
-                                              string configurationsPath,
-                                              string catalogPath = "catalog.json")
+                                              SpaceConfiguration configs)
         {
 
             var outputModel = new Model();
             var totalSeats = 0;
-            ContentCatalogRetrieval.SetCatalogFilePath(catalogPath);
+
             var spacePlanningZones = inputModels["Space Planning Zones"];
             var levels = GetLevels(inputModels, spacePlanningZones);
             var levelVolumes = LayoutStrategies.GetLevelVolumes<TLevelVolume>(inputModels);
-            var configJson = configurationsPath != null ? File.ReadAllText(configurationsPath) : "{}";
-            var configs = DeserializeConfigJson(configJson);
+
             var allSpaceBoundaries = spacePlanningZones.AllElementsAssignableFromType<TSpaceBoundary>().Where(z => (z.HyparSpaceType ?? z.Name) == programTypeName).ToList();
             foreach (var lvl in levels)
             {
@@ -63,6 +61,12 @@ namespace LayoutFunctionCommon
                     };
                     boundaryCurves.AddRange(spaceBoundary.Voids ?? new List<Polygon>());
 
+                    var configsForRoom = configs;
+                    if (room.ConfigId != null)
+                    {
+                        configsForRoom = LayoutStrategies.LimitConfigsToId(configs, room, wallCandidateOptions);
+                    }
+
                     var possibleConfigs = new List<(ConfigInfo configInfo, List<RoomEdge> wallCandidates)>();
                     foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
                     {
@@ -70,7 +74,7 @@ namespace LayoutFunctionCommon
                         var grid = new Grid2d(boundaryCurves, orientationTransform);
                         foreach (var cell in grid.GetCells())
                         {
-                            var config = FindConfigByFit(configs, cell);
+                            var config = FindConfigByFit(configsForRoom, cell);
                             if (config != null)
                             {
                                 possibleConfigs.Add((config.Value, WallCandidates));
@@ -240,7 +244,7 @@ namespace LayoutFunctionCommon
             KeyValuePair<string, ContentConfiguration>? selectedConfigPair = null;
             foreach (var configPair in orderedConfigs)
             {
-                if (configPair.Value.CellBoundary.Width < width && configPair.Value.CellBoundary.Depth < length)
+                if (configPair.Value.CellBoundary.Width < (width + Vector3.EPSILON) && configPair.Value.CellBoundary.Depth < (length + Vector3.EPSILON))
                 {
                     selectedConfigPair = configPair;
                     break;

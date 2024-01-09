@@ -6,6 +6,10 @@
   "language": "C#",
   "model_dependencies": [
     {
+      "name": "Program Requirements",
+      "optional": true
+    },
+    {
       "autohide": false,
       "name": "Space Planning Zones",
       "optional": false
@@ -286,8 +290,8 @@
     "https://schemas.hypar.io/CirculationSegment.json",
     "https://schemas.hypar.io/LevelVolume.json",
     "https://schemas.hypar.io/LabelConfiguration.json",
-    "https://schemas.hypar.io/ProgramRequirement.json",
-    "https://schemas.hypar.io/CollaborationSpaceBoundary.json"
+    "https://schemas.hypar.io/CollaborationSpaceBoundary.json",
+    "https://schemas.hypar.io/ProgramRequirement.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "default_camera": {

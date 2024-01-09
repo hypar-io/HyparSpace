@@ -21,6 +21,9 @@ namespace Elements
 
         public string DefaultWallType { get; set; }
 
+        [JsonProperty("Config Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ConfigId { get; set; }
+
     }
 
 }

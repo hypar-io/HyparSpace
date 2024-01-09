@@ -27,7 +27,7 @@ namespace Elements
     public partial class ProgramRequirement : Element
     {
         [JsonConstructor]
-        public ProgramRequirement(string @programGroup, string @programName, Color? @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid @id = default, string @name = null)
+        public ProgramRequirement(string @programGroup, string @programName, Color? @color, double @areaPerSpace, int @spaceCount, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementCountType @countType, double @totalArea, System.Guid? @spaceConfig, System.Guid? @layoutTypeId, System.Guid? @catalog, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.ProgramGroup = @programGroup;
@@ -40,6 +40,9 @@ namespace Elements
             this.HyparSpaceType = @hyparSpaceType;
             this.CountType = @countType;
             this.TotalArea = @totalArea;
+            this.SpaceConfig = @spaceConfig;
+            this.LayoutTypeId = @layoutTypeId;
+            this.Catalog = @catalog;
             }
         
         
@@ -95,6 +98,18 @@ namespace Elements
         /// <summary>The Area per Space times the Space Count</summary>
         [JsonProperty("Total Area", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double TotalArea { get; set; }
+    
+        /// <summary>The guid of the space configuration</summary>
+        [JsonProperty("SpaceConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? SpaceConfig { get; set; }
+    
+        /// <summary>The guid of the layout type</summary>
+        [JsonProperty("Layout Type Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? LayoutTypeId { get; set; }
+    
+        /// <summary>The guid of the catalog</summary>
+        [JsonProperty("Catalog", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Catalog { get; set; }
     
     
     }

@@ -87,9 +87,9 @@ namespace OpenCollaborationLayout
                 return spaceConfiguration;
             }
 
-            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, string configurationsPath, string catalogPath = "catalog.json")
+            public override LayoutGenerationResult StandardLayoutOnAllLevels(string programTypeName, Dictionary<string, Model> inputModels, dynamic overrides, bool createWalls, SpaceConfiguration configs)
             {
-                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configurationsPath, catalogPath);
+                var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configs);
                 return result;
             }
 
@@ -121,7 +121,11 @@ namespace OpenCollaborationLayout
         {
             Elements.Serialization.glTF.GltfExtensions.UseReferencedContentExtension = true;
             var layoutGeneration = new OpenCollaborationLayoutGeneration();
-            var result = layoutGeneration.StandardLayoutOnAllLevels("Open Collaboration", inputModels, input.Overrides, false, "./OpenCollaborationConfigurations.json");
+
+            string configJsonPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "./OpenCollaborationConfigurations.json");
+            SpaceConfiguration configs = ContentManagement.GetSpaceConfiguration<ProgramRequirement>(inputModels, configJsonPath, "Open Collaboration");
+
+            var result = layoutGeneration.StandardLayoutOnAllLevels("Open Collaboration", inputModels, input.Overrides, false, configs);
             var output = new OpenCollaborationLayoutOutputs
             {
                 Model = result.OutputModel,
