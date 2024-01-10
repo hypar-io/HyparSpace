@@ -635,9 +635,19 @@ namespace LayoutFunctionCommon
         public static RoomEdge FindEdgeAdjacentToSegments(IEnumerable<RoomEdge> edgesToClassify, IEnumerable<Line> segmentsToTestAgainst, out IEnumerable<RoomEdge> otherSegments, double maxDist = 0)
         {
             var minDist = double.MaxValue;
-            var minSeg = edgesToClassify.OrderBy(e => e.Length).Last(); // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
+            var edgesOrderedByLength = edgesToClassify.OrderBy(e => e.Length);
+            var minSeg = edgesOrderedByLength.Last(); // if no max dist, and no corridor, we just return the longest edge as an orientation guide.
+
+            // If all the edges are essentially equal, use the first one.
+            // TODO: use a real orientation when it becomes part of the data.
+            if (edgesOrderedByLength.Last().Length - edgesOrderedByLength.First().Length < Vector3.EPSILON)
+            {
+                minSeg = edgesToClassify.First();
+            }
+
             var allEdges = edgesToClassify.ToList();
             var selectedIndex = 0;
+
             for (int i = 0; i < allEdges.Count; i++)
             {
                 var edge = allEdges[i];
