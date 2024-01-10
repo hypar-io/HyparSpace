@@ -259,7 +259,7 @@ namespace LayoutFunctionCommon
                 for (int i = wallCandidateOptions.Count - 1; i >= 0; i--)
                 {
                     var (OrientationGuideEdge, _) = wallCandidateOptions[i];
-                    if (OrientationGuideEdge.Line.Mid().DistanceTo(roomOrientationEdge.Mid()) > 0.01)
+                    if (OrientationGuideEdge.Line.Mid().Project(Plane.XY).DistanceTo(roomOrientationEdge.Mid().Project(Plane.XY)) > 0.01)
                     {
                         wallCandidateOptions.RemoveAt(i);
                     }
