@@ -251,19 +251,9 @@ namespace LayoutFunctionCommon
         /// </summary>
         public static SpaceConfiguration LimitConfigsToId<TSpaceBoundary>(SpaceConfiguration originalConfigs, TSpaceBoundary room, List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> wallCandidateOptions = null) where TSpaceBoundary : Element, ISpaceBoundary
         {
-            // If a set of wall candidate options are provided, limit to the one that aligns with the boundary's first edge.
-            // In the future, as room shapes become more editable, we might want to pass in an explicit "orientation edge" instead of just using the first edge.
             if (wallCandidateOptions != null)
             {
-                var roomOrientationEdge = room.Boundary.Perimeter.Segments().First();
-                for (int i = wallCandidateOptions.Count - 1; i >= 0; i--)
-                {
-                    var (OrientationGuideEdge, _) = wallCandidateOptions[i];
-                    if (OrientationGuideEdge.Line.Mid().Project(Plane.XY).DistanceTo(roomOrientationEdge.Mid().Project(Plane.XY)) > 0.01)
-                    {
-                        wallCandidateOptions.RemoveAt(i);
-                    }
-                }
+                LimitWallCandidateOptionsByConfigId(wallCandidateOptions, room);
             }
 
             // Limit the possible configs to the one specified by the room's ConfigId property, if it's found in the set.
@@ -276,6 +266,21 @@ namespace LayoutFunctionCommon
             }
 
             return originalConfigs;
+        }
+
+        public static void LimitWallCandidateOptionsByConfigId<TSpaceBoundary>(List<(RoomEdge OrientationGuideEdge, List<RoomEdge> WallCandidates)> wallCandidateOptions, TSpaceBoundary room) where TSpaceBoundary : Element, ISpaceBoundary
+        {
+            // If a set of wall candidate options are provided, limit to the one that aligns with the boundary's first edge.
+            // In the future, as room shapes become more editable, we might want to pass in an explicit "orientation edge" instead of just using the first edge.
+            var roomOrientationEdge = room.Boundary.Perimeter.Segments().First();
+            for (int i = wallCandidateOptions.Count - 1; i >= 0; i--)
+            {
+                var (OrientationGuideEdge, _) = wallCandidateOptions[i];
+                if (OrientationGuideEdge.Line.Mid().Project(Plane.XY).DistanceTo(roomOrientationEdge.Mid().Project(Plane.XY)) > 0.01)
+                {
+                    wallCandidateOptions.RemoveAt(i);
+                }
+            }
         }
 
 
@@ -377,6 +382,10 @@ namespace LayoutFunctionCommon
             var success = false;
             var spaceBoundary = room.Boundary;
             var wallCandidateOptions = WallGeneration.FindWallCandidateOptions(room, levelVolume?.Profile, corridorSegments);
+            if (room.ConfigId != null && wallCandidateOptions != null)
+            {
+                LimitWallCandidateOptionsByConfigId(wallCandidateOptions, room);
+            }
 
             foreach (var (OrientationGuideEdge, WallCandidates) in wallCandidateOptions)
             {
