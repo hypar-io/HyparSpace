@@ -640,7 +640,7 @@ namespace LayoutFunctionCommon
 
             // If all the edges are essentially equal, use the first one.
             // TODO: use a real orientation when it becomes part of the data.
-            if (edgesOrderedByLength.Last().Length - edgesOrderedByLength.First().Length < Vector3.EPSILON)
+            if (minSeg.Length - edgesOrderedByLength.First().Length < Vector3.EPSILON)
             {
                 minSeg = edgesToClassify.First();
             }
