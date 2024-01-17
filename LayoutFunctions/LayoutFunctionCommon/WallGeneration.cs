@@ -272,7 +272,13 @@ namespace LayoutFunctionCommon
                     resultCandidates.Add(candidate);
                     continue;
                 }
-                var linesOrderedByLength = collinearLinesGroup.Value.Where(x => !x.Item2.Contains("Partition")).OrderByDescending(v => v.Line.Length());
+                var filteredLines = collinearLinesGroup.Value.Where(x => !x.Item2.Contains("Partition"));
+                if (!filteredLines.Any())
+                {
+                    filteredLines = collinearLinesGroup.Value;
+                }
+
+                var linesOrderedByLength = filteredLines.OrderByDescending(v => v.Line.Length());
 
                 var dominantLineForGroup = linesOrderedByLength.FirstOrDefault(x => x.PrimaryEntryEdge == true);
 
