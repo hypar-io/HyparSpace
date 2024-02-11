@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Elements
 {
-    public partial class SpaceBoundary : ISpaceBoundary
+    public partial class SpaceBoundary : ISpaceBoundary, IHasParent
     {
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
         public Line AlignmentEdge { get; set; } = null;
@@ -27,6 +27,9 @@ namespace Elements
 
         [JsonProperty("Config Id")]
         public string ConfigId { get; set; } // unused by this layout type
+
+        public Guid? Parent { get; set; } = null;
+        public Polygon ParentBoundary { get; set; } = null;
 
         [Newtonsoft.Json.JsonIgnore]
         public LevelElements LevelElements { get; set; }
@@ -63,46 +66,6 @@ namespace Elements
             this.CollectedSpaces.Add(req);
         }
 
-        public List<SpaceBoundary> ResolveCollected()
-        {
-            var newSpaces = new List<SpaceBoundary>();
-            if (this.CollectedSpaces.Count > 0)
-            {
-                var runningX = 0.0;
-                var bonus = 0.0;
-                if (this.AvailableLength < 3)
-                {
-                    bonus = this.AvailableLength / this.CollectedSpaces.Count;
-                }
-                foreach (var space in this.CollectedSpaces)
-                {
-                    var depth = space.Depth.Value;
-                    var width = space.Width.Value + bonus;
-                    if (Math.Abs(this.Depth.Value - depth) < 3)
-                    {
-                        depth = this.Depth.Value;
-                    }
-                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(width + runningX, depth)).TransformedPolygon(this.FromAlignmentEdge);
-                    var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(width + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
-                    var newSb = SpaceBoundary.Make(idealRect, space.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
-                    newSb.AlignmentEdge = edge;
-                    newSb.LevelElements = LevelElements;
-                    newSb.Level = Level;
-                    runningX += width;
-                    newSpaces.Add(newSb);
-                }
-                if (this.AvailableLength > 3)
-                {
-                    var idealRect = Polygon.Rectangle(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, this.Depth.Value)).TransformedPolygon(this.FromAlignmentEdge);
-                    var edge = new Line(new Vector3(runningX, 0, 0), new Vector3(this.AvailableLength + runningX, 0)).TransformedLine(this.FromAlignmentEdge);
-                    var newSb = SpaceBoundary.Make(idealRect, this.ProgramName, this.Transform, this.Representation.SolidOperations.OfType<Extrude>().First().Height, (Vector3)this.ParentCentroid, (Vector3)this.IndividualCentroid, this.AdjacentCorridorEdges);
-                    newSb.LevelElements = LevelElements;
-                    newSb.Level = Level;
-                    newSpaces.Add(newSb);
-                }
-            }
-            return newSpaces;
-        }
         public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)
         {
             if (Requirements.TryGetValue(nameToFind, out fullRequirement))
@@ -153,7 +116,7 @@ namespace Elements
             }
         }
         private static Random random = new Random(11);
-        public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
+        public static SpaceBoundary Make(Profile profile, string displayName, Transform xform, double height, SpaceBoundary parent, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
         {
             if (profile.Perimeter.IsClockWise())
             {
@@ -176,7 +139,9 @@ namespace Elements
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
                 Representation = representation,
-                Name = name
+                Name = name,
+                Parent = parent.Id,
+                ParentBoundary = parent.Boundary.Perimeter.TransformedPolygon(parent.Transform)
             };
             if (hasReqMatch)
             {

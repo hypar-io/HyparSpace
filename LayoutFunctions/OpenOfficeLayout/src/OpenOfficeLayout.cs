@@ -190,7 +190,7 @@ namespace OpenOfficeLayout
                             seatsCount += deskCount;
                             foreach (var profile in collabProfiles)
                             {
-                                var sb = SpaceBoundary.Make(profile, "Open Collaboration", ob.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
+                                var sb = SpaceBoundary.Make(profile, "Open Collaboration", ob.Transform.Concatenated(new Transform(0, 0, -0.03)), 3, ob, profile.Perimeter.Centroid(), profile.Perimeter.Centroid());
                                 sb.Representation = new Representation(new[] { new Lamina(profile.Perimeter, false) });
                                 sb.AdditionalProperties.Add("Parent Level Id", lvl.Id);
                                 output.Model.AddElement(sb);
