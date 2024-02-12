@@ -909,22 +909,28 @@ namespace LayoutFunctionCommon
             {
                 foreach (var instance in componentInstance.Instances)
                 {
-                    if (instance != null)
-                    {
-                        instance.AdditionalProperties["Space"] = parentSpaceBoundary.Id;
-                        instance.AdditionalProperties["Space Boundary"] = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform).Vertices;
-                    }
+                    SetParentSpace(instance, parentSpaceBoundary);
                 }
             }
         }
 
-        public static void SetParentSpace(ElementInstance elementInstance, ISpaceBoundary parentSpaceBoundary)
+        public static void SetParentSpace(Element element, ISpaceBoundary parentSpaceBoundary)
         {
-            if (elementInstance != null)
+            if (element is null)
             {
-                elementInstance.AdditionalProperties["Space"] = parentSpaceBoundary.Id;
-                elementInstance.AdditionalProperties["Space Boundary"] = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform).Vertices;
+                return;
             }
+
+            var id = parentSpaceBoundary.Id;
+            var spaceBoundary = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform);
+            if (parentSpaceBoundary is IHasParent childSpace)
+            {
+                id = childSpace.Parent ?? id;
+                spaceBoundary = childSpace.ParentBoundary ?? spaceBoundary;
+            }
+            element.AdditionalProperties["Space"] = id;
+            element.AdditionalProperties["Space Boundary"] = spaceBoundary.Vertices;
+
         }
 
         private static ContentConfiguration GetRotatedConfig(ContentConfiguration config, double degrees)
