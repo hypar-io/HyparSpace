@@ -372,8 +372,8 @@ namespace PrivateOfficeLayout
                             null,
                             new SpaceSettingsValue(
                                 new SpaceSettingsValueOfficeSizing(
-                                    input.OfficeSizing.AutomateOfficeSubdivisions,
-                                    input.OfficeSizing.OfficeSize),
+                                    input.OfficeSizing?.AutomateOfficeSubdivisions ?? true,
+                                    input.OfficeSizing?.OfficeSize ?? 5),
                                     input.CreateWalls
                             )
                     );
