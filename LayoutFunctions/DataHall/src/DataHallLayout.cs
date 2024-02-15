@@ -23,6 +23,11 @@ namespace DataHallLayout
             var model = new Model();
             var warnings = new List<string>();
             var dataRack = DataRack.CabinetSiemonV800V82ADataCenterV82A48U;
+
+            var hotAisleWidth = input.HotAisleWidth ?? 0.9144;
+            var coldAisleWidth = input.ColdAisleWidth ?? 1.2192;
+            var clearance = input.Clearance ?? 1.2192;
+
             switch (input.CabinetDepth)
             {
                 case DataHallLayoutInputsCabinetDepth._1000mm:
@@ -64,7 +69,7 @@ namespace DataHallLayout
                 var profile = room.Boundary;
                 totalArea += profile.Area();
                 //inset from walls
-                var inset = profile.Perimeter.Offset(-input.Clearance);
+                var inset = profile.Perimeter.Offset(-clearance);
                 Line alignmentEdge = null;
                 try
                 {
@@ -89,17 +94,17 @@ namespace DataHallLayout
 
                 if (input.SwapColdHotPattern)
                 {
-                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Cold Aisle", input.ColdAisleWidth), ("Backward Rack", depth), ("Hot Aisle", input.HotAisleWidth) });
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Cold Aisle", coldAisleWidth), ("Backward Rack", depth), ("Hot Aisle", hotAisleWidth) });
                 }
                 else
                 {
-                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", input.HotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", input.ColdAisleWidth) });
+                    grid.V.DivideByPattern(new[] { ("Forward Rack", depth), ("Hot Aisle", hotAisleWidth), ("Backward Rack", depth), ("Cold Aisle", coldAisleWidth) });
                 }
 
                 var floorGrid = new Grid2d(profile.Perimeter, alignment);
                 floorGrid.U.DivideByFixedLength(0.6096);
                 floorGrid.V.DivideByFixedLength(0.6096);
-                model.AddElement(ToModelLines(floorGrid, room.Transform, room.Id));
+                model.AddElement(ToModelLines(floorGrid, room.Transform.Concatenated(new Transform(0, 0, 0.01)), room.Id));
 
                 double rackAngle = 0;
                 if (input.SwapColdHotPattern) rackAngle = 180;
@@ -115,13 +120,13 @@ namespace DataHallLayout
                     }
                     if (cell.Type == "Hot Aisle")
                     {
-                        var panel = new Panel(cellRect, BuiltInMaterials.XAxis, room.Transform);
+                        var panel = new Panel(cellRect, BuiltInMaterials.XAxis, room.Transform.Concatenated(new Transform(0, 0, 0.01)));
                         panel.AdditionalProperties["Space"] = room.Id;
                         model.AddElement(panel);
                     }
                     else if (cell.Type == "Cold Aisle")
                     {
-                        var panel = new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform);
+                        var panel = new Panel(cellRect, BuiltInMaterials.ZAxis, room.Transform.Concatenated(new Transform(0, 0, 0.01)));
                         panel.AdditionalProperties["Space"] = room.Id;
                         model.AddElement(panel);
                     }
@@ -166,7 +171,7 @@ namespace DataHallLayout
             return columns.Count > 0 ? columns : null;
         }
 
-        private static bool CheckIntersectsWithColumns(Polygon? cellRect, List<Column> columns)
+        private static bool CheckIntersectsWithColumns(Polygon cellRect, List<Column> columns)
         {
             if (cellRect == null || columns == null || columns.Count == 0)
             {

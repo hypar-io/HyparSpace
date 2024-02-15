@@ -29,7 +29,7 @@ namespace DataHallLayout
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public DataHallLayoutInputs(DataHallLayoutInputsCabinetDepth @cabinetDepth, DataHallLayoutInputsCabinetHeight @cabinetHeight, double @kWRack, double @hotAisleWidth, double @coldAisleWidth, double @clearance, bool @flipDirection, bool @swapColdHotPattern, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public DataHallLayoutInputs(DataHallLayoutInputsCabinetDepth @cabinetDepth, DataHallLayoutInputsCabinetHeight @cabinetHeight, double @kWRack, double? @hotAisleWidth, double? @coldAisleWidth, double? @clearance, bool @flipDirection, bool @swapColdHotPattern, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<DataHallLayoutInputs>();
@@ -66,19 +66,19 @@ namespace DataHallLayout
         public double KWRack { get; set; } = 10D;
     
         /// <summary>The width of each hot aisle.</summary>
-        [Newtonsoft.Json.JsonProperty("Hot Aisle Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Hot Aisle Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0D, 4D)]
-        public double HotAisleWidth { get; set; } = 0.9144D;
+        public double? HotAisleWidth { get; set; } = 0.9144D;
     
         /// <summary>The width of each cold aisle.</summary>
-        [Newtonsoft.Json.JsonProperty("Cold Aisle Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Cold Aisle Width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0D, 4D)]
-        public double ColdAisleWidth { get; set; } = 1.2192D;
+        public double? ColdAisleWidth { get; set; } = 1.2192D;
     
         /// <summary>The clearance around the perimeter of the Data Hall.</summary>
-        [Newtonsoft.Json.JsonProperty("Clearance", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Clearance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.0D, 4D)]
-        public double Clearance { get; set; } = 1.2192D;
+        public double? Clearance { get; set; } = 1.2192D;
     
         /// <summary>Flip the direction of the layout.</summary>
         [Newtonsoft.Json.JsonProperty("Flip Direction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

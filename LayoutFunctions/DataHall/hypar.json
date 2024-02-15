@@ -44,7 +44,7 @@
         "default": 10
       },
       "Hot Aisle Width": {
-        "type": "number",
+        "type": ["number", "null"],
         "description": "The width of each hot aisle.",
         "minimum": 0.0,
         "maximum": 4,
@@ -53,7 +53,7 @@
         "$hyparUnitType": "length"
       },
       "Cold Aisle Width": {
-        "type": "number",
+        "type": ["number", "null"],
         "description": "The width of each cold aisle.",
         "minimum": 0.0,
         "maximum": 4,
@@ -62,7 +62,7 @@
         "$hyparUnitType": "length"
       },
       "Clearance": {
-        "type": "number",
+        "type": ["number", "null"],
         "description": "The clearance around the perimeter of the Data Hall.",
         "minimum": 0.0,
         "maximum": 4,
