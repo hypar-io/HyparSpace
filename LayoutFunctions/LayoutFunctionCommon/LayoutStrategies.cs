@@ -928,6 +928,10 @@ namespace LayoutFunctionCommon
                 id = childSpace.Parent ?? id;
                 spaceBoundary = childSpace.ParentBoundary ?? spaceBoundary;
             }
+            if (spaceBoundary == null)
+            {
+                return;
+            }
             element.AdditionalProperties["Space"] = id;
             element.AdditionalProperties["Space Boundary"] = spaceBoundary.Vertices;
 
