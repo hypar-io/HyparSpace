@@ -19,7 +19,7 @@ namespace Hypar.Server
                     var input = executionRequest.Args.ToObject<DefineProgramRequirements.DefineProgramRequirementsInputs>();
                     var function = new DefineProgramRequirements.Function();
                     Directory.SetCurrentDirectory(Path.GetDirectoryName(typeof(DefineProgramRequirements.Function).Assembly.Location)!);
-                    return await function.Handler(input, null);
+                    return await function.Handler(input);
                 });
         }
     }
