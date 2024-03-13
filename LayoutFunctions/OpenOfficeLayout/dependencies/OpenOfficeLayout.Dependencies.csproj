@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
-  <!-- <ItemGroup>
-    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs"
-  />
-    <Compile
-  Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs"
-  />
-    <Compile
-  Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirementCountType.g.cs"
-  />
-    <Compile
-  Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+    <!-- <ItemGroup>
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/SpaceBoundary.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.g.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirementCountType.g.cs" />
+    <Compile Include="../../../ZonePlanningFunctions/SpacePlanningZones/dependencies/ProgramRequirement.cs" />
   </ItemGroup> -->
-  <ItemGroup>
-    <!-- <ProjectReference Include="..\..\..\Elements\Elements\src\Elements.csproj" /> -->
-    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.24" />
-    <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
-  </ItemGroup>
+    <ItemGroup>
+        <!-- <ProjectReference Include="..\..\..\Elements\Elements\src\Elements.csproj" /> -->
+        <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.25" />
+        <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
+    </ItemGroup>
 </Project>
