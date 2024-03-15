@@ -1,25 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <PropertyGroup>
-    <Title>Hypar Space Layout Utilities</Title>
-    <PackageDescription>A set of convenience utilities for creating space layout functions for use
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Title>Hypar Space Layout Utilities</Title>
+        <PackageDescription>A set of convenience utilities for creating space layout functions for use
       with Hypar's Space Planning capabilities.</PackageDescription>
-    <PackageId>Hypar.Space.LayoutFunctionCommon</PackageId>
-    <PackageProjectUrl>
+        <PackageId>Hypar.Space.LayoutFunctionCommon</PackageId>
+        <PackageProjectUrl>
       https://github.com/hypar-io/HyparSpace/tree/master/LayoutFunctions/LayoutFunctionCommon</PackageProjectUrl>
-    <Version>2.0.0</Version>
-    <Authors>Andrew Heumann</Authors>
-    <Company>Hypar</Company>
-  </PropertyGroup>
-  <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.24" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.24" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-    <PackageReference Include="Elements.LargestInteriorRectangle" Version="2.0.0" />
-  </ItemGroup>
+        <Version>2.0.0</Version>
+        <Authors>Andrew Heumann</Authors>
+        <Company>Hypar</Company>
+    </PropertyGroup>
+    <ItemGroup>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.25" />
+        <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.25" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Elements.LargestInteriorRectangle" Version="2.0.0" />
+    </ItemGroup>
 </Project>

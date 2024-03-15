@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.24" />
-    <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.24" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- <ProjectReference Include="..\..\..\..\Elements\Elements.Components\src\Elements.Components.csproj" />
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.25" />
+        <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
+        <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.25" />
+    </ItemGroup>
+    <ItemGroup>
+        <!-- <ProjectReference Include="..\..\..\..\Elements\Elements.Components\src\Elements.Components.csproj" />
 
     <ProjectReference Include="..\..\..\..\Elements\Elements\src\Elements.csproj" />
 
     <ProjectReference Include="..\..\..\..\Hypar\Hypar.Functions\src\Hypar.Functions.csproj" /> -->
-  </ItemGroup>
+    </ItemGroup>
 </Project>
