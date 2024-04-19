@@ -20,14 +20,24 @@ namespace WallsLOD200
             Random random = new Random(21);
             var output = new WallsLOD200Outputs();
 
-            var wallsModel = inputModels["Walls"];
-            var walls = wallsModel.AllElementsOfType<StandardWall>();
-            var wallGroups = walls.GroupBy(w => w.CenterLine.Start.Z);
-            foreach (var group in wallGroups)
+            if (inputModels.TryGetValue("Walls", out var wallsModel))
             {
-                var lines = UnifyLines(group.ToList().Select(g => g.CenterLine).ToList());
-                var newwalls = lines.Select(mc => new StandardWall(mc, 0.1, 3, random.NextMaterial()));
-                output.Model.AddElements(newwalls);
+                var walls = wallsModel.AllElementsOfType<StandardWall>();
+                var wallGroups = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+
+                var levels = new List<Level>();
+                if (inputModels.TryGetValue("Levels", out var levelsModel))
+                {
+                    levels = levelsModel.AllElementsOfType<Level>().ToList();
+                }
+
+                foreach (var group in wallGroups)
+                {
+                    var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
+                    var lines = UnifyLines(group.ToList().Select(g => g.CenterLine).ToList());
+                    var newwalls = lines.Select(mc => new StandardWall(mc, 0.1, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+                    output.Model.AddElements(newwalls);
+                }
             }
 
             return output;

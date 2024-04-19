@@ -29,33 +29,21 @@ namespace WallsLOD200
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public WallsLOD200Inputs(double @length, double @width, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public WallsLOD200Inputs(Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<WallsLOD200Inputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @length, @width});
+                validator.PreConstruct(new object[]{ });
             }
         
-            this.Length = @length;
-            this.Width = @width;
         
             if(validator != null)
             {
                 validator.PostConstruct(this);
             }
         }
-    
-        /// <summary>The Length.</summary>
-        [Newtonsoft.Json.JsonProperty("Length", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1.0D, 10.0D)]
-        public double Length { get; set; }
-    
-        /// <summary>The Width.</summary>
-        [Newtonsoft.Json.JsonProperty("Width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(1.0D, 10.0D)]
-        public double Width { get; set; }
     
     }
 }

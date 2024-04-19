@@ -7,7 +7,14 @@
   "model_dependencies": [
     {
       "name": "Walls"
+    },
+    {
+      "name": "Levels",
+      "optional": true
     }
+  ],
+  "element_types": [
+    "https://schemas.hypar.io/Level.json"
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",

@@ -16,11 +16,6 @@ namespace WallsLOD200
 {
     public class WallsLOD200Outputs: SystemResults
     {
-		/// <summary>
-		/// The volume.
-		/// </summary>
-		[JsonProperty("Volume")]
-		public double Volume { get; set; }
 
         /// <summary>
         /// Construct a WallsLOD200Outputs with default inputs.
@@ -30,21 +25,5 @@ namespace WallsLOD200
         {
         }
 
-        /// <summary>
-        /// Construct a WallsLOD200Outputs specifying all inputs.
-        /// </summary>
-        /// <returns></returns>
-        [JsonConstructor]
-        public WallsLOD200Outputs(double volume) : base()
-        {
-			this.Volume = volume;
-
-		}
-
-		public override string ToString()
-		{
-			var json = JsonConvert.SerializeObject(this);
-			return json;
-		}
 	}
 }
