@@ -17,16 +17,12 @@ namespace WallsLOD200
         /// <returns>A WallsLOD200Outputs instance containing computed results and the model with any new elements.</returns>
         public static WallsLOD200Outputs Execute(Dictionary<string, Model> inputModels, WallsLOD200Inputs input)
         {
-            // Your code here.
             Random random = new Random(21);
-            var height = 1.0;
-            var volume = input.Length * input.Width * height;
-            var output = new WallsLOD200Outputs(volume);
+            var output = new WallsLOD200Outputs();
 
             var wallsModel = inputModels["Walls"];
             var walls = wallsModel.AllElementsOfType<StandardWall>();
             var wallGroups = walls.GroupBy(w => w.CenterLine.Start.Z);
-            // var wallGroups = model.AllElementsOfType<WallByProfile>().GroupBy(w => w.Centerline.Start.Z);
             foreach (var group in wallGroups)
             {
                 var lines = UnifyLines(group.ToList().Select(g => g.CenterLine).ToList());
@@ -34,9 +30,6 @@ namespace WallsLOD200
                 output.Model.AddElements(newwalls);
             }
 
-            var rectangle = Polygon.Rectangle(input.Length, input.Width);
-            var mass = new Mass(rectangle, height);
-            output.Model.AddElement(mass);
             return output;
         }
 
@@ -44,13 +37,10 @@ namespace WallsLOD200
         {
 
             // Remove duplicate lines based on their hash codes
-            List<Line> dedupedlines = null;//RemoveDuplicateLines(lines);
+            List<Line> dedupedlines = null;
 
             // Merge collinear lines that are touching or overlapping
-            List<Line> mergedLines = null;//MergeCollinearLines(dedupedlines);
-
-            // // Merge collinear lines that are touching or overlapping
-            // List<Line> mergedLines2 = MergeCollinearLines2(dedupedlines);
+            List<Line> mergedLines = null;
 
             // Create stopwatch for timing
             Stopwatch stopwatch = new Stopwatch();
@@ -90,8 +80,8 @@ namespace WallsLOD200
             TimeSpan mergeCollinearLinesAverage = TimeSpan.FromTicks((long)mergeCollinearLinesTimes.Average(t => t.Ticks));
 
             // Print results
-            Console.WriteLine("RemoveDuplicateLines: Min - " + removeDuplicateLinesMin + ", Max - " + removeDuplicateLinesMax + ", Average - " + removeDuplicateLinesAverage);
-            Console.WriteLine("MergeCollinearLines: Min - " + mergeCollinearLinesMin + ", Max - " + mergeCollinearLinesMax + ", Average - " + mergeCollinearLinesAverage);
+            Console.WriteLine($"RemoveDuplicateLines: Min - {removeDuplicateLinesMin}, Max - {removeDuplicateLinesMax}, Average - {removeDuplicateLinesAverage}");
+            Console.WriteLine($"MergeCollinearLines: Min -{mergeCollinearLinesMin}, Max - {mergeCollinearLinesMax}, Average - {mergeCollinearLinesAverage}");
             Console.WriteLine($"Merged {lines.Count} Lines into {mergedLines.Count}");
 
             return mergedLines;
