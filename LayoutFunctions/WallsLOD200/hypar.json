@@ -1,0 +1,44 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "35198423-a74c-4d58-9a9d-c88798dc6bfa",
+  "name": "Walls LOD 200",
+  "description": "The WallsLOD200 function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "name": "Walls"
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Length": {
+        "type": "number",
+        "description": "The Length.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      },
+      "Width": {
+        "type": "number",
+        "description": "The Width.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      }
+    }
+  },
+  "outputs": [
+    {
+      "unit_type": "volume",
+      "name": "Volume",
+      "description": "The volume.",
+      "type": "number"
+    }
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.11.0-alpha.18"
+}
