@@ -1,9 +1,5 @@
 using Elements;
-using System.Linq;
-using Elements.Search;
 using Elements.Geometry;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace WallsLOD200
 {
@@ -45,54 +41,10 @@ namespace WallsLOD200
 
         public static List<Line> UnifyLines(List<Line> lines)
         {
-
             // Remove duplicate lines based on their hash codes
-            List<Line> dedupedlines = null;
-
+            List<Line> dedupedlines = RemoveDuplicateLines(lines);
             // Merge collinear lines that are touching or overlapping
-            List<Line> mergedLines = null;
-
-            // Create stopwatch for timing
-            Stopwatch stopwatch = new Stopwatch();
-
-            // Number of iterations
-            int iterations = 1;
-
-            // Lists to store elapsed times for each method
-            List<TimeSpan> removeDuplicateLinesTimes = new List<TimeSpan>();
-            List<TimeSpan> mergeCollinearLinesTimes = new List<TimeSpan>();
-            List<TimeSpan> removeDuplicateLines2Times = new List<TimeSpan>();
-            List<TimeSpan> mergeCollinearLines2Times = new List<TimeSpan>();
-
-            for (int i = 0; i < iterations; i++)
-            {
-
-                // Timing for RemoveDuplicateLines
-                stopwatch.Restart();
-                dedupedlines = RemoveDuplicateLines(lines);
-                stopwatch.Stop();
-                removeDuplicateLinesTimes.Add(stopwatch.Elapsed);
-
-                // Timing for MergeCollinearLines2
-                stopwatch.Restart();
-                mergedLines = MergeCollinearLines(dedupedlines);
-                stopwatch.Stop();
-                mergeCollinearLinesTimes.Add(stopwatch.Elapsed);
-            }
-
-            // Calculate min, max, and average times for each method
-            TimeSpan removeDuplicateLinesMin = removeDuplicateLinesTimes.Min();
-            TimeSpan removeDuplicateLinesMax = removeDuplicateLinesTimes.Max();
-            TimeSpan removeDuplicateLinesAverage = TimeSpan.FromTicks((long)removeDuplicateLinesTimes.Average(t => t.Ticks));
-
-            TimeSpan mergeCollinearLinesMin = mergeCollinearLinesTimes.Min();
-            TimeSpan mergeCollinearLinesMax = mergeCollinearLinesTimes.Max();
-            TimeSpan mergeCollinearLinesAverage = TimeSpan.FromTicks((long)mergeCollinearLinesTimes.Average(t => t.Ticks));
-
-            // Print results
-            Console.WriteLine($"RemoveDuplicateLines: Min - {removeDuplicateLinesMin}, Max - {removeDuplicateLinesMax}, Average - {removeDuplicateLinesAverage}");
-            Console.WriteLine($"MergeCollinearLines: Min -{mergeCollinearLinesMin}, Max - {mergeCollinearLinesMax}, Average - {mergeCollinearLinesAverage}");
-            Console.WriteLine($"Merged {lines.Count} Lines into {mergedLines.Count}");
+            List<Line> mergedLines = MergeCollinearLines(dedupedlines);
 
             return mergedLines;
         }
