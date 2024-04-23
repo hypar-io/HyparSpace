@@ -51,7 +51,7 @@ namespace WallsLOD200
 
         private static List<Line> RemoveDuplicateLines(List<Line> lines)
         {
-            HashSet<Line> uniqueLines = new HashSet<Line>(new LineEqualityComparer());
+            HashSet<Line> uniqueLines = new(new LineEqualityComparer());
 
             foreach (Line line in lines)
             {
@@ -114,7 +114,7 @@ namespace WallsLOD200
                         {
                             Line otherLine = mergedLines[j];
 
-                            if (line.IsCollinear(otherLine) && (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < 0.0001))
+                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < 0.0001)
                             {
                                 // Merge collinear lines
                                 Line mergedLine = line.MergedCollinearLine(otherLine);
@@ -134,27 +134,6 @@ namespace WallsLOD200
                 merged.AddRange(mergedLines);
             }
             return merged;
-        }
-
-        private class LineEqualityComparer : IEqualityComparer<Line>
-        {
-            public bool Equals(Line x, Line y)
-            {
-                // Check if start and end points of lines are equal
-                return (x.Start == y.Start && x.End == y.End) || (x.Start == y.End && x.End == y.Start);
-            }
-
-            public int GetHashCode(Line obj)
-            {
-                // Compute hash code based on start and end points
-                unchecked
-                {
-                    int hash = 17;
-                    hash = hash * 23 + obj.Start.GetHashCode();
-                    hash = hash * 23 + obj.End.GetHashCode();
-                    return hash;
-                }
-            }
         }
     }
 }
