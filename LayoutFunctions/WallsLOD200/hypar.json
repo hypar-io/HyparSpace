@@ -4,6 +4,7 @@
   "name": "Walls LOD 200",
   "description": "The WallsLOD200 function.",
   "language": "C#",
+  "model_output": "Walls:LOD200",
   "model_dependencies": [
     {
       "name": "Walls"
