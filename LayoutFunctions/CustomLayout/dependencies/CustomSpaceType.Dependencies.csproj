@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\LayoutFunctionCommon\LayoutFunctionCommon.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.21" />
-    <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
-    <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.21" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Hypar.Elements" Version="2.2.0-alpha.25" />
+        <PackageReference Include="Hypar.Functions" Version="1.11.0-alpha.13" />
+        <PackageReference Include="Hypar.Elements.Components" Version="2.2.0-alpha.25" />
+    </ItemGroup>
 
 </Project>
