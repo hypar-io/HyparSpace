@@ -328,12 +328,15 @@ namespace LayoutFunctionCommon
                     double height = room.Height == 0 ? 3 : room.Height;
                     Transform xform = levelVolume?.Transform ?? new Transform();
 
-                    outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    if (wallCandidateLines.Count > 0)
                     {
-                        WallCandidateLines = wallCandidateLines,
-                        Height = height,
-                        LevelTransform = xform,
-                    });
+                        outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                        {
+                            WallCandidateLines = wallCandidateLines,
+                            Height = height,
+                            LevelTransform = xform,
+                        });
+                    }
                 }
             }
             foreach (var room in allSpaceBoundaries)

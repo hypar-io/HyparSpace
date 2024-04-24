@@ -104,7 +104,7 @@ namespace LayoutFunctionCommon
                 double height = levelVolume?.Height ?? 3;
                 Transform xform = levelVolume?.Transform ?? new Transform();
 
-                if (createWalls)
+                if (createWalls && wallCandidateLines.Count > 0)
                 {
                     outputModel.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {

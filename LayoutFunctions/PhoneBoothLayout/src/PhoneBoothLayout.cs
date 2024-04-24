@@ -127,7 +127,7 @@ namespace PhoneBoothLayout
                     output.Model.AddElement(new SpaceMetric(room.Id, seatsCount, 0, 0, 0));
                 }
                 var height = meetingRmBoundaries.FirstOrDefault()?.Height ?? 3;
-                if (input.CreateWalls)
+                if (input.CreateWalls && wallCandidateLines.Count > 0)
                 {
                     output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
                     {
