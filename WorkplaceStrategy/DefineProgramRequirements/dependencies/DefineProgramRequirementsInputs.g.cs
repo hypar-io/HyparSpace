@@ -218,7 +218,7 @@ namespace DefineProgramRequirements
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramRequirements(string @programGroup, string @programName, Color? @color, int @spaceCount, double @areaPerSpace, ProfileConstraint @dimensions, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType @countType, InputFolder @layoutType, bool? @enclosed, ProgramRequirementsDefaultWallType? @defaultWallType)
+        public ProgramRequirements(string @programGroup, string @programName, Color? @color, int? @spaceCount, double? @areaPerSpace, ProfileConstraint @dimensions, double? @width, double? @depth, string @hyparSpaceType, ProgramRequirementsCountType? @countType, InputFolder @layoutType, bool? @enclosed, ProgramRequirementsDefaultWallType? @defaultWallType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramRequirements>();
             if(validator != null)
@@ -260,15 +260,15 @@ namespace DefineProgramRequirements
         public Color? Color { get; set; }
     
         /// <summary>How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.</summary>
-        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int SpaceCount { get; set; } = 1;
+        [Newtonsoft.Json.JsonProperty("Space Count", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? SpaceCount { get; set; } = 1;
     
         /// <summary>How much area should be allocated for this space?</summary>
-        [Newtonsoft.Json.JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double AreaPerSpace { get; set; }
+        [Newtonsoft.Json.JsonProperty("Area per Space", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? AreaPerSpace { get; set; }
     
         /// <summary>The required dimensions of the space. Supply specific dimension or just an area, and edit options to specify additional constraints.</summary>
-        [Newtonsoft.Json.JsonProperty("Dimensions", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Dimensions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ProfileConstraint Dimensions { get; set; }
     
         /// <summary>Optional. (Typically the longer dimension — along the side from which the space is accessed, like a corridor.)</summary>
@@ -288,9 +288,9 @@ namespace DefineProgramRequirements
         /// Use "Item" for individual spaces (e.g. 3 conference rooms),
         /// "Area Total" for spaces where you only care about the total (e.g. 1000 SF of circulation), and 
         /// "Unit" where you want total area divided by a "unit" size (e.g. this space supports 400 people at 120 SF / person)</summary>
-        [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Count Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProgramRequirementsCountType CountType { get; set; } = ProgramRequirementsCountType.Item;
+        public ProgramRequirementsCountType? CountType { get; set; } = ProgramRequirementsCountType.Item;
     
         /// <summary>What sort of space type should be used to lay out furniture and equipment in this space?</summary>
         [Newtonsoft.Json.JsonProperty("Layout Type", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

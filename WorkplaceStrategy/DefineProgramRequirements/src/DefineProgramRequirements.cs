@@ -119,7 +119,7 @@ namespace DefineProgramRequirements
 
             }
             output.Model.AddElement(colorScheme);
-            output.TotalProgramArea = sum;
+            output.TotalProgramArea = sum ?? 0.0;
             Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = true;
             var idsToDelete = new List<Guid>();
             foreach (var elem in output.Model.Elements)

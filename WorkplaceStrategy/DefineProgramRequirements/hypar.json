@@ -52,14 +52,20 @@
             "Space Count": {
               "$hyparOrder": 3,
               "description": "How many of this space type are required? Leave at 1 for spaces measured in aggregate, like circulation.",
-              "type": "integer",
+              "type": [
+                "integer",
+                "null"
+              ],
               "default": 1
             },
             "Area per Space": {
               "$hyparDeprecated": true,
               "$hyparOrder": 4,
               "description": "How much area should be allocated for this space?",
-              "type": "number",
+              "type": [
+                "number",
+                "null"
+              ],
               "$hyparUnitType": "area",
               "multipleOf": 1
             },
@@ -124,7 +130,10 @@
                 ]
               },
               "description": "How should this requirement be counted? \n\nUse \"Item\" for individual spaces (e.g. 3 conference rooms),\n\"Area Total\" for spaces where you only care about the total (e.g. 1000 SF of circulation), and \n\"Unit\" where you want total area divided by a \"unit\" size (e.g. this space supports 400 people at 120 SF / person)",
-              "type": "string",
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "Item",
                 "Area Total"
