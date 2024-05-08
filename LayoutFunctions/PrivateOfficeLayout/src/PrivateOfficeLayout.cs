@@ -155,12 +155,15 @@ namespace PrivateOfficeLayout
                 }
 
                 var height = privateOfficeBoundaries.FirstOrDefault()?.Height ?? 3;
-                output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                if (wallCandidateLines.Count > 0)
                 {
-                    WallCandidateLines = wallCandidateLines,
-                    Height = height,
-                    LevelTransform = levelVolume?.Transform ?? new Transform()
-                });
+                    output.Model.AddElement(new InteriorPartitionCandidate(Guid.NewGuid())
+                    {
+                        WallCandidateLines = wallCandidateLines,
+                        Height = height,
+                        LevelTransform = levelVolume?.Transform ?? new Transform()
+                    });
+                }
             }
             output.PrivateOfficeCount = totalPrivateOfficeCount;
             OverrideUtilities.InstancePositionOverrides(input.Overrides, output.Model);
