@@ -19,7 +19,7 @@ namespace Elements
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProgramRequirementsDefaultWallType? DefaultWallType { get; internal set; }
 
-        [JsonProperty("Layout Type")]
+        [JsonProperty("Layout Type", Required = Required.Default, NullValueHandling = NullValueHandling.Ignore)]
         public InputFolder LayoutType { get; set; }
 
         // this is just a front-end thing we need to make sure persists from the inputs
