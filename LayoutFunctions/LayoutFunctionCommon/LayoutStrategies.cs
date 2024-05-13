@@ -926,9 +926,9 @@ namespace LayoutFunctionCommon
 
             var id = parentSpaceBoundary.Id;
             var spaceBoundary = parentSpaceBoundary.Boundary.Perimeter.TransformedPolygon(parentSpaceBoundary.Transform);
-            if (parentSpaceBoundary is IHasParent childSpace)
+            if (parentSpaceBoundary is IHasParentSpace childSpace)
             {
-                id = childSpace.Parent ?? id;
+                id = childSpace.ParentSpace ?? id;
                 spaceBoundary = childSpace.ParentBoundary ?? spaceBoundary;
             }
             if (spaceBoundary == null)

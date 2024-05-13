@@ -8,8 +8,8 @@ namespace Elements
     {
         [JsonProperty("Qualified Program Name")]
         public string QualifiedProgramName => String.IsNullOrEmpty(this.ProgramGroup) ? this.ProgramName : $"{this.ProgramGroup} - {this.ProgramName}";
-       
-       [JsonProperty("Program Display Name")]
+
+        [JsonProperty("Program Display Name")]
         public string ProgramDisplayName { get; set; }
 
         public bool Enclosed { get; set; }
@@ -21,5 +21,9 @@ namespace Elements
 
         [JsonProperty("Layout Type")]
         public InputFolder LayoutType { get; set; }
+
+        // this is just a front-end thing we need to make sure persists from the inputs
+        [JsonProperty("isSpaceType")]
+        public bool? IsSpaceType { get; set; }
     }
 }

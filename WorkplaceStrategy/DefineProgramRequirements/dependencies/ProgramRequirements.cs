@@ -12,6 +12,9 @@ public partial class ProgramRequirements
 
     [JsonProperty("Program Display Name")]
     public string ProgramDisplayName { get; set; }
+
+    [JsonProperty("isSpaceType")]
+    public bool? IsSpaceType { get; set; }
     public Elements.ProgramRequirement ToElement(Elements.CatalogWrapper catalogWrapper, Elements.SpaceConfigurationElement spaceConfigElem)
     {
         var req = new Elements.ProgramRequirement
@@ -31,7 +34,8 @@ public partial class ProgramRequirements
             SpaceConfig = spaceConfigElem?.Id,
             DefaultWallType = this.DefaultWallType,
             ProgramDisplayName = this.ProgramDisplayName,
-            LayoutType = this.LayoutType?.Id is not null ? new InputFolder(this.LayoutType.Id, Array.Empty<InputFileRef>(), this.LayoutType.Name) : null
+            LayoutType = this.LayoutType?.Id is not null ? new InputFolder(this.LayoutType.Id, Array.Empty<InputFileRef>(), this.LayoutType.Name) : null,
+            IsSpaceType = this.IsSpaceType ?? false
         };
         req.Id = this.Id ?? req.Id;
         return req;

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Elements
 {
-    public partial class SpaceBoundary : ISpaceBoundary, IHasParent
+    public partial class SpaceBoundary : ISpaceBoundary, IHasParentSpace
     {
         public List<Line> AdjacentCorridorEdges { get; set; } = null;
         public Line AlignmentEdge { get; set; } = null;
@@ -28,7 +28,7 @@ namespace Elements
         [JsonProperty("Config Id")]
         public string ConfigId { get; set; } // unused by this layout type
 
-        public Guid? Parent { get; set; } = null;
+        public Guid? ParentSpace { get; set; } = null;
         public Polygon ParentBoundary { get; set; } = null;
 
         [Newtonsoft.Json.JsonIgnore]
@@ -140,7 +140,7 @@ namespace Elements
                 Material = material ?? MaterialDict["unrecognized"],
                 Representation = representation,
                 Name = name,
-                Parent = parent.Id,
+                ParentSpace = parent.Id,
                 ParentBoundary = parent.Boundary.Perimeter.TransformedPolygon(parent.Transform)
             };
             if (hasReqMatch)
