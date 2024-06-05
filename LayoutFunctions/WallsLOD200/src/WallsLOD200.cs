@@ -5,6 +5,7 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
+        public static double tolerance = 0.0001;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -114,17 +115,31 @@ namespace WallsLOD200
                         {
                             Line otherLine = mergedLines[j];
 
-                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < 0.0001)
+                            try
                             {
-                                // Merge collinear lines
-                                Line mergedLine = line.MergedCollinearLine(otherLine);
+                                if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
+                                {
+                                    // project lines within tolerance but further than epsilon
+                                    if (line.DistanceTo(otherLine) > double.Epsilon)
+                                    {
+                                        otherLine = otherLine.Projected(line);
+                                    }
+                                    // Merge collinear lines
+                                    Line mergedLine = line.MergedCollinearLine(otherLine);
 
-                                // Update the list with the merged line
-                                mergedLines.RemoveAt(j);
-                                mergedLines[i] = mergedLine;
+                                    // Update the list with the merged line
+                                    mergedLines.RemoveAt(j);
+                                    mergedLines[i] = mergedLine;
 
-                                linesMerged = true;
-                                break; // Exit the inner loop as we have merged the lines
+                                    linesMerged = true;
+                                    break; // Exit the inner loop as we have merged the lines
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"Failed to merge wall line {otherLine.Start} - {otherLine.End}.");
+                                Console.WriteLine(e.Message);
+                                Console.WriteLine(e.StackTrace);
                             }
                         }
                         if (linesMerged)
