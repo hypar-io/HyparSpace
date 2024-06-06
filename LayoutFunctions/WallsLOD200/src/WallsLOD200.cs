@@ -115,31 +115,22 @@ namespace WallsLOD200
                         {
                             Line otherLine = mergedLines[j];
 
-                            try
+                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
                             {
-                                if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
+                                // project lines within tolerance but further than epsilon
+                                if (line.DistanceTo(otherLine) > double.Epsilon)
                                 {
-                                    // project lines within tolerance but further than epsilon
-                                    if (line.DistanceTo(otherLine) > double.Epsilon)
-                                    {
-                                        otherLine = otherLine.Projected(line);
-                                    }
-                                    // Merge collinear lines
-                                    Line mergedLine = line.MergedCollinearLine(otherLine);
-
-                                    // Update the list with the merged line
-                                    mergedLines.RemoveAt(j);
-                                    mergedLines[i] = mergedLine;
-
-                                    linesMerged = true;
-                                    break; // Exit the inner loop as we have merged the lines
+                                    otherLine = otherLine.Projected(line);
                                 }
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine($"Failed to merge wall line {otherLine.Start} - {otherLine.End}.");
-                                Console.WriteLine(e.Message);
-                                Console.WriteLine(e.StackTrace);
+                                // Merge collinear lines
+                                Line mergedLine = line.MergedCollinearLine(otherLine);
+
+                                // Update the list with the merged line
+                                mergedLines.RemoveAt(j);
+                                mergedLines[i] = mergedLine;
+
+                                linesMerged = true;
+                                break; // Exit the inner loop as we have merged the lines
                             }
                         }
                         if (linesMerged)
