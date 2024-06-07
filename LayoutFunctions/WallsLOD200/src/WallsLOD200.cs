@@ -5,6 +5,7 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
+        public static double tolerance = 0.0001;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -121,8 +122,13 @@ namespace WallsLOD200
                         {
                             Line otherLine = mergedLines[j];
 
-                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < 0.0001)
+                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
                             {
+                                // project lines within tolerance but further than epsilon
+                                if (line.DistanceTo(otherLine) > double.Epsilon)
+                                {
+                                    otherLine = otherLine.Projected(line);
+                                }
                                 // Merge collinear lines
                                 Line mergedLine = line.MergedCollinearLine(otherLine);
 
