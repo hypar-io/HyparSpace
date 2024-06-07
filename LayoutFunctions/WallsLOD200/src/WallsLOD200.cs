@@ -31,8 +31,15 @@ namespace WallsLOD200
                 {
                     var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
                     var lines = UnifyLines(group.ToList().Select(g => g.CenterLine).ToList());
-                    var newwalls = lines.Select(mc => new StandardWall(mc, 0.1, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
-                    output.Model.AddElements(newwalls);
+                    var roundedZLines = lines.Select(l =>
+                        {
+                            var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
+                            var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
+                            return new Line(roundedStart, roundedEnd);
+                        }
+                    );
+                    var newWalls = roundedZLines.Select(mc => new StandardWall(mc, 0.1, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+                    output.Model.AddElements(newWalls);
                 }
             }
 
