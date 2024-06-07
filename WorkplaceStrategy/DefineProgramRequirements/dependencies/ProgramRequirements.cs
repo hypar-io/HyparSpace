@@ -23,7 +23,7 @@ public partial class ProgramRequirements
             ProgramName = this.ProgramName,
             Color = this.Color ?? Colors.Magenta,
             SpaceCount = this.SpaceCount ?? 1,
-            AreaPerSpace = this.Dimensions?.Area ?? this.AreaPerSpace ?? 0.0,
+            AreaPerSpace = this.AreaPerSpace ?? 0.0,
             Dimensions = this.Dimensions,
             Width = this.Dimensions?.Width ?? this.Width,
             Depth = this.Dimensions?.Depth ?? this.Depth,
