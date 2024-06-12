@@ -124,8 +124,8 @@ namespace WallsLOD200
 
                             if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
                             {
-                                // project lines within tolerance but further than epsilon
-                                if (line.DistanceTo(otherLine) > double.Epsilon)
+                                // project lines with points within tolerance of eachother but further than epsilon
+                                if (LinesWithinTolerance(line, otherLine, tolerance))
                                 {
                                     otherLine = otherLine.Projected(line);
                                 }
@@ -147,6 +147,29 @@ namespace WallsLOD200
                 merged.AddRange(mergedLines);
             }
             return merged;
+        }
+
+        public static bool LinesWithinTolerance(Line line1, Line line2, double tolerance)
+        {
+            // Calculate distances between all point pairs
+            var distances = new List<double>()
+            {
+                line1.Start.DistanceTo(line2.Start),
+                line1.Start.DistanceTo(line2.End),
+                line1.End.DistanceTo(line2.Start),
+                line1.End.DistanceTo(line2.End)
+            };
+
+            // Check if any distance is within the tolerance but larger than double.Epsilon
+            foreach (var distance in distances)
+            {
+                if (distance > double.Epsilon && distance <= tolerance)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
