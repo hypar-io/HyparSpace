@@ -124,7 +124,8 @@ namespace WallsLOD200
                             {
                                 // we project the lines because line.IsCollinear resolves to true on
                                 // near 0 differences which MergedCollinearLine does not tolerate
-                                // line.DistanceTo is similarly fuzzy and resolves to 0 on near (but greater than epsilon) distances
+                                // originally we validated if projection was necessary using line.DistanceTo,
+                                // but it is similarly fuzzy and resolves to 0 on near (but greater than epsilon) distances
                                 otherLine = otherLine.Projected(line);
                                 Line mergedLine = line.MergedCollinearLine(otherLine);
 
