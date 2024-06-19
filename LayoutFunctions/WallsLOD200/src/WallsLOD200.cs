@@ -49,9 +49,9 @@ namespace WallsLOD200
 
         public static List<Line> UnifyLines(List<Line> lines)
         {
-            // Remove duplicate lines based on their hash codes
+            // Remove duplicate lines
             List<Line> dedupedlines = RemoveDuplicateLines(lines);
-            // Merge collinear lines that are touching or overlapping
+            // Merge collinear lines that are touching, overlapping or nearly so
             List<Line> mergedLines = MergeCollinearLines(dedupedlines);
 
             return mergedLines;
@@ -82,7 +82,6 @@ namespace WallsLOD200
                 {
                     if (line.IsCollinear(kvp.Value))
                     {
-                        // Add line to existing group
                         lineGroups[kvp.Key].Add(line);
                         addedToGroup = true;
                         break;
@@ -91,7 +90,6 @@ namespace WallsLOD200
 
                 if (!addedToGroup)
                 {
-                    // Create new group
                     collinearGroups.Add(groupId, line);
                     lineGroups.Add(new List<Line>() { line });
                     groupId++;
@@ -124,52 +122,26 @@ namespace WallsLOD200
 
                             if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
                             {
-                                // project lines with points within tolerance of eachother but further than epsilon
-                                if (LinesWithinTolerance(line, otherLine, tolerance))
-                                {
-                                    otherLine = otherLine.Projected(line);
-                                }
-                                // Merge collinear lines
+                                // we project the lines because line.IsCollinear resolves to true on
+                                // near 0 differences which MergedCollinearLine does not tolerate
+                                // line.DistanceTo is similarly fuzzy and resolves to 0 on near (but greater than epsilon) distances
+                                otherLine = otherLine.Projected(line);
                                 Line mergedLine = line.MergedCollinearLine(otherLine);
 
-                                // Update the list with the merged line
                                 mergedLines.RemoveAt(j);
                                 mergedLines[i] = mergedLine;
 
                                 linesMerged = true;
-                                break; // Exit the inner loop as we have merged the lines
+                                break;
                             }
                         }
                         if (linesMerged)
-                            break; // Exit the outer loop to restart the merging process
+                            break;
                     }
                 } while (linesMerged);
                 merged.AddRange(mergedLines);
             }
             return merged;
-        }
-
-        public static bool LinesWithinTolerance(Line line1, Line line2, double tolerance)
-        {
-            // Calculate distances between all point pairs
-            var distances = new List<double>()
-            {
-                line1.Start.DistanceTo(line2.Start),
-                line1.Start.DistanceTo(line2.End),
-                line1.End.DistanceTo(line2.Start),
-                line1.End.DistanceTo(line2.End)
-            };
-
-            // Check if any distance is within the tolerance but larger than double.Epsilon
-            foreach (var distance in distances)
-            {
-                if (distance > double.Epsilon && distance <= tolerance)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }
