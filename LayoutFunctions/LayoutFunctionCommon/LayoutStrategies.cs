@@ -273,6 +273,8 @@ namespace LayoutFunctionCommon
             // If a set of wall candidate options are provided, limit to the one that aligns with the boundary's first edge.
             // In the future, as room shapes become more editable, we might want to pass in an explicit "orientation edge" instead of just using the first edge.
             var roomOrientationEdge = room.Boundary.Perimeter.Segments().First();
+            // // If we keep passing in already-transformed lines, we need to compare against the transformed first segment.
+            // var roomOrientationEdge = room.Boundary.Perimeter.Segments().First().TransformedLine(room.Transform);
             for (int i = wallCandidateOptions.Count - 1; i >= 0; i--)
             {
                 var (OrientationGuideEdge, _) = wallCandidateOptions[i];

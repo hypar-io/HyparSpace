@@ -70,7 +70,7 @@ namespace LayoutFunctionCommon
             var thicknesses = room.Boundary.GetEdgeThickness();
             var allSegments = room.Boundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
-                Line = s.TransformedLine(room.Transform),
+                Line = new Line(s.Start, s.End),
                 Thickness = thicknesses?.ElementAtOrDefault(i)
             }).ToList();
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
