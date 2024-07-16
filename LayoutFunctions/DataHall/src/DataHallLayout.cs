@@ -112,7 +112,7 @@ namespace DataHallLayout
                 foreach (var cell in grid.GetCells())
                 {
                     var cellRect = cell.GetCellGeometry() as Polygon;
-                    bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns);
+                    bool intersectsColumn = CheckIntersectsWithColumns(cellRect, roomColumns, room.Transform);
 
                     if (cell.IsTrimmed() || cell.Type == null || cell.GetTrimmedCellGeometry().Count() == 0)
                     {
@@ -164,21 +164,22 @@ namespace DataHallLayout
             }
 
             var allColumns = inputModels["Columns"].Elements.Values.OfType<Column>().ToList();
+            var roomBoundary = room.Boundary.Transformed(room.Transform);
             var columns = allColumns
-                .Where(column => column.Profile.Perimeter.Vertices.All(point => room.Boundary.Contains(point + column.Location)))
+                .Where(column => column.Profile.Perimeter.Vertices.All(point => roomBoundary.Contains(point + column.Location)))
                 .ToList();
 
             return columns.Count > 0 ? columns : null;
         }
 
-        private static bool CheckIntersectsWithColumns(Polygon cellRect, List<Column> columns)
+        private static bool CheckIntersectsWithColumns(Polygon cellRect, List<Column> columns, Transform roomTransform)
         {
             if (cellRect == null || columns == null || columns.Count == 0)
             {
                 return false;
             }
 
-            return columns.Any(column => cellRect.Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
+            return columns.Any(column => cellRect.TransformedPolygon(roomTransform).Intersects(column.Profile.Perimeter.TransformedPolygon(new Transform(column.Location))));
         }
 
         private static ModelLines ToModelLines(Grid2d grid, Transform transform, System.Guid id)
