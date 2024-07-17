@@ -38,6 +38,8 @@ namespace LayoutFunctionCommon
             }), corridorSegments, levelProfile, out var wallCandidates);
             orientationGuideEdge.Type = room.DefaultWallType ?? "Glass";
             orientationGuideEdge.PrimaryEntryEdge = true;
+            // Return the orientation guide edge relative to the room's transform.
+            orientationGuideEdge.Line = orientationGuideEdge.Line.TransformedLine(room.Transform.Inverted());
             wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
@@ -70,7 +72,7 @@ namespace LayoutFunctionCommon
             var thicknesses = room.Boundary.GetEdgeThickness();
             var allSegments = room.Boundary.Perimeter.Segments().Select((s, i) => new RoomEdge
             {
-                Line = new Line(s.Start, s.End),
+                Line = s.TransformedLine(room.Transform),
                 Thickness = thicknesses?.ElementAtOrDefault(i)
             }).ToList();
             var orientationGuideEdges = SortEdgesByPrimaryAccess(allSegments, corridorSegments, levelProfile, 0.3);
@@ -78,6 +80,8 @@ namespace LayoutFunctionCommon
             {
                 orientationGuideEdge.Line.Type = room.DefaultWallType ?? "Glass";
                 orientationGuideEdge.Line.PrimaryEntryEdge = true;
+                // Return the orientation guide edge relative to the room's transform.
+                orientationGuideEdge.Line.Line = orientationGuideEdge.Line.Line.TransformedLine(room.Transform.Inverted());
                 var wallCandidateLines = new List<RoomEdge>
                 {
                     orientationGuideEdge.Line
@@ -87,7 +91,7 @@ namespace LayoutFunctionCommon
                     var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary, out var corridorEdges);
                     wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
                     {
-                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
+                        if (!orientationGuideEdges.Select(x => x.Line.Line.TransformedLine(room.Transform)).Contains(s.Line))
                         {
                             s.Type = "Solid";
                         }
@@ -99,7 +103,7 @@ namespace LayoutFunctionCommon
                     // if no level or floor is present, everything that's not glass is solid.
                     wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s =>
                     {
-                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
+                        if (!orientationGuideEdges.Select(x => x.Line.Line.TransformedLine(room.Transform)).Contains(s.Line))
                         {
                             s.Type = "Solid";
                         }

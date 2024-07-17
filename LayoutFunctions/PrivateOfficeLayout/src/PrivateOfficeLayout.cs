@@ -191,8 +191,7 @@ namespace PrivateOfficeLayout
                 }
                 var relativeRoomTransform = room.Transform.Concatenated(levelInvertedTransform);
                 var relativeRoomTransformProjected = new Transform(0, 0, -relativeRoomTransform.Origin.Z);
-                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis);
-                orientationTransform.Concatenate(relativeRoomTransform);
+                var orientationTransform = new Transform(Vector3.Origin, orientationGuideEdge.Direction, Vector3.ZAxis).Concatenated(relativeRoomTransform);
                 var boundaryCurves = new List<Polygon>();
                 boundaryCurves.Add(room.Boundary.Perimeter.TransformedPolygon(relativeRoomTransform));
                 boundaryCurves.AddRange(room.Boundary.Voids?.Select(v => v.TransformedPolygon(relativeRoomTransform)) ?? new List<Polygon>());
