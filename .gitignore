@@ -3,3 +3,4 @@ obj/
 nupkg/
 .DS_Store
 */test/Generated/*
+settings.json
