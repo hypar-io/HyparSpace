@@ -91,7 +91,7 @@ namespace LayoutFunctionCommon
                     var exteriorWalls = FindAllEdgesAdjacentToSegments(orientationGuideEdge.OtherSegments, levelProfile.Segments(), out var notAdjacentToFloorBoundary, out var corridorEdges);
                     wallCandidateLines.AddRange(notAdjacentToFloorBoundary.Select(s =>
                     {
-                        if (!orientationGuideEdges.Select(x => x.Line.Line.TransformedLine(room.Transform)).Contains(s.Line))
+                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
                         {
                             s.Type = "Solid";
                         }
@@ -103,7 +103,7 @@ namespace LayoutFunctionCommon
                     // if no level or floor is present, everything that's not glass is solid.
                     wallCandidateLines.AddRange(orientationGuideEdge.OtherSegments.Select(s =>
                     {
-                        if (!orientationGuideEdges.Select(x => x.Line.Line.TransformedLine(room.Transform)).Contains(s.Line))
+                        if (!orientationGuideEdges.Select(x => x.Line).Contains(s))
                         {
                             s.Type = "Solid";
                         }
