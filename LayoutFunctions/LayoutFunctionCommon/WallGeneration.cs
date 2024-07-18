@@ -38,6 +38,8 @@ namespace LayoutFunctionCommon
             }), corridorSegments, levelProfile, out var wallCandidates);
             orientationGuideEdge.Type = room.DefaultWallType ?? "Glass";
             orientationGuideEdge.PrimaryEntryEdge = true;
+            // Return the orientation guide edge relative to the room's transform.
+            orientationGuideEdge.Line = orientationGuideEdge.Line.TransformedLine(room.Transform.Inverted());
             wallCandidateLines.Add(orientationGuideEdge);
             if (levelProfile != null)
             {
@@ -78,6 +80,8 @@ namespace LayoutFunctionCommon
             {
                 orientationGuideEdge.Line.Type = room.DefaultWallType ?? "Glass";
                 orientationGuideEdge.Line.PrimaryEntryEdge = true;
+                // Return the orientation guide edge relative to the room's transform.
+                orientationGuideEdge.Line.Line = orientationGuideEdge.Line.Line.TransformedLine(room.Transform.Inverted());
                 var wallCandidateLines = new List<RoomEdge>
                 {
                     orientationGuideEdge.Line

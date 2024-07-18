@@ -45,8 +45,6 @@ namespace MeetingRoomLayout
                 seatsTable = new Dictionary<string, RoomTally>();
 
                 var result = base.StandardLayoutOnAllLevels(programTypeName, inputModels, (object)overrides, createWalls, configs);
-
-
                 result.OutputModel.AddElements(seatsTable.Select(kvp => kvp.Value).OrderByDescending(a => a.SeatsCount));
                 return result;
             }

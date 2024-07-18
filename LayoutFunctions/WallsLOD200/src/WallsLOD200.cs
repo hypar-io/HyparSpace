@@ -31,7 +31,12 @@ namespace WallsLOD200
                 foreach (var group in wallGroups)
                 {
                     var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
-                    var lines = UnifyLines(group.ToList().Select(g => g.CenterLine).ToList());
+                    var lines = UnifyLines(group.ToList().Select(wall =>
+                    {
+                        var transform = new Transform(wall.Transform);
+                        transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
+                        return wall.CenterLine.TransformedLine(transform);
+                    }).ToList());
                     var roundedZLines = lines.Select(l =>
                         {
                             var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
