@@ -1,4 +1,3 @@
-using DotLiquid.Tags;
 using Elements;
 using Elements.Geometry;
 
@@ -28,8 +27,7 @@ namespace WallsLOD200
                     levels = levelsModel.AllElementsOfType<Level>().ToList();
                 }
 
-                levels.Sort((level1, level2) => level1.Elevation.CompareTo(level2.Elevation));
-                walls = SplitWallsByLevels(walls.ToList(), levels, random);
+                walls = SplitWallsByLevels(walls, levels, random);
 
                 var wallGroups = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
 
@@ -49,7 +47,7 @@ namespace WallsLOD200
                             return new Line(roundedStart, roundedEnd);
                         }
                     );
-                    var newWalls = roundedZLines.Select(mc => new StandardWall(mc, 0.1, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+                    var newWalls = roundedZLines.Select(mc => new StandardWall(mc, 0.13335, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
                     output.Model.AddElements(newWalls);
                 }
             }
@@ -57,55 +55,56 @@ namespace WallsLOD200
             return output;
         }
 
-        public static List<StandardWall> SplitWallsByLevels(List<StandardWall> walls, List<Level> levels, Random random)
+        public static List<StandardWall> SplitWallsByLevels(IEnumerable<StandardWall> walls, List<Level> levels, Random random)
         {
+            levels.Sort((level1, level2) => level1.Elevation.CompareTo(level2.Elevation));
             var newWalls = new List<StandardWall>();
 
             foreach (var wall in walls)
             {
-                if (wall.AdditionalProperties.TryGetValue("Level", out var levelIdObj) && Guid.TryParse(levelIdObj.ToString(), out var levelId))
+                if (!(wall.AdditionalProperties.TryGetValue("Level", out var levelIdObj) && Guid.TryParse(levelIdObj.ToString(), out var levelId)))
                 {
-                    var wallLevel = levels.FirstOrDefault(level => level.Id == levelId);
-
-                    if (wallLevel != null && wall.Height > wallLevel.Height)
-                    {
-                        double remainingHeight = wall.Height;
-
-                        for (int i = levels.IndexOf(wallLevel); i < levels.Count - 1; i++)
-                        {
-                            if (remainingHeight <= 0) break;
-
-                            double segmentHeight = levels[i + 1].Elevation - levels[i].Elevation;
-
-                            if (segmentHeight > remainingHeight)
-                            {
-                                segmentHeight = remainingHeight;
-                            }
-
-                            var newWall = new StandardWall(
-                                wall.CenterLine,
-                                0.1,
-                                segmentHeight,
-                                random.NextMaterial(),
-                                wall.Transform.Moved(0, 0, levels[i].Elevation - wallLevel.Elevation))
-                            {
-                                AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
-                            };
-
-                            newWall.AdditionalProperties["Level"] = levels[i].Id.ToString();
-                            newWalls.Add(newWall);
-
-                            remainingHeight -= segmentHeight;
-                        }
-                    }
-                    else
-                    {
-                        newWalls.Add(wall);
-                    }
-                }
-                else
-                {
+                    // If we can't get the walls level then we can't reasonably split the wall by other levels
                     newWalls.Add(wall);
+                    continue;
+                }
+
+                var wallLevel = levels.FirstOrDefault(level => level.Id == levelId);
+
+                if (wallLevel == null || wall.Height < wallLevel.Height)
+                {
+                    // If we can't find the walls level or the wall is shorter than the level height then it doesn't need to split
+                    newWalls.Add(wall);
+                    continue;
+                }
+
+                double remainingHeight = wall.Height;
+
+                for (int i = levels.IndexOf(wallLevel); i < levels.Count - 1; i++)
+                {
+                    if (remainingHeight <= 0) break;
+
+                    double segmentHeight = levels[i + 1].Elevation - levels[i].Elevation;
+
+                    if (segmentHeight > remainingHeight)
+                    {
+                        segmentHeight = remainingHeight;
+                    }
+
+                    var newWall = new StandardWall(
+                        wall.CenterLine,
+                        wall.Thickness,
+                        segmentHeight,
+                        random.NextMaterial(),
+                        wall.Transform.Moved(0, 0, levels[i].Elevation - wallLevel.Elevation))
+                    {
+                        AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
+                    };
+
+                    newWall.AdditionalProperties["Level"] = levels[i].Id.ToString();
+                    newWalls.Add(newWall);
+
+                    remainingHeight -= segmentHeight;
                 }
             }
 

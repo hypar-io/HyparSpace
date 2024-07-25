@@ -34,7 +34,7 @@ namespace WallsLOD200
             // deserialization.
             var asmName = Path.GetFileNameWithoutExtension(asmLocation);
             var depPath = Path.Combine(asmDir, $"{asmName}.Dependencies.dll");
-            if (File.Exists(depPath))
+            if(File.Exists(depPath))
             {
                 Console.WriteLine($"Loading dependencies assembly from: {depPath}...");
                 Assembly.LoadFrom(depPath);
@@ -59,15 +59,15 @@ namespace WallsLOD200
             sw.Stop();
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
-            if (this.store == null)
+            if(this.store == null)
             {
                 this.store = new UrlModelStore<WallsLOD200Inputs>();
             }
+            
 
-
-            var l = new InvocationWrapper<WallsLOD200Inputs, WallsLOD200Outputs>(store, WallsLOD200.Execute);
+            var l = new InvocationWrapper<WallsLOD200Inputs,WallsLOD200Outputs> (store, WallsLOD200.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
-    }
+      }
 }
