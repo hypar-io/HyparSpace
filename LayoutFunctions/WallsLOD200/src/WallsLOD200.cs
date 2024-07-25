@@ -1,3 +1,4 @@
+using DotLiquid.Tags;
 using Elements;
 using Elements.Geometry;
 
@@ -20,13 +21,17 @@ namespace WallsLOD200
             if (inputModels.TryGetValue("Walls", out var wallsModel))
             {
                 var walls = wallsModel.AllElementsOfType<StandardWall>();
-                var wallGroups = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
 
                 var levels = new List<Level>();
                 if (inputModels.TryGetValue("Levels", out var levelsModel))
                 {
                     levels = levelsModel.AllElementsOfType<Level>().ToList();
                 }
+
+                levels.Sort((level1, level2) => level1.Elevation.CompareTo(level2.Elevation));
+                walls = SplitWallsByLevels(walls.ToList(), levels, random);
+
+                var wallGroups = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
 
                 foreach (var group in wallGroups)
                 {
@@ -50,6 +55,61 @@ namespace WallsLOD200
             }
 
             return output;
+        }
+
+        public static List<StandardWall> SplitWallsByLevels(List<StandardWall> walls, List<Level> levels, Random random)
+        {
+            var newWalls = new List<StandardWall>();
+
+            foreach (var wall in walls)
+            {
+                if (wall.AdditionalProperties.TryGetValue("Level", out var levelIdObj) && Guid.TryParse(levelIdObj.ToString(), out var levelId))
+                {
+                    var wallLevel = levels.FirstOrDefault(level => level.Id == levelId);
+
+                    if (wallLevel != null && wall.Height > wallLevel.Height)
+                    {
+                        double remainingHeight = wall.Height;
+
+                        for (int i = levels.IndexOf(wallLevel); i < levels.Count - 1; i++)
+                        {
+                            if (remainingHeight <= 0) break;
+
+                            double segmentHeight = levels[i + 1].Elevation - levels[i].Elevation;
+
+                            if (segmentHeight > remainingHeight)
+                            {
+                                segmentHeight = remainingHeight;
+                            }
+
+                            var newWall = new StandardWall(
+                                wall.CenterLine,
+                                0.1,
+                                segmentHeight,
+                                random.NextMaterial(),
+                                wall.Transform.Moved(0, 0, levels[i].Elevation - wallLevel.Elevation))
+                            {
+                                AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
+                            };
+
+                            newWall.AdditionalProperties["Level"] = levels[i].Id.ToString();
+                            newWalls.Add(newWall);
+
+                            remainingHeight -= segmentHeight;
+                        }
+                    }
+                    else
+                    {
+                        newWalls.Add(wall);
+                    }
+                }
+                else
+                {
+                    newWalls.Add(wall);
+                }
+            }
+
+            return newWalls;
         }
 
         public static List<Line> UnifyLines(List<Line> lines)
