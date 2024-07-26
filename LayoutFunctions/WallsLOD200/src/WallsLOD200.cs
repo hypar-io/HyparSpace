@@ -62,7 +62,7 @@ namespace WallsLOD200
 
         public static List<StandardWall> SplitWallsByLevels(IEnumerable<StandardWall> walls, List<Level> levels, Random random)
         {
-            levels.Sort((level1, level2) => level1.Elevation.CompareTo(level2.Elevation));
+            List<Level> sortedLevels = levels.OrderBy(level => level.Elevation).ToList();
             var newWalls = new List<StandardWall>();
 
             foreach (var wall in walls)
@@ -74,7 +74,7 @@ namespace WallsLOD200
                     continue;
                 }
 
-                var wallLevel = levels.FirstOrDefault(level => level.Id == levelId);
+                var wallLevel = sortedLevels.FirstOrDefault(level => level.Id == levelId);
 
                 if (wallLevel == null || wall.Height < wallLevel.Height)
                 {
@@ -85,11 +85,11 @@ namespace WallsLOD200
 
                 double remainingHeight = wall.Height;
 
-                for (int i = levels.IndexOf(wallLevel); i < levels.Count - 1; i++)
+                for (int i = sortedLevels.IndexOf(wallLevel); i < sortedLevels.Count - 1; i++)
                 {
                     if (remainingHeight <= 0) break;
 
-                    double segmentHeight = levels[i + 1].Elevation - levels[i].Elevation;
+                    double segmentHeight = sortedLevels[i + 1].Elevation - sortedLevels[i].Elevation;
 
                     if (segmentHeight > remainingHeight)
                     {
@@ -101,12 +101,12 @@ namespace WallsLOD200
                         wall.Thickness,
                         segmentHeight,
                         random.NextMaterial(),
-                        wall.Transform.Moved(0, 0, levels[i].Elevation - wallLevel.Elevation))
+                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation))
                     {
                         AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
                     };
 
-                    newWall.AdditionalProperties["Level"] = levels[i].Id.ToString();
+                    newWall.AdditionalProperties["Level"] = sortedLevels[i].Id.ToString();
                     newWalls.Add(newWall);
 
                     remainingHeight -= segmentHeight;
