@@ -5,7 +5,7 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
-        public static double tolerance = 0.0001;
+        public static double tolerance = 0.01;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -29,7 +29,7 @@ namespace WallsLOD200
 
                 walls = SplitWallsByLevels(walls, levels, random);
 
-                var wallThicknessGroups = walls.GroupBy(w => w.Thickness);
+                var wallThicknessGroups = walls.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
                 foreach (var thicknessGroup in wallThicknessGroups)
                 {
                     var thickness = thicknessGroup.Key;
