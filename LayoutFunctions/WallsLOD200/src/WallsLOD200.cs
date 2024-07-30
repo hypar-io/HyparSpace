@@ -5,7 +5,7 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
-        public static double tolerance = 0.01;
+        public static double tolerance = 0.002;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -17,9 +17,35 @@ namespace WallsLOD200
             Random random = new Random(21);
             var output = new WallsLOD200Outputs();
 
+            var unitSystem = "metric";
+
+            if (inputModels.TryGetValue("Project Settings", out var settingsModel))
+            {
+                foreach (var elementDict in settingsModel.Elements)
+                {
+                    if (elementDict.Value.AdditionalProperties.ContainsKey("UnitSystem"))
+                    {
+                        if (elementDict.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue))
+                        {
+                            unitSystem = unitSystemValue.ToString();
+                        }
+                    }
+                }
+            }
+
             if (inputModels.TryGetValue("Walls", out var wallsModel))
             {
                 var walls = wallsModel.AllElementsOfType<StandardWall>();
+                if (unitSystem != null)
+                {
+                    // if the unit system is metric, convert all 0.13335 thick walls to 0.135
+                    // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
+                    walls
+                        .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
+                                    (unitSystem.Equals("imperial") && w.Thickness == 0.135))
+                        .ToList()
+                        .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
+                }
 
                 var levels = new List<Level>();
                 if (inputModels.TryGetValue("Levels", out var levelsModel))
