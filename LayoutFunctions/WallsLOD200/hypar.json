@@ -12,6 +12,9 @@
     {
       "name": "Levels",
       "optional": true
+    },
+    {
+      "name": "Project Settings"
     }
   ],
   "element_types": [

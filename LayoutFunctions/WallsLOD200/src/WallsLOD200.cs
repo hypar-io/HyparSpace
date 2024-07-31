@@ -5,7 +5,7 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
-        public static double tolerance = 0.0001;
+        public static double tolerance = 0.002;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -17,10 +17,31 @@ namespace WallsLOD200
             Random random = new Random(21);
             var output = new WallsLOD200Outputs();
 
+            var unitSystem = "metric";
+
+            if (inputModels.TryGetValue("Project Settings", out var settingsModel))
+            {
+                var unitSystemObject = settingsModel.Elements.FirstOrDefault(e => e.Value.AdditionalProperties["discriminator"].ToString() == "Elements.ProjectSettings");
+
+                if (unitSystemObject.Key != Guid.Empty &&
+                    unitSystemObject.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue) &&
+                    unitSystemValue.ToString() != null)
+                {
+                    unitSystem = unitSystemValue.ToString();
+                }
+            }
+
             if (inputModels.TryGetValue("Walls", out var wallsModel))
             {
                 var walls = wallsModel.AllElementsOfType<StandardWall>();
-                var wallGroups = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+
+                // if the unit system is metric, convert all 0.13335 thick walls to 0.135
+                // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
+                walls
+                    .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
+                                (unitSystem.Equals("imperial") && w.Thickness == 0.135))
+                    .ToList()
+                    .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
 
                 var levels = new List<Level>();
                 if (inputModels.TryGetValue("Levels", out var levelsModel))
@@ -28,28 +49,93 @@ namespace WallsLOD200
                     levels = levelsModel.AllElementsOfType<Level>().ToList();
                 }
 
-                foreach (var group in wallGroups)
+                walls = SplitWallsByLevels(walls, levels, random);
+
+                var wallThicknessGroups = walls.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
+                foreach (var thicknessGroup in wallThicknessGroups)
                 {
-                    var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
-                    var lines = UnifyLines(group.ToList().Select(wall =>
+                    var thickness = thicknessGroup.Key;
+                    var wallGroups = thicknessGroup.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+
+                    foreach (var group in wallGroups)
                     {
-                        var transform = new Transform(wall.Transform);
-                        transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
-                        return wall.CenterLine.TransformedLine(transform);
-                    }).ToList());
-                    var roundedZLines = lines.Select(l =>
+                        var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
+                        var lines = UnifyLines(group.ToList().Select(wall =>
                         {
-                            var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
-                            var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
-                            return new Line(roundedStart, roundedEnd);
-                        }
-                    );
-                    var newWalls = roundedZLines.Select(mc => new StandardWall(mc, 0.1, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
-                    output.Model.AddElements(newWalls);
+                            var transform = new Transform(wall.Transform);
+                            transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
+                            return wall.CenterLine.TransformedLine(transform);
+                        }).ToList());
+                        var roundedZLines = lines.Select(l =>
+                            {
+                                var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
+                                var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
+                                return new Line(roundedStart, roundedEnd);
+                            }
+                        );
+                        var newWalls = roundedZLines.Select(mc => new StandardWall(mc, thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+                        output.Model.AddElements(newWalls);
+                    }
                 }
             }
 
             return output;
+        }
+
+        public static List<StandardWall> SplitWallsByLevels(IEnumerable<StandardWall> walls, List<Level> levels, Random random)
+        {
+            List<Level> sortedLevels = levels.OrderBy(level => level.Elevation).ToList();
+            var newWalls = new List<StandardWall>();
+
+            foreach (var wall in walls)
+            {
+                if (!(wall.AdditionalProperties.TryGetValue("Level", out var levelIdObj) && Guid.TryParse(levelIdObj.ToString(), out var levelId)))
+                {
+                    // If we can't get the walls level then we can't reasonably split the wall by other levels
+                    newWalls.Add(wall);
+                    continue;
+                }
+
+                var wallLevel = sortedLevels.FirstOrDefault(level => level.Id == levelId);
+
+                if (wallLevel == null || wall.Height < wallLevel.Height)
+                {
+                    // If we can't find the walls level or the wall is shorter than the level height then it doesn't need to split
+                    newWalls.Add(wall);
+                    continue;
+                }
+
+                double remainingHeight = wall.Height;
+
+                for (int i = sortedLevels.IndexOf(wallLevel); i < sortedLevels.Count - 1; i++)
+                {
+                    if (remainingHeight <= 0) break;
+
+                    double segmentHeight = sortedLevels[i + 1].Elevation - sortedLevels[i].Elevation;
+
+                    if (segmentHeight > remainingHeight)
+                    {
+                        segmentHeight = remainingHeight;
+                    }
+
+                    var newWall = new StandardWall(
+                        wall.CenterLine,
+                        wall.Thickness,
+                        segmentHeight,
+                        random.NextMaterial(),
+                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation))
+                    {
+                        AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
+                    };
+
+                    newWall.AdditionalProperties["Level"] = sortedLevels[i].Id.ToString();
+                    newWalls.Add(newWall);
+
+                    remainingHeight -= segmentHeight;
+                }
+            }
+
+            return newWalls;
         }
 
         public static List<Line> UnifyLines(List<Line> lines)
