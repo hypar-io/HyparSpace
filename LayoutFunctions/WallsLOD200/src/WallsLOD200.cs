@@ -21,31 +21,27 @@ namespace WallsLOD200
 
             if (inputModels.TryGetValue("Project Settings", out var settingsModel))
             {
-                foreach (var elementDict in settingsModel.Elements)
+                var unitSystemObject = settingsModel.Elements.FirstOrDefault(e => e.Value.AdditionalProperties["discriminator"].ToString() == "Elements.ProjectSettings");
+
+                if (unitSystemObject.Key != Guid.Empty &&
+                    unitSystemObject.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue) &&
+                    unitSystemValue.ToString() != null)
                 {
-                    if (elementDict.Value.AdditionalProperties.ContainsKey("UnitSystem"))
-                    {
-                        if (elementDict.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue))
-                        {
-                            unitSystem = unitSystemValue.ToString();
-                        }
-                    }
+                    unitSystem = unitSystemValue.ToString();
                 }
             }
 
             if (inputModels.TryGetValue("Walls", out var wallsModel))
             {
                 var walls = wallsModel.AllElementsOfType<StandardWall>();
-                if (unitSystem != null)
-                {
-                    // if the unit system is metric, convert all 0.13335 thick walls to 0.135
-                    // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
-                    walls
-                        .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
-                                    (unitSystem.Equals("imperial") && w.Thickness == 0.135))
-                        .ToList()
-                        .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
-                }
+
+                // if the unit system is metric, convert all 0.13335 thick walls to 0.135
+                // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
+                walls
+                    .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
+                                (unitSystem.Equals("imperial") && w.Thickness == 0.135))
+                    .ToList()
+                    .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
 
                 var levels = new List<Level>();
                 if (inputModels.TryGetValue("Levels", out var levelsModel))
