@@ -46,7 +46,7 @@ namespace WallsLOD200
                 var levels = new List<Level>();
                 if (inputModels.TryGetValue("Levels", out var levelsModel))
                 {
-                    levels = levelsModel.AllElementsOfType<Level>().ToList();
+                    levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
                 }
 
                 walls = SplitWallsByLevels(walls, levels, random);
