@@ -89,6 +89,13 @@ namespace WallsLOD200
 
             foreach (var wall in walls)
             {
+                // If there is only one level, no splitting is required
+                if (sortedLevels.Count == 1)
+                {
+                    newWalls.Add(wall);
+                    continue;
+                }
+
                 if (!(wall.AdditionalProperties.TryGetValue("Level", out var levelIdObj) && Guid.TryParse(levelIdObj.ToString(), out var levelId)))
                 {
                     // If we can't get the walls level then we can't reasonably split the wall by other levels
