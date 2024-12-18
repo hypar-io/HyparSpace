@@ -161,7 +161,11 @@ namespace WallsLOD200
 
             foreach (Line line in lines)
             {
-                uniqueLines.Add(line);
+                // Don't include lines that have a near 0 length
+                if (line.Length() > tolerance)
+                {
+                    uniqueLines.Add(line);
+                }
             }
 
             return uniqueLines.ToList();
