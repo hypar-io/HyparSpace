@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Update and initialize submodules
-git submodule update --init --recursive
-
 # Find all hypar.json files, excluding those in Archive, and store their paths in an array
 file_paths=($(find -name 'hypar.json' ! -path '*/Archive/*'))
 
