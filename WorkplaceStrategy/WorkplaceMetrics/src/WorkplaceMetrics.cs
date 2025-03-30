@@ -32,8 +32,6 @@ namespace WorkplaceMetrics
             var hasFloors = inputModels.TryGetValue("Floors", out var floorsModel);
             var hasMass = inputModels.TryGetValue("Conceptual Mass", out var massModel);
             var hasCirculation = inputModels.TryGetValue("Circulation", out var circulationModel);
-            inputModels.TryGetValue(_openOffice + " Layout", out var openOfficeModel);
-            inputModels.TryGetValue(_openCollab + " Layout", out var openCollabModel);
 
             // Get program requirements
             var hasProgramRequirements = inputModels.TryGetValue("Program Requirements", out var programReqsModel);
@@ -92,8 +90,6 @@ namespace WorkplaceMetrics
             outputModel.AddElement(settings);
 
             var allSpaceBoundaries = zonesModel.AllElementsAssignableFromType<SpaceBoundary>().ToList();
-            var openOfficeBoundaries = openOfficeModel?.AllElementsAssignableFromType<SpaceBoundary>().ToList();
-            var openCollabSpaceMetrics = openCollabModel?.AllElementsAssignableFromType<SpaceMetric>().ToList();
 
             // convert circulation to space boundaries
             if (hasCirculation)
@@ -131,11 +127,19 @@ namespace WorkplaceMetrics
 
             }
 
+            inputModels.TryGetValue(_openOffice + " Layout", out var openOfficeModel);
+            inputModels.TryGetValue(_openCollab + " Layout", out var openCollabModel);
+            inputModels.TryGetValue("Space Metrics", out var spaceMetricsModel);
+
+            var spaceMetricOverrides = spaceMetricsModel?.AllElementsOfType<SpaceMetric>().ToList();
+            var openOfficeBoundaries = openOfficeModel?.AllElementsAssignableFromType<SpaceBoundary>().ToList();
+            var openCollabSpaceMetrics = openCollabModel?.AllElementsAssignableFromType<SpaceMetric>().ToList();
+
             var layoutNames = new string[] { _openOffice, _meetingRoom, _classroom, _phoneBooth, _openCollab, _privateOffice, _lounge, _reception, _pantry };
             var metricByLayouts = new Dictionary<string, SpaceMetric>();
             foreach (var layoutName in layoutNames)
             {
-                metricByLayouts[layoutName] = CountWorkplaceTyped(inputModels, input, layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics);
+                metricByLayouts[layoutName] = CountWorkplaceTyped(inputModels, input, layoutName, allSpaceBoundaries, openOfficeBoundaries, openCollabSpaceMetrics, spaceMetricOverrides);
             }
 
             var meetingRoomCount = allSpaceBoundaries.Count(sb => sb.Name == "Meeting Room");
@@ -216,7 +220,8 @@ namespace WorkplaceMetrics
             string layoutName,
             List<SpaceBoundary> boundaries,
             List<SpaceBoundary> openOfficeBoundaries,
-            List<SpaceMetric> openCollabSpaceMetrics)
+            List<SpaceMetric> openCollabSpaceMetrics,
+            List<SpaceMetric> spaceMetricOverrides)
         {
             var metric = new SpaceMetric();
             if (inputModels.TryGetValue(layoutName + " Layout", out var layoutModel))
@@ -226,7 +231,15 @@ namespace WorkplaceMetrics
                     var room = boundaries.FirstOrDefault(b => b.Id == sm.Space);
                     if (room != null)
                     {
-                        if (layoutName == _openOffice && openOfficeBoundaries != null && openCollabSpaceMetrics != null)
+                        var smOverride = spaceMetricOverrides?.FirstOrDefault(o => o.Space == sm.Space);
+                        if (smOverride != null)
+                        {
+                            sm.Seats = smOverride.Seats;
+                            sm.Headcount = smOverride.Headcount;
+                            sm.Desks = smOverride.Desks;
+                            sm.CollaborationSeats = smOverride.CollaborationSeats;
+                        }
+                        else if (layoutName == _openOffice && openOfficeBoundaries != null && openCollabSpaceMetrics != null)
                         {
                             var openCollabBoundaries = openOfficeBoundaries.Where(b => room.Boundary.Perimeter.Contains(b.Boundary.Perimeter.Centroid()));
                             foreach (var openCollabBoundary in openCollabBoundaries)
