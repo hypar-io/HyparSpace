@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Elements.Geometry;          // Vector3, Line
+using Elements.Geometry;
 
 namespace WallsLOD200;
 
