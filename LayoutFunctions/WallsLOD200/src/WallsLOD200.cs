@@ -31,53 +31,75 @@ namespace WallsLOD200
                 }
             }
 
-            if (inputModels.TryGetValue("Walls", out var wallsModel))
+            if (!inputModels.TryGetValue("Walls", out var wallsModel))
             {
-                var walls = wallsModel.AllElementsOfType<StandardWall>();
-
-                // if the unit system is metric, convert all 0.13335 thick walls to 0.135
-                // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
-                walls
-                    .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
-                                (unitSystem.Equals("imperial") && w.Thickness == 0.135))
-                    .ToList()
-                    .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
-
-                var levels = new List<Level>();
-                if (inputModels.TryGetValue("Levels", out var levelsModel))
-                {
-                    levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
-                }
-
-                walls = SplitWallsByLevels(walls, levels, random);
-
-                var wallThicknessGroups = walls.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
-                foreach (var thicknessGroup in wallThicknessGroups)
-                {
-                    var thickness = thicknessGroup.Key;
-                    var wallGroups = thicknessGroup.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
-
-                    foreach (var group in wallGroups)
-                    {
-                        var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
-                        var lines = UnifyLines(group.ToList().Select(wall =>
-                        {
-                            var transform = new Transform(wall.Transform);
-                            transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
-                            return wall.CenterLine.TransformedLine(transform);
-                        }).ToList());
-                        var roundedZLines = lines.Select(l =>
-                            {
-                                var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
-                                var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
-                                return new Line(roundedStart, roundedEnd);
-                            }
-                        );
-                        var newWalls = roundedZLines.Select(mc => new StandardWall(mc, thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
-                        output.Model.AddElements(newWalls);
-                    }
-                }
+                return output;
             }
+            var walls = wallsModel.AllElementsOfType<StandardWall>();
+
+            // if the unit system is metric, convert all 0.13335 thick walls to 0.135
+            // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
+            walls
+                .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
+                            (unitSystem.Equals("imperial") && w.Thickness == 0.135))
+                .ToList()
+                .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
+
+            var levels = new List<Level>();
+            if (inputModels.TryGetValue("Levels", out var levelsModel))
+            {
+                levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
+            }
+
+            walls = SplitWallsByLevels(walls, levels, random);
+
+            var wallsByLevel = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+
+            var newWallsByLevel = wallsByLevel.SelectMany((wallsOnLevel) =>
+            {
+                var level = levels.FirstOrDefault(l => l.Id.ToString() == wallsOnLevel.Key.ToString()) ?? new Level(0, 3, null);
+                var newWalls = new List<StandardWall>();
+
+                // // Existing strategy — group walls by thickness, then merge
+                // var wallsByThickness = wallsOnLevel.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
+                // var newWallsByThickness = wallsByThickness.SelectMany(thicknessGroup =>
+                // {
+                //     var thickness = thicknessGroup.Key;
+                //     var lines = UnifyLines([.. thicknessGroup.Select(wall =>
+                //         {
+                //             var transform = new Transform(wall.Transform);
+                //             transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
+                //             return wall.CenterLine.TransformedLine(transform);
+                //         })]);
+                //     var roundedZLines = lines.Select(l =>
+                //         {
+                //             var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
+                //             var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
+                //             return new Line(roundedStart, roundedEnd);
+                //         }
+                //     );
+                //     return roundedZLines.Select(mc => new StandardWall(mc, thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+                // });
+
+                var idx = new OverlapIndex<StandardWall>(-0.001, wallsOnLevel.Max(w => w.Thickness));
+                foreach (var wall in wallsOnLevel)
+                {
+                    idx.AddItem(wall, wall.CenterLine.TransformedLine(wall.Transform), wall.Thickness);
+                }
+
+                var groups = idx.GetOverlapGroups();
+
+                var mergedWalls = groups.Select((g) =>
+                {
+                    var mergedWall = new StandardWall(g.mergedCenterline, g.mergedThickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
+                    mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
+                    return mergedWall;
+                });
+
+                return mergedWalls;
+            });
+
+            output.Model.AddElements(newWallsByLevel);
 
             return output;
         }
