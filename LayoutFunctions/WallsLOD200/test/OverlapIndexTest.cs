@@ -113,4 +113,55 @@ public class OverlapIndexTest
                                       g.Contains(lines[7]));
         Assert.NotNull(pair);
     }
+
+    [Fact]
+    public void VariableThicknessOverlaps_SplitCorrectly()
+    {
+        var inputFatLines = new[] {
+            (new Line((0,0), (2,2)), 0.1),
+            (new Line((1,1), (3,3)), 0.3),
+            (new Line((3,3), (5,5)), 0.3),
+            (new Line((7,7), (9,9)), 0.1),
+        };
+
+        // Diagonal but looks like this:
+        // 0  1  2  3  4  5  6  7  8  9
+        //    ------+------
+        // =======              =======
+        //    ------+------
+        //
+        // So we want two merge groups,
+        // and the first merge group should have two fat lines:
+        // 0-1 at 0.1, and 1-5 at 0.3.
+
+
+        var idx = new OverlapIndex<Line>();
+        foreach (var (line, thickness) in inputFatLines)
+        {
+            idx.AddItem(line, line, thickness);
+        }
+
+        var groups = idx.GetOverlapGroups();
+        Assert.Equal(2, groups.Count);
+        // One of the groups is a single line
+        var groupsSorted = groups.OrderBy((g) => g.Items.Count);
+        var singleGroup = groupsSorted.First();
+        Assert.Single(singleGroup.Items);
+        // The other is the other three lines
+        var pairGroup = groupsSorted.Skip(1).First();
+        Assert.Equal(3, pairGroup.Items.Count);
+        // There should be two resulting fat lines from the group merged from 3 input lines
+        var fatLines = pairGroup.FatLines;
+        Assert.Equal(2, fatLines.Count);
+        var fatlinesOrdered = fatLines.OrderBy((l) => l.Thickness);
+        // One is from (0,0) to (1,1) with thickness 0.1
+        var fatline1 = fatlinesOrdered.First();
+        Assert.Equal(0.1, fatline1.Thickness);
+
+        Assert.True(new Line((0, 0), (1, 1)).Equals(fatline1.Centerline));
+        // The other is from (1,1) to (5,5) with thickness 0.3
+        var fatline2 = fatlinesOrdered.Last();
+        Assert.Equal(0.3, fatline2.Thickness);
+        Assert.True(new Line((1, 1), (5, 5)).Equals(fatline2.Centerline));
+    }
 }
