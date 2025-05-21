@@ -6,33 +6,40 @@ using Elements.Geometry;          // Vector3, Line
 
 namespace WallsLOD200;
 
+/// <summary>
+/// Represents a line with thickness (a "fat line").
+/// </summary>
 public readonly record struct FatLine(Line Centerline, double Thickness);
 
-/// <summary>
-/// Represents a group of overlapping items with their merged centerline and thickness
-/// </summary>
 /// <summary>
 /// A connected set of overlapping segments and the fat-lines
 /// obtained by slicing/merging them along the longitudinal axis.
 /// </summary>
 public class OverlapMergeGroup<T>
 {
+    /// <summary>
+    /// The original items in this group.
+    /// </summary>
     public IReadOnlyList<T> Items { get; }
+
+    /// <summary>
+    /// The merged fat lines representing this group.
+    /// </summary>
     public IReadOnlyList<FatLine> FatLines { get; }
 
-    internal OverlapMergeGroup(List<SegmentRec<T>> segs)
+    internal OverlapMergeGroup(List<SegmentRecord<T>> segments)
     {
-        Items = segs.Select(s => s.Payload).ToArray();
+        Items = [.. segments.Select(s => s.Payload)];
 
         /* ----  build the non-overlapping intervals  ------------------ */
 
         // 1. collect all break-points on the s-axis
         var sCuts = new SortedSet<double>();
-        foreach (var s in segs) { sCuts.Add(s.MinS); sCuts.Add(s.MaxS); }
+        foreach (var s in segments) { sCuts.Add(s.MinS); sCuts.Add(s.MaxS); }
         var sList = sCuts.ToArray();
 
         // direction basis (same for whole group)
-        double ang = segs[0].Angle;
+        double ang = segments[0].Angle;
         double cos = Math.Cos(ang);
         double sin = Math.Sin(ang);
         var u = new Vector3(cos, sin, 0);          // unit direction
@@ -46,25 +53,34 @@ public class OverlapMergeGroup<T>
         {
             double s0 = sList[i];
             double s1 = sList[i + 1];
-            if (s1 - s0 < Vector3.EPSILON) continue;            // zero-length slot
+            if (s1 - s0 < Vector3.EPSILON)
+            {
+                continue;            // zero-length slot
+            }
 
             // 2.  which segments cover [s0,s1]?
-            var active = segs.Where(s => s.MinS <= s0 + Vector3.EPSILON && s.MaxS >= s1 - Vector3.EPSILON)
+            var active = segments.Where(s => s.MinS <= s0 + Vector3.EPSILON && s.MaxS >= s1 - Vector3.EPSILON)
                              .ToList();
-            if (active.Count == 0) continue;
+            if (active.Count == 0)
+            {
+                continue;
+            }
 
             // 3. perpendicular envelope for those segments
-            double low = active.Min(s => s.Offset - s.PerpTol);
-            double high = active.Max(s => s.Offset + s.PerpTol);
+            double low = active.Min(s => s.Offset - s.OffsetTolerance);
+            double high = active.Max(s => s.Offset + s.OffsetTolerance);
             double thick = high - low;
             double offC = 0.5 * (low + high);
 
-            // 4. build centre-line for this slice
+            // 4. build centerline for this slice
             var start = new Vector3(u.X * s0 + n.X * offC,
                                     u.Y * s0 + n.Y * offC, 0);
             var end = new Vector3(u.X * s1 + n.X * offC,
                                     u.Y * s1 + n.Y * offC, 0);
-            if ((start - end).Length() < Vector3.EPSILON) continue;
+            if ((start - end).Length() < Vector3.EPSILON)
+            {
+                continue;
+            }
             var slice = new Line(start, end);
 
             // 5. merge with previous slice if thickness matches
@@ -75,32 +91,32 @@ public class OverlapMergeGroup<T>
             else
             {
                 if (open is not null)
+                {
                     lines.Add(new FatLine(open, openThick));
+                }
                 open = slice;
                 openThick = thick;
             }
         }
         if (open is not null)
+        {
             lines.Add(new FatLine(open, openThick));
+        }
 
         FatLines = lines;
     }
 }
 
-readonly struct SegmentRec<T>
+/// <summary>
+/// Internal record to track segment data for processing.
+/// </summary>
+readonly struct SegmentRecord<T>(T payload, double angle, double offset, double minS, double maxS, double offsetTolerance)
 {
-    public SegmentRec(T payload, double angle, double offset,
-                      double minS, double maxS, double perpTol)
-    {
-        Payload = payload; Angle = angle; Offset = offset;
-        MinS = minS; MaxS = maxS; PerpTol = perpTol;
-    }
-
-    public readonly T Payload;
-    public readonly double Angle;
-    public readonly double Offset;
-    public readonly double MinS, MaxS;
-    public readonly double PerpTol;
+    public readonly T Payload = payload;
+    public readonly double Angle = angle;
+    public readonly double Offset = offset;
+    public readonly double MinS = minS, MaxS = maxS;
+    public readonly double OffsetTolerance = offsetTolerance;
 }
 
 /// <summary>
@@ -110,17 +126,16 @@ readonly struct SegmentRec<T>
 /// • whose offset intervals overlap, taking each segment's own thickness into account
 /// • whose scalar intervals along the line overlap
 /// </summary>
-/// <param name="angleTol">
+/// <typeparam name="T">Type of payload objects associated with each segment</typeparam>
+/// <param name="angleTolerance">
 /// Angular tolerance in **radians** for folding two directions into the same bucket
 /// (defaults to 1 × 10⁻³ ≈ 0.057°).
 /// </param>
-public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
+/// <param name="longTolerance">
+/// Longitudinal tolerance for determining overlaps along the direction of segments.
+/// </param>
+public class OverlapIndex<T>(double angleTolerance = 1e-3, double longTolerance = 1e-6)
 {
-
-    /*---------------------------------------------------------------------
-     * public API
-     *-------------------------------------------------------------------*/
-
     /// <summary>Add one segment + payload.</summary>
     /// <param name="item">User data to carry along.</param>
     /// <param name="line">2-D segment (Z is ignored).</param>
@@ -140,13 +155,13 @@ public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
     /// </summary>
     /// <param name="thicknessTolerance">
     /// Extra gap you are willing to tolerate between two strips that *almost* touch.
-    /// Set to 0 for strict behaviour.
+    /// Set to 0 for strict behavior.
     /// </param>
-    public List<OverlapMergeGroup<T>>
-    GetOverlapGroups(double thicknessTolerance = 0.0)
+    /// <returns>List of overlap groups where each contains multiple items</returns>
+    public List<OverlapMergeGroup<T>> GetOverlapGroups(double thicknessTolerance = 0.0)
     {
         // 1.  Bucket by canonical direction
-        var dirBuckets = new Dictionary<int, List<SegmentRec<T>>>();
+        var dirBuckets = new Dictionary<int, List<SegmentRecord<T>>>();
 
         foreach (var r in _records)
         {
@@ -166,15 +181,15 @@ public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
         {
             // sort by low edge of [offset ± tol] interval
             bucket.Sort((a, b) =>
-                (a.Offset - a.PerpTol).CompareTo(b.Offset - b.PerpTol));
+                (a.Offset - a.OffsetTolerance).CompareTo(b.Offset - b.OffsetTolerance));
 
-            var currentCluster = new List<SegmentRec<T>>();
+            var currentCluster = new List<SegmentRecord<T>>();
             double currentHigh = double.NegativeInfinity;
 
             foreach (var seg in bucket)
             {
-                double low = seg.Offset - seg.PerpTol - thicknessTolerance;
-                double high = seg.Offset + seg.PerpTol + thicknessTolerance;
+                double low = seg.Offset - seg.OffsetTolerance - thicknessTolerance;
+                double high = seg.Offset + seg.OffsetTolerance + thicknessTolerance;
 
                 if (low <= currentHigh)                // still inside same fat strip
                 {
@@ -194,31 +209,34 @@ public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
         return result;
     }
 
-    /*---------------------------------------------------------------------
-     * private helpers
-     *-------------------------------------------------------------------*/
+    private readonly double _angleQuantum = 1.0 / angleTolerance;
+    private readonly double _longTolerance = longTolerance;
+    private readonly List<SegmentRecord<T>> _records = [];
 
-    private readonly double _angleTol = angleTol;
-    private readonly double _angleQuantum = 1.0 / angleTol;
-    private readonly double _longTol = longTol;
-    private readonly List<SegmentRec<T>> _records = [];
-
-    private static SegmentRec<T> Canonicalise(T item, Line ln, double perpTol)
+    /// <summary>
+    /// Converts a line segment into a canonical internal representation.
+    /// </summary>
+    private static SegmentRecord<T> Canonicalise(T item, Line line, double offsetTolerance)
     {
         // Project into XY
-        var p0 = ln.Start;
-        var p1 = ln.End;
+        var p0 = line.Start;
+        var p1 = line.End;
         var d = p1 - p0;
         var dir2 = new Vector3(d.X, d.Y);
         var len = dir2.Length();
-        if (len < 1e-12) throw new ArgumentException("Zero-length line.");
+        if (len < 1e-12)
+        {
+            throw new ArgumentException("Zero-length line.");
+        }
 
         // Unit direction
         dir2 /= len;
 
         // Fold anti-parallel into the same half-plane
         if (dir2.X < 0 || (Math.Abs(dir2.X) < 1e-12 && dir2.Y < 0))
+        {
             dir2 = dir2.Negate();
+        }
 
         double angle = Math.Atan2(dir2.Y, dir2.X);          // ∈ [0, π)
 
@@ -232,34 +250,44 @@ public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
         double s0 = dir2.X * p0.X + dir2.Y * p0.Y;
         double s1 = dir2.X * p1.X + dir2.Y * p1.Y;
 
-        return new SegmentRec<T>(
+        return new SegmentRecord<T>(
             item,
             angle,
             offset,
             Math.Min(s0, s1),
             Math.Max(s0, s1),
-            perpTol
+            offsetTolerance
         );
     }
 
+    /// <summary>
+    /// Calculates a direction key for bucketing by angle.
+    /// </summary>
     private int DirKey(double angle) => (int)Math.Round(angle * _angleQuantum);
 
+    /// <summary>
     /// Split a fat-cluster into longitudinal overlap groups and add them to <paramref name="sink"/>.
+    /// </summary>
+    /// <param name="cluster">Cluster of segments to process</param>
+    /// <param name="sink">Collection to add resulting groups to</param>
     private void EmitLongitudinalGroups(
-    List<SegmentRec<T>> cluster,
+    List<SegmentRecord<T>> cluster,
     List<OverlapMergeGroup<T>> sink)
     {
-        if (cluster.Count == 0) return;
+        if (cluster.Count == 0)
+        {
+            return;
+        }
 
         // sort by MinS and sweep exactly as before to split by longitudinal gaps
         cluster.Sort((a, b) => a.MinS.CompareTo(b.MinS));
 
-        var current = new List<SegmentRec<T>>();
+        var current = new List<SegmentRecord<T>>();
         double currentMax = double.NegativeInfinity;
 
         foreach (var seg in cluster)
         {
-            if (seg.MinS <= currentMax + _longTol)        // overlaps current set
+            if (seg.MinS <= currentMax + _longTolerance)        // overlaps current set
             {
                 current.Add(seg);
                 currentMax = Math.Max(currentMax, seg.MaxS);
@@ -267,12 +295,16 @@ public class OverlapIndex<T>(double angleTol = 1e-3, double longTol = 1e-6)
             else
             {
                 if (current.Count > 0)
+                {
                     sink.Add(new OverlapMergeGroup<T>(current));
+                }
                 current = [seg];
                 currentMax = seg.MaxS;
             }
         }
         if (current.Count > 0)
+        {
             sink.Add(new OverlapMergeGroup<T>(current));
+        }
     }
 }
