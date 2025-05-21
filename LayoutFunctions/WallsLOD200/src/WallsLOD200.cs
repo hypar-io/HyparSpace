@@ -5,7 +5,6 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
-        public static double tolerance = 0.002;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -27,7 +26,7 @@ namespace WallsLOD200
                     unitSystemObject.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue) &&
                     unitSystemValue.ToString() != null)
                 {
-                    unitSystem = unitSystemValue.ToString();
+                    unitSystem = unitSystemValue.ToString() ?? "metric";
                 }
             }
 
@@ -60,27 +59,6 @@ namespace WallsLOD200
                 var level = levels.FirstOrDefault(l => l.Id.ToString() == wallsOnLevel.Key.ToString()) ?? new Level(0, 3, null);
                 var levelHeight = ComputeLevelHeight(level, levels);
                 var newWalls = new List<StandardWall>();
-
-                // // Existing strategy — group walls by thickness, then merge
-                // var wallsByThickness = wallsOnLevel.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
-                // var newWallsByThickness = wallsByThickness.SelectMany(thicknessGroup =>
-                // {
-                //     var thickness = thicknessGroup.Key;
-                //     var lines = UnifyLines([.. thicknessGroup.Select(wall =>
-                //         {
-                //             var transform = new Transform(wall.Transform);
-                //             transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
-                //             return wall.CenterLine.TransformedLine(transform);
-                //         })]);
-                //     var roundedZLines = lines.Select(l =>
-                //         {
-                //             var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
-                //             var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
-                //             return new Line(roundedStart, roundedEnd);
-                //         }
-                //     );
-                //     return roundedZLines.Select(mc => new StandardWall(mc, thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
-                // });
 
                 var idx = new OverlapIndex<StandardWall>(-0.001, wallsOnLevel.Max(w => w.Thickness));
                 foreach (var wall in wallsOnLevel)
@@ -209,108 +187,6 @@ namespace WallsLOD200
             }
 
             return newWalls;
-        }
-
-        public static List<Line> UnifyLines(List<Line> lines)
-        {
-            // Remove duplicate lines
-            List<Line> dedupedlines = RemoveDuplicateLines(lines);
-            // Merge collinear lines that are touching, overlapping or nearly so
-            List<Line> mergedLines = MergeCollinearLines(dedupedlines);
-
-            return mergedLines;
-        }
-
-        private static List<Line> RemoveDuplicateLines(List<Line> lines)
-        {
-            HashSet<Line> uniqueLines = new(new LineEqualityComparer());
-
-            foreach (Line line in lines)
-            {
-                // Don't include lines that have a near 0 length
-                if (line.Length() > tolerance)
-                {
-                    uniqueLines.Add(line);
-                }
-            }
-
-            return uniqueLines.ToList();
-        }
-
-        static List<List<Line>> GroupLinesByCollinearity(List<Line> lines)
-        {
-            Dictionary<int, Line> collinearGroups = new Dictionary<int, Line>();
-            List<List<Line>> lineGroups = new List<List<Line>>();
-            int groupId = 0;
-
-            foreach (var line in lines)
-            {
-                bool addedToGroup = false;
-                foreach (var kvp in collinearGroups)
-                {
-                    if (line.IsCollinear(kvp.Value))
-                    {
-                        lineGroups[kvp.Key].Add(line);
-                        addedToGroup = true;
-                        break;
-                    }
-                }
-
-                if (!addedToGroup)
-                {
-                    collinearGroups.Add(groupId, line);
-                    lineGroups.Add(new List<Line>() { line });
-                    groupId++;
-                }
-            }
-
-            return lineGroups;
-        }
-
-        private static List<Line> MergeCollinearLines(List<Line> lines)
-        {
-            var groupedLines = GroupLinesByCollinearity(lines);
-
-            List<Line> merged = new List<Line>();
-
-            foreach (var group in groupedLines)
-            {
-                List<Line> mergedLines = new List<Line>(group);
-
-                bool linesMerged;
-                do
-                {
-                    linesMerged = false;
-                    for (int i = 0; i < mergedLines.Count; i++)
-                    {
-                        Line line = mergedLines[i];
-                        for (int j = i + 1; j < mergedLines.Count; j++)
-                        {
-                            Line otherLine = mergedLines[j];
-
-                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
-                            {
-                                // we project the lines because line.IsCollinear resolves to true on
-                                // near 0 differences which MergedCollinearLine does not tolerate
-                                // originally we validated if projection was necessary using line.DistanceTo,
-                                // but it is similarly fuzzy and resolves to 0 on near (but greater than epsilon) distances
-                                otherLine = otherLine.Projected(line);
-                                Line mergedLine = line.MergedCollinearLine(otherLine);
-
-                                mergedLines.RemoveAt(j);
-                                mergedLines[i] = mergedLine;
-
-                                linesMerged = true;
-                                break;
-                            }
-                        }
-                        if (linesMerged)
-                            break;
-                    }
-                } while (linesMerged);
-                merged.AddRange(mergedLines);
-            }
-            return merged;
         }
     }
 }
