@@ -58,6 +58,7 @@ namespace WallsLOD200
             var newWallsByLevel = wallsByLevel.SelectMany((wallsOnLevel) =>
             {
                 var level = levels.FirstOrDefault(l => l.Id.ToString() == wallsOnLevel.Key.ToString()) ?? new Level(0, 3, null);
+                var levelHeight = ComputeLevelHeight(level, levels);
                 var newWalls = new List<StandardWall>();
 
                 // // Existing strategy — group walls by thickness, then merge
@@ -103,7 +104,7 @@ namespace WallsLOD200
                 {
                     return g.FatLines.Select((wall) =>
                     {
-                        var mergedWall = new StandardWall(wall.Centerline, wall.Thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
+                        var mergedWall = new StandardWall(wall.Centerline, wall.Thickness, levelHeight ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
                         mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
                         return mergedWall;
                     });
@@ -115,6 +116,24 @@ namespace WallsLOD200
             output.Model.AddElements(newWallsByLevel);
 
             return output;
+        }
+
+        private static double? ComputeLevelHeight(Level level, List<Level> levels)
+        {
+            var sortedLevels = levels.OrderBy(level => level.Elevation).ToList();
+            var wallLevelIndex = sortedLevels.FindIndex(l => l.Id == level.Id);
+            if (wallLevelIndex == -1)
+            {
+                return null;
+            }
+            var wallLevel = sortedLevels[wallLevelIndex];
+            var levelAboveIndex = wallLevelIndex + 1;
+            if (levelAboveIndex >= sortedLevels.Count)
+            {
+                return null;
+            }
+            var levelAbove = sortedLevels[levelAboveIndex];
+            return levelAbove.Elevation - wallLevel.Elevation;
         }
 
         public static List<StandardWall> SplitWallsByLevels(IEnumerable<StandardWall> walls, List<Level> levels, Random random)
@@ -139,10 +158,22 @@ namespace WallsLOD200
                 }
 
                 var wallLevel = sortedLevels.FirstOrDefault(level => level.Id == levelId);
-
-                if (wallLevel == null || wall.Height < wallLevel.Height)
+                if (wallLevel == null)
                 {
-                    // If we can't find the walls level or the wall is shorter than the level height then it doesn't need to split
+                    // If we can't find the walls level
+                    newWalls.Add(wall);
+                    continue;
+                }
+                var wallLevelHeight = ComputeLevelHeight(wallLevel, sortedLevels);
+                if (wallLevelHeight == null)
+                {
+                    newWalls.Add(wall);
+                    continue;
+                }
+
+                if (wall.Height < wallLevelHeight)
+                {
+                    // if the wall is shorter than the level height then it doesn't need to split
                     newWalls.Add(wall);
                     continue;
                 }
