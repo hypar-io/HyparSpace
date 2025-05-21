@@ -73,13 +73,33 @@ namespace WallsLOD200
                                 return new Line(roundedStart, roundedEnd);
                             }
                         );
-                        var newWalls = roundedZLines.Select(mc => new StandardWall(mc, thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
+
+                        var levelHeight = ComputeLevelHeight(level, levels);
+                        var newWalls = roundedZLines.Select(mc => new StandardWall(mc, thickness, levelHeight ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
                         output.Model.AddElements(newWalls);
                     }
                 }
             }
 
             return output;
+        }
+
+        private static double? ComputeLevelHeight(Level level, List<Level> levels)
+        {
+            var sortedLevels = levels.OrderBy(level => level.Elevation).ToList();
+            var wallLevelIndex = sortedLevels.FindIndex(l => l.Id == level.Id);
+            if (wallLevelIndex == -1)
+            {
+                return null;
+            }
+            var wallLevel = sortedLevels[wallLevelIndex];
+            var levelAboveIndex = wallLevelIndex + 1;
+            if (levelAboveIndex >= sortedLevels.Count)
+            {
+                return null;
+            }
+            var levelAbove = sortedLevels[levelAboveIndex];
+            return levelAbove.Elevation - wallLevel.Elevation;
         }
 
         public static List<StandardWall> SplitWallsByLevels(IEnumerable<StandardWall> walls, List<Level> levels, Random random)
@@ -104,10 +124,22 @@ namespace WallsLOD200
                 }
 
                 var wallLevel = sortedLevels.FirstOrDefault(level => level.Id == levelId);
-
-                if (wallLevel == null || wall.Height < wallLevel.Height)
+                if (wallLevel == null)
                 {
-                    // If we can't find the walls level or the wall is shorter than the level height then it doesn't need to split
+                    // If we can't find the walls level
+                    newWalls.Add(wall);
+                    continue;
+                }
+                var wallLevelHeight = ComputeLevelHeight(wallLevel, sortedLevels);
+                if (wallLevelHeight == null)
+                {
+                    newWalls.Add(wall);
+                    continue;
+                }
+
+                if (wall.Height < wallLevelHeight)
+                {
+                    // if the wall is shorter than the level height then it doesn't need to split
                     newWalls.Add(wall);
                     continue;
                 }
