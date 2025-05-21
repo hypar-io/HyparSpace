@@ -22,7 +22,7 @@ public class OverlapIndexTest
         var groups = idx.GetOverlapGroups();
 
         Assert.Single(groups);                  // 1 group
-        Assert.Equal([1, 2], groups[0].group);
+        Assert.Equal([1, 2], groups[0].Items);
     }
 
     /* ------------------------------------------------------------------ */
@@ -36,7 +36,7 @@ public class OverlapIndexTest
         idx.AddItem("A", new Line((0, 0, 0), (1, 0, 0)), 0.05);
         idx.AddItem("B", new Line((2, 0, 0), (1, 0, 0)), 0.05); // reversed
 
-        var g = idx.GetOverlapGroups().Select(g => g.group).ToList();
+        var g = idx.GetOverlapGroups().Select(g => g.Items).ToList();
 
         Assert.Single(g);
         Assert.Contains("A", g[0]);
@@ -57,7 +57,7 @@ public class OverlapIndexTest
         var g = idx.GetOverlapGroups();
 
         Assert.Single(g);
-        Assert.Equal([1, 2], g[0].group);
+        Assert.Equal([1, 2], g[0].Items);
     }
 
     /* ------------------------------------------------------------------ */
@@ -71,11 +71,11 @@ public class OverlapIndexTest
         idx.AddItem(1, new Line((0, 0, 0), (1, 0, 0)), 0.10);
         idx.AddItem(2, new Line((5, 0, 0), (6, 0, 0)), 0.10);
 
-        var groups = idx.GetOverlapGroups().Select(g => g.group).ToList();
+        var groups = idx.GetOverlapGroups().Select(g => g.Items).ToList();
 
         Assert.Equal(2, groups.Count);                    // one per segment
-        Assert.Contains(groups, g => g.Length == 1 && g[0] == 1);
-        Assert.Contains(groups, g => g.Length == 1 && g[0] == 2);
+        Assert.Contains(groups, g => g.Count == 1 && g[0] == 1);
+        Assert.Contains(groups, g => g.Count == 1 && g[0] == 2);
     }
 
     /* ------------------------------------------------------------------ */
@@ -108,7 +108,7 @@ public class OverlapIndexTest
         Assert.Equal(7, groups.Count);
 
         // find the pair-group
-        var pair = groups.Select(g => g.group).Single(g => g.Length == 2 &&
+        var pair = groups.Select(g => g.Items).Single(g => g.Count == 2 &&
                                       g.Contains(lines[1]) &&
                                       g.Contains(lines[7]));
         Assert.NotNull(pair);

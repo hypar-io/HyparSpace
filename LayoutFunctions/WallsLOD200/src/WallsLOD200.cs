@@ -84,16 +84,29 @@ namespace WallsLOD200
                 var idx = new OverlapIndex<StandardWall>(-0.001, wallsOnLevel.Max(w => w.Thickness));
                 foreach (var wall in wallsOnLevel)
                 {
-                    idx.AddItem(wall, wall.CenterLine.TransformedLine(wall.Transform), wall.Thickness);
+                    try
+                    {
+                        // We sometimes get exceptions in TransformedLine if the transform is bad,
+                        var transformedLine = wall.CenterLine.TransformedLine(wall.Transform);
+                        idx.AddItem(wall, transformedLine, wall.Thickness);
+                    }
+                    catch (Exception e)
+                    {
+                        // Handle the exception if needed
+                        Console.WriteLine($"Error adding wall to index: {e.Message}");
+                    }
                 }
 
                 var groups = idx.GetOverlapGroups();
 
-                var mergedWalls = groups.Select((g) =>
+                var mergedWalls = groups.SelectMany((g) =>
                 {
-                    var mergedWall = new StandardWall(g.mergedCenterline, g.mergedThickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
-                    mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
-                    return mergedWall;
+                    return g.FatLines.Select((wall) =>
+                    {
+                        var mergedWall = new StandardWall(wall.Centerline, wall.Thickness, level.Height ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
+                        mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
+                        return mergedWall;
+                    });
                 });
 
                 return mergedWalls;
