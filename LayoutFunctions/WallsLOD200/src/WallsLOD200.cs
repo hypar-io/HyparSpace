@@ -34,11 +34,29 @@ namespace WallsLOD200
             {
                 return output;
             }
-            var walls = wallsModel.AllElementsOfType<StandardWall>();
+            var allWalls = wallsModel.AllElementsOfType<StandardWall>();
+
+            var zeroThicknessWalls = allWalls.Where(w => w.Thickness <= Vector3.EPSILON).ToList();
+
+            foreach (var wall in zeroThicknessWalls)
+            {
+                var wallCenterline = wall.CenterLine;
+
+                var rawLevel = wall.AdditionalProperties["Level"] as string;
+                Guid? level = Guid.TryParse(rawLevel, out var levelId) ? levelId : null;
+                var roomSeparatorLine = new RoomSeparatorLine
+                {
+                    Line = wallCenterline,
+                    Transform = wall.Transform,
+                    Level = level,
+                };
+            }
+
+            var realWalls = allWalls.Where(w => w.Thickness > Vector3.EPSILON);
 
             // if the unit system is metric, convert all 0.13335 thick walls to 0.135
             // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
-            walls
+            realWalls
                 .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
                             (unitSystem.Equals("imperial") && w.Thickness == 0.135))
                 .ToList()
@@ -50,9 +68,9 @@ namespace WallsLOD200
                 levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
             }
 
-            walls = SplitWallsByLevels(walls, levels, random);
+            realWalls = SplitWallsByLevels(realWalls, levels, random);
 
-            var wallsByLevel = walls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+            var wallsByLevel = realWalls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
 
             var newWallsByLevel = wallsByLevel.SelectMany((wallsOnLevel) =>
             {
