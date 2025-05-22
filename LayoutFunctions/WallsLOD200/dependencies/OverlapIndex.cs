@@ -212,48 +212,44 @@ public class OverlapIndex<T>(double angleTolerance = 1e-3, double longTolerance 
     /// <summary>
     /// Converts a line segment into a canonical internal representation.
     /// </summary>
-    private static SegmentRecord<T> Canonicalise(T item, Line line, double offsetTolerance)
+    private static SegmentRecord<T> Canonicalise(T item, Line line, double perpTol)
     {
-        // Project into XY
+        // ---- 1. basic checks ------------------------------------------------
         var p0 = line.Start;
         var p1 = line.End;
-        var d = p1 - p0;
-        var dir2 = new Vector3(d.X, d.Y);
-        var len = dir2.Length();
+        var d3 = p1 - p0;
+        var len = Math.Sqrt(d3.X * d3.X + d3.Y * d3.Y);      // ignore Z
         if (len < 1e-12)
-        {
             throw new ArgumentException("Zero-length line.");
-        }
 
-        // Unit direction
-        dir2 /= len;
+        // ---- 2. direction as unit vector -----------------------------------
+        double ux = d3.X / len;
+        double uy = d3.Y / len;
 
-        // Fold anti-parallel into the same half-plane
-        if (dir2.X < 0 || (Math.Abs(dir2.X) < 1e-12 && dir2.Y < 0))
-        {
-            dir2 = dir2.Negate();
-        }
+        // ---- 3. canonical angle  [0, π)  -----------------------------------
+        double ang = Math.Atan2(uy, ux);      // (-π, π]
+        if (ang < 0) ang += Math.PI;         // → 0 … π
+        if (ang >= Math.PI - 1e-12) ang = 0;  // fold the π boundary onto 0
 
-        double angle = Math.Atan2(dir2.Y, dir2.X);          // ∈ [0, π)
+        // and regenerate *exactly* from the angle so every collinear line shares
+        // identical bases, independent of its original sign fuzz.
+        double cos = Math.Cos(ang);
+        double sin = Math.Sin(ang);
+        var u = new Vector3((float)cos, (float)sin);
+        var n = new Vector3((float)-sin, (float)cos);
 
-        // Unit normal (90° CCW)
-        var n = new Vector3(-dir2.Y, dir2.X);
-
-        // Offset of the infinite line
-        double offset = n.X * p0.X + n.Y * p0.Y;
-
-        // Scalars along direction
-        double s0 = dir2.X * p0.X + dir2.Y * p0.Y;
-        double s1 = dir2.X * p1.X + dir2.Y * p1.Y;
+        // ---- 4. scalar data -------------------------------------------------
+        double offset = n.X * p0.X + n.Y * p0.Y;          // signed distance
+        double s0 = u.X * p0.X + u.Y * p0.Y;
+        double s1 = u.X * p1.X + u.Y * p1.Y;
 
         return new SegmentRecord<T>(
             item,
-            angle,
+            ang,
             offset,
             Math.Min(s0, s1),
             Math.Max(s0, s1),
-            offsetTolerance
-        );
+            perpTol);
     }
 
     /// <summary>

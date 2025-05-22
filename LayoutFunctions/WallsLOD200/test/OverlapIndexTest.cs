@@ -164,4 +164,25 @@ public class OverlapIndexTest
         Assert.Equal(0.3, fatline2.Thickness);
         Assert.True(new Line((1, 1), (5, 5)).Equals(fatline2.Centerline));
     }
+
+    [Fact]
+    public void SlightAngleTolerance_StillGroups()
+    {
+        var lines = new Line[] {
+        new((-4.287484, 4.802104, 0), (-4.287634, 5.929903, 0)),
+        new((-4.287484, 2.138953, 0), (-4.287484, 4.802104, 0)),
+        new((-4.287543, -1.651997, 0), (-4.287484, -0.524196, 0)),
+        new((-4.287484, -0.524194, 0), (-4.287484, 2.138953, 0))
+    };
+
+        var idx = new OverlapIndex<Line>(0.001, 0.335);
+        foreach (var line in lines)
+        {
+            idx.AddItem(line, line, 0.335);
+        }
+
+        var groups = idx.GetOverlapGroups();
+        Assert.Single(groups);
+
+    }
 }
