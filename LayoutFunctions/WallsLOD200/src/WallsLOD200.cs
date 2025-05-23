@@ -5,7 +5,6 @@ namespace WallsLOD200
 {
     public static partial class WallsLOD200
     {
-        public static double tolerance = 0.002;
         /// <summary>
         /// The WallsLOD200 function.
         /// </summary>
@@ -27,59 +26,78 @@ namespace WallsLOD200
                     unitSystemObject.Value.AdditionalProperties.TryGetValue("UnitSystem", out var unitSystemValue) &&
                     unitSystemValue.ToString() != null)
                 {
-                    unitSystem = unitSystemValue.ToString();
+                    unitSystem = unitSystemValue.ToString() ?? "metric";
                 }
             }
 
-            if (inputModels.TryGetValue("Walls", out var wallsModel))
+            if (!inputModels.TryGetValue("Walls", out var wallsModel))
             {
-                var walls = wallsModel.AllElementsOfType<StandardWall>();
+                return output;
+            }
+            var allWalls = wallsModel.AllElementsOfType<StandardWall>();
 
-                // if the unit system is metric, convert all 0.13335 thick walls to 0.135
-                // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
-                walls
-                    .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
-                                (unitSystem.Equals("imperial") && w.Thickness == 0.135))
-                    .ToList()
-                    .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
+            // if the unit system is metric, convert all 0.13335 thick walls to 0.135
+            // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
+            allWalls
+                .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
+                            (unitSystem.Equals("imperial") && w.Thickness == 0.135))
+                .ToList()
+                .ForEach(w => w.Thickness = unitSystem.Equals("metric") ? 0.135 : 0.13335);
 
-                var levels = new List<Level>();
-                if (inputModels.TryGetValue("Levels", out var levelsModel))
+            var levels = new List<Level>();
+            if (inputModels.TryGetValue("Levels", out var levelsModel))
+            {
+                levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
+            }
+
+            allWalls = SplitWallsByLevels(allWalls, levels, random);
+
+            var wallsByLevel = allWalls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+
+            var newWallsByLevel = wallsByLevel.SelectMany((wallsOnLevel) =>
+            {
+                var level = levels.FirstOrDefault(l => l.Id.ToString() == wallsOnLevel.Key.ToString()) ?? new Level(0, 3, null);
+                var levelHeight = ComputeLevelHeight(level, levels);
+
+                var idx = new OverlapIndex<StandardWall>(-0.001, wallsOnLevel.Max(w => w.Thickness));
+                foreach (var wall in wallsOnLevel)
                 {
-                    levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
-                }
-
-                walls = SplitWallsByLevels(walls, levels, random);
-
-                var wallThicknessGroups = walls.GroupBy(w => w.Thickness, new ToleranceEqualityComparer(tolerance));
-                foreach (var thicknessGroup in wallThicknessGroups)
-                {
-                    var thickness = thicknessGroup.Key;
-                    var wallGroups = thicknessGroup.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
-
-                    foreach (var group in wallGroups)
+                    try
                     {
-                        var level = levels.FirstOrDefault(l => l.Id.ToString() == group.Key.ToString()) ?? new Level(0, 3, null);
-                        var lines = UnifyLines(group.ToList().Select(wall =>
-                        {
-                            var transform = new Transform(wall.Transform);
-                            transform.Move(0, 0, -level.Elevation); // To keep the level.Elevation logic below, negate the wall's Z-position.
-                            return wall.CenterLine.TransformedLine(transform);
-                        }).ToList());
-                        var roundedZLines = lines.Select(l =>
-                            {
-                                var roundedStart = new Vector3(l.Start.X, l.Start.Y, Math.Round(l.Start.Z, 5));
-                                var roundedEnd = new Vector3(l.End.X, l.End.Y, Math.Round(l.End.Z, 5));
-                                return new Line(roundedStart, roundedEnd);
-                            }
-                        );
-
-                        var levelHeight = ComputeLevelHeight(level, levels);
-                        var newWalls = roundedZLines.Select(mc => new StandardWall(mc, thickness, levelHeight ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation)));
-                        output.Model.AddElements(newWalls);
+                        // We sometimes get exceptions in TransformedLine if the transform is bad,
+                        var transformedLine = wall.CenterLine.TransformedLine(wall.Transform);
+                        idx.AddItem(wall, transformedLine, wall.Thickness);
+                    }
+                    catch (Exception e)
+                    {
+                        // TODO: Handle the exception if needed
+                        var msg = $"Error adding wall to index: {e.Message}";
+                        output.Warnings.Add(msg);
                     }
                 }
-            }
+
+                var groups = idx.GetOverlapGroups();
+
+                var mergedWalls = groups.SelectMany((g) =>
+                {
+                    return g.FatLines.Select((wall) =>
+                    {
+                        var wallVersion = g.Items[0].WallsVersion;
+                        var mergedWall = new StandardWall(wall.Centerline,
+                                                          wall.Thickness,
+                                                          levelHeight ?? 3,
+                                                          random.NextMaterial(),
+                                                          new Transform().Moved(0, 0, level.Elevation),
+                                                          wallsVersion: wallVersion);
+                        mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
+                        return mergedWall;
+                    });
+                });
+
+                return mergedWalls;
+            });
+
+            output.Model.AddElements(newWallsByLevel);
 
             return output;
         }
@@ -148,7 +166,7 @@ namespace WallsLOD200
 
                 for (int i = sortedLevels.IndexOf(wallLevel); i < sortedLevels.Count - 1; i++)
                 {
-                    if (remainingHeight <= 0) break;
+                    if (remainingHeight <= 0 + Elements.Geometry.Vector3.EPSILON) break;
 
                     double segmentHeight = sortedLevels[i + 1].Elevation - sortedLevels[i].Elevation;
 
@@ -162,7 +180,8 @@ namespace WallsLOD200
                         wall.Thickness,
                         segmentHeight,
                         random.NextMaterial(),
-                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation))
+                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation),
+                        wallsVersion: wall.WallsVersion)
                     {
                         AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
                     };
@@ -175,108 +194,6 @@ namespace WallsLOD200
             }
 
             return newWalls;
-        }
-
-        public static List<Line> UnifyLines(List<Line> lines)
-        {
-            // Remove duplicate lines
-            List<Line> dedupedlines = RemoveDuplicateLines(lines);
-            // Merge collinear lines that are touching, overlapping or nearly so
-            List<Line> mergedLines = MergeCollinearLines(dedupedlines);
-
-            return mergedLines;
-        }
-
-        private static List<Line> RemoveDuplicateLines(List<Line> lines)
-        {
-            HashSet<Line> uniqueLines = new(new LineEqualityComparer());
-
-            foreach (Line line in lines)
-            {
-                // Don't include lines that have a near 0 length
-                if (line.Length() > tolerance)
-                {
-                    uniqueLines.Add(line);
-                }
-            }
-
-            return uniqueLines.ToList();
-        }
-
-        static List<List<Line>> GroupLinesByCollinearity(List<Line> lines)
-        {
-            Dictionary<int, Line> collinearGroups = new Dictionary<int, Line>();
-            List<List<Line>> lineGroups = new List<List<Line>>();
-            int groupId = 0;
-
-            foreach (var line in lines)
-            {
-                bool addedToGroup = false;
-                foreach (var kvp in collinearGroups)
-                {
-                    if (line.IsCollinear(kvp.Value))
-                    {
-                        lineGroups[kvp.Key].Add(line);
-                        addedToGroup = true;
-                        break;
-                    }
-                }
-
-                if (!addedToGroup)
-                {
-                    collinearGroups.Add(groupId, line);
-                    lineGroups.Add(new List<Line>() { line });
-                    groupId++;
-                }
-            }
-
-            return lineGroups;
-        }
-
-        private static List<Line> MergeCollinearLines(List<Line> lines)
-        {
-            var groupedLines = GroupLinesByCollinearity(lines);
-
-            List<Line> merged = new List<Line>();
-
-            foreach (var group in groupedLines)
-            {
-                List<Line> mergedLines = new List<Line>(group);
-
-                bool linesMerged;
-                do
-                {
-                    linesMerged = false;
-                    for (int i = 0; i < mergedLines.Count; i++)
-                    {
-                        Line line = mergedLines[i];
-                        for (int j = i + 1; j < mergedLines.Count; j++)
-                        {
-                            Line otherLine = mergedLines[j];
-
-                            if (line.TryGetOverlap(otherLine, out var overlap) || line.DistanceTo(otherLine) < tolerance)
-                            {
-                                // we project the lines because line.IsCollinear resolves to true on
-                                // near 0 differences which MergedCollinearLine does not tolerate
-                                // originally we validated if projection was necessary using line.DistanceTo,
-                                // but it is similarly fuzzy and resolves to 0 on near (but greater than epsilon) distances
-                                otherLine = otherLine.Projected(line);
-                                Line mergedLine = line.MergedCollinearLine(otherLine);
-
-                                mergedLines.RemoveAt(j);
-                                mergedLines[i] = mergedLine;
-
-                                linesMerged = true;
-                                break;
-                            }
-                        }
-                        if (linesMerged)
-                            break;
-                    }
-                } while (linesMerged);
-                merged.AddRange(mergedLines);
-            }
-            return merged;
         }
     }
 }

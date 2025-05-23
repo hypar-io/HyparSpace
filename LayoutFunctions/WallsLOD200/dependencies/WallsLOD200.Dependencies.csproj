@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.3.0-alpha.5" />
-    <PackageReference Include="Hypar.Functions" Version="1.13.1-alpha.21" />
+    <PackageReference Include="Hypar.Elements" Version="2.4.0-alpha.2" />
+    <PackageReference Include="Hypar.Functions" Version="1.13.1" />
   </ItemGroup>
 </Project>
