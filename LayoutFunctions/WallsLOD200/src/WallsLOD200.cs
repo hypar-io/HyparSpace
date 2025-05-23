@@ -70,10 +70,9 @@ namespace WallsLOD200
                     }
                     catch (Exception e)
                     {
+                        // TODO: Handle the exception if needed
                         var msg = $"Error adding wall to index: {e.Message}";
                         output.Warnings.Add(msg);
-                        // TODO: Handle the exception if needed
-                        Console.WriteLine($"Error adding wall to index: {e.Message}");
                     }
                 }
 
