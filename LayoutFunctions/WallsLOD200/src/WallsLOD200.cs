@@ -36,27 +36,9 @@ namespace WallsLOD200
             }
             var allWalls = wallsModel.AllElementsOfType<StandardWall>();
 
-            var zeroThicknessWalls = allWalls.Where(w => w.Thickness <= Vector3.EPSILON).ToList();
-
-            foreach (var wall in zeroThicknessWalls)
-            {
-                var wallCenterline = wall.CenterLine;
-
-                var rawLevel = wall.AdditionalProperties["Level"] as string;
-                Guid? level = Guid.TryParse(rawLevel, out var levelId) ? levelId : null;
-                var roomSeparatorLine = new RoomSeparatorLine
-                {
-                    Line = wallCenterline,
-                    Transform = wall.Transform,
-                    Level = level,
-                };
-            }
-
-            var realWalls = allWalls.Where(w => w.Thickness > Vector3.EPSILON);
-
             // if the unit system is metric, convert all 0.13335 thick walls to 0.135
             // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
-            realWalls
+            allWalls
                 .Where(w => (unitSystem.Equals("metric") && w.Thickness == 0.13335) ||
                             (unitSystem.Equals("imperial") && w.Thickness == 0.135))
                 .ToList()
@@ -68,9 +50,9 @@ namespace WallsLOD200
                 levels = levelsModel.AllElementsOfType<Level>().DistinctBy((x) => x.Elevation).ToList();
             }
 
-            realWalls = SplitWallsByLevels(realWalls, levels, random);
+            allWalls = SplitWallsByLevels(allWalls, levels, random);
 
-            var wallsByLevel = realWalls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
+            var wallsByLevel = allWalls.GroupBy(w => w.AdditionalProperties["Level"] ?? w.Transform.Origin.Z);
 
             var newWallsByLevel = wallsByLevel.SelectMany((wallsOnLevel) =>
             {
@@ -100,7 +82,13 @@ namespace WallsLOD200
                 {
                     return g.FatLines.Select((wall) =>
                     {
-                        var mergedWall = new StandardWall(wall.Centerline, wall.Thickness, levelHeight ?? 3, random.NextMaterial(), new Transform().Moved(0, 0, level.Elevation));
+                        var wallVersion = g.Items[0].WallsVersion;
+                        var mergedWall = new StandardWall(wall.Centerline,
+                                                          wall.Thickness,
+                                                          levelHeight ?? 3,
+                                                          random.NextMaterial(),
+                                                          new Transform().Moved(0, 0, level.Elevation),
+                                                          wallsVersion: wallVersion);
                         mergedWall.AdditionalProperties["Level"] = level.Id.ToString();
                         return mergedWall;
                     });
@@ -178,7 +166,7 @@ namespace WallsLOD200
 
                 for (int i = sortedLevels.IndexOf(wallLevel); i < sortedLevels.Count - 1; i++)
                 {
-                    if (remainingHeight <= 0) break;
+                    if (remainingHeight <= 0 + Elements.Geometry.Vector3.EPSILON) break;
 
                     double segmentHeight = sortedLevels[i + 1].Elevation - sortedLevels[i].Elevation;
 
@@ -192,7 +180,8 @@ namespace WallsLOD200
                         wall.Thickness,
                         segmentHeight,
                         random.NextMaterial(),
-                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation))
+                        wall.Transform.Moved(0, 0, sortedLevels[i].Elevation - wallLevel.Elevation),
+                        wallsVersion: wall.WallsVersion)
                     {
                         AdditionalProperties = new Dictionary<string, object>(wall.AdditionalProperties)
                     };
