@@ -58,7 +58,6 @@ namespace WallsLOD200
             {
                 var level = levels.FirstOrDefault(l => l.Id.ToString() == wallsOnLevel.Key.ToString()) ?? new Level(0, 3, null);
                 var levelHeight = ComputeLevelHeight(level, levels);
-                var newWalls = new List<StandardWall>();
 
                 var idx = new OverlapIndex<StandardWall>(-0.001, wallsOnLevel.Max(w => w.Thickness));
                 foreach (var wall in wallsOnLevel)
@@ -71,7 +70,9 @@ namespace WallsLOD200
                     }
                     catch (Exception e)
                     {
-                        // Handle the exception if needed
+                        var msg = $"Error adding wall to index: {e.Message}";
+                        output.Warnings.Add(msg);
+                        // TODO: Handle the exception if needed
                         Console.WriteLine($"Error adding wall to index: {e.Message}");
                     }
                 }

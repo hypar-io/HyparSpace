@@ -147,7 +147,6 @@ public class OverlapIndex<T>(double angleTolerance = 1e-3, double longTolerance 
 
     /// <summary>
     /// Compute and return all overlap groups.
-    /// Groups with a single member (i.e. nobody overlaps anybody) are omitted.
     /// </summary>
     /// <param name="thicknessTolerance">
     /// Extra gap you are willing to tolerate between two strips that *almost* touch.
