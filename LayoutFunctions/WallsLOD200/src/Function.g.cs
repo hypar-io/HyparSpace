@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+[assembly: LambdaSerializer(typeof(Hypar.Functions.CompressedJsonSerializer))]
 namespace WallsLOD200
 {
     public class Function
