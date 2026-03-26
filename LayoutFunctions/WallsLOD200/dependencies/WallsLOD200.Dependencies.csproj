@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Hypar.Elements" Version="2.4.0-alpha.2" />
-    <PackageReference Include="Hypar.Functions" Version="1.13.1" />
+    <PackageReference Include="Hypar.Elements" Version="2.4.0-alpha.11" />
+    <PackageReference Include="Hypar.Functions" Version="1.14.0-alpha.9" />
   </ItemGroup>
 </Project>
