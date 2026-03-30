@@ -1,5 +1,6 @@
 using Elements;
 using Elements.Geometry;
+using Newtonsoft.Json;
 
 namespace WallsLOD200
 {
@@ -45,9 +46,9 @@ namespace WallsLOD200
                         wall.AdditionalProperties.TryGetValue("Parent", out var spaceIdObj) &&
                         Guid.TryParse(spaceIdObj?.ToString(), out var spaceId) &&
                         spaceModel.Elements.TryGetValue(spaceId, out var spaceElement) &&
-                        spaceElement is GeometricElement spaceGe)
+                        TryGetParentSpaceTransform(spaceElement, out var parentTransform))
                     {
-                        wall.Transform = wall.Transform.Concatenated(spaceGe.Transform);
+                        wall.Transform = wall.Transform.Concatenated(parentTransform);
                     }
                 }
             }
@@ -210,6 +211,44 @@ namespace WallsLOD200
             }
 
             return newWalls;
+        }
+
+        /// <summary>
+        /// Parent space transform from GeometricElement.Transform, or AdditionalProperties["Transform"].
+        /// </summary>
+        private static bool TryGetParentSpaceTransform(Element spaceElement, out Transform parentTransform)
+        {
+            if (spaceElement is GeometricElement ge && ge.Transform != null)
+            {
+                parentTransform = ge.Transform;
+                return true;
+            }
+
+            if (spaceElement.AdditionalProperties?.TryGetValue("Transform", out var raw) == true && raw != null)
+            {
+                if (raw is Transform transformFromAdditionalProperties)
+                {
+                    parentTransform = transformFromAdditionalProperties;
+                    return true;
+                }
+
+                try
+                {
+                    var json = raw is string jsonString ? jsonString : JsonConvert.SerializeObject(raw);
+                    if (JsonConvert.DeserializeObject<Transform>(json) is { } parsed)
+                    {
+                        parentTransform = parsed;
+                        return true;
+                    }
+                }
+                catch
+                {
+                    // Not transform-shaped JSON.
+                }
+            }
+
+            parentTransform = null!;
+            return false;
         }
     }
 }
