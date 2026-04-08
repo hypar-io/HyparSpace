@@ -72,6 +72,10 @@
     {
       "name": "Circulation",
       "optional": true
+    },
+    {
+      "name": "Space Metrics",
+      "optional": true
     }
   ],
   "input_schema": {
