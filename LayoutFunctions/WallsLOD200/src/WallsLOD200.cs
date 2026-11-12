@@ -1,6 +1,5 @@
 using Elements;
 using Elements.Geometry;
-using Newtonsoft.Json;
 
 namespace WallsLOD200
 {
@@ -37,21 +36,7 @@ namespace WallsLOD200
             }
             var allWalls = wallsModel.AllElementsOfType<StandardWall>().ToList();
 
-            // For version 4+ walls, apply parent space transform before any processing
-            if (inputModels.TryGetValue("Space Planning Zones", out var spaceModel))
-            {
-                foreach (var wall in allWalls)
-                {
-                    if (int.TryParse(wall.WallsVersion, out var version) && version >= 4 &&
-                        wall.AdditionalProperties.TryGetValue("Parent", out var spaceIdObj) &&
-                        Guid.TryParse(spaceIdObj?.ToString(), out var spaceId) &&
-                        spaceModel.Elements.TryGetValue(spaceId, out var spaceElement) &&
-                        TryGetParentSpaceTransform(spaceElement, out var parentTransform))
-                    {
-                        wall.Transform = wall.Transform.Concatenated(parentTransform);
-                    }
-                }
-            }
+            BakeWorldTransforms(allWalls, inputModels);
 
             // if the unit system is metric, convert all 0.13335 thick walls to 0.135
             // if the unit system is imperial, convert all 0.135 thick walls to 0.13335
@@ -213,42 +198,29 @@ namespace WallsLOD200
             return newWalls;
         }
 
+        // A wall's Parent is a space or a mass, and a mass is relative to its building group.
+        private static readonly string[] ParentModelNames = ["Walls", "Space Planning Zones", "Conceptual Mass"];
+
         /// <summary>
-        /// Parent space transform from GeometricElement.Transform, or AdditionalProperties["Transform"].
+        /// Replace each wall's stored Transform with its world transform, walking the
+        /// Parent chain. Walls the editor stores in world space are left as they are.
         /// </summary>
-        private static bool TryGetParentSpaceTransform(Element spaceElement, out Transform parentTransform)
+        public static void BakeWorldTransforms(List<StandardWall> walls, Dictionary<string, Model> inputModels)
         {
-            if (spaceElement is GeometricElement ge && ge.Transform != null)
+            var parentModels = ParentModelNames
+                .Select(name => inputModels.TryGetValue(name, out var model) ? model : null)
+                .OfType<Model>()
+                .ToList();
+            var resolver = new WorldTransformResolver(id => parentModels
+                .Select(m => m.Elements.TryGetValue(id, out var element) ? element : null)
+                .FirstOrDefault(element => element != null));
+
+            // Resolve every wall before writing any back: the resolver caches what it has read.
+            var worlds = walls.Select(resolver.GetWorldTransform).ToList();
+            for (var i = 0; i < walls.Count; i++)
             {
-                parentTransform = ge.Transform;
-                return true;
+                walls[i].Transform = worlds[i];
             }
-
-            if (spaceElement.AdditionalProperties?.TryGetValue("Transform", out var raw) == true && raw != null)
-            {
-                if (raw is Transform transformFromAdditionalProperties)
-                {
-                    parentTransform = transformFromAdditionalProperties;
-                    return true;
-                }
-
-                try
-                {
-                    var json = raw is string jsonString ? jsonString : JsonConvert.SerializeObject(raw);
-                    if (JsonConvert.DeserializeObject<Transform>(json) is { } parsed)
-                    {
-                        parentTransform = parsed;
-                        return true;
-                    }
-                }
-                catch
-                {
-                    // Not transform-shaped JSON.
-                }
-            }
-
-            parentTransform = null!;
-            return false;
         }
     }
 }
