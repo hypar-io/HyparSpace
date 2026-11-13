@@ -199,13 +199,14 @@ namespace WallsLOD200
         }
 
         // A wall's Parent is a space or a mass, and a mass is relative to its building group.
+        // Walls is searched too, so a parent filed alongside the walls still resolves.
         private static readonly string[] ParentModelNames = ["Walls", "Space Planning Zones", "Conceptual Mass"];
 
         /// <summary>
         /// Replace each wall's stored Transform with its world transform, walking the
         /// Parent chain. Walls the editor stores in world space are left as they are.
         /// </summary>
-        public static void BakeWorldTransforms(List<StandardWall> walls, Dictionary<string, Model> inputModels)
+        private static void BakeWorldTransforms(List<StandardWall> walls, Dictionary<string, Model> inputModels)
         {
             var parentModels = ParentModelNames
                 .Select(name => inputModels.TryGetValue(name, out var model) ? model : null)
