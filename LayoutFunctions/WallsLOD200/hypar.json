@@ -19,6 +19,10 @@
         {
             "name": "Space Planning Zones",
             "optional": true
+        },
+        {
+            "name": "Conceptual Mass",
+            "optional": true
         }
     ],
     "element_types": [
