@@ -1,0 +1,101 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "2a34af5b-0d9b-4b11-8a0b-27728a079673",
+  "name": "Space Metrics",
+  "description": "Override various workplace metrics from a layout.",
+  "language": "C#",
+  "model_output": "Space Metrics",
+  "model_dependencies": [
+    {
+      "autohide": false,
+      "name": "Space Planning Zones",
+      "optional": false
+    },
+    {
+      "autohide": false,
+      "name": "Open Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Meeting Room Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Classroom Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Phone Booth Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Open Collaboration Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Private Office Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Lounge Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Pantry Layout",
+      "optional": true
+    },
+    {
+      "autohide": false,
+      "name": "Reception Layout",
+      "optional": true
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+    }
+  },
+  "overrides": {
+    "Space Metrics": {
+      "$hyparOrder": 1,
+      "dependency": "Space Planning Zones",
+      "context": "[*discriminator=Elements.SpaceBoundary]",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "paradigm": "edit",
+      "schema": {
+        "Seats": {
+          "type": "number"
+        },
+        "Headcount": {
+          "type": "number"
+        },
+        "Desks": {
+          "type": "number"
+        },
+        "Collaboration Seats": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "outputs": [],
+  "element_types": [
+    "https://schemas.hypar.io/SpaceMetric.json",
+    "https://schemas.hypar.io/SpaceBoundary.json"
+  ],
+  "repository_url": "",
+  "filters": {},
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.10.0"
+}
