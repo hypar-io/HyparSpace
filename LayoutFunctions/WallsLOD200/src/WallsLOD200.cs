@@ -99,9 +99,53 @@ namespace WallsLOD200
                 return mergedWalls;
             });
 
-            output.Model.AddElements(newWallsByLevel);
+            output.Model.AddElements(JoinVerticalStacks(newWallsByLevel));
 
             return output;
+        }
+
+        /// <summary>
+        /// Join walls stacked on neighboring levels into one tall wall, based on the lowest level.
+        /// A wall joins the one below it only when its centerline and thickness match exactly and
+        /// it starts where the lower wall ends, so where the stack changes along a wall the split
+        /// stays at the level rather than cutting the wall along its length.
+        /// </summary>
+        public static List<StandardWall> JoinVerticalStacks(IEnumerable<StandardWall> walls, double tolerance = 0.001)
+        {
+            long Q(double v) => (long)Math.Round(v / tolerance);
+            string Key(Line line, double z, double thickness)
+            {
+                var (a, b) = (line.Start, line.End);
+                if (a.X > b.X || (a.X == b.X && a.Y > b.Y)) (a, b) = (b, a);
+                return $"{Q(z)}|{Q(a.X)},{Q(a.Y)}|{Q(b.X)},{Q(b.Y)}|{Q(thickness)}";
+            }
+
+            // each stack is its bottom wall and the height it has grown to
+            var stackHeights = new Dictionary<StandardWall, double>();
+            // open stacks keyed by the elevation of their top, so the wall above can find them
+            var byTop = new Dictionary<string, StandardWall>();
+            foreach (var wall in walls.OrderBy(w => w.Transform.Origin.Z))
+            {
+                var line = wall.CenterLine.TransformedLine(wall.Transform);
+                if (byTop.Remove(Key(line, wall.Transform.Origin.Z, wall.Thickness), out var bottom))
+                {
+                    stackHeights[bottom] += wall.Height;
+                }
+                else
+                {
+                    bottom = wall;
+                    stackHeights[bottom] = wall.Height;
+                }
+                byTop[Key(line, bottom.Transform.Origin.Z + stackHeights[bottom], wall.Thickness)] = bottom;
+            }
+
+            return stackHeights.Select(s => s.Value == s.Key.Height
+                ? s.Key
+                : new StandardWall(s.Key.CenterLine, s.Key.Thickness, s.Value, s.Key.Material,
+                                   s.Key.Transform, wallsVersion: s.Key.WallsVersion)
+                {
+                    AdditionalProperties = new Dictionary<string, object>(s.Key.AdditionalProperties)
+                }).ToList();
         }
 
         private static double? ComputeLevelHeight(Level level, List<Level> levels)
